@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: jquery-plugin/mediaControl.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: jquery-plugin/mediaControl.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const $ = require('jquery');
+import provide from '../util/provide';
+let nm = provide('jQueryPlugin');
+
+/**
+ * Created by gavorhes on 11/2/2015.
+ */
+
+/**
+ * @callback mediaCallback
+ * @param {number} newValue
+ */
+
+import {} from './rangeChange.js';
+
+function timeToLocalDateString(tm) {
+    "use strict";
+    let d = new Date(tm);
+    let p1 = d.toLocaleTimeString().split(' ');
+    let p2 = p1[0].split(':');
+    p2 = p2.slice(0, 2);
+
+    return d.toLocaleDateString() + '&lt;br>' + p2.join(':') + ' ' + p1[1];
+}
+
+class MediaControl {
+    constructor(jQueryElement, min, max, val, step, func, playInterval, dateFormat) {
+
+        this._container = jQueryElement;
+        this._playInterval = playInterval;
+        this._interval = undefined;
+        this._func = func;
+
+        this._dateFormat = dateFormat;
+
+        this._currentValue = undefined;
+        this._min = undefined;
+        this._max = undefined;
+        this._step = undefined;
+        this._playing = false;
+
+        let htmlStr =
+            '&lt;span class="media-player-button media-back">&lt;/span>' +
+            '&lt;span class="media-player-button media-play">&lt;/span>' +
+            '&lt;span class="media-player-button media-pause media-disabled">&lt;/span>' +
+            '&lt;span class="media-player-button media-stop media-disabled" >&lt;/span>' +
+            '&lt;span class="media-player-button media-ahead">&lt;/span>' +
+            `&lt;input type="range">` +
+            `&lt;div class="media-control-value-label-container">` +
+            `&lt;span class="media-control-value-label-min">&lt;/span>` +
+            `&lt;span class="media-control-value-label-val">&lt;/span>` +
+            `&lt;span class="media-control-value-label-max">&lt;/span>` +
+            `&lt;/div>`;
+
+        this._container.append(htmlStr);
+
+        let btnPause = this._container.find('.media-pause');
+        let btnPlay = this._container.find('.media-play');
+        this._$btnStop = this._container.find('.media-stop');
+        let btnAhead = this._container.find('.media-ahead');
+        let btnBack = this._container.find('.media-back');
+        this._$slider = this._container.find('input[type=range]');
+
+        this._$valLabelMin = this._container.find('.media-control-value-label-min');
+        this._$valLabelVal = this._container.find('.media-control-value-label-val');
+        this._$valLabelMax = this._container.find('.media-control-value-label-max');
+
+        this.setMinMaxValueStep(min, max, val, step);
+
+
+        let _this = this;
+
+        this._$slider.rangeChange(function (newVal, ratio, evt) {
+            _this.currentValue = newVal;
+        }, 100);
+
+        btnPlay.click(function () {
+            let $this = $(this);
+            $this.addClass('media-disabled');
+            _this._$btnStop.removeClass('media-disabled');
+            btnAhead.addClass('media-locked');
+            btnBack.addClass('media-locked');
+            _this._$slider.prop('disabled', true);
+            _this._playing = true;
+
+            _this._interval = setInterval(function () {
+                _this.currentValue += _this._step;
+            }, _this._playInterval);
+        });
+
+        this._$btnStop.click(function () {
+            clearInterval(_this._interval);
+            let $this = $(this);
+            $this.addClass('media-disabled');
+            btnPlay.removeClass('media-disabled');
+            btnAhead.removeClass('media-locked');
+            btnBack.removeClass('media-locked');
+            _this._$slider.prop('disabled', false);
+            _this._playing = false;
+        });
+
+        btnAhead.click(function () {
+            _this.currentValue = _this.currentValue + _this._step;
+        });
+
+        btnBack.click(function () {
+            _this.currentValue = _this.currentValue - _this._step;
+        });
+    }
+
+    stopPlaying(){
+        if (this._playing){
+            this._$btnStop.trigger('click');
+        }
+    }
+
+    get playing(){
+        return this._playing;
+    }
+
+    get min() {
+        return this._min;
+    }
+
+    get max() {
+        return this._max;
+    }
+
+    get step() {
+        return this._step;
+    }
+
+    get currentValue() {
+        return this._currentValue;
+    }
+
+    set currentValue(newValue) {
+        if (newValue > this._max) {
+            newValue = this._min;
+        } else if (newValue &lt; this._min) {
+            newValue = this._max;
+        }
+        this._currentValue = newValue;
+        this._$slider.val(this._currentValue.toFixed(2));
+
+        if (this._dateFormat) {
+            this._$valLabelVal.html(timeToLocalDateString(this.currentValue));
+        } else {
+            this._$valLabelVal.html(this.currentValue.toString());
+        }
+
+        this._func(newValue);
+    }
+
+    /**
+     * set min and max value with step
+     * @param {number} newMin the new min
+     * @param {number} newMax the new mas
+     * @param {number} [newValue=newMin] the value to set
+     * @param {number} [newStep=(newMax-newMin)/20] step value
+     */
+    setMinMaxValueStep(newMin, newMax, newValue, newStep) {
+        this._min = newMin;
+        this._max = newMax;
+
+        newValue = typeof newValue == 'number' ? newValue : newMin;
+        newStep = typeof newStep == 'number' ? newStep : (newMax-newMin)/20;
+
+        this._currentValue = newValue;
+        this._step = newStep;
+
+        this._$slider.prop('min', this.min.toString());
+        this._$slider.prop('max', this.max.toString());
+        this._$slider.prop('step', this.step.toString());
+        this._$slider.val(this.currentValue.toString());
+
+        if (this._dateFormat) {
+            this._$valLabelMin.html(timeToLocalDateString(this._min));
+            this._$valLabelVal.html(timeToLocalDateString(this.currentValue));
+            this._$valLabelMax.html(timeToLocalDateString(this._max));
+        } else {
+            this._$valLabelMin.html(this._min.toString());
+            this._$valLabelVal.html(this.currentValue.toString());
+            this._$valLabelMax.html(this._max.toString());
+        }
+    }
+
+    /**
+     *
+     * @param {mediaCallback} newFunc the callback on change
+     */
+    set changeFunction(newFunc) {
+        this._func = newFunc;
+    }
+}
+
+nm.MediaControl = MediaControl;
+
+/**
+ * Adds a media control to a container
+ * @param {number} [min=0] the min
+ * @param {number} [max=100] the max
+ * @param {number} [val=0] the val
+ * @param {number} [step=1] the step
+ * @param {mediaCallback} [func=function (n) {console.log('default function', n);}] media change callback function
+ * @param {number} [playInterval=500] play interval
+ * @param {boolean} [dateFormat=false] date format
+ * @this {jQuery}
+ * @returns {MediaControl} the Media control object
+ */
+$.fn.mediaControl = function (min, max, val, step, func, playInterval, dateFormat) {
+
+    min = typeof min == 'number' ? min : 0;
+    max = typeof max == 'number' ? max : 100;
+    val = typeof val == 'number' ? val : 0;
+    step = typeof step == 'number' ? step : 1;
+    func = typeof func == 'function' ? func : function (n) {
+        console.log('default function', n);
+    };
+
+    playInterval = typeof playInterval == 'number' ? playInterval : 500;
+    dateFormat = typeof dateFormat == 'boolean' ? dateFormat : false;
+
+    this.addClass('media-control-container');
+
+    return new MediaControl(this, min, max, val, step, func, playInterval, dateFormat);
+};
+
+export default undefined;
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_FeatureLayerProperties.html">_FeatureLayerProperties</a></li><li><a href="-_Slider.html">_Slider</a></li><li><a href="Corridor.html">Corridor</a></li><li><a href="DayRange.html">DayRange</a></li><li><a href="ItsLayerCollection.html">ItsLayerCollection</a></li><li><a href="LayerBase.html">LayerBase</a></li><li><a href="LayerBaseVector.html">LayerBaseVector</a></li><li><a href="LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></li><li><a href="LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></li><li><a href="LayerBaseXyzTile.html">LayerBaseXyzTile</a></li><li><a href="LayerEsriMapServer.html">LayerEsriMapServer</a></li><li><a href="LayerGroup.html">LayerGroup</a></li><li><a href="LayerItsInventory.html">LayerItsInventory</a></li><li><a href="LayerLegend.html">LayerLegend</a></li><li><a href="LayerRealEarthTile.html">LayerRealEarthTile</a></li><li><a href="LayerVectorRealEarth.html">LayerVectorRealEarth</a></li><li><a href="MapInteractionBase.html">MapInteractionBase</a></li><li><a href="MapMoveCls.html">MapMoveCls</a></li><li><a href="MapPopupCls.html">MapPopupCls</a></li><li><a href="RealEarthAnimate.html">RealEarthAnimate</a></li><li><a href="RealEarthAnimateTile.html">RealEarthAnimateTile</a></li><li><a href="RealEarthAnimateVector.html">RealEarthAnimateVector</a></li><li><a href="RpPicker.html">RpPicker</a></li><li><a href="SingleSymbol.html">SingleSymbol</a></li><li><a href="Sliders.html">Sliders</a></li><li><a href="SortedFeatures.html">SortedFeatures</a></li><li><a href="SsaCorridorPicker.html">SsaCorridorPicker</a></li><li><a href="UniqueValueSymbol.html">UniqueValueSymbol</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$">$</a></li><li><a href="global.html#dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></li><li><a href="global.html#dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></li><li><a href="global.html#definedAndNotNull">definedAndNotNull</a></li><li><a href="global.html#defineLegend">defineLegend</a></li><li><a href="global.html#defineStyle">defineStyle</a></li><li><a href="global.html#hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></li><li><a href="global.html#highwayConvert">highwayConvert</a></li><li><a href="global.html#htmlEscape">htmlEscape</a></li><li><a href="global.html#makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></li><li><a href="global.html#makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></li><li><a href="global.html#makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></li><li><a href="global.html#makeGuid">makeGuid</a></li><li><a href="global.html#makeMapServiceLegend">makeMapServiceLegend</a></li><li><a href="global.html#mapServiceLegendItem">mapServiceLegendItem</a></li><li><a href="global.html#offsetMinutes">offsetMinutes</a></li><li><a href="global.html#ol">ol</a></li><li><a href="global.html#propertiesZoomStyle">propertiesZoomStyle</a></li><li><a href="global.html#provide">provide</a></li><li><a href="global.html#quickMap">quickMap</a></li><li><a href="global.html#quickMapBase">quickMapBase</a></li><li><a href="global.html#quickMapMulti">quickMapMulti</a></li><li><a href="global.html#resolutionToZoom">resolutionToZoom</a></li><li><a href="global.html#returnedColors">returnedColors</a></li><li><a href="global.html#rgb2hex">rgb2hex</a></li><li><a href="global.html#rgbToRgba">rgbToRgba</a></li><li><a href="global.html#undefinedOrNull">undefinedOrNull</a></li><li><a href="global.html#zoomToResolution">zoomToResolution</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon May 02 2016 16:37:12 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

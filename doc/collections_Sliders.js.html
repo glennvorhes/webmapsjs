@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: collections/Sliders.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: collections/Sliders.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Created by gavorhes on 12/10/2015.
+ */
+import provide from '../util/provide';
+let nm = provide('collections');
+let $ = require('jquery');
+
+class _Slider {
+
+    /**
+     * Slider constructor
+     * @param {string} name - the slider name
+     * @param {Array} selections - the selection
+     * @param {number} wgt - weight
+     * @param {boolean} selected - if selected
+     */
+    constructor(name, selections, wgt, selected) {
+        //let _this = this;
+        this.name = name;
+        this.domId = name.toLowerCase().replace(/ /g, '-');
+        this._weight = wgt;
+        this._weightDefault = this._weight;
+
+        this.selectedParam = null;
+        this.selectedParamDefault = null;
+
+        this._locked = false;
+
+        this._min = 0.0;
+        this._max = 100;
+
+        this.labelLow = null;
+        this.labelHigh = null;
+        this.labelVal = null;
+        this.slider = null;
+        this.chk = null;
+
+        this.atMin = this._weight == this._min;
+        this.atMax = this._weight == this._max;
+
+
+        let sel = `&lt;select class="${selections.length == 1 ? 'hidden-select' : 'show-select'}" id="${this.domId}_chg">`;
+        for (let i = 0; i &lt; selections.length; i++) {
+            let itm = selections[i][0];
+            let itmSelected = itm === selected;
+
+            sel += `&lt;option value="${itm}" ${itmSelected ? ' selected="selected"' : ''}>${selections[i][1]}&lt;/option>`;
+            if (itmSelected) {
+                this.selectedParam = itm;
+            }
+        }
+        sel += '&lt;/select>';
+
+        this.selectedParamDefault = this.selectedParam;
+
+        this.html = '&lt;div class="slider-div">' +
+            `&lt;label for="${this.domId}_chk" class="slider-label">${this.name}&lt;/label>` +
+            sel + `&lt;br>` +
+            `&lt;input id="${this.domId}_chk" type="checkbox" title="Lock/Unlock Slider">` +
+            `&lt;label id="${this.domId}_low" class="low-high">${this._min.toFixed(1)}&lt;/label>` +
+            `&lt;input id="${this.domId}" type="range" value="${this._weight.toFixed(1)}" min="0" max="100" step="0.1">` +
+            `&lt;label id="${this.domId}_high" class="low-high">${this._max.toFixed(1)}&lt;/label>` +
+            `&lt;label id="${this.domId}_lbl" for="${this.domId}" class="percent-label">${this._weight.toFixed(1)}%&lt;/label>&lt;/div>`;
+    }
+
+    /**
+     * add html to dom
+     * @param {jQuery} $container - container element
+     */
+    addToDom($container) {
+        $container.append(this.html);
+        this.labelLow = $(`#${this.domId}_low`);
+        this.labelHigh = $(`#${this.domId}_high`);
+        this.labelVal = $(`#${this.domId}_lbl`);
+        this.slider = $(`#${this.domId}`);
+        this.selectionBox = $(`#${this.domId}_chg`);
+        this.chk = $(`#${this.domId}_chk`);
+    }
+
+    /**
+     * increment the slider
+     * @param {number} delta change delta
+     * @returns {number} the remainder not able to be allocated to this slider
+     */
+    increment(delta) {
+        let remainder = 0;
+        delta = Number(delta.toFixed(1));
+
+        this._weight += delta;
+        if (this._weight &lt; this._min) {
+            remainder = this._min - this._weight;
+            this._weight = this._min;
+            this.atMin = true;
+        } else if (this._weight > this._max) {
+            remainder = this._max - this._weight;
+            this._weight = this._max;
+            this.atMax = true;
+        } else {
+            this.atMin = false;
+            this.atMax = false;
+        }
+
+        this.slider.val(this._weight.toFixed(1));
+        this.labelVal.html(this._weight.toFixed(1) + '%');
+
+        return remainder;
+    }
+
+    /**
+     * reset to the original values
+     */
+    reset() {
+        this.weight = this._weightDefault;
+        this.slider.val(this._weightDefault.toFixed(1));
+        this.selectionBox.val(this.selectedParamDefault);
+        this.chk.attr('checked', false);
+        //let event = new CustomEvent('change');
+        //this.chk[0].dispatchEvent(event);
+    }
+
+    /**
+     * set the value and drop down
+     * @param {number} newVal the new value
+     * @param {string} selectedParam the selected parameter
+     */
+    setValAndDropDown(newVal, selectedParam) {
+        this.weight = newVal;
+        this.min = 0;
+        this.max = 100;
+        this.slider.val(newVal.toFixed(1));
+        this.selectionBox.val(selectedParam);
+        this.selectedParam = selectedParam;
+        this.locked = true;
+    }
+
+    /**
+     *
+     * @returns {boolean} if locked
+     */
+    get locked() {
+        return this._locked;
+    }
+
+    /**
+     *
+     * @param {boolean} val if locked
+     */
+    set locked(val) {
+        this._locked = val;
+        this.slider.prop('disabled', this._locked);
+        this.selectionBox.prop('disabled', this._locked);
+        this.chk.prop('checked', !this._locked);
+    }
+
+    /**
+     *
+     * @returns {number} the minimum
+     */
+    get min() {
+        return this._min;
+    }
+
+    /**
+     *
+     * @param {number} newVal new minimum
+     */
+    set min(newVal) {
+        this._min = Number(newVal.toFixed(1));
+        if (this._min &lt; 0) {
+            this._min = 0;
+        }
+        this.labelLow.html(this._min.toFixed(1));
+        this.slider.attr('min', this._min.toFixed(1));
+        this.atMin = this._weight == this._min;
+    }
+
+    /**
+     *
+     * @returns {number} the maximum
+     */
+    get max() {
+        return this._max;
+    }
+
+    /**
+     *
+     * @param {number} newVal the maximum
+     */
+    set max(newVal) {
+        this._max = Number(newVal.toFixed(1));
+        if (this._max > 100) {
+            this._max = 100.0;
+        }
+        this.labelHigh.html(this._max.toFixed(1));
+        this.slider.attr('max', this._max.toFixed(1));
+        this.atMax = this._weight == this._max;
+    }
+
+    /**
+     *
+     * @returns {number} the weight
+     */
+    get weight() {
+        return this._weight;
+    }
+
+    /**
+     *
+     * @param {number} newVal the weight
+     */
+    set weight(newVal) {
+        this._weight = Number(newVal.toFixed(1));
+        this.labelVal.html(this._weight.toFixed(1) + '%');
+        if (this._weight &lt;= this._min) {
+            this.atMin = true;
+            this.atMax = false;
+        } else if (this._weight >= this._max) {
+            this.atMin = false;
+            this.atMax = true;
+        } else {
+            this.atMin = false;
+            this.atMax = false;
+        }
+    }
+}
+
+nm._Slider = _Slider;
+
+/**
+ * class to make a slider group
+ */
+class Sliders {
+    /**
+     *
+     * @param {Array} paramList list of parameters
+     * @param {string} divId the div id
+     */
+    constructor(paramList, divId) {
+        this.resetting = false;
+        this._slideFinishedFunctions = [];
+        this.reservedPercent = 0.0;
+        this.$container = $('#' + divId);
+        this.$container.addClass('slider-container');
+
+        this.sliderList = [];
+        this.sliderLookup = {};
+
+        this.total = 0;
+
+        for (let i = 0; i &lt; paramList.length; i++) {
+            let p = paramList[i];
+
+            let sld = new _Slider(p[0], p[1], p[2], p[3]);
+            this.sliderList.push(sld);
+            this.sliderLookup[sld.domId] = sld;
+            sld.addToDom(this.$container);
+            this.total += sld._weight;
+        }
+
+        if (this.total != 100) {
+            alert('total not equal to 100');
+        }
+
+        this.lockedList = [];
+        this.inRangeList = [];
+        this.atMinList = [];
+        this.atMaxList = [];
+
+        this.lockedCount = 0;
+        this.notLockedCount = 0;
+
+        this._splitSliderArray();
+        this._addEventListeners();
+
+    }
+    
+    addSlideFinishedFunction (finishedFunction){
+        this._slideFinishedFunctions.push(finishedFunction);
+    }
+
+    /**
+     * split array into subarrays holding the sliders
+     * @private
+     */
+    _splitSliderArray() {
+        this.lockedList = [];
+        this.inRangeList = [];
+        this.atMinList = [];
+        this.atMaxList = [];
+
+        for (let i = 0; i &lt; this.sliderList.length; i++) {
+            let sld = this.sliderList[i];
+
+            if (sld.locked) {
+                this.lockedList.push(sld);
+            } else if (sld.atMin) {
+                this.atMinList.push(sld);
+            } else if (sld.atMax) {
+                this.atMaxList.push(sld);
+            } else {
+                this.inRangeList.push(sld);
+            }
+        }
+        this.lockedCount = this.lockedList.length;
+        this.notLockedCount = this.sliderList.length - this.lockedCount;
+    }
+
+    /**
+     * handle remainder, recursive to take care of min max overshoots
+     * @param {number} remain the remainder
+     * @param {string} skipDomId - this dom id
+     * @private
+     */
+    _handleRemainder(remain, skipDomId) {
+
+        remain = Number(remain.toFixed(1));
+        if (remain == 0) {
+            return;
+        }
+
+        this._splitSliderArray();
+
+        let canChangeArray = [];
+        for (let i = 0; i &lt; this.inRangeList.length; i++) {
+            let sld = this.inRangeList[i];
+            if (sld.domId == skipDomId) {
+                continue;
+            }
+            canChangeArray.push(sld);
+        }
+
+        if (remain > 0) {
+            for (let i = 0; i &lt; this.atMaxList.length; i++) {
+                let sld = this.atMaxList[i];
+                if (sld.domId == skipDomId) {
+                    continue;
+                }
+                canChangeArray.push(sld);
+            }
+        } else {
+            for (let i = 0; i &lt; this.atMinList.length; i++) {
+                let sld = this.atMinList[i];
+                if (sld.domId == skipDomId) {
+                    continue;
+                }
+                canChangeArray.push(sld);
+            }
+        }
+
+        if (canChangeArray.length == 0) {
+            return;
+        }
+
+        let inc = -1 * Number((remain / canChangeArray.length).toFixed(1));
+
+        let newRemainder = 0;
+        for (let i = 0; i &lt; canChangeArray.length; i++) {
+            newRemainder += canChangeArray[i].increment(inc);
+        }
+
+        this._handleRemainder(newRemainder, skipDomId);
+    }
+
+    /**
+     * reset all
+     */
+    reset() {
+        this.resetting = true;
+        for (let i = 0; i &lt; this.sliderList.length; i++) {
+            let sld = this.sliderList[i];
+            sld.reset();
+        }
+        this.resetting = false;
+
+        if (this._slideFinishedFunctions != null) {
+            this._slideFinishedFunctions();
+        }
+    }
+
+    /**
+     *
+     * @param {object} keyValList key and value list
+     */
+    setValues(keyValList) {
+        this.resetting = true;
+        for (let k in keyValList) {
+            if (keyValList.hasOwnProperty(k)) {
+                this.sliderLookup[k].setValAndDropDown(keyValList[k][0], keyValList[k][1]);
+            }
+        }
+        this.resetting = false;
+    }
+
+    /**
+     * get the weight sum
+     * @returns {number} the weight sum
+     */
+    getSum () {
+        let total = 0;
+        for (let i = 0; i &lt; this.sliderList.length; i++) {
+            let sld = this.sliderList[i];
+            total += Number(sld.weight.toFixed(1));
+        }
+
+        return total;
+    }
+
+    /**
+     * get the parameter weights
+     * @returns {object} lookup with parameter weights
+     */
+    getParams  () {
+        let paramWeights = {};
+        for (let i = 0; i &lt; this.sliderList.length; i++) {
+            let sld = this.sliderList[i];
+            paramWeights[sld.selectedParam] = Number(sld.weight.toFixed(1));
+        }
+
+        return paramWeights;
+    }
+
+    _addEventListeners() {
+        let _this = this;
+
+        //change function
+        this.$container.find('input[type="range"]').change(function () {
+                if (_this.resetting) {
+                    return;
+                }
+
+                let $this = $(this);
+                let domId = this.id;
+                let sldr = _this.sliderLookup[domId];
+
+                let newValue = parseFloat($this.val());
+
+                let oldValue = sldr.weight;
+                let diff = newValue - oldValue;
+                diff = Number(diff.toFixed(1));
+
+                sldr.weight = Number(newValue.toFixed(1));
+
+                _this._handleRemainder(diff, domId);
+
+                //cleanup, make sure the sum is still 100
+                let sum = Number(_this.getSum().toFixed(1));
+
+                if (sum > 100) {
+                    loop1:
+                        while (true) {
+                            for (i = 0; i &lt; _this.sliderList.length; i++) {
+                                let sld = _this.sliderList[i];
+                                if (sld.domId == domId || sld.locked || sld.atMin) {
+                                    continue;
+                                }
+                                sld.increment(-0.1);
+                                sum -= 0.1;
+                                if (sum.toFixed(1) == '100.0') {
+                                    break loop1;
+                                }
+                            }
+                        }
+                } else if (sum &lt; 100) {
+                    loop1:
+                        while (true) {
+                            for (i = 0; i &lt; _this.sliderList.length; i++) {
+                                sld = _this.sliderList[i];
+                                if (sld.domId == domId || sld.locked || sld.atMax) {
+                                    continue;
+                                }
+                                sld.increment(0.1);
+                                sum += 0.1;
+                                if (sum.toFixed(1) == '100.0') {
+                                    break loop1;
+                                }
+                            }
+                        }
+                }
+
+                for (let i = 0; i &lt; _this._slideFinishedFunctions.length; i++) {
+                    _this._slideFinishedFunctions[i]();
+                }
+            }
+        );
+
+        //update the selected parameter when the selection is changed
+        $('.show-select').change(function () {
+            if (_this.resetting) {
+                return;
+            }
+            _this.sliderLookup[this.id.replace('_chg', '')].selectedParam = $(this).val();
+        });
+
+        //lock the slider and update the reserved percent
+        this.$container.find('input[type="checkbox"]').change(function () {
+            let domEl = this;
+
+            _this.sliderLookup[domEl.id.replace('_chk', '')].locked = !domEl.checked;
+            _this.reservedPercent = 0.0;
+            _this.notLockedCount = 0;
+
+            let notLockedSliders = [];
+
+            for (let i = 0; i &lt; _this.sliderList.length; i++) {
+                let sld = _this.sliderList[i];
+                if (sld.locked) {
+                    _this.reservedPercent += sld.weight;
+                    continue;
+                }
+                notLockedSliders.push(sld);
+                _this.notLockedCount++;
+            }
+
+            for (i = 0; i &lt; _this.sliderList.length; i++) {
+                sld = _this.sliderList[i];
+                if (sld.locked) {
+                    continue;
+                }
+                sld.max = 100 - _this.reservedPercent;
+            }
+
+            if (notLockedSliders.length == 1) {
+                notLockedSliders[0].min = notLockedSliders[0].weight;
+            } else {
+                for (i = 0; i &lt; notLockedSliders.length; i++) {
+                    notLockedSliders[i].min = 0;
+                }
+            }
+        });
+
+    }
+}
+
+nm.Sliders = Sliders;
+window.gv['collections'].Sliders = Sliders;
+export default Sliders;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_FeatureLayerProperties.html">_FeatureLayerProperties</a></li><li><a href="-_Slider.html">_Slider</a></li><li><a href="Corridor.html">Corridor</a></li><li><a href="DayRange.html">DayRange</a></li><li><a href="ItsLayerCollection.html">ItsLayerCollection</a></li><li><a href="LayerBase.html">LayerBase</a></li><li><a href="LayerBaseVector.html">LayerBaseVector</a></li><li><a href="LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></li><li><a href="LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></li><li><a href="LayerBaseXyzTile.html">LayerBaseXyzTile</a></li><li><a href="LayerEsriMapServer.html">LayerEsriMapServer</a></li><li><a href="LayerGroup.html">LayerGroup</a></li><li><a href="LayerItsInventory.html">LayerItsInventory</a></li><li><a href="LayerLegend.html">LayerLegend</a></li><li><a href="LayerRealEarthTile.html">LayerRealEarthTile</a></li><li><a href="LayerVectorRealEarth.html">LayerVectorRealEarth</a></li><li><a href="MapInteractionBase.html">MapInteractionBase</a></li><li><a href="MapMoveCls.html">MapMoveCls</a></li><li><a href="MapPopupCls.html">MapPopupCls</a></li><li><a href="RealEarthAnimate.html">RealEarthAnimate</a></li><li><a href="RealEarthAnimateTile.html">RealEarthAnimateTile</a></li><li><a href="RealEarthAnimateVector.html">RealEarthAnimateVector</a></li><li><a href="RpPicker.html">RpPicker</a></li><li><a href="SingleSymbol.html">SingleSymbol</a></li><li><a href="Sliders.html">Sliders</a></li><li><a href="SortedFeatures.html">SortedFeatures</a></li><li><a href="SsaCorridorPicker.html">SsaCorridorPicker</a></li><li><a href="UniqueValueSymbol.html">UniqueValueSymbol</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$">$</a></li><li><a href="global.html#dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></li><li><a href="global.html#dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></li><li><a href="global.html#definedAndNotNull">definedAndNotNull</a></li><li><a href="global.html#defineLegend">defineLegend</a></li><li><a href="global.html#defineStyle">defineStyle</a></li><li><a href="global.html#hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></li><li><a href="global.html#highwayConvert">highwayConvert</a></li><li><a href="global.html#htmlEscape">htmlEscape</a></li><li><a href="global.html#makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></li><li><a href="global.html#makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></li><li><a href="global.html#makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></li><li><a href="global.html#makeGuid">makeGuid</a></li><li><a href="global.html#makeMapServiceLegend">makeMapServiceLegend</a></li><li><a href="global.html#mapServiceLegendItem">mapServiceLegendItem</a></li><li><a href="global.html#offsetMinutes">offsetMinutes</a></li><li><a href="global.html#ol">ol</a></li><li><a href="global.html#propertiesZoomStyle">propertiesZoomStyle</a></li><li><a href="global.html#provide">provide</a></li><li><a href="global.html#quickMap">quickMap</a></li><li><a href="global.html#quickMapBase">quickMapBase</a></li><li><a href="global.html#quickMapMulti">quickMapMulti</a></li><li><a href="global.html#resolutionToZoom">resolutionToZoom</a></li><li><a href="global.html#returnedColors">returnedColors</a></li><li><a href="global.html#rgb2hex">rgb2hex</a></li><li><a href="global.html#rgbToRgba">rgbToRgba</a></li><li><a href="global.html#undefinedOrNull">undefinedOrNull</a></li><li><a href="global.html#zoomToResolution">zoomToResolution</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon May 02 2016 16:37:12 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

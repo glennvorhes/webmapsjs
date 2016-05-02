@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: util/colors.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: util/colors.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Created by gavorhes on 11/3/2015.
+ */
+import provide from './provide';
+import * as chk from './checkDefined';
+let nm = provide('util.colors');
+
+
+/**
+ * helper function to convert to hex
+ * @param {number|string} x - the number to convert to hex
+ * @returns {string} number as hex
+ * @private
+ */
+function _hex(x) {
+    let hexDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
+
+    return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+}
+
+/**
+ * converts an RGB string to hex
+ * @param {string} rgb - rgb color
+ * @returns {string} rbg as hex
+ */
+export function rgb2hex(rgb) {
+    let rgb1 = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+
+    return ("#" + _hex(rgb1[1]) + _hex(rgb1[2]) + _hex(rgb1[3])).toUpperCase();
+}
+
+nm.rgb2hex = rgb2hex;
+
+
+/**
+ * Convert hex string to RGB or RGBA string
+ * @param {string} hexString - hex color string
+ * @param {number} [alphaVal=undefined] Alpha value
+ * @returns {string} - rgb or rgba color
+ */
+export function hexAlphaToRgbOrRgba(hexString, alphaVal) {
+    hexString = ((hexString.charAt(0) == "#") ? hexString.substring(1, 7) : hexString);
+    let r = parseInt(hexString.substring(0, 2), 16).toString() || '0';
+    let g = parseInt(hexString.substring(2, 4), 16).toString() || '0';
+    let b = parseInt(hexString.substring(4, 6), 16).toString() || '0';
+    if (alphaVal) {
+        return `rgba(${r},${g},${b},${alphaVal})`;
+    } else {
+        return `rgba(${r},${g},${b})`;
+    }
+}
+
+nm.hexAlphaToRgbOrRgba = hexAlphaToRgbOrRgba;
+
+
+/**
+ * adds alpha value to rgb string 'rgb(r, b, g)', returns 'rgba(r, g, b, a)'
+ * @param {string} rgb - rgb color
+ * @param {number} alpha - alpha value 0 to 1
+ * @returns {string} rgba color
+ */
+export function rgbToRgba(rgb, alpha) {
+    let pieces = rgb.split(',');
+    pieces[0] = pieces[0].replace('rgb', 'rgba');
+    pieces[2] = pieces[2].replace(')', '');
+    pieces.push(' ' + alpha.toFixed(1) + ')');
+
+    return pieces.join(',');
+}
+
+nm.rgbToRgba = rgbToRgba;
+
+
+/**
+ * @typedef {function} colorLookupByNumber
+ * @param {number} num - the number to use to retrieve the color
+ * @returns {string} rgb color
+ */
+
+
+/**
+ * Make a blue green red gradient
+ * @param {number} minVal - minimum value
+ * @param {number} maxVal - maximum value
+ * @param {boolean} flipColors - if the colors should be flipped
+ * @returns {colorLookupByNumber} color lookup function
+ */
+export function makeBlueGreenRedGradient(minVal, maxVal, flipColors) {
+
+    if (typeof flipColors != "boolean") {
+        flipColors = false;
+    }
+
+    return function (theVal) {
+        let r, g, b;
+        let ratio;
+
+        if (chk.undefinedOrNull(theVal)) {
+            return 'rgb(100,100,100)';
+        }
+
+        let percent = (theVal - minVal) / (maxVal - minVal);
+
+        if (flipColors == true) {
+            percent = 1 - percent;
+        }
+
+        if (percent >= 1) {
+            r = 255;
+            g = 0;
+            b = 0;
+        } else if (percent &lt;= 0) {
+            r = 0;
+            g = 0;
+            b = 255;
+        } else if (percent &lt; .25) {
+            // green up, blue constant
+            r = 0;
+            g = Math.floor(255 * percent / 0.25);
+            b = 255;
+        } else if (percent &lt; 0.50) {
+            //blue down, green constant
+            ratio = (percent - 0.25) / 0.25;
+            r = 0;
+            g = 255;
+            b = 255 - Math.floor(255 * ratio);
+        } else if (percent &lt; 0.75) {
+            // red up, green constant
+            ratio = (percent - 0.5) / 0.25;
+            r = Math.floor(255 * ratio);
+            g = 255;
+            b = 0;
+        } else {
+            // green down, red constant
+            ratio = (percent - 0.75) / 0.25;
+            r = 255;
+            g = 255 - Math.floor(255 * ratio);
+            b = 0;
+        }
+
+        r = r.toFixed();
+        g = g.toFixed();
+        b = b.toFixed();
+
+        return 'rgb(' + r + ',' + g + ',' + b + ')';
+    };
+}
+
+nm.makeBlueGreenRedGradient = makeBlueGreenRedGradient;
+
+
+/**
+ * Create a function that will return colors based on a gradient
+ * @param {number} median - median value
+ * @param {number} stdDev - standard deviation
+ * @param {boolean} flipColors - if the colors should be flipped
+ * @returns {colorLookupByNumber} color lookup function
+ */
+export function makeBlueGreenRedGradientZScore(median, stdDev, flipColors) {
+
+    let grd = makeBlueGreenRedGradient(-2.5, 2.5, flipColors);
+
+    return function (theVal) {
+
+        let zScore;
+        if (theVal == null) {
+            zScore = null;
+        } else {
+            zScore = (theVal - median) / stdDev;
+        }
+
+        return grd(zScore);
+    };
+}
+
+nm.makeBlueGreenRedGradientZScore = makeBlueGreenRedGradientZScore;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_FeatureLayerProperties.html">_FeatureLayerProperties</a></li><li><a href="-_Slider.html">_Slider</a></li><li><a href="Corridor.html">Corridor</a></li><li><a href="DayRange.html">DayRange</a></li><li><a href="ItsLayerCollection.html">ItsLayerCollection</a></li><li><a href="LayerBase.html">LayerBase</a></li><li><a href="LayerBaseVector.html">LayerBaseVector</a></li><li><a href="LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></li><li><a href="LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></li><li><a href="LayerBaseXyzTile.html">LayerBaseXyzTile</a></li><li><a href="LayerEsriMapServer.html">LayerEsriMapServer</a></li><li><a href="LayerGroup.html">LayerGroup</a></li><li><a href="LayerItsInventory.html">LayerItsInventory</a></li><li><a href="LayerLegend.html">LayerLegend</a></li><li><a href="LayerRealEarthTile.html">LayerRealEarthTile</a></li><li><a href="LayerVectorRealEarth.html">LayerVectorRealEarth</a></li><li><a href="MapInteractionBase.html">MapInteractionBase</a></li><li><a href="MapMoveCls.html">MapMoveCls</a></li><li><a href="MapPopupCls.html">MapPopupCls</a></li><li><a href="RealEarthAnimate.html">RealEarthAnimate</a></li><li><a href="RealEarthAnimateTile.html">RealEarthAnimateTile</a></li><li><a href="RealEarthAnimateVector.html">RealEarthAnimateVector</a></li><li><a href="RpPicker.html">RpPicker</a></li><li><a href="SingleSymbol.html">SingleSymbol</a></li><li><a href="Sliders.html">Sliders</a></li><li><a href="SortedFeatures.html">SortedFeatures</a></li><li><a href="SsaCorridorPicker.html">SsaCorridorPicker</a></li><li><a href="UniqueValueSymbol.html">UniqueValueSymbol</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$">$</a></li><li><a href="global.html#dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></li><li><a href="global.html#dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></li><li><a href="global.html#definedAndNotNull">definedAndNotNull</a></li><li><a href="global.html#defineLegend">defineLegend</a></li><li><a href="global.html#defineStyle">defineStyle</a></li><li><a href="global.html#hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></li><li><a href="global.html#highwayConvert">highwayConvert</a></li><li><a href="global.html#htmlEscape">htmlEscape</a></li><li><a href="global.html#makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></li><li><a href="global.html#makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></li><li><a href="global.html#makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></li><li><a href="global.html#makeGuid">makeGuid</a></li><li><a href="global.html#makeMapServiceLegend">makeMapServiceLegend</a></li><li><a href="global.html#mapServiceLegendItem">mapServiceLegendItem</a></li><li><a href="global.html#offsetMinutes">offsetMinutes</a></li><li><a href="global.html#ol">ol</a></li><li><a href="global.html#propertiesZoomStyle">propertiesZoomStyle</a></li><li><a href="global.html#provide">provide</a></li><li><a href="global.html#quickMap">quickMap</a></li><li><a href="global.html#quickMapBase">quickMapBase</a></li><li><a href="global.html#quickMapMulti">quickMapMulti</a></li><li><a href="global.html#resolutionToZoom">resolutionToZoom</a></li><li><a href="global.html#returnedColors">returnedColors</a></li><li><a href="global.html#rgb2hex">rgb2hex</a></li><li><a href="global.html#rgbToRgba">rgbToRgba</a></li><li><a href="global.html#undefinedOrNull">undefinedOrNull</a></li><li><a href="global.html#zoomToResolution">zoomToResolution</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon May 02 2016 16:37:12 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

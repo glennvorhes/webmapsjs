@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: olHelpers/esriToOlStyle.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: olHelpers/esriToOlStyle.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Created by gavorhes on 1/4/2016.
+ */
+import ol from '../custom-ol';
+import provide from '../util/provide';
+let nm = provide('olHelpers.esriToOlStyle');
+
+/**
+ * This callback is displayed as part of the Requester class.
+ * @callback styleFunc
+ * @param {ol.Feature} feat - openlayers feature
+ * @param {number} resolution - map resolution
+ */
+
+
+function _colorArrayToRgba(colorArray, opacity) {
+    "use strict";
+
+    return `rgba(${colorArray[0]},${colorArray[1]},${colorArray[2]},${opacity})`;
+}
+
+/**
+ * escape html charcters
+ * @param {string} str - input string
+ * @returns {string} escaped string
+ */
+function htmlEscape(str) {
+    return String(str)
+        .replace(/&amp;/g, '&amp;amp;')
+        .replace(/"/g, '&amp;quot;')
+        .replace(/'/g, '&amp;#39;')
+        .replace(/&lt;/g, '&amp;lt;')
+        .replace(/>/g, '&amp;gt;');
+}
+
+nm.htmlEscape = htmlEscape;
+
+
+class CommonSymbol {
+    constructor(symbolObj, opacity) {
+        this.symbolObj = symbolObj;
+        this.opacity = opacity;
+        this.olStyle = undefined;
+        this.legendHtml = '';
+    }
+}
+
+class PointSymbol extends CommonSymbol {
+    constructor(symbolObj, opacity) {
+        super(symbolObj, opacity);
+        switch (this.symbolObj['type']) {
+            case 'esriSMS':
+                let innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
+                let outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);
+                let outlineWidth = this.symbolObj.outline.width;
+                let radius = this.symbolObj.size;
+
+                this.olStyle = new ol.style.Style({
+                    image: new ol.style.Circle({
+                        radius: radius,
+                        fill: new ol.style.Fill({
+                            color: innerColor
+                        }),
+                        stroke: new ol.style.Stroke({color: outerColor, width: outlineWidth})
+                    })
+                });
+                this.legendHtml = `&lt;span class="legend-layer-icon" style="color: ${innerColor}">&amp;#9679;&lt;/span>`;
+                break;
+            case 'esriPMS':
+                this.olStyle = new ol.style.Style({
+                    image: new ol.style.Icon({src: `data:image/png;base64,${this.symbolObj['imageData']}`})
+                });
+                this.legendHtml = `&lt;img class="legend-layer-icon" height="17" src="data:image/png;base64,${this.symbolObj['imageData']}">`;
+                break;
+            default:
+                console.log(this.symbolObj);
+                alert('Point symbol does not handle symbol type: ' + this.symbolObj['type']);
+        }
+    }
+}
+
+class LineSymbol extends CommonSymbol {
+    constructor(symbolObj, opacity) {
+        super(symbolObj, opacity);
+        switch (this.symbolObj['type']) {
+            case 'esriSLS':
+                let innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
+                let lineWidth = this.symbolObj.width;
+
+                this.olStyle = new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: innerColor,
+                        //lineDash: [4],
+                        width: lineWidth
+                    })
+                });
+
+                this.legendHtml = `&lt;span class="legend-layer-icon" `;
+                this.legendHtml += `style="`;
+                this.legendHtml += `background-color: ${innerColor};`;
+                this.legendHtml += `width: 40px;`;
+                this.legendHtml += `height: 4px;`;
+                this.legendHtml += `position: relative;`;
+                this.legendHtml += `display: inline-block;`;
+                this.legendHtml += `top: -1px;`;
+                this.legendHtml += `">&lt;/span>`;
+                break;
+            default:
+                console.log(this.symbolObj);
+                alert('Line symbol does not handle symbol type: ' + this.symbolObj['type']);
+        }
+    }
+}
+
+class PolygonSymbol extends CommonSymbol {
+    constructor(symbolObj, opacity) {
+        super(symbolObj, opacity);
+        switch (this.symbolObj['type']) {
+            case 'esriSFS':
+                let innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
+                let outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);
+                let outlineWidth = this.symbolObj.outline.width;
+
+                this.olStyle = new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: outerColor,
+                        //lineDash: [4],
+                        width: outlineWidth
+                    }),
+                    fill: new ol.style.Fill({
+                        color: innerColor
+                    })
+                });
+
+                this.legendHtml = `&lt;span class="legend-layer-icon" `;
+                this.legendHtml += `style="`;
+                this.legendHtml += `background-color: ${innerColor};`;
+                this.legendHtml += `border: solid ${outerColor} 1px;`;
+                this.legendHtml += `width: 40px;`;
+                this.legendHtml += `height: 9px;`;
+                this.legendHtml += `position: relative;`;
+                this.legendHtml += `display: inline-block;`;
+                this.legendHtml += `top: 2px;`;
+                this.legendHtml += `">&lt;/span>`;
+                break;
+
+            default:
+                console.log(this.symbolObj);
+                alert('Polygon symbol does handle symbol type: ' + this.symbolObj['type']);
+        }
+    }
+}
+
+class SymbolGenerator {
+    constructor(esriResponse) {
+        this.opacity = (100 - (esriResponse['drawingInfo']['transparency'] || 0)) / 100;
+        this.renderer = esriResponse['drawingInfo']['renderer'];
+        this.olStyle = undefined;
+        this.legendHtml = '';
+    }
+}
+
+class SingleSymbol extends SymbolGenerator {
+    /**
+     *
+     * @param {object} esriResponse - layer info
+     * @param {Constructor|*} SymbolClass - the symbol class to use
+     */
+    constructor(esriResponse, SymbolClass) {
+        super(esriResponse);
+        this.symbol = this.renderer['symbol'];
+        let symbolObj = new SymbolClass(this.symbol, this.opacity);
+        this.olStyle = symbolObj.olStyle;
+        this.legendHtml = symbolObj.legendHtml;
+    }
+}
+
+class UniqueValueSymbol extends SymbolGenerator {
+    /**
+     *
+     * @param {object} esriResponse - layer info
+     * @param {Constructor|*} SymbolClass - the Symbol class definition
+     */
+    constructor(esriResponse, SymbolClass) {
+        super(esriResponse);
+        this.uniqueValueInfos = this.renderer['uniqueValueInfos'];
+        this.propertyName = this.renderer['field1'];
+        this.defaultSymbol = this.renderer['defaultSymbol'];
+
+
+        if (this.defaultSymbol) {
+            let symbolObj = new SymbolClass(this.defaultSymbol, this.opacity);
+            this.defaultStyle = symbolObj.olStyle;
+            this.defaultLabelHtml = `&lt;span class="legend-layer-subitem">${htmlEscape(this.renderer['defaultLabel'])}&lt;/span>` + symbolObj.legendHtml;
+        } else {
+            this.defaultStyle = undefined;
+            this.defaultLabelHtml = 'other';
+        }
+
+        this.valueArray = [];
+        this.labelArray = [];
+        this.legendArray = [];
+        this.propertyStyleLookup = {};
+
+        for (let uniqueVal of this.uniqueValueInfos) {
+            this.labelArray.push(uniqueVal['label']);
+            this.valueArray.push(uniqueVal['value']);
+            let uniqueSym = new SymbolClass(uniqueVal.symbol, this.opacity);
+            this.legendArray.push(`&lt;span class="legend-layer-subitem">${htmlEscape(uniqueVal['label'])}&lt;/span>` + uniqueSym.legendHtml);
+            this.propertyStyleLookup[uniqueVal['value']] = uniqueSym.olStyle;
+        }
+
+        let _this = this;
+
+        this.olStyle = function (feature, resolution) {
+            let checkProperties = feature.getProperties();
+            let checkProperty = checkProperties[_this.propertyName];
+
+            let returnValue;
+            if (_this.propertyStyleLookup[checkProperty] !== undefined) {
+                returnValue = [_this.propertyStyleLookup[checkProperty]];
+            } else {
+               returnValue = [_this.defaultStyle];
+            }
+
+            return returnValue;
+        };
+
+        if (this.defaultLabelHtml !== null) {
+            this.legendArray.push(this.defaultLabelHtml);
+        }
+
+        this.legendHtml = '&lt;ul>';
+        for (let h of this.legendArray) {
+            this.legendHtml += `&lt;li>${h}&lt;/li>`;
+        }
+        this.legendHtml += '&lt;/ul>';
+    }
+}
+
+
+
+
+
+/**
+ * style and legend object
+ * @typedef {oject} styleAndLegend
+ * @property {styleFunc} style - style function
+ * @property {string} legend - legend content
+ */
+
+/**
+ *
+ * @param {object} esriResponse - layer info
+ * @returns {styleAndLegend} style and legend object
+ */
+export function makeFeatureServiceLegendAndSymbol(esriResponse) {
+    "use strict";
+    let renderer = esriResponse['drawingInfo']['renderer'];
+    let symbolLegendOut = null;
+
+    switch (renderer['type']) {
+        case 'simple':
+            switch (esriResponse['geometryType']) {
+                case 'esriGeometryPoint':
+                    symbolLegendOut = new SingleSymbol(esriResponse, PointSymbol);
+                    break;
+                case 'esriGeometryPolyline':
+                    symbolLegendOut = new SingleSymbol(esriResponse, LineSymbol);
+                    break;
+                case 'esriGeometryPolygon':
+                    symbolLegendOut = new SingleSymbol(esriResponse, PolygonSymbol);
+                    break;
+                default:
+                    console.log(esriResponse);
+                    alert(esriResponse['geometryType'] + ' not handled');
+            }
+            break;
+        case 'uniqueValue':
+            switch (esriResponse['geometryType']) {
+                case 'esriGeometryPoint':
+                    symbolLegendOut = new UniqueValueSymbol(esriResponse, PointSymbol);
+                    break;
+                case 'esriGeometryPolyline':
+                    symbolLegendOut = new UniqueValueSymbol(esriResponse, LineSymbol);
+                    break;
+                case 'esriGeometryPolygon':
+                    symbolLegendOut = new UniqueValueSymbol(esriResponse, PolygonSymbol);
+                    break;
+                default:
+                    console.log(esriResponse);
+                    alert(esriResponse['geometryType'] + ' not handled');
+            }
+            break;
+        default:
+            alert('not handled renderer type: ' + renderer['type']);
+    }
+
+    if (symbolLegendOut == null) {
+        return {style: undefined, legend: ''};
+    } else {
+        return {style: symbolLegendOut.olStyle, legend: symbolLegendOut.legendHtml};
+    }
+};
+
+nm.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
+
+/**
+ *
+ * @param {object} lyrObject - the layer as defined in the response
+ * @param {boolean} [iconsOnly=false] use only icons
+ * @returns {string} legend html
+ */
+function mapServiceLegendItem(lyrObject, iconsOnly) {
+
+
+    iconsOnly = typeof iconsOnly == 'boolean' ? iconsOnly : false;
+    let layerName = lyrObject['layerName'];
+    let legendItems = lyrObject['legend'];
+    let legendHtml = '';
+
+    if (legendItems.length == 1) {
+        legendHtml = `&lt;img class="legend-layer-icon" height="17" src="data:image/png;base64,${legendItems[0]['imageData']}">`;
+    } else {
+        legendHtml += '&lt;span class="legend-items-expander" title="Expand/Collapse">&amp;#9660;&lt;/span>&lt;ul>';
+        for (let i = 0; i &lt; legendItems.length; i++) {
+            legendHtml += `&lt;li>`;
+            legendHtml += `&lt;span class="legend-layer-subitem">${htmlEscape(legendItems[i]['label'])}&lt;/span>`;
+            legendHtml += `&lt;img class="legend-layer-icon" height="17" src="data:image/png;base64,${legendItems[i]['imageData']}">`;
+            legendHtml += `&lt;/li>`;
+        }
+        legendHtml += '&lt;/ul>';
+    }
+
+    if (!iconsOnly) {
+        legendHtml = `&lt;span class="legend-layer-subitem">${layerName}&lt;/span>` + legendHtml;
+    }
+
+    return legendHtml;
+}
+
+/**
+ * make map service legent
+ * @param {object} esriResponse - layer info
+ * @returns {string} legend content
+ */
+export function makeMapServiceLegend(esriResponse) {
+    "use strict";
+
+    let newLegendHtml = '';
+
+    let layers = esriResponse['layers'];
+
+    if (layers.length == 1) {
+        newLegendHtml += mapServiceLegendItem(layers[0], true);
+    } else {
+        newLegendHtml += '&lt;ul>';
+        for (let i = 0; i &lt; layers.length; i++) {
+            newLegendHtml += '&lt;li>' + mapServiceLegendItem(layers[i]) + '&lt;/li>';
+        }
+        newLegendHtml += '&lt;/ul>';
+    }
+
+    return newLegendHtml;
+}
+
+nm.makeMapServiceLegend = makeMapServiceLegend;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_FeatureLayerProperties.html">_FeatureLayerProperties</a></li><li><a href="-_Slider.html">_Slider</a></li><li><a href="Corridor.html">Corridor</a></li><li><a href="DayRange.html">DayRange</a></li><li><a href="ItsLayerCollection.html">ItsLayerCollection</a></li><li><a href="LayerBase.html">LayerBase</a></li><li><a href="LayerBaseVector.html">LayerBaseVector</a></li><li><a href="LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></li><li><a href="LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></li><li><a href="LayerBaseXyzTile.html">LayerBaseXyzTile</a></li><li><a href="LayerEsriMapServer.html">LayerEsriMapServer</a></li><li><a href="LayerGroup.html">LayerGroup</a></li><li><a href="LayerItsInventory.html">LayerItsInventory</a></li><li><a href="LayerLegend.html">LayerLegend</a></li><li><a href="LayerRealEarthTile.html">LayerRealEarthTile</a></li><li><a href="LayerVectorRealEarth.html">LayerVectorRealEarth</a></li><li><a href="MapInteractionBase.html">MapInteractionBase</a></li><li><a href="MapMoveCls.html">MapMoveCls</a></li><li><a href="MapPopupCls.html">MapPopupCls</a></li><li><a href="RealEarthAnimate.html">RealEarthAnimate</a></li><li><a href="RealEarthAnimateTile.html">RealEarthAnimateTile</a></li><li><a href="RealEarthAnimateVector.html">RealEarthAnimateVector</a></li><li><a href="RpPicker.html">RpPicker</a></li><li><a href="SingleSymbol.html">SingleSymbol</a></li><li><a href="Sliders.html">Sliders</a></li><li><a href="SortedFeatures.html">SortedFeatures</a></li><li><a href="SsaCorridorPicker.html">SsaCorridorPicker</a></li><li><a href="UniqueValueSymbol.html">UniqueValueSymbol</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$">$</a></li><li><a href="global.html#dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></li><li><a href="global.html#dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></li><li><a href="global.html#definedAndNotNull">definedAndNotNull</a></li><li><a href="global.html#defineLegend">defineLegend</a></li><li><a href="global.html#defineStyle">defineStyle</a></li><li><a href="global.html#hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></li><li><a href="global.html#highwayConvert">highwayConvert</a></li><li><a href="global.html#htmlEscape">htmlEscape</a></li><li><a href="global.html#makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></li><li><a href="global.html#makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></li><li><a href="global.html#makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></li><li><a href="global.html#makeGuid">makeGuid</a></li><li><a href="global.html#makeMapServiceLegend">makeMapServiceLegend</a></li><li><a href="global.html#mapServiceLegendItem">mapServiceLegendItem</a></li><li><a href="global.html#offsetMinutes">offsetMinutes</a></li><li><a href="global.html#ol">ol</a></li><li><a href="global.html#propertiesZoomStyle">propertiesZoomStyle</a></li><li><a href="global.html#provide">provide</a></li><li><a href="global.html#quickMap">quickMap</a></li><li><a href="global.html#quickMapBase">quickMapBase</a></li><li><a href="global.html#quickMapMulti">quickMapMulti</a></li><li><a href="global.html#resolutionToZoom">resolutionToZoom</a></li><li><a href="global.html#returnedColors">returnedColors</a></li><li><a href="global.html#rgb2hex">rgb2hex</a></li><li><a href="global.html#rgbToRgba">rgbToRgba</a></li><li><a href="global.html#undefinedOrNull">undefinedOrNull</a></li><li><a href="global.html#zoomToResolution">zoomToResolution</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon May 02 2016 16:37:12 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

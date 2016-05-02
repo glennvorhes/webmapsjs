@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: olHelpers/mapMoveCls.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: olHelpers/mapMoveCls.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+
+const $ = require('jquery');
+import MapInteractionBase from './mapInteractionBase';
+import * as checkDefined from '../util/checkDefined';
+import provide from '../util/provide';
+import makeGuid from '../util/makeGuid';
+let nm = provide('olHelpers');
+
+/**
+ * assists with map move interactions, trigger callback functions
+ * @augments MapInteractionBase
+ */
+class MapMoveCls extends MapInteractionBase {
+
+    /**
+     * constructor called implicitly
+     */
+    constructor() {
+        super('map move');
+        this._arrLyrRequest = [];
+        this._arrLyrTimeout = [];
+        this._arrLayer = [];
+        this._lookupLayer = {};
+
+        this._mapMoveCallbacks = [];
+        this._mapMoveCallbacksLookup = {};
+        this._mapMoveCallbackDelays = [];
+        this._mapMoveCallbackContext = [];
+        this._mapMoveCallbackTimeout = [];
+
+        this._mapExtent = undefined;
+        this._zoomLevel = undefined;
+    }
+
+    /**
+     * initialize the map move object
+     * @param {ol.Map} theMap - the ol map
+     */
+    init(theMap) {
+        if (super.init(theMap)) {
+            return;
+        }
+
+        let _this = this;
+
+        this.map.getView().on(['change:center', 'change:resolution'], function (e) {
+
+            _this._updateMapExtent();
+
+            // trigger the layer updates
+            for (let i = 0; i &lt; _this._arrLayer.length; i++) {
+                _this.triggerLyrLoad(_this._arrLayer[i], i, e.type);
+            }
+
+            // trigger the map callbacks
+            for (let i = 0; i &lt; _this._mapMoveCallbacks.length; i++) {
+                _this.triggerMoveCallback(i, e.type);
+            }
+        });
+    }
+
+    _updateMapExtent() {
+        let theView = this.map.getView();
+        this._zoomLevel = theView.getZoom();
+
+        let extentArray = theView.calculateExtent(this.map.getSize());
+
+        this._mapExtent = {
+            minX: extentArray[0],
+            minY: extentArray[1],
+            maxX: extentArray[2],
+            maxY: extentArray[3]
+        };
+    }
+
+    /**
+     * return the map extent
+     */
+    get mapExtent() {
+        if (!this._mapExtent) {
+            this._updateMapExtent();
+        }
+
+        return this._mapExtent;
+    }
+
+    /**
+     * Trigger the layer load
+     * @param {LayerBaseVector|*} lyr - the layer being acted on
+     * @param {number} [index=undefined] - index of the layer
+     * @param {string|*} [eventType=undefined] the event triggering the load, as 'change:center' or 'change:resolution'
+     */
+    triggerLyrLoad(lyr, index, eventType) {
+
+        if (checkDefined.undefinedOrNull(lyr) &amp;&amp; checkDefined.undefinedOrNull(index)) {
+            throw 'need to define lyr or index';
+        } else if (checkDefined.definedAndNotNull(lyr) &amp;&amp; checkDefined.undefinedOrNull(index)) {
+            index = this._arrLayer.indexOf(lyr);
+        } else if (checkDefined.undefinedOrNull(lyr) &amp;&amp; checkDefined.definedAndNotNull(index)) {
+            lyr = this._arrLayer[index];
+        }
+
+        // clear the timeout
+        if (this._arrLyrTimeout[index] != null) {
+            clearTimeout(this._arrLyrTimeout[index]);
+            this._arrLyrTimeout[index] = null;
+        }
+
+        // abort if necessary and clear the request
+        if (this._arrLyrRequest[index] != null &amp;&amp; this._arrLyrRequest[index] != 4) {
+            this._arrLyrRequest[index].abort();
+            this._arrLyrRequest[index] = null;
+        }
+
+        // dummy callback used if before load returns false
+        let callbackFunc = function () {};
+
+        if (lyr.mapMoveBefore(this._zoomLevel, eventType)) {
+            lyr.mapMoveMakeGetParams(this._mapExtent, this._zoomLevel);
+
+            let _this = this;
+
+            callbackFunc = function () {
+                function innerFunction(theLayer, theIndex) {
+                    let _innerThis = this;
+                    this._arrLyrRequest[theIndex] = $.get(
+                        theLayer.url,
+                        theLayer.mapMoveParams,
+                        function (d) {
+                            /**
+                             * @type {LayerBaseVector}
+                             */
+                            theLayer.mapMoveCallback(d);
+                            theLayer.loadCallback();
+                        }, 'json').fail(
+                        function (jqXHR) {
+                            if (jqXHR.statusText != 'abort') {
+                                console.log('failed');
+                                console.log(theLayer.url);
+                                console.log(theLayer.mapMoveParams);
+                            }
+                        }).always(
+                        function () {
+                            _innerThis._arrLyrTimeout[theIndex] = null;
+                            _innerThis._arrLyrRequest[theIndex] = null;
+                        });
+                }
+                innerFunction.call(_this, lyr, index);
+            };
+        } else {
+            lyr.clear();
+        }
+        this._arrLyrTimeout[index] = setTimeout(callbackFunc, lyr.onDemandDelay);
+    }
+
+    /**
+     * trigger the map move call back at the given index
+     * @param {number} ind - the index of the layer
+     * @param {string|*} [eventType=undefined] the event triggering the load as 'change:center' or 'change:resolution'
+     * @param {string} [functionId=undefined] the function id used to reference the added callback function
+     */
+    triggerMoveCallback(ind, eventType, functionId) {
+
+        if (typeof ind == 'undefined' &amp;&amp; typeof functionId == 'undefined'){
+            throw 'either the function index or the id must be defined';
+        }
+
+        if (typeof ind !== 'number'){
+            ind = this._mapMoveCallbacks.indexOf(this._mapMoveCallbacksLookup[functionId]);
+        }
+
+        if (ind &lt; 0){
+            console.log('function not found');
+
+            return;
+        }
+
+        // clear the timeout
+        if (this._mapMoveCallbackTimeout[ind] != null) {
+            clearTimeout(this._mapMoveCallbackTimeout[ind]);
+            this._mapMoveCallbackTimeout[ind] = null;
+        }
+
+        let ctx = this._mapMoveCallbackContext[ind];
+        let theFunc = this._mapMoveCallbacks[ind];
+
+        let _this = this;
+
+        let f = function () {
+            if (ctx !== null) {
+                theFunc.call(ctx, _this._mapExtent, _this._zoomLevel, eventType);
+            } else {
+                theFunc(_this._mapExtent, _this._zoomLevel, eventType);
+            }
+        };
+
+        this._mapMoveCallbackTimeout[ind] = setTimeout(f, this._mapMoveCallbackDelays[ind]);
+    }
+
+    /**
+     * Add a layer to the interaction
+     * @param {LayerBaseVector|*} lyr - layer to add
+     * @param {boolean} [triggerOnAdd=true] - if the layer should be loaded on add
+     */
+    addVectorLayer(lyr, triggerOnAdd) {
+        if (this._arrLayer.indexOf(lyr) > -1) {
+            console.log('already added ' + lyr.name + ' to map move');
+
+            return;
+        }
+        this._checkInit();
+
+        this._arrLyrRequest.push(null);
+        this._arrLyrTimeout.push(null);
+        this._arrLayer.push(lyr);
+        this._lookupLayer[lyr.id] = lyr;
+
+        triggerOnAdd = typeof triggerOnAdd == 'boolean' ? triggerOnAdd : true;
+
+        if (triggerOnAdd) {
+            if (this._mapExtent === undefined) {
+                this._updateMapExtent();
+            }
+            this.triggerLyrLoad(lyr, this._arrLayer.length - 1);
+        }
+    }
+
+    /**
+     * This callback is displayed as a global member.
+     * @callback mapMoveCallbackFunction
+     * @param {object} extent - extent object
+     * @param {number} extent.minX - minX
+     * @param {number} extent.minY - minY
+     * @param {number} extent.maxX - maxX
+     * @param {number} extent.maxY - maxY
+     * @param {number} zoomLevel - zoom level
+     * @param {string} [evtType=undefined] undefined for initial load, otherwise one of 'change:center', 'change:resolution'
+     */
+
+    /**
+     * add a callback to the map move event
+     * @param {mapMoveCallbackFunction} func - callback function
+     * @param {*} context - the context to use for this function
+     * @param {number} [delay=50] the delay before call load
+     * @param {boolean} [triggerOnAdd=true] if the layer should be loaded on add to mapMove
+     * @param {string} [functionId=undefined] optional id to reference the function later for outside triggering
+     */
+    addCallback(func, context, delay, triggerOnAdd, functionId) {
+
+        if (this._mapMoveCallbacks.indexOf(func) > -1) {
+            console.log('this function already added to map move');
+
+            return;
+        }
+        this._checkInit();
+        if (!functionId){
+            functionId = makeGuid();
+        }
+
+        this._mapMoveCallbacks.push(func);
+        this._mapMoveCallbacksLookup[functionId] = func;
+        this._mapMoveCallbackDelays.push(typeof delay == 'number' ? delay : 50);
+        this._mapMoveCallbackContext.push(checkDefined.definedAndNotNull(context) ? context : null);
+        this._mapMoveCallbackTimeout.push(null);
+
+        triggerOnAdd = typeof triggerOnAdd == 'boolean' ? triggerOnAdd : true;
+
+        if (triggerOnAdd) {
+            if (this._mapExtent === undefined) {
+                this._updateMapExtent();
+            }
+            this.triggerMoveCallback(this._mapMoveCallbacks.length - 1);
+        }
+    }
+}
+
+nm.MapMoveCls = MapMoveCls;
+export default MapMoveCls;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_FeatureLayerProperties.html">_FeatureLayerProperties</a></li><li><a href="-_Slider.html">_Slider</a></li><li><a href="Corridor.html">Corridor</a></li><li><a href="DayRange.html">DayRange</a></li><li><a href="ItsLayerCollection.html">ItsLayerCollection</a></li><li><a href="LayerBase.html">LayerBase</a></li><li><a href="LayerBaseVector.html">LayerBaseVector</a></li><li><a href="LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></li><li><a href="LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></li><li><a href="LayerBaseXyzTile.html">LayerBaseXyzTile</a></li><li><a href="LayerEsriMapServer.html">LayerEsriMapServer</a></li><li><a href="LayerGroup.html">LayerGroup</a></li><li><a href="LayerItsInventory.html">LayerItsInventory</a></li><li><a href="LayerLegend.html">LayerLegend</a></li><li><a href="LayerRealEarthTile.html">LayerRealEarthTile</a></li><li><a href="LayerVectorRealEarth.html">LayerVectorRealEarth</a></li><li><a href="MapInteractionBase.html">MapInteractionBase</a></li><li><a href="MapMoveCls.html">MapMoveCls</a></li><li><a href="MapPopupCls.html">MapPopupCls</a></li><li><a href="RealEarthAnimate.html">RealEarthAnimate</a></li><li><a href="RealEarthAnimateTile.html">RealEarthAnimateTile</a></li><li><a href="RealEarthAnimateVector.html">RealEarthAnimateVector</a></li><li><a href="RpPicker.html">RpPicker</a></li><li><a href="SingleSymbol.html">SingleSymbol</a></li><li><a href="Sliders.html">Sliders</a></li><li><a href="SortedFeatures.html">SortedFeatures</a></li><li><a href="SsaCorridorPicker.html">SsaCorridorPicker</a></li><li><a href="UniqueValueSymbol.html">UniqueValueSymbol</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$">$</a></li><li><a href="global.html#dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></li><li><a href="global.html#dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></li><li><a href="global.html#definedAndNotNull">definedAndNotNull</a></li><li><a href="global.html#defineLegend">defineLegend</a></li><li><a href="global.html#defineStyle">defineStyle</a></li><li><a href="global.html#hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></li><li><a href="global.html#highwayConvert">highwayConvert</a></li><li><a href="global.html#htmlEscape">htmlEscape</a></li><li><a href="global.html#makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></li><li><a href="global.html#makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></li><li><a href="global.html#makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></li><li><a href="global.html#makeGuid">makeGuid</a></li><li><a href="global.html#makeMapServiceLegend">makeMapServiceLegend</a></li><li><a href="global.html#mapServiceLegendItem">mapServiceLegendItem</a></li><li><a href="global.html#offsetMinutes">offsetMinutes</a></li><li><a href="global.html#ol">ol</a></li><li><a href="global.html#propertiesZoomStyle">propertiesZoomStyle</a></li><li><a href="global.html#provide">provide</a></li><li><a href="global.html#quickMap">quickMap</a></li><li><a href="global.html#quickMapBase">quickMapBase</a></li><li><a href="global.html#quickMapMulti">quickMapMulti</a></li><li><a href="global.html#resolutionToZoom">resolutionToZoom</a></li><li><a href="global.html#returnedColors">returnedColors</a></li><li><a href="global.html#rgb2hex">rgb2hex</a></li><li><a href="global.html#rgbToRgba">rgbToRgba</a></li><li><a href="global.html#undefinedOrNull">undefinedOrNull</a></li><li><a href="global.html#zoomToResolution">zoomToResolution</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon May 02 2016 16:37:12 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

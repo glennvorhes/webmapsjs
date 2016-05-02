@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: collections/ItsLayerCollection.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: collections/ItsLayerCollection.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Created by gavorhes on 12/14/2015.
+ */
+
+import LayerItsInventory from '../layers/LayerItsInventory';
+import mapMove from '../olHelpers/mapMove';
+import * as colors from '../util/colors';
+import provide from '../util/provide';
+let nm = provide('collections');
+
+
+let itsConfig = [
+    {name: 'Camera', itsType: 'cctv', minZoom: 11, itsIcon: 'cctv.png'},
+    {
+        name: 'Message Signs',
+        itsType: 'DMS',
+        minZoom: 11,
+        itsIconConfig: {
+            prop: 'dmsType',
+            defaultName: 'DMS',
+            defaultIcon: 'dms.png',
+            iconArray: [
+                ['pcms', 'PCMS', 'pcms.png']
+            ]
+        }
+    },
+    {name: 'Lighting', itsType: 'light', minZoom: 16, itsIcon: 'streetlight.png', visible: false, onDemand: true},
+    {name: 'Bluetooth', itsType: 'blue', minZoom: 10, itsIcon: 'bluetooth.png', visible: false},
+    {name: 'Cabinets', itsType: 'cabinet', minZoom: 10, itsIcon: 'cabinet.png', visible: false},
+    {name: 'Hut', itsType: 'hut', minZoom: 10, itsIcon: 'hut.png', visible: false},
+    {name: 'Vault', itsType: 'vault', minZoom: 13, itsIcon: 'vault.png', visible: false},
+    {name: 'Advisory Radio', itsType: 'har', minZoom: 10, itsIcon: 'har.png', visible: false},
+    {
+        name: 'Loop Detectors',
+        itsType: 'loop',
+        legendCollapse: true,
+        minZoom: 14,
+        visible: false,
+        itsIconConfig: {
+            prop: 'dtctrType',
+            defaultName: 'Other',
+            defaultIcon: 'loopdetectorother.png',
+            iconArray: [
+                ['detector', 'Detector', 'loopdetector.png'],
+                ['long', 'Long', 'loopdetectorlong.png'],
+                ['zone', 'Zone', 'loopdetectorzone.png']
+            ]
+        },
+        onDemand: true
+    },
+    {name: 'Microwave', itsType: 'microwave', minZoom: 14, itsIcon: 'microwave.png', visible: false},
+    {name: 'Pull Box', itsType: 'pull', minZoom: 14, itsIcon: 'pullbox.png', visible: false, onDemand: true},
+    {name: 'RWIS', itsType: 'rwis', minZoom: 7, itsIcon: 'rwis.png', visible: false},
+    {name: 'Ramp Gates', itsType: 'gate', minZoom: 10, itsIcon: 'rampgate.png', visible: false},
+    {name: 'Ramp Meter', itsType: 'meter', minZoom: 10, itsIcon: 'rampmeter.png', visible: false},
+    {name: 'Signal', itsType: 'signal', minZoom: 13, itsIcon: 'signal.png', visible: false, onDemand: true},
+    {name: 'Tower', itsType: 'tower', minZoom: 10, itsIcon: 'tower.png', visible: false},
+    //{
+    //    name: 'Trench',
+    //    itsType: 'trench',
+    //    onDemand: true,
+    //    visible: false,
+    //    onDemandDelay: 500,
+    //    minZoom: 15,
+    //    itsLineConfig: {
+    //        prop: 'installType',
+    //        //defaultName: 'Other',
+    //        //defaultWidth: 7,
+    //        defaultColor: colors.hexAlphaToRgbOrRgba('#747474', 0.8),
+    //        lineArray: [
+    //            ['asc', 'Aerial Strand', colors.hexAlphaToRgbOrRgba('#FF0000', 0.7)],
+    //            ['udbc', 'Directional Bore', colors.hexAlphaToRgbOrRgba('#0509FF', 0.7)],
+    //            ['utc', 'Underground', colors.hexAlphaToRgbOrRgba('#FF00ED', 0.7)],
+    //            ['utd', 'Underground - Design', colors.hexAlphaToRgbOrRgba('#A50095', 0.7)]
+    //        ]
+    //    }
+    //},
+
+    {
+        name: 'Trench',
+        itsType: 'trench',
+        onDemand: true,
+        visible: false,
+        onDemandDelay: 500,
+        minZoom: 15,
+        legendCollapse: true,
+        itsLineConfig: {
+            prop: 'owner',
+            //defaultName: 'Other',
+            //defaultWidth: 7,
+            defaultColor: colors.hexAlphaToRgbOrRgba('#747474', 0.8),
+            lineArray: [
+                ['WisDOT', 'WisDOT', colors.hexAlphaToRgbOrRgba('#FF032F', 0.7)],
+                ['WIN', 'WIN', colors.hexAlphaToRgbOrRgba('#FFC632', 0.7)],
+                ['USXchange', 'USXchange', colors.hexAlphaToRgbOrRgba('#2DFF46', 0.7)],
+                ['AT&amp;T', 'AT&amp;T', colors.hexAlphaToRgbOrRgba('#ff2be5', 0.7)],
+                ['Touch America', 'Touch America', colors.hexAlphaToRgbOrRgba('#52f3ff', 0.7)],
+                ['Qwest', 'Qwest', colors.hexAlphaToRgbOrRgba('#9278ff', 0.7)],
+                ['McLeodUSA', 'McLeodUSA', colors.hexAlphaToRgbOrRgba('#2926FF', 0.7)],
+                ['CINC', 'CINC', colors.hexAlphaToRgbOrRgba('#CB00FF', 0.7)],
+                ['City of Madison', 'Madison', colors.hexAlphaToRgbOrRgba('#000380', 0.7)]
+            ]
+        }
+    }
+
+    //    {
+    //    name: 'Trench',
+    //    itsType: 'trench',
+    //    onDemand: true,
+    //    visible: false,
+    //    onDemandDelay: 500,
+    //    minZoom: 15,
+    //    itsLineStyle: {
+    //        color: '#FF0000',
+    //        width: 7
+    //    }
+    //}
+
+];
+
+
+class ItsLayerCollection {
+
+    /**
+     * Create a collection of all ITS layers
+     * @param {Map} theMap the openlayers map
+     * @param {Array} [exclude=[]] array of Its layer identifiers to exclude
+     *
+     * BLUE Bluetooth Detector - Bluetooth Detector
+     * CABINET Cabinets - The cabinets
+     * CCTV Camera - Traffic Cameras
+     * HUT Communication Hut - Communication Hut
+     * VAULT Communication Vault - The communication vaults
+     * HAR Highway Advisory Radio - Advisory Radios
+     * LIGHT Lighting - Lighting
+     * LOOP Loop Detectors - Loop Detectors
+     * DMS Message Board - Message Boards and Signs
+     * MICROWAVE Microwave Detector - Microwave Detectors
+     * PULL Pull Box - A pull box
+     * RWIS RWIS - Road weather information system
+     * GATE Ramp Gate - The ramp Gates
+     * METER Ramp Meter - The ramp meters
+     * SIGNAL Signal - Traffic Signal
+     * TOWER Tower - The towers
+     * TRENCH
+     */
+    constructor(theMap, exclude) {
+
+        this.map = theMap;
+        this._layers = [];
+
+        exclude = typeof exclude == 'object' ? exclude : [];
+
+        for (let i = 0; i &lt; itsConfig.length; i++) {
+            let lyrConfig = itsConfig[i];
+            let addLayer = true;
+
+            for (let j = 0; j &lt; exclude.length; j++) {
+                if (exclude[j] == lyrConfig.itsType) {
+                    addLayer = false;
+                    break;
+                }
+            }
+
+            if (addLayer) {
+                let inventLyr = new LayerItsInventory(lyrConfig);
+                this['map'].addLayer(inventLyr.olLayer);
+                this._layers.push(inventLyr);
+
+            }
+        }
+    }
+
+    /**
+     * Return the array of layers in this collection
+     * @returns {Array&lt;LayerItsInventory>} an array of layers
+     */
+    get layers() {
+        return this._layers;
+    }
+}
+
+nm.ItsLayerCollection = ItsLayerCollection;
+export default ItsLayerCollection;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_FeatureLayerProperties.html">_FeatureLayerProperties</a></li><li><a href="-_Slider.html">_Slider</a></li><li><a href="Corridor.html">Corridor</a></li><li><a href="DayRange.html">DayRange</a></li><li><a href="ItsLayerCollection.html">ItsLayerCollection</a></li><li><a href="LayerBase.html">LayerBase</a></li><li><a href="LayerBaseVector.html">LayerBaseVector</a></li><li><a href="LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></li><li><a href="LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></li><li><a href="LayerBaseXyzTile.html">LayerBaseXyzTile</a></li><li><a href="LayerEsriMapServer.html">LayerEsriMapServer</a></li><li><a href="LayerGroup.html">LayerGroup</a></li><li><a href="LayerItsInventory.html">LayerItsInventory</a></li><li><a href="LayerLegend.html">LayerLegend</a></li><li><a href="LayerRealEarthTile.html">LayerRealEarthTile</a></li><li><a href="LayerVectorRealEarth.html">LayerVectorRealEarth</a></li><li><a href="MapInteractionBase.html">MapInteractionBase</a></li><li><a href="MapMoveCls.html">MapMoveCls</a></li><li><a href="MapPopupCls.html">MapPopupCls</a></li><li><a href="RealEarthAnimate.html">RealEarthAnimate</a></li><li><a href="RealEarthAnimateTile.html">RealEarthAnimateTile</a></li><li><a href="RealEarthAnimateVector.html">RealEarthAnimateVector</a></li><li><a href="RpPicker.html">RpPicker</a></li><li><a href="SingleSymbol.html">SingleSymbol</a></li><li><a href="Sliders.html">Sliders</a></li><li><a href="SortedFeatures.html">SortedFeatures</a></li><li><a href="SsaCorridorPicker.html">SsaCorridorPicker</a></li><li><a href="UniqueValueSymbol.html">UniqueValueSymbol</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$">$</a></li><li><a href="global.html#dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></li><li><a href="global.html#dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></li><li><a href="global.html#definedAndNotNull">definedAndNotNull</a></li><li><a href="global.html#defineLegend">defineLegend</a></li><li><a href="global.html#defineStyle">defineStyle</a></li><li><a href="global.html#hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></li><li><a href="global.html#highwayConvert">highwayConvert</a></li><li><a href="global.html#htmlEscape">htmlEscape</a></li><li><a href="global.html#makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></li><li><a href="global.html#makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></li><li><a href="global.html#makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></li><li><a href="global.html#makeGuid">makeGuid</a></li><li><a href="global.html#makeMapServiceLegend">makeMapServiceLegend</a></li><li><a href="global.html#mapServiceLegendItem">mapServiceLegendItem</a></li><li><a href="global.html#offsetMinutes">offsetMinutes</a></li><li><a href="global.html#ol">ol</a></li><li><a href="global.html#propertiesZoomStyle">propertiesZoomStyle</a></li><li><a href="global.html#provide">provide</a></li><li><a href="global.html#quickMap">quickMap</a></li><li><a href="global.html#quickMapBase">quickMapBase</a></li><li><a href="global.html#quickMapMulti">quickMapMulti</a></li><li><a href="global.html#resolutionToZoom">resolutionToZoom</a></li><li><a href="global.html#returnedColors">returnedColors</a></li><li><a href="global.html#rgb2hex">rgb2hex</a></li><li><a href="global.html#rgbToRgba">rgbToRgba</a></li><li><a href="global.html#undefinedOrNull">undefinedOrNull</a></li><li><a href="global.html#zoomToResolution">zoomToResolution</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon May 02 2016 16:37:12 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

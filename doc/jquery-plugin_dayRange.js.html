@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: jquery-plugin/dayRange.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: jquery-plugin/dayRange.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let $ = require('jquery');
+require('jquery-ui/datepicker');
+import provide from '../util/provide';
+let nm = provide('jQueryPlugin');
+
+class DayRange {
+
+    /**
+     * constructor for the date range
+     * @param {number} dayRange number of days
+     * @param {jQuery} jQueryRef reference to the jquery element
+     */
+    constructor(dayRange, jQueryRef) {
+        this._workingDayRange = dayRange - 1;
+
+        let pickerHtml = '&lt;label for="start-date" style="width: 78px; display: inline-block; margin:5px;">Start Date&lt;/label>' +
+            '&lt;input type="text" readonly id="start-date" class="date-pick"  style="width: 90px;">' +
+            '&lt;br>&lt;label for="end-date" style="width: 78px; display: inline-block;  margin:5px;">End Date&lt;/label>' +
+            '&lt;input type="text" readonly id="end-date" class="date-pick" style="width: 90px;">';
+
+        jQueryRef.append(pickerHtml);
+
+        this._$startDate = $('#start-date');
+        this._$endDate = $('#end-date');
+
+        this._$startDate.datepicker();
+        this._$endDate.datepicker();
+
+        this._startDate = null;
+        this._endDate = null;
+
+        let dte1 = new Date();
+        dte1.setHours(0, 0, 0, 0);
+        let dte2 = new Date(dte1.getTime());
+        dte2.setDate(dte2.getDate() + dayRange);
+        dte2.setHours(23, 59, 59, 0);
+        this._maxDateRange = dte2 - dte1;
+
+        let _this = this;
+
+        //add event listeners
+        this._$startDate.change(function () {
+            _this.startDate = this.value;
+        });
+
+        this._$endDate.change(function () {
+            _this.endDate = this.value;
+        });
+
+        // initialize
+        this.endDate = (new Date()).getTime();
+    }
+
+    get startDate() {
+        return this._startDate;
+    }
+
+    set startDate(val) {
+        this._startDate = new Date(val);
+        this._startDate.setHours(0, 0, 0, 0);
+        this._$startDate.val(this._startDate.toLocaleDateString());
+
+        if (this.endDate == null || this._endDate - this._startDate > this._maxDateRange || this._endDate.getTime() - this._startDate.getTime() &lt; 24 * 60 * 60 * 1000) {
+            let tmpDate = new Date(this._startDate.getTime());
+            tmpDate.setDate(tmpDate.getDate() + this._workingDayRange);
+            this.endDate = tmpDate.getTime();
+        }
+    }
+
+    get endDate() {
+        return this._endDate;
+    }
+
+
+    set endDate(val) {
+        this._endDate = new Date(val);
+        this._endDate.setHours(23, 59, 59, 0);
+        this._$endDate.val(this._endDate.toLocaleDateString());
+        if (this._startDate == null || this._endDate - this.startDate > this._maxDateRange || this._endDate.getTime() - this._startDate.getTime() &lt; 24 * 60 * 60 * 1000) {
+            let tmpDate = new Date(this._endDate.getTime());
+            tmpDate.setDate(tmpDate.getDate() - this._workingDayRange);
+            this.startDate = tmpDate.getTime();
+        }
+    }
+}
+
+nm.DayRange = DayRange;
+
+/**
+ * Adds day range control
+ * @param {number} dayRange the number of days
+ * @returns {DayRange} the day range object
+ */
+$.fn.dayRange = function (dayRange) {
+    return new DayRange(dayRange, this);
+};
+
+export default undefined;
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_FeatureLayerProperties.html">_FeatureLayerProperties</a></li><li><a href="-_Slider.html">_Slider</a></li><li><a href="Corridor.html">Corridor</a></li><li><a href="DayRange.html">DayRange</a></li><li><a href="ItsLayerCollection.html">ItsLayerCollection</a></li><li><a href="LayerBase.html">LayerBase</a></li><li><a href="LayerBaseVector.html">LayerBaseVector</a></li><li><a href="LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></li><li><a href="LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></li><li><a href="LayerBaseXyzTile.html">LayerBaseXyzTile</a></li><li><a href="LayerEsriMapServer.html">LayerEsriMapServer</a></li><li><a href="LayerGroup.html">LayerGroup</a></li><li><a href="LayerItsInventory.html">LayerItsInventory</a></li><li><a href="LayerLegend.html">LayerLegend</a></li><li><a href="LayerRealEarthTile.html">LayerRealEarthTile</a></li><li><a href="LayerVectorRealEarth.html">LayerVectorRealEarth</a></li><li><a href="MapInteractionBase.html">MapInteractionBase</a></li><li><a href="MapMoveCls.html">MapMoveCls</a></li><li><a href="MapPopupCls.html">MapPopupCls</a></li><li><a href="RealEarthAnimate.html">RealEarthAnimate</a></li><li><a href="RealEarthAnimateTile.html">RealEarthAnimateTile</a></li><li><a href="RealEarthAnimateVector.html">RealEarthAnimateVector</a></li><li><a href="RpPicker.html">RpPicker</a></li><li><a href="SingleSymbol.html">SingleSymbol</a></li><li><a href="Sliders.html">Sliders</a></li><li><a href="SortedFeatures.html">SortedFeatures</a></li><li><a href="SsaCorridorPicker.html">SsaCorridorPicker</a></li><li><a href="UniqueValueSymbol.html">UniqueValueSymbol</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$">$</a></li><li><a href="global.html#dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></li><li><a href="global.html#dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></li><li><a href="global.html#definedAndNotNull">definedAndNotNull</a></li><li><a href="global.html#defineLegend">defineLegend</a></li><li><a href="global.html#defineStyle">defineStyle</a></li><li><a href="global.html#hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></li><li><a href="global.html#highwayConvert">highwayConvert</a></li><li><a href="global.html#htmlEscape">htmlEscape</a></li><li><a href="global.html#makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></li><li><a href="global.html#makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></li><li><a href="global.html#makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></li><li><a href="global.html#makeGuid">makeGuid</a></li><li><a href="global.html#makeMapServiceLegend">makeMapServiceLegend</a></li><li><a href="global.html#mapServiceLegendItem">mapServiceLegendItem</a></li><li><a href="global.html#offsetMinutes">offsetMinutes</a></li><li><a href="global.html#ol">ol</a></li><li><a href="global.html#propertiesZoomStyle">propertiesZoomStyle</a></li><li><a href="global.html#provide">provide</a></li><li><a href="global.html#quickMap">quickMap</a></li><li><a href="global.html#quickMapBase">quickMapBase</a></li><li><a href="global.html#quickMapMulti">quickMapMulti</a></li><li><a href="global.html#resolutionToZoom">resolutionToZoom</a></li><li><a href="global.html#returnedColors">returnedColors</a></li><li><a href="global.html#rgb2hex">rgb2hex</a></li><li><a href="global.html#rgbToRgba">rgbToRgba</a></li><li><a href="global.html#undefinedOrNull">undefinedOrNull</a></li><li><a href="global.html#zoomToResolution">zoomToResolution</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon May 02 2016 16:37:12 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

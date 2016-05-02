@@ -1,0 +1,39 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "semi": 1,
+    "brace-style": 1,
+    "block-spacing": 1,
+    "comma-spacing": 1,
+    "no-var": 1,
+    "camelcase": 1,
+    "newline-before-return": 1,
+    "block-scoped-var": 1,
+    "dot-location": [
+      1,
+      "property"
+    ],
+    "default-case": 1,
+    "valid-typeof": 1,
+    "valid-jsdoc": [
+      1,
+      {
+        "prefer": {
+          "return": "returns"
+        },
+        "requireReturn": false
+      }
+    ],
+    "eol-last": 1
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}
