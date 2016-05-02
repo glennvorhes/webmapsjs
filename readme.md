@@ -1,2 +1,2 @@
-project name
-here is the project
+# webmapsjs
+Openlayers helpers
