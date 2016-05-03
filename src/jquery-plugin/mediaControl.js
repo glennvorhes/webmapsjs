@@ -1,4 +1,4 @@
-const $ = require('jquery');
+import $ from '../jquery';
 import provide from '../util/provide';
 let nm = provide('jQueryPlugin');
 

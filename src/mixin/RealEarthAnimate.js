@@ -3,7 +3,7 @@
  */
 import provide from '../util/provide';
 import mapPopup from '../olHelpers/mapPopup';
-const $ = require('jquery');
+import $ from '../jquery';
 let nm = provide('mixin');
 
 

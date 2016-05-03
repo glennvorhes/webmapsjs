@@ -2,7 +2,7 @@
  * Created by gavorhes on 12/8/2015.
  */
 
-const $ = require('jquery');
+import $ from '../jquery';
 import ol from '../custom-ol';
 import LayerBaseVectorGeoJson from './LayerBaseVectorGeoJson';
 import mapMove from '../olHelpers/mapMove';

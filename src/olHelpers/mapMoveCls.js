@@ -3,7 +3,7 @@
  */
 
 
-const $ = require('jquery');
+import $ from '../jquery';
 import MapInteractionBase from './mapInteractionBase';
 import * as checkDefined from '../util/checkDefined';
 import provide from '../util/provide';

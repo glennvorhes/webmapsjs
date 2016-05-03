@@ -1,7 +1,7 @@
 /**
  * Created by gavorhes on 12/16/2015.
  */
-const $ = require('jquery');
+import $ from '../jquery';
 import provide from '../util/provide';
 import makeGuid from '../util/makeGuid';
 import mapMove from '../olHelpers/mapMove';

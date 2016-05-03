@@ -1,4 +1,4 @@
-let $ = require('jquery');
+import $ from '../jquery';
 require('jquery-ui/datepicker');
 import provide from '../util/provide';
 let nm = provide('jQueryPlugin');

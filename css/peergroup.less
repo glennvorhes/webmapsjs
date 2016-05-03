@@ -1,0 +1,173 @@
+@import './all-ol-style';
+
+@sidebarWidth: 280px;
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#app-container {
+  display: flex;
+  height: 100%;
+
+  > div {
+    height: 100%;
+    overflow-y: auto;
+  }
+}
+
+#left-sidebar {
+  width: @sidebarWidth;
+
+  label {
+    display: inline-block;
+    margin-left: 4px;
+  }
+
+  h6 {
+    margin-top: 5px;
+    margin-bottom: 2px;
+  }
+}
+
+#accordion {
+  font-size: 0.9em !important;
+
+  h3 {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-bottom: 2px;
+  }
+}
+
+#right-sidebar {
+  width: 400px;
+}
+
+#map {
+  flex: 1;
+}
+
+#dialog{
+  display: none;
+}
+//
+.ui-accordion-content {
+  padding: 5px 10px !important;
+}
+
+select {
+  margin: 4px;
+  padding: 0;
+}
+
+input[type=text] {
+  margin: 2px 7px;
+  padding: 5px;
+}
+
+.divUnd {
+  width: 100px;
+
+}
+
+.equality-compare {
+  width: 45px;
+}
+
+.class-adtVal {
+  width: 90px;
+}
+
+.class-laneVal, .class-speedVal {
+  width: 50px;
+}
+
+.comma-list {
+  width: 250px;
+
+}
+
+#summary {
+  border-collapse: collapse;
+}
+
+#summary tr {
+  height: 30px;
+}
+
+#summary th, td {
+  border: 1px solid black;
+  padding: 1px 4px;
+  text-align: center;
+  //color: #636363;
+}
+
+.invalid {
+  border: solid red 1px !important;
+}
+
+.popup-table {
+  border-collapse: collapse;
+  margin-top: 5px;
+
+}
+
+.popup-table th, td {
+  border: 1px solid black;
+}
+
+//
+//.ol-popup {
+//    display: none;
+//    position: absolute;
+//    background-color: white;
+//    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+//    -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+//    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+//    padding: 15px;
+//    border-radius: 10px;
+//    border: 1px solid #cccccc;
+//    bottom: 12px;
+//    left: -50px;
+//}
+//
+//.ol-popup:after, .ol-popup:before {
+//    top: 100%;
+//    border: solid transparent;
+//    content: " ";
+//    height: 0;
+//    width: 0;
+//    position: absolute;
+//    pointer-events: none;
+//}
+//
+//.ol-popup:after {
+//    border-top-color: white;
+//    border-width: 10px;
+//    left: 48px;
+//    margin-left: -10px;
+//}
+//
+//.ol-popup:before {
+//    border-top-color: #cccccc;
+//    border-width: 11px;
+//    left: 48px;
+//    margin-left: -11px;
+//}
+//
+//.ol-popup-closer {
+//    text-decoration: none;
+//    position: absolute;
+//    top: 2px;
+//    right: 8px;
+//}
+//
+//.ol-popup-closer:after {
+//    content: "✖";
+//}
+//
+//

@@ -3,7 +3,7 @@
  */
 import provide from '../util/provide';
 let nm = provide('collections');
-let $ = require('jquery');
+import $ from '../jquery';
 
 class _Slider {
 

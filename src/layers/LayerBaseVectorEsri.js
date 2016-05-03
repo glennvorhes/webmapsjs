@@ -1,7 +1,7 @@
 /**
  * Created by gavorhes on 11/2/2015.
  */
-const $ = require('jquery');
+import $ from '../jquery';
 import ol from '../custom-ol';
 import LayerBaseVector from './LayerBaseVector';
 import * as esriToOl from '../olHelpers/esriToOlStyle';

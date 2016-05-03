@@ -6,7 +6,7 @@
  * Created by gavorhes on 12/15/2015.
  */
 
-const $ = require('jquery');
+import $ from '../jquery';
 import ol from '../custom-ol';
 import provide from '../util/provide';
 import mapMove from './mapMove';

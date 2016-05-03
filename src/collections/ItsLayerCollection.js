@@ -123,7 +123,7 @@ class ItsLayerCollection {
 
     /**
      * Create a collection of all ITS layers
-     * @param {Map} theMap the openlayers map
+     * @param {ol.Map} theMap the openlayers map
      * @param {Array} [exclude=[]] array of Its layer identifiers to exclude
      *
      * BLUE Bluetooth Detector - Bluetooth Detector

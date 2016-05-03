@@ -4,7 +4,7 @@
  * Created by gavorhes on 11/2/2015.
  */
 
-const $ = require('jquery');
+import $ from '../jquery';
 let mouseIn = false;
 let mouseDown = false;
 let timeout = null;

@@ -1,4 +1,4 @@
-const $ = require('jquery');
+import $ from '../jquery';
 import ol from '../custom-ol';
 import LayerBase from './LayerBase';
 import mapMove from '../olHelpers/mapMove';
@@ -183,7 +183,7 @@ class LayerBaseVector extends LayerBase {
 
     /**
      * get the style definition
-     * @type {ol.Style|function}
+     * @type {ol.Style|styleFunc}
      */
     get style() {
         return this._style;

@@ -2,7 +2,7 @@
  * Created by gavorhes on 11/3/2015.
  */
 
-const $ = require('jquery');
+import $ from '../jquery';
 import ol from '../custom-ol';
 import MapInteractionBase from './mapInteractionBase';
 import propertiesZoomStyle from '../olHelpers/propertiesZoomStyle';

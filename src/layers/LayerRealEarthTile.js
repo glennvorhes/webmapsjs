@@ -2,7 +2,7 @@
  * Created by gavorhes on 11/4/2015.
  */
 
-const $ = require('jquery');
+import $ from '../jquery';
 import LayerBaseXyzTile from './LayerBaseXyzTile';
 import RealEarthAnimateTile from '../mixin/RealEarthAnimateTile';
 let mixIns = require('es6-mixins');

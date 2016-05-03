@@ -1,4 +1,4 @@
-const $ = require('jquery');
+import $ from '../jquery';
 import ol from '../custom-ol';
 
 import quickMap from '../olHelpers/quickMap';
