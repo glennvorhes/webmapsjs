@@ -7,7 +7,8 @@
     "test": "node node_modules\\karma\\bin\\karma start karma.conf.js",
     "ol": "node node_modules/openlayers/tasks/build.js src/ol/ol-config.json src/ol/ol.js",
     "lint": "eslint src/**/*.js",
-    "jsdoc": "jsdoc -r -d doc src"
+    "jsdoc": "jsdoc -r -d doc src",
+    "src2lib": "babel src --out-dir lib --presets es2015 --ignore ol.js & COPY /Y src\\ol\\ol.js lib\\ol\\ol.js"
   },
   "author": "TOPS Lab",
   "license": "ISC",
@@ -25,6 +26,7 @@
     "codecov.io": "^0.1.6",
     "es6-mixins": "^1.0.2",
     "es6-shim": "^0.35.0",
+    "expect": "^1.20.1",
     "glob": "^7.0.3",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
