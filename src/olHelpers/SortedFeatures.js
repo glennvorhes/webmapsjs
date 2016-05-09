@@ -11,7 +11,7 @@ class SortedFeatures {
 
     /**
      *
-     * @param {Array} features array of ol features
+     * @param {Array<ol.Feature>} features array of ol features
      * @param {string} propertyName - the property name to use for lookup
      */
     constructor(features, propertyName) {

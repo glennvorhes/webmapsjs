@@ -5,9 +5,9 @@
 import $ from '../jquery';
 import LayerBaseXyzTile from './LayerBaseXyzTile';
 import RealEarthAnimateTile from '../mixin/RealEarthAnimateTile';
-let mixIns = require('es6-mixins');
 import provide from '../util/provide';
-let nm = provide('layers');
+const mixIns = require('es6-mixins');
+const nm = provide('layers');
 
 /**
  * Real earth tile

@@ -3,7 +3,7 @@
  */
 
 import provide from '../util/provide';
-let nm = provide('olHelpers.zoomResolutionConvert');
+const nm = provide('olHelpers.zoomResolutionConvert');
 
 let _zoomResLookup = [
     156543.03392804097, //0

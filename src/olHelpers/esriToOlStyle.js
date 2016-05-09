@@ -1,9 +1,9 @@
 /**
  * Created by gavorhes on 1/4/2016.
  */
-import ol from '../custom-ol';
 import provide from '../util/provide';
-let nm = provide('olHelpers.esriToOlStyle');
+const ol = require('../ol/ol');
+const nm = provide('olHelpers.esriToOlStyle');
 
 /**
  * This callback is displayed as part of the Requester class.
@@ -12,7 +12,13 @@ let nm = provide('olHelpers.esriToOlStyle');
  * @param {number} resolution - map resolution
  */
 
-
+/**
+ *
+ * @param {Array<number>} colorArray - input color array
+ * @param {number} opacity - the opacity 0 to 1
+ * @returns {string} rgba string
+ * @private
+ */
 function _colorArrayToRgba(colorArray, opacity) {
     "use strict";
 
@@ -37,6 +43,12 @@ nm.htmlEscape = htmlEscape;
 
 
 class CommonSymbol {
+
+    /**
+     * 
+     * @param symbolObj
+     * @param {number} opacity
+     */
     constructor(symbolObj, opacity) {
         this.symbolObj = symbolObj;
         this.opacity = opacity;
@@ -54,6 +66,7 @@ class PointSymbol extends CommonSymbol {
                 let outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);
                 let outlineWidth = this.symbolObj.outline.width;
                 let radius = this.symbolObj.size;
+
 
                 this.olStyle = new ol.style.Style({
                     image: new ol.style.Circle({
@@ -244,7 +257,7 @@ class UniqueValueSymbol extends SymbolGenerator {
 
 /**
  * style and legend object
- * @typedef {oject} styleAndLegend
+ * @typedef {object} styleAndLegend
  * @property {styleFunc} style - style function
  * @property {string} legend - legend content
  */
@@ -301,7 +314,7 @@ export function makeFeatureServiceLegendAndSymbol(esriResponse) {
     } else {
         return {style: symbolLegendOut.olStyle, legend: symbolLegendOut.legendHtml};
     }
-};
+}
 
 nm.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
 

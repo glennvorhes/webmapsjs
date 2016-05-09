@@ -4,7 +4,7 @@
 import provide from '../util/provide';
 import mapPopup from '../olHelpers/mapPopup';
 import $ from '../jquery';
-let nm = provide('mixin');
+const nm = provide('mixin');
 
 
 /**

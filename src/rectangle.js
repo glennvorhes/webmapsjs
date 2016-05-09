@@ -15,6 +15,12 @@ class Rectangle {
     constructor(width, height) {
         this.width = width;
         this.height = height;
+        this.bird = 10;
+        this.cat= 10;
+        this.cat= 10;
+        this.cat= 10;
+        this.cat= 11;
+        console.log('bird');
     }
 
     // This is also a new feature of ES6. The "get" keyword

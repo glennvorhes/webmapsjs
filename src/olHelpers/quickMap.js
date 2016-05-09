@@ -31,5 +31,6 @@ function quickMap(options) {
     return m;
 }
 
+
 nm.quickMap = quickMap;
 export default quickMap;

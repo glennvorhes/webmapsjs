@@ -2,12 +2,12 @@
  * Created by gavorhes on 12/7/2015.
  */
 import $ from '../jquery';
-import ol from '../custom-ol';
 import LayerBase from './LayerBase';
 import * as esriToOl from '../olHelpers/esriToOlStyle';
 import mapPopup from '../olHelpers/mapPopup';
 import provide from '../util/provide';
-let nm = provide('layers');
+const ol = require('../ol/ol');
+const nm = provide('layers');
 
 /**
  * esri mapserver layer

@@ -4,9 +4,9 @@
 
 import LayerBaseVectorGeoJson from './LayerBaseVectorGeoJson';
 import RealEarthAnimateVector from '../mixin/RealEarthAnimateVector';
-let mixIns = require('es6-mixins');
 import provide from '../util/provide';
-let nm = provide('layers');
+const mixIns = require('es6-mixins');
+const nm = provide('layers');
 
 /**
  * Vector real earth vector

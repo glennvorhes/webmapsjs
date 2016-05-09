@@ -1,9 +1,9 @@
 import $ from '../jquery';
-import ol from '../custom-ol';
 import LayerBase from './LayerBase';
 import mapMove from '../olHelpers/mapMove';
 import provide from '../util/provide';
-let nm = provide('layers');
+const ol = require('../ol/ol');
+const nm = provide('layers');
 
 /**
  * The make mapMoveGetParams function takes the extent and the zoom level

@@ -16,9 +16,9 @@ class TipConfig {
 
         /**
          *
-         * @type {Map}
+         * @type {ol.Map|undefined}
          */
-        this.map = null;
+        this.map = undefined;
 
         this.$loadingGif = null;
         this.$regionSelector = undefined;

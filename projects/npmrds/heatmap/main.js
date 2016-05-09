@@ -1,7 +1,7 @@
 /**
  * Created by gavorhes on 12/22/2015.
  */
-
+require('babel-polyfill');
 import npmrdsHeatmapConfig from './appConfig';
 import quickMap from '../../../src/olHelpers/quickMap';
 import LayerBaseXyzTile from '../../../src/layers/LayerBaseXyzTile';

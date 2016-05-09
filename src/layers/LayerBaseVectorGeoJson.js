@@ -1,10 +1,11 @@
 /**
  * Created by gavorhes on 11/2/2015.
  */
+
 import $ from '../jquery';
-import ol from '../custom-ol';
 import LayerBaseVector from './LayerBaseVector';
 import provide from '../util/provide';
+const ol = require('../ol/ol');
 let nm = provide('layers');
 
 /**

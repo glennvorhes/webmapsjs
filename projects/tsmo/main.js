@@ -1,6 +1,7 @@
 /**
  * Created by gavorhes on 12/14/2015.
  */
+import '../../node_modules/babel-polyfill/dist/polyfill.min';
 import Sliders from '../../src/collections/Sliders';
 import tipConfig from './TipConfig';
 import mapPopup from '../../src/olHelpers/mapPopup';
@@ -65,7 +66,6 @@ import TipSegmentLayer from './TipSegmentLayer';
 
     uiSetup.endUi();
     uiSetup.endUiMap();
-
 })();
 
 

@@ -3,7 +3,6 @@
  */
 
 import LayerItsInventory from '../layers/LayerItsInventory';
-import mapMove from '../olHelpers/mapMove';
 import * as colors from '../util/colors';
 import provide from '../util/provide';
 let nm = provide('collections');

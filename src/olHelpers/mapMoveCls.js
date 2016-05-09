@@ -8,7 +8,7 @@ import MapInteractionBase from './mapInteractionBase';
 import * as checkDefined from '../util/checkDefined';
 import provide from '../util/provide';
 import makeGuid from '../util/makeGuid';
-let nm = provide('olHelpers');
+const nm = provide('olHelpers');
 
 /**
  * assists with map move interactions, trigger callback functions

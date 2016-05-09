@@ -4,7 +4,7 @@
 
 import provide from '../util/provide';
 import * as zoomResolutionConvert from './zoomResolutionConvert';
-let nm = provide('olHelpers');
+const nm = provide('olHelpers');
 
 /**
  * A style function based on properties and zoom level, wraps normal feature, resolution function

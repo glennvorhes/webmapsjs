@@ -2,13 +2,13 @@
  * Created by gavorhes on 12/22/2015.
  */
 import * as zoomResolutionConvert from '../../src/olHelpers/zoomResolutionConvert';
-import ol from '../../src/custom-ol';
+const ol = require('../../src/ol/ol');
 
 
 /**
  * tip style function
- * @param feature
- * @param resolution
+ * @param {ol.Feature} feature - the feature
+ * @param {number} resolution - resolution level
  * @returns {*[]}
  */
 export function tipStyle(feature, resolution) {

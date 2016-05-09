@@ -1,7 +1,7 @@
 /**
  * Created by gavorhes on 12/22/2015.
  */
-
+import '../../node_modules/babel-polyfill/dist/polyfill.min';
 import quickMap from '../../src/olHelpers/quickMap';
 import LayerBaseVectorGeoJson from '../../src/layers/LayerBaseVectorGeoJson';
 import mapPopup from '../../src/olHelpers/mapPopup';
@@ -17,9 +17,9 @@ let suppressLowScores = true;
 function tipStyleReport(feature, resolution) {
     "use strict";
 
-    let seg_score = feature.getProperties()['z'];
+    let segScore= feature.getProperties()['z'];
 
-    if (seg_score < 1 && suppressLowScores) {
+    if (segScore < 1 && suppressLowScores) {
         return null;
     } else {
         return tipLayerStyles.tipStyle(feature, resolution);
@@ -37,7 +37,7 @@ function tipStyleReport(feature, resolution) {
 
         $.get('getcrash', {pdpId: pdpId}, function (d) {
             $crashData.html(d);
-        }, 'text')
+        }, 'text');
     }
 
     // add the cell classes
@@ -127,6 +127,7 @@ function tipStyleReport(feature, resolution) {
             $selectedRow.addClass('selected-row');
             $resultsContainer.find('table tbody').scrollTop(0);
             $resultsContainer.find('table tbody').scrollTop($selectedRow.offset().top - 60);
+        
             return undefined;
         },
         {olStyle: tipLayerStyles.tipStyleSelection}
@@ -149,6 +150,7 @@ function tipStyleReport(feature, resolution) {
                 selectionLayer.getSource().addFeature(feature);
                 mapView.fit(feature.getGeometry().getExtent(), map.getSize());
                 mapView.setZoom(mapView.getZoom() - 2);
+                
                 return;
             }
         }
@@ -193,6 +195,4 @@ function tipStyleReport(feature, resolution) {
        setTimeout(updateTableColumnWidth, 50);
 
     });
-
-
 })();

@@ -3,7 +3,7 @@
  */
 
 // <editor-fold desc="imports">
-
+require('babel-polyfill');
 import quickMap from '../../src/olHelpers/quickMap';
 import LayerBase from '../../src/layers/LayerBase';
 import LayerBaseVectorGeoJson from '../../src/layers/LayerBaseVectorGeoJson';

@@ -3,7 +3,7 @@
  */
 import RealEarthAnimate from './RealEarthAnimate';
 import provide from '../util/provide';
-let nm = provide('mixin');
+const nm = provide('mixin');
 
 /**
  * Animate real earth tile

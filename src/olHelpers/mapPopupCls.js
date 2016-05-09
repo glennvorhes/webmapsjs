@@ -3,11 +3,11 @@
  */
 
 import $ from '../jquery';
-import ol from '../custom-ol';
 import MapInteractionBase from './mapInteractionBase';
 import propertiesZoomStyle from '../olHelpers/propertiesZoomStyle';
 import provide from '../util/provide';
-let nm = provide('olHelpers');
+const ol = require('../ol/ol');
+const nm = provide('olHelpers');
 
 
 class _FeatureLayerProperties {

@@ -1,13 +1,12 @@
 import $ from '../jquery';
-import ol from '../custom-ol';
-
 import quickMap from '../olHelpers/quickMap';
 import quickMapMulti from '../olHelpers/quickMapMulti';
 import SortedFeatures from '../olHelpers/SortedFeatures';
 import LayerBaseVectorGeoJson from '../layers/LayerBaseVectorGeoJson';
 import LayerEsriMapServer from '../layers/LayerEsriMapServer';
 import provide from '../util/provide';
-let nm = provide('ssa');
+const ol = require('../ol/ol');
+const nm = provide('ssa');
 
 /**
  * @callback rpSetCallback

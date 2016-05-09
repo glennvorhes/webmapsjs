@@ -7,11 +7,11 @@
  */
 
 import $ from '../jquery';
-import ol from '../custom-ol';
 import provide from '../util/provide';
 import mapMove from './mapMove';
 import mapPopup from './mapPopup';
-let nm = provide('olHelpers');
+const ol = require('../ol/ol');
+const nm = provide('olHelpers');
 
 
 /**

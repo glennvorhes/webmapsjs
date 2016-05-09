@@ -1,6 +1,7 @@
 /**
  * Created by gavorhes on 12/18/2015.
  */
+require('babel-polyfill');
 import quickMap from '../../src/olHelpers/quickMap';
 import mapMove from '../../src/olHelpers/mapMove';
 import mapPopup from '../../src/olHelpers/mapPopup';

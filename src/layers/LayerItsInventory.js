@@ -3,11 +3,11 @@
  */
 
 import $ from '../jquery';
-import ol from '../custom-ol';
 import LayerBaseVectorGeoJson from './LayerBaseVectorGeoJson';
 import mapMove from '../olHelpers/mapMove';
 import mapPopup from '../olHelpers/mapPopup';
 import provide from '../util/provide';
+const ol = require('../ol/ol');
 let nm = provide('layers');
 
 
