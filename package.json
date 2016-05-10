@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Openlayers helpers",
   "main": "lib",
-  "files": ["lib", "doc"],
+  "files": ["lib", "doc", "src"],
   "scripts": {
     "test": "node node_modules\\karma\\bin\\karma start karma.conf.js",
     "ol": "node node_modules/openlayers/tasks/build.js src/ol/ol-config.json src/ol/ol.js",
