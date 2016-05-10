@@ -8,8 +8,6 @@ import LayerEsriMapServer from '../../src/layers/LayerEsriMapServer';
 import LayerBaseXyzTile from '../../src/layers/LayerBaseXyzTile';
 import LayerLegend from '../../src/collections/LayerLegend';
 import ItsLayerCollection from '../../src/collections/ItsLayerCollection';
-import mapPopup from '../../src/olHelpers/mapPopup';
-
 
 (function () {
     "use strict";
@@ -32,9 +30,6 @@ import mapPopup from '../../src/olHelpers/mapPopup';
     map.addLayer(oakRidgeCams.olLayer);
 
     glob.cat = (bird) => bird * 2;
-
-
-
 
     glob.map = map;
 
@@ -124,6 +119,4 @@ import mapPopup from '../../src/olHelpers/mapPopup';
     //map.addLayer(esriMapServer.olLayer);
 
     glob.itsCollection = itsLayerCollection;
-
-
 })();

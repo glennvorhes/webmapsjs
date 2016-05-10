@@ -29,9 +29,9 @@
             <pre class="prettyprint source linenums"><code>/**
  * Created by gavorhes on 1/4/2016.
  */
-import ol from '../custom-ol';
 import provide from '../util/provide';
-let nm = provide('olHelpers.esriToOlStyle');
+const ol = require('../ol/ol');
+const nm = provide('olHelpers.esriToOlStyle');
 
 /**
  * This callback is displayed as part of the Requester class.
@@ -40,7 +40,13 @@ let nm = provide('olHelpers.esriToOlStyle');
  * @param {number} resolution - map resolution
  */
 
-
+/**
+ *
+ * @param {Array&lt;number>} colorArray - input color array
+ * @param {number} opacity - the opacity 0 to 1
+ * @returns {string} rgba string
+ * @private
+ */
 function _colorArrayToRgba(colorArray, opacity) {
     "use strict";
 
@@ -65,6 +71,12 @@ nm.htmlEscape = htmlEscape;
 
 
 class CommonSymbol {
+
+    /**
+     * 
+     * @param symbolObj
+     * @param {number} opacity
+     */
     constructor(symbolObj, opacity) {
         this.symbolObj = symbolObj;
         this.opacity = opacity;
@@ -82,6 +94,7 @@ class PointSymbol extends CommonSymbol {
                 let outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);
                 let outlineWidth = this.symbolObj.outline.width;
                 let radius = this.symbolObj.size;
+
 
                 this.olStyle = new ol.style.Style({
                     image: new ol.style.Circle({
@@ -272,7 +285,7 @@ class UniqueValueSymbol extends SymbolGenerator {
 
 /**
  * style and legend object
- * @typedef {oject} styleAndLegend
+ * @typedef {object} styleAndLegend
  * @property {styleFunc} style - style function
  * @property {string} legend - legend content
  */
@@ -329,7 +342,7 @@ export function makeFeatureServiceLegendAndSymbol(esriResponse) {
     } else {
         return {style: symbolLegendOut.olStyle, legend: symbolLegendOut.legendHtml};
     }
-};
+}
 
 nm.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
 
@@ -403,13 +416,13 @@ nm.makeMapServiceLegend = makeMapServiceLegend;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_FeatureLayerProperties.html">_FeatureLayerProperties</a></li><li><a href="-_Slider.html">_Slider</a></li><li><a href="Corridor.html">Corridor</a></li><li><a href="DayRange.html">DayRange</a></li><li><a href="ItsLayerCollection.html">ItsLayerCollection</a></li><li><a href="LayerBase.html">LayerBase</a></li><li><a href="LayerBaseVector.html">LayerBaseVector</a></li><li><a href="LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></li><li><a href="LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></li><li><a href="LayerBaseXyzTile.html">LayerBaseXyzTile</a></li><li><a href="LayerEsriMapServer.html">LayerEsriMapServer</a></li><li><a href="LayerGroup.html">LayerGroup</a></li><li><a href="LayerItsInventory.html">LayerItsInventory</a></li><li><a href="LayerLegend.html">LayerLegend</a></li><li><a href="LayerRealEarthTile.html">LayerRealEarthTile</a></li><li><a href="LayerVectorRealEarth.html">LayerVectorRealEarth</a></li><li><a href="MapInteractionBase.html">MapInteractionBase</a></li><li><a href="MapMoveCls.html">MapMoveCls</a></li><li><a href="MapPopupCls.html">MapPopupCls</a></li><li><a href="RealEarthAnimate.html">RealEarthAnimate</a></li><li><a href="RealEarthAnimateTile.html">RealEarthAnimateTile</a></li><li><a href="RealEarthAnimateVector.html">RealEarthAnimateVector</a></li><li><a href="RpPicker.html">RpPicker</a></li><li><a href="SingleSymbol.html">SingleSymbol</a></li><li><a href="Sliders.html">Sliders</a></li><li><a href="SortedFeatures.html">SortedFeatures</a></li><li><a href="SsaCorridorPicker.html">SsaCorridorPicker</a></li><li><a href="UniqueValueSymbol.html">UniqueValueSymbol</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$">$</a></li><li><a href="global.html#dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></li><li><a href="global.html#dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></li><li><a href="global.html#definedAndNotNull">definedAndNotNull</a></li><li><a href="global.html#defineLegend">defineLegend</a></li><li><a href="global.html#defineStyle">defineStyle</a></li><li><a href="global.html#hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></li><li><a href="global.html#highwayConvert">highwayConvert</a></li><li><a href="global.html#htmlEscape">htmlEscape</a></li><li><a href="global.html#makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></li><li><a href="global.html#makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></li><li><a href="global.html#makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></li><li><a href="global.html#makeGuid">makeGuid</a></li><li><a href="global.html#makeMapServiceLegend">makeMapServiceLegend</a></li><li><a href="global.html#mapServiceLegendItem">mapServiceLegendItem</a></li><li><a href="global.html#offsetMinutes">offsetMinutes</a></li><li><a href="global.html#ol">ol</a></li><li><a href="global.html#propertiesZoomStyle">propertiesZoomStyle</a></li><li><a href="global.html#provide">provide</a></li><li><a href="global.html#quickMap">quickMap</a></li><li><a href="global.html#quickMapBase">quickMapBase</a></li><li><a href="global.html#quickMapMulti">quickMapMulti</a></li><li><a href="global.html#resolutionToZoom">resolutionToZoom</a></li><li><a href="global.html#returnedColors">returnedColors</a></li><li><a href="global.html#rgb2hex">rgb2hex</a></li><li><a href="global.html#rgbToRgba">rgbToRgba</a></li><li><a href="global.html#undefinedOrNull">undefinedOrNull</a></li><li><a href="global.html#zoomToResolution">zoomToResolution</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_FeatureLayerProperties.html">_FeatureLayerProperties</a></li><li><a href="-_Slider.html">_Slider</a></li><li><a href="CommonSymbol.html">CommonSymbol</a></li><li><a href="Corridor.html">Corridor</a></li><li><a href="DayRange.html">DayRange</a></li><li><a href="ItsLayerCollection.html">ItsLayerCollection</a></li><li><a href="LayerBase.html">LayerBase</a></li><li><a href="LayerBaseVector.html">LayerBaseVector</a></li><li><a href="LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></li><li><a href="LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></li><li><a href="LayerBaseXyzTile.html">LayerBaseXyzTile</a></li><li><a href="LayerEsriMapServer.html">LayerEsriMapServer</a></li><li><a href="LayerGroup.html">LayerGroup</a></li><li><a href="LayerItsInventory.html">LayerItsInventory</a></li><li><a href="LayerLegend.html">LayerLegend</a></li><li><a href="LayerRealEarthTile.html">LayerRealEarthTile</a></li><li><a href="LayerVectorRealEarth.html">LayerVectorRealEarth</a></li><li><a href="MapInteractionBase.html">MapInteractionBase</a></li><li><a href="MapMoveCls.html">MapMoveCls</a></li><li><a href="MapPopupCls.html">MapPopupCls</a></li><li><a href="RealEarthAnimate.html">RealEarthAnimate</a></li><li><a href="RealEarthAnimateTile.html">RealEarthAnimateTile</a></li><li><a href="RealEarthAnimateVector.html">RealEarthAnimateVector</a></li><li><a href="RpPicker.html">RpPicker</a></li><li><a href="SingleSymbol.html">SingleSymbol</a></li><li><a href="Sliders.html">Sliders</a></li><li><a href="SortedFeatures.html">SortedFeatures</a></li><li><a href="SsaCorridorPicker.html">SsaCorridorPicker</a></li><li><a href="UniqueValueSymbol.html">UniqueValueSymbol</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$">$</a></li><li><a href="global.html#bundleEs2015Multiple">bundleEs2015Multiple</a></li><li><a href="global.html#dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></li><li><a href="global.html#dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></li><li><a href="global.html#definedAndNotNull">definedAndNotNull</a></li><li><a href="global.html#defineLegend">defineLegend</a></li><li><a href="global.html#defineStyle">defineStyle</a></li><li><a href="global.html#gulp">gulp</a></li><li><a href="global.html#hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></li><li><a href="global.html#highwayConvert">highwayConvert</a></li><li><a href="global.html#htmlEscape">htmlEscape</a></li><li><a href="global.html#makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></li><li><a href="global.html#makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></li><li><a href="global.html#makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></li><li><a href="global.html#makeGuid">makeGuid</a></li><li><a href="global.html#makeMapServiceLegend">makeMapServiceLegend</a></li><li><a href="global.html#mapServiceLegendItem">mapServiceLegendItem</a></li><li><a href="global.html#offsetMinutes">offsetMinutes</a></li><li><a href="global.html#processLessFile">processLessFile</a></li><li><a href="global.html#propertiesZoomStyle">propertiesZoomStyle</a></li><li><a href="global.html#provide">provide</a></li><li><a href="global.html#quickMap">quickMap</a></li><li><a href="global.html#quickMapBase">quickMapBase</a></li><li><a href="global.html#quickMapMulti">quickMapMulti</a></li><li><a href="global.html#resolutionToZoom">resolutionToZoom</a></li><li><a href="global.html#returnedColors">returnedColors</a></li><li><a href="global.html#rgb2hex">rgb2hex</a></li><li><a href="global.html#rgbToRgba">rgbToRgba</a></li><li><a href="global.html#undefinedOrNull">undefinedOrNull</a></li><li><a href="global.html#zoomToResolution">zoomToResolution</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon May 02 2016 16:37:12 GMT-0500 (Central Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue May 10 2016 12:18:14 GMT-0500 (Central Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

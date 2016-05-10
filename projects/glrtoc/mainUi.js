@@ -2,13 +2,15 @@
  * Created by gavorhes on 12/7/2015.
  */
 
-import {} from '../../src/jquery-plugin/mediaControl';
-import {} from '../../src/jquery-plugin/rangeChange';
+// import {} from '../../src/jquery-plugin/animationControl';
+import '../../src/jquery-plugin/range-change';
+import '../../src/jquery-plugin/animate-buttons';
 import appConfig from './appConfig';
+
+
 import $ from '../../src/jquery';
 require('jquery-ui/tabs');
 require('jquery-ui/accordion');
-
 
 /**
  * Set up the UI

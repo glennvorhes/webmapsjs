@@ -3,7 +3,7 @@
  */
 require('babel-polyfill');
 import Sliders from '../../src/collections/Sliders';
-import {} from '../../src/jquery-plugin/dayRange';
+import {} from '../../src/jquery-plugin/day-range';
 import tipConfig from './TipConfig';
 const $ = require('jquery');
 

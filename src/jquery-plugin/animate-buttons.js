@@ -1,45 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>JSDoc: Source: jquery-plugin/mediaControl.js</title>
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-</head>
-
-<body>
-
-<div id="main">
-
-    <h1 class="page-title">Source: jquery-plugin/mediaControl.js</h1>
-
-    
-
-
-
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>const $ = require('jquery');
-import provide from '../util/provide';
-let nm = provide('jQueryPlugin');
 
 /**
  * Created by gavorhes on 11/2/2015.
  */
 
+import $ from '../jquery';
+import provide from '../util/provide';
+import {} from './range-change';
+
+let nm = provide('jQueryPlugin');
+
 /**
  * @callback mediaCallback
  * @param {number} newValue
  */
-
-import {} from './rangeChange.js';
 
 function timeToLocalDateString(tm) {
     "use strict";
@@ -48,8 +22,9 @@ function timeToLocalDateString(tm) {
     let p2 = p1[0].split(':');
     p2 = p2.slice(0, 2);
 
-    return d.toLocaleDateString() + '&lt;br>' + p2.join(':') + ' ' + p1[1];
+    return d.toLocaleDateString() + '<br>' + p2.join(':') + ' ' + p1[1];
 }
+
 
 class MediaControl {
     constructor(jQueryElement, min, max, val, step, func, playInterval, dateFormat) {
@@ -68,17 +43,17 @@ class MediaControl {
         this._playing = false;
 
         let htmlStr =
-            '&lt;span class="media-player-button media-back">&lt;/span>' +
-            '&lt;span class="media-player-button media-play">&lt;/span>' +
-            '&lt;span class="media-player-button media-pause media-disabled">&lt;/span>' +
-            '&lt;span class="media-player-button media-stop media-disabled" >&lt;/span>' +
-            '&lt;span class="media-player-button media-ahead">&lt;/span>' +
-            `&lt;input type="range">` +
-            `&lt;div class="media-control-value-label-container">` +
-            `&lt;span class="media-control-value-label-min">&lt;/span>` +
-            `&lt;span class="media-control-value-label-val">&lt;/span>` +
-            `&lt;span class="media-control-value-label-max">&lt;/span>` +
-            `&lt;/div>`;
+            '<span class="media-player-button media-back"></span>' +
+            '<span class="media-player-button media-play"></span>' +
+            '<span class="media-player-button media-pause media-disabled"></span>' +
+            '<span class="media-player-button media-stop media-disabled" ></span>' +
+            '<span class="media-player-button media-ahead"></span>' +
+            `<input type="range">` +
+            `<div class="media-control-value-label-container">` +
+            `<span class="media-control-value-label-min"></span>` +
+            `<span class="media-control-value-label-val"></span>` +
+            `<span class="media-control-value-label-max"></span>` +
+            `</div>`;
 
         this._container.append(htmlStr);
 
@@ -165,7 +140,7 @@ class MediaControl {
     set currentValue(newValue) {
         if (newValue > this._max) {
             newValue = this._min;
-        } else if (newValue &lt; this._min) {
+        } else if (newValue < this._min) {
             newValue = this._max;
         }
         this._currentValue = newValue;
@@ -224,6 +199,7 @@ class MediaControl {
 
 nm.MediaControl = MediaControl;
 
+
 /**
  * Adds a media control to a container
  * @param {number} [min=0] the min
@@ -254,28 +230,6 @@ $.fn.mediaControl = function (min, max, val, step, func, playInterval, dateForma
     return new MediaControl(this, min, max, val, step, func, playInterval, dateFormat);
 };
 
+
+
 export default undefined;
-
-</code></pre>
-        </article>
-    </section>
-
-
-
-
-</div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_FeatureLayerProperties.html">_FeatureLayerProperties</a></li><li><a href="-_Slider.html">_Slider</a></li><li><a href="Corridor.html">Corridor</a></li><li><a href="DayRange.html">DayRange</a></li><li><a href="ItsLayerCollection.html">ItsLayerCollection</a></li><li><a href="LayerBase.html">LayerBase</a></li><li><a href="LayerBaseVector.html">LayerBaseVector</a></li><li><a href="LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></li><li><a href="LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></li><li><a href="LayerBaseXyzTile.html">LayerBaseXyzTile</a></li><li><a href="LayerEsriMapServer.html">LayerEsriMapServer</a></li><li><a href="LayerGroup.html">LayerGroup</a></li><li><a href="LayerItsInventory.html">LayerItsInventory</a></li><li><a href="LayerLegend.html">LayerLegend</a></li><li><a href="LayerRealEarthTile.html">LayerRealEarthTile</a></li><li><a href="LayerVectorRealEarth.html">LayerVectorRealEarth</a></li><li><a href="MapInteractionBase.html">MapInteractionBase</a></li><li><a href="MapMoveCls.html">MapMoveCls</a></li><li><a href="MapPopupCls.html">MapPopupCls</a></li><li><a href="RealEarthAnimate.html">RealEarthAnimate</a></li><li><a href="RealEarthAnimateTile.html">RealEarthAnimateTile</a></li><li><a href="RealEarthAnimateVector.html">RealEarthAnimateVector</a></li><li><a href="RpPicker.html">RpPicker</a></li><li><a href="SingleSymbol.html">SingleSymbol</a></li><li><a href="Sliders.html">Sliders</a></li><li><a href="SortedFeatures.html">SortedFeatures</a></li><li><a href="SsaCorridorPicker.html">SsaCorridorPicker</a></li><li><a href="UniqueValueSymbol.html">UniqueValueSymbol</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$">$</a></li><li><a href="global.html#dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></li><li><a href="global.html#dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></li><li><a href="global.html#definedAndNotNull">definedAndNotNull</a></li><li><a href="global.html#defineLegend">defineLegend</a></li><li><a href="global.html#defineStyle">defineStyle</a></li><li><a href="global.html#hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></li><li><a href="global.html#highwayConvert">highwayConvert</a></li><li><a href="global.html#htmlEscape">htmlEscape</a></li><li><a href="global.html#makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></li><li><a href="global.html#makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></li><li><a href="global.html#makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></li><li><a href="global.html#makeGuid">makeGuid</a></li><li><a href="global.html#makeMapServiceLegend">makeMapServiceLegend</a></li><li><a href="global.html#mapServiceLegendItem">mapServiceLegendItem</a></li><li><a href="global.html#offsetMinutes">offsetMinutes</a></li><li><a href="global.html#ol">ol</a></li><li><a href="global.html#propertiesZoomStyle">propertiesZoomStyle</a></li><li><a href="global.html#provide">provide</a></li><li><a href="global.html#quickMap">quickMap</a></li><li><a href="global.html#quickMapBase">quickMapBase</a></li><li><a href="global.html#quickMapMulti">quickMapMulti</a></li><li><a href="global.html#resolutionToZoom">resolutionToZoom</a></li><li><a href="global.html#returnedColors">returnedColors</a></li><li><a href="global.html#rgb2hex">rgb2hex</a></li><li><a href="global.html#rgbToRgba">rgbToRgba</a></li><li><a href="global.html#undefinedOrNull">undefinedOrNull</a></li><li><a href="global.html#zoomToResolution">zoomToResolution</a></li></ul>
-</nav>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon May 02 2016 16:37:12 GMT-0500 (Central Daylight Time)
-</footer>
-
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
-</body>
-</html>

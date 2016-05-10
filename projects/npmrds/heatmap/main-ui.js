@@ -3,8 +3,8 @@
  */
 
 import npmrdsHeatmapConfig from './appConfig';
-import {} from '../../../src/jquery-plugin/dayRange';
-import {} from '../../../src/jquery-plugin/rangeChange';
+import {} from '../../../src/jquery-plugin/day-range';
+import {} from '../../../src/jquery-plugin/range-change';
 import * as colors from '../../../src/util/colors';
 import SortedFeatures from '../../../src/olHelpers/SortedFeatures';
 import $ from '../../../src/jquery';
