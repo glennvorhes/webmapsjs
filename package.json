@@ -14,7 +14,7 @@
     "ol": "node node_modules/openlayers/tasks/build.js src/ol/ol-config.json src/ol/ol-build.js",
     "lint": "eslint src/**/*.js",
     "jsdoc": "jsdoc -r -d doc src",
-    "src2lib": "babel src --out-dir lib --presets es2015 --ignore ol-build.js & COPY /Y src\\ol\\ol-build.js lib\\ol\\ol-build.js"
+    "src2lib": "babel src --out-dir lib --presets es2015 --plugins add-module-exports --ignore ol-build.js & COPY /Y src\\ol\\ol-build.js lib\\ol\\ol-build.js"
   },
   "author": "TOPS Lab",
   "license": "ISC",
@@ -60,5 +60,21 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
+  },
+  "browserify": {
+    "cache": {},
+    "packageCache": {},
+    "debug": true,
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ],
+          "ignore": "ol/-build/.js|jquery/.min"
+        }
+      ]
+    ]
   }
 }

@@ -63,19 +63,7 @@ export function bundleEs2015(inputFile, outFile, production) {
         inputFile = glob.sync('./spec/**/*.js');
     }
 
-    let bundler = browserify(
-        {
-            entries: inputFile,
-            cache: {},
-            packageCache: {},
-            debug: true
-        }
-    );
-
-    bundler.transform(babelify.configure({
-        presets: ["es2015"],
-        ignore: /ol\-build\.js|jquery\.min/
-    }));
+    let bundler = browserify(inputFile);
 
     if (!production) {
         bundler = watchify(bundler);
@@ -152,7 +140,7 @@ export function processLessFile(inputFile, outputFile) {
  */
 export function bundleEs2015Multiple(fileArray, production){
     "use strict";
-    
+
     let outStream;
 
     for (let f of fileArray){
