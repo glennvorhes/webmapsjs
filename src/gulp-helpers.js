@@ -152,7 +152,6 @@ export function processLessFile(inputFile, outputFile) {
  */
 export function bundleEs2015Multiple(fileArray, production){
     "use strict";
-
     
     let outStream;
 
