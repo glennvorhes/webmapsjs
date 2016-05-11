@@ -62,8 +62,6 @@
     "watchify": "^3.7.0"
   },
   "browserify": {
-    "cache": {},
-    "packageCache": {},
     "debug": true,
     "transform": [
       [

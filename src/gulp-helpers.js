@@ -33,7 +33,7 @@ const gulpUtil = require('gulp-util');
  */
 function _processOutDir(outputFile) {
     "use strict";
-
+    
     let pathParts = outputFile.split('/');
     let outFileName = pathParts[pathParts.length - 1];
     pathParts.splice(pathParts.length - 1, 1);
@@ -52,7 +52,7 @@ function _processOutDir(outputFile) {
  */
 export function bundleEs2015(inputFile, outFile, production) {
     "use strict";
-
+    
     if (typeof outFile == 'string') {
         outFile = _processOutDir(outFile);
     }
@@ -63,7 +63,13 @@ export function bundleEs2015(inputFile, outFile, production) {
         inputFile = glob.sync('./spec/**/*.js');
     }
 
-    let bundler = browserify(inputFile);
+    let bundler = browserify(
+        {
+            entries: inputFile,
+            cache: {},
+            packageCache: {}
+        }
+    );
 
     if (!production) {
         bundler = watchify(bundler);
@@ -140,7 +146,7 @@ export function processLessFile(inputFile, outputFile) {
  */
 export function bundleEs2015Multiple(fileArray, production){
     "use strict";
-
+    
     let outStream;
 
     for (let f of fileArray){
