@@ -6,7 +6,7 @@
   "files": ["lib", "doc", "src", "ext"],
   "scripts": {
     "test": "node node_modules\\karma\\bin\\karma start karma.conf.js",
-    "ol": "node node_modules/openlayers/tasks/build.js src/ol/ol-config.json src/ol/ol.js",
+    "ol": "node node_modules/openlayers/tasks/build.js src/ol/ol-config.json src/ol/ol-build.js",
     "lint": "eslint src/**/*.js",
     "jsdoc": "jsdoc -r -d doc src",
     "src2lib": "babel src --out-dir lib --presets es2015 --ignore ol.js & COPY /Y src\\ol\\ol.js lib\\ol\\ol.js"
