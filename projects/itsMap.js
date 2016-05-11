@@ -24,3 +24,8 @@ let layerArray = [
 ];
 
 let legend = new LayerLegend(layerArray, 'legend-container', {});
+
+
+
+
+
