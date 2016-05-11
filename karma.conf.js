@@ -23,6 +23,7 @@ module.exports = function (config) {
             // 'src/**/*.js',
             // 'projects/**/*.js',
             {pattern: 'test/**/*.js', watched: true, included: true, served: true},
+            {pattern: 'test/**/*.html', watched: false, included: true, served: true},
             {pattern: '*.js', watched: false, included: false, served: false},
             {pattern: 'projects/**/*.js', watched: false, included: false, served: false},
             {pattern: 'src/**/*.js', watched: false, included: false, served: false}

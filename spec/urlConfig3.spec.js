@@ -2,8 +2,6 @@
  * Created by gavorhes on 5/5/2016.
  */
 
-import expect from 'expect';
-
 
 import quickMap from '../src/olHelpers/quickMap';
 
@@ -18,7 +16,7 @@ describe('karma test with Chaiadfadf', function() {
   });
 
   it('should expose the Chai expect method', function() {
-    expect('foo').to.not.equal('bar');
+    'foo'.should.not.equals('t');
   });
 
   it('should expose the Chai should property', function() {
@@ -45,6 +43,7 @@ describe('karma test with 2adfaasdf', function() {
   });
 
   it('should expose the Chai expect method', function() {
+    
     expect('foo').to.not.equal('bar');
     expect('cat').to.equal('cat');
     expect('cat').to.equal('bird');
