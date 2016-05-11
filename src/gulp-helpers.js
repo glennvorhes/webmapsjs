@@ -32,6 +32,8 @@ const gulpUtil = require('gulp-util');
  * @private
  */
 function _processOutDir(outputFile) {
+    "use strict";
+
     let pathParts = outputFile.split('/');
     let outFileName = pathParts[pathParts.length - 1];
     pathParts.splice(pathParts.length - 1, 1);
@@ -49,6 +51,8 @@ function _processOutDir(outputFile) {
  * @private
  */
 export function bundleEs2015(inputFile, outFile, production) {
+    "use strict";
+
     if (typeof outFile == 'string') {
         outFile = _processOutDir(outFile);
     }
@@ -148,6 +152,7 @@ export function processLessFile(inputFile, outputFile) {
  */
 export function bundleEs2015Multiple(fileArray, production){
     "use strict";
+    
     let outStream;
 
     for (let f of fileArray){
