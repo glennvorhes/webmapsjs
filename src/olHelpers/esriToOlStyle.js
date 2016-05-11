@@ -2,7 +2,7 @@
  * Created by gavorhes on 1/4/2016.
  */
 import provide from '../util/provide';
-const ol = require('../ol/ol');
+import ol from '../ol/ol';
 const nm = provide('olHelpers.esriToOlStyle');
 
 /**

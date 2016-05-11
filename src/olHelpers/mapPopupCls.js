@@ -6,7 +6,9 @@ import $ from '../jquery';
 import MapInteractionBase from './mapInteractionBase';
 import propertiesZoomStyle from '../olHelpers/propertiesZoomStyle';
 import provide from '../util/provide';
-const ol = require('../ol/ol');
+import ol from '../ol/ol';
+
+
 const nm = provide('olHelpers');
 
 

@@ -5,7 +5,7 @@
 import $ from '../jquery';
 import LayerBaseVector from './LayerBaseVector';
 import provide from '../util/provide';
-const ol = require('../ol/ol');
+import ol from '../ol/ol';
 let nm = provide('layers');
 
 /**

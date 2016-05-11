@@ -7,7 +7,7 @@ import LayerBaseVector from './LayerBaseVector';
 import * as esriToOl from '../olHelpers/esriToOlStyle';
 import mapMove from '../olHelpers/mapMove';
 import provide from '../util/provide';
-const ol = require('../ol/ol');
+import ol from '../ol/ol';
 
 let nm = provide('layers');
 

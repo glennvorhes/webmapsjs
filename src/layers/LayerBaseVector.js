@@ -2,7 +2,7 @@ import $ from '../jquery';
 import LayerBase from './LayerBase';
 import mapMove from '../olHelpers/mapMove';
 import provide from '../util/provide';
-const ol = require('../ol/ol');
+import ol from '../ol/ol';
 const nm = provide('layers');
 
 /**

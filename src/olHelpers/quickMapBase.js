@@ -10,9 +10,8 @@ import $ from '../jquery';
 import provide from '../util/provide';
 import mapMove from './mapMove';
 import mapPopup from './mapPopup';
-const ol = require('../ol/ol');
+import ol from '../ol/ol';
 const nm = provide('olHelpers');
-
 
 /**
  * Sets up a map with some default parameters and initializes

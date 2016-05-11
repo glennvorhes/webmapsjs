@@ -15,7 +15,7 @@
     "lint": "eslint src/**/*.js",
     "jsdoc": "jsdoc -r -d doc src",
     "src2lib": "babel src --out-dir lib --ignore ol-build.js --presets es2015 --plugins add-module-exports & COPY /Y src\\ol\\ol-build.js lib\\ol\\ol-build.js",
-    "copy": "xcopy /y /s src ..\\..\\src"
+    "copy": "xcopy /y /s src ..\\..\\src\\"
   },
   "author": "TOPS Lab",
   "license": "ISC",

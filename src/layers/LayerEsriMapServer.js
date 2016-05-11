@@ -6,7 +6,7 @@ import LayerBase from './LayerBase';
 import * as esriToOl from '../olHelpers/esriToOlStyle';
 import mapPopup from '../olHelpers/mapPopup';
 import provide from '../util/provide';
-const ol = require('../ol/ol');
+import ol from '../ol/ol';
 const nm = provide('layers');
 
 /**

@@ -5,7 +5,7 @@ import SortedFeatures from '../olHelpers/SortedFeatures';
 import LayerBaseVectorGeoJson from '../layers/LayerBaseVectorGeoJson';
 import LayerEsriMapServer from '../layers/LayerEsriMapServer';
 import provide from '../util/provide';
-const ol = require('../ol/ol');
+import ol from '../ol/ol';
 const nm = provide('ssa');
 
 /**
