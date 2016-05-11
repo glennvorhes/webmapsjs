@@ -20,6 +20,7 @@ mapPopup.init(map);
 
 let itsLayerCollection = new ItsLayerCollection(map);
 
+
 let layerArray = [
     {
         groupName: 'ITS Inventory Layers',
