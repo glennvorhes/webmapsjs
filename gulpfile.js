@@ -34,6 +34,13 @@ function _tsmo(production) {
     return gulpHelpers.bundleEs2015Multiple(filesArr, production);
 }
 
+
+function _npmrds(doMinify) {
+    "use strict";
+
+    return processJsFile('./flaskApp/blueprints/npmrds/static/js/heatmap/main.js', './flaskApp/blueprints/npmrds/static/_build/heatmap-main.js', doMinify);
+}
+
 gulp.task('build-tests', function () {
     "use strict";
 

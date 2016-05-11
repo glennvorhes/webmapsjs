@@ -70,7 +70,7 @@ export function bundleEs2015(inputFile, outFile, production) {
 
     bundler.transform(babelify.configure({
         presets: ["es2015"],
-        ignore: /ol-build\.js|jquery\.min/
+        ignore: /ol\-build\.js|jquery\.min/
     }));
 
     if (!production) {
