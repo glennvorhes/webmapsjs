@@ -14,7 +14,8 @@
     "ol": "node node_modules/openlayers/tasks/build.js src/ol/ol-config.json src/ol/ol-build.js",
     "lint": "eslint src/**/*.js",
     "jsdoc": "jsdoc -r -d doc src",
-    "src2lib": "babel src --out-dir lib --ignore ol-build.js --presets es2015 --plugins add-module-exports & COPY /Y src\\ol\\ol-build.js lib\\ol\\ol-build.js"
+    "src2lib": "babel src --out-dir lib --ignore ol-build.js --presets es2015 --plugins add-module-exports & COPY /Y src\\ol\\ol-build.js lib\\ol\\ol-build.js",
+    "copy": "xcopy /y /s src ..\\..\\src"
   },
   "author": "TOPS Lab",
   "license": "ISC",
@@ -22,6 +23,7 @@
     "babel-plugin-add-module-exports": "^0.2.0",
     "babel-plugin-transform-es2015-modules-umd": "^6.8.0",
     "babel-preset-es2015": "^6.6.0",
+    "babel-preset-es2015-node5": "^1.2.0",
     "chai": "^3.5.0",
     "expect": "^1.20.1",
     "jasmine": "^2.4.1",
