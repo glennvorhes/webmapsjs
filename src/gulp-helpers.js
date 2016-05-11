@@ -33,7 +33,7 @@ const gulpUtil = require('gulp-util');
  */
 function _processOutDir(outputFile) {
     "use strict";
-    
+
     let pathParts = outputFile.split('/');
     let outFileName = pathParts[pathParts.length - 1];
     pathParts.splice(pathParts.length - 1, 1);
@@ -52,28 +52,27 @@ function _processOutDir(outputFile) {
  */
 export function bundleEs2015(inputFile, outFile, production) {
     "use strict";
-    
+
     if (typeof outFile == 'string') {
         outFile = _processOutDir(outFile);
     }
 
     production = typeof production == 'boolean' ? production : false;
 
-    if (inputFile == null){
+    if (inputFile == null) {
         inputFile = glob.sync('./spec/**/*.js');
     }
 
-    let bundler = browserify(
-        {
-            entries: inputFile,
-            cache: {},
-            packageCache: {},
-            debug: true
-        }
-    );
 
+    let bundler = browserify({
+        entries: inputFile,
+        cache: {},
+        packageCache: {},
+        debug: true
+    });
+
+    
     bundler.transform(babelify.configure({
-        global: true,
         presets: ["es2015"],
         ignore: /ol\-build\.js|jquery\.min|\/node_modules\/(?!webmapsjs\/)|\/node_modules\/webmapsjs\/(?!lib\/)/
     }));
@@ -115,7 +114,7 @@ export function bundleEs2015(inputFile, outFile, production) {
 
 
 /**
- * convert less file 
+ * convert less file
  * @param {string} inputFile - input less file
  * @param {string} outputFile - output css file
  * @returns {*} stream
@@ -151,12 +150,12 @@ export function processLessFile(inputFile, outputFile) {
  * @param {boolean} production - if is production
  * @returns {*} output stream
  */
-export function bundleEs2015Multiple(fileArray, production){
+export function bundleEs2015Multiple(fileArray, production) {
     "use strict";
-    
+
     let outStream;
 
-    for (let f of fileArray){
+    for (let f of fileArray) {
         outStream = bundleEs2015(f[0], f[1], production);
     }
 

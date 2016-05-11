@@ -14,12 +14,13 @@
     "ol": "node node_modules/openlayers/tasks/build.js src/ol/ol-config.json src/ol/ol-build.js",
     "lint": "eslint src/**/*.js",
     "jsdoc": "jsdoc -r -d doc src",
-    "src2lib": "babel src --out-dir lib --presets es2015 --plugins add-module-exports --ignore ol-build.js & COPY /Y src\\ol\\ol-build.js lib\\ol\\ol-build.js"
+    "src2lib": "babel src --out-dir lib --ignore ol-build.js --presets es2015 --plugins add-module-exports & COPY /Y src\\ol\\ol-build.js lib\\ol\\ol-build.js"
   },
   "author": "TOPS Lab",
   "license": "ISC",
   "devDependencies": {
     "babel-plugin-add-module-exports": "^0.2.0",
+    "babel-plugin-transform-es2015-modules-umd": "^6.8.0",
     "babel-preset-es2015": "^6.6.0",
     "chai": "^3.5.0",
     "expect": "^1.20.1",
@@ -45,6 +46,7 @@
     "babel-polyfill": "^6.8.0",
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
+    "browserify-override": "0.0.9",
     "es6-mixins": "^1.0.2",
     "glob": "^7.0.3",
     "gulp": "^3.9.1",
@@ -60,10 +62,5 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
-  },
-  "browserify": {
-    "transform": [
-      "babelify"
-    ]
   }
 }
