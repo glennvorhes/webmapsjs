@@ -64,26 +64,6 @@ gulp.task('tsmo', () => {
     return _tsmo(false);
 });
 
-//
-// function _npmrds(doMinify) {
-//     "use strict";
-//
-//     return processJsFile('./flaskApp/blueprints/npmrds/static/js/heatmap/main.js', './flaskApp/blueprints/npmrds/static/_build/heatmap-main.js', doMinify);
-// }
-//
-// gulp.task('npmrds-dev', () => {
-//     "use strict";
-//
-//     return _npmrds(false);
-// });
-//
-// gulp.task('npmrds-prod', () => {
-//     "use strict";
-//
-//     return _npmrds(true);
-// });
-
-
 function _ssa(production) {
     "use strict";
     gulpHelpers.processLessFile('./flaskApp/blueprints/testing/static/css/ssa-corridor.less', './flaskApp/blueprints/testing/static/_build/ssa-corridor.css');

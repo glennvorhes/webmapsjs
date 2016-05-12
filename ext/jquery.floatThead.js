@@ -964,4 +964,3 @@ let jQuery = require('jQuery');
   })();
 })(jQuery);
 
-export default undefined;
