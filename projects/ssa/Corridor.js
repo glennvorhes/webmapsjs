@@ -3,7 +3,7 @@
  */
 
 import LayerBaseVectorGeoJson from '../../src/layers/LayerBaseVectorGeoJson';
-import ol from '../../src/custom-ol';
+import ol from '../../src/ol/ol';
 import $ from '../../src/jquery';
 
 function escapeHtml(string) {

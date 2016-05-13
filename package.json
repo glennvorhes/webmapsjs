@@ -7,7 +7,8 @@
     "lib",
     "doc",
     "src",
-    "ext"
+    "ext",
+    "css"
   ],
   "scripts": {
     "test": "node node_modules\\karma\\bin\\karma start karma.conf.js",
