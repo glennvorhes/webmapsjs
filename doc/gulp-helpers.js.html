@@ -60,6 +60,8 @@ const gulpUtil = require('gulp-util');
  * @private
  */
 function _processOutDir(outputFile) {
+    "use strict";
+
     let pathParts = outputFile.split('/');
     let outFileName = pathParts[pathParts.length - 1];
     pathParts.splice(pathParts.length - 1, 1);
@@ -70,35 +72,37 @@ function _processOutDir(outputFile) {
 
 /**
  *
- * @param {string|null} inputFile - input file set to null to bundle everything in 'test' directory
+ * @param {string} inputFile - input file set to null to bundle everything in 'test' directory
  * @param {dirNameFilePath|string} outFile - output file as string or path object
  * @param {boolean} [production=false] if production, minify and don't watch
  * @returns {*} the stream
  * @private
  */
 export function bundleEs2015(inputFile, outFile, production) {
+    "use strict";
+
     if (typeof outFile == 'string') {
         outFile = _processOutDir(outFile);
     }
 
     production = typeof production == 'boolean' ? production : false;
 
-    if (inputFile == null){
-        inputFile = glob.sync('./spec/**/*.js');
+    if (inputFile.indexOf('*') > -1) {
+        inputFile = glob.sync(inputFile);
     }
 
-    let bundler = browserify(
-        {
-            entries: inputFile,
-            cache: {},
-            packageCache: {},
-            debug: true
-        }
-    );
 
+    let bundler = browserify({
+        entries: inputFile,
+        cache: {},
+        packageCache: {},
+        debug: true
+    });
+
+    
     bundler.transform(babelify.configure({
         presets: ["es2015"],
-        ignore: /ol\.js|jquery\.min/
+        ignore: /ol\-build\.js|jquery\.min|\/node_modules\/(?!webmapsjs\/)|\/node_modules\/webmapsjs\/(?!lib\/)/
     }));
 
     if (!production) {
@@ -138,7 +142,7 @@ export function bundleEs2015(inputFile, outFile, production) {
 
 
 /**
- * convert less file 
+ * convert less file
  * @param {string} inputFile - input less file
  * @param {string} outputFile - output css file
  * @returns {*} stream
@@ -174,11 +178,12 @@ export function processLessFile(inputFile, outputFile) {
  * @param {boolean} production - if is production
  * @returns {*} output stream
  */
-export function bundleEs2015Multiple(fileArray, production){
+export function bundleEs2015Multiple(fileArray, production) {
     "use strict";
-    let outStream;
 
-    for (let f of fileArray){
+    let outStream = undefined;
+
+    for (let f of fileArray) {
         outStream = bundleEs2015(f[0], f[1], production);
     }
 
@@ -194,13 +199,13 @@ export function bundleEs2015Multiple(fileArray, production){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_FeatureLayerProperties.html">_FeatureLayerProperties</a></li><li><a href="-_Slider.html">_Slider</a></li><li><a href="CommonSymbol.html">CommonSymbol</a></li><li><a href="Corridor.html">Corridor</a></li><li><a href="DayRange.html">DayRange</a></li><li><a href="ItsLayerCollection.html">ItsLayerCollection</a></li><li><a href="LayerBase.html">LayerBase</a></li><li><a href="LayerBaseVector.html">LayerBaseVector</a></li><li><a href="LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></li><li><a href="LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></li><li><a href="LayerBaseXyzTile.html">LayerBaseXyzTile</a></li><li><a href="LayerEsriMapServer.html">LayerEsriMapServer</a></li><li><a href="LayerGroup.html">LayerGroup</a></li><li><a href="LayerItsInventory.html">LayerItsInventory</a></li><li><a href="LayerLegend.html">LayerLegend</a></li><li><a href="LayerRealEarthTile.html">LayerRealEarthTile</a></li><li><a href="LayerVectorRealEarth.html">LayerVectorRealEarth</a></li><li><a href="MapInteractionBase.html">MapInteractionBase</a></li><li><a href="MapMoveCls.html">MapMoveCls</a></li><li><a href="MapPopupCls.html">MapPopupCls</a></li><li><a href="RealEarthAnimate.html">RealEarthAnimate</a></li><li><a href="RealEarthAnimateTile.html">RealEarthAnimateTile</a></li><li><a href="RealEarthAnimateVector.html">RealEarthAnimateVector</a></li><li><a href="RpPicker.html">RpPicker</a></li><li><a href="SingleSymbol.html">SingleSymbol</a></li><li><a href="Sliders.html">Sliders</a></li><li><a href="SortedFeatures.html">SortedFeatures</a></li><li><a href="SsaCorridorPicker.html">SsaCorridorPicker</a></li><li><a href="UniqueValueSymbol.html">UniqueValueSymbol</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$">$</a></li><li><a href="global.html#bundleEs2015Multiple">bundleEs2015Multiple</a></li><li><a href="global.html#dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></li><li><a href="global.html#dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></li><li><a href="global.html#definedAndNotNull">definedAndNotNull</a></li><li><a href="global.html#defineLegend">defineLegend</a></li><li><a href="global.html#defineStyle">defineStyle</a></li><li><a href="global.html#gulp">gulp</a></li><li><a href="global.html#hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></li><li><a href="global.html#highwayConvert">highwayConvert</a></li><li><a href="global.html#htmlEscape">htmlEscape</a></li><li><a href="global.html#makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></li><li><a href="global.html#makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></li><li><a href="global.html#makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></li><li><a href="global.html#makeGuid">makeGuid</a></li><li><a href="global.html#makeMapServiceLegend">makeMapServiceLegend</a></li><li><a href="global.html#mapServiceLegendItem">mapServiceLegendItem</a></li><li><a href="global.html#offsetMinutes">offsetMinutes</a></li><li><a href="global.html#processLessFile">processLessFile</a></li><li><a href="global.html#propertiesZoomStyle">propertiesZoomStyle</a></li><li><a href="global.html#provide">provide</a></li><li><a href="global.html#quickMap">quickMap</a></li><li><a href="global.html#quickMapBase">quickMapBase</a></li><li><a href="global.html#quickMapMulti">quickMapMulti</a></li><li><a href="global.html#resolutionToZoom">resolutionToZoom</a></li><li><a href="global.html#returnedColors">returnedColors</a></li><li><a href="global.html#rgb2hex">rgb2hex</a></li><li><a href="global.html#rgbToRgba">rgbToRgba</a></li><li><a href="global.html#undefinedOrNull">undefinedOrNull</a></li><li><a href="global.html#zoomToResolution">zoomToResolution</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_FeatureLayerProperties.html">_FeatureLayerProperties</a></li><li><a href="-_Slider.html">_Slider</a></li><li><a href="CommonSymbol.html">CommonSymbol</a></li><li><a href="DayRange.html">DayRange</a></li><li><a href="ItsLayerCollection.html">ItsLayerCollection</a></li><li><a href="LayerBase.html">LayerBase</a></li><li><a href="LayerBaseVector.html">LayerBaseVector</a></li><li><a href="LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></li><li><a href="LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></li><li><a href="LayerBaseXyzTile.html">LayerBaseXyzTile</a></li><li><a href="LayerEsriMapServer.html">LayerEsriMapServer</a></li><li><a href="LayerGroup.html">LayerGroup</a></li><li><a href="LayerItsInventory.html">LayerItsInventory</a></li><li><a href="LayerLegend.html">LayerLegend</a></li><li><a href="LayerRealEarthTile.html">LayerRealEarthTile</a></li><li><a href="LayerVectorRealEarth.html">LayerVectorRealEarth</a></li><li><a href="MapInteractionBase.html">MapInteractionBase</a></li><li><a href="MapMoveCls.html">MapMoveCls</a></li><li><a href="MapPopupCls.html">MapPopupCls</a></li><li><a href="RealEarthAnimate.html">RealEarthAnimate</a></li><li><a href="RealEarthAnimateTile.html">RealEarthAnimateTile</a></li><li><a href="RealEarthAnimateVector.html">RealEarthAnimateVector</a></li><li><a href="SingleSymbol.html">SingleSymbol</a></li><li><a href="Sliders.html">Sliders</a></li><li><a href="SortedFeatures.html">SortedFeatures</a></li><li><a href="UniqueValueSymbol.html">UniqueValueSymbol</a></li></ul><h3>Global</h3><ul><li><a href="global.html#bundleEs2015Multiple">bundleEs2015Multiple</a></li><li><a href="global.html#dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></li><li><a href="global.html#dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></li><li><a href="global.html#definedAndNotNull">definedAndNotNull</a></li><li><a href="global.html#defineLegend">defineLegend</a></li><li><a href="global.html#defineStyle">defineStyle</a></li><li><a href="global.html#gulp">gulp</a></li><li><a href="global.html#hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></li><li><a href="global.html#htmlEscape">htmlEscape</a></li><li><a href="global.html#makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></li><li><a href="global.html#makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></li><li><a href="global.html#makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></li><li><a href="global.html#makeGuid">makeGuid</a></li><li><a href="global.html#makeMapServiceLegend">makeMapServiceLegend</a></li><li><a href="global.html#mapServiceLegendItem">mapServiceLegendItem</a></li><li><a href="global.html#offsetMinutes">offsetMinutes</a></li><li><a href="global.html#processLessFile">processLessFile</a></li><li><a href="global.html#propertiesZoomStyle">propertiesZoomStyle</a></li><li><a href="global.html#provide">provide</a></li><li><a href="global.html#quickMap">quickMap</a></li><li><a href="global.html#quickMapBase">quickMapBase</a></li><li><a href="global.html#quickMapMulti">quickMapMulti</a></li><li><a href="global.html#resolutionToZoom">resolutionToZoom</a></li><li><a href="global.html#rgb2hex">rgb2hex</a></li><li><a href="global.html#rgbToRgba">rgbToRgba</a></li><li><a href="global.html#undefinedOrNull">undefinedOrNull</a></li><li><a href="global.html#zoomToResolution">zoomToResolution</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue May 10 2016 12:18:14 GMT-0500 (Central Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu May 19 2016 18:03:34 GMT-0500 (Central Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>
