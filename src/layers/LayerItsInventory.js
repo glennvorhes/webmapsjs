@@ -281,7 +281,7 @@ class LayerItsInventory extends LayerBaseVectorGeoJson {
         $.extend(options.params, {format: 'JSON', resource: options.itsType});
 
         super('http://transportal.cee.wisc.edu/its/inventory/', options);
-
+        
         //add any additional content to the legend
         this.addLegendContent(addToLegend);
 

@@ -3,19 +3,14 @@
  */
 require('babel-polyfill');
 
+
 import quickMap from '../lib/olHelpers/quickMap';
 
-
-// import quickMap from '../src/olHelpers/quickMap';
-import mapMove from '../src/olHelpers/mapMove';
-import mapPopup from '../src/olHelpers/mapPopup';
 import ItsLayerCollection from '../src/collections/ItsLayerCollection';
 import LayerLegend from '../src/collections/LayerLegend';
 
 
 let map = quickMap();
-mapMove.init(map);
-mapPopup.init(map);
 
 
 let itsLayerCollection = new ItsLayerCollection(map);

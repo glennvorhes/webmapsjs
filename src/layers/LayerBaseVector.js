@@ -89,6 +89,11 @@ class LayerBaseVector extends LayerBase {
         }
 
         this._source = new ol.source.Vector();
+
+        /**
+         *
+         * @type {ol.layer.Vector|ol.layer.Base}
+         */
         this.olLayer = new ol.layer.Vector(
             {
                 source: this._source,
@@ -212,7 +217,7 @@ class LayerBaseVector extends LayerBase {
 
     /**
      * get the map move object
-     * @type {MapMove|*}
+     * @type {MapMoveCls|*}
      */
     get mapMove() {
         return this._mapMove;
@@ -224,6 +229,14 @@ class LayerBaseVector extends LayerBase {
      */
     get mapMoveParams() {
         return this._mapMoveParams;
+    }
+
+        /**
+     * Get the layer visibility
+     * @type {boolean}
+     */
+    get visible() {
+        return super.visible;
     }
 
     /**

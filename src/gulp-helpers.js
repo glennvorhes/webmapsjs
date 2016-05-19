@@ -44,7 +44,7 @@ function _processOutDir(outputFile) {
 
 /**
  *
- * @param {string|null} inputFile - input file set to null to bundle everything in 'test' directory
+ * @param {string} inputFile - input file set to null to bundle everything in 'test' directory
  * @param {dirNameFilePath|string} outFile - output file as string or path object
  * @param {boolean} [production=false] if production, minify and don't watch
  * @returns {*} the stream
@@ -59,8 +59,8 @@ export function bundleEs2015(inputFile, outFile, production) {
 
     production = typeof production == 'boolean' ? production : false;
 
-    if (inputFile == null) {
-        inputFile = glob.sync('./spec/**/*.js');
+    if (inputFile.indexOf('*') > -1) {
+        inputFile = glob.sync(inputFile);
     }
 
 
@@ -153,7 +153,7 @@ export function processLessFile(inputFile, outputFile) {
 export function bundleEs2015Multiple(fileArray, production) {
     "use strict";
 
-    let outStream;
+    let outStream = undefined;
 
     for (let f of fileArray) {
         outStream = bundleEs2015(f[0], f[1], production);

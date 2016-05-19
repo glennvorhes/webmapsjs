@@ -65,6 +65,7 @@
     "ol.Map#addInteraction",
     "ol.Map#removeInteraction",
     "ol.Map#beforeRender",
+    "ol.Map#addControl",
     "ol.source.Vector",
     "ol.source.Vector#getFeatures",
     "ol.source.Vector#getExtent",
@@ -98,7 +99,8 @@
     "ol.proj.Projection#getCode",
     "ol.interaction.Draw",
     "ol.interaction.Draw#on",
-    "ol.animation.pan"
+    "ol.animation.pan",
+    "ol.control.FullScreen"
   ],
   "compile": {
     "externs": [

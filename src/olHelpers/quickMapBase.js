@@ -8,8 +8,6 @@
 
 import $ from '../jquery';
 import provide from '../util/provide';
-import mapMove from './mapMove';
-import mapPopup from './mapPopup';
 import ol from '../ol/ol';
 const nm = provide('olHelpers');
 
@@ -26,6 +24,7 @@ const nm = provide('olHelpers');
  * @param {number} [options.minZoom=undefined] min zoom
  * @param {number} [options.maxZoom=undefined] max zoom
  * @param {boolean} [options.baseSwitcher=true] if add base map switcher
+ * @param {boolean} [options.fullScreen=false] if add base map switcher
  * @returns {ol.Map} the ol map
  */
 function quickMapBase(options) {
@@ -36,6 +35,7 @@ function quickMapBase(options) {
     options.center.y = typeof options.center.y == 'number' ? options.center.y : 5574910;
     options.zoom = typeof options.zoom == 'number' ? options.zoom : 7;
     options.baseSwitcher = typeof options.baseSwitcher == 'boolean' ? options.baseSwitcher : true;
+    options.fullScreen = typeof options.fullScreen == 'boolean' ? options.fullScreen : false;
 
 
     let $mapDiv = $('#' + options.divId);
@@ -79,7 +79,7 @@ function quickMapBase(options) {
         options.center.y = coordinates[1];
     }
 
-    return new ol.Map({
+    let map = new ol.Map({
         layers: [osmLayer, satLayer],
         target: options.divId,
         controls: ol.control.defaults({
@@ -92,6 +92,12 @@ function quickMapBase(options) {
             maxZoom: options.maxZoom
         })
     });
+    
+    if (options.fullScreen){
+        map.addControl(new ol.control.FullScreen());
+    }
+
+    return map;
 }
 
 nm.quickMapBase = quickMapBase;

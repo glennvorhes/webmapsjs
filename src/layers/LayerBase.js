@@ -33,7 +33,9 @@ class LayerBase {
             throw 'Invalid URL';
         }
         this._url = url;
-
+        
+        
+        
         this._params = typeof options.params == 'object' ? options.params : {};
         this._legendCollapse = typeof options.legendCollapse == 'boolean' ? options.legendCollapse : false;
         this._legendCheckbox = typeof options.legendCheckbox == 'boolean' ? options.legendCheckbox : true;
@@ -50,7 +52,7 @@ class LayerBase {
         }
 
         this._visible = typeof options.visible === 'boolean' ? options.visible : true;
-
+        
         this._source = undefined;
         this.olLayer = undefined;
         this._loaded = false;

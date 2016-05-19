@@ -2,7 +2,7 @@
   "name": "webmapsjs",
   "version": "1.0.0",
   "description": "Openlayers helpers",
-  "main": "lib",
+  "main": "lib/index.js",
   "files": [
     "lib",
     "doc",
@@ -12,11 +12,10 @@
   ],
   "scripts": {
     "test": "node node_modules\\karma\\bin\\karma start karma.conf.js",
-    "ol": "node node_modules/openlayers/tasks/build.js src/ol/ol-config.json src/ol/ol-build.js",
+    "ol": "node node_modules/openlayers/tasks/build.js src/ol/ol-config.json src/ol/ol-build.js & COPY /Y src\\ol\\ol-build.js lib\\ol\\ol-build.js",
     "lint": "eslint src/**/*.js",
     "jsdoc": "jsdoc -r -d doc src",
-    "src2lib": "babel src --out-dir lib --ignore ol-build.js --presets es2015 --plugins add-module-exports & COPY /Y src\\ol\\ol-build.js lib\\ol\\ol-build.js",
-    "copy": "xcopy /y /s src ..\\..\\src\\"
+    "src2lib": "babel src --out-dir lib --ignore ol-build.js --presets es2015 --plugins add-module-exports"
   },
   "author": "TOPS Lab",
   "license": "ISC",

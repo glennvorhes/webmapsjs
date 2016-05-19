@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/all-ol-style.css">
+    <style>
+        body, html{
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            display: flex;
+            height: 100%;
+            width: 100%
+        }
+
+        #container > div{
+            height: 100%
+        }
+
+        #left {
+            width: 300px;
+        }
+
+        #left:fullscreen{
+            display: none;
+        }
+
+        #map{
+            flex: 1;
+        }
+
+        #map:fullscreen{
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="left">
+        <div id="legend-container"></div>
+    </div>
+    <div id="map"></div>
+
+</div>
+<script>
+//    document.addEventListener('fullscreenchange', function() {
+//  document.body.classList.toggle('is-fullscreen', document.fullscreenEnabled);
+//});
+</script>
+
+<script src="../test-build/legend-test.js"></script>
+</body>
+</html>

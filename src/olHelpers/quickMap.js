@@ -21,6 +21,7 @@ let nm = provide('olHelpers');
  * @param {number} [options.minZoom=undefined] min zoom
  * @param {number} [options.maxZoom=undefined] max zoom
  * @param {boolean} [options.baseSwitcher=true] if add base map switcher
+ * @param {boolean} [options.fullScreen=false] if add base map switcher
  * @returns {ol.Map} the ol map
  */
 function quickMap(options) {

@@ -54,27 +54,6 @@ let itsConfig = [
     {name: 'Ramp Meter', itsType: 'meter', minZoom: 10, itsIcon: 'rampmeter.png', visible: false},
     {name: 'Signal', itsType: 'signal', minZoom: 13, itsIcon: 'signal.png', visible: false, onDemand: true},
     {name: 'Tower', itsType: 'tower', minZoom: 10, itsIcon: 'tower.png', visible: false},
-    //{
-    //    name: 'Trench',
-    //    itsType: 'trench',
-    //    onDemand: true,
-    //    visible: false,
-    //    onDemandDelay: 500,
-    //    minZoom: 15,
-    //    itsLineConfig: {
-    //        prop: 'installType',
-    //        //defaultName: 'Other',
-    //        //defaultWidth: 7,
-    //        defaultColor: colors.hexAlphaToRgbOrRgba('#747474', 0.8),
-    //        lineArray: [
-    //            ['asc', 'Aerial Strand', colors.hexAlphaToRgbOrRgba('#FF0000', 0.7)],
-    //            ['udbc', 'Directional Bore', colors.hexAlphaToRgbOrRgba('#0509FF', 0.7)],
-    //            ['utc', 'Underground', colors.hexAlphaToRgbOrRgba('#FF00ED', 0.7)],
-    //            ['utd', 'Underground - Design', colors.hexAlphaToRgbOrRgba('#A50095', 0.7)]
-    //        ]
-    //    }
-    //},
-
     {
         name: 'Trench',
         itsType: 'trench',
@@ -102,18 +81,6 @@ let itsConfig = [
         }
     }
 
-    //    {
-    //    name: 'Trench',
-    //    itsType: 'trench',
-    //    onDemand: true,
-    //    visible: false,
-    //    onDemandDelay: 500,
-    //    minZoom: 15,
-    //    itsLineStyle: {
-    //        color: '#FF0000',
-    //        width: 7
-    //    }
-    //}
 
 ];
 
