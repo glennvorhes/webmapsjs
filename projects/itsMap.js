@@ -6,7 +6,18 @@ require('babel-polyfill');
 
 import quickMap from '../lib/olHelpers/quickMap';
 
-import ItsLayerCollection from '../src/collections/ItsLayerCollection';
+
+
+
+import quickMap from '../lib/olHelpers/quickMap';
+import co from '../lib/util/colors';
+
+const c = require('../lib/util/colors');
+
+
+
+
+import ItsLayerCollection from '../lib/collections/ItsLayerCollection';
 import LayerLegend from '../src/collections/LayerLegend';
 
 
