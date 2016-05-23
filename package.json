@@ -74,7 +74,7 @@
       [
         "babelify",
         {
-          "ignore": "/ol\\-build\\.js|jquery\\.min/",
+          "ignore": "ol-build.js",
           "presets": [
             "es2015"
           ]
