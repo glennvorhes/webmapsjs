@@ -1,4 +1,4 @@
-import $ from '../jquery';
+import $ from '../jquery/jquery';
 import LayerBase from './LayerBase';
 import mapMove from '../olHelpers/mapMove';
 import provide from '../util/provide';

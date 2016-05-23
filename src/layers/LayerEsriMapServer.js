@@ -1,7 +1,7 @@
 /**
  * Created by gavorhes on 12/7/2015.
  */
-import $ from '../jquery';
+import $ from '../jquery/jquery';
 import LayerBase from './LayerBase';
 import * as esriToOl from '../olHelpers/esriToOlStyle';
 import mapPopup from '../olHelpers/mapPopup';

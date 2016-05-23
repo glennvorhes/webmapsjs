@@ -1,4 +1,4 @@
-import $ from '../jquery';
+import $ from '../jquery/jquery';
 import makeGuid from '../util/makeGuid';
 import * as zoomResolutionConvert from '../olHelpers/zoomResolutionConvert';
 import provide from '../util/provide';

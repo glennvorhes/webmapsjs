@@ -2,9 +2,8 @@
  * Created by gavorhes on 12/8/2015.
  */
 
-import $ from '../jquery';
+import $ from '../jquery/jquery';
 import LayerBaseVectorGeoJson from './LayerBaseVectorGeoJson';
-import mapMove from '../olHelpers/mapMove';
 import mapPopup from '../olHelpers/mapPopup';
 import provide from '../util/provide';
 import ol from '../ol/ol';

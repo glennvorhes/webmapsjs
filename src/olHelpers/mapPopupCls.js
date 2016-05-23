@@ -2,7 +2,7 @@
  * Created by gavorhes on 11/3/2015.
  */
 
-import $ from '../jquery';
+import $ from '../jquery/jquery';
 import MapInteractionBase from './mapInteractionBase';
 import propertiesZoomStyle from '../olHelpers/propertiesZoomStyle';
 import provide from '../util/provide';

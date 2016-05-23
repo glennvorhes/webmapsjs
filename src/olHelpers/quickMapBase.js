@@ -1,12 +1,9 @@
-/**
- * Created by gavorhes on 3/25/2016.
- */
 
 /**
  * Created by gavorhes on 12/15/2015.
  */
 
-import $ from '../jquery';
+import $ from '../jquery/jquery';
 import provide from '../util/provide';
 import ol from '../ol/ol';
 const nm = provide('olHelpers');

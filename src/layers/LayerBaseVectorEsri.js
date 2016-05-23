@@ -2,10 +2,9 @@
  * Created by gavorhes on 11/2/2015.
  */
 
-import $ from '../jquery';
+import $ from '../jquery/jquery';
 import LayerBaseVector from './LayerBaseVector';
 import * as esriToOl from '../olHelpers/esriToOlStyle';
-import mapMove from '../olHelpers/mapMove';
 import provide from '../util/provide';
 import ol from '../ol/ol';
 

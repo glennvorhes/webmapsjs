@@ -2,7 +2,7 @@
  * Created by gavorhes on 11/4/2015.
  */
 
-import $ from '../jquery';
+import $ from '../jquery/jquery';
 import LayerBaseXyzTile from './LayerBaseXyzTile';
 import RealEarthAnimateTile from '../mixin/RealEarthAnimateTile';
 import provide from '../util/provide';
