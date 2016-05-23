@@ -1,15 +1,15 @@
 
 
-/**
- * Created by gavorhes on 11/2/2015.
- */
-
-import $ from '../jquery';
+import $ from '../jquery/jquery';
 let mouseIn = false;
 let mouseDown = false;
 let timeout = null;
 let dragged = false;
 let lastVal;
+
+/**
+ * Created by gavorhes on 11/2/2015.
+ */
 
 function triggerCallback(callback, evt) {
     "use strict";

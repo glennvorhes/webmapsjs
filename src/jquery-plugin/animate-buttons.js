@@ -4,7 +4,7 @@
  * Created by gavorhes on 11/2/2015.
  */
 
-import $ from '../jquery';
+import $ from '../jquery/jquery';
 import provide from '../util/provide';
 import {} from './range-change';
 

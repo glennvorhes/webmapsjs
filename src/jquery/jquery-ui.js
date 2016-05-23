@@ -2,30 +2,6 @@
  * Created by gavorhes on 5/23/2016.
  */
 
-function _checkImport(){
-    "use strict";
+require('jquery-ui');
 
-    if (!global.$){
-        require('./jquery');
-    }
-}
-
-
-export function requireAll(){
-    "use strict";
-
-    _checkImport();
-
-    require('jquery-ui');
-
-}
-
-
-export function requireComponent(component){
-    "use strict";
-
-    _checkImport();
-
-    require('jquery-ui/' + component);
-
-}
+export default undefined;

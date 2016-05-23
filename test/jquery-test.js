@@ -4,8 +4,18 @@
 
 
 import $ from '../src/jquery/jquery';
+import  '../src/jquery/jquery-ui';
+//
+// // require('jquery-ui/accordion');
+//
+// // ui.requireAll();
+// // ui.requireComponent('accordion');
+//
+// console.log($);
+//
+//
+let acc = $("#accordion").accordion();
+// glob.acc = acc;
+// console.log(acc);
 
-$('body').append('cat');
 
-console.log($);
-console.log('here');

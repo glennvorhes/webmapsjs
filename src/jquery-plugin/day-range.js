@@ -1,4 +1,4 @@
-import $ from '../jquery';
+import $ from '../jquery/jquery';
 require('jquery-ui/datepicker');
 import provide from '../util/provide';
 let nm = provide('jQueryPlugin');
@@ -91,7 +91,7 @@ nm.DayRange = DayRange;
  * @param {number} dayRange the number of days
  * @returns {DayRange} the day range object
  */
-$.fn.dayRange = function (dayRange) {
+jQuery.fn.dayRange = function (dayRange) {
     return new DayRange(dayRange, this);
 };
 
