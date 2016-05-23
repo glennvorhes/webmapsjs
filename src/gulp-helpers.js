@@ -73,7 +73,6 @@ export function bundleEs2015(inputFile, outFile, production) {
 
     
     bundler.transform(babelify.configure({
-        global: true,
         presets: ["es2015"],
         ignore: /ol\-build\.js|jquery\.min/
         // ignore: /ol\-build\.js|jquery\.min|\/node_modules\/(?!webmapsjs\/)|\/node_modules\/webmapsjs\/(?!lib\/)/
@@ -82,6 +81,7 @@ export function bundleEs2015(inputFile, outFile, production) {
     if (!production) {
         bundler = watchify(bundler);
     }
+
 
     function runBundle() {
         let stream = bundler.bundle()
