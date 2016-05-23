@@ -41,14 +41,28 @@ const gulpHelpers = require('./lib/gulp-helpers');
 //     return processJsFile('./flaskApp/blueprints/npmrds/static/js/heatmap/main.js', './flaskApp/blueprints/npmrds/static/_build/heatmap-main.js', doMinify);
 // }
 
+
+
+/**
+ *
+ * @param {string} inputFile - file name relative to app_code_js
+ * @returns {Array<string>} - input and output file in 2 element array
+ * @private
+ */
+function _makeInputOutput(inputFile) {
+    "use strict";
+    var inFile = './test/' + inputFile;
+    var outFile = './test-build/' + inputFile;
+
+    return [inFile, outFile];
+}
+
 gulp.task('build-tests', function () {
     "use strict";
     
         let filesArr = [
-        ['./test/legend-test.js', './test-build/legend-test.js']
-        // ['./projects/tsmo/slider-test.js', './build/tsmo/slider-test.js'],
-        // ['./projects/tsmo/main.js', './build/tsmo/main.js'],
-        // ['./projects/tsmo/main-report.js', './build/tsmo/main-report.js']
+            _makeInputOutput('legend-test.js'),
+            _makeInputOutput('jquery-test.js')
     ];
 
     gulpHelpers.bundleEs2015Multiple(filesArr, false);

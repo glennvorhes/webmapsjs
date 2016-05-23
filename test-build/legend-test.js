@@ -16696,489 +16696,4174 @@ return jQuery;
 }));
 
 },{}],300:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Created by gavorhes on 12/14/2015.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
-
-var _LayerItsInventory = require('../layers/LayerItsInventory');
-
-var _LayerItsInventory2 = _interopRequireDefault(_LayerItsInventory);
-
-var _colors = require('../util/colors');
-
-var colors = _interopRequireWildcard(_colors);
-
-var _provide = require('../util/provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var nm = (0, _provide2.default)('collections');
-
-var itsConfig = [{ name: 'Camera', itsType: 'cctv', minZoom: 11, itsIcon: 'cctv.png' }, {
-    name: 'Message Signs',
-    itsType: 'DMS',
-    minZoom: 11,
-    itsIconConfig: {
-        prop: 'dmsType',
-        defaultName: 'DMS',
-        defaultIcon: 'dms.png',
-        iconArray: [['pcms', 'PCMS', 'pcms.png']]
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', '../layers/LayerItsInventory', '../util/colors', '../util/provide'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('../layers/LayerItsInventory'), require('../util/colors'), require('../util/provide'));
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports, global.LayerItsInventory, global.colors, global.provide);
+        global.ItsLayerCollection = mod.exports;
     }
-}, { name: 'Lighting', itsType: 'light', minZoom: 16, itsIcon: 'streetlight.png', visible: false, onDemand: true }, { name: 'Bluetooth', itsType: 'blue', minZoom: 10, itsIcon: 'bluetooth.png', visible: false }, { name: 'Cabinets', itsType: 'cabinet', minZoom: 10, itsIcon: 'cabinet.png', visible: false }, { name: 'Hut', itsType: 'hut', minZoom: 10, itsIcon: 'hut.png', visible: false }, { name: 'Vault', itsType: 'vault', minZoom: 13, itsIcon: 'vault.png', visible: false }, { name: 'Advisory Radio', itsType: 'har', minZoom: 10, itsIcon: 'har.png', visible: false }, {
-    name: 'Loop Detectors',
-    itsType: 'loop',
-    legendCollapse: true,
-    minZoom: 14,
-    visible: false,
-    itsIconConfig: {
-        prop: 'dtctrType',
-        defaultName: 'Other',
-        defaultIcon: 'loopdetectorother.png',
-        iconArray: [['detector', 'Detector', 'loopdetector.png'], ['long', 'Long', 'loopdetectorlong.png'], ['zone', 'Zone', 'loopdetectorzone.png']]
-    },
-    onDemand: true
-}, { name: 'Microwave', itsType: 'microwave', minZoom: 14, itsIcon: 'microwave.png', visible: false }, { name: 'Pull Box', itsType: 'pull', minZoom: 14, itsIcon: 'pullbox.png', visible: false, onDemand: true }, { name: 'RWIS', itsType: 'rwis', minZoom: 7, itsIcon: 'rwis.png', visible: false }, { name: 'Ramp Gates', itsType: 'gate', minZoom: 10, itsIcon: 'rampgate.png', visible: false }, { name: 'Ramp Meter', itsType: 'meter', minZoom: 10, itsIcon: 'rampmeter.png', visible: false }, { name: 'Signal', itsType: 'signal', minZoom: 13, itsIcon: 'signal.png', visible: false, onDemand: true }, { name: 'Tower', itsType: 'tower', minZoom: 10, itsIcon: 'tower.png', visible: false }, {
-    name: 'Trench',
-    itsType: 'trench',
-    onDemand: true,
-    visible: false,
-    onDemandDelay: 500,
-    minZoom: 15,
-    legendCollapse: true,
-    itsLineConfig: {
-        prop: 'owner',
-        //defaultName: 'Other',
-        //defaultWidth: 7,
-        defaultColor: colors.hexAlphaToRgbOrRgba('#747474', 0.8),
-        lineArray: [['WisDOT', 'WisDOT', colors.hexAlphaToRgbOrRgba('#FF032F', 0.7)], ['WIN', 'WIN', colors.hexAlphaToRgbOrRgba('#FFC632', 0.7)], ['USXchange', 'USXchange', colors.hexAlphaToRgbOrRgba('#2DFF46', 0.7)], ['AT&T', 'AT&T', colors.hexAlphaToRgbOrRgba('#ff2be5', 0.7)], ['Touch America', 'Touch America', colors.hexAlphaToRgbOrRgba('#52f3ff', 0.7)], ['Qwest', 'Qwest', colors.hexAlphaToRgbOrRgba('#9278ff', 0.7)], ['McLeodUSA', 'McLeodUSA', colors.hexAlphaToRgbOrRgba('#2926FF', 0.7)], ['CINC', 'CINC', colors.hexAlphaToRgbOrRgba('#CB00FF', 0.7)], ['City of Madison', 'Madison', colors.hexAlphaToRgbOrRgba('#000380', 0.7)]]
-    }
-}];
+})(this, function (exports) {
+    'use strict';
 
-var ItsLayerCollection = function () {
+    var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+        return typeof obj;
+    } : function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+    };
 
-    /**
-     * Create a collection of all ITS layers
-     * @param {ol.Map} theMap the openlayers map
-     * @param {Array} [exclude=[]] array of Its layer identifiers to exclude
-     *
-     * BLUE Bluetooth Detector - Bluetooth Detector
-     * CABINET Cabinets - The cabinets
-     * CCTV Camera - Traffic Cameras
-     * HUT Communication Hut - Communication Hut
-     * VAULT Communication Vault - The communication vaults
-     * HAR Highway Advisory Radio - Advisory Radios
-     * LIGHT Lighting - Lighting
-     * LOOP Loop Detectors - Loop Detectors
-     * DMS Message Board - Message Boards and Signs
-     * MICROWAVE Microwave Detector - Microwave Detectors
-     * PULL Pull Box - A pull box
-     * RWIS RWIS - Road weather information system
-     * GATE Ramp Gate - The ramp Gates
-     * METER Ramp Meter - The ramp meters
-     * SIGNAL Signal - Traffic Signal
-     * TOWER Tower - The towers
-     * TRENCH
-     */
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports', '../layers/LayerItsInventory', '../util/colors', '../util/provide'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports, global.LayerItsInventory, global.colors, global.provide);
+            global.ItsLayerCollection = mod.exports;
+        }
+    })(undefined, function (exports, _LayerItsInventory, _colors, _provide) {
+        'use strict';
 
-    function ItsLayerCollection(theMap, exclude) {
-        _classCallCheck(this, ItsLayerCollection);
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
 
-        this.map = theMap;
-        this._layers = [];
+        var _LayerItsInventory2 = _interopRequireDefault(_LayerItsInventory);
 
-        exclude = (typeof exclude === 'undefined' ? 'undefined' : _typeof(exclude)) == 'object' ? exclude : [];
+        var colors = _interopRequireWildcard(_colors);
 
-        for (var i = 0; i < itsConfig.length; i++) {
-            var lyrConfig = itsConfig[i];
-            var addLayer = true;
+        var _provide2 = _interopRequireDefault(_provide);
 
-            for (var j = 0; j < exclude.length; j++) {
-                if (exclude[j] == lyrConfig.itsType) {
-                    addLayer = false;
-                    break;
+        function _interopRequireWildcard(obj) {
+            if (obj && obj.__esModule) {
+                return obj;
+            } else {
+                var newObj = {};
+
+                if (obj != null) {
+                    for (var key in obj) {
+                        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+                    }
+                }
+
+                newObj.default = obj;
+                return newObj;
+            }
+        }
+
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
+        }
+
+        var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
+            return typeof obj === 'undefined' ? 'undefined' : _typeof2(obj);
+        } : function (obj) {
+            return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj === 'undefined' ? 'undefined' : _typeof2(obj);
+        };
+
+        function _classCallCheck(instance, Constructor) {
+            if (!(instance instanceof Constructor)) {
+                throw new TypeError("Cannot call a class as a function");
+            }
+        }
+
+        var _createClass = function () {
+            function defineProperties(target, props) {
+                for (var i = 0; i < props.length; i++) {
+                    var descriptor = props[i];
+                    descriptor.enumerable = descriptor.enumerable || false;
+                    descriptor.configurable = true;
+                    if ("value" in descriptor) descriptor.writable = true;
+                    Object.defineProperty(target, descriptor.key, descriptor);
                 }
             }
 
-            if (addLayer) {
-                var inventLyr = new _LayerItsInventory2.default(lyrConfig);
-                this['map'].addLayer(inventLyr.olLayer);
-                this._layers.push(inventLyr);
+            return function (Constructor, protoProps, staticProps) {
+                if (protoProps) defineProperties(Constructor.prototype, protoProps);
+                if (staticProps) defineProperties(Constructor, staticProps);
+                return Constructor;
+            };
+        }();
+
+        var nm = (0, _provide2.default)('collections');
+
+        var itsConfig = [{ name: 'Camera', itsType: 'cctv', minZoom: 11, itsIcon: 'cctv.png' }, {
+            name: 'Message Signs',
+            itsType: 'DMS',
+            minZoom: 11,
+            itsIconConfig: {
+                prop: 'dmsType',
+                defaultName: 'DMS',
+                defaultIcon: 'dms.png',
+                iconArray: [['pcms', 'PCMS', 'pcms.png']]
             }
-        }
-    }
+        }, { name: 'Lighting', itsType: 'light', minZoom: 16, itsIcon: 'streetlight.png', visible: false, onDemand: true }, { name: 'Bluetooth', itsType: 'blue', minZoom: 10, itsIcon: 'bluetooth.png', visible: false }, { name: 'Cabinets', itsType: 'cabinet', minZoom: 10, itsIcon: 'cabinet.png', visible: false }, { name: 'Hut', itsType: 'hut', minZoom: 10, itsIcon: 'hut.png', visible: false }, { name: 'Vault', itsType: 'vault', minZoom: 13, itsIcon: 'vault.png', visible: false }, { name: 'Advisory Radio', itsType: 'har', minZoom: 10, itsIcon: 'har.png', visible: false }, {
+            name: 'Loop Detectors',
+            itsType: 'loop',
+            legendCollapse: true,
+            minZoom: 14,
+            visible: false,
+            itsIconConfig: {
+                prop: 'dtctrType',
+                defaultName: 'Other',
+                defaultIcon: 'loopdetectorother.png',
+                iconArray: [['detector', 'Detector', 'loopdetector.png'], ['long', 'Long', 'loopdetectorlong.png'], ['zone', 'Zone', 'loopdetectorzone.png']]
+            },
+            onDemand: true
+        }, { name: 'Microwave', itsType: 'microwave', minZoom: 14, itsIcon: 'microwave.png', visible: false }, { name: 'Pull Box', itsType: 'pull', minZoom: 14, itsIcon: 'pullbox.png', visible: false, onDemand: true }, { name: 'RWIS', itsType: 'rwis', minZoom: 7, itsIcon: 'rwis.png', visible: false }, { name: 'Ramp Gates', itsType: 'gate', minZoom: 10, itsIcon: 'rampgate.png', visible: false }, { name: 'Ramp Meter', itsType: 'meter', minZoom: 10, itsIcon: 'rampmeter.png', visible: false }, { name: 'Signal', itsType: 'signal', minZoom: 13, itsIcon: 'signal.png', visible: false, onDemand: true }, { name: 'Tower', itsType: 'tower', minZoom: 10, itsIcon: 'tower.png', visible: false }, {
+            name: 'Trench',
+            itsType: 'trench',
+            onDemand: true,
+            visible: false,
+            onDemandDelay: 500,
+            minZoom: 15,
+            legendCollapse: true,
+            itsLineConfig: {
+                prop: 'owner',
+                //defaultName: 'Other',
+                //defaultWidth: 7,
+                defaultColor: colors.hexAlphaToRgbOrRgba('#747474', 0.8),
+                lineArray: [['WisDOT', 'WisDOT', colors.hexAlphaToRgbOrRgba('#FF032F', 0.7)], ['WIN', 'WIN', colors.hexAlphaToRgbOrRgba('#FFC632', 0.7)], ['USXchange', 'USXchange', colors.hexAlphaToRgbOrRgba('#2DFF46', 0.7)], ['AT&T', 'AT&T', colors.hexAlphaToRgbOrRgba('#ff2be5', 0.7)], ['Touch America', 'Touch America', colors.hexAlphaToRgbOrRgba('#52f3ff', 0.7)], ['Qwest', 'Qwest', colors.hexAlphaToRgbOrRgba('#9278ff', 0.7)], ['McLeodUSA', 'McLeodUSA', colors.hexAlphaToRgbOrRgba('#2926FF', 0.7)], ['CINC', 'CINC', colors.hexAlphaToRgbOrRgba('#CB00FF', 0.7)], ['City of Madison', 'Madison', colors.hexAlphaToRgbOrRgba('#000380', 0.7)]]
+            }
+        }];
 
-    /**
-     * Return the array of layers in this collection
-     * @returns {Array<LayerItsInventory>} an array of layers
-     */
+        var ItsLayerCollection = function () {
 
+            /**
+             * Create a collection of all ITS layers
+             * @param {ol.Map} theMap the openlayers map
+             * @param {Array} [exclude=[]] array of Its layer identifiers to exclude
+             *
+             * BLUE Bluetooth Detector - Bluetooth Detector
+             * CABINET Cabinets - The cabinets
+             * CCTV Camera - Traffic Cameras
+             * HUT Communication Hut - Communication Hut
+             * VAULT Communication Vault - The communication vaults
+             * HAR Highway Advisory Radio - Advisory Radios
+             * LIGHT Lighting - Lighting
+             * LOOP Loop Detectors - Loop Detectors
+             * DMS Message Board - Message Boards and Signs
+             * MICROWAVE Microwave Detector - Microwave Detectors
+             * PULL Pull Box - A pull box
+             * RWIS RWIS - Road weather information system
+             * GATE Ramp Gate - The ramp Gates
+             * METER Ramp Meter - The ramp meters
+             * SIGNAL Signal - Traffic Signal
+             * TOWER Tower - The towers
+             * TRENCH
+             */
 
-    _createClass(ItsLayerCollection, [{
-        key: 'layers',
-        get: function get() {
-            return this._layers;
-        }
-    }]);
+            function ItsLayerCollection(theMap, exclude) {
+                _classCallCheck(this, ItsLayerCollection);
 
-    return ItsLayerCollection;
-}();
+                this.map = theMap;
+                this._layers = [];
 
-nm.ItsLayerCollection = ItsLayerCollection;
-exports.default = ItsLayerCollection;
+                exclude = (typeof exclude === 'undefined' ? 'undefined' : _typeof(exclude)) == 'object' ? exclude : [];
 
-},{"../layers/LayerItsInventory":307,"../util/colors":321,"../util/provide":323}],301:[function(require,module,exports){
-'use strict';
+                for (var i = 0; i < itsConfig.length; i++) {
+                    var lyrConfig = itsConfig[i];
+                    var addLayer = true;
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+                    for (var j = 0; j < exclude.length; j++) {
+                        if (exclude[j] == lyrConfig.itsType) {
+                            addLayer = false;
+                            break;
+                        }
+                    }
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Created by gavorhes on 12/16/2015.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
-
-
-var _jquery = require('../jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _provide = require('../util/provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-var _makeGuid = require('../util/makeGuid');
-
-var _makeGuid2 = _interopRequireDefault(_makeGuid);
-
-var _mapMove = require('../olHelpers/mapMove');
-
-var _mapMove2 = _interopRequireDefault(_mapMove);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var nm = (0, _provide2.default)('collections');
-
-var LayerGroup = function () {
-
-    /**
-     *
-     * @param {object} [groupConfig={}] - group configuration object
-     * @param {string} groupConfig.groupName - the group name
-     * @param {boolean} [groupConfig.collapse=false] - if the group should be collapsed initially
-     * @param {boolean} [groupConfig.addCheck=true] - if the group should have a checkbox controlling visibility of all layers
-     * @param {LayerGroup} [parent=undefined] - the parent group
-     */
-
-    function LayerGroup(groupConfig, parent) {
-        _classCallCheck(this, LayerGroup);
-
-        this.groupLayers = [];
-        this.groupLayersLookup = {};
-        this.groupGroups = [];
-        this.groupGroupsLookup = {};
-        this.itemIdArray = [];
-
-        if (typeof groupConfig == 'undefined') {
-            this.parent = null;
-            this.groupId = 'root';
-            this.groupName = 'root';
-            this.allGroupLookup = { root: this };
-            this.allGroupArray = [this];
-            this.allLayerArray = [];
-            this.allLayerLookup = {};
-            this.layerParentLookup = {};
-            this.collapse = false;
-            this.addCheck = false;
-        } else {
-            this.groupId = (0, _makeGuid2.default)();
-            this.parent = parent;
-            this.groupName = groupConfig.groupName;
-            this.collapse = typeof groupConfig.collapse == 'boolean' ? groupConfig.collapse : false;
-            this.addCheck = typeof groupConfig.addCheck == 'boolean' ? groupConfig.addCheck : true;
-        }
-    }
-
-    /**
-     *
-     * @param {object} groupConfig - configuration object
-     * @param {string} groupConfig.groupName - the group name
-     * @param {boolean} groupConfig.collapse if the group should be collapsed initially
-     * @param {boolean} groupConfig.addCheck if the group should have a checkbox controlling visibility of all layers
-     * @param {Array<LayerGroup>} parents parent groups
-     * @returns {LayerGroup} the layer group just added
-     */
-
-
-    _createClass(LayerGroup, [{
-        key: 'addGroup',
-        value: function addGroup(groupConfig, parents) {
-            var parent = void 0;
-            if (parents.length > 0) {
-                parent = parents[parents.length - 1];
-            } else {
-                parent = 'root';
+                    if (addLayer) {
+                        var inventLyr = new _LayerItsInventory2.default(lyrConfig);
+                        this['map'].addLayer(inventLyr.olLayer);
+                        this._layers.push(inventLyr);
+                    }
+                }
             }
 
             /**
-             * @type {LayerGroup}
+             * Return the array of layers in this collection
+             * @returns {Array<LayerItsInventory>} an array of layers
              */
-            var parentGroup = this.allGroupLookup[parent];
-            var newGroup = new LayerGroup(groupConfig, parentGroup);
-            this.allGroupLookup[newGroup.groupId] = newGroup;
-            this.allGroupArray.push(newGroup);
 
-            parentGroup.groupGroups.push(newGroup);
-            parentGroup.groupGroupsLookup[newGroup.groupId] = newGroup;
+            _createClass(ItsLayerCollection, [{
+                key: 'layers',
+                get: function get() {
+                    return this._layers;
+                }
+            }]);
 
-            if (parentGroup.itemIdArray.indexOf(newGroup.groupId) > 0) {
-                console.log(newGroup.groupId);
-                throw 'layer and group ids must be unique';
+            return ItsLayerCollection;
+        }();
+
+        nm.ItsLayerCollection = ItsLayerCollection;
+        exports.default = ItsLayerCollection;
+    });
+});
+
+},{"../layers/LayerItsInventory":307,"../util/colors":321,"../util/provide":323}],301:[function(require,module,exports){
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', '../jquery', '../util/provide', '../util/makeGuid', '../olHelpers/mapMove'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('../jquery'), require('../util/provide'), require('../util/makeGuid'), require('../olHelpers/mapMove'));
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports, global.jquery, global.provide, global.makeGuid, global.mapMove);
+        global.LayerLegend = mod.exports;
+    }
+})(this, function (exports) {
+    'use strict';
+
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports', '../jquery', '../util/provide', '../util/makeGuid', '../olHelpers/mapMove'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports, global.jquery, global.provide, global.makeGuid, global.mapMove);
+            global.LayerLegend = mod.exports;
+        }
+    })(undefined, function (exports, _jquery, _provide, _makeGuid, _mapMove) {
+        'use strict';
+
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+
+        var _jquery2 = _interopRequireDefault(_jquery);
+
+        var _provide2 = _interopRequireDefault(_provide);
+
+        var _makeGuid2 = _interopRequireDefault(_makeGuid);
+
+        var _mapMove2 = _interopRequireDefault(_mapMove);
+
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
+        }
+
+        function _classCallCheck(instance, Constructor) {
+            if (!(instance instanceof Constructor)) {
+                throw new TypeError("Cannot call a class as a function");
             }
-            parentGroup.itemIdArray.push(newGroup.groupId);
+        }
 
-            return newGroup;
+        var _createClass = function () {
+            function defineProperties(target, props) {
+                for (var i = 0; i < props.length; i++) {
+                    var descriptor = props[i];
+                    descriptor.enumerable = descriptor.enumerable || false;
+                    descriptor.configurable = true;
+                    if ("value" in descriptor) descriptor.writable = true;
+                    Object.defineProperty(target, descriptor.key, descriptor);
+                }
+            }
+
+            return function (Constructor, protoProps, staticProps) {
+                if (protoProps) defineProperties(Constructor.prototype, protoProps);
+                if (staticProps) defineProperties(Constructor, staticProps);
+                return Constructor;
+            };
+        }();
+
+        var nm = (0, _provide2.default)('collections');
+
+        var LayerGroup = function () {
+
+            /**
+             *
+             * @param {object} [groupConfig={}] - group configuration object
+             * @param {string} groupConfig.groupName - the group name
+             * @param {boolean} [groupConfig.collapse=false] - if the group should be collapsed initially
+             * @param {boolean} [groupConfig.addCheck=true] - if the group should have a checkbox controlling visibility of all layers
+             * @param {LayerGroup} [parent=undefined] - the parent group
+             */
+
+            function LayerGroup(groupConfig, parent) {
+                _classCallCheck(this, LayerGroup);
+
+                this.groupLayers = [];
+                this.groupLayersLookup = {};
+                this.groupGroups = [];
+                this.groupGroupsLookup = {};
+                this.itemIdArray = [];
+
+                if (typeof groupConfig == 'undefined') {
+                    this.parent = null;
+                    this.groupId = 'root';
+                    this.groupName = 'root';
+                    this.allGroupLookup = { root: this };
+                    this.allGroupArray = [this];
+                    this.allLayerArray = [];
+                    this.allLayerLookup = {};
+                    this.layerParentLookup = {};
+                    this.collapse = false;
+                    this.addCheck = false;
+                } else {
+                    this.groupId = (0, _makeGuid2.default)();
+                    this.parent = parent;
+                    this.groupName = groupConfig.groupName;
+                    this.collapse = typeof groupConfig.collapse == 'boolean' ? groupConfig.collapse : false;
+                    this.addCheck = typeof groupConfig.addCheck == 'boolean' ? groupConfig.addCheck : true;
+                }
+            }
+
+            /**
+             *
+             * @param {object} groupConfig - configuration object
+             * @param {string} groupConfig.groupName - the group name
+             * @param {boolean} groupConfig.collapse if the group should be collapsed initially
+             * @param {boolean} groupConfig.addCheck if the group should have a checkbox controlling visibility of all layers
+             * @param {Array<LayerGroup>} parents parent groups
+             * @returns {LayerGroup} the layer group just added
+             */
+
+            _createClass(LayerGroup, [{
+                key: 'addGroup',
+                value: function addGroup(groupConfig, parents) {
+                    var parent = void 0;
+                    if (parents.length > 0) {
+                        parent = parents[parents.length - 1];
+                    } else {
+                        parent = 'root';
+                    }
+
+                    /**
+                     * @type {LayerGroup}
+                     */
+                    var parentGroup = this.allGroupLookup[parent];
+                    var newGroup = new LayerGroup(groupConfig, parentGroup);
+                    this.allGroupLookup[newGroup.groupId] = newGroup;
+                    this.allGroupArray.push(newGroup);
+
+                    parentGroup.groupGroups.push(newGroup);
+                    parentGroup.groupGroupsLookup[newGroup.groupId] = newGroup;
+
+                    if (parentGroup.itemIdArray.indexOf(newGroup.groupId) > 0) {
+                        console.log(newGroup.groupId);
+                        throw 'layer and group ids must be unique';
+                    }
+                    parentGroup.itemIdArray.push(newGroup.groupId);
+
+                    return newGroup;
+                }
+            }, {
+                key: 'addLegendLayer',
+                value: function addLegendLayer(newLayer, parents) {
+                    var parent = void 0;
+                    if (parents.length > 0) {
+                        parent = parents[parents.length - 1];
+                    } else {
+                        parent = 'root';
+                    }
+
+                    this.allLayerLookup[newLayer.id] = newLayer;
+                    this.allLayerArray.push(newLayer);
+
+                    /**
+                     * @type {LayerGroup}
+                     */
+                    var parentGroup = this.allGroupLookup[parent];
+
+                    parentGroup.groupLayers.push(newLayer);
+                    parentGroup.groupLayersLookup[newLayer.id] = newLayer;
+                    if (parentGroup.itemIdArray.indexOf(newLayer.id) > 0) {
+                        console.log(newLayer.id);
+                        throw 'layer and group ids must be unique';
+                    }
+                    parentGroup.itemIdArray.push(newLayer.id);
+
+                    this.layerParentLookup[newLayer.id] = parentGroup;
+                }
+            }, {
+                key: 'getLegendHtml',
+                value: function getLegendHtml(legendId, options) {
+
+                    var legendHtml = '<ul id="' + legendId + '" class="legend-container">';
+
+                    legendHtml += '<li>' + options.legendTitle + '<input type="checkbox" checked id="suppress-by-extent-' + legendId + '" class="suppress-by-extent">' + ('<label title="Suppress layers not visible at this zoom level" for="suppress-by-extent-' + legendId + '">') + '<span></span>' + '</label></li>';
+
+                    legendHtml += this._buildLegend(this.itemIdArray, this, options.layerDivClasses) + '</ul>';
+
+                    return legendHtml;
+                }
+            }, {
+                key: '_buildLegend',
+                value: function _buildLegend(itemIds, theGroup, layerDivClasses) {
+
+                    if (itemIds.length == 0) {
+                        return '';
+                    }
+
+                    var theHml = '';
+
+                    var itemId = itemIds[0];
+
+                    if (theGroup.groupLayersLookup[itemId]) {
+
+                        /**
+                         * @type {LayerBase}
+                         */
+                        var lyr = theGroup.groupLayersLookup[itemId];
+                        theHml += '<li id="' + lyr.id + '-layer-li" class="legend-layer-li ' + layerDivClasses.join(' ') + '">' + lyr.getLegendDiv() + '</li>';
+                    } else if (theGroup.groupGroupsLookup[itemId]) {
+                        /**
+                         * type {LayerGroup}
+                         */
+                        var otherGroup = theGroup.groupGroupsLookup[itemId];
+
+                        theHml += '<li>';
+                        theHml += '<div id="' + otherGroup.groupId + '-legend-layer-div" ' + ('class="legend-layer-group  ' + layerDivClasses.join(' ') + '">');
+
+                        if (otherGroup.addCheck) {
+                            theHml += '<input type="checkbox" checked id="' + otherGroup.groupId + '-group-chck">' + ('<label for="' + otherGroup.groupId + '-group-chck" title="Click arrow to expand or collapse">' + otherGroup.groupName + '</label>');
+                        } else {
+                            theHml += '<label title="Click arrow to expand or collapse">' + otherGroup.groupName + '</label>';
+                        }
+
+                        theHml += '<span title="Expand/Collapse" class="layer-group-expander';
+                        theHml += (otherGroup.collapse ? ' legend-layer-group-initial-collapse' : '') + '">';
+                        theHml += otherGroup.collapse ? '&#9654;' : '&#9660;';
+                        theHml += '</span>';
+
+                        //parents.push(groupId);
+                        theHml += '<ul>' + this._buildLegend(otherGroup.itemIdArray, otherGroup, layerDivClasses) + '</ul>';
+                        theHml += '</div>';
+                        theHml += '</li>';
+                    }
+
+                    return theHml + this._buildLegend(itemIds.slice(1), theGroup, layerDivClasses);
+                }
+            }]);
+
+            return LayerGroup;
+        }();
+
+        var LayerLegend = function () {
+
+            /**
+             *
+             * @param {Array} legendItems array of layers or objects with {groupName:  {string}, collapse: {boolean}, addCheck: {boolean}, items: {Array}}
+             * @param {string} divId the div where the legend should be added
+             * @param {object} options for legend
+             * @param {Array} [options.layerDivClasses=[]] optional array of classes to be applied to the layer legend divs for custom styling
+             * @param {string} [options.legendTitle=Legend] the legend title
+             * @param {bool} [options.scaleDependent=true] if legend display is scale dependent
+             */
+
+            function LayerLegend(legendItems, divId, options) {
+                _classCallCheck(this, LayerLegend);
+
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = legendItems[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var i = _step.value;
+
+                        if (typeof i == 'undefined') {
+                            throw 'undefined item passed in array to legend constructor';
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+
+                options = options || {};
+
+                options.legendTitle = typeof options.legendTitle == 'string' ? options.legendTitle : 'Legend';
+                options.scaleDependent = typeof options.scaleDependent == 'boolean' ? options.scaleDependent : true;
+                options.layerDivClasses = options.layerDivClasses || [];
+
+                // if legend display is scale dependent, make sure the mapMove object is initialized first
+                if (options.scaleDependent) {
+                    _mapMove2.default.checkInit();
+                }
+
+                this.$divElement = (0, _jquery2.default)('#' + divId);
+
+                this._legendItems = legendItems;
+
+                this.layerGroup = new LayerGroup();
+
+                this._buildTree(legendItems);
+
+                this.legendId = (0, _makeGuid2.default)();
+
+                this.$divElement.append(this.layerGroup.getLegendHtml(this.legendId, options));
+
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
+
+                try {
+                    for (var _iterator2 = this.layerGroup.allLayerArray[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var l = _step2.value;
+
+                        l.applyCollapse();
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
+                        }
+                    }
+                }
+
+                var _this = this;
+
+                //// if legend display is scale dependent, make sure the mapMove object is initialized first
+                if (options.scaleDependent) {
+                    _mapMove2.default.checkInit();
+
+                    _mapMove2.default.addCallback(function (ext, zoom, evt) {
+                        if (typeof evt == 'undefined' || evt == 'change:resolution') {
+                            var _iteratorNormalCompletion3 = true;
+                            var _didIteratorError3 = false;
+                            var _iteratorError3 = undefined;
+
+                            try {
+                                for (var _iterator3 = this.layerGroup.allLayerArray[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                                    var lyr = _step3.value;
+
+                                    var $lyrLi = (0, _jquery2.default)('#' + lyr.id + '-layer-li');
+                                    if (zoom > lyr.maxZoom || zoom < lyr.minZoom) {
+                                        $lyrLi.addClass('layer-not-visible');
+                                    } else {
+                                        $lyrLi.removeClass('layer-not-visible');
+                                    }
+                                }
+                            } catch (err) {
+                                _didIteratorError3 = true;
+                                _iteratorError3 = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                                        _iterator3.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError3) {
+                                        throw _iteratorError3;
+                                    }
+                                }
+                            }
+                        }
+                    }, this, 100, true, 'legend1');
+                }
+
+                // <editor-fold desc="add event listeners">
+
+                this.$divElement.find(".suppress-by-extent").change(function () {
+                    var legendLayerLis = (0, _jquery2.default)('.legend-layer-li');
+                    if (this.checked) {
+                        legendLayerLis.removeClass('layer-force-show');
+                    } else {
+                        legendLayerLis.addClass('layer-force-show');
+                    }
+                });
+
+                this.$divElement.find('.legend-check').change(function () {
+                    var lyrId = this.id.replace('-legend-layer-check', '');
+                    _this.layerGroup.allLayerLookup[lyrId].visible = this.checked;
+                });
+
+                this.$divElement.find('.legend-layer-group > input[type=checkbox]').change(function () {
+                    (0, _jquery2.default)(this).siblings('ul').find('input[type=checkbox]').prop('checked', this.checked).trigger('change');
+                });
+
+                this.$divElement.find('.layer-group-expander').click(function () {
+                    var $this = (0, _jquery2.default)(this);
+                    $this.removeClass('legend-layer-group-initial-collapse');
+
+                    $this.siblings('ul').slideToggle();
+
+                    if ($this.hasClass('legend-layer-group-collapsed')) {
+                        $this.removeClass('legend-layer-group-collapsed');
+                        $this.html('&#9660;');
+                    } else {
+                        $this.addClass('legend-layer-group-collapsed');
+                        $this.html('&#9654;');
+                    }
+                });
+
+                this.$divElement.find('.legend-layer-group-initial-collapse').trigger('click');
+                // </editor-fold>
+            }
+
+            /**
+             * @param {Array} [legendItems=this._layerConfig] the legend items
+             * @param {Array} [parents=[]] the ordered list of groups in which this item is a member
+             * @private
+             */
+
+            _createClass(LayerLegend, [{
+                key: '_buildTree',
+                value: function _buildTree(legendItems, parents) {
+
+                    if (legendItems.length == 0) {
+                        return;
+                    }
+
+                    var oneItem = legendItems[0];
+
+                    //reset the parent if the item is in the base array
+                    if (this._legendItems.indexOf(oneItem) > -1 || typeof parents == 'undefined') {
+                        parents = [];
+                    }
+
+                    if (typeof oneItem['groupName'] !== 'undefined') {
+                        var groupItem = legendItems[0];
+                        var newGroup = this.layerGroup.addGroup(groupItem, parents);
+                        parents.push(newGroup.groupId);
+                        this._buildTree(groupItem.items, parents);
+                    } else {
+                        /**
+                         * @type {LayerBase}
+                         */
+                        var layerItem = legendItems[0];
+
+                        this.layerGroup.addLegendLayer(layerItem, parents);
+                    }
+
+                    this._buildTree(legendItems.slice(1), parents);
+                }
+            }, {
+                key: 'showAll',
+                set: function set(val) {}
+            }]);
+
+            return LayerLegend;
+        }();
+
+        nm.LayerLegend = LayerLegend;
+        exports.default = LayerLegend;
+    });
+});
+
+},{"../jquery":302,"../olHelpers/mapMove":310,"../util/makeGuid":322,"../util/provide":323}],302:[function(require,module,exports){
+(function (global){
+(function (global, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(['exports', 'jquery'], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(exports, require('jquery'));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports, global.jquery);
+    global.jquery = mod.exports;
+  }
+})(this, function (exports) {
+  'use strict';
+
+  (function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+      define(['exports', 'jquery'], factory);
+    } else if (typeof exports !== "undefined") {
+      factory(exports);
+    } else {
+      var mod = {
+        exports: {}
+      };
+      factory(mod.exports, global.jquery);
+      global.jquery = mod.exports;
+    }
+  })(undefined, function (exports, $) {
+    'use strict';
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+
+    global.$ = $;
+    global.jQuery = $;
+
+    exports.default = $;
+  });
+});
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+
+},{"jquery":299}],303:[function(require,module,exports){
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', '../jquery', '../util/makeGuid', '../olHelpers/zoomResolutionConvert', '../util/provide'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('../jquery'), require('../util/makeGuid'), require('../olHelpers/zoomResolutionConvert'), require('../util/provide'));
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports, global.jquery, global.makeGuid, global.zoomResolutionConvert, global.provide);
+        global.LayerBase = mod.exports;
+    }
+})(this, function (exports) {
+    'use strict';
+
+    var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+        return typeof obj;
+    } : function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+    };
+
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports', '../jquery', '../util/makeGuid', '../olHelpers/zoomResolutionConvert', '../util/provide'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports, global.jquery, global.makeGuid, global.zoomResolutionConvert, global.provide);
+            global.LayerBase = mod.exports;
+        }
+    })(undefined, function (exports, _jquery, _makeGuid, _zoomResolutionConvert, _provide) {
+        'use strict';
+
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+
+        var _jquery2 = _interopRequireDefault(_jquery);
+
+        var _makeGuid2 = _interopRequireDefault(_makeGuid);
+
+        var zoomResolutionConvert = _interopRequireWildcard(_zoomResolutionConvert);
+
+        var _provide2 = _interopRequireDefault(_provide);
+
+        function _interopRequireWildcard(obj) {
+            if (obj && obj.__esModule) {
+                return obj;
+            } else {
+                var newObj = {};
+
+                if (obj != null) {
+                    for (var key in obj) {
+                        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+                    }
+                }
+
+                newObj.default = obj;
+                return newObj;
+            }
+        }
+
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
+        }
+
+        var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
+            return typeof obj === 'undefined' ? 'undefined' : _typeof2(obj);
+        } : function (obj) {
+            return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj === 'undefined' ? 'undefined' : _typeof2(obj);
+        };
+
+        function _classCallCheck(instance, Constructor) {
+            if (!(instance instanceof Constructor)) {
+                throw new TypeError("Cannot call a class as a function");
+            }
+        }
+
+        var _createClass = function () {
+            function defineProperties(target, props) {
+                for (var i = 0; i < props.length; i++) {
+                    var descriptor = props[i];
+                    descriptor.enumerable = descriptor.enumerable || false;
+                    descriptor.configurable = true;
+                    if ("value" in descriptor) descriptor.writable = true;
+                    Object.defineProperty(target, descriptor.key, descriptor);
+                }
+            }
+
+            return function (Constructor, protoProps, staticProps) {
+                if (protoProps) defineProperties(Constructor.prototype, protoProps);
+                if (staticProps) defineProperties(Constructor, staticProps);
+                return Constructor;
+            };
+        }();
+
+        var nm = (0, _provide2.default)('layers');
+
+        /**
+         * The base layer class
+         * @abstract
+         */
+
+        var LayerBase = function () {
+            /**
+             * The base layer for all others
+             * @param {string} url - url for source
+             * @param {object} options - config
+             * @param {string} [options.id=makeGuid()] - layer id
+             * @param {string} [options.name=Unnamed Layer] - layer name
+             * @param {number} [options.opacity=1] - opacity
+             * @param {boolean} [options.visible=true] - default visible
+             * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+             * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+             * @param {object} [options.params={}] - the get parameters to include to retrieve the layer
+             * @param {number} [options.zIndex=0] - the z index for the layer
+             * @param {function} [options.loadCallback] - function to call on load, context this is the layer object
+             * @param {boolean} [options.legendCollapse=false] - if the legend item should be initially collapsed
+             * @param {boolean} [options.legendCheckbox=true] - if the legend item should have a checkbox for visibility
+             * @param {boolean} [options.legendContent=undefined] - additional content to add to the legend
+             */
+
+            function LayerBase(url, options) {
+                _classCallCheck(this, LayerBase);
+
+                options = options || {};
+
+                if (typeof url !== 'string') {
+                    throw 'Invalid URL';
+                }
+                this._url = url;
+
+                this._params = _typeof(options.params) == 'object' ? options.params : {};
+                this._legendCollapse = typeof options.legendCollapse == 'boolean' ? options.legendCollapse : false;
+                this._legendCheckbox = typeof options.legendCheckbox == 'boolean' ? options.legendCheckbox : true;
+
+                this.id = options.id || (0, _makeGuid2.default)();
+                this._name = options.name || 'Unnamed Layer';
+                this.animate = false;
+                this._opacity = typeof options.opacity == 'number' ? options.opacity : 1;
+
+                if (this._opacity > 1) {
+                    this._opacity = 1;
+                } else if (this._opacity < 0) {
+                    this._opacity = 0;
+                }
+
+                this._visible = typeof options.visible === 'boolean' ? options.visible : true;
+
+                this._source = undefined;
+                this.olLayer = undefined;
+                this._loaded = false;
+
+                this._maxResolution = zoomResolutionConvert.zoomToResolution(options.minZoom);
+                if (typeof this._maxResolution !== 'undefined') {
+                    this._maxResolution += 0.00001;
+                }
+                this._minResolution = zoomResolutionConvert.zoomToResolution(options.maxZoom);
+
+                this._minZoom = typeof options.minZoom == 'number' ? options.minZoom : undefined;
+                this._maxZoom = typeof options.maxZoom == 'number' ? options.maxZoom : undefined;
+                this._zIndex = typeof options.zIndex == 'number' ? options.zIndex : 0;
+
+                this.loadCallback = typeof options.loadCallback == 'function' ? options.loadCallback : function () {};
+
+                this._legendContent = '';
+
+                if (this._legendCheckbox) {
+                    this._legendContent += '<input type="checkbox" ' + (this.visible ? 'checked' : '') + ' ' + ('class="legend-check" id="' + this.id + '-legend-layer-check"><span></span>');
+                    this._legendContent += '<label for="' + this.id + '-legend-layer-check" class="legend-layer-name">' + this.name + '</label>';
+                } else {
+                    this._legendContent += '<label class="legend-layer-name">' + this.name + '</label>';
+                }
+
+                this._$legendDiv = null;
+                this._applyCollapseCalled = false;
+                this._addLegendContent(typeof options.legendContent === 'string' ? options.legendContent : undefined);
+            }
+
+            /**
+             * base load function, sets _loaded = true if it is not already
+             * @protected
+             * @returns {boolean} if already loaded
+             */
+
+            _createClass(LayerBase, [{
+                key: '_load',
+                value: function _load() {
+                    if (this.loaded == true) {
+                        return true;
+                    } else {
+                        this._loaded = true;
+
+                        return false;
+                    }
+                }
+            }, {
+                key: 'getLegendDiv',
+                value: function getLegendDiv() {
+                    return '<div class="legend-layer-div" id="' + this.id + '-legend-layer-div">' + this._legendContent + '</div>';
+                }
+            }, {
+                key: '_addLegendContent',
+                value: function _addLegendContent(additionalContent) {
+                    additionalContent = typeof additionalContent == 'string' ? additionalContent : '';
+
+                    var addCollapse = additionalContent.indexOf('<ul>') > -1;
+
+                    if (addCollapse) {
+                        additionalContent = '<span class="legend-items-expander" title="Expand/Collapse">&#9660;</span>' + additionalContent;
+                    }
+
+                    this._legendContent += additionalContent;
+
+                    this._$legendDiv = (0, _jquery2.default)('#' + this.id + '-legend-layer-div');
+
+                    if (this._$legendDiv.length > 0) {
+                        this._$legendDiv.append(additionalContent);
+                        this.applyCollapse();
+                    }
+                }
+            }, {
+                key: 'addLegendContent',
+                value: function addLegendContent(additionalContent) {
+                    this._addLegendContent(additionalContent);
+                }
+            }, {
+                key: 'applyCollapse',
+                value: function applyCollapse() {
+                    if (this._applyCollapseCalled) {
+                        console.log('collapse already applied');
+
+                        return undefined;
+                    }
+
+                    this._$legendDiv = (0, _jquery2.default)('#' + this.id + '-legend-layer-div');
+
+                    if (this._$legendDiv.length > 0) {
+
+                        var $expander = this._$legendDiv.find('.legend-items-expander');
+
+                        if ($expander.length > 0) {
+                            this._applyCollapseCalled = true;
+
+                            $expander.click(function () {
+                                var $this = (0, _jquery2.default)(this);
+
+                                $this.siblings('ul').slideToggle();
+
+                                if ($this.hasClass('legend-layer-group-collapsed')) {
+                                    $this.removeClass('legend-layer-group-collapsed');
+                                    $this.html('&#9660;');
+                                } else {
+                                    $this.addClass('legend-layer-group-collapsed');
+                                    $this.html('&#9654;');
+                                }
+                            });
+
+                            if (this._legendCollapse) {
+                                $expander.trigger('click');
+                            }
+                        }
+                    }
+                }
+            }, {
+                key: 'refresh',
+                value: function refresh() {
+                    if (this.source) {
+                        this.source.refresh();
+                        //let src = this.source;
+                        //this.olLayer.setSource(undefined);
+                        //this.olLayer.setSource(src);
+                    }
+                }
+            }, {
+                key: 'legendContent',
+                get: function get() {
+                    return this._legendContent;
+                },
+                set: function set(newVal) {
+                    this._legendContent = newVal;
+                }
+            }, {
+                key: 'params',
+                get: function get() {
+                    return this._params;
+                },
+                set: function set(newParams) {
+                    this._params = newParams;
+                }
+            }, {
+                key: 'minResolution',
+                get: function get() {
+                    return this._minResolution;
+                }
+            }, {
+                key: 'maxResolution',
+                get: function get() {
+                    return this._maxResolution;
+                }
+            }, {
+                key: 'minZoom',
+                get: function get() {
+                    return this._minZoom;
+                }
+            }, {
+                key: 'maxZoom',
+                get: function get() {
+                    return this._maxZoom;
+                }
+            }, {
+                key: 'url',
+                get: function get() {
+                    return this._url;
+                }
+            }, {
+                key: 'visible',
+                get: function get() {
+                    return this._visible;
+                },
+                set: function set(visibility) {
+                    this._visible = visibility;
+                    if (this.olLayer) {
+                        this.olLayer.setVisible(this._visible);
+                        if (visibility && !this._loaded) {
+                            this._load();
+                        }
+                    }
+                }
+            }, {
+                key: 'opacity',
+                get: function get() {
+                    return this._opacity;
+                },
+                set: function set(opacity) {
+                    this._opacity = opacity;
+                    if (this.olLayer) {
+                        this.olLayer.setOpacity(this._opacity);
+                    }
+                }
+            }, {
+                key: 'name',
+                get: function get() {
+                    return this._name;
+                },
+                set: function set(newName) {
+                    this._name = newName;
+                }
+            }, {
+                key: 'loaded',
+                get: function get() {
+                    return this._loaded;
+                }
+            }, {
+                key: 'source',
+                get: function get() {
+                    return this._source;
+                }
+            }, {
+                key: 'zIndex',
+                get: function get() {
+                    return this._zIndex;
+                },
+                set: function set(newZ) {
+                    this._zIndex = newZ;
+                    this.olLayer.setZIndex(this.zIndex);
+                }
+            }]);
+
+            return LayerBase;
+        }();
+
+        nm.LayerBase = LayerBase;
+        exports.default = LayerBase;
+    });
+});
+
+},{"../jquery":302,"../olHelpers/zoomResolutionConvert":317,"../util/makeGuid":322,"../util/provide":323}],304:[function(require,module,exports){
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', '../jquery', './LayerBase', '../olHelpers/mapMove', '../util/provide', '../ol/ol'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('../jquery'), require('./LayerBase'), require('../olHelpers/mapMove'), require('../util/provide'), require('../ol/ol'));
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports, global.jquery, global.LayerBase, global.mapMove, global.provide, global.ol);
+        global.LayerBaseVector = mod.exports;
+    }
+})(this, function (exports) {
+    'use strict';
+
+    var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+        return typeof obj;
+    } : function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+    };
+
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports', '../jquery', './LayerBase', '../olHelpers/mapMove', '../util/provide', '../ol/ol'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports, global.jquery, global.LayerBase, global.mapMove, global.provide, global.ol);
+            global.LayerBaseVector = mod.exports;
+        }
+    })(undefined, function (exports, _jquery, _LayerBase2, _mapMove, _provide, _ol) {
+        'use strict';
+
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+
+        var _jquery2 = _interopRequireDefault(_jquery);
+
+        var _LayerBase3 = _interopRequireDefault(_LayerBase2);
+
+        var _mapMove2 = _interopRequireDefault(_mapMove);
+
+        var _provide2 = _interopRequireDefault(_provide);
+
+        var _ol2 = _interopRequireDefault(_ol);
+
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
+        }
+
+        function _classCallCheck(instance, Constructor) {
+            if (!(instance instanceof Constructor)) {
+                throw new TypeError("Cannot call a class as a function");
+            }
+        }
+
+        var _createClass = function () {
+            function defineProperties(target, props) {
+                for (var i = 0; i < props.length; i++) {
+                    var descriptor = props[i];
+                    descriptor.enumerable = descriptor.enumerable || false;
+                    descriptor.configurable = true;
+                    if ("value" in descriptor) descriptor.writable = true;
+                    Object.defineProperty(target, descriptor.key, descriptor);
+                }
+            }
+
+            return function (Constructor, protoProps, staticProps) {
+                if (protoProps) defineProperties(Constructor.prototype, protoProps);
+                if (staticProps) defineProperties(Constructor, staticProps);
+                return Constructor;
+            };
+        }();
+
+        function _possibleConstructorReturn(self, call) {
+            if (!self) {
+                throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+            }
+
+            return call && ((typeof call === 'undefined' ? 'undefined' : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+        }
+
+        var _set = function set(object, property, value, receiver) {
+            var desc = Object.getOwnPropertyDescriptor(object, property);
+
+            if (desc === undefined) {
+                var parent = Object.getPrototypeOf(object);
+
+                if (parent !== null) {
+                    set(parent, property, value, receiver);
+                }
+            } else if ("value" in desc && desc.writable) {
+                desc.value = value;
+            } else {
+                var setter = desc.set;
+
+                if (setter !== undefined) {
+                    setter.call(receiver, value);
+                }
+            }
+
+            return value;
+        };
+
+        var _get = function get(object, property, receiver) {
+            if (object === null) object = Function.prototype;
+            var desc = Object.getOwnPropertyDescriptor(object, property);
+
+            if (desc === undefined) {
+                var parent = Object.getPrototypeOf(object);
+
+                if (parent === null) {
+                    return undefined;
+                } else {
+                    return get(parent, property, receiver);
+                }
+            } else if ("value" in desc) {
+                return desc.value;
+            } else {
+                var getter = desc.get;
+
+                if (getter === undefined) {
+                    return undefined;
+                }
+
+                return getter.call(receiver);
+            }
+        };
+
+        function _inherits(subClass, superClass) {
+            if (typeof superClass !== "function" && superClass !== null) {
+                throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === 'undefined' ? 'undefined' : _typeof(superClass)));
+            }
+
+            subClass.prototype = Object.create(superClass && superClass.prototype, {
+                constructor: {
+                    value: subClass,
+                    enumerable: false,
+                    writable: true,
+                    configurable: true
+                }
+            });
+            if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+        }
+
+        var nm = (0, _provide2.default)('layers');
+
+        /**
+         * The make mapMoveGetParams function takes the extent and the zoom level
+         * context is 'this' object, probably want to do something with this.mapMoveParams
+         * @callback mapMoveMakeGetParams
+         * @param {LayerBaseVector} lyr
+         * @param {object} extent
+         * @param {number} extent.minX
+         * @param {number} extent.minY
+         * @param {number} extent.maxX
+         * @param {number} extent.maxY
+         * @param {number} zoomLevel
+         */
+
+        /**
+         * The Vector layer base
+         * @augments LayerBase
+         * @abstract
+         */
+
+        var LayerBaseVector = function (_LayerBase) {
+            _inherits(LayerBaseVector, _LayerBase);
+
+            /**
+             * The base vector layer
+             * @param {string} url - pass an empty string to prevent default load and add from a json source
+             * @param {object} options - config
+             * @param {string} [options.id] - layer id
+             * @param {string} [options.name=Unnamed Layer] - layer name
+             * @param {number} [options.opacity=1] - opacity
+             * @param {boolean} [options.visible=true] - default visible
+             * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+             * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+             * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+             * @param {number} [options.zIndex=0] the z index for the layer
+             * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+             * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+             * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+             * @param {boolean} [options.legendContent] additional content to add to the legend
+             *
+             * @param {boolean} [options.autoLoad=false] if the layer should auto load if not visible
+             * @param {object} [options.style=undefined] the layer style, use openlayers default style if not defined
+             * @param {boolean} [options.onDemand=false] if the layer should be loaded by extent on map move
+             * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
+             * @param {mapMoveMakeGetParams} [options.mapMoveMakeGetParams=function(lyr, extent, zoomLevel){}] function to create additional map move params
+             * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
+             *
+             */
+
+            function LayerBaseVector(url, options) {
+                _classCallCheck(this, LayerBaseVector);
+
+                var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LayerBaseVector).call(this, url, options));
+
+                //prevent regular load if no url has been provided
+                if (_this.url.trim() == '') {
+                    _this._loaded = true;
+                }
+
+                _this._style = typeof options.style == 'undefined' ? undefined : options.style;
+
+                if (_this.visible) {
+                    _this._autoLoad = true;
+                } else {
+                    _this._autoLoad = typeof options['autoLoad'] == 'boolean' ? options['autoLoad'] : false;
+                }
+
+                _this._onDemand = typeof options.onDemand == 'boolean' ? options.onDemand : false;
+                _this._onDemandDelay = typeof options.onDemandDelay == 'number' ? options.onDemandDelay : 300;
+
+                if (options.mapMoveObj) {
+                    _this._mapMove = options.mapMoveObj;
+                } else {
+                    _this._mapMove = _this._onDemand ? _mapMove2.default : undefined;
+                }
+
+                _this._mapMoveMakeGetParams = typeof options.mapMoveMakeGetParams == 'function' ? options.mapMoveMakeGetParams : function (lyr, extent, zoomLevel) {
+                    return {};
+                };
+
+                if (_this._onDemand) {
+                    _this._loaded = true;
+                    _this._mapMoveParams = {};
+                    _this._mapMove.checkInit();
+                    _this._mapMove.addVectorLayer(_this);
+                }
+
+                _this._source = new _ol2.default.source.Vector();
+
+                /**
+                 *
+                 * @type {ol.layer.Vector|ol.layer.Base}
+                 */
+                _this.olLayer = new _ol2.default.layer.Vector({
+                    source: _this._source,
+                    visible: _this.visible,
+                    style: _this.style,
+                    minResolution: _this._minResolution,
+                    maxResolution: _this._maxResolution,
+                    zIndex: _this._zIndex
+                });
+                return _this;
+            }
+
+            /**
+             * dummy to be overridden
+             * @param {object} featureCollection - geojson or esrijson object
+             */
+
+            _createClass(LayerBaseVector, [{
+                key: 'addFeatures',
+                value: function addFeatures(featureCollection) {
+                    console.log('Layer vector base addFeatures is a placeholder and does nothing');
+                }
+            }, {
+                key: 'mapMoveBefore',
+                value: function mapMoveBefore(zoom, evtType) {
+                    if (this.minZoom !== undefined) {
+                        if (zoom < this.minZoom) {
+                            return false;
+                        }
+                    }
+
+                    if (this.maxZoom !== undefined) {
+                        if (zoom > this.maxZoom) {
+                            return false;
+                        }
+                    }
+
+                    return this.visible;
+                }
+            }, {
+                key: 'mapMoveMakeGetParams',
+                value: function mapMoveMakeGetParams(extent, zoomLevel) {
+                    this._mapMoveParams = {};
+                    _jquery2.default.extend(this._mapMoveParams, this.params);
+                    _jquery2.default.extend(this._mapMoveParams, this._mapMoveMakeGetParams(this, extent, zoomLevel));
+                }
+            }, {
+                key: 'mapMoveCallback',
+                value: function mapMoveCallback(d) {
+                    if (this.source) {
+                        this._source.clear();
+                    }
+                }
+            }, {
+                key: 'clear',
+                value: function clear() {
+                    if (this._source) {
+                        this._source.clear();
+                    }
+                }
+            }, {
+                key: 'onDemandDelay',
+                get: function get() {
+                    return this._onDemandDelay;
+                }
+            }, {
+                key: 'autoLoad',
+                get: function get() {
+                    return this._autoLoad;
+                }
+            }, {
+                key: 'style',
+                get: function get() {
+                    return this._style;
+                },
+                set: function set(style) {
+                    this._style = style;
+                    this.olLayer.setStyle(this._style);
+                }
+            }, {
+                key: 'mapCrs',
+                get: function get() {
+                    if (this._mapMove) {
+                        return this._mapMove.map.getView().getProjection().getCode();
+                    } else {
+                        return undefined;
+                    }
+                }
+            }, {
+                key: 'mapMove',
+                get: function get() {
+                    return this._mapMove;
+                }
+            }, {
+                key: 'mapMoveParams',
+                get: function get() {
+                    return this._mapMoveParams;
+                }
+            }, {
+                key: 'visible',
+                get: function get() {
+                    return _get(Object.getPrototypeOf(LayerBaseVector.prototype), 'visible', this);
+                },
+                set: function set(visibility) {
+                    _set(Object.getPrototypeOf(LayerBaseVector.prototype), 'visible', visibility, this);
+
+                    if (this._onDemand) {
+                        this.mapMove.triggerLyrLoad(this);
+                    }
+                }
+            }, {
+                key: 'source',
+                get: function get() {
+                    return _get(Object.getPrototypeOf(LayerBaseVector.prototype), 'source', this);
+                }
+            }, {
+                key: 'features',
+                get: function get() {
+                    return this.source.getFeatures();
+                }
+            }]);
+
+            return LayerBaseVector;
+        }(_LayerBase3.default);
+
+        nm.LayerBaseVector = LayerBaseVector;
+        exports.default = LayerBaseVector;
+    });
+});
+
+},{"../jquery":302,"../ol/ol":319,"../olHelpers/mapMove":310,"../util/provide":323,"./LayerBase":303}],305:[function(require,module,exports){
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', '../jquery', './LayerBaseVector', '../util/provide', '../ol/ol'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('../jquery'), require('./LayerBaseVector'), require('../util/provide'), require('../ol/ol'));
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports, global.jquery, global.LayerBaseVector, global.provide, global.ol);
+        global.LayerBaseVectorGeoJson = mod.exports;
+    }
+})(this, function (exports) {
+    'use strict';
+
+    var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+        return typeof obj;
+    } : function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+    };
+
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports', '../jquery', './LayerBaseVector', '../util/provide', '../ol/ol'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports, global.jquery, global.LayerBaseVector, global.provide, global.ol);
+            global.LayerBaseVectorGeoJson = mod.exports;
+        }
+    })(undefined, function (exports, _jquery, _LayerBaseVector2, _provide, _ol) {
+        'use strict';
+
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+
+        var _jquery2 = _interopRequireDefault(_jquery);
+
+        var _LayerBaseVector3 = _interopRequireDefault(_LayerBaseVector2);
+
+        var _provide2 = _interopRequireDefault(_provide);
+
+        var _ol2 = _interopRequireDefault(_ol);
+
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
+        }
+
+        function _classCallCheck(instance, Constructor) {
+            if (!(instance instanceof Constructor)) {
+                throw new TypeError("Cannot call a class as a function");
+            }
+        }
+
+        var _createClass = function () {
+            function defineProperties(target, props) {
+                for (var i = 0; i < props.length; i++) {
+                    var descriptor = props[i];
+                    descriptor.enumerable = descriptor.enumerable || false;
+                    descriptor.configurable = true;
+                    if ("value" in descriptor) descriptor.writable = true;
+                    Object.defineProperty(target, descriptor.key, descriptor);
+                }
+            }
+
+            return function (Constructor, protoProps, staticProps) {
+                if (protoProps) defineProperties(Constructor.prototype, protoProps);
+                if (staticProps) defineProperties(Constructor, staticProps);
+                return Constructor;
+            };
+        }();
+
+        function _possibleConstructorReturn(self, call) {
+            if (!self) {
+                throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+            }
+
+            return call && ((typeof call === 'undefined' ? 'undefined' : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+        }
+
+        var _get = function get(object, property, receiver) {
+            if (object === null) object = Function.prototype;
+            var desc = Object.getOwnPropertyDescriptor(object, property);
+
+            if (desc === undefined) {
+                var parent = Object.getPrototypeOf(object);
+
+                if (parent === null) {
+                    return undefined;
+                } else {
+                    return get(parent, property, receiver);
+                }
+            } else if ("value" in desc) {
+                return desc.value;
+            } else {
+                var getter = desc.get;
+
+                if (getter === undefined) {
+                    return undefined;
+                }
+
+                return getter.call(receiver);
+            }
+        };
+
+        function _inherits(subClass, superClass) {
+            if (typeof superClass !== "function" && superClass !== null) {
+                throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === 'undefined' ? 'undefined' : _typeof(superClass)));
+            }
+
+            subClass.prototype = Object.create(superClass && superClass.prototype, {
+                constructor: {
+                    value: subClass,
+                    enumerable: false,
+                    writable: true,
+                    configurable: true
+                }
+            });
+            if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+        }
+
+        var nm = (0, _provide2.default)('layers');
+
+        /**
+         * The Vector GeoJson Layer
+         * @augments LayerBaseVector
+         */
+
+        var LayerBaseVectorGeoJson = function (_LayerBaseVector) {
+            _inherits(LayerBaseVectorGeoJson, _LayerBaseVector);
+
+            /**
+             * @param {string|undefined|null} url - resource url, set to '' to make blank layer
+             * @param {object} options - config
+             * @param {string} [options.id] - layer id
+             * @param {string} [options.name=Unnamed Layer] - layer name
+             * @param {number} [options.opacity=1] - opacity
+             * @param {boolean} [options.visible=true] - default visible
+             * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+             * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+             * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+             * @param {number} [options.zIndex=0] the z index for the layer
+             * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+             * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+             * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+             * @param {boolean} [options.legendContent] additional content to add to the legend
+             *
+             * @param {boolean} [options.autoLoad=false] if the layer should auto load if not visible
+             * @param {object} [options.style=undefined] the layer style, use openlayers default style if not defined
+             * @param {boolean} [options.onDemand=false] if the layer should be loaded by extent on map move
+             * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
+             *
+             * @param {object} [options.transform={}] SR transform, set as false for no transform
+             * @param {string} options.transform.dataProjection=EPSG:4326 the data CRS
+             * @param {string} options.transform.featureProjection=EPSG:3857 the feature/map CRS
+             * @param {mapMoveMakeGetParams} [options.mapMoveMakeGetParams=function(lyr, extent, zoomLevel){}] function to create additional map move params
+             * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
+             */
+
+            function LayerBaseVectorGeoJson(url, options) {
+                _classCallCheck(this, LayerBaseVectorGeoJson);
+
+                url = typeof url == 'string' ? url : '';
+
+                var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LayerBaseVectorGeoJson).call(this, url, options));
+
+                _this._geoJsonFormat = new _ol2.default.format.GeoJSON();
+
+                _this._transform = options.transform || {};
+                _this._transform.dataProjection = _this._transform.dataProjection || "EPSG:4326";
+                _this._transform.featureProjection = _this._transform.featureProjection || "EPSG:3857";
+
+                if (_this.autoLoad || _this.visible) {
+                    _this._load();
+                }
+                return _this;
+            }
+
+            /**
+             * add feature collection
+             * @param {object} featureCollection - as geojson object
+             */
+
+            _createClass(LayerBaseVectorGeoJson, [{
+                key: 'addFeatures',
+                value: function addFeatures(featureCollection) {
+                    if (this._transform.dataProjection == 'EPSG:3857' && this._transform.featureProjection == 'EPSG:3857') {
+                        this._source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection));
+                    } else {
+                        this._source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection, this._transform));
+                    }
+                }
+            }, {
+                key: '_load',
+                value: function _load() {
+                    var _this2 = this;
+
+                    if (_get(Object.getPrototypeOf(LayerBaseVectorGeoJson.prototype), '_load', this).call(this)) {
+                        return true;
+                    }
+
+                    _jquery2.default.get(this._url, this._params, function (d) {
+                        _this2.addFeatures(d);
+                        _this2.loadCallback(_this2);
+                    }, 'json').fail(function () {
+                        this._loaded = false;
+                    });
+
+                    return false;
+                }
+            }, {
+                key: 'mapMoveCallback',
+                value: function mapMoveCallback(d) {
+                    _get(Object.getPrototypeOf(LayerBaseVectorGeoJson.prototype), 'mapMoveCallback', this).call(this, d);
+                    this._source.addFeatures(this._geoJsonFormat.readFeatures(d, this._transform));
+                }
+            }]);
+
+            return LayerBaseVectorGeoJson;
+        }(_LayerBaseVector3.default);
+
+        nm.LayerBaseVectorGeoJson = LayerBaseVectorGeoJson;
+        exports.default = LayerBaseVectorGeoJson;
+    });
+});
+
+},{"../jquery":302,"../ol/ol":319,"../util/provide":323,"./LayerBaseVector":304}],306:[function(require,module,exports){
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', '../jquery', './LayerBase', '../olHelpers/esriToOlStyle', '../olHelpers/mapPopup', '../util/provide', '../ol/ol'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('../jquery'), require('./LayerBase'), require('../olHelpers/esriToOlStyle'), require('../olHelpers/mapPopup'), require('../util/provide'), require('../ol/ol'));
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports, global.jquery, global.LayerBase, global.esriToOlStyle, global.mapPopup, global.provide, global.ol);
+        global.LayerEsriMapServer = mod.exports;
+    }
+})(this, function (exports) {
+    'use strict';
+
+    var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+        return typeof obj;
+    } : function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+    };
+
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports', '../jquery', './LayerBase', '../olHelpers/esriToOlStyle', '../olHelpers/mapPopup', '../util/provide', '../ol/ol'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports, global.jquery, global.LayerBase, global.esriToOlStyle, global.mapPopup, global.provide, global.ol);
+            global.LayerEsriMapServer = mod.exports;
+        }
+    })(undefined, function (exports, _jquery, _LayerBase2, _esriToOlStyle, _mapPopup, _provide, _ol) {
+        'use strict';
+
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+
+        var _jquery2 = _interopRequireDefault(_jquery);
+
+        var _LayerBase3 = _interopRequireDefault(_LayerBase2);
+
+        var esriToOl = _interopRequireWildcard(_esriToOlStyle);
+
+        var _mapPopup2 = _interopRequireDefault(_mapPopup);
+
+        var _provide2 = _interopRequireDefault(_provide);
+
+        var _ol2 = _interopRequireDefault(_ol);
+
+        function _interopRequireWildcard(obj) {
+            if (obj && obj.__esModule) {
+                return obj;
+            } else {
+                var newObj = {};
+
+                if (obj != null) {
+                    for (var key in obj) {
+                        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+                    }
+                }
+
+                newObj.default = obj;
+                return newObj;
+            }
+        }
+
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
+        }
+
+        function _classCallCheck(instance, Constructor) {
+            if (!(instance instanceof Constructor)) {
+                throw new TypeError("Cannot call a class as a function");
+            }
+        }
+
+        var _createClass = function () {
+            function defineProperties(target, props) {
+                for (var i = 0; i < props.length; i++) {
+                    var descriptor = props[i];
+                    descriptor.enumerable = descriptor.enumerable || false;
+                    descriptor.configurable = true;
+                    if ("value" in descriptor) descriptor.writable = true;
+                    Object.defineProperty(target, descriptor.key, descriptor);
+                }
+            }
+
+            return function (Constructor, protoProps, staticProps) {
+                if (protoProps) defineProperties(Constructor.prototype, protoProps);
+                if (staticProps) defineProperties(Constructor, staticProps);
+                return Constructor;
+            };
+        }();
+
+        function _possibleConstructorReturn(self, call) {
+            if (!self) {
+                throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+            }
+
+            return call && ((typeof call === 'undefined' ? 'undefined' : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+        }
+
+        var _get = function get(object, property, receiver) {
+            if (object === null) object = Function.prototype;
+            var desc = Object.getOwnPropertyDescriptor(object, property);
+
+            if (desc === undefined) {
+                var parent = Object.getPrototypeOf(object);
+
+                if (parent === null) {
+                    return undefined;
+                } else {
+                    return get(parent, property, receiver);
+                }
+            } else if ("value" in desc) {
+                return desc.value;
+            } else {
+                var getter = desc.get;
+
+                if (getter === undefined) {
+                    return undefined;
+                }
+
+                return getter.call(receiver);
+            }
+        };
+
+        function _inherits(subClass, superClass) {
+            if (typeof superClass !== "function" && superClass !== null) {
+                throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === 'undefined' ? 'undefined' : _typeof(superClass)));
+            }
+
+            subClass.prototype = Object.create(superClass && superClass.prototype, {
+                constructor: {
+                    value: subClass,
+                    enumerable: false,
+                    writable: true,
+                    configurable: true
+                }
+            });
+            if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+        }
+
+        var nm = (0, _provide2.default)('layers');
+
+        /**
+         * esri mapserver layer
+         * @augments LayerBase
+         */
+
+        var LayerEsriMapServer = function (_LayerBase) {
+            _inherits(LayerEsriMapServer, _LayerBase);
+
+            /**
+             * The base layer for all others
+             * @param {string} url - resource url
+             * @param {object} options - config
+             * @param {string} [options.id] - layer id
+             * @param {string} [options.name=Unnamed Layer] - layer name
+             * @param {number} [options.opacity=1] - opacity
+             * @param {boolean} [options.visible=true] - default visible
+             * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+             * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+             * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+             * @param {number} [options.zIndex=0] the z index for the layer
+             * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+             * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+             * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+             * @param {boolean} [options.legendContent] additional content to add to the legend
+             * @param {boolean} [options.addPopup=false] if a popup should be added
+             */
+
+            function LayerEsriMapServer(url, options) {
+                _classCallCheck(this, LayerEsriMapServer);
+
+                var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(LayerEsriMapServer).call(this, url, options));
+
+                _this2._source = new _ol2.default.source.TileArcGISRest({ url: _this2.url == '' ? undefined : _this2.url });
+
+                _this2.olLayer = new _ol2.default.layer.Tile({
+                    source: _this2._source,
+                    visible: _this2.visible,
+                    opacity: _this2.opacity,
+                    minResolution: _this2._minResolution,
+                    maxResolution: _this2._maxResolution,
+                    zIndex: _this2._zIndex
+                });
+
+                options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
+
+                _this2._esriFormat = new _ol2.default.format.EsriJSON();
+                _this2._popupRequest = null;
+
+                _this2.addLegendContent();
+
+                if (options.addPopup) {
+                    _mapPopup2.default.addMapServicePopup(_this2);
+                }
+                return _this2;
+            }
+
+            /**
+             * add additional content to the legend
+             * @param {string} [additionalContent=''] additional content for legend
+             */
+
+            _createClass(LayerEsriMapServer, [{
+                key: 'addLegendContent',
+                value: function addLegendContent(additionalContent) {
+                    var urlCopy = this.url;
+
+                    if (urlCopy[urlCopy.length - 1] !== '/') {
+                        urlCopy += '/';
+                    }
+
+                    urlCopy += 'legend?f=pjson&callback=?';
+
+                    var _this = this;
+                    var superAddLegend = _get(Object.getPrototypeOf(LayerEsriMapServer.prototype), 'addLegendContent', this);
+
+                    _jquery2.default.get(urlCopy, {}, function (d) {
+                        var newHtml = esriToOl.makeMapServiceLegend(d);
+                        superAddLegend.call(_this, newHtml);
+                    }, 'json');
+                }
+            }, {
+                key: 'getPopupInfo',
+                value: function getPopupInfo(queryParams) {
+                    if (!this.visible) {
+                        return;
+                    }
+
+                    var urlCopy = this.url;
+
+                    if (urlCopy[urlCopy.length - 1] != '/') {
+                        urlCopy += '/';
+                    }
+
+                    urlCopy += 'identify?callback=?';
+
+                    var _this = this;
+
+                    if (this._popupRequest != null) {
+                        this._popupRequest.abort();
+                    }
+
+                    this._popupRequest = _jquery2.default.get(urlCopy, queryParams, function (d) {
+                        var _iteratorNormalCompletion = true;
+                        var _didIteratorError = false;
+                        var _iteratorError = undefined;
+
+                        try {
+                            for (var _iterator = d['results'][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                                var r = _step.value;
+
+                                var popupHtml = '<table class="esri-popup-table">';
+
+                                for (var a in r['attributes']) {
+                                    if (r['attributes'].hasOwnProperty(a)) {
+                                        var attrVal = r['attributes'][a];
+
+                                        if (attrVal == null || attrVal.toString().toLowerCase() == 'null') {
+                                            continue;
+                                        }
+
+                                        var attr = a;
+                                        if (attr.length > 14) {
+                                            attr = attr.slice(0, 11) + '...';
+                                        }
+
+                                        popupHtml += '<tr><td>' + attr + '</td><td>' + attrVal + '</td></tr>';
+                                    }
+                                }
+
+                                popupHtml += '</table>';
+
+                                _mapPopup2.default.addMapServicePopupContent(_this._esriFormat.readFeature(r), _this, popupHtml, r['layerName']);
+                            }
+                        } catch (err) {
+                            _didIteratorError = true;
+                            _iteratorError = err;
+                        } finally {
+                            try {
+                                if (!_iteratorNormalCompletion && _iterator.return) {
+                                    _iterator.return();
+                                }
+                            } finally {
+                                if (_didIteratorError) {
+                                    throw _iteratorError;
+                                }
+                            }
+                        }
+                    }, 'json').always(function () {
+                        _this._popupRequest = null;
+                    });
+                }
+            }, {
+                key: '_load',
+                value: function _load() {}
+            }, {
+                key: 'source',
+                get: function get() {
+                    return _get(Object.getPrototypeOf(LayerEsriMapServer.prototype), 'source', this);
+                }
+            }]);
+
+            return LayerEsriMapServer;
+        }(_LayerBase3.default);
+
+        nm.LayerEsriMapServer = LayerEsriMapServer;
+        exports.default = LayerEsriMapServer;
+    });
+});
+
+},{"../jquery":302,"../ol/ol":319,"../olHelpers/esriToOlStyle":308,"../olHelpers/mapPopup":312,"../util/provide":323,"./LayerBase":303}],307:[function(require,module,exports){
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', '../jquery', './LayerBaseVectorGeoJson', '../olHelpers/mapMove', '../olHelpers/mapPopup', '../util/provide', '../ol/ol'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('../jquery'), require('./LayerBaseVectorGeoJson'), require('../olHelpers/mapMove'), require('../olHelpers/mapPopup'), require('../util/provide'), require('../ol/ol'));
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports, global.jquery, global.LayerBaseVectorGeoJson, global.mapMove, global.mapPopup, global.provide, global.ol);
+        global.LayerItsInventory = mod.exports;
+    }
+})(this, function (exports) {
+    'use strict';
+
+    var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+        return typeof obj;
+    } : function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+    };
+
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports', '../jquery', './LayerBaseVectorGeoJson', '../olHelpers/mapMove', '../olHelpers/mapPopup', '../util/provide', '../ol/ol'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports, global.jquery, global.LayerBaseVectorGeoJson, global.mapMove, global.mapPopup, global.provide, global.ol);
+            global.LayerItsInventory = mod.exports;
+        }
+    })(undefined, function (exports, _jquery, _LayerBaseVectorGeoJson, _mapMove, _mapPopup, _provide, _ol) {
+        'use strict';
+
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+
+        var _jquery2 = _interopRequireDefault(_jquery);
+
+        var _LayerBaseVectorGeoJson2 = _interopRequireDefault(_LayerBaseVectorGeoJson);
+
+        var _mapMove2 = _interopRequireDefault(_mapMove);
+
+        var _mapPopup2 = _interopRequireDefault(_mapPopup);
+
+        var _provide2 = _interopRequireDefault(_provide);
+
+        var _ol2 = _interopRequireDefault(_ol);
+
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
+        }
+
+        function _classCallCheck(instance, Constructor) {
+            if (!(instance instanceof Constructor)) {
+                throw new TypeError("Cannot call a class as a function");
+            }
+        }
+
+        var _createClass = function () {
+            function defineProperties(target, props) {
+                for (var i = 0; i < props.length; i++) {
+                    var descriptor = props[i];
+                    descriptor.enumerable = descriptor.enumerable || false;
+                    descriptor.configurable = true;
+                    if ("value" in descriptor) descriptor.writable = true;
+                    Object.defineProperty(target, descriptor.key, descriptor);
+                }
+            }
+
+            return function (Constructor, protoProps, staticProps) {
+                if (protoProps) defineProperties(Constructor.prototype, protoProps);
+                if (staticProps) defineProperties(Constructor, staticProps);
+                return Constructor;
+            };
+        }();
+
+        function _possibleConstructorReturn(self, call) {
+            if (!self) {
+                throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+            }
+
+            return call && ((typeof call === 'undefined' ? 'undefined' : _typeof2(call)) === "object" || typeof call === "function") ? call : self;
+        }
+
+        var _get = function get(object, property, receiver) {
+            if (object === null) object = Function.prototype;
+            var desc = Object.getOwnPropertyDescriptor(object, property);
+
+            if (desc === undefined) {
+                var parent = Object.getPrototypeOf(object);
+
+                if (parent === null) {
+                    return undefined;
+                } else {
+                    return get(parent, property, receiver);
+                }
+            } else if ("value" in desc) {
+                return desc.value;
+            } else {
+                var getter = desc.get;
+
+                if (getter === undefined) {
+                    return undefined;
+                }
+
+                return getter.call(receiver);
+            }
+        };
+
+        function _inherits(subClass, superClass) {
+            if (typeof superClass !== "function" && superClass !== null) {
+                throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === 'undefined' ? 'undefined' : _typeof2(superClass)));
+            }
+
+            subClass.prototype = Object.create(superClass && superClass.prototype, {
+                constructor: {
+                    value: subClass,
+                    enumerable: false,
+                    writable: true,
+                    configurable: true
+                }
+            });
+            if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+        }
+
+        var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
+            return typeof obj === 'undefined' ? 'undefined' : _typeof2(obj);
+        } : function (obj) {
+            return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj === 'undefined' ? 'undefined' : _typeof2(obj);
+        };
+
+        var nm = (0, _provide2.default)('layers');
+
+        function checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
+            "use strict";
+
+            //make sure one and only one configuration is defined;
+
+            var configCount = 0;
+            if (typeof itsIcon == 'string') {
+                configCount++;
+            }
+
+            if ((typeof itsLineStyle === 'undefined' ? 'undefined' : _typeof(itsLineStyle)) == 'object') {
+                itsLineStyle.width = typeof itsLineStyle.width == 'number' ? itsLineStyle.width : 5;
+                itsLineStyle.color = typeof itsLineStyle.color == 'string' ? itsLineStyle.color : 'red';
+                configCount++;
+            }
+
+            if ((typeof itsIconConfig === 'undefined' ? 'undefined' : _typeof(itsIconConfig)) == 'object') {
+                itsIconConfig.defaultName = itsIconConfig.defaultName || 'Other';
+
+                if (typeof itsIconConfig.iconArray == 'undefined') {
+                    itsIconConfig.iconArray = [];
+                }
+
+                configCount++;
+            }
+
+            if ((typeof itsLineConfig === 'undefined' ? 'undefined' : _typeof(itsLineConfig)) == 'object') {
+                itsLineConfig.defaultName = itsLineConfig.defaultName || 'Other';
+                itsLineConfig.defaultWidth = itsLineConfig.defaultWidth || 5;
+                itsLineConfig.defaultColor = itsLineConfig.defaultColor || 'red';
+
+                if (typeof itsLineConfig.lineArray == 'undefined') {
+                    itsLineConfig.lineArray = [];
+                }
+
+                // set the width if not defined
+                for (var i = 0; i < itsLineConfig.lineArray.length; i++) {
+                    if (itsLineConfig.lineArray[i].length == 3) {
+                        itsLineConfig.lineArray[i].push(5);
+                    }
+                }
+
+                configCount++;
+            }
+
+            if (configCount > 1) {
+                throw 'Only one style config can be defined';
+            }
         }
 
         /**
          *
-         * @param {LayerBase} newLayer the layer to be added
-         * @param {Array} parents array
+         * @param {string} [itsIcon=undefined] the ITS device type icon image see http://transportal.cee.wisc.edu/its/inventory/icons/
+         *
+         * @param {object} [itsLineStyle=undefined] A single line style
+         * @param {string} itsLineStyle.color the line color as rgb or hex
+         * @param {number} [itsLineStyle.width=5] the line width
+         *
+         * @param {object} [itsIconConfig=undefined] The icon subtype configuration
+         * @param {string} itsIconConfig.prop The property used to define icon attribute symbolization
+         * @param {string} itsIconConfig.defaultName The default name to be used if no other match is found
+         * @param {string} itsIconConfig.defaultIcon The default icon to be used for no other matches
+         * @param {object} [itsIconConfig.iconArray=[]] an array, items with format [property, name, img]
+         *
+         * @param {object} [itsLineConfig=undefined] The property used to define icon attribute symbolization
+         * @param {string} itsLineConfig.prop The property used to define icon attribute symbolization
+         * @param {string} [itsLineConfig.defaultName=Other] The default name to be used if no other match is found
+         * @param {string} [itsLineConfig.defaultColor=red] The default line color to be used for no other matches
+         * @param {number} [itsLineConfig.defaultWidth=5] The default line width to be used for no other matches
+         * @param {object} [itsLineConfig.lineArray=[]] an array, items with format [property, name, color, optional width]
+         * @returns {*} undefined, style, or style function
+         */
+        function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
+            "use strict";
+
+            checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig);
+
+            var _iconUrlRoot = 'http://transportal.cee.wisc.edu/its/inventory/icons/';
+
+            if (itsIcon) {
+                return new _ol2.default.style.Style({
+                    image: new _ol2.default.style.Icon({ src: _iconUrlRoot + itsIcon })
+                });
+            } else if (itsLineStyle) {
+                return new _ol2.default.style.Style({
+                    stroke: new _ol2.default.style.Stroke({
+                        color: itsLineStyle.color,
+                        width: itsLineStyle.width
+                    })
+                });
+            } else if (itsIconConfig) {
+                return function (feature) {
+                    var symbolProp = feature.getProperties()[itsIconConfig.prop];
+                    var iconUrl = _iconUrlRoot + itsIconConfig.defaultIcon;
+
+                    for (var i = 0; i < itsIconConfig.iconArray.length; i++) {
+                        var thisProp = itsIconConfig.iconArray[i];
+
+                        if (symbolProp.trim().toLocaleLowerCase() == thisProp[0].trim().toLocaleLowerCase()) {
+                            iconUrl = _iconUrlRoot + thisProp[2];
+                            break;
+                        }
+                    }
+
+                    return [new _ol2.default.style.Style({
+                        image: new _ol2.default.style.Icon({ src: iconUrl })
+                    })];
+                };
+            } else if (itsLineConfig) {
+                return function (feature) {
+                    var symbolProp = feature.getProperties()[itsLineConfig.prop];
+                    var colr = itsLineConfig.defaultColor || 'red';
+                    var width = itsLineConfig.defaultWidth || 5;
+
+                    for (var i = 0; i < itsLineConfig.lineArray.length; i++) {
+                        var thisProp = itsLineConfig.lineArray[i];
+
+                        if (symbolProp.trim().toLocaleLowerCase() == thisProp[0].trim().toLocaleLowerCase()) {
+                            colr = thisProp[2];
+                            width = thisProp[3];
+                            break;
+                        }
+                    }
+
+                    return [new _ol2.default.style.Style({
+                        stroke: new _ol2.default.style.Stroke({
+                            color: colr,
+                            width: width
+                        })
+                    })];
+                };
+            } else {
+                return undefined;
+            }
+        }
+
+        /**
+         *
+         * @param {string} [itsIcon=undefined] the ITS device type icon image see http://transportal.cee.wisc.edu/its/inventory/icons/
+         *
+         * @param {object} [itsLineStyle=undefined] A single line style
+         * @param {string} itsLineStyle.color the line color as rgb or hex
+         * @param {number} [itsLineStyle.width=5] the line width
+         *
+         * @param {object} [itsIconConfig=undefined] The icon subtype configuration
+         * @param {string} itsIconConfig.prop The property used to define icon attribute symbolization
+         * @param {string} itsIconConfig.defaultName The default name to be used if no other match is found
+         * @param {string} itsIconConfig.defaultIcon The default icon to be used for no other matches
+         * @param {object} [itsIconConfig.iconArray=[]] an array, items with format [property, name, img]
+         *
+         * @param {object} [itsLineConfig=undefined] The property used to define icon attribute symbolization
+         * @param {string} itsLineConfig.prop The property used to define icon attribute symbolization
+         * @param {string} [itsLineConfig.defaultName=Other] The default name to be used if no other match is found
+         * @param {string} [itsLineConfig.defaultColor=red] The default line color to be used for no other matches
+         * @param {number} [itsLineConfig.defaultWidth=5] The default line width to be used for no other matches
+         * @param {object} [itsLineConfig.lineArray=[]] an array, items with format [property, name, color, optional width]
+         * @returns {string} html to be added to the legend
+         */
+        function defineLegend(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
+            "use strict";
+
+            var iconHeight = 17;
+
+            checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig);
+
+            var _iconUrlRoot = 'http://transportal.cee.wisc.edu/its/inventory/icons/';
+
+            if (itsIcon) {
+                return '<img src="' + (_iconUrlRoot + itsIcon) + '" class="legend-layer-icon" height="' + iconHeight + '">';
+            } else if (itsLineStyle) {
+                return '<hr style="height: ' + itsLineStyle.width + 'px; background-color: ' + itsLineStyle.color + '">';
+            } else if (itsIconConfig) {
+                var outHtml = '';
+                outHtml += '<ul>';
+
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = itsIconConfig.iconArray[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var a = _step.value;
+
+                        outHtml += '<li><span class="legend-layer-subitem">' + a[1] + '</span><img src="' + (_iconUrlRoot + a[2]) + '" class="legend-layer-icon" height="' + iconHeight + '">';
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+
+                outHtml += '<li><span class="legend-layer-subitem">' + itsIconConfig.defaultName + '</span>' + ('<img src="' + (_iconUrlRoot + itsIconConfig.defaultIcon) + '" class="legend-layer-icon" height="' + iconHeight + '"></li>');
+                outHtml += '</ul>';
+
+                return outHtml;
+            } else if (itsLineConfig) {
+                var _outHtml = '';
+                _outHtml += '<ul>';
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
+
+                try {
+                    for (var _iterator2 = itsLineConfig.lineArray[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var ls = _step2.value;
+
+                        _outHtml += '<li><span class="legend-layer-subitem">' + ls[1] + '</span>' + ('<hr style="height: ' + ls[3] + 'px; background-color: ' + ls[2] + '">');
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
+                        }
+                    }
+                }
+
+                _outHtml += '<li><span class="legend-layer-subitem">' + itsLineConfig.defaultName + '</span>' + ('<hr style="height: ' + itsLineConfig.defaultWidth + 'px; background-color: ' + itsLineConfig.defaultColor + '"></li>');
+                _outHtml += '</ul>';
+
+                return _outHtml;
+            } else {
+                return '';
+            }
+        }
+
+        /**
+         * Its Layer class
+         * @augments LayerBaseVectorGeoJson
          */
 
-    }, {
-        key: 'addLegendLayer',
-        value: function addLegendLayer(newLayer, parents) {
-            var parent = void 0;
-            if (parents.length > 0) {
-                parent = parents[parents.length - 1];
-            } else {
-                parent = 'root';
-            }
-
-            this.allLayerLookup[newLayer.id] = newLayer;
-            this.allLayerArray.push(newLayer);
+        var LayerItsInventory = function (_LayerBaseVectorGeoJs) {
+            _inherits(LayerItsInventory, _LayerBaseVectorGeoJs);
 
             /**
-             * @type {LayerGroup}
+             * ITS device layer, types available at http://transportal.cee.wisc.edu/its/inventory/
+             * @param {object} options - config
+             * @param {string} [options.id] - layer id
+             * @param {string} [options.name=Unnamed Layer] - layer name
+             * @param {number} [options.opacity=1] - opacity
+             * @param {boolean} [options.visible=true] - default visible
+             * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+             * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+             * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+             * @param {number} [options.zIndex=0] the z index for the layer
+             * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+             * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+             * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+             * @param {boolean} [options.legendContent] additional content to add to the legend
+             *
+             * @param {boolean} [options.autoLoad=false] if the layer should auto load if not visible
+             * @param {object|*} [options.style=undefined] the layer style, use openlayers default style if not defined
+             * @param {boolean} [options.onDemand=false] if the layer should be loaded by extent on map move
+             * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
+             * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
+             *
+             * @param {string} options.itsType the ITS device type, use the url flag at http://transportal.cee.wisc.edu/its/inventory/
+             * @param {boolean} [options.addPopup=true] if the popup should be added automatically
+             *
+             * @param {string} [options.itsIcon=undefined] the ITS device type icon image see http://transportal.cee.wisc.edu/its/inventory/icons/
+             *
+             * @param {object} [options.itsLineStyle=undefined] A single line style
+             * @param {string} options.itsLineStyle.color the line color as rgb or hex
+             * @param {number} [options.itsLineStyle.width=5] the line width
+             *
+             * @param {object} [options.itsIconConfig=undefined] The icon subtype configuration
+             * @param {string} options.itsIconConfig.prop The property used to define icon attribute symbolization
+             * @param {string} options.itsIconConfig.defaultName The default name to be used if no other match is found
+             * @param {string} options.itsIconConfig.defaultIcon The default icon to be used for no other matches
+             * @param {object} [options.itsIconConfig.iconArray=[]] an array, items with format [property, name, img]
+             *
+             * @param {object} [options.itsLineConfig=undefined] The property used to define icon attribute symbolization
+             * @param {string} options.itsLineConfig.prop The property used to define icon attribute symbolization
+             * @param {string} [options.itsLineConfig.defaultName=Other] The default name to be used if no other match is found
+             * @param {string} [options.itsLineConfig.defaultColor=red] The default line color to be used for no other matches
+             * @param {number} [options.itsLineConfig.defaultWidth] The default line width to be used for no other matches
+             * @param {object} [options.itsLineConfig.lineArray=[]] an array, items with format [property, name, color, optional width = 5]
              */
-            var parentGroup = this.allGroupLookup[parent];
 
-            parentGroup.groupLayers.push(newLayer);
-            parentGroup.groupLayersLookup[newLayer.id] = newLayer;
-            if (parentGroup.itemIdArray.indexOf(newLayer.id) > 0) {
-                console.log(newLayer.id);
-                throw 'layer and group ids must be unique';
+            function LayerItsInventory(options) {
+                _classCallCheck(this, LayerItsInventory);
+
+                if (typeof options.itsType !== 'string') {
+                    throw 'its type must be defined';
+                }
+
+                var addToLegend = '';
+
+                // define a style with the helper function if it is not explicitly defined
+                if (typeof options.style == 'undefined') {
+                    options.style = defineStyle(options.itsIcon, options.itsLineStyle, options.itsIconConfig, options.itsLineConfig);
+                    addToLegend = defineLegend(options.itsIcon, options.itsLineStyle, options.itsIconConfig, options.itsLineConfig);
+                }
+
+                options.params = _typeof(options.params) == 'object' ? options.params : {};
+                _jquery2.default.extend(options.params, { format: 'JSON', resource: options.itsType });
+
+                var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LayerItsInventory).call(this, 'http://transportal.cee.wisc.edu/its/inventory/', options));
+
+                //add any additional content to the legend
+                _this.addLegendContent(addToLegend);
+
+                options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : true;
+
+                if (options.addPopup) {
+                    _mapPopup2.default.addVectorPopup(_this, function (props) {
+                        return '<iframe src="http://transportal.cee.wisc.edu/its/inventory/?feature=' + props['featureGuid'] + '" ' + 'height="250" width="350"></iframe>';
+                    });
+                }
+                return _this;
             }
-            parentGroup.itemIdArray.push(newLayer.id);
 
-            this.layerParentLookup[newLayer.id] = parentGroup;
+            /**
+             * callback to generate the parameters passed in the get request
+             * @callback makeGetParams
+             * @param {object} extent - extent object
+             * @param {number} extent.minX - minX
+             * @param {number} extent.minY - minY
+             * @param {number} extent.maxX - maxX
+             * @param {number} extent.maxY - maxY
+             * @param {number} zoomLevel - zoom level
+             */
+
+            _createClass(LayerItsInventory, [{
+                key: 'mapMoveMakeGetParams',
+                value: function mapMoveMakeGetParams(extent, zoomLevel) {
+                    _get(Object.getPrototypeOf(LayerItsInventory.prototype), 'mapMoveMakeGetParams', this).call(this, extent, zoomLevel);
+                    var lowerLeft = new _ol2.default.geom.Point([extent.minX, extent.minY]);
+                    lowerLeft.transform(this.mapCrs, "EPSG:4326");
+                    var lowerLeftCoordinates = lowerLeft.getCoordinates();
+                    var upperRight = new _ol2.default.geom.Point([extent.maxX, extent.maxY]);
+                    upperRight.transform(this.mapCrs, "EPSG:4326");
+                    var upperRightCoordinates = upperRight.getCoordinates();
+
+                    _jquery2.default.extend(this.mapMoveParams, {
+                        L: lowerLeftCoordinates[0],
+                        R: upperRightCoordinates[0],
+                        B: lowerLeftCoordinates[1],
+                        T: upperRightCoordinates[1]
+                    });
+                }
+            }]);
+
+            return LayerItsInventory;
+        }(_LayerBaseVectorGeoJson2.default);
+
+        nm.LayerItsInventory = LayerItsInventory;
+        exports.default = LayerItsInventory;
+    });
+});
+
+},{"../jquery":302,"../ol/ol":319,"../olHelpers/mapMove":310,"../olHelpers/mapPopup":312,"../util/provide":323,"./LayerBaseVectorGeoJson":305}],308:[function(require,module,exports){
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', '../util/provide', '../ol/ol'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('../util/provide'), require('../ol/ol'));
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports, global.provide, global.ol);
+        global.esriToOlStyle = mod.exports;
+    }
+})(this, function (exports) {
+    'use strict';
+
+    var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+        return typeof obj;
+    } : function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+    };
+
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports', '../util/provide', '../ol/ol'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports, global.provide, global.ol);
+            global.esriToOlStyle = mod.exports;
         }
-    }, {
-        key: 'getLegendHtml',
-        value: function getLegendHtml(legendId, options) {
+    })(undefined, function (exports, _provide, _ol) {
+        'use strict';
 
-            var legendHtml = '<ul id="' + legendId + '" class="legend-container">';
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+        exports.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
+        exports.makeMapServiceLegend = makeMapServiceLegend;
 
-            legendHtml += '<li>' + options.legendTitle + '<input type="checkbox" checked id="suppress-by-extent-' + legendId + '" class="suppress-by-extent">' + ('<label title="Suppress layers not visible at this zoom level" for="suppress-by-extent-' + legendId + '">') + '<span></span>' + '</label></li>';
+        var _provide2 = _interopRequireDefault(_provide);
 
-            legendHtml += this._buildLegend(this.itemIdArray, this, options.layerDivClasses) + '</ul>';
+        var _ol2 = _interopRequireDefault(_ol);
+
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
+        }
+
+        function _possibleConstructorReturn(self, call) {
+            if (!self) {
+                throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+            }
+
+            return call && ((typeof call === 'undefined' ? 'undefined' : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+        }
+
+        function _inherits(subClass, superClass) {
+            if (typeof superClass !== "function" && superClass !== null) {
+                throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === 'undefined' ? 'undefined' : _typeof(superClass)));
+            }
+
+            subClass.prototype = Object.create(superClass && superClass.prototype, {
+                constructor: {
+                    value: subClass,
+                    enumerable: false,
+                    writable: true,
+                    configurable: true
+                }
+            });
+            if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+        }
+
+        function _classCallCheck(instance, Constructor) {
+            if (!(instance instanceof Constructor)) {
+                throw new TypeError("Cannot call a class as a function");
+            }
+        }
+
+        var nm = (0, _provide2.default)('olHelpers.esriToOlStyle');
+
+        /**
+         * This callback is displayed as part of the Requester class.
+         * @callback styleFunc
+         * @param {ol.Feature} feat - openlayers feature
+         * @param {number} resolution - map resolution
+         */
+
+        /**
+         *
+         * @param {Array<number>} colorArray - input color array
+         * @param {number} opacity - the opacity 0 to 1
+         * @returns {string} rgba string
+         * @private
+         */
+        function _colorArrayToRgba(colorArray, opacity) {
+            "use strict";
+
+            return 'rgba(' + colorArray[0] + ',' + colorArray[1] + ',' + colorArray[2] + ',' + opacity + ')';
+        }
+
+        /**
+         * escape html charcters
+         * @param {string} str - input string
+         * @returns {string} escaped string
+         */
+        function htmlEscape(str) {
+            return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        nm.htmlEscape = htmlEscape;
+
+        var CommonSymbol =
+
+        /**
+         * 
+         * @param symbolObj
+         * @param {number} opacity
+         */
+        function CommonSymbol(symbolObj, opacity) {
+            _classCallCheck(this, CommonSymbol);
+
+            this.symbolObj = symbolObj;
+            this.opacity = opacity;
+            this.olStyle = undefined;
+            this.legendHtml = '';
+        };
+
+        var PointSymbol = function (_CommonSymbol) {
+            _inherits(PointSymbol, _CommonSymbol);
+
+            function PointSymbol(symbolObj, opacity) {
+                _classCallCheck(this, PointSymbol);
+
+                var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(PointSymbol).call(this, symbolObj, opacity));
+
+                switch (_this2.symbolObj['type']) {
+                    case 'esriSMS':
+                        var innerColor = _colorArrayToRgba(_this2.symbolObj.color, _this2.opacity);
+                        var outerColor = _colorArrayToRgba(_this2.symbolObj.outline.color, _this2.opacity);
+                        var outlineWidth = _this2.symbolObj.outline.width;
+                        var radius = _this2.symbolObj.size;
+
+                        _this2.olStyle = new _ol2.default.style.Style({
+                            image: new _ol2.default.style.Circle({
+                                radius: radius,
+                                fill: new _ol2.default.style.Fill({
+                                    color: innerColor
+                                }),
+                                stroke: new _ol2.default.style.Stroke({ color: outerColor, width: outlineWidth })
+                            })
+                        });
+                        _this2.legendHtml = '<span class="legend-layer-icon" style="color: ' + innerColor + '">&#9679;</span>';
+                        break;
+                    case 'esriPMS':
+                        _this2.olStyle = new _ol2.default.style.Style({
+                            image: new _ol2.default.style.Icon({ src: 'data:image/png;base64,' + _this2.symbolObj['imageData'] })
+                        });
+                        _this2.legendHtml = '<img class="legend-layer-icon" height="17" src="data:image/png;base64,' + _this2.symbolObj['imageData'] + '">';
+                        break;
+                    default:
+                        console.log(_this2.symbolObj);
+                        alert('Point symbol does not handle symbol type: ' + _this2.symbolObj['type']);
+                }
+                return _this2;
+            }
+
+            return PointSymbol;
+        }(CommonSymbol);
+
+        var LineSymbol = function (_CommonSymbol2) {
+            _inherits(LineSymbol, _CommonSymbol2);
+
+            function LineSymbol(symbolObj, opacity) {
+                _classCallCheck(this, LineSymbol);
+
+                var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(LineSymbol).call(this, symbolObj, opacity));
+
+                switch (_this3.symbolObj['type']) {
+                    case 'esriSLS':
+                        var innerColor = _colorArrayToRgba(_this3.symbolObj.color, _this3.opacity);
+                        var lineWidth = _this3.symbolObj.width;
+
+                        _this3.olStyle = new _ol2.default.style.Style({
+                            stroke: new _ol2.default.style.Stroke({
+                                color: innerColor,
+                                //lineDash: [4],
+                                width: lineWidth
+                            })
+                        });
+
+                        _this3.legendHtml = '<span class="legend-layer-icon" ';
+                        _this3.legendHtml += 'style="';
+                        _this3.legendHtml += 'background-color: ' + innerColor + ';';
+                        _this3.legendHtml += 'width: 40px;';
+                        _this3.legendHtml += 'height: 4px;';
+                        _this3.legendHtml += 'position: relative;';
+                        _this3.legendHtml += 'display: inline-block;';
+                        _this3.legendHtml += 'top: -1px;';
+                        _this3.legendHtml += '"></span>';
+                        break;
+                    default:
+                        console.log(_this3.symbolObj);
+                        alert('Line symbol does not handle symbol type: ' + _this3.symbolObj['type']);
+                }
+                return _this3;
+            }
+
+            return LineSymbol;
+        }(CommonSymbol);
+
+        var PolygonSymbol = function (_CommonSymbol3) {
+            _inherits(PolygonSymbol, _CommonSymbol3);
+
+            function PolygonSymbol(symbolObj, opacity) {
+                _classCallCheck(this, PolygonSymbol);
+
+                var _this4 = _possibleConstructorReturn(this, Object.getPrototypeOf(PolygonSymbol).call(this, symbolObj, opacity));
+
+                switch (_this4.symbolObj['type']) {
+                    case 'esriSFS':
+                        var innerColor = _colorArrayToRgba(_this4.symbolObj.color, _this4.opacity);
+                        var outerColor = _colorArrayToRgba(_this4.symbolObj.outline.color, _this4.opacity);
+                        var outlineWidth = _this4.symbolObj.outline.width;
+
+                        _this4.olStyle = new _ol2.default.style.Style({
+                            stroke: new _ol2.default.style.Stroke({
+                                color: outerColor,
+                                //lineDash: [4],
+                                width: outlineWidth
+                            }),
+                            fill: new _ol2.default.style.Fill({
+                                color: innerColor
+                            })
+                        });
+
+                        _this4.legendHtml = '<span class="legend-layer-icon" ';
+                        _this4.legendHtml += 'style="';
+                        _this4.legendHtml += 'background-color: ' + innerColor + ';';
+                        _this4.legendHtml += 'border: solid ' + outerColor + ' 1px;';
+                        _this4.legendHtml += 'width: 40px;';
+                        _this4.legendHtml += 'height: 9px;';
+                        _this4.legendHtml += 'position: relative;';
+                        _this4.legendHtml += 'display: inline-block;';
+                        _this4.legendHtml += 'top: 2px;';
+                        _this4.legendHtml += '"></span>';
+                        break;
+
+                    default:
+                        console.log(_this4.symbolObj);
+                        alert('Polygon symbol does handle symbol type: ' + _this4.symbolObj['type']);
+                }
+                return _this4;
+            }
+
+            return PolygonSymbol;
+        }(CommonSymbol);
+
+        var SymbolGenerator = function SymbolGenerator(esriResponse) {
+            _classCallCheck(this, SymbolGenerator);
+
+            this.opacity = (100 - (esriResponse['drawingInfo']['transparency'] || 0)) / 100;
+            this.renderer = esriResponse['drawingInfo']['renderer'];
+            this.olStyle = undefined;
+            this.legendHtml = '';
+        };
+
+        var SingleSymbol = function (_SymbolGenerator) {
+            _inherits(SingleSymbol, _SymbolGenerator);
+
+            /**
+             *
+             * @param {object} esriResponse - layer info
+             * @param {Constructor|*} SymbolClass - the symbol class to use
+             */
+
+            function SingleSymbol(esriResponse, SymbolClass) {
+                _classCallCheck(this, SingleSymbol);
+
+                var _this5 = _possibleConstructorReturn(this, Object.getPrototypeOf(SingleSymbol).call(this, esriResponse));
+
+                _this5.symbol = _this5.renderer['symbol'];
+                var symbolObj = new SymbolClass(_this5.symbol, _this5.opacity);
+                _this5.olStyle = symbolObj.olStyle;
+                _this5.legendHtml = symbolObj.legendHtml;
+                return _this5;
+            }
+
+            return SingleSymbol;
+        }(SymbolGenerator);
+
+        var UniqueValueSymbol = function (_SymbolGenerator2) {
+            _inherits(UniqueValueSymbol, _SymbolGenerator2);
+
+            /**
+             *
+             * @param {object} esriResponse - layer info
+             * @param {Constructor|*} SymbolClass - the Symbol class definition
+             */
+
+            function UniqueValueSymbol(esriResponse, SymbolClass) {
+                _classCallCheck(this, UniqueValueSymbol);
+
+                var _this6 = _possibleConstructorReturn(this, Object.getPrototypeOf(UniqueValueSymbol).call(this, esriResponse));
+
+                _this6.uniqueValueInfos = _this6.renderer['uniqueValueInfos'];
+                _this6.propertyName = _this6.renderer['field1'];
+                _this6.defaultSymbol = _this6.renderer['defaultSymbol'];
+
+                if (_this6.defaultSymbol) {
+                    var symbolObj = new SymbolClass(_this6.defaultSymbol, _this6.opacity);
+                    _this6.defaultStyle = symbolObj.olStyle;
+                    _this6.defaultLabelHtml = '<span class="legend-layer-subitem">' + htmlEscape(_this6.renderer['defaultLabel']) + '</span>' + symbolObj.legendHtml;
+                } else {
+                    _this6.defaultStyle = undefined;
+                    _this6.defaultLabelHtml = 'other';
+                }
+
+                _this6.valueArray = [];
+                _this6.labelArray = [];
+                _this6.legendArray = [];
+                _this6.propertyStyleLookup = {};
+
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = _this6.uniqueValueInfos[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var uniqueVal = _step.value;
+
+                        _this6.labelArray.push(uniqueVal['label']);
+                        _this6.valueArray.push(uniqueVal['value']);
+                        var uniqueSym = new SymbolClass(uniqueVal.symbol, _this6.opacity);
+                        _this6.legendArray.push('<span class="legend-layer-subitem">' + htmlEscape(uniqueVal['label']) + '</span>' + uniqueSym.legendHtml);
+                        _this6.propertyStyleLookup[uniqueVal['value']] = uniqueSym.olStyle;
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+
+                var _this = _this6;
+
+                _this6.olStyle = function (feature, resolution) {
+                    var checkProperties = feature.getProperties();
+                    var checkProperty = checkProperties[_this.propertyName];
+
+                    var returnValue = void 0;
+                    if (_this.propertyStyleLookup[checkProperty] !== undefined) {
+                        returnValue = [_this.propertyStyleLookup[checkProperty]];
+                    } else {
+                        returnValue = [_this.defaultStyle];
+                    }
+
+                    return returnValue;
+                };
+
+                if (_this6.defaultLabelHtml !== null) {
+                    _this6.legendArray.push(_this6.defaultLabelHtml);
+                }
+
+                _this6.legendHtml = '<ul>';
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
+
+                try {
+                    for (var _iterator2 = _this6.legendArray[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var h = _step2.value;
+
+                        _this6.legendHtml += '<li>' + h + '</li>';
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
+                        }
+                    }
+                }
+
+                _this6.legendHtml += '</ul>';
+                return _this6;
+            }
+
+            return UniqueValueSymbol;
+        }(SymbolGenerator);
+
+        /**
+         * style and legend object
+         * @typedef {object} styleAndLegend
+         * @property {styleFunc} style - style function
+         * @property {string} legend - legend content
+         */
+
+        /**
+         *
+         * @param {object} esriResponse - layer info
+         * @returns {styleAndLegend} style and legend object
+         */
+        function makeFeatureServiceLegendAndSymbol(esriResponse) {
+            "use strict";
+
+            var renderer = esriResponse['drawingInfo']['renderer'];
+            var symbolLegendOut = null;
+
+            switch (renderer['type']) {
+                case 'simple':
+                    switch (esriResponse['geometryType']) {
+                        case 'esriGeometryPoint':
+                            symbolLegendOut = new SingleSymbol(esriResponse, PointSymbol);
+                            break;
+                        case 'esriGeometryPolyline':
+                            symbolLegendOut = new SingleSymbol(esriResponse, LineSymbol);
+                            break;
+                        case 'esriGeometryPolygon':
+                            symbolLegendOut = new SingleSymbol(esriResponse, PolygonSymbol);
+                            break;
+                        default:
+                            console.log(esriResponse);
+                            alert(esriResponse['geometryType'] + ' not handled');
+                    }
+                    break;
+                case 'uniqueValue':
+                    switch (esriResponse['geometryType']) {
+                        case 'esriGeometryPoint':
+                            symbolLegendOut = new UniqueValueSymbol(esriResponse, PointSymbol);
+                            break;
+                        case 'esriGeometryPolyline':
+                            symbolLegendOut = new UniqueValueSymbol(esriResponse, LineSymbol);
+                            break;
+                        case 'esriGeometryPolygon':
+                            symbolLegendOut = new UniqueValueSymbol(esriResponse, PolygonSymbol);
+                            break;
+                        default:
+                            console.log(esriResponse);
+                            alert(esriResponse['geometryType'] + ' not handled');
+                    }
+                    break;
+                default:
+                    alert('not handled renderer type: ' + renderer['type']);
+            }
+
+            if (symbolLegendOut == null) {
+                return { style: undefined, legend: '' };
+            } else {
+                return { style: symbolLegendOut.olStyle, legend: symbolLegendOut.legendHtml };
+            }
+        }
+
+        nm.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
+
+        /**
+         *
+         * @param {object} lyrObject - the layer as defined in the response
+         * @param {boolean} [iconsOnly=false] use only icons
+         * @returns {string} legend html
+         */
+        function mapServiceLegendItem(lyrObject, iconsOnly) {
+
+            iconsOnly = typeof iconsOnly == 'boolean' ? iconsOnly : false;
+            var layerName = lyrObject['layerName'];
+            var legendItems = lyrObject['legend'];
+            var legendHtml = '';
+
+            if (legendItems.length == 1) {
+                legendHtml = '<img class="legend-layer-icon" height="17" src="data:image/png;base64,' + legendItems[0]['imageData'] + '">';
+            } else {
+                legendHtml += '<span class="legend-items-expander" title="Expand/Collapse">&#9660;</span><ul>';
+                for (var i = 0; i < legendItems.length; i++) {
+                    legendHtml += '<li>';
+                    legendHtml += '<span class="legend-layer-subitem">' + htmlEscape(legendItems[i]['label']) + '</span>';
+                    legendHtml += '<img class="legend-layer-icon" height="17" src="data:image/png;base64,' + legendItems[i]['imageData'] + '">';
+                    legendHtml += '</li>';
+                }
+                legendHtml += '</ul>';
+            }
+
+            if (!iconsOnly) {
+                legendHtml = '<span class="legend-layer-subitem">' + layerName + '</span>' + legendHtml;
+            }
 
             return legendHtml;
         }
 
         /**
-         * @param {Array} itemIds the items to process
-         * @param {LayerGroup} theGroup new group
-         * @param {Array} [layerDivClasses=[]] optional classes to apply to the layer divs
-         * @static
-         * @returns {string} html string
+         * make map service legent
+         * @param {object} esriResponse - layer info
+         * @returns {string} legend content
+         */
+        function makeMapServiceLegend(esriResponse) {
+            "use strict";
+
+            var newLegendHtml = '';
+
+            var layers = esriResponse['layers'];
+
+            if (layers.length == 1) {
+                newLegendHtml += mapServiceLegendItem(layers[0], true);
+            } else {
+                newLegendHtml += '<ul>';
+                for (var i = 0; i < layers.length; i++) {
+                    newLegendHtml += '<li>' + mapServiceLegendItem(layers[i]) + '</li>';
+                }
+                newLegendHtml += '</ul>';
+            }
+
+            return newLegendHtml;
+        }
+
+        nm.makeMapServiceLegend = makeMapServiceLegend;
+    });
+});
+
+},{"../ol/ol":319,"../util/provide":323}],309:[function(require,module,exports){
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', '../util/provide'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('../util/provide'));
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports, global.provide);
+        global.mapInteractionBase = mod.exports;
+    }
+})(this, function (exports) {
+    'use strict';
+
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports', '../util/provide'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports, global.provide);
+            global.mapInteractionBase = mod.exports;
+        }
+    })(undefined, function (exports, _provide) {
+        'use strict';
+
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+
+        var _provide2 = _interopRequireDefault(_provide);
+
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
+        }
+
+        function _classCallCheck(instance, Constructor) {
+            if (!(instance instanceof Constructor)) {
+                throw new TypeError("Cannot call a class as a function");
+            }
+        }
+
+        var _createClass = function () {
+            function defineProperties(target, props) {
+                for (var i = 0; i < props.length; i++) {
+                    var descriptor = props[i];
+                    descriptor.enumerable = descriptor.enumerable || false;
+                    descriptor.configurable = true;
+                    if ("value" in descriptor) descriptor.writable = true;
+                    Object.defineProperty(target, descriptor.key, descriptor);
+                }
+            }
+
+            return function (Constructor, protoProps, staticProps) {
+                if (protoProps) defineProperties(Constructor.prototype, protoProps);
+                if (staticProps) defineProperties(Constructor, staticProps);
+                return Constructor;
+            };
+        }();
+
+        var nm = (0, _provide2.default)('olHelpers');
+
+        /**
+         * base interaction
          */
 
-    }, {
-        key: '_buildLegend',
-        value: function _buildLegend(itemIds, theGroup, layerDivClasses) {
+        var MapInteractionBase = function () {
 
-            if (itemIds.length == 0) {
-                return '';
+            /**
+             * map interaction base
+             * @param {string} subtype - the interaction subtype
+             */
+
+            function MapInteractionBase(subtype) {
+                _classCallCheck(this, MapInteractionBase);
+
+                this._map = undefined;
+                this._initialized = false;
+                this._subtype = subtype;
             }
 
-            var theHml = '';
+            /**
+             * base initializer, returns true for already initialized
+             * @param {ol.Map} theMap - the ol Map
+             * @returns {boolean} true for already initialized
+             */
 
-            var itemId = itemIds[0];
+            _createClass(MapInteractionBase, [{
+                key: 'init',
+                value: function init(theMap) {
+                    if (!this._initialized) {
+                        this._map = theMap;
+                        this._initialized = true;
 
-            if (theGroup.groupLayersLookup[itemId]) {
+                        return false;
+                    }
 
-                /**
-                 * @type {LayerBase}
-                 */
-                var lyr = theGroup.groupLayersLookup[itemId];
-                theHml += '<li id="' + lyr.id + '-layer-li" class="legend-layer-li ' + layerDivClasses.join(' ') + '">' + lyr.getLegendDiv() + '</li>';
-            } else if (theGroup.groupGroupsLookup[itemId]) {
-                /**
-                 * type {LayerGroup}
-                 */
-                var otherGroup = theGroup.groupGroupsLookup[itemId];
+                    return true;
+                }
+            }, {
+                key: '_checkInit',
+                value: function _checkInit() {
+                    if (!this.initialized) {
+                        var msg = this._subtype + ' object not initialized';
+                        alert(msg);
+                        console.log(msg);
+                        throw msg;
+                    }
+                }
+            }, {
+                key: 'checkInit',
+                value: function checkInit() {
+                    this._checkInit();
+                }
+            }, {
+                key: 'map',
+                get: function get() {
+                    return this._map;
+                }
+            }, {
+                key: 'initialized',
+                get: function get() {
+                    return this._initialized;
+                }
+            }]);
 
-                theHml += '<li>';
-                theHml += '<div id="' + otherGroup.groupId + '-legend-layer-div" ' + ('class="legend-layer-group  ' + layerDivClasses.join(' ') + '">');
+            return MapInteractionBase;
+        }();
 
-                if (otherGroup.addCheck) {
-                    theHml += '<input type="checkbox" checked id="' + otherGroup.groupId + '-group-chck">' + ('<label for="' + otherGroup.groupId + '-group-chck" title="Click arrow to expand or collapse">' + otherGroup.groupName + '</label>');
+        nm.MapInteractionBase = MapInteractionBase;
+        exports.default = MapInteractionBase;
+    });
+});
+
+},{"../util/provide":323}],310:[function(require,module,exports){
+(function (global, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(['exports', './mapMoveCls'], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(exports, require('./mapMoveCls'));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports, global.mapMoveCls);
+    global.mapMove = mod.exports;
+  }
+})(this, function (exports) {
+  'use strict';
+
+  (function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+      define(['exports', './mapMoveCls'], factory);
+    } else if (typeof exports !== "undefined") {
+      factory(exports);
+    } else {
+      var mod = {
+        exports: {}
+      };
+      factory(mod.exports, global.mapMoveCls);
+      global.mapMove = mod.exports;
+    }
+  })(undefined, function (exports, _mapMoveCls) {
+    'use strict';
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+
+    var _mapMoveCls2 = _interopRequireDefault(_mapMoveCls);
+
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {
+        default: obj
+      };
+    }
+
+    exports.default = new _mapMoveCls2.default();
+  });
+});
+
+},{"./mapMoveCls":311}],311:[function(require,module,exports){
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', '../jquery', './mapInteractionBase', '../util/checkDefined', '../util/provide', '../util/makeGuid'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('../jquery'), require('./mapInteractionBase'), require('../util/checkDefined'), require('../util/provide'), require('../util/makeGuid'));
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports, global.jquery, global.mapInteractionBase, global.checkDefined, global.provide, global.makeGuid);
+        global.mapMoveCls = mod.exports;
+    }
+})(this, function (exports) {
+    'use strict';
+
+    var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+        return typeof obj;
+    } : function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+    };
+
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports', '../jquery', './mapInteractionBase', '../util/checkDefined', '../util/provide', '../util/makeGuid'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports, global.jquery, global.mapInteractionBase, global.checkDefined, global.provide, global.makeGuid);
+            global.mapMoveCls = mod.exports;
+        }
+    })(undefined, function (exports, _jquery, _mapInteractionBase, _checkDefined, _provide, _makeGuid) {
+        'use strict';
+
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+
+        var _jquery2 = _interopRequireDefault(_jquery);
+
+        var _mapInteractionBase2 = _interopRequireDefault(_mapInteractionBase);
+
+        var checkDefined = _interopRequireWildcard(_checkDefined);
+
+        var _provide2 = _interopRequireDefault(_provide);
+
+        var _makeGuid2 = _interopRequireDefault(_makeGuid);
+
+        function _interopRequireWildcard(obj) {
+            if (obj && obj.__esModule) {
+                return obj;
+            } else {
+                var newObj = {};
+
+                if (obj != null) {
+                    for (var key in obj) {
+                        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+                    }
+                }
+
+                newObj.default = obj;
+                return newObj;
+            }
+        }
+
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
+        }
+
+        function _classCallCheck(instance, Constructor) {
+            if (!(instance instanceof Constructor)) {
+                throw new TypeError("Cannot call a class as a function");
+            }
+        }
+
+        var _createClass = function () {
+            function defineProperties(target, props) {
+                for (var i = 0; i < props.length; i++) {
+                    var descriptor = props[i];
+                    descriptor.enumerable = descriptor.enumerable || false;
+                    descriptor.configurable = true;
+                    if ("value" in descriptor) descriptor.writable = true;
+                    Object.defineProperty(target, descriptor.key, descriptor);
+                }
+            }
+
+            return function (Constructor, protoProps, staticProps) {
+                if (protoProps) defineProperties(Constructor.prototype, protoProps);
+                if (staticProps) defineProperties(Constructor, staticProps);
+                return Constructor;
+            };
+        }();
+
+        function _possibleConstructorReturn(self, call) {
+            if (!self) {
+                throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+            }
+
+            return call && ((typeof call === 'undefined' ? 'undefined' : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+        }
+
+        var _get = function get(object, property, receiver) {
+            if (object === null) object = Function.prototype;
+            var desc = Object.getOwnPropertyDescriptor(object, property);
+
+            if (desc === undefined) {
+                var parent = Object.getPrototypeOf(object);
+
+                if (parent === null) {
+                    return undefined;
                 } else {
-                    theHml += '<label title="Click arrow to expand or collapse">' + otherGroup.groupName + '</label>';
+                    return get(parent, property, receiver);
+                }
+            } else if ("value" in desc) {
+                return desc.value;
+            } else {
+                var getter = desc.get;
+
+                if (getter === undefined) {
+                    return undefined;
                 }
 
-                theHml += '<span title="Expand/Collapse" class="layer-group-expander';
-                theHml += (otherGroup.collapse ? ' legend-layer-group-initial-collapse' : '') + '">';
-                theHml += otherGroup.collapse ? '&#9654;' : '&#9660;';
-                theHml += '</span>';
+                return getter.call(receiver);
+            }
+        };
 
-                //parents.push(groupId);
-                theHml += '<ul>' + this._buildLegend(otherGroup.itemIdArray, otherGroup, layerDivClasses) + '</ul>';
-                theHml += '</div>';
-                theHml += '</li>';
+        function _inherits(subClass, superClass) {
+            if (typeof superClass !== "function" && superClass !== null) {
+                throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === 'undefined' ? 'undefined' : _typeof(superClass)));
             }
 
-            return theHml + this._buildLegend(itemIds.slice(1), theGroup, layerDivClasses);
-        }
-    }]);
-
-    return LayerGroup;
-}();
-
-/**
- * a wrapper to make a legend
- */
-
-
-var LayerLegend = function () {
-
-    /**
-     *
-     * @param {Array} legendItems array of layers or objects with {groupName:  {string}, collapse: {boolean}, addCheck: {boolean}, items: {Array}}
-     * @param {string} divId the div where the legend should be added
-     * @param {object} options for legend
-     * @param {Array} [options.layerDivClasses=[]] optional array of classes to be applied to the layer legend divs for custom styling
-     * @param {string} [options.legendTitle=Legend] the legend title
-     * @param {bool} [options.scaleDependent=true] if legend display is scale dependent
-     */
-
-    function LayerLegend(legendItems, divId, options) {
-        _classCallCheck(this, LayerLegend);
-
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-            for (var _iterator = legendItems[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var i = _step.value;
-
-                if (typeof i == 'undefined') {
-                    throw 'undefined item passed in array to legend constructor';
+            subClass.prototype = Object.create(superClass && superClass.prototype, {
+                constructor: {
+                    value: subClass,
+                    enumerable: false,
+                    writable: true,
+                    configurable: true
                 }
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                    _iterator.return();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
-            }
+            });
+            if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
         }
 
-        options = options || {};
+        var nm = (0, _provide2.default)('olHelpers');
 
-        options.legendTitle = typeof options.legendTitle == 'string' ? options.legendTitle : 'Legend';
-        options.scaleDependent = typeof options.scaleDependent == 'boolean' ? options.scaleDependent : true;
-        options.layerDivClasses = options.layerDivClasses || [];
+        /**
+         * assists with map move interactions, trigger callback functions
+         * @augments MapInteractionBase
+         */
 
-        // if legend display is scale dependent, make sure the mapMove object is initialized first
-        if (options.scaleDependent) {
-            _mapMove2.default.checkInit();
+        var MapMoveCls = function (_MapInteractionBase) {
+            _inherits(MapMoveCls, _MapInteractionBase);
+
+            /**
+             * constructor called implicitly
+             */
+
+            function MapMoveCls() {
+                _classCallCheck(this, MapMoveCls);
+
+                var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(MapMoveCls).call(this, 'map move'));
+
+                _this2._arrLyrRequest = [];
+                _this2._arrLyrTimeout = [];
+                _this2._arrLayer = [];
+                _this2._lookupLayer = {};
+
+                _this2._mapMoveCallbacks = [];
+                _this2._mapMoveCallbacksLookup = {};
+                _this2._mapMoveCallbackDelays = [];
+                _this2._mapMoveCallbackContext = [];
+                _this2._mapMoveCallbackTimeout = [];
+
+                _this2._mapExtent = undefined;
+                _this2._zoomLevel = undefined;
+                return _this2;
+            }
+
+            /**
+             * initialize the map move object
+             * @param {ol.Map} theMap - the ol map
+             */
+
+            _createClass(MapMoveCls, [{
+                key: 'init',
+                value: function init(theMap) {
+                    if (_get(Object.getPrototypeOf(MapMoveCls.prototype), 'init', this).call(this, theMap)) {
+                        return;
+                    }
+
+                    var _this = this;
+
+                    this.map.getView().on(['change:center', 'change:resolution'], function (e) {
+
+                        _this._updateMapExtent();
+
+                        // trigger the layer updates
+                        for (var i = 0; i < _this._arrLayer.length; i++) {
+                            _this.triggerLyrLoad(_this._arrLayer[i], i, e.type);
+                        }
+
+                        // trigger the map callbacks
+                        for (var _i = 0; _i < _this._mapMoveCallbacks.length; _i++) {
+                            _this.triggerMoveCallback(_i, e.type);
+                        }
+                    });
+                }
+            }, {
+                key: '_updateMapExtent',
+                value: function _updateMapExtent() {
+                    var theView = this.map.getView();
+                    this._zoomLevel = theView.getZoom();
+
+                    var extentArray = theView.calculateExtent(this.map.getSize());
+
+                    this._mapExtent = {
+                        minX: extentArray[0],
+                        minY: extentArray[1],
+                        maxX: extentArray[2],
+                        maxY: extentArray[3]
+                    };
+                }
+            }, {
+                key: 'triggerLyrLoad',
+                value: function triggerLyrLoad(lyr, index, eventType) {
+                    var _this3 = this;
+
+                    if (checkDefined.undefinedOrNull(lyr) && checkDefined.undefinedOrNull(index)) {
+                        throw 'need to define lyr or index';
+                    } else if (checkDefined.definedAndNotNull(lyr) && checkDefined.undefinedOrNull(index)) {
+                        index = this._arrLayer.indexOf(lyr);
+                    } else if (checkDefined.undefinedOrNull(lyr) && checkDefined.definedAndNotNull(index)) {
+                        lyr = this._arrLayer[index];
+                    }
+
+                    // clear the timeout
+                    if (this._arrLyrTimeout[index] != null) {
+                        clearTimeout(this._arrLyrTimeout[index]);
+                        this._arrLyrTimeout[index] = null;
+                    }
+
+                    // abort if necessary and clear the request
+                    if (this._arrLyrRequest[index] != null && this._arrLyrRequest[index] != 4) {
+                        this._arrLyrRequest[index].abort();
+                        this._arrLyrRequest[index] = null;
+                    }
+
+                    // dummy callback used if before load returns false
+                    var callbackFunc = function callbackFunc() {};
+
+                    if (lyr.mapMoveBefore(this._zoomLevel, eventType)) {
+                        (function () {
+                            lyr.mapMoveMakeGetParams(_this3._mapExtent, _this3._zoomLevel);
+
+                            var _this = _this3;
+
+                            callbackFunc = function callbackFunc() {
+                                function innerFunction(theLayer, theIndex) {
+                                    var _innerThis = this;
+                                    this._arrLyrRequest[theIndex] = _jquery2.default.get(theLayer.url, theLayer.mapMoveParams, function (d) {
+                                        /**
+                                         * @type {LayerBaseVector}
+                                         */
+                                        theLayer.mapMoveCallback(d);
+                                        theLayer.loadCallback();
+                                    }, 'json').fail(function (jqXHR) {
+                                        if (jqXHR.statusText != 'abort') {
+                                            console.log('failed');
+                                            console.log(theLayer.url);
+                                            console.log(theLayer.mapMoveParams);
+                                        }
+                                    }).always(function () {
+                                        _innerThis._arrLyrTimeout[theIndex] = null;
+                                        _innerThis._arrLyrRequest[theIndex] = null;
+                                    });
+                                }
+                                innerFunction.call(_this, lyr, index);
+                            };
+                        })();
+                    } else {
+                        lyr.clear();
+                    }
+                    this._arrLyrTimeout[index] = setTimeout(callbackFunc, lyr.onDemandDelay);
+                }
+            }, {
+                key: 'triggerMoveCallback',
+                value: function triggerMoveCallback(ind, eventType, functionId) {
+
+                    if (typeof ind == 'undefined' && typeof functionId == 'undefined') {
+                        throw 'either the function index or the id must be defined';
+                    }
+
+                    if (typeof ind !== 'number') {
+                        ind = this._mapMoveCallbacks.indexOf(this._mapMoveCallbacksLookup[functionId]);
+                    }
+
+                    if (ind < 0) {
+                        console.log('function not found');
+
+                        return;
+                    }
+
+                    // clear the timeout
+                    if (this._mapMoveCallbackTimeout[ind] != null) {
+                        clearTimeout(this._mapMoveCallbackTimeout[ind]);
+                        this._mapMoveCallbackTimeout[ind] = null;
+                    }
+
+                    var ctx = this._mapMoveCallbackContext[ind];
+                    var theFunc = this._mapMoveCallbacks[ind];
+
+                    var _this = this;
+
+                    var f = function f() {
+                        if (ctx !== null) {
+                            theFunc.call(ctx, _this._mapExtent, _this._zoomLevel, eventType);
+                        } else {
+                            theFunc(_this._mapExtent, _this._zoomLevel, eventType);
+                        }
+                    };
+
+                    this._mapMoveCallbackTimeout[ind] = setTimeout(f, this._mapMoveCallbackDelays[ind]);
+                }
+            }, {
+                key: 'addVectorLayer',
+                value: function addVectorLayer(lyr, triggerOnAdd) {
+                    if (this._arrLayer.indexOf(lyr) > -1) {
+                        console.log('already added ' + lyr.name + ' to map move');
+
+                        return;
+                    }
+                    this._checkInit();
+
+                    this._arrLyrRequest.push(null);
+                    this._arrLyrTimeout.push(null);
+                    this._arrLayer.push(lyr);
+                    this._lookupLayer[lyr.id] = lyr;
+
+                    triggerOnAdd = typeof triggerOnAdd == 'boolean' ? triggerOnAdd : true;
+
+                    if (triggerOnAdd) {
+                        if (this._mapExtent === undefined) {
+                            this._updateMapExtent();
+                        }
+                        this.triggerLyrLoad(lyr, this._arrLayer.length - 1);
+                    }
+                }
+            }, {
+                key: 'addCallback',
+                value: function addCallback(func, context, delay, triggerOnAdd, functionId) {
+
+                    if (this._mapMoveCallbacks.indexOf(func) > -1) {
+                        console.log('this function already added to map move');
+
+                        return;
+                    }
+                    this._checkInit();
+                    if (!functionId) {
+                        functionId = (0, _makeGuid2.default)();
+                    }
+
+                    this._mapMoveCallbacks.push(func);
+                    this._mapMoveCallbacksLookup[functionId] = func;
+                    this._mapMoveCallbackDelays.push(typeof delay == 'number' ? delay : 50);
+                    this._mapMoveCallbackContext.push(checkDefined.definedAndNotNull(context) ? context : null);
+                    this._mapMoveCallbackTimeout.push(null);
+
+                    triggerOnAdd = typeof triggerOnAdd == 'boolean' ? triggerOnAdd : true;
+
+                    if (triggerOnAdd) {
+                        if (this._mapExtent === undefined) {
+                            this._updateMapExtent();
+                        }
+                        this.triggerMoveCallback(this._mapMoveCallbacks.length - 1);
+                    }
+                }
+            }, {
+                key: 'mapExtent',
+                get: function get() {
+                    if (!this._mapExtent) {
+                        this._updateMapExtent();
+                    }
+
+                    return this._mapExtent;
+                }
+            }]);
+
+            return MapMoveCls;
+        }(_mapInteractionBase2.default);
+
+        nm.MapMoveCls = MapMoveCls;
+        exports.default = MapMoveCls;
+    });
+});
+
+},{"../jquery":302,"../util/checkDefined":320,"../util/makeGuid":322,"../util/provide":323,"./mapInteractionBase":309}],312:[function(require,module,exports){
+(function (global, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(['exports', './mapPopupCls'], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(exports, require('./mapPopupCls'));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports, global.mapPopupCls);
+    global.mapPopup = mod.exports;
+  }
+})(this, function (exports) {
+  'use strict';
+
+  (function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+      define(['exports', './mapPopupCls'], factory);
+    } else if (typeof exports !== "undefined") {
+      factory(exports);
+    } else {
+      var mod = {
+        exports: {}
+      };
+      factory(mod.exports, global.mapPopupCls);
+      global.mapPopup = mod.exports;
+    }
+  })(undefined, function (exports, _mapPopupCls) {
+    'use strict';
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+
+    var _mapPopupCls2 = _interopRequireDefault(_mapPopupCls);
+
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {
+        default: obj
+      };
+    }
+
+    exports.default = new _mapPopupCls2.default();
+  });
+});
+
+},{"./mapPopupCls":313}],313:[function(require,module,exports){
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', '../jquery', './mapInteractionBase', '../olHelpers/propertiesZoomStyle', '../util/provide', '../ol/ol'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('../jquery'), require('./mapInteractionBase'), require('../olHelpers/propertiesZoomStyle'), require('../util/provide'), require('../ol/ol'));
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports, global.jquery, global.mapInteractionBase, global.propertiesZoomStyle, global.provide, global.ol);
+        global.mapPopupCls = mod.exports;
+    }
+})(this, function (exports) {
+    'use strict';
+
+    var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+        return typeof obj;
+    } : function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+    };
+
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports', '../jquery', './mapInteractionBase', '../olHelpers/propertiesZoomStyle', '../util/provide', '../ol/ol'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports, global.jquery, global.mapInteractionBase, global.propertiesZoomStyle, global.provide, global.ol);
+            global.mapPopupCls = mod.exports;
+        }
+    })(undefined, function (exports, _jquery, _mapInteractionBase, _propertiesZoomStyle, _provide, _ol) {
+        'use strict';
+
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+
+        var _jquery2 = _interopRequireDefault(_jquery);
+
+        var _mapInteractionBase2 = _interopRequireDefault(_mapInteractionBase);
+
+        var _propertiesZoomStyle2 = _interopRequireDefault(_propertiesZoomStyle);
+
+        var _provide2 = _interopRequireDefault(_provide);
+
+        var _ol2 = _interopRequireDefault(_ol);
+
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
         }
 
-        this.$divElement = (0, _jquery2.default)('#' + divId);
-
-        this._legendItems = legendItems;
-
-        this.layerGroup = new LayerGroup();
-
-        this._buildTree(legendItems);
-
-        this.legendId = (0, _makeGuid2.default)();
-
-        this.$divElement.append(this.layerGroup.getLegendHtml(this.legendId, options));
-
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
-
-        try {
-            for (var _iterator2 = this.layerGroup.allLayerArray[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                var l = _step2.value;
-
-                l.applyCollapse();
+        function _possibleConstructorReturn(self, call) {
+            if (!self) {
+                throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
             }
-        } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                    _iterator2.return();
+
+            return call && ((typeof call === 'undefined' ? 'undefined' : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+        }
+
+        var _get = function get(object, property, receiver) {
+            if (object === null) object = Function.prototype;
+            var desc = Object.getOwnPropertyDescriptor(object, property);
+
+            if (desc === undefined) {
+                var parent = Object.getPrototypeOf(object);
+
+                if (parent === null) {
+                    return undefined;
+                } else {
+                    return get(parent, property, receiver);
                 }
-            } finally {
-                if (_didIteratorError2) {
-                    throw _iteratorError2;
+            } else if ("value" in desc) {
+                return desc.value;
+            } else {
+                var getter = desc.get;
+
+                if (getter === undefined) {
+                    return undefined;
                 }
+
+                return getter.call(receiver);
+            }
+        };
+
+        function _inherits(subClass, superClass) {
+            if (typeof superClass !== "function" && superClass !== null) {
+                throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === 'undefined' ? 'undefined' : _typeof(superClass)));
+            }
+
+            subClass.prototype = Object.create(superClass && superClass.prototype, {
+                constructor: {
+                    value: subClass,
+                    enumerable: false,
+                    writable: true,
+                    configurable: true
+                }
+            });
+            if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+        }
+
+        function _classCallCheck(instance, Constructor) {
+            if (!(instance instanceof Constructor)) {
+                throw new TypeError("Cannot call a class as a function");
             }
         }
 
-        var _this = this;
+        var _createClass = function () {
+            function defineProperties(target, props) {
+                for (var i = 0; i < props.length; i++) {
+                    var descriptor = props[i];
+                    descriptor.enumerable = descriptor.enumerable || false;
+                    descriptor.configurable = true;
+                    if ("value" in descriptor) descriptor.writable = true;
+                    Object.defineProperty(target, descriptor.key, descriptor);
+                }
+            }
 
-        //// if legend display is scale dependent, make sure the mapMove object is initialized first
-        if (options.scaleDependent) {
-            _mapMove2.default.checkInit();
+            return function (Constructor, protoProps, staticProps) {
+                if (protoProps) defineProperties(Constructor.prototype, protoProps);
+                if (staticProps) defineProperties(Constructor, staticProps);
+                return Constructor;
+            };
+        }();
 
-            _mapMove2.default.addCallback(function (ext, zoom, evt) {
-                if (typeof evt == 'undefined' || evt == 'change:resolution') {
+        var nm = (0, _provide2.default)('olHelpers');
+
+        var _FeatureLayerProperties = function () {
+
+            /**
+             *
+             * @param {ol.Feature} feature the feature
+             * @param {LayerBaseVector|*} layer - the layer in the popup
+             * @param {number} layerIndex - index of the layer
+             * @param {ol.layer.Vector} selectionLayer - the ol selection layer
+             * @param {string} [esriLayerName=undefined] - esri layer name
+             */
+
+            function _FeatureLayerProperties(feature, layer, layerIndex, selectionLayer, esriLayerName) {
+                _classCallCheck(this, _FeatureLayerProperties);
+
+                this.feature = feature;
+                this.layer = layer;
+                this.layerIndex = layerIndex;
+                this.selectionLayer = selectionLayer;
+                this.popupContent = '';
+                this.esriLayerName = typeof esriLayerName == 'string' ? esriLayerName : undefined;
+            }
+
+            _createClass(_FeatureLayerProperties, [{
+                key: 'layerName',
+                get: function get() {
+                    if (typeof this.esriLayerName == 'string') {
+                        return this.esriLayerName;
+                    } else {
+                        return this.layer.name;
+                    }
+                }
+            }]);
+
+            return _FeatureLayerProperties;
+        }();
+
+        var MapPopupCls = function (_MapInteractionBase) {
+            _inherits(MapPopupCls, _MapInteractionBase);
+
+            /**
+             * Definition for openlayers style function
+             * @callback olStyleFunction
+             * &param feature the openlayers vector feature
+             * $param
+             */
+
+            /**
+             * Definition for popup changed callback functions
+             * @callback popupChangedFunction
+             * @param $popContent jquery reference to the popup content
+             */
+
+            /**
+             * map popup constructor
+             */
+
+            function MapPopupCls() {
+                _classCallCheck(this, MapPopupCls);
+
+                var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MapPopupCls).call(this, 'map popup'));
+
+                _this._arrPopupLayerIds = [];
+                _this._arrPopupLayerNames = [];
+                /**
+                 *
+                 * @type {Array<LayerBaseVector>}
+                 * @private
+                 */
+                _this._arrPopupLayers = [];
+                _this._arrPopupOlLayers = [];
+                _this._arrPopupContentFunction = [];
+                _this._$popupContainer = undefined;
+                _this._$popupContent = undefined;
+                _this._$popupCloser = undefined;
+                _this._popupOverlay = undefined;
+                _this._selectionLayers = [];
+                _this._selectionLayerLookup = {};
+                _this._mapClickFunctions = [];
+
+                //let a = function($jqueryContent){console.log($jqueryContent)};
+                //this._popupChangedLookup = {'a': a};
+                _this._popupChangedFunctions = [];
+                /**
+                 *
+                 * @type {Array<LayerEsriMapServer>}
+                 * @private
+                 */
+                _this._esriMapServiceLayers = [];
+
+                _this._popupOpen = false;
+                _this._popupCoordinate = null;
+
+                /**
+                 *
+                 * @type {Array.<_FeatureLayerProperties>}
+                 */
+                _this._passThroughLayerFeatureArray = [];
+
+                _this._currentPopupIndex = -1;
+                _this._popupContentLength = 0;
+
+                return _this;
+            }
+
+            /**
+             * map popup initialization
+             * @param {ol.Map} theMap - the ol map
+             */
+
+            _createClass(MapPopupCls, [{
+                key: 'init',
+                value: function init(theMap) {
+                    var _this2 = this;
+
+                    if (_get(Object.getPrototypeOf(MapPopupCls.prototype), 'init', this).call(this, theMap)) {
+                        return;
+                    }
+                    var $map = (0, _jquery2.default)('#' + this.map.getTarget());
+
+                    $map.append('<div class="ol-popup">' + '<a href="#" class="ol-popup-closer"></a>' + '<div class="popup-content"></div>' + '</div>');
+
+                    this._$popupContainer = $map.find('.ol-popup');
+                    this._$popupContent = $map.find('.popup-content');
+                    this._$popupCloser = $map.find('.ol-popup-closer');
+
+                    this._popupOverlay = new _ol2.default.Overlay({
+                        element: this._$popupContainer[0],
+                        autoPan: true,
+                        autoPanAnimation: {
+                            duration: 250
+                        }
+                    });
+
+                    this._map.addOverlay(this._popupOverlay);
+
+                    this._$popupCloser.click(function () {
+                        _this2.closePopup();
+                    });
+
+                    // display popup on click
+                    this._map.on('singleclick', function (evt) {
+                        _this2.closePopup();
+                        _this2._popupCoordinate = evt.coordinate;
+
+                        if (_this2._esriMapServiceLayers.length > 0) {
+                            var queryParams = {
+                                geometry: evt.coordinate.join(','),
+                                geometryType: 'esriGeometryPoint',
+                                layers: 'all',
+                                sr: _this2._map.getView().getProjection().getCode().split(':')[1],
+                                mapExtent: _this2._map.getView().calculateExtent(_this2._map.getSize()).join(','),
+                                imageDisplay: _this2._map.getSize().join(',') + ',96',
+                                returnGeometry: true,
+                                tolerance: 15,
+                                f: 'pjson'
+                            };
+
+                            var _iteratorNormalCompletion = true;
+                            var _didIteratorError = false;
+                            var _iteratorError = undefined;
+
+                            try {
+                                for (var _iterator = _this2._esriMapServiceLayers[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                                    var l = _step.value;
+
+                                    l.getPopupInfo(queryParams, _this2._selectionLayerLookup[l.id]);
+                                }
+                            } catch (err) {
+                                _didIteratorError = true;
+                                _iteratorError = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion && _iterator.return) {
+                                        _iterator.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError) {
+                                        throw _iteratorError;
+                                    }
+                                }
+                            }
+                        }
+
+                        var layerFeatureObjectArray = _this2._featuresAtPixel(evt.pixel);
+
+                        /**
+                         *
+                         * @type {Array.<_FeatureLayerProperties>}
+                         */
+                        _this2._passThroughLayerFeatureArray = [];
+                        _this2._currentPopupIndex = -1;
+
+                        for (var i = 0; i < layerFeatureObjectArray.length; i++) {
+                            var featObj = layerFeatureObjectArray[i];
+
+                            var props = featObj.feature.getProperties();
+
+                            var popupContentResponse = _this2._arrPopupContentFunction[featObj.layerIndex](props, _this2._$popupContent);
+
+                            //skip if return was false
+                            if (popupContentResponse === false) {
+                                //continue;
+                            } else if (typeof popupContentResponse == 'string') {
+                                    featObj.popupContent = popupContentResponse;
+                                    _this2._passThroughLayerFeatureArray.push(featObj);
+                                } else {
+                                    featObj.selectionLayer.getSource().addFeature(featObj.feature);
+                                }
+                        }
+
+                        _this2._popupContentLength = _this2._passThroughLayerFeatureArray.length;
+
+                        _this2._currentPopupIndex = -1;
+
+                        var popupHtml = '<div class="ol-popup-nav">';
+                        popupHtml += '<span class="previous-popup ol-popup-nav-arrow">&#9664;</span>';
+                        popupHtml += '<span class="next-popup ol-popup-nav-arrow">&#9654;</span>';
+                        popupHtml += '<span class="current-popup-item-number" style="font-weight: bold;"></span>';
+                        popupHtml += '<span>&nbsp;of&nbsp;</span>';
+                        popupHtml += '<span class="popup-content-length" style="font-weight: bold;">' + _this2._popupContentLength + '</span>';
+                        popupHtml += '<span>&nbsp;&nbsp;-&nbsp;&nbsp;</span>';
+                        popupHtml += '<span class="current-popup-layer-name"></span>';
+                        popupHtml += '</div>';
+                        popupHtml += '<div class="ol-popup-inner">';
+
+                        popupHtml += '</div>';
+
+                        _this2._$popupContent.html(popupHtml);
+
+                        _this2._$popupContent.find('.previous-popup').click(function () {
+                            if (_this2._popupContentLength == 1) {
+                                return;
+                            }
+
+                            if (_this2._currentPopupIndex == 0) {
+                                _this2._currentPopupIndex = _this2._popupContentLength - 1;
+                            } else {
+                                _this2._currentPopupIndex--;
+                            }
+                            _this2._triggerFeatSelect();
+                        });
+
+                        var nextPopup = _this2._$popupContent.find('.next-popup');
+
+                        nextPopup.click(function () {
+                            if (_this2._popupContentLength == 1 && _this2._currentPopupIndex > -1) {
+                                return;
+                            }
+
+                            if (_this2._currentPopupIndex == _this2._popupContentLength - 1) {
+                                _this2._currentPopupIndex = 0;
+                            } else {
+                                _this2._currentPopupIndex++;
+                            }
+                            _this2._triggerFeatSelect();
+                        });
+
+                        if (_this2._popupContentLength > 0) {
+                            nextPopup.trigger('click');
+                            _this2._popupOverlay.setPosition(_this2._popupCoordinate);
+                            _this2._$popupContent.scrollTop(0);
+                            _this2._popupOpen = true;
+                        }
+                    });
+
+                    //change mouse cursor when over marker
+                    this._map.on('pointermove', function (e) {
+                        if (e.dragging) {
+                            return;
+                        }
+                        var pixel = _this2.map.getEventPixel(e.originalEvent);
+                        var hit = _this2.map.hasFeatureAtPixel(pixel, function (lyrCandidate) {
+                            var _iteratorNormalCompletion2 = true;
+                            var _didIteratorError2 = false;
+                            var _iteratorError2 = undefined;
+
+                            try {
+                                for (var _iterator2 = _this2._arrPopupOlLayers[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                                    var olLayer = _step2.value;
+
+                                    if (lyrCandidate == olLayer) {
+                                        return true;
+                                    }
+                                }
+                            } catch (err) {
+                                _didIteratorError2 = true;
+                                _iteratorError2 = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                        _iterator2.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError2) {
+                                        throw _iteratorError2;
+                                    }
+                                }
+                            }
+
+                            return false;
+                        });
+                        _this2.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+                    });
+                }
+            }, {
+                key: '_triggerFeatSelect',
+                value: function _triggerFeatSelect() {
+                    var $currentPopupItemNumber = this._$popupContent.find('.current-popup-item-number');
+                    var $innerPopup = this._$popupContent.find('.ol-popup-inner');
+                    var $layerNameSpan = this._$popupContent.find('.current-popup-layer-name');
+                    this.clearSelection();
+                    var lyrFeatObj = this._passThroughLayerFeatureArray[this._currentPopupIndex];
+                    $currentPopupItemNumber.html((this._currentPopupIndex + 1).toFixed());
+                    $layerNameSpan.html(lyrFeatObj.layerName);
+                    $innerPopup.html(lyrFeatObj.popupContent);
+                    lyrFeatObj.selectionLayer.getSource().addFeature(lyrFeatObj.feature);
                     var _iteratorNormalCompletion3 = true;
                     var _didIteratorError3 = false;
                     var _iteratorError3 = undefined;
 
                     try {
-                        for (var _iterator3 = this.layerGroup.allLayerArray[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                            var lyr = _step3.value;
+                        for (var _iterator3 = this._popupChangedFunctions[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                            var f = _step3.value;
 
-                            var $lyrLi = (0, _jquery2.default)('#' + lyr.id + '-layer-li');
-                            if (zoom > lyr.maxZoom || zoom < lyr.minZoom) {
-                                $lyrLi.addClass('layer-not-visible');
-                            } else {
-                                $lyrLi.removeClass('layer-not-visible');
-                            }
+                            f(this._$popupContent);
                         }
                     } catch (err) {
                         _didIteratorError3 = true;
@@ -17195,3681 +20880,634 @@ var LayerLegend = function () {
                         }
                     }
                 }
-            }, this, 100, true, 'legend1');
-        }
-
-        // <editor-fold desc="add event listeners">
-
-        this.$divElement.find(".suppress-by-extent").change(function () {
-            var legendLayerLis = (0, _jquery2.default)('.legend-layer-li');
-            if (this.checked) {
-                legendLayerLis.removeClass('layer-force-show');
-            } else {
-                legendLayerLis.addClass('layer-force-show');
-            }
-        });
-
-        this.$divElement.find('.legend-check').change(function () {
-            var lyrId = this.id.replace('-legend-layer-check', '');
-            _this.layerGroup.allLayerLookup[lyrId].visible = this.checked;
-        });
-
-        this.$divElement.find('.legend-layer-group > input[type=checkbox]').change(function () {
-            (0, _jquery2.default)(this).siblings('ul').find('input[type=checkbox]').prop('checked', this.checked).trigger('change');
-        });
-
-        this.$divElement.find('.layer-group-expander').click(function () {
-            var $this = (0, _jquery2.default)(this);
-            $this.removeClass('legend-layer-group-initial-collapse');
-
-            $this.siblings('ul').slideToggle();
-
-            if ($this.hasClass('legend-layer-group-collapsed')) {
-                $this.removeClass('legend-layer-group-collapsed');
-                $this.html('&#9660;');
-            } else {
-                $this.addClass('legend-layer-group-collapsed');
-                $this.html('&#9654;');
-            }
-        });
-
-        this.$divElement.find('.legend-layer-group-initial-collapse').trigger('click');
-        // </editor-fold>
-    }
-
-    /**
-     * @param {Array} [legendItems=this._layerConfig] the legend items
-     * @param {Array} [parents=[]] the ordered list of groups in which this item is a member
-     * @private
-     */
-
-
-    _createClass(LayerLegend, [{
-        key: '_buildTree',
-        value: function _buildTree(legendItems, parents) {
-
-            if (legendItems.length == 0) {
-                return;
-            }
-
-            var oneItem = legendItems[0];
-
-            //reset the parent if the item is in the base array
-            if (this._legendItems.indexOf(oneItem) > -1 || typeof parents == 'undefined') {
-                parents = [];
-            }
-
-            if (typeof oneItem['groupName'] !== 'undefined') {
-                var groupItem = legendItems[0];
-                var newGroup = this.layerGroup.addGroup(groupItem, parents);
-                parents.push(newGroup.groupId);
-                this._buildTree(groupItem.items, parents);
-            } else {
-                /**
-                 * @type {LayerBase}
-                 */
-                var layerItem = legendItems[0];
-
-                this.layerGroup.addLegendLayer(layerItem, parents);
-            }
-
-            this._buildTree(legendItems.slice(1), parents);
-        }
-    }, {
-        key: 'showAll',
-        set: function set(val) {}
-    }]);
-
-    return LayerLegend;
-}();
-
-nm.LayerLegend = LayerLegend;
-exports.default = LayerLegend;
-
-},{"../jquery":302,"../olHelpers/mapMove":310,"../util/makeGuid":322,"../util/provide":323}],302:[function(require,module,exports){
-(function (global){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-/**
- * Created by gavorhes on 5/3/2016.
- */
-global.jQuery = require('jquery');
-
-exports.default = global.jQuery;
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-
-},{"jquery":299}],303:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _jquery = require('../jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _makeGuid = require('../util/makeGuid');
-
-var _makeGuid2 = _interopRequireDefault(_makeGuid);
-
-var _zoomResolutionConvert = require('../olHelpers/zoomResolutionConvert');
-
-var zoomResolutionConvert = _interopRequireWildcard(_zoomResolutionConvert);
-
-var _provide = require('../util/provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var nm = (0, _provide2.default)('layers');
-
-/**
- * The base layer class
- * @abstract
- */
-
-var LayerBase = function () {
-    /**
-     * The base layer for all others
-     * @param {string} url - url for source
-     * @param {object} options - config
-     * @param {string} [options.id=makeGuid()] - layer id
-     * @param {string} [options.name=Unnamed Layer] - layer name
-     * @param {number} [options.opacity=1] - opacity
-     * @param {boolean} [options.visible=true] - default visible
-     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
-     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
-     * @param {object} [options.params={}] - the get parameters to include to retrieve the layer
-     * @param {number} [options.zIndex=0] - the z index for the layer
-     * @param {function} [options.loadCallback] - function to call on load, context this is the layer object
-     * @param {boolean} [options.legendCollapse=false] - if the legend item should be initially collapsed
-     * @param {boolean} [options.legendCheckbox=true] - if the legend item should have a checkbox for visibility
-     * @param {boolean} [options.legendContent=undefined] - additional content to add to the legend
-     */
-
-    function LayerBase(url, options) {
-        _classCallCheck(this, LayerBase);
-
-        options = options || {};
-
-        if (typeof url !== 'string') {
-            throw 'Invalid URL';
-        }
-        this._url = url;
-
-        this._params = _typeof(options.params) == 'object' ? options.params : {};
-        this._legendCollapse = typeof options.legendCollapse == 'boolean' ? options.legendCollapse : false;
-        this._legendCheckbox = typeof options.legendCheckbox == 'boolean' ? options.legendCheckbox : true;
-
-        this.id = options.id || (0, _makeGuid2.default)();
-        this._name = options.name || 'Unnamed Layer';
-        this.animate = false;
-        this._opacity = typeof options.opacity == 'number' ? options.opacity : 1;
-
-        if (this._opacity > 1) {
-            this._opacity = 1;
-        } else if (this._opacity < 0) {
-            this._opacity = 0;
-        }
-
-        this._visible = typeof options.visible === 'boolean' ? options.visible : true;
-
-        this._source = undefined;
-        this.olLayer = undefined;
-        this._loaded = false;
-
-        this._maxResolution = zoomResolutionConvert.zoomToResolution(options.minZoom);
-        if (typeof this._maxResolution !== 'undefined') {
-            this._maxResolution += 0.00001;
-        }
-        this._minResolution = zoomResolutionConvert.zoomToResolution(options.maxZoom);
-
-        this._minZoom = typeof options.minZoom == 'number' ? options.minZoom : undefined;
-        this._maxZoom = typeof options.maxZoom == 'number' ? options.maxZoom : undefined;
-        this._zIndex = typeof options.zIndex == 'number' ? options.zIndex : 0;
-
-        this.loadCallback = typeof options.loadCallback == 'function' ? options.loadCallback : function () {};
-
-        this._legendContent = '';
-
-        if (this._legendCheckbox) {
-            this._legendContent += '<input type="checkbox" ' + (this.visible ? 'checked' : '') + ' ' + ('class="legend-check" id="' + this.id + '-legend-layer-check"><span></span>');
-            this._legendContent += '<label for="' + this.id + '-legend-layer-check" class="legend-layer-name">' + this.name + '</label>';
-        } else {
-            this._legendContent += '<label class="legend-layer-name">' + this.name + '</label>';
-        }
-
-        this._$legendDiv = null;
-        this._applyCollapseCalled = false;
-        this._addLegendContent(typeof options.legendContent === 'string' ? options.legendContent : undefined);
-    }
-
-    /**
-     * base load function, sets _loaded = true if it is not already
-     * @protected
-     * @returns {boolean} if already loaded
-     */
-
-
-    _createClass(LayerBase, [{
-        key: '_load',
-        value: function _load() {
-            if (this.loaded == true) {
-                return true;
-            } else {
-                this._loaded = true;
-
-                return false;
-            }
-        }
-
-        /**
-         * Get the legend html, be sure to only add to the DOM once
-         * @returns {string} html for layer wrapped in a div
-         */
-
-    }, {
-        key: 'getLegendDiv',
-        value: function getLegendDiv() {
-            return '<div class="legend-layer-div" id="' + this.id + '-legend-layer-div">' + this._legendContent + '</div>';
-        }
-
-        /**
-         *
-         * @param {string|undefined} additionalContent - additional content to add to legend
-         * @private
-         */
-
-    }, {
-        key: '_addLegendContent',
-        value: function _addLegendContent(additionalContent) {
-            additionalContent = typeof additionalContent == 'string' ? additionalContent : '';
-
-            var addCollapse = additionalContent.indexOf('<ul>') > -1;
-
-            if (addCollapse) {
-                additionalContent = '<span class="legend-items-expander" title="Expand/Collapse">&#9660;</span>' + additionalContent;
-            }
-
-            this._legendContent += additionalContent;
-
-            this._$legendDiv = (0, _jquery2.default)('#' + this.id + '-legend-layer-div');
-
-            if (this._$legendDiv.length > 0) {
-                this._$legendDiv.append(additionalContent);
-                this.applyCollapse();
-            }
-        }
-
-        /**
-         * add additional content to the legend
-         * @param {string} [additionalContent=] - additonal content to add
-         */
-
-    }, {
-        key: 'addLegendContent',
-        value: function addLegendContent(additionalContent) {
-            this._addLegendContent(additionalContent);
-        }
-    }, {
-        key: 'applyCollapse',
-        value: function applyCollapse() {
-            if (this._applyCollapseCalled) {
-                console.log('collapse already applied');
-
-                return undefined;
-            }
-
-            this._$legendDiv = (0, _jquery2.default)('#' + this.id + '-legend-layer-div');
-
-            if (this._$legendDiv.length > 0) {
-
-                var $expander = this._$legendDiv.find('.legend-items-expander');
-
-                if ($expander.length > 0) {
-                    this._applyCollapseCalled = true;
-
-                    $expander.click(function () {
-                        var $this = (0, _jquery2.default)(this);
-
-                        $this.siblings('ul').slideToggle();
-
-                        if ($this.hasClass('legend-layer-group-collapsed')) {
-                            $this.removeClass('legend-layer-group-collapsed');
-                            $this.html('&#9660;');
-                        } else {
-                            $this.addClass('legend-layer-group-collapsed');
-                            $this.html('&#9654;');
+            }, {
+                key: 'addMapServicePopupContent',
+                value: function addMapServicePopupContent(feature, lyr, popupContent, esriName) {
+
+                    var featLayerObject = new _FeatureLayerProperties(feature, lyr, this._popupContentLength, this._selectionLayerLookup[lyr.id], esriName);
+                    featLayerObject.popupContent = popupContent;
+
+                    this._passThroughLayerFeatureArray.push(featLayerObject);
+                    this._popupContentLength++;
+
+                    (0, _jquery2.default)('.popup-content-length').html(this._popupContentLength.toFixed());
+
+                    if (!this._popupOpen) {
+                        this._$popupContent.find('.next-popup').trigger('click');
+
+                        this._popupOverlay.setPosition(this._popupCoordinate);
+                        this._$popupContent.scrollTop(0);
+                        this._popupOpen = true;
+                    }
+                }
+            }, {
+                key: '_featuresAtPixel',
+                value: function _featuresAtPixel(pixel) {
+                    var _this3 = this;
+
+                    var layerFeatureObjectArray = [];
+                    this.map.forEachFeatureAtPixel(pixel, function (feature, layer) {
+                        var lyrIndex = _this3._arrPopupOlLayers.indexOf(layer);
+
+                        if (lyrIndex > -1) {
+                            layerFeatureObjectArray.push(new _FeatureLayerProperties(feature, _this3._arrPopupLayers[lyrIndex], lyrIndex, _this3._selectionLayers[lyrIndex]));
                         }
                     });
 
-                    if (this._legendCollapse) {
-                        $expander.trigger('click');
+                    return layerFeatureObjectArray;
+                }
+            }, {
+                key: 'closePopup',
+                value: function closePopup() {
+                    this._checkInit();
+                    this._popupOpen = false;
+                    this._popupOverlay.setPosition(undefined);
+                    this._$popupCloser[0].blur();
+                    this.clearSelection();
+                    this._$popupContent.html('');
+
+                    return false;
+                }
+            }, {
+                key: 'addPopupChangedFunction',
+                value: function addPopupChangedFunction(chgFunction) {
+                    this._popupChangedFunctions.push(chgFunction);
+                }
+            }, {
+                key: '_addPopupLayer',
+                value: function _addPopupLayer(lyr, selectionStyle) {
+                    this._checkInit();
+
+                    selectionStyle = selectionStyle || {};
+                    selectionStyle.color = selectionStyle.color || 'rgba(255,170,0,0.5)';
+                    selectionStyle.width = selectionStyle.width || 10;
+
+                    var theStyle = void 0;
+
+                    if (selectionStyle.olStyle) {
+                        theStyle = selectionStyle.olStyle;
+                    } else {
+                        theStyle = new _ol2.default.style.Style({
+                            stroke: new _ol2.default.style.Stroke({
+                                color: selectionStyle.color,
+                                width: selectionStyle.width
+                            }),
+                            image: new _ol2.default.style.Circle({
+                                radius: 7,
+                                fill: new _ol2.default.style.Fill({ color: selectionStyle.color }),
+                                stroke: new _ol2.default.style.Stroke({ color: selectionStyle.color, width: 1 })
+                            }),
+                            fill: new _ol2.default.style.Fill({
+                                color: selectionStyle.color
+                            })
+                        });
+                    }
+
+                    var selectionLayer = new _ol2.default.layer.Vector({
+                        source: new _ol2.default.source.Vector(),
+                        style: theStyle,
+                        zIndex: 100
+                    });
+
+                    this._selectionLayers.push(selectionLayer);
+                    this._selectionLayerLookup[lyr.id] = selectionLayer;
+                    this.map.addLayer(selectionLayer);
+
+                    return selectionLayer;
+                }
+            }, {
+                key: 'addVectorPopup',
+                value: function addVectorPopup(lyr, popupContentFunction, selectionStyle) {
+                    var selectionLayer = this._addPopupLayer(lyr, selectionStyle);
+                    this._arrPopupLayerIds.push(lyr.id);
+                    this._arrPopupLayerNames.push(lyr.name);
+                    this._arrPopupLayers.push(lyr);
+                    this._arrPopupOlLayers.push(lyr.olLayer);
+                    this._arrPopupContentFunction.push(popupContentFunction);
+
+                    return selectionLayer;
+                }
+            }, {
+                key: 'removeVectorPopup',
+                value: function removeVectorPopup(lyr) {
+                    var idx = this._arrPopupLayerIds.indexOf(lyr.id);
+
+                    if (idx > -1) {
+                        this._arrPopupLayerIds.splice(idx, 1);
+                        this._arrPopupLayerNames.splice(idx, 1);
+                        this._arrPopupLayers.splice(idx, 1);
+                        this._arrPopupOlLayers.splice(idx, 1);
+                        this._arrPopupContentFunction.splice(idx, 1);
+                        this._selectionLayers.splice(idx, 1);
+                        delete this._selectionLayerLookup[lyr.id];
                     }
                 }
-            }
-        }
+            }, {
+                key: 'addMapServicePopup',
+                value: function addMapServicePopup(lyr, selectionStyle) {
+                    var selectionLayer = this._addPopupLayer(lyr, selectionStyle);
+                    this._esriMapServiceLayers.push(lyr);
 
-        /**
-         * trick to refresh the layer
-         */
-
-    }, {
-        key: 'refresh',
-        value: function refresh() {
-            if (this.source) {
-                this.source.refresh();
-                //let src = this.source;
-                //this.olLayer.setSource(undefined);
-                //this.olLayer.setSource(src);
-            }
-        }
-
-        /**
-         * get the legend content
-         * @type {string}
-         */
-
-    }, {
-        key: 'legendContent',
-        get: function get() {
-            return this._legendContent;
-        }
-
-        /**
-         * set the legend content directly
-         * @param {string} newVal - new content
-         * @protected
-         */
-        ,
-        set: function set(newVal) {
-            this._legendContent = newVal;
-        }
-
-        /**
-         * get the map get params
-         * @type {object}
-         */
-
-    }, {
-        key: 'params',
-        get: function get() {
-            return this._params;
-        }
-
-        /**
-         * set the map get params
-         * @param {object} newParams - new get params
-         * @protected
-         */
-        ,
-        set: function set(newParams) {
-            this._params = newParams;
-        }
-
-        /**
-         * get the minimum resolution
-         * @type {number|*}
-         */
-
-    }, {
-        key: 'minResolution',
-        get: function get() {
-            return this._minResolution;
-        }
-
-        /**
-         * get the maximum resolution
-         * @type {number|*}
-         */
-
-    }, {
-        key: 'maxResolution',
-        get: function get() {
-            return this._maxResolution;
-        }
-
-        /**
-         * get min zoom
-         * @type {number|*}
-         */
-
-    }, {
-        key: 'minZoom',
-        get: function get() {
-            return this._minZoom;
-        }
-
-        /**
-         * get max zoom
-         * @type {number|*}
-         */
-
-    }, {
-        key: 'maxZoom',
-        get: function get() {
-            return this._maxZoom;
-        }
-
-        /**
-         * get the url
-         * @type {string}
-         */
-
-    }, {
-        key: 'url',
-        get: function get() {
-            return this._url;
-        }
-
-        /**
-         * Get the layer visibility
-         * @type {boolean}
-         */
-
-    }, {
-        key: 'visible',
-        get: function get() {
-            return this._visible;
-        }
-
-        /**
-         * Set the layer visibility
-         * @param {boolean} visibility - layer visibility
-         */
-        ,
-        set: function set(visibility) {
-            this._visible = visibility;
-            if (this.olLayer) {
-                this.olLayer.setVisible(this._visible);
-                if (visibility && !this._loaded) {
-                    this._load();
+                    return selectionLayer;
                 }
-            }
-        }
+            }, {
+                key: 'clearSelection',
+                value: function clearSelection() {
+                    this._checkInit();
+                    for (var i = 0; i < this._selectionLayers.length; i++) {
+                        this._selectionLayers[i].getSource().clear();
+                    }
+                    var _iteratorNormalCompletion4 = true;
+                    var _didIteratorError4 = false;
+                    var _iteratorError4 = undefined;
 
-        /**
-         * Get the layer opacity
-         * @type {number}
-         */
+                    try {
+                        for (var _iterator4 = this._mapClickFunctions[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                            var f = _step4.value;
 
-    }, {
-        key: 'opacity',
-        get: function get() {
-            return this._opacity;
-        }
+                            f();
+                        }
+                    } catch (err) {
+                        _didIteratorError4 = true;
+                        _iteratorError4 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                                _iterator4.return();
+                            }
+                        } finally {
+                            if (_didIteratorError4) {
+                                throw _iteratorError4;
+                            }
+                        }
+                    }
+                }
+            }, {
+                key: 'addMapClickFunction',
+                value: function addMapClickFunction(func) {
+                    this._mapClickFunctions.push(func);
+                }
+            }]);
 
-        /**
-         * Set the layer opacity
-         * @param {number} opacity - layer opacity
-         */
-        ,
-        set: function set(opacity) {
-            this._opacity = opacity;
-            if (this.olLayer) {
-                this.olLayer.setOpacity(this._opacity);
-            }
-        }
+            return MapPopupCls;
+        }(_mapInteractionBase2.default);
 
-        /**
-         * Get the layer name
-         * @type {string}
-         */
-
-    }, {
-        key: 'name',
-        get: function get() {
-            return this._name;
-        }
-
-        /**
-         * set the layer name
-         * @param {string} newName - the new name
-         */
-        ,
-        set: function set(newName) {
-            this._name = newName;
-        }
-
-        /**
-         * Check if the layer is loaded
-         * @type {boolean}
-         */
-
-    }, {
-        key: 'loaded',
-        get: function get() {
-            return this._loaded;
-        }
-
-        /**
-         * get the layer source
-         * @type {*}
-         */
-
-    }, {
-        key: 'source',
-        get: function get() {
-            return this._source;
-        }
-
-        /**
-         * get the z index
-         * @type {number}
-         */
-
-    }, {
-        key: 'zIndex',
-        get: function get() {
-            return this._zIndex;
-        }
-
-        /**
-         * set the z index
-         * @param {number} newZ - new Z index
-         */
-        ,
-        set: function set(newZ) {
-            this._zIndex = newZ;
-            this.olLayer.setZIndex(this.zIndex);
-        }
-    }]);
-
-    return LayerBase;
-}();
-
-nm.LayerBase = LayerBase;
-exports.default = LayerBase;
-
-},{"../jquery":302,"../olHelpers/zoomResolutionConvert":317,"../util/makeGuid":322,"../util/provide":323}],304:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
+        nm.MapPopupCls = MapPopupCls;
+        exports.default = MapPopupCls;
+    });
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _set = function set(object, property, value, receiver) { var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent !== null) { set(parent, property, value, receiver); } } else if ("value" in desc && desc.writable) { desc.value = value; } else { var setter = desc.set; if (setter !== undefined) { setter.call(receiver, value); } } return value; };
-
-var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
-var _jquery = require('../jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _LayerBase2 = require('./LayerBase');
-
-var _LayerBase3 = _interopRequireDefault(_LayerBase2);
-
-var _mapMove = require('../olHelpers/mapMove');
-
-var _mapMove2 = _interopRequireDefault(_mapMove);
-
-var _provide = require('../util/provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-var _ol = require('../ol/ol');
-
-var _ol2 = _interopRequireDefault(_ol);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var nm = (0, _provide2.default)('layers');
-
-/**
- * The make mapMoveGetParams function takes the extent and the zoom level
- * context is 'this' object, probably want to do something with this.mapMoveParams
- * @callback mapMoveMakeGetParams
- * @param {LayerBaseVector} lyr
- * @param {object} extent
- * @param {number} extent.minX
- * @param {number} extent.minY
- * @param {number} extent.maxX
- * @param {number} extent.maxY
- * @param {number} zoomLevel
- */
-
-/**
- * The Vector layer base
- * @augments LayerBase
- * @abstract
- */
-
-var LayerBaseVector = function (_LayerBase) {
-    _inherits(LayerBaseVector, _LayerBase);
-
-    /**
-     * The base vector layer
-     * @param {string} url - pass an empty string to prevent default load and add from a json source
-     * @param {object} options - config
-     * @param {string} [options.id] - layer id
-     * @param {string} [options.name=Unnamed Layer] - layer name
-     * @param {number} [options.opacity=1] - opacity
-     * @param {boolean} [options.visible=true] - default visible
-     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
-     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
-     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
-     * @param {number} [options.zIndex=0] the z index for the layer
-     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
-     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
-     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
-     * @param {boolean} [options.legendContent] additional content to add to the legend
-     *
-     * @param {boolean} [options.autoLoad=false] if the layer should auto load if not visible
-     * @param {object} [options.style=undefined] the layer style, use openlayers default style if not defined
-     * @param {boolean} [options.onDemand=false] if the layer should be loaded by extent on map move
-     * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
-     * @param {mapMoveMakeGetParams} [options.mapMoveMakeGetParams=function(lyr, extent, zoomLevel){}] function to create additional map move params
-     * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
-     *
-     */
-
-    function LayerBaseVector(url, options) {
-        _classCallCheck(this, LayerBaseVector);
-
-        //prevent regular load if no url has been provided
-
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LayerBaseVector).call(this, url, options));
-
-        if (_this.url.trim() == '') {
-            _this._loaded = true;
-        }
-
-        _this._style = typeof options.style == 'undefined' ? undefined : options.style;
-
-        if (_this.visible) {
-            _this._autoLoad = true;
-        } else {
-            _this._autoLoad = typeof options['autoLoad'] == 'boolean' ? options['autoLoad'] : false;
-        }
-
-        _this._onDemand = typeof options.onDemand == 'boolean' ? options.onDemand : false;
-        _this._onDemandDelay = typeof options.onDemandDelay == 'number' ? options.onDemandDelay : 300;
-
-        if (options.mapMoveObj) {
-            _this._mapMove = options.mapMoveObj;
-        } else {
-            _this._mapMove = _this._onDemand ? _mapMove2.default : undefined;
-        }
-
-        _this._mapMoveMakeGetParams = typeof options.mapMoveMakeGetParams == 'function' ? options.mapMoveMakeGetParams : function (lyr, extent, zoomLevel) {
-            return {};
+},{"../jquery":302,"../ol/ol":319,"../olHelpers/propertiesZoomStyle":314,"../util/provide":323,"./mapInteractionBase":309}],314:[function(require,module,exports){
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', '../util/provide', './zoomResolutionConvert'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('../util/provide'), require('./zoomResolutionConvert'));
+    } else {
+        var mod = {
+            exports: {}
         };
+        factory(mod.exports, global.provide, global.zoomResolutionConvert);
+        global.propertiesZoomStyle = mod.exports;
+    }
+})(this, function (exports) {
+    'use strict';
 
-        if (_this._onDemand) {
-            _this._loaded = true;
-            _this._mapMoveParams = {};
-            _this._mapMove.checkInit();
-            _this._mapMove.addVectorLayer(_this);
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports', '../util/provide', './zoomResolutionConvert'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports, global.provide, global.zoomResolutionConvert);
+            global.propertiesZoomStyle = mod.exports;
+        }
+    })(undefined, function (exports, _provide, _zoomResolutionConvert) {
+        'use strict';
+
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+
+        var _provide2 = _interopRequireDefault(_provide);
+
+        var zoomResolutionConvert = _interopRequireWildcard(_zoomResolutionConvert);
+
+        function _interopRequireWildcard(obj) {
+            if (obj && obj.__esModule) {
+                return obj;
+            } else {
+                var newObj = {};
+
+                if (obj != null) {
+                    for (var key in obj) {
+                        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+                    }
+                }
+
+                newObj.default = obj;
+                return newObj;
+            }
         }
 
-        _this._source = new _ol2.default.source.Vector();
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
+        }
 
         /**
-         *
-         * @type {ol.layer.Vector|ol.layer.Base}
+         * Created by gavorhes on 12/14/2015.
          */
-        _this.olLayer = new _ol2.default.layer.Vector({
-            source: _this._source,
-            visible: _this.visible,
-            style: _this.style,
-            minResolution: _this._minResolution,
-            maxResolution: _this._maxResolution,
-            zIndex: _this._zIndex
-        });
-        return _this;
+
+        var nm = (0, _provide2.default)('olHelpers');
+
+        /**
+         * A style function based on properties and zoom level, wraps normal feature, resolution function
+         * @callback propertiesZoomStyle
+         * @param {object} properties the feature properties
+         * @param {number} zoom level
+         *
+         */
+
+        /**
+         * wrapper to define a style function by properties and zoom level
+         * @param {propertiesZoomStyle|*} styleFunc - style function
+         * @returns {function|*} new function
+         */
+        function propertiesZoomStyle(styleFunc) {
+            if (styleFunc == undefined) {
+                return undefined;
+            }
+
+            return function (feature, resolution) {
+                styleFunc(feature.getProperties(), zoomResolutionConvert.resolutionToZoom(resolution));
+            };
+        }
+
+        nm.propertiesZoomStyle = propertiesZoomStyle;
+        exports.default = propertiesZoomStyle;
+    });
+});
+
+},{"../util/provide":323,"./zoomResolutionConvert":317}],315:[function(require,module,exports){
+(function (global, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(['exports', './quickMapBase', '../util/provide', './mapMove', './mapPopup'], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(exports, require('./quickMapBase'), require('../util/provide'), require('./mapMove'), require('./mapPopup'));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports, global.quickMapBase, global.provide, global.mapMove, global.mapPopup);
+    global.quickMap = mod.exports;
+  }
+})(this, function (exports) {
+  'use strict';
+
+  (function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+      define(['exports', './quickMapBase', '../util/provide', './mapMove', './mapPopup'], factory);
+    } else if (typeof exports !== "undefined") {
+      factory(exports);
+    } else {
+      var mod = {
+        exports: {}
+      };
+      factory(mod.exports, global.quickMapBase, global.provide, global.mapMove, global.mapPopup);
+      global.quickMap = mod.exports;
+    }
+  })(undefined, function (exports, _quickMapBase, _provide, _mapMove, _mapPopup) {
+    'use strict';
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+
+    var _quickMapBase2 = _interopRequireDefault(_quickMapBase);
+
+    var _provide2 = _interopRequireDefault(_provide);
+
+    var _mapMove2 = _interopRequireDefault(_mapMove);
+
+    var _mapPopup2 = _interopRequireDefault(_mapPopup);
+
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {
+        default: obj
+      };
     }
 
     /**
-     * dummy to be overridden
-     * @param {object} featureCollection - geojson or esrijson object
+     * Created by gavorhes on 12/15/2015.
      */
 
+    var nm = (0, _provide2.default)('olHelpers');
 
-    _createClass(LayerBaseVector, [{
-        key: 'addFeatures',
-        value: function addFeatures(featureCollection) {
-            console.log('Layer vector base addFeatures is a placeholder and does nothing');
+    /**
+     * Sets up a map with some default parameters and initializes
+     * mapMove and mapPopup
+     *
+     * @param {object} [options={}] config options
+     * @param {string} [options.divId=map] map div id
+     * @param {object} [options.center={}] center config object
+     * @param {number} [options.center.x=-10018378] center x, web mercator x or lon
+     * @param {number} [options.center.y=5574910] center y, web mercator y or lat
+     * @param {number} [options.zoom=7] zoom level
+     * @param {number} [options.minZoom=undefined] min zoom
+     * @param {number} [options.maxZoom=undefined] max zoom
+     * @param {boolean} [options.baseSwitcher=true] if add base map switcher
+     * @param {boolean} [options.fullScreen=false] if add base map switcher
+     * @returns {ol.Map} the ol map
+     */
+    function quickMap(options) {
+      var m = (0, _quickMapBase2.default)(options);
+      _mapMove2.default.init(m);
+      _mapPopup2.default.init(m);
+
+      return m;
+    }
+
+    nm.quickMap = quickMap;
+    exports.default = quickMap;
+  });
+});
+
+},{"../util/provide":323,"./mapMove":310,"./mapPopup":312,"./quickMapBase":316}],316:[function(require,module,exports){
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', '../jquery', '../util/provide', '../ol/ol'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('../jquery'), require('../util/provide'), require('../ol/ol'));
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports, global.jquery, global.provide, global.ol);
+        global.quickMapBase = mod.exports;
+    }
+})(this, function (exports) {
+    'use strict';
+
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports', '../jquery', '../util/provide', '../ol/ol'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports, global.jquery, global.provide, global.ol);
+            global.quickMapBase = mod.exports;
+        }
+    })(undefined, function (exports, _jquery, _provide, _ol) {
+        'use strict';
+
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+
+        var _jquery2 = _interopRequireDefault(_jquery);
+
+        var _provide2 = _interopRequireDefault(_provide);
+
+        var _ol2 = _interopRequireDefault(_ol);
+
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
         }
 
+        var nm = (0, _provide2.default)('olHelpers');
+
         /**
-         * Before call to map move callback, can prevent call by returning false
-         * @param {number} zoom - zoom level
-         * @param {string} [evtType=undefined] undefined for initial load, otherwise one of 'change:center', 'change:resolution'
-         * @returns {boolean} if the call should proceed
+         * Sets up a map with some default parameters and initializes
+         * mapMove and mapPopup
+         *
+         * @param {object} [options={}] config options
+         * @param {string} [options.divId=map] map div id
+         * @param {object} [options.center={}] center config object
+         * @param {number} [options.center.x=-10018378] center x, web mercator x or lon
+         * @param {number} [options.center.y=5574910] center y, web mercator y or lat
+         * @param {number} [options.zoom=7] zoom level
+         * @param {number} [options.minZoom=undefined] min zoom
+         * @param {number} [options.maxZoom=undefined] max zoom
+         * @param {boolean} [options.baseSwitcher=true] if add base map switcher
+         * @param {boolean} [options.fullScreen=false] if add base map switcher
+         * @returns {ol.Map} the ol map
+         */
+        /**
+         * Created by gavorhes on 3/25/2016.
          */
 
-    }, {
-        key: 'mapMoveBefore',
-        value: function mapMoveBefore(zoom, evtType) {
-            if (this.minZoom !== undefined) {
-                if (zoom < this.minZoom) {
-                    return false;
+        /**
+         * Created by gavorhes on 12/15/2015.
+         */
+
+        function quickMapBase(options) {
+            options = options || {};
+            options.divId = options.divId || 'map';
+            options.center = options.center || {};
+            options.center.x = typeof options.center.x == 'number' ? options.center.x : -10018378;
+            options.center.y = typeof options.center.y == 'number' ? options.center.y : 5574910;
+            options.zoom = typeof options.zoom == 'number' ? options.zoom : 7;
+            options.baseSwitcher = typeof options.baseSwitcher == 'boolean' ? options.baseSwitcher : true;
+            options.fullScreen = typeof options.fullScreen == 'boolean' ? options.fullScreen : false;
+
+            var $mapDiv = (0, _jquery2.default)('#' + options.divId);
+            $mapDiv.css('position', 'relative');
+
+            var osmLayer = new _ol2.default.layer.Tile({ source: new _ol2.default.source.OSM() });
+            var satLayer = new _ol2.default.layer.Tile({ visible: false, source: new _ol2.default.source.MapQuest({ layer: 'sat' }) });
+
+            var osmCss = "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURQAAADQ1NDk5OURFREtLS1FHSFlZWGJRVGJiYWdmZWxsbHRmaXBpanN0c3V0dHp5eX5+fIVzd4F3eeV0jud5juZ8k4aHhomHhoyGh5eGj5OVlJiVlZiYl5qZmJydnKOTlaKZmqKdnaOioaqqqKuzsbOvrrSysLa3tbW4uLm6ub27ub+/vbGXwbCZwbCgxLKlxrOqyLStybO3yrSxyrWzzbW2y7a1zbK4y7W6zbW8y760yrTAzbTFzrPKzrLOzrTJzrTOzr7CwbXC0LXK0LTO0L3I0bPQz7TQz7PS0bXQ0LnR0brW1bzT0r7U077V1Lzc2dqNqteUsdyXscaquuOHneaGmueHnOeJnuiBleiKn+eNoOiOoOWUpOiRo+iSpeiUpeqYpumaqOmdrPSynemgruSqtOmisOmlsuuqtequuOW1vOuxu+uxvOq1ve+xvPK0pvW3o/W5pfO5qvS7qfCwvMOuwc2/wNenxNyyzNe/0Nq31Nq51dy72Oy3wOu4wOu+xey4wO+6xO2+xfTAr/TCsvfFtPHLvvTJuMPDwMfHxcXKyc3DxMvFyMvLyM3PzcDV08DV1MTX1cbY1s7X1sjZ1sra2Mnd3M7b2c7c2tfH1tnB1t7F2d7M29fX1tLY1tDd2tHe3NTf3NnS19rZ1tva2Nnf3t3d28rh3tXg3Nnh3tzj393k39ni4N7k4N7n5uXDyOfLz+zAxu3CyOzEyezKzeDJ3eLM3uvP0u3P0ePf2+7R0u7Q1u/U0+7U1ezc0+7a2e/d2+3f3vbFzvLOwfHN0PPQw/TUx/LWyvLYzPDQ1fPe0ubc4vve4uHh3+nh3+/h2u/h3vHj2vHl3uHm4eTn4uDp5ebo4+Xo5ODq6ebq6OTv6+nl4+/j4O7l4e7n5ujp4+np5Ozq5e7s5urt6O7t6Orw6u7x6u3x7vPj5PDl4fDo4vDq5fDt5vDu6PDv7PTv6fDx6vHx7fH17fXw6fXy7fb07/bz8fT18vn38vr39fr48/r59Pr6+P3++//+/gAAALNTSk0AAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wBT9wclAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4wLjlsM35OAAAFNElEQVRIS1VVCZxVUxi/9l0UIUT2bMnY43bVI2c0Y01kSWIaS0j2JEtkN41piomZrPPKQ2aQ7JKImOZlnm2493TJzDufuU1Zi+v/fee+mZ//793vnPOd7zvfes5zDBEZkBBjAcIjb+Iiotqgdhat8AMK0vl7/R9N7GiWtshqIr+EZ5gYKibyUsXY1l/mfFpssvUlWQ0FkU3gy4+RB/+kwYcO8pRSnldcOU/r2lAHARSwk2ORgEmOdC1EsuRiYSqMPwwroMIraZk5V2fYJQjCKfZrRmh3gSAZi2i4b7wSylWu8EqZwS59JkFUaW96JbNSc+CEUmt4rorwuZmWdDaoc+uZETuQlTCU5xYzR7muUnVUVo+BcRhre/VwUpasgJwhH7JkYIYA0sNxhmCwUK+lw6vCKBZehw01dEiyw4Q4aE0Z4ahDhKaFQsGnJ2BgqKoTBsNjFy0SlW6whRAZTdm8DBJmkBZhDi1j4xJQBk6ywrWUTymaCxac8lROcdauRGzQSNtA7EHUYhXyEwhhgjFUqRuO+rauhF1awFpzCsmwUbjIFBR0u1bKtyGpulW/H/cVVzkyGaIWTIR9pFAV6GK2gPMXMX8gPk9zzxXgI1kimcAltEYr+cjio1imlKpEa9rOipLm+p+CZ6Bw//qd1/f/O+GwMxbSLpyoZEcwkyh2jIks+3hmdd2jWUw4scxNysnHxU7nSspTRcJjCZGL3IsjsYJMMg5mwgx7gaIOLBFCogAgBBoNa9w+DE6I+Bs7FTgwwrJbHjWDgpYo2KwtBTcYEDuloC9geQw+k2RGnPGpTaOlq7AS+YICUz4DZVaX2TiNDhuYfTtY4geLi0IoCm3XccwM9hx4kU28StQEljDs3ZEpFGA+8dKzLmV9ymIwF5FOGn2GdJM8KLHDJbXyiYVMG9MRTLiXGGg2QKaxM3khPSRrwM9zEIardxU2w/EiA0gOeYKHzDR0V7/QGV3lKIA9ktrDArxO3gdA+k6SKoBiVwcm7NjZb9+Hnztg282TuHVZ9LOISFNt9MgyCetZVczSxnyDbl17Penq6mqpg1IhRaEO2aVLUO4/r17H8tTv6f13h71dduvZI3Y+uMdWksNSauLovJw5hsqiPIUvt0ku7/iBeUR3sksmomYWtRbAjbiLfv2lX9/V7LVG4uYnUZXhQ7f2OPCZEx9wrYWTcePEQqPEML8pl4mMdr/jlXlvHiRiJ2+MSTFY4TTSYStuvz2R/JXh+PPeGXm055J+3/YDWuNu3R3DArPutyg0ZgykMVDU9Ndm22+wYalr2rse48CnsTIFcMn73vfhNrktx1EUcZnPv6ah3Yy5cDTRdBEoGoBeah71dqFyjZDJLkWk3N3v4uuktssjWpzciMPxQeHj8nMKzcGuB0tAyzFhdCKOYWv4HwOQVwIxLG99a6uvH3sJCyO3h+k4EZ+G7+xj5f4XXksoaGrdMRzSc8ARA8+cdOuk2x6fffNNt5x+Ro1omPlrT/CQDlcNlpx4NBIWXhkx7Y3Zp3ofNR7Uv89Om/beW0TLIynHv3vs1VsOFpSWSXvfuPUf9BrRFyxgXdHoKJnQFegPOovvzz59ntrzye240ig8UQ3lDI2VqwagrKIQcLXNFL3wglN2OHdBQ6/vI3kENDVBwRb3k1XtczFbjWn4EzMYi7CF3129+JTYuRSdrGuS92g5dpqn6qXoJQs5xmL8p+Wt4hLbt0mx2OLNZR2bbPy8zJNQGFM/f/CfXZekRYFjGCWjIJpM+WiCzGBPWHhoyaAsjRT/B2Gy5yzYJkwUAAAAAElFTkSuQmCC')";
+            var aerialCss = "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURQALBgIMDQgOBwQOEQcTBwUSCwoVDAwdBw8ZDgUREwYUGAYZFQYZGgkTFQoVGQsZFAwZHBMeDhIbFBEbHAwWIA4bIREcIQ4hCQwjFw4lHBgkDB8sDxUiExIiGhAoGxohFRshGRorHQcrKQsiIQwmKgooJA0pKQ81Jw8yLRMiIxImKxUrJREuKhslJB0rIhooKRUuMBMyLhkwJhozKh48LxUzMRM9MBwzMiUvFCMtGiMwEiwzFCgzHDI+GSIsISkvJSQxIiM2LiY5Jic+Lyk0JSo0Ky49JSs9KSU1NSM7NCs2NS8+NDM1JzU9Ljg7IDJCHS1DLSNAMitCMSxIOjREITZLIDZJKDlFIjpFKztKJT1LKzJBMzpHMD1JMjpKPD1RKjlQNC1DQj5QQEA8MEJGJkBKJUJNK0lLLEJMMkVMPEpONENSLUdZL0pTLkpaLkRUMkRSPEVZMktUM0pVOklZMklZNEpcNU1ZMk1ZNUxfMk5dNkxcOVFUM1RUOFJbNVFZOVNYPVFdOVJdPFVaOVVaPVVdOlVdPVpaNlpdO0phN01hOlBiN1NhPFNoP1piPWFbPmRjPENOQEtPSURTQkJVS0xVQk1VSkxbQkxcS0heUVFXRFRcQlJfTFxeQlpeS05lQk1kSFRjQVRjSlZpQ1tkQlxlSlxpRF1rSVVnUVtlU1llXF9tU1xoXlxwSl9ramRfQmJlQ2FhSWFlSWFlTmVlSWRmTGFoQWFpRWFsRmVpRWVtRmNsSmtlRGpqRmpsS2BmWGRsUmFrW2ptUmZyR2RxTGpxTWVyU2RyW2d5V2tzUmt0WW15VG15WXFuTHNtVnFxTXF4T3h0TnJzUnJ1XHJ4VXN6Wnp0VHx1W315VXp8XGR0YGx0YHVzZXJ0aHR9ZXV+aHl9YHOCXXqBXXeCYHyCY3iEaHyIYn+JaXqKcYB5WIN6Y4SCXoCDZIGEaYCIZoOLa4iCaImJbIOOdYuMco6OeIuVcpOKbZKPc5aQb5eXe5ufg6KjhAAAAAAAAAAAAAAAAOGCeQgAAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wBT9wclAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4wLjlsM35OAAAH80lEQVRISy1WbXQUVxm+6wqnk3Zmpxl2FG2EGg92C8GDlWptVTwa+uF3xcKmDfFzCUzDsJNsunXipglJXJbrtJWmwZNSnHD3jojRgUIm2UumIZ0JZ7JByrALbMWW0IBW8aRa4+cf76TeX3Nm3uc+z/s+7/vugl4r/aMTrT4e1pPTqnnmJNn5AyUzRnrRle/qE33dsvrBtAQVoxtpZNK3zSzYjUjviWO2Ag+R77dl7W36n/1Ep9KBPG/S+Py0PkjU/gPKQGqwTHryiWYFAXSvMairsio7SjyNsnCzh0qKImV9/7mhfHQZx2yN1O+7rXUm33MUPaboOkAJHaoIdXfJj2xWeyD8jMFEXkvIu5qzpU988gWB5zl+GS+sFe55trEVPdWZB2miq8bBVkNFO2R0qnrfkiXhcJhtDNXE6tbW97/s9O9/7ZfVhx86/CwrROpfvvxboMqeLsuqPr1j44qEwDNMOBximUiYoU8sw7BC/a7T72uEnyJDlGxZ9KcglZRyuqqrv/tSZErgOI4NgRBTIw9EmHAoFGZZnp6aGaJ2GTxfxYs8kKVUQh7WB5hQeC3LsUxoxVKW14l3BX2WcoUYPiZyLLe8teZ+iuT4GGhvV5KpKWkpyzxEr2MZgQ1xdRjfRBoH+2k6lIHjKTHPPBo8CSJISqqq4wGGOcWylIGlgvgNX1Gd8vF5f+IUIwb30ng+Gg2QfBRIMvy0jG8SVkYo4N0zvUXVRztbJ/L6xL7lUZEXBEHkuZqlS6gEAUgKJurnhFtfpACOYd8b/hVbJPqwi44a6KA0sPVjIi/SIyxb3u8KlAJ0S8jRVgrlW+nVHPdrhiXCxu42d86ByksDc80P3MkJFBFQ8Ho1lQegpWJRWFGsDsRwwv7pIyvuQW0ZkrX6NDVFbqcvaQI8vbyqzt5AARrsbKx5yhQEGs+wPO56bOK+0rcwMrOKkpUbZWYxV04UeZZv/cBKFhRL6Qdv9y4LfEDA7/thg7tTmv1a5/GnO0wl0dQg80wglZaHUmxRvjwAHOfyN0mxrpqLUpcjsK3NHYMo4R1o6eho2ZyIb2FoeOC3ILK8kZ2HQMOuWywGXUkJBCeTbYFS0+ym1h2/6UgmvnrvKYZZtIEXGf75C2cIAp5LHNd71x7uPoTjakrWH9e3KFpaatjUvJUysFw0KrLMYMW2lTg4PeUQx6kJEALvxXEmCdVyPLHtCSjBhc01XCjIgafxou+PE6KC1dhxSCwoBCc+N4P3btM84pmdSSjJnjO/nvY4LQfVyz5/I+v6IwjUOMjy+MVCxIbKupTJaEktp7cTKU42Pvjh2m/8cSpC6aPsaX/MHSuUQLVVsIa4RUTs/r/BVAexNdjdnsNG7j/rV93xheLMzKnFrPeTEQchCyCcKb25aAIn7lrAertrZwyNXM8N6zfWrFo3d2SmOEcF83x/r+OOFgrAHYWF7cELjhV7UQo/6WAIUVl9JFl8a//HZ66VpbY3I9QKZqPru77lA+iOWAIr0hKxHCmmr0othSyeIl5y3qt4xT8gSNrKEZozs8Els67rgsLOZ+ygzwMfbtNhobfgzpEyGnz7htPtzUi6PuOoj7K0WF/MXiUFxwGajRD1hjYXHXI9p406qOyinp5/tiWcDHY0jIu4n64Qfq7kliB2gemag9QbOia0PbbDMbd43SHuvxFxrAocxins7MX5Kqbe1QixKBxoV4//PfAgGCu+Rlm4SvZizyDH+0reDHp92iO0BuX3bCfItl0PEwvYLqpwXG2MHlGsQ4S8pMJZv1JGmHiEoHQDdOjwmVlEP/nE9ADKjI8xLI0OOGITfy0SbeG/C2jKUDGSlDhM9I3IpK9iup6XnbRNC7yqueNsJCCIiXzdQhnaGN+46umnEdy5U5UbUJ48LFM9GkJo8BdDOiAZ7ZIQbKhYLMqvhU2wmNxjEAsS2AI7y4nWF64duePbk7YV3zvAVLEMD9AxJRNa3KDUibV7DjnkuprMEYjScFNcaR2ceP2u9R/5k1052Ryme5phAFRswlHjAudiP4dOy7CaxLgdJh9vUlU1702/+LPa1U9fvPi9qlA4XEUBJc3dFlpsR457IDl1iPqLp7o81NQgyV19iYU38uTiv975Pd3SiwQcsGjx+v4/6fl5T7EOOMTCtpbKxfemsQq/3olQZcminADAAI0cuGLHaHOFxbuGvRk/Z9u7CULqoVR6NE0yx1avj30oRhc/jWUoIALGxkz0dg1Dl9iaI7LqOOXKsXJFwjiuEAi70Jra2nW1PL08zLBhZsMABpW5csI7TPfew9ipFKcn5k1i+1KyCWKjC3W/8dF1d666+RaabBVTFTHacjoojBNDh0NDxk+IPTlwfqJkWpbnpFHXIbLbmpxEQ3ff/Z0g/mauXsoln9wDRjy/NHsQFw3P6vWuTJ43/+FZrk2cvAFRipCKdfD9y2+pjRj78s0KdCUDKJvdV91ChngV38T20TM+gghjpJaPlpFr2xbEz5g4A/NGt5rNwdwmYGeeeMXBSLHHUIc+6RsojRH9VTUm3/mLf/64b470XvoxoTKhlMBQ2jMEzo2PjxdGMppmn1RM24bWFJqaQv4BcuJa2Sam7Zokq1ldCsz06NCBHrhwqVQYpfFj42NZexz1EW9SR/kT58nEeQKJb2fPXjjp0u/YUkwHEgLeOnf2nOuf1TRTM02CLKLTPy60/x1CCztqn7Ev+BdsC3m+30decQvW/wBNTwU+CfUQAQAAAABJRU5ErkJggg==')";
+
+            if (options.baseSwitcher) {
+                var switcherContent = '<div class="base-map-switcher" title="Toggle Base Layer" style="';
+                switcherContent += 'position: absolute; top: 70px; left: 4px; border: solid black 1px; ';
+                switcherContent += 'height: 50px; width: 50px; z-index: 10; border-radius: 4px; background: ' + aerialCss + ';';
+                switcherContent += '"></div>';
+                $mapDiv.append(switcherContent);
+
+                $mapDiv.find('.base-map-switcher').click(function () {
+                    "use strict";
+
+                    osmLayer.setVisible(!osmLayer.getVisible());
+                    satLayer.setVisible(!satLayer.getVisible());
+
+                    if (osmLayer.getVisible()) {
+                        (0, _jquery2.default)(this).css('background', aerialCss);
+                    } else {
+                        (0, _jquery2.default)(this).css('background', osmCss);
+                    }
+                });
+            }
+
+            if (options.zoom < 0 || options.zoom > 28) {
+                throw 'zoom out of range';
+            }
+
+            if (options.center.x >= -180 && options.center.x <= 180 && options.center.y >= -90 && options.center.y <= 90) {
+                var p = new _ol2.default.geom.Point([options.center.x, options.center.y]);
+                p.transform("EPSG:4326", "EPSG:3857");
+                var coordinates = p.getCoordinates();
+                options.center.x = coordinates[0];
+                options.center.y = coordinates[1];
+            }
+
+            var map = new _ol2.default.Map({
+                layers: [osmLayer, satLayer],
+                target: options.divId,
+                controls: _ol2.default.control.defaults({
+                    attributionOptions: { collapsible: false }
+                }),
+                view: new _ol2.default.View({
+                    center: [options.center.x, options.center.y],
+                    zoom: options.zoom,
+                    minZoom: options.minZoom,
+                    maxZoom: options.maxZoom
+                })
+            });
+
+            if (options.fullScreen) {
+                map.addControl(new _ol2.default.control.FullScreen());
+            }
+
+            return map;
+        }
+
+        nm.quickMapBase = quickMapBase;
+        exports.default = quickMapBase;
+    });
+});
+
+},{"../jquery":302,"../ol/ol":319,"../util/provide":323}],317:[function(require,module,exports){
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', '../util/provide'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('../util/provide'));
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports, global.provide);
+        global.zoomResolutionConvert = mod.exports;
+    }
+})(this, function (exports) {
+    'use strict';
+
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports', '../util/provide'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports, global.provide);
+            global.zoomResolutionConvert = mod.exports;
+        }
+    })(undefined, function (exports, _provide) {
+        'use strict';
+
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+        exports.zoomToResolution = zoomToResolution;
+        exports.resolutionToZoom = resolutionToZoom;
+
+        var _provide2 = _interopRequireDefault(_provide);
+
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
+        }
+
+        var nm = (0, _provide2.default)('olHelpers.zoomResolutionConvert'); /**
+                                                                             * Created by gavorhes on 12/14/2015.
+                                                                             */
+
+        var _zoomResLookup = [156543.03392804097, //0
+        78271.51696402048, //1
+        39135.75848201024, //2
+        19567.87924100512, //3
+        9783.93962050256, //4
+        4891.96981025128, //5
+        2445.98490512564, //6
+        1222.99245256282, //7
+        611.49622628141, //8
+        305.748113140705, //9
+        152.8740565703525, //10
+        76.43702828517625, //11
+        38.21851414258813, //12
+        19.109257071294063, //13
+        9.554628535647032, //14
+        4.777314267823516, //15
+        2.388657133911758, //16
+        1.194328566955879, //17
+        0.5971642834779395, //18
+        0.29858214173896974, //19
+        0.14929107086948487, //20
+        0.07464553543474244, //21
+        0.03732276771737122, //22
+        0.01866138385868561, //23
+        0.009330691929342804, //24
+        0.004665345964671402, //25
+        0.002332672982335701, //26
+        0.0011663364911678506, //27
+        0.0005831682455839253 //28
+        ];
+
+        /**
+         * Get the resolution given the zoom level
+         * @param {number} zoomLevel - the zoom level
+         * @returns {number|*} the map resolution
+         */
+        function zoomToResolution(zoomLevel) {
+            "use strict";
+
+            if (typeof zoomLevel == 'number') {
+                if (zoomLevel % 1 === 0 && zoomLevel >= 0 && zoomLevel <= 28) {
+                    return _zoomResLookup[zoomLevel];
+                } else {
+                    console.log('invalid zoom level provided: ' + zoomLevel);
+
+                    return undefined;
                 }
-            }
-
-            if (this.maxZoom !== undefined) {
-                if (zoom > this.maxZoom) {
-                    return false;
-                }
-            }
-
-            return this.visible;
-        }
-
-        /**
-         * callback to generate the parameters passed in the get request
-         * @param {object} extent - extent object
-         * @param {number} extent.minX - minX
-         * @param {number} extent.minY - minY
-         * @param {number} extent.maxX - maxX
-         * @param {number} extent.maxY - maxY
-         * @param {number} zoomLevel - zoom level
-         */
-
-    }, {
-        key: 'mapMoveMakeGetParams',
-        value: function mapMoveMakeGetParams(extent, zoomLevel) {
-            this._mapMoveParams = {};
-            _jquery2.default.extend(this._mapMoveParams, this.params);
-            _jquery2.default.extend(this._mapMoveParams, this._mapMoveMakeGetParams(this, extent, zoomLevel));
-        }
-
-        /**
-         * callback function on map move
-         * @param {object} d - the json response
-         */
-
-    }, {
-        key: 'mapMoveCallback',
-        value: function mapMoveCallback(d) {
-            if (this.source) {
-                this._source.clear();
-            }
-        }
-
-        /**
-         * clear features in the layer
-         */
-
-    }, {
-        key: 'clear',
-        value: function clear() {
-            if (this._source) {
-                this._source.clear();
-            }
-        }
-
-        /**
-         * get on demand delay in miliseconds
-         * @type {number|*}
-         */
-
-    }, {
-        key: 'onDemandDelay',
-        get: function get() {
-            return this._onDemandDelay;
-        }
-
-        /**
-         * get if the layer is autoloaded
-         * @type {boolean}
-         */
-
-    }, {
-        key: 'autoLoad',
-        get: function get() {
-            return this._autoLoad;
-        }
-
-        /**
-         * get the style definition
-         * @type {ol.Style|styleFunc}
-         */
-
-    }, {
-        key: 'style',
-        get: function get() {
-            return this._style;
-        }
-
-        /**
-         * set the style
-         * @param {ol.Style|styleFunc} style - the style or function
-         */
-        ,
-        set: function set(style) {
-            this._style = style;
-            this.olLayer.setStyle(this._style);
-        }
-
-        /**
-         * get the map CRS if it is defined by the map move object
-         * @type {string|*}
-         */
-
-    }, {
-        key: 'mapCrs',
-        get: function get() {
-            if (this._mapMove) {
-                return this._mapMove.map.getView().getProjection().getCode();
             } else {
                 return undefined;
             }
         }
+        nm.zoomToResolution = zoomToResolution;
 
         /**
-         * get the map move object
-         * @type {MapMoveCls|*}
+         * Get resolution from the zoom level
+         * @param {number} resolution - the resolution
+         * @returns {number|*} the zoom level
          */
-
-    }, {
-        key: 'mapMove',
-        get: function get() {
-            return this._mapMove;
-        }
-
-        /**
-         * map move params
-         * @type {object}
-         */
-
-    }, {
-        key: 'mapMoveParams',
-        get: function get() {
-            return this._mapMoveParams;
-        }
-
-        /**
-        * Get the layer visibility
-        * @type {boolean}
-        */
-
-    }, {
-        key: 'visible',
-        get: function get() {
-            return _get(Object.getPrototypeOf(LayerBaseVector.prototype), 'visible', this);
-        }
-
-        /**
-         * Set the layer visibility
-         * @type {boolean}
-         * @override
-         */
-        ,
-        set: function set(visibility) {
-            _set(Object.getPrototypeOf(LayerBaseVector.prototype), 'visible', visibility, this);
-
-            if (this._onDemand) {
-                this.mapMove.triggerLyrLoad(this);
-            }
-        }
-
-        /**
-         * get the layer vector source
-         * @override
-         * @type {ol.source.Vector}
-         */
-
-    }, {
-        key: 'source',
-        get: function get() {
-            return _get(Object.getPrototypeOf(LayerBaseVector.prototype), 'source', this);
-        }
-
-        /**
-         * array of ol features
-         * @type {Array.<ol.Feature>}
-         */
-
-    }, {
-        key: 'features',
-        get: function get() {
-            return this.source.getFeatures();
-        }
-    }]);
-
-    return LayerBaseVector;
-}(_LayerBase3.default);
-
-nm.LayerBaseVector = LayerBaseVector;
-exports.default = LayerBaseVector;
-
-},{"../jquery":302,"../ol/ol":319,"../olHelpers/mapMove":310,"../util/provide":323,"./LayerBase":303}],305:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
-var _jquery = require('../jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _LayerBaseVector2 = require('./LayerBaseVector');
-
-var _LayerBaseVector3 = _interopRequireDefault(_LayerBaseVector2);
-
-var _provide = require('../util/provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-var _ol = require('../ol/ol');
-
-var _ol2 = _interopRequireDefault(_ol);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by gavorhes on 11/2/2015.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
-var nm = (0, _provide2.default)('layers');
-
-/**
- * The Vector GeoJson Layer
- * @augments LayerBaseVector
- */
-
-var LayerBaseVectorGeoJson = function (_LayerBaseVector) {
-    _inherits(LayerBaseVectorGeoJson, _LayerBaseVector);
-
-    /**
-     * @param {string|undefined|null} url - resource url, set to '' to make blank layer
-     * @param {object} options - config
-     * @param {string} [options.id] - layer id
-     * @param {string} [options.name=Unnamed Layer] - layer name
-     * @param {number} [options.opacity=1] - opacity
-     * @param {boolean} [options.visible=true] - default visible
-     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
-     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
-     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
-     * @param {number} [options.zIndex=0] the z index for the layer
-     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
-     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
-     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
-     * @param {boolean} [options.legendContent] additional content to add to the legend
-     *
-     * @param {boolean} [options.autoLoad=false] if the layer should auto load if not visible
-     * @param {object} [options.style=undefined] the layer style, use openlayers default style if not defined
-     * @param {boolean} [options.onDemand=false] if the layer should be loaded by extent on map move
-     * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
-     *
-     * @param {object} [options.transform={}] SR transform, set as false for no transform
-     * @param {string} options.transform.dataProjection=EPSG:4326 the data CRS
-     * @param {string} options.transform.featureProjection=EPSG:3857 the feature/map CRS
-     * @param {mapMoveMakeGetParams} [options.mapMoveMakeGetParams=function(lyr, extent, zoomLevel){}] function to create additional map move params
-     * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
-     */
-
-    function LayerBaseVectorGeoJson(url, options) {
-        _classCallCheck(this, LayerBaseVectorGeoJson);
-
-        url = typeof url == 'string' ? url : '';
-
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LayerBaseVectorGeoJson).call(this, url, options));
-
-        _this._geoJsonFormat = new _ol2.default.format.GeoJSON();
-
-        _this._transform = options.transform || {};
-        _this._transform.dataProjection = _this._transform.dataProjection || "EPSG:4326";
-        _this._transform.featureProjection = _this._transform.featureProjection || "EPSG:3857";
-
-        if (_this.autoLoad || _this.visible) {
-            _this._load();
-        }
-        return _this;
-    }
-
-    /**
-     * add feature collection
-     * @param {object} featureCollection - as geojson object
-     */
-
-
-    _createClass(LayerBaseVectorGeoJson, [{
-        key: 'addFeatures',
-        value: function addFeatures(featureCollection) {
-            if (this._transform.dataProjection == 'EPSG:3857' && this._transform.featureProjection == 'EPSG:3857') {
-                this._source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection));
-            } else {
-                this._source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection, this._transform));
-            }
-        }
-
-        /**
-         * trigger load features
-         * @protected
-         * @returns {boolean} if already loaded
-         */
-
-    }, {
-        key: '_load',
-        value: function _load() {
-            var _this2 = this;
-
-            if (_get(Object.getPrototypeOf(LayerBaseVectorGeoJson.prototype), '_load', this).call(this)) {
-                return true;
-            }
-
-            _jquery2.default.get(this._url, this._params, function (d) {
-                _this2.addFeatures(d);
-                _this2.loadCallback(_this2);
-            }, 'json').fail(function () {
-                this._loaded = false;
-            });
-
-            return false;
-        }
-
-        /**
-         * callback function on map move
-         * @param {object} d the json response
-         * @override
-         */
-
-    }, {
-        key: 'mapMoveCallback',
-        value: function mapMoveCallback(d) {
-            _get(Object.getPrototypeOf(LayerBaseVectorGeoJson.prototype), 'mapMoveCallback', this).call(this, d);
-            this._source.addFeatures(this._geoJsonFormat.readFeatures(d, this._transform));
-        }
-    }]);
-
-    return LayerBaseVectorGeoJson;
-}(_LayerBaseVector3.default);
-
-nm.LayerBaseVectorGeoJson = LayerBaseVectorGeoJson;
-exports.default = LayerBaseVectorGeoJson;
-
-},{"../jquery":302,"../ol/ol":319,"../util/provide":323,"./LayerBaseVector":304}],306:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
-var _jquery = require('../jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _LayerBase2 = require('./LayerBase');
-
-var _LayerBase3 = _interopRequireDefault(_LayerBase2);
-
-var _esriToOlStyle = require('../olHelpers/esriToOlStyle');
-
-var esriToOl = _interopRequireWildcard(_esriToOlStyle);
-
-var _mapPopup = require('../olHelpers/mapPopup');
-
-var _mapPopup2 = _interopRequireDefault(_mapPopup);
-
-var _provide = require('../util/provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-var _ol = require('../ol/ol');
-
-var _ol2 = _interopRequireDefault(_ol);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by gavorhes on 12/7/2015.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
-
-var nm = (0, _provide2.default)('layers');
-
-/**
- * esri mapserver layer
- * @augments LayerBase
- */
-
-var LayerEsriMapServer = function (_LayerBase) {
-    _inherits(LayerEsriMapServer, _LayerBase);
-
-    /**
-     * The base layer for all others
-     * @param {string} url - resource url
-     * @param {object} options - config
-     * @param {string} [options.id] - layer id
-     * @param {string} [options.name=Unnamed Layer] - layer name
-     * @param {number} [options.opacity=1] - opacity
-     * @param {boolean} [options.visible=true] - default visible
-     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
-     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
-     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
-     * @param {number} [options.zIndex=0] the z index for the layer
-     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
-     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
-     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
-     * @param {boolean} [options.legendContent] additional content to add to the legend
-     * @param {boolean} [options.addPopup=false] if a popup should be added
-     */
-
-    function LayerEsriMapServer(url, options) {
-        _classCallCheck(this, LayerEsriMapServer);
-
-        var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(LayerEsriMapServer).call(this, url, options));
-
-        _this2._source = new _ol2.default.source.TileArcGISRest({ url: _this2.url == '' ? undefined : _this2.url });
-
-        _this2.olLayer = new _ol2.default.layer.Tile({
-            source: _this2._source,
-            visible: _this2.visible,
-            opacity: _this2.opacity,
-            minResolution: _this2._minResolution,
-            maxResolution: _this2._maxResolution,
-            zIndex: _this2._zIndex
-        });
-
-        options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
-
-        _this2._esriFormat = new _ol2.default.format.EsriJSON();
-        _this2._popupRequest = null;
-
-        _this2.addLegendContent();
-
-        if (options.addPopup) {
-            _mapPopup2.default.addMapServicePopup(_this2);
-        }
-        return _this2;
-    }
-
-    /**
-     * add additional content to the legend
-     * @param {string} [additionalContent=''] additional content for legend
-     */
-
-
-    _createClass(LayerEsriMapServer, [{
-        key: 'addLegendContent',
-        value: function addLegendContent(additionalContent) {
-            var urlCopy = this.url;
-
-            if (urlCopy[urlCopy.length - 1] !== '/') {
-                urlCopy += '/';
-            }
-
-            urlCopy += 'legend?f=pjson&callback=?';
-
-            var _this = this;
-            var superAddLegend = _get(Object.getPrototypeOf(LayerEsriMapServer.prototype), 'addLegendContent', this);
-
-            _jquery2.default.get(urlCopy, {}, function (d) {
-                var newHtml = esriToOl.makeMapServiceLegend(d);
-                superAddLegend.call(_this, newHtml);
-            }, 'json');
-        }
-    }, {
-        key: 'getPopupInfo',
-        value: function getPopupInfo(queryParams) {
-            if (!this.visible) {
-                return;
-            }
-
-            var urlCopy = this.url;
-
-            if (urlCopy[urlCopy.length - 1] != '/') {
-                urlCopy += '/';
-            }
-
-            urlCopy += 'identify?callback=?';
-
-            var _this = this;
-
-            if (this._popupRequest != null) {
-                this._popupRequest.abort();
-            }
-
-            this._popupRequest = _jquery2.default.get(urlCopy, queryParams, function (d) {
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
-
-                try {
-                    for (var _iterator = d['results'][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                        var r = _step.value;
-
-
-                        var popupHtml = '<table class="esri-popup-table">';
-
-                        for (var a in r['attributes']) {
-                            if (r['attributes'].hasOwnProperty(a)) {
-                                var attrVal = r['attributes'][a];
-
-                                if (attrVal == null || attrVal.toString().toLowerCase() == 'null') {
-                                    continue;
-                                }
-
-                                var attr = a;
-                                if (attr.length > 14) {
-                                    attr = attr.slice(0, 11) + '...';
-                                }
-
-                                popupHtml += '<tr><td>' + attr + '</td><td>' + attrVal + '</td></tr>';
-                            }
-                        }
-
-                        popupHtml += '</table>';
-
-                        _mapPopup2.default.addMapServicePopupContent(_this._esriFormat.readFeature(r), _this, popupHtml, r['layerName']);
-                    }
-                } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
-                        }
-                    } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
-                        }
-                    }
-                }
-            }, 'json').always(function () {
-                _this._popupRequest = null;
-            });
-        }
-
-        /**
-         * overwrite the base load
-         * @protected
-         */
-
-    }, {
-        key: '_load',
-        value: function _load() {}
-
-        /**
-         *
-         * @returns {ol.source.TileArcGISRest} the vector source
-         */
-
-    }, {
-        key: 'source',
-        get: function get() {
-            return _get(Object.getPrototypeOf(LayerEsriMapServer.prototype), 'source', this);
-        }
-    }]);
-
-    return LayerEsriMapServer;
-}(_LayerBase3.default);
-
-nm.LayerEsriMapServer = LayerEsriMapServer;
-exports.default = LayerEsriMapServer;
-
-},{"../jquery":302,"../ol/ol":319,"../olHelpers/esriToOlStyle":308,"../olHelpers/mapPopup":312,"../util/provide":323,"./LayerBase":303}],307:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; }; /**
-                                                                                                                                                                                                                                                   * Created by gavorhes on 12/8/2015.
-                                                                                                                                                                                                                                                   */
-
-var _jquery = require('../jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _LayerBaseVectorGeoJson = require('./LayerBaseVectorGeoJson');
-
-var _LayerBaseVectorGeoJson2 = _interopRequireDefault(_LayerBaseVectorGeoJson);
-
-var _mapMove = require('../olHelpers/mapMove');
-
-var _mapMove2 = _interopRequireDefault(_mapMove);
-
-var _mapPopup = require('../olHelpers/mapPopup');
-
-var _mapPopup2 = _interopRequireDefault(_mapPopup);
-
-var _provide = require('../util/provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-var _ol = require('../ol/ol');
-
-var _ol2 = _interopRequireDefault(_ol);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var nm = (0, _provide2.default)('layers');
-
-function checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
-    "use strict";
-
-    //make sure one and only one configuration is defined;
-
-    var configCount = 0;
-    if (typeof itsIcon == 'string') {
-        configCount++;
-    }
-
-    if ((typeof itsLineStyle === 'undefined' ? 'undefined' : _typeof(itsLineStyle)) == 'object') {
-        itsLineStyle.width = typeof itsLineStyle.width == 'number' ? itsLineStyle.width : 5;
-        itsLineStyle.color = typeof itsLineStyle.color == 'string' ? itsLineStyle.color : 'red';
-        configCount++;
-    }
-
-    if ((typeof itsIconConfig === 'undefined' ? 'undefined' : _typeof(itsIconConfig)) == 'object') {
-        itsIconConfig.defaultName = itsIconConfig.defaultName || 'Other';
-
-        if (typeof itsIconConfig.iconArray == 'undefined') {
-            itsIconConfig.iconArray = [];
-        }
-
-        configCount++;
-    }
-
-    if ((typeof itsLineConfig === 'undefined' ? 'undefined' : _typeof(itsLineConfig)) == 'object') {
-        itsLineConfig.defaultName = itsLineConfig.defaultName || 'Other';
-        itsLineConfig.defaultWidth = itsLineConfig.defaultWidth || 5;
-        itsLineConfig.defaultColor = itsLineConfig.defaultColor || 'red';
-
-        if (typeof itsLineConfig.lineArray == 'undefined') {
-            itsLineConfig.lineArray = [];
-        }
-
-        // set the width if not defined
-        for (var i = 0; i < itsLineConfig.lineArray.length; i++) {
-            if (itsLineConfig.lineArray[i].length == 3) {
-                itsLineConfig.lineArray[i].push(5);
-            }
-        }
-
-        configCount++;
-    }
-
-    if (configCount > 1) {
-        throw 'Only one style config can be defined';
-    }
-}
-
-/**
- *
- * @param {string} [itsIcon=undefined] the ITS device type icon image see http://transportal.cee.wisc.edu/its/inventory/icons/
- *
- * @param {object} [itsLineStyle=undefined] A single line style
- * @param {string} itsLineStyle.color the line color as rgb or hex
- * @param {number} [itsLineStyle.width=5] the line width
- *
- * @param {object} [itsIconConfig=undefined] The icon subtype configuration
- * @param {string} itsIconConfig.prop The property used to define icon attribute symbolization
- * @param {string} itsIconConfig.defaultName The default name to be used if no other match is found
- * @param {string} itsIconConfig.defaultIcon The default icon to be used for no other matches
- * @param {object} [itsIconConfig.iconArray=[]] an array, items with format [property, name, img]
- *
- * @param {object} [itsLineConfig=undefined] The property used to define icon attribute symbolization
- * @param {string} itsLineConfig.prop The property used to define icon attribute symbolization
- * @param {string} [itsLineConfig.defaultName=Other] The default name to be used if no other match is found
- * @param {string} [itsLineConfig.defaultColor=red] The default line color to be used for no other matches
- * @param {number} [itsLineConfig.defaultWidth=5] The default line width to be used for no other matches
- * @param {object} [itsLineConfig.lineArray=[]] an array, items with format [property, name, color, optional width]
- * @returns {*} undefined, style, or style function
- */
-function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
-    "use strict";
-
-    checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig);
-
-    var _iconUrlRoot = 'http://transportal.cee.wisc.edu/its/inventory/icons/';
-
-    if (itsIcon) {
-        return new _ol2.default.style.Style({
-            image: new _ol2.default.style.Icon({ src: _iconUrlRoot + itsIcon })
-        });
-    } else if (itsLineStyle) {
-        return new _ol2.default.style.Style({
-            stroke: new _ol2.default.style.Stroke({
-                color: itsLineStyle.color,
-                width: itsLineStyle.width
-            })
-        });
-    } else if (itsIconConfig) {
-        return function (feature) {
-            var symbolProp = feature.getProperties()[itsIconConfig.prop];
-            var iconUrl = _iconUrlRoot + itsIconConfig.defaultIcon;
-
-            for (var i = 0; i < itsIconConfig.iconArray.length; i++) {
-                var thisProp = itsIconConfig.iconArray[i];
-
-                if (symbolProp.trim().toLocaleLowerCase() == thisProp[0].trim().toLocaleLowerCase()) {
-                    iconUrl = _iconUrlRoot + thisProp[2];
-                    break;
+        function resolutionToZoom(resolution) {
+            for (var i = 0; i < _zoomResLookup.length; i++) {
+                if (resolution >= _zoomResLookup[i]) {
+                    return i;
                 }
             }
 
-            return [new _ol2.default.style.Style({
-                image: new _ol2.default.style.Icon({ src: iconUrl })
-            })];
-        };
-    } else if (itsLineConfig) {
-        return function (feature) {
-            var symbolProp = feature.getProperties()[itsLineConfig.prop];
-            var colr = itsLineConfig.defaultColor || 'red';
-            var width = itsLineConfig.defaultWidth || 5;
-
-            for (var i = 0; i < itsLineConfig.lineArray.length; i++) {
-                var thisProp = itsLineConfig.lineArray[i];
-
-                if (symbolProp.trim().toLocaleLowerCase() == thisProp[0].trim().toLocaleLowerCase()) {
-                    colr = thisProp[2];
-                    width = thisProp[3];
-                    break;
-                }
-            }
-
-            return [new _ol2.default.style.Style({
-                stroke: new _ol2.default.style.Stroke({
-                    color: colr,
-                    width: width
-                })
-            })];
-        };
-    } else {
-        return undefined;
-    }
-}
-
-/**
- *
- * @param {string} [itsIcon=undefined] the ITS device type icon image see http://transportal.cee.wisc.edu/its/inventory/icons/
- *
- * @param {object} [itsLineStyle=undefined] A single line style
- * @param {string} itsLineStyle.color the line color as rgb or hex
- * @param {number} [itsLineStyle.width=5] the line width
- *
- * @param {object} [itsIconConfig=undefined] The icon subtype configuration
- * @param {string} itsIconConfig.prop The property used to define icon attribute symbolization
- * @param {string} itsIconConfig.defaultName The default name to be used if no other match is found
- * @param {string} itsIconConfig.defaultIcon The default icon to be used for no other matches
- * @param {object} [itsIconConfig.iconArray=[]] an array, items with format [property, name, img]
- *
- * @param {object} [itsLineConfig=undefined] The property used to define icon attribute symbolization
- * @param {string} itsLineConfig.prop The property used to define icon attribute symbolization
- * @param {string} [itsLineConfig.defaultName=Other] The default name to be used if no other match is found
- * @param {string} [itsLineConfig.defaultColor=red] The default line color to be used for no other matches
- * @param {number} [itsLineConfig.defaultWidth=5] The default line width to be used for no other matches
- * @param {object} [itsLineConfig.lineArray=[]] an array, items with format [property, name, color, optional width]
- * @returns {string} html to be added to the legend
- */
-function defineLegend(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
-    "use strict";
-
-    var iconHeight = 17;
-
-    checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig);
-
-    var _iconUrlRoot = 'http://transportal.cee.wisc.edu/its/inventory/icons/';
-
-    if (itsIcon) {
-        return '<img src="' + (_iconUrlRoot + itsIcon) + '" class="legend-layer-icon" height="' + iconHeight + '">';
-    } else if (itsLineStyle) {
-        return '<hr style="height: ' + itsLineStyle.width + 'px; background-color: ' + itsLineStyle.color + '">';
-    } else if (itsIconConfig) {
-        var outHtml = '';
-        outHtml += '<ul>';
-
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-            for (var _iterator = itsIconConfig.iconArray[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var a = _step.value;
-
-                outHtml += '<li><span class="legend-layer-subitem">' + a[1] + '</span><img src="' + (_iconUrlRoot + a[2]) + '" class="legend-layer-icon" height="' + iconHeight + '">';
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                    _iterator.return();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
-            }
+            return 0;
         }
 
-        outHtml += '<li><span class="legend-layer-subitem">' + itsIconConfig.defaultName + '</span>' + ('<img src="' + (_iconUrlRoot + itsIconConfig.defaultIcon) + '" class="legend-layer-icon" height="' + iconHeight + '"></li>');
-        outHtml += '</ul>';
-
-        return outHtml;
-    } else if (itsLineConfig) {
-        var _outHtml = '';
-        _outHtml += '<ul>';
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
-
-        try {
-            for (var _iterator2 = itsLineConfig.lineArray[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                var ls = _step2.value;
-
-                _outHtml += '<li><span class="legend-layer-subitem">' + ls[1] + '</span>' + ('<hr style="height: ' + ls[3] + 'px; background-color: ' + ls[2] + '">');
-            }
-        } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                    _iterator2.return();
-                }
-            } finally {
-                if (_didIteratorError2) {
-                    throw _iteratorError2;
-                }
-            }
-        }
-
-        _outHtml += '<li><span class="legend-layer-subitem">' + itsLineConfig.defaultName + '</span>' + ('<hr style="height: ' + itsLineConfig.defaultWidth + 'px; background-color: ' + itsLineConfig.defaultColor + '"></li>');
-        _outHtml += '</ul>';
-
-        return _outHtml;
-    } else {
-        return '';
-    }
-}
-
-/**
- * Its Layer class
- * @augments LayerBaseVectorGeoJson
- */
-
-var LayerItsInventory = function (_LayerBaseVectorGeoJs) {
-    _inherits(LayerItsInventory, _LayerBaseVectorGeoJs);
-
-    /**
-     * ITS device layer, types available at http://transportal.cee.wisc.edu/its/inventory/
-     * @param {object} options - config
-     * @param {string} [options.id] - layer id
-     * @param {string} [options.name=Unnamed Layer] - layer name
-     * @param {number} [options.opacity=1] - opacity
-     * @param {boolean} [options.visible=true] - default visible
-     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
-     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
-     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
-     * @param {number} [options.zIndex=0] the z index for the layer
-     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
-     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
-     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
-     * @param {boolean} [options.legendContent] additional content to add to the legend
-     *
-     * @param {boolean} [options.autoLoad=false] if the layer should auto load if not visible
-     * @param {object|*} [options.style=undefined] the layer style, use openlayers default style if not defined
-     * @param {boolean} [options.onDemand=false] if the layer should be loaded by extent on map move
-     * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
-     * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
-     *
-     * @param {string} options.itsType the ITS device type, use the url flag at http://transportal.cee.wisc.edu/its/inventory/
-     * @param {boolean} [options.addPopup=true] if the popup should be added automatically
-     *
-     * @param {string} [options.itsIcon=undefined] the ITS device type icon image see http://transportal.cee.wisc.edu/its/inventory/icons/
-     *
-     * @param {object} [options.itsLineStyle=undefined] A single line style
-     * @param {string} options.itsLineStyle.color the line color as rgb or hex
-     * @param {number} [options.itsLineStyle.width=5] the line width
-     *
-     * @param {object} [options.itsIconConfig=undefined] The icon subtype configuration
-     * @param {string} options.itsIconConfig.prop The property used to define icon attribute symbolization
-     * @param {string} options.itsIconConfig.defaultName The default name to be used if no other match is found
-     * @param {string} options.itsIconConfig.defaultIcon The default icon to be used for no other matches
-     * @param {object} [options.itsIconConfig.iconArray=[]] an array, items with format [property, name, img]
-     *
-     * @param {object} [options.itsLineConfig=undefined] The property used to define icon attribute symbolization
-     * @param {string} options.itsLineConfig.prop The property used to define icon attribute symbolization
-     * @param {string} [options.itsLineConfig.defaultName=Other] The default name to be used if no other match is found
-     * @param {string} [options.itsLineConfig.defaultColor=red] The default line color to be used for no other matches
-     * @param {number} [options.itsLineConfig.defaultWidth] The default line width to be used for no other matches
-     * @param {object} [options.itsLineConfig.lineArray=[]] an array, items with format [property, name, color, optional width = 5]
-     */
-
-    function LayerItsInventory(options) {
-        _classCallCheck(this, LayerItsInventory);
-
-        if (typeof options.itsType !== 'string') {
-            throw 'its type must be defined';
-        }
-
-        var addToLegend = '';
-
-        // define a style with the helper function if it is not explicitly defined
-        if (typeof options.style == 'undefined') {
-            options.style = defineStyle(options.itsIcon, options.itsLineStyle, options.itsIconConfig, options.itsLineConfig);
-            addToLegend = defineLegend(options.itsIcon, options.itsLineStyle, options.itsIconConfig, options.itsLineConfig);
-        }
-
-        options.params = _typeof(options.params) == 'object' ? options.params : {};
-        _jquery2.default.extend(options.params, { format: 'JSON', resource: options.itsType });
-
-        //add any additional content to the legend
-
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LayerItsInventory).call(this, 'http://transportal.cee.wisc.edu/its/inventory/', options));
-
-        _this.addLegendContent(addToLegend);
-
-        options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : true;
-
-        if (options.addPopup) {
-            _mapPopup2.default.addVectorPopup(_this, function (props) {
-                return '<iframe src="http://transportal.cee.wisc.edu/its/inventory/?feature=' + props['featureGuid'] + '" ' + 'height="250" width="350"></iframe>';
-            });
-        }
-        return _this;
-    }
-
-    /**
-     * callback to generate the parameters passed in the get request
-     * @callback makeGetParams
-     * @param {object} extent - extent object
-     * @param {number} extent.minX - minX
-     * @param {number} extent.minY - minY
-     * @param {number} extent.maxX - maxX
-     * @param {number} extent.maxY - maxY
-     * @param {number} zoomLevel - zoom level
-     */
-
-
-    _createClass(LayerItsInventory, [{
-        key: 'mapMoveMakeGetParams',
-        value: function mapMoveMakeGetParams(extent, zoomLevel) {
-            _get(Object.getPrototypeOf(LayerItsInventory.prototype), 'mapMoveMakeGetParams', this).call(this, extent, zoomLevel);
-            var lowerLeft = new _ol2.default.geom.Point([extent.minX, extent.minY]);
-            lowerLeft.transform(this.mapCrs, "EPSG:4326");
-            var lowerLeftCoordinates = lowerLeft.getCoordinates();
-            var upperRight = new _ol2.default.geom.Point([extent.maxX, extent.maxY]);
-            upperRight.transform(this.mapCrs, "EPSG:4326");
-            var upperRightCoordinates = upperRight.getCoordinates();
-
-            _jquery2.default.extend(this.mapMoveParams, {
-                L: lowerLeftCoordinates[0],
-                R: upperRightCoordinates[0],
-                B: lowerLeftCoordinates[1],
-                T: upperRightCoordinates[1]
-            });
-        }
-    }]);
-
-    return LayerItsInventory;
-}(_LayerBaseVectorGeoJson2.default);
-
-nm.LayerItsInventory = LayerItsInventory;
-exports.default = LayerItsInventory;
-
-},{"../jquery":302,"../ol/ol":319,"../olHelpers/mapMove":310,"../olHelpers/mapPopup":312,"../util/provide":323,"./LayerBaseVectorGeoJson":305}],308:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
-exports.makeMapServiceLegend = makeMapServiceLegend;
-
-var _provide = require('../util/provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-var _ol = require('../ol/ol');
-
-var _ol2 = _interopRequireDefault(_ol);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } /**
-                                                                                                                                                           * Created by gavorhes on 1/4/2016.
-                                                                                                                                                           */
-
-
-var nm = (0, _provide2.default)('olHelpers.esriToOlStyle');
-
-/**
- * This callback is displayed as part of the Requester class.
- * @callback styleFunc
- * @param {ol.Feature} feat - openlayers feature
- * @param {number} resolution - map resolution
- */
-
-/**
- *
- * @param {Array<number>} colorArray - input color array
- * @param {number} opacity - the opacity 0 to 1
- * @returns {string} rgba string
- * @private
- */
-function _colorArrayToRgba(colorArray, opacity) {
-    "use strict";
-
-    return 'rgba(' + colorArray[0] + ',' + colorArray[1] + ',' + colorArray[2] + ',' + opacity + ')';
-}
-
-/**
- * escape html charcters
- * @param {string} str - input string
- * @returns {string} escaped string
- */
-function htmlEscape(str) {
-    return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-nm.htmlEscape = htmlEscape;
-
-var CommonSymbol =
-
-/**
- * 
- * @param symbolObj
- * @param {number} opacity
- */
-function CommonSymbol(symbolObj, opacity) {
-    _classCallCheck(this, CommonSymbol);
-
-    this.symbolObj = symbolObj;
-    this.opacity = opacity;
-    this.olStyle = undefined;
-    this.legendHtml = '';
-};
-
-var PointSymbol = function (_CommonSymbol) {
-    _inherits(PointSymbol, _CommonSymbol);
-
-    function PointSymbol(symbolObj, opacity) {
-        _classCallCheck(this, PointSymbol);
-
-        var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(PointSymbol).call(this, symbolObj, opacity));
-
-        switch (_this2.symbolObj['type']) {
-            case 'esriSMS':
-                var innerColor = _colorArrayToRgba(_this2.symbolObj.color, _this2.opacity);
-                var outerColor = _colorArrayToRgba(_this2.symbolObj.outline.color, _this2.opacity);
-                var outlineWidth = _this2.symbolObj.outline.width;
-                var radius = _this2.symbolObj.size;
-
-                _this2.olStyle = new _ol2.default.style.Style({
-                    image: new _ol2.default.style.Circle({
-                        radius: radius,
-                        fill: new _ol2.default.style.Fill({
-                            color: innerColor
-                        }),
-                        stroke: new _ol2.default.style.Stroke({ color: outerColor, width: outlineWidth })
-                    })
-                });
-                _this2.legendHtml = '<span class="legend-layer-icon" style="color: ' + innerColor + '">&#9679;</span>';
-                break;
-            case 'esriPMS':
-                _this2.olStyle = new _ol2.default.style.Style({
-                    image: new _ol2.default.style.Icon({ src: 'data:image/png;base64,' + _this2.symbolObj['imageData'] })
-                });
-                _this2.legendHtml = '<img class="legend-layer-icon" height="17" src="data:image/png;base64,' + _this2.symbolObj['imageData'] + '">';
-                break;
-            default:
-                console.log(_this2.symbolObj);
-                alert('Point symbol does not handle symbol type: ' + _this2.symbolObj['type']);
-        }
-        return _this2;
-    }
-
-    return PointSymbol;
-}(CommonSymbol);
-
-var LineSymbol = function (_CommonSymbol2) {
-    _inherits(LineSymbol, _CommonSymbol2);
-
-    function LineSymbol(symbolObj, opacity) {
-        _classCallCheck(this, LineSymbol);
-
-        var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(LineSymbol).call(this, symbolObj, opacity));
-
-        switch (_this3.symbolObj['type']) {
-            case 'esriSLS':
-                var innerColor = _colorArrayToRgba(_this3.symbolObj.color, _this3.opacity);
-                var lineWidth = _this3.symbolObj.width;
-
-                _this3.olStyle = new _ol2.default.style.Style({
-                    stroke: new _ol2.default.style.Stroke({
-                        color: innerColor,
-                        //lineDash: [4],
-                        width: lineWidth
-                    })
-                });
-
-                _this3.legendHtml = '<span class="legend-layer-icon" ';
-                _this3.legendHtml += 'style="';
-                _this3.legendHtml += 'background-color: ' + innerColor + ';';
-                _this3.legendHtml += 'width: 40px;';
-                _this3.legendHtml += 'height: 4px;';
-                _this3.legendHtml += 'position: relative;';
-                _this3.legendHtml += 'display: inline-block;';
-                _this3.legendHtml += 'top: -1px;';
-                _this3.legendHtml += '"></span>';
-                break;
-            default:
-                console.log(_this3.symbolObj);
-                alert('Line symbol does not handle symbol type: ' + _this3.symbolObj['type']);
-        }
-        return _this3;
-    }
-
-    return LineSymbol;
-}(CommonSymbol);
-
-var PolygonSymbol = function (_CommonSymbol3) {
-    _inherits(PolygonSymbol, _CommonSymbol3);
-
-    function PolygonSymbol(symbolObj, opacity) {
-        _classCallCheck(this, PolygonSymbol);
-
-        var _this4 = _possibleConstructorReturn(this, Object.getPrototypeOf(PolygonSymbol).call(this, symbolObj, opacity));
-
-        switch (_this4.symbolObj['type']) {
-            case 'esriSFS':
-                var innerColor = _colorArrayToRgba(_this4.symbolObj.color, _this4.opacity);
-                var outerColor = _colorArrayToRgba(_this4.symbolObj.outline.color, _this4.opacity);
-                var outlineWidth = _this4.symbolObj.outline.width;
-
-                _this4.olStyle = new _ol2.default.style.Style({
-                    stroke: new _ol2.default.style.Stroke({
-                        color: outerColor,
-                        //lineDash: [4],
-                        width: outlineWidth
-                    }),
-                    fill: new _ol2.default.style.Fill({
-                        color: innerColor
-                    })
-                });
-
-                _this4.legendHtml = '<span class="legend-layer-icon" ';
-                _this4.legendHtml += 'style="';
-                _this4.legendHtml += 'background-color: ' + innerColor + ';';
-                _this4.legendHtml += 'border: solid ' + outerColor + ' 1px;';
-                _this4.legendHtml += 'width: 40px;';
-                _this4.legendHtml += 'height: 9px;';
-                _this4.legendHtml += 'position: relative;';
-                _this4.legendHtml += 'display: inline-block;';
-                _this4.legendHtml += 'top: 2px;';
-                _this4.legendHtml += '"></span>';
-                break;
-
-            default:
-                console.log(_this4.symbolObj);
-                alert('Polygon symbol does handle symbol type: ' + _this4.symbolObj['type']);
-        }
-        return _this4;
-    }
-
-    return PolygonSymbol;
-}(CommonSymbol);
-
-var SymbolGenerator = function SymbolGenerator(esriResponse) {
-    _classCallCheck(this, SymbolGenerator);
-
-    this.opacity = (100 - (esriResponse['drawingInfo']['transparency'] || 0)) / 100;
-    this.renderer = esriResponse['drawingInfo']['renderer'];
-    this.olStyle = undefined;
-    this.legendHtml = '';
-};
-
-var SingleSymbol = function (_SymbolGenerator) {
-    _inherits(SingleSymbol, _SymbolGenerator);
-
-    /**
-     *
-     * @param {object} esriResponse - layer info
-     * @param {Constructor|*} SymbolClass - the symbol class to use
-     */
-
-    function SingleSymbol(esriResponse, SymbolClass) {
-        _classCallCheck(this, SingleSymbol);
-
-        var _this5 = _possibleConstructorReturn(this, Object.getPrototypeOf(SingleSymbol).call(this, esriResponse));
-
-        _this5.symbol = _this5.renderer['symbol'];
-        var symbolObj = new SymbolClass(_this5.symbol, _this5.opacity);
-        _this5.olStyle = symbolObj.olStyle;
-        _this5.legendHtml = symbolObj.legendHtml;
-        return _this5;
-    }
-
-    return SingleSymbol;
-}(SymbolGenerator);
-
-var UniqueValueSymbol = function (_SymbolGenerator2) {
-    _inherits(UniqueValueSymbol, _SymbolGenerator2);
-
-    /**
-     *
-     * @param {object} esriResponse - layer info
-     * @param {Constructor|*} SymbolClass - the Symbol class definition
-     */
-
-    function UniqueValueSymbol(esriResponse, SymbolClass) {
-        _classCallCheck(this, UniqueValueSymbol);
-
-        var _this6 = _possibleConstructorReturn(this, Object.getPrototypeOf(UniqueValueSymbol).call(this, esriResponse));
-
-        _this6.uniqueValueInfos = _this6.renderer['uniqueValueInfos'];
-        _this6.propertyName = _this6.renderer['field1'];
-        _this6.defaultSymbol = _this6.renderer['defaultSymbol'];
-
-        if (_this6.defaultSymbol) {
-            var symbolObj = new SymbolClass(_this6.defaultSymbol, _this6.opacity);
-            _this6.defaultStyle = symbolObj.olStyle;
-            _this6.defaultLabelHtml = '<span class="legend-layer-subitem">' + htmlEscape(_this6.renderer['defaultLabel']) + '</span>' + symbolObj.legendHtml;
-        } else {
-            _this6.defaultStyle = undefined;
-            _this6.defaultLabelHtml = 'other';
-        }
-
-        _this6.valueArray = [];
-        _this6.labelArray = [];
-        _this6.legendArray = [];
-        _this6.propertyStyleLookup = {};
-
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-            for (var _iterator = _this6.uniqueValueInfos[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var uniqueVal = _step.value;
-
-                _this6.labelArray.push(uniqueVal['label']);
-                _this6.valueArray.push(uniqueVal['value']);
-                var uniqueSym = new SymbolClass(uniqueVal.symbol, _this6.opacity);
-                _this6.legendArray.push('<span class="legend-layer-subitem">' + htmlEscape(uniqueVal['label']) + '</span>' + uniqueSym.legendHtml);
-                _this6.propertyStyleLookup[uniqueVal['value']] = uniqueSym.olStyle;
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                    _iterator.return();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
-            }
-        }
-
-        var _this = _this6;
-
-        _this6.olStyle = function (feature, resolution) {
-            var checkProperties = feature.getProperties();
-            var checkProperty = checkProperties[_this.propertyName];
-
-            var returnValue = void 0;
-            if (_this.propertyStyleLookup[checkProperty] !== undefined) {
-                returnValue = [_this.propertyStyleLookup[checkProperty]];
-            } else {
-                returnValue = [_this.defaultStyle];
-            }
-
-            return returnValue;
-        };
-
-        if (_this6.defaultLabelHtml !== null) {
-            _this6.legendArray.push(_this6.defaultLabelHtml);
-        }
-
-        _this6.legendHtml = '<ul>';
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
-
-        try {
-            for (var _iterator2 = _this6.legendArray[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                var h = _step2.value;
-
-                _this6.legendHtml += '<li>' + h + '</li>';
-            }
-        } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                    _iterator2.return();
-                }
-            } finally {
-                if (_didIteratorError2) {
-                    throw _iteratorError2;
-                }
-            }
-        }
-
-        _this6.legendHtml += '</ul>';
-        return _this6;
-    }
-
-    return UniqueValueSymbol;
-}(SymbolGenerator);
-
-/**
- * style and legend object
- * @typedef {object} styleAndLegend
- * @property {styleFunc} style - style function
- * @property {string} legend - legend content
- */
-
-/**
- *
- * @param {object} esriResponse - layer info
- * @returns {styleAndLegend} style and legend object
- */
-
-
-function makeFeatureServiceLegendAndSymbol(esriResponse) {
-    "use strict";
-
-    var renderer = esriResponse['drawingInfo']['renderer'];
-    var symbolLegendOut = null;
-
-    switch (renderer['type']) {
-        case 'simple':
-            switch (esriResponse['geometryType']) {
-                case 'esriGeometryPoint':
-                    symbolLegendOut = new SingleSymbol(esriResponse, PointSymbol);
-                    break;
-                case 'esriGeometryPolyline':
-                    symbolLegendOut = new SingleSymbol(esriResponse, LineSymbol);
-                    break;
-                case 'esriGeometryPolygon':
-                    symbolLegendOut = new SingleSymbol(esriResponse, PolygonSymbol);
-                    break;
-                default:
-                    console.log(esriResponse);
-                    alert(esriResponse['geometryType'] + ' not handled');
-            }
-            break;
-        case 'uniqueValue':
-            switch (esriResponse['geometryType']) {
-                case 'esriGeometryPoint':
-                    symbolLegendOut = new UniqueValueSymbol(esriResponse, PointSymbol);
-                    break;
-                case 'esriGeometryPolyline':
-                    symbolLegendOut = new UniqueValueSymbol(esriResponse, LineSymbol);
-                    break;
-                case 'esriGeometryPolygon':
-                    symbolLegendOut = new UniqueValueSymbol(esriResponse, PolygonSymbol);
-                    break;
-                default:
-                    console.log(esriResponse);
-                    alert(esriResponse['geometryType'] + ' not handled');
-            }
-            break;
-        default:
-            alert('not handled renderer type: ' + renderer['type']);
-    }
-
-    if (symbolLegendOut == null) {
-        return { style: undefined, legend: '' };
-    } else {
-        return { style: symbolLegendOut.olStyle, legend: symbolLegendOut.legendHtml };
-    }
-}
-
-nm.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
-
-/**
- *
- * @param {object} lyrObject - the layer as defined in the response
- * @param {boolean} [iconsOnly=false] use only icons
- * @returns {string} legend html
- */
-function mapServiceLegendItem(lyrObject, iconsOnly) {
-
-    iconsOnly = typeof iconsOnly == 'boolean' ? iconsOnly : false;
-    var layerName = lyrObject['layerName'];
-    var legendItems = lyrObject['legend'];
-    var legendHtml = '';
-
-    if (legendItems.length == 1) {
-        legendHtml = '<img class="legend-layer-icon" height="17" src="data:image/png;base64,' + legendItems[0]['imageData'] + '">';
-    } else {
-        legendHtml += '<span class="legend-items-expander" title="Expand/Collapse">&#9660;</span><ul>';
-        for (var i = 0; i < legendItems.length; i++) {
-            legendHtml += '<li>';
-            legendHtml += '<span class="legend-layer-subitem">' + htmlEscape(legendItems[i]['label']) + '</span>';
-            legendHtml += '<img class="legend-layer-icon" height="17" src="data:image/png;base64,' + legendItems[i]['imageData'] + '">';
-            legendHtml += '</li>';
-        }
-        legendHtml += '</ul>';
-    }
-
-    if (!iconsOnly) {
-        legendHtml = '<span class="legend-layer-subitem">' + layerName + '</span>' + legendHtml;
-    }
-
-    return legendHtml;
-}
-
-/**
- * make map service legent
- * @param {object} esriResponse - layer info
- * @returns {string} legend content
- */
-function makeMapServiceLegend(esriResponse) {
-    "use strict";
-
-    var newLegendHtml = '';
-
-    var layers = esriResponse['layers'];
-
-    if (layers.length == 1) {
-        newLegendHtml += mapServiceLegendItem(layers[0], true);
-    } else {
-        newLegendHtml += '<ul>';
-        for (var i = 0; i < layers.length; i++) {
-            newLegendHtml += '<li>' + mapServiceLegendItem(layers[i]) + '</li>';
-        }
-        newLegendHtml += '</ul>';
-    }
-
-    return newLegendHtml;
-}
-
-nm.makeMapServiceLegend = makeMapServiceLegend;
-
-},{"../ol/ol":319,"../util/provide":323}],309:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Created by gavorhes on 12/8/2015.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
-
-
-var _provide = require('../util/provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var nm = (0, _provide2.default)('olHelpers');
-
-/**
- * base interaction
- */
-
-var MapInteractionBase = function () {
-
-    /**
-     * map interaction base
-     * @param {string} subtype - the interaction subtype
-     */
-
-    function MapInteractionBase(subtype) {
-        _classCallCheck(this, MapInteractionBase);
-
-        this._map = undefined;
-        this._initialized = false;
-        this._subtype = subtype;
-    }
-
-    /**
-     * base initializer, returns true for already initialized
-     * @param {ol.Map} theMap - the ol Map
-     * @returns {boolean} true for already initialized
-     */
-
-
-    _createClass(MapInteractionBase, [{
-        key: 'init',
-        value: function init(theMap) {
-            if (!this._initialized) {
-                this._map = theMap;
-                this._initialized = true;
-
-                return false;
-            }
-
-            return true;
-        }
-
-        /**
-         * get reference to the ol map object
-         * @returns {ol.Map} the map object
-         */
-
-    }, {
-        key: '_checkInit',
-
-
-        /**
-         * Check the initialization status and throw exception if not valid yet
-         * @protected
-         */
-        value: function _checkInit() {
-            if (!this.initialized) {
-                var msg = this._subtype + ' object not initialized';
-                alert(msg);
-                console.log(msg);
-                throw msg;
-            }
-        }
-
-        /**
-         * Check the initialization status and throw exception if not valid yet
-         */
-
-    }, {
-        key: 'checkInit',
-        value: function checkInit() {
-            this._checkInit();
-        }
-    }, {
-        key: 'map',
-        get: function get() {
-            return this._map;
-        }
-
-        /**
-         * get if is initialized
-         * @returns {boolean} is initialized
-         */
-
-    }, {
-        key: 'initialized',
-        get: function get() {
-            return this._initialized;
-        }
-    }]);
-
-    return MapInteractionBase;
-}();
-
-nm.MapInteractionBase = MapInteractionBase;
-exports.default = MapInteractionBase;
-
-},{"../util/provide":323}],310:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _mapMoveCls = require('./mapMoveCls');
-
-var _mapMoveCls2 = _interopRequireDefault(_mapMoveCls);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * The single map move object catch is that it is common to multimap pages
- * @type {MapMoveCls}
- */
-exports.default = new _mapMoveCls2.default(); /**
-                                               * Created by gavorhes on 11/3/2015.
-                                               */
-
-},{"./mapMoveCls":311}],311:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
-var _jquery = require('../jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _mapInteractionBase = require('./mapInteractionBase');
-
-var _mapInteractionBase2 = _interopRequireDefault(_mapInteractionBase);
-
-var _checkDefined = require('../util/checkDefined');
-
-var checkDefined = _interopRequireWildcard(_checkDefined);
-
-var _provide = require('../util/provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-var _makeGuid = require('../util/makeGuid');
-
-var _makeGuid2 = _interopRequireDefault(_makeGuid);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by gavorhes on 11/3/2015.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
-var nm = (0, _provide2.default)('olHelpers');
-
-/**
- * assists with map move interactions, trigger callback functions
- * @augments MapInteractionBase
- */
-
-var MapMoveCls = function (_MapInteractionBase) {
-    _inherits(MapMoveCls, _MapInteractionBase);
-
-    /**
-     * constructor called implicitly
-     */
-
-    function MapMoveCls() {
-        _classCallCheck(this, MapMoveCls);
-
-        var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(MapMoveCls).call(this, 'map move'));
-
-        _this2._arrLyrRequest = [];
-        _this2._arrLyrTimeout = [];
-        _this2._arrLayer = [];
-        _this2._lookupLayer = {};
-
-        _this2._mapMoveCallbacks = [];
-        _this2._mapMoveCallbacksLookup = {};
-        _this2._mapMoveCallbackDelays = [];
-        _this2._mapMoveCallbackContext = [];
-        _this2._mapMoveCallbackTimeout = [];
-
-        _this2._mapExtent = undefined;
-        _this2._zoomLevel = undefined;
-        return _this2;
-    }
-
-    /**
-     * initialize the map move object
-     * @param {ol.Map} theMap - the ol map
-     */
-
-
-    _createClass(MapMoveCls, [{
-        key: 'init',
-        value: function init(theMap) {
-            if (_get(Object.getPrototypeOf(MapMoveCls.prototype), 'init', this).call(this, theMap)) {
-                return;
-            }
-
-            var _this = this;
-
-            this.map.getView().on(['change:center', 'change:resolution'], function (e) {
-
-                _this._updateMapExtent();
-
-                // trigger the layer updates
-                for (var i = 0; i < _this._arrLayer.length; i++) {
-                    _this.triggerLyrLoad(_this._arrLayer[i], i, e.type);
-                }
-
-                // trigger the map callbacks
-                for (var _i = 0; _i < _this._mapMoveCallbacks.length; _i++) {
-                    _this.triggerMoveCallback(_i, e.type);
-                }
-            });
-        }
-    }, {
-        key: '_updateMapExtent',
-        value: function _updateMapExtent() {
-            var theView = this.map.getView();
-            this._zoomLevel = theView.getZoom();
-
-            var extentArray = theView.calculateExtent(this.map.getSize());
-
-            this._mapExtent = {
-                minX: extentArray[0],
-                minY: extentArray[1],
-                maxX: extentArray[2],
-                maxY: extentArray[3]
-            };
-        }
-
-        /**
-         * return the map extent
-         */
-
-    }, {
-        key: 'triggerLyrLoad',
-
-
-        /**
-         * Trigger the layer load
-         * @param {LayerBaseVector|*} lyr - the layer being acted on
-         * @param {number} [index=undefined] - index of the layer
-         * @param {string|*} [eventType=undefined] the event triggering the load, as 'change:center' or 'change:resolution'
-         */
-        value: function triggerLyrLoad(lyr, index, eventType) {
-            var _this3 = this;
-
-            if (checkDefined.undefinedOrNull(lyr) && checkDefined.undefinedOrNull(index)) {
-                throw 'need to define lyr or index';
-            } else if (checkDefined.definedAndNotNull(lyr) && checkDefined.undefinedOrNull(index)) {
-                index = this._arrLayer.indexOf(lyr);
-            } else if (checkDefined.undefinedOrNull(lyr) && checkDefined.definedAndNotNull(index)) {
-                lyr = this._arrLayer[index];
-            }
-
-            // clear the timeout
-            if (this._arrLyrTimeout[index] != null) {
-                clearTimeout(this._arrLyrTimeout[index]);
-                this._arrLyrTimeout[index] = null;
-            }
-
-            // abort if necessary and clear the request
-            if (this._arrLyrRequest[index] != null && this._arrLyrRequest[index] != 4) {
-                this._arrLyrRequest[index].abort();
-                this._arrLyrRequest[index] = null;
-            }
-
-            // dummy callback used if before load returns false
-            var callbackFunc = function callbackFunc() {};
-
-            if (lyr.mapMoveBefore(this._zoomLevel, eventType)) {
-                (function () {
-                    lyr.mapMoveMakeGetParams(_this3._mapExtent, _this3._zoomLevel);
-
-                    var _this = _this3;
-
-                    callbackFunc = function callbackFunc() {
-                        function innerFunction(theLayer, theIndex) {
-                            var _innerThis = this;
-                            this._arrLyrRequest[theIndex] = _jquery2.default.get(theLayer.url, theLayer.mapMoveParams, function (d) {
-                                /**
-                                 * @type {LayerBaseVector}
-                                 */
-                                theLayer.mapMoveCallback(d);
-                                theLayer.loadCallback();
-                            }, 'json').fail(function (jqXHR) {
-                                if (jqXHR.statusText != 'abort') {
-                                    console.log('failed');
-                                    console.log(theLayer.url);
-                                    console.log(theLayer.mapMoveParams);
-                                }
-                            }).always(function () {
-                                _innerThis._arrLyrTimeout[theIndex] = null;
-                                _innerThis._arrLyrRequest[theIndex] = null;
-                            });
-                        }
-                        innerFunction.call(_this, lyr, index);
-                    };
-                })();
-            } else {
-                lyr.clear();
-            }
-            this._arrLyrTimeout[index] = setTimeout(callbackFunc, lyr.onDemandDelay);
-        }
-
-        /**
-         * trigger the map move call back at the given index
-         * @param {number} ind - the index of the layer
-         * @param {string|*} [eventType=undefined] the event triggering the load as 'change:center' or 'change:resolution'
-         * @param {string} [functionId=undefined] the function id used to reference the added callback function
-         */
-
-    }, {
-        key: 'triggerMoveCallback',
-        value: function triggerMoveCallback(ind, eventType, functionId) {
-
-            if (typeof ind == 'undefined' && typeof functionId == 'undefined') {
-                throw 'either the function index or the id must be defined';
-            }
-
-            if (typeof ind !== 'number') {
-                ind = this._mapMoveCallbacks.indexOf(this._mapMoveCallbacksLookup[functionId]);
-            }
-
-            if (ind < 0) {
-                console.log('function not found');
-
-                return;
-            }
-
-            // clear the timeout
-            if (this._mapMoveCallbackTimeout[ind] != null) {
-                clearTimeout(this._mapMoveCallbackTimeout[ind]);
-                this._mapMoveCallbackTimeout[ind] = null;
-            }
-
-            var ctx = this._mapMoveCallbackContext[ind];
-            var theFunc = this._mapMoveCallbacks[ind];
-
-            var _this = this;
-
-            var f = function f() {
-                if (ctx !== null) {
-                    theFunc.call(ctx, _this._mapExtent, _this._zoomLevel, eventType);
-                } else {
-                    theFunc(_this._mapExtent, _this._zoomLevel, eventType);
-                }
-            };
-
-            this._mapMoveCallbackTimeout[ind] = setTimeout(f, this._mapMoveCallbackDelays[ind]);
-        }
-
-        /**
-         * Add a layer to the interaction
-         * @param {LayerBaseVector|*} lyr - layer to add
-         * @param {boolean} [triggerOnAdd=true] - if the layer should be loaded on add
-         */
-
-    }, {
-        key: 'addVectorLayer',
-        value: function addVectorLayer(lyr, triggerOnAdd) {
-            if (this._arrLayer.indexOf(lyr) > -1) {
-                console.log('already added ' + lyr.name + ' to map move');
-
-                return;
-            }
-            this._checkInit();
-
-            this._arrLyrRequest.push(null);
-            this._arrLyrTimeout.push(null);
-            this._arrLayer.push(lyr);
-            this._lookupLayer[lyr.id] = lyr;
-
-            triggerOnAdd = typeof triggerOnAdd == 'boolean' ? triggerOnAdd : true;
-
-            if (triggerOnAdd) {
-                if (this._mapExtent === undefined) {
-                    this._updateMapExtent();
-                }
-                this.triggerLyrLoad(lyr, this._arrLayer.length - 1);
-            }
-        }
-
-        /**
-         * This callback is displayed as a global member.
-         * @callback mapMoveCallbackFunction
-         * @param {object} extent - extent object
-         * @param {number} extent.minX - minX
-         * @param {number} extent.minY - minY
-         * @param {number} extent.maxX - maxX
-         * @param {number} extent.maxY - maxY
-         * @param {number} zoomLevel - zoom level
-         * @param {string} [evtType=undefined] undefined for initial load, otherwise one of 'change:center', 'change:resolution'
-         */
-
-        /**
-         * add a callback to the map move event
-         * @param {mapMoveCallbackFunction} func - callback function
-         * @param {*} context - the context to use for this function
-         * @param {number} [delay=50] the delay before call load
-         * @param {boolean} [triggerOnAdd=true] if the layer should be loaded on add to mapMove
-         * @param {string} [functionId=undefined] optional id to reference the function later for outside triggering
-         */
-
-    }, {
-        key: 'addCallback',
-        value: function addCallback(func, context, delay, triggerOnAdd, functionId) {
-
-            if (this._mapMoveCallbacks.indexOf(func) > -1) {
-                console.log('this function already added to map move');
-
-                return;
-            }
-            this._checkInit();
-            if (!functionId) {
-                functionId = (0, _makeGuid2.default)();
-            }
-
-            this._mapMoveCallbacks.push(func);
-            this._mapMoveCallbacksLookup[functionId] = func;
-            this._mapMoveCallbackDelays.push(typeof delay == 'number' ? delay : 50);
-            this._mapMoveCallbackContext.push(checkDefined.definedAndNotNull(context) ? context : null);
-            this._mapMoveCallbackTimeout.push(null);
-
-            triggerOnAdd = typeof triggerOnAdd == 'boolean' ? triggerOnAdd : true;
-
-            if (triggerOnAdd) {
-                if (this._mapExtent === undefined) {
-                    this._updateMapExtent();
-                }
-                this.triggerMoveCallback(this._mapMoveCallbacks.length - 1);
-            }
-        }
-    }, {
-        key: 'mapExtent',
-        get: function get() {
-            if (!this._mapExtent) {
-                this._updateMapExtent();
-            }
-
-            return this._mapExtent;
-        }
-    }]);
-
-    return MapMoveCls;
-}(_mapInteractionBase2.default);
-
-nm.MapMoveCls = MapMoveCls;
-exports.default = MapMoveCls;
-
-},{"../jquery":302,"../util/checkDefined":320,"../util/makeGuid":322,"../util/provide":323,"./mapInteractionBase":309}],312:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _mapPopupCls = require('./mapPopupCls');
-
-var _mapPopupCls2 = _interopRequireDefault(_mapPopupCls);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * The single popup object catch is that it is common to multimap pages
- * @type {MapPopupCls}
- */
-exports.default = new _mapPopupCls2.default(); /**
-                                                * Created by gavorhes on 11/3/2015.
-                                                */
-
-},{"./mapPopupCls":313}],313:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Created by gavorhes on 11/3/2015.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
-
-var _jquery = require('../jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _mapInteractionBase = require('./mapInteractionBase');
-
-var _mapInteractionBase2 = _interopRequireDefault(_mapInteractionBase);
-
-var _propertiesZoomStyle = require('../olHelpers/propertiesZoomStyle');
-
-var _propertiesZoomStyle2 = _interopRequireDefault(_propertiesZoomStyle);
-
-var _provide = require('../util/provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-var _ol = require('../ol/ol');
-
-var _ol2 = _interopRequireDefault(_ol);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var nm = (0, _provide2.default)('olHelpers');
-
-var _FeatureLayerProperties = function () {
-
-    /**
-     *
-     * @param {ol.Feature} feature the feature
-     * @param {LayerBaseVector|*} layer - the layer in the popup
-     * @param {number} layerIndex - index of the layer
-     * @param {ol.layer.Vector} selectionLayer - the ol selection layer
-     * @param {string} [esriLayerName=undefined] - esri layer name
-     */
-
-    function _FeatureLayerProperties(feature, layer, layerIndex, selectionLayer, esriLayerName) {
-        _classCallCheck(this, _FeatureLayerProperties);
-
-        this.feature = feature;
-        this.layer = layer;
-        this.layerIndex = layerIndex;
-        this.selectionLayer = selectionLayer;
-        this.popupContent = '';
-        this.esriLayerName = typeof esriLayerName == 'string' ? esriLayerName : undefined;
-    }
-
-    _createClass(_FeatureLayerProperties, [{
-        key: 'layerName',
-        get: function get() {
-            if (typeof this.esriLayerName == 'string') {
-                return this.esriLayerName;
-            } else {
-                return this.layer.name;
-            }
-        }
-    }]);
-
-    return _FeatureLayerProperties;
-}();
-
-/**
- * map popup class
- * @augments MapInteractionBase
- */
-
-
-var MapPopupCls = function (_MapInteractionBase) {
-    _inherits(MapPopupCls, _MapInteractionBase);
-
-    /**
-     * Definition for openlayers style function
-     * @callback olStyleFunction
-     * &param feature the openlayers vector feature
-     * $param
-     */
-
-    /**
-     * Definition for popup changed callback functions
-     * @callback popupChangedFunction
-     * @param $popContent jquery reference to the popup content
-     */
-
-    /**
-     * map popup constructor
-     */
-
-    function MapPopupCls() {
-        _classCallCheck(this, MapPopupCls);
-
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MapPopupCls).call(this, 'map popup'));
-
-        _this._arrPopupLayerIds = [];
-        _this._arrPopupLayerNames = [];
-        /**
-         *
-         * @type {Array<LayerBaseVector>}
-         * @private
-         */
-        _this._arrPopupLayers = [];
-        _this._arrPopupOlLayers = [];
-        _this._arrPopupContentFunction = [];
-        _this._$popupContainer = undefined;
-        _this._$popupContent = undefined;
-        _this._$popupCloser = undefined;
-        _this._popupOverlay = undefined;
-        _this._selectionLayers = [];
-        _this._selectionLayerLookup = {};
-        _this._mapClickFunctions = [];
-
-        //let a = function($jqueryContent){console.log($jqueryContent)};
-        //this._popupChangedLookup = {'a': a};
-        _this._popupChangedFunctions = [];
-        /**
-         *
-         * @type {Array<LayerEsriMapServer>}
-         * @private
-         */
-        _this._esriMapServiceLayers = [];
-
-        _this._popupOpen = false;
-        _this._popupCoordinate = null;
-
-        /**
-         *
-         * @type {Array.<_FeatureLayerProperties>}
-         */
-        _this._passThroughLayerFeatureArray = [];
-
-        _this._currentPopupIndex = -1;
-        _this._popupContentLength = 0;
-
-        return _this;
-    }
-
-    /**
-     * map popup initialization
-     * @param {ol.Map} theMap - the ol map
-     */
-
-
-    _createClass(MapPopupCls, [{
-        key: 'init',
-        value: function init(theMap) {
-            var _this2 = this;
-
-            if (_get(Object.getPrototypeOf(MapPopupCls.prototype), 'init', this).call(this, theMap)) {
-                return;
-            }
-            var $map = (0, _jquery2.default)('#' + this.map.getTarget());
-
-            $map.append('<div class="ol-popup">' + '<a href="#" class="ol-popup-closer"></a>' + '<div class="popup-content"></div>' + '</div>');
-
-            this._$popupContainer = $map.find('.ol-popup');
-            this._$popupContent = $map.find('.popup-content');
-            this._$popupCloser = $map.find('.ol-popup-closer');
-
-            this._popupOverlay = new _ol2.default.Overlay({
-                element: this._$popupContainer[0],
-                autoPan: true,
-                autoPanAnimation: {
-                    duration: 250
-                }
-            });
-
-            this._map.addOverlay(this._popupOverlay);
-
-            this._$popupCloser.click(function () {
-                _this2.closePopup();
-            });
-
-            // display popup on click
-            this._map.on('singleclick', function (evt) {
-                _this2.closePopup();
-                _this2._popupCoordinate = evt.coordinate;
-
-                if (_this2._esriMapServiceLayers.length > 0) {
-                    var queryParams = {
-                        geometry: evt.coordinate.join(','),
-                        geometryType: 'esriGeometryPoint',
-                        layers: 'all',
-                        sr: _this2._map.getView().getProjection().getCode().split(':')[1],
-                        mapExtent: _this2._map.getView().calculateExtent(_this2._map.getSize()).join(','),
-                        imageDisplay: _this2._map.getSize().join(',') + ',96',
-                        returnGeometry: true,
-                        tolerance: 15,
-                        f: 'pjson'
-                    };
-
-                    var _iteratorNormalCompletion = true;
-                    var _didIteratorError = false;
-                    var _iteratorError = undefined;
-
-                    try {
-                        for (var _iterator = _this2._esriMapServiceLayers[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                            var l = _step.value;
-
-                            l.getPopupInfo(queryParams, _this2._selectionLayerLookup[l.id]);
-                        }
-                    } catch (err) {
-                        _didIteratorError = true;
-                        _iteratorError = err;
-                    } finally {
-                        try {
-                            if (!_iteratorNormalCompletion && _iterator.return) {
-                                _iterator.return();
-                            }
-                        } finally {
-                            if (_didIteratorError) {
-                                throw _iteratorError;
-                            }
-                        }
-                    }
-                }
-
-                var layerFeatureObjectArray = _this2._featuresAtPixel(evt.pixel);
-
-                /**
-                 *
-                 * @type {Array.<_FeatureLayerProperties>}
-                 */
-                _this2._passThroughLayerFeatureArray = [];
-                _this2._currentPopupIndex = -1;
-
-                for (var i = 0; i < layerFeatureObjectArray.length; i++) {
-                    var featObj = layerFeatureObjectArray[i];
-
-                    var props = featObj.feature.getProperties();
-
-                    var popupContentResponse = _this2._arrPopupContentFunction[featObj.layerIndex](props, _this2._$popupContent);
-
-                    //skip if return was false
-                    if (popupContentResponse === false) {
-                        //continue;
-                    } else if (typeof popupContentResponse == 'string') {
-                            featObj.popupContent = popupContentResponse;
-                            _this2._passThroughLayerFeatureArray.push(featObj);
-                        } else {
-                            featObj.selectionLayer.getSource().addFeature(featObj.feature);
-                        }
-                }
-
-                _this2._popupContentLength = _this2._passThroughLayerFeatureArray.length;
-
-                _this2._currentPopupIndex = -1;
-
-                var popupHtml = '<div class="ol-popup-nav">';
-                popupHtml += '<span class="previous-popup ol-popup-nav-arrow">&#9664;</span>';
-                popupHtml += '<span class="next-popup ol-popup-nav-arrow">&#9654;</span>';
-                popupHtml += '<span class="current-popup-item-number" style="font-weight: bold;"></span>';
-                popupHtml += '<span>&nbsp;of&nbsp;</span>';
-                popupHtml += '<span class="popup-content-length" style="font-weight: bold;">' + _this2._popupContentLength + '</span>';
-                popupHtml += '<span>&nbsp;&nbsp;-&nbsp;&nbsp;</span>';
-                popupHtml += '<span class="current-popup-layer-name"></span>';
-                popupHtml += '</div>';
-                popupHtml += '<div class="ol-popup-inner">';
-
-                popupHtml += '</div>';
-
-                _this2._$popupContent.html(popupHtml);
-
-                _this2._$popupContent.find('.previous-popup').click(function () {
-                    if (_this2._popupContentLength == 1) {
-                        return;
-                    }
-
-                    if (_this2._currentPopupIndex == 0) {
-                        _this2._currentPopupIndex = _this2._popupContentLength - 1;
-                    } else {
-                        _this2._currentPopupIndex--;
-                    }
-                    _this2._triggerFeatSelect();
-                });
-
-                var nextPopup = _this2._$popupContent.find('.next-popup');
-
-                nextPopup.click(function () {
-                    if (_this2._popupContentLength == 1 && _this2._currentPopupIndex > -1) {
-                        return;
-                    }
-
-                    if (_this2._currentPopupIndex == _this2._popupContentLength - 1) {
-                        _this2._currentPopupIndex = 0;
-                    } else {
-                        _this2._currentPopupIndex++;
-                    }
-                    _this2._triggerFeatSelect();
-                });
-
-                if (_this2._popupContentLength > 0) {
-                    nextPopup.trigger('click');
-                    _this2._popupOverlay.setPosition(_this2._popupCoordinate);
-                    _this2._$popupContent.scrollTop(0);
-                    _this2._popupOpen = true;
-                }
-            });
-
-            //change mouse cursor when over marker
-            this._map.on('pointermove', function (e) {
-                if (e.dragging) {
-                    return;
-                }
-                var pixel = _this2.map.getEventPixel(e.originalEvent);
-                var hit = _this2.map.hasFeatureAtPixel(pixel, function (lyrCandidate) {
-                    var _iteratorNormalCompletion2 = true;
-                    var _didIteratorError2 = false;
-                    var _iteratorError2 = undefined;
-
-                    try {
-                        for (var _iterator2 = _this2._arrPopupOlLayers[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                            var olLayer = _step2.value;
-
-                            if (lyrCandidate == olLayer) {
-                                return true;
-                            }
-                        }
-                    } catch (err) {
-                        _didIteratorError2 = true;
-                        _iteratorError2 = err;
-                    } finally {
-                        try {
-                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                                _iterator2.return();
-                            }
-                        } finally {
-                            if (_didIteratorError2) {
-                                throw _iteratorError2;
-                            }
-                        }
-                    }
-
-                    return false;
-                });
-                _this2.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
-            });
-        }
-
-        /**
-         * helper to select features
-         * @private
-         */
-
-    }, {
-        key: '_triggerFeatSelect',
-        value: function _triggerFeatSelect() {
-            var $currentPopupItemNumber = this._$popupContent.find('.current-popup-item-number');
-            var $innerPopup = this._$popupContent.find('.ol-popup-inner');
-            var $layerNameSpan = this._$popupContent.find('.current-popup-layer-name');
-            this.clearSelection();
-            var lyrFeatObj = this._passThroughLayerFeatureArray[this._currentPopupIndex];
-            $currentPopupItemNumber.html((this._currentPopupIndex + 1).toFixed());
-            $layerNameSpan.html(lyrFeatObj.layerName);
-            $innerPopup.html(lyrFeatObj.popupContent);
-            lyrFeatObj.selectionLayer.getSource().addFeature(lyrFeatObj.feature);
-            var _iteratorNormalCompletion3 = true;
-            var _didIteratorError3 = false;
-            var _iteratorError3 = undefined;
-
-            try {
-                for (var _iterator3 = this._popupChangedFunctions[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                    var f = _step3.value;
-
-                    f(this._$popupContent);
-                }
-            } catch (err) {
-                _didIteratorError3 = true;
-                _iteratorError3 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                        _iterator3.return();
-                    }
-                } finally {
-                    if (_didIteratorError3) {
-                        throw _iteratorError3;
-                    }
-                }
-            }
-        }
-
-        /**
-         *
-         * @param {ol.Feature} feature - the ol feature
-         * @param {LayerEsriMapServer} lyr - the map server layer
-         * @param {string} popupContent - popup content
-         * @param {string} esriName - esri layer name
-         */
-
-    }, {
-        key: 'addMapServicePopupContent',
-        value: function addMapServicePopupContent(feature, lyr, popupContent, esriName) {
-
-            var featLayerObject = new _FeatureLayerProperties(feature, lyr, this._popupContentLength, this._selectionLayerLookup[lyr.id], esriName);
-            featLayerObject.popupContent = popupContent;
-
-            this._passThroughLayerFeatureArray.push(featLayerObject);
-            this._popupContentLength++;
-
-            (0, _jquery2.default)('.popup-content-length').html(this._popupContentLength.toFixed());
-
-            if (!this._popupOpen) {
-                this._$popupContent.find('.next-popup').trigger('click');
-
-                this._popupOverlay.setPosition(this._popupCoordinate);
-                this._$popupContent.scrollTop(0);
-                this._popupOpen = true;
-            }
-        }
-
-        /**
-         *
-         * @param {ol.Pixel} pixel - the ol pixel
-         * @returns {Array.<_FeatureLayerProperties>} - feature layer properties
-         * @private
-         */
-
-    }, {
-        key: '_featuresAtPixel',
-        value: function _featuresAtPixel(pixel) {
-            var _this3 = this;
-
-            var layerFeatureObjectArray = [];
-            this.map.forEachFeatureAtPixel(pixel, function (feature, layer) {
-                var lyrIndex = _this3._arrPopupOlLayers.indexOf(layer);
-
-                if (lyrIndex > -1) {
-                    layerFeatureObjectArray.push(new _FeatureLayerProperties(feature, _this3._arrPopupLayers[lyrIndex], lyrIndex, _this3._selectionLayers[lyrIndex]));
-                }
-            });
-
-            return layerFeatureObjectArray;
-        }
-    }, {
-        key: 'closePopup',
-        value: function closePopup() {
-            this._checkInit();
-            this._popupOpen = false;
-            this._popupOverlay.setPosition(undefined);
-            this._$popupCloser[0].blur();
-            this.clearSelection();
-            this._$popupContent.html('');
-
-            return false;
-        }
-    }, {
-        key: 'addPopupChangedFunction',
-
-
-        /**
-         *
-         * @param {popupChangedFunction} chgFunction - popup change function
-         */
-        value: function addPopupChangedFunction(chgFunction) {
-            this._popupChangedFunctions.push(chgFunction);
-        }
-
-        /**
-         *
-         * @param {LayerBase|*} lyr - the layer being acted on
-         * @param {object} [selectionStyle={}] the selection style configuration
-         * @param {string} [selectionStyle.color=rgba(255,170,0,0.5)] the selection color
-         * @param {number} [selectionStyle.width=10] the selection width for linear features
-         * @param {object|function} [selectionStyle.olStyle=undefined] an openlayers style object or function
-         * @returns {ol.layer.Vector} the new selection layer
-         * @private
-         */
-
-    }, {
-        key: '_addPopupLayer',
-        value: function _addPopupLayer(lyr, selectionStyle) {
-            this._checkInit();
-
-            selectionStyle = selectionStyle || {};
-            selectionStyle.color = selectionStyle.color || 'rgba(255,170,0,0.5)';
-            selectionStyle.width = selectionStyle.width || 10;
-
-            var theStyle = void 0;
-
-            if (selectionStyle.olStyle) {
-                theStyle = selectionStyle.olStyle;
-            } else {
-                theStyle = new _ol2.default.style.Style({
-                    stroke: new _ol2.default.style.Stroke({
-                        color: selectionStyle.color,
-                        width: selectionStyle.width
-                    }),
-                    image: new _ol2.default.style.Circle({
-                        radius: 7,
-                        fill: new _ol2.default.style.Fill({ color: selectionStyle.color }),
-                        stroke: new _ol2.default.style.Stroke({ color: selectionStyle.color, width: 1 })
-                    }),
-                    fill: new _ol2.default.style.Fill({
-                        color: selectionStyle.color
-                    })
-                });
-            }
-
-            var selectionLayer = new _ol2.default.layer.Vector({
-                source: new _ol2.default.source.Vector(),
-                style: theStyle,
-                zIndex: 100
-            });
-
-            this._selectionLayers.push(selectionLayer);
-            this._selectionLayerLookup[lyr.id] = selectionLayer;
-            this.map.addLayer(selectionLayer);
-
-            return selectionLayer;
-        }
-
-        /**
-         * The popup callback function
-         * @callback popupCallback
-         * @param {object} featureProperties - the feature properties
-         * @param {jQuery} jqRef reference to the div content to do some async stuff inside the div
-         * @returns {string} the html content to be added to the popup
-         */
-
-        /**
-         * Add popup to the map
-         * @param {LayerBase|*} lyr The layer that the popup with act on
-         * @param {popupCallback} popupContentFunction - popup content function that makes popup info
-         * @param {object} [selectionStyle={}] the selection style configuration
-         * @param {string} [selectionStyle.color=rgba(255,170,0,0.5)] the selection color
-         * @param {number} [selectionStyle.width=10] the selection width for linear features
-         * @param {object|function} [selectionStyle.olStyle=undefined] an openlayers style object or function
-         * @returns {object} a reference to the ol selection layer
-         */
-
-    }, {
-        key: 'addVectorPopup',
-        value: function addVectorPopup(lyr, popupContentFunction, selectionStyle) {
-            var selectionLayer = this._addPopupLayer(lyr, selectionStyle);
-            this._arrPopupLayerIds.push(lyr.id);
-            this._arrPopupLayerNames.push(lyr.name);
-            this._arrPopupLayers.push(lyr);
-            this._arrPopupOlLayers.push(lyr.olLayer);
-            this._arrPopupContentFunction.push(popupContentFunction);
-
-            return selectionLayer;
-        }
-    }, {
-        key: 'removeVectorPopup',
-
-
-        /**
-         *
-         * @param {LayerBase} lyr - layer
-         */
-        value: function removeVectorPopup(lyr) {
-            var idx = this._arrPopupLayerIds.indexOf(lyr.id);
-
-            if (idx > -1) {
-                this._arrPopupLayerIds.splice(idx, 1);
-                this._arrPopupLayerNames.splice(idx, 1);
-                this._arrPopupLayers.splice(idx, 1);
-                this._arrPopupOlLayers.splice(idx, 1);
-                this._arrPopupContentFunction.splice(idx, 1);
-                this._selectionLayers.splice(idx, 1);
-                delete this._selectionLayerLookup[lyr.id];
-            }
-        }
-
-        /**
-         *
-         * @param {LayerEsriMapServer} lyr - map server layer
-         * @param {object} [selectionStyle={}] the selection style configuration
-         * @param {string} [selectionStyle.color=rgba(255,170,0,0.5)] the selection color
-         * @param {number} [selectionStyle.width=10] the selection width for linear features
-         * @param {object|function} [selectionStyle.olStyle=undefined] an openlayers style object or function
-         * @returns {object} a reference to the ol selection layer
-         */
-
-    }, {
-        key: 'addMapServicePopup',
-        value: function addMapServicePopup(lyr, selectionStyle) {
-            var selectionLayer = this._addPopupLayer(lyr, selectionStyle);
-            this._esriMapServiceLayers.push(lyr);
-
-            return selectionLayer;
-        }
-    }, {
-        key: 'clearSelection',
-        value: function clearSelection() {
-            this._checkInit();
-            for (var i = 0; i < this._selectionLayers.length; i++) {
-                this._selectionLayers[i].getSource().clear();
-            }
-            var _iteratorNormalCompletion4 = true;
-            var _didIteratorError4 = false;
-            var _iteratorError4 = undefined;
-
-            try {
-                for (var _iterator4 = this._mapClickFunctions[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-                    var f = _step4.value;
-
-                    f();
-                }
-            } catch (err) {
-                _didIteratorError4 = true;
-                _iteratorError4 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
-                        _iterator4.return();
-                    }
-                } finally {
-                    if (_didIteratorError4) {
-                        throw _iteratorError4;
-                    }
-                }
-            }
-        }
-    }, {
-        key: 'addMapClickFunction',
-
-
-        /**
-         * Add a function to be called when the map is clicked but before any popups are implemented
-         * @param {function} func - the map click function
-         */
-        value: function addMapClickFunction(func) {
-            this._mapClickFunctions.push(func);
-        }
-    }]);
-
-    return MapPopupCls;
-}(_mapInteractionBase2.default);
-
-nm.MapPopupCls = MapPopupCls;
-exports.default = MapPopupCls;
-
-},{"../jquery":302,"../ol/ol":319,"../olHelpers/propertiesZoomStyle":314,"../util/provide":323,"./mapInteractionBase":309}],314:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _provide = require('../util/provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-var _zoomResolutionConvert = require('./zoomResolutionConvert');
-
-var zoomResolutionConvert = _interopRequireWildcard(_zoomResolutionConvert);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Created by gavorhes on 12/14/2015.
- */
-
-var nm = (0, _provide2.default)('olHelpers');
-
-/**
- * A style function based on properties and zoom level, wraps normal feature, resolution function
- * @callback propertiesZoomStyle
- * @param {object} properties the feature properties
- * @param {number} zoom level
- *
- */
-
-/**
- * wrapper to define a style function by properties and zoom level
- * @param {propertiesZoomStyle|*} styleFunc - style function
- * @returns {function|*} new function
- */
-function propertiesZoomStyle(styleFunc) {
-    if (styleFunc == undefined) {
-        return undefined;
-    }
-
-    return function (feature, resolution) {
-        styleFunc(feature.getProperties(), zoomResolutionConvert.resolutionToZoom(resolution));
-    };
-}
-
-nm.propertiesZoomStyle = propertiesZoomStyle;
-exports.default = propertiesZoomStyle;
-
-},{"../util/provide":323,"./zoomResolutionConvert":317}],315:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _quickMapBase = require('./quickMapBase');
-
-var _quickMapBase2 = _interopRequireDefault(_quickMapBase);
-
-var _provide = require('../util/provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-var _mapMove = require('./mapMove');
-
-var _mapMove2 = _interopRequireDefault(_mapMove);
-
-var _mapPopup = require('./mapPopup');
-
-var _mapPopup2 = _interopRequireDefault(_mapPopup);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Created by gavorhes on 12/15/2015.
- */
-
-var nm = (0, _provide2.default)('olHelpers');
-
-/**
- * Sets up a map with some default parameters and initializes
- * mapMove and mapPopup
- *
- * @param {object} [options={}] config options
- * @param {string} [options.divId=map] map div id
- * @param {object} [options.center={}] center config object
- * @param {number} [options.center.x=-10018378] center x, web mercator x or lon
- * @param {number} [options.center.y=5574910] center y, web mercator y or lat
- * @param {number} [options.zoom=7] zoom level
- * @param {number} [options.minZoom=undefined] min zoom
- * @param {number} [options.maxZoom=undefined] max zoom
- * @param {boolean} [options.baseSwitcher=true] if add base map switcher
- * @param {boolean} [options.fullScreen=false] if add base map switcher
- * @returns {ol.Map} the ol map
- */
-function quickMap(options) {
-  var m = (0, _quickMapBase2.default)(options);
-  _mapMove2.default.init(m);
-  _mapPopup2.default.init(m);
-
-  return m;
-}
-
-nm.quickMap = quickMap;
-exports.default = quickMap;
-
-},{"../util/provide":323,"./mapMove":310,"./mapPopup":312,"./quickMapBase":316}],316:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _jquery = require('../jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _provide = require('../util/provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-var _ol = require('../ol/ol');
-
-var _ol2 = _interopRequireDefault(_ol);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var nm = (0, _provide2.default)('olHelpers');
-
-/**
- * Sets up a map with some default parameters and initializes
- * mapMove and mapPopup
- *
- * @param {object} [options={}] config options
- * @param {string} [options.divId=map] map div id
- * @param {object} [options.center={}] center config object
- * @param {number} [options.center.x=-10018378] center x, web mercator x or lon
- * @param {number} [options.center.y=5574910] center y, web mercator y or lat
- * @param {number} [options.zoom=7] zoom level
- * @param {number} [options.minZoom=undefined] min zoom
- * @param {number} [options.maxZoom=undefined] max zoom
- * @param {boolean} [options.baseSwitcher=true] if add base map switcher
- * @param {boolean} [options.fullScreen=false] if add base map switcher
- * @returns {ol.Map} the ol map
- */
-/**
- * Created by gavorhes on 3/25/2016.
- */
-
-/**
- * Created by gavorhes on 12/15/2015.
- */
-
-function quickMapBase(options) {
-    options = options || {};
-    options.divId = options.divId || 'map';
-    options.center = options.center || {};
-    options.center.x = typeof options.center.x == 'number' ? options.center.x : -10018378;
-    options.center.y = typeof options.center.y == 'number' ? options.center.y : 5574910;
-    options.zoom = typeof options.zoom == 'number' ? options.zoom : 7;
-    options.baseSwitcher = typeof options.baseSwitcher == 'boolean' ? options.baseSwitcher : true;
-    options.fullScreen = typeof options.fullScreen == 'boolean' ? options.fullScreen : false;
-
-    var $mapDiv = (0, _jquery2.default)('#' + options.divId);
-    $mapDiv.css('position', 'relative');
-
-    var osmLayer = new _ol2.default.layer.Tile({ source: new _ol2.default.source.OSM() });
-    var satLayer = new _ol2.default.layer.Tile({ visible: false, source: new _ol2.default.source.MapQuest({ layer: 'sat' }) });
-
-    var osmCss = "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURQAAADQ1NDk5OURFREtLS1FHSFlZWGJRVGJiYWdmZWxsbHRmaXBpanN0c3V0dHp5eX5+fIVzd4F3eeV0jud5juZ8k4aHhomHhoyGh5eGj5OVlJiVlZiYl5qZmJydnKOTlaKZmqKdnaOioaqqqKuzsbOvrrSysLa3tbW4uLm6ub27ub+/vbGXwbCZwbCgxLKlxrOqyLStybO3yrSxyrWzzbW2y7a1zbK4y7W6zbW8y760yrTAzbTFzrPKzrLOzrTJzrTOzr7CwbXC0LXK0LTO0L3I0bPQz7TQz7PS0bXQ0LnR0brW1bzT0r7U077V1Lzc2dqNqteUsdyXscaquuOHneaGmueHnOeJnuiBleiKn+eNoOiOoOWUpOiRo+iSpeiUpeqYpumaqOmdrPSynemgruSqtOmisOmlsuuqtequuOW1vOuxu+uxvOq1ve+xvPK0pvW3o/W5pfO5qvS7qfCwvMOuwc2/wNenxNyyzNe/0Nq31Nq51dy72Oy3wOu4wOu+xey4wO+6xO2+xfTAr/TCsvfFtPHLvvTJuMPDwMfHxcXKyc3DxMvFyMvLyM3PzcDV08DV1MTX1cbY1s7X1sjZ1sra2Mnd3M7b2c7c2tfH1tnB1t7F2d7M29fX1tLY1tDd2tHe3NTf3NnS19rZ1tva2Nnf3t3d28rh3tXg3Nnh3tzj393k39ni4N7k4N7n5uXDyOfLz+zAxu3CyOzEyezKzeDJ3eLM3uvP0u3P0ePf2+7R0u7Q1u/U0+7U1ezc0+7a2e/d2+3f3vbFzvLOwfHN0PPQw/TUx/LWyvLYzPDQ1fPe0ubc4vve4uHh3+nh3+/h2u/h3vHj2vHl3uHm4eTn4uDp5ebo4+Xo5ODq6ebq6OTv6+nl4+/j4O7l4e7n5ujp4+np5Ozq5e7s5urt6O7t6Orw6u7x6u3x7vPj5PDl4fDo4vDq5fDt5vDu6PDv7PTv6fDx6vHx7fH17fXw6fXy7fb07/bz8fT18vn38vr39fr48/r59Pr6+P3++//+/gAAALNTSk0AAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wBT9wclAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4wLjlsM35OAAAFNElEQVRIS1VVCZxVUxi/9l0UIUT2bMnY43bVI2c0Y01kSWIaS0j2JEtkN41piomZrPPKQ2aQ7JKImOZlnm2493TJzDufuU1Zi+v/fee+mZ//793vnPOd7zvfes5zDBEZkBBjAcIjb+Iiotqgdhat8AMK0vl7/R9N7GiWtshqIr+EZ5gYKibyUsXY1l/mfFpssvUlWQ0FkU3gy4+RB/+kwYcO8pRSnldcOU/r2lAHARSwk2ORgEmOdC1EsuRiYSqMPwwroMIraZk5V2fYJQjCKfZrRmh3gSAZi2i4b7wSylWu8EqZwS59JkFUaW96JbNSc+CEUmt4rorwuZmWdDaoc+uZETuQlTCU5xYzR7muUnVUVo+BcRhre/VwUpasgJwhH7JkYIYA0sNxhmCwUK+lw6vCKBZehw01dEiyw4Q4aE0Z4ahDhKaFQsGnJ2BgqKoTBsNjFy0SlW6whRAZTdm8DBJmkBZhDi1j4xJQBk6ywrWUTymaCxac8lROcdauRGzQSNtA7EHUYhXyEwhhgjFUqRuO+rauhF1awFpzCsmwUbjIFBR0u1bKtyGpulW/H/cVVzkyGaIWTIR9pFAV6GK2gPMXMX8gPk9zzxXgI1kimcAltEYr+cjio1imlKpEa9rOipLm+p+CZ6Bw//qd1/f/O+GwMxbSLpyoZEcwkyh2jIks+3hmdd2jWUw4scxNysnHxU7nSspTRcJjCZGL3IsjsYJMMg5mwgx7gaIOLBFCogAgBBoNa9w+DE6I+Bs7FTgwwrJbHjWDgpYo2KwtBTcYEDuloC9geQw+k2RGnPGpTaOlq7AS+YICUz4DZVaX2TiNDhuYfTtY4geLi0IoCm3XccwM9hx4kU28StQEljDs3ZEpFGA+8dKzLmV9ymIwF5FOGn2GdJM8KLHDJbXyiYVMG9MRTLiXGGg2QKaxM3khPSRrwM9zEIardxU2w/EiA0gOeYKHzDR0V7/QGV3lKIA9ktrDArxO3gdA+k6SKoBiVwcm7NjZb9+Hnztg282TuHVZ9LOISFNt9MgyCetZVczSxnyDbl17Penq6mqpg1IhRaEO2aVLUO4/r17H8tTv6f13h71dduvZI3Y+uMdWksNSauLovJw5hsqiPIUvt0ku7/iBeUR3sksmomYWtRbAjbiLfv2lX9/V7LVG4uYnUZXhQ7f2OPCZEx9wrYWTcePEQqPEML8pl4mMdr/jlXlvHiRiJ2+MSTFY4TTSYStuvz2R/JXh+PPeGXm055J+3/YDWuNu3R3DArPutyg0ZgykMVDU9Ndm22+wYalr2rse48CnsTIFcMn73vfhNrktx1EUcZnPv6ah3Yy5cDTRdBEoGoBeah71dqFyjZDJLkWk3N3v4uuktssjWpzciMPxQeHj8nMKzcGuB0tAyzFhdCKOYWv4HwOQVwIxLG99a6uvH3sJCyO3h+k4EZ+G7+xj5f4XXksoaGrdMRzSc8ARA8+cdOuk2x6fffNNt5x+Ro1omPlrT/CQDlcNlpx4NBIWXhkx7Y3Zp3ofNR7Uv89Om/beW0TLIynHv3vs1VsOFpSWSXvfuPUf9BrRFyxgXdHoKJnQFegPOovvzz59ntrzye240ig8UQ3lDI2VqwagrKIQcLXNFL3wglN2OHdBQ6/vI3kENDVBwRb3k1XtczFbjWn4EzMYi7CF3129+JTYuRSdrGuS92g5dpqn6qXoJQs5xmL8p+Wt4hLbt0mx2OLNZR2bbPy8zJNQGFM/f/CfXZekRYFjGCWjIJpM+WiCzGBPWHhoyaAsjRT/B2Gy5yzYJkwUAAAAAElFTkSuQmCC')";
-    var aerialCss = "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURQALBgIMDQgOBwQOEQcTBwUSCwoVDAwdBw8ZDgUREwYUGAYZFQYZGgkTFQoVGQsZFAwZHBMeDhIbFBEbHAwWIA4bIREcIQ4hCQwjFw4lHBgkDB8sDxUiExIiGhAoGxohFRshGRorHQcrKQsiIQwmKgooJA0pKQ81Jw8yLRMiIxImKxUrJREuKhslJB0rIhooKRUuMBMyLhkwJhozKh48LxUzMRM9MBwzMiUvFCMtGiMwEiwzFCgzHDI+GSIsISkvJSQxIiM2LiY5Jic+Lyk0JSo0Ky49JSs9KSU1NSM7NCs2NS8+NDM1JzU9Ljg7IDJCHS1DLSNAMitCMSxIOjREITZLIDZJKDlFIjpFKztKJT1LKzJBMzpHMD1JMjpKPD1RKjlQNC1DQj5QQEA8MEJGJkBKJUJNK0lLLEJMMkVMPEpONENSLUdZL0pTLkpaLkRUMkRSPEVZMktUM0pVOklZMklZNEpcNU1ZMk1ZNUxfMk5dNkxcOVFUM1RUOFJbNVFZOVNYPVFdOVJdPFVaOVVaPVVdOlVdPVpaNlpdO0phN01hOlBiN1NhPFNoP1piPWFbPmRjPENOQEtPSURTQkJVS0xVQk1VSkxbQkxcS0heUVFXRFRcQlJfTFxeQlpeS05lQk1kSFRjQVRjSlZpQ1tkQlxlSlxpRF1rSVVnUVtlU1llXF9tU1xoXlxwSl9ramRfQmJlQ2FhSWFlSWFlTmVlSWRmTGFoQWFpRWFsRmVpRWVtRmNsSmtlRGpqRmpsS2BmWGRsUmFrW2ptUmZyR2RxTGpxTWVyU2RyW2d5V2tzUmt0WW15VG15WXFuTHNtVnFxTXF4T3h0TnJzUnJ1XHJ4VXN6Wnp0VHx1W315VXp8XGR0YGx0YHVzZXJ0aHR9ZXV+aHl9YHOCXXqBXXeCYHyCY3iEaHyIYn+JaXqKcYB5WIN6Y4SCXoCDZIGEaYCIZoOLa4iCaImJbIOOdYuMco6OeIuVcpOKbZKPc5aQb5eXe5ufg6KjhAAAAAAAAAAAAAAAAOGCeQgAAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wBT9wclAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4wLjlsM35OAAAH80lEQVRISy1WbXQUVxm+6wqnk3Zmpxl2FG2EGg92C8GDlWptVTwa+uF3xcKmDfFzCUzDsJNsunXipglJXJbrtJWmwZNSnHD3jojRgUIm2UumIZ0JZ7JByrALbMWW0IBW8aRa4+cf76TeX3Nm3uc+z/s+7/vugl4r/aMTrT4e1pPTqnnmJNn5AyUzRnrRle/qE33dsvrBtAQVoxtpZNK3zSzYjUjviWO2Ag+R77dl7W36n/1Ep9KBPG/S+Py0PkjU/gPKQGqwTHryiWYFAXSvMairsio7SjyNsnCzh0qKImV9/7mhfHQZx2yN1O+7rXUm33MUPaboOkAJHaoIdXfJj2xWeyD8jMFEXkvIu5qzpU988gWB5zl+GS+sFe55trEVPdWZB2miq8bBVkNFO2R0qnrfkiXhcJhtDNXE6tbW97/s9O9/7ZfVhx86/CwrROpfvvxboMqeLsuqPr1j44qEwDNMOBximUiYoU8sw7BC/a7T72uEnyJDlGxZ9KcglZRyuqqrv/tSZErgOI4NgRBTIw9EmHAoFGZZnp6aGaJ2GTxfxYs8kKVUQh7WB5hQeC3LsUxoxVKW14l3BX2WcoUYPiZyLLe8teZ+iuT4GGhvV5KpKWkpyzxEr2MZgQ1xdRjfRBoH+2k6lIHjKTHPPBo8CSJISqqq4wGGOcWylIGlgvgNX1Gd8vF5f+IUIwb30ng+Gg2QfBRIMvy0jG8SVkYo4N0zvUXVRztbJ/L6xL7lUZEXBEHkuZqlS6gEAUgKJurnhFtfpACOYd8b/hVbJPqwi44a6KA0sPVjIi/SIyxb3u8KlAJ0S8jRVgrlW+nVHPdrhiXCxu42d86ByksDc80P3MkJFBFQ8Ho1lQegpWJRWFGsDsRwwv7pIyvuQW0ZkrX6NDVFbqcvaQI8vbyqzt5AARrsbKx5yhQEGs+wPO56bOK+0rcwMrOKkpUbZWYxV04UeZZv/cBKFhRL6Qdv9y4LfEDA7/thg7tTmv1a5/GnO0wl0dQg80wglZaHUmxRvjwAHOfyN0mxrpqLUpcjsK3NHYMo4R1o6eho2ZyIb2FoeOC3ILK8kZ2HQMOuWywGXUkJBCeTbYFS0+ym1h2/6UgmvnrvKYZZtIEXGf75C2cIAp5LHNd71x7uPoTjakrWH9e3KFpaatjUvJUysFw0KrLMYMW2lTg4PeUQx6kJEALvxXEmCdVyPLHtCSjBhc01XCjIgafxou+PE6KC1dhxSCwoBCc+N4P3btM84pmdSSjJnjO/nvY4LQfVyz5/I+v6IwjUOMjy+MVCxIbKupTJaEktp7cTKU42Pvjh2m/8cSpC6aPsaX/MHSuUQLVVsIa4RUTs/r/BVAexNdjdnsNG7j/rV93xheLMzKnFrPeTEQchCyCcKb25aAIn7lrAertrZwyNXM8N6zfWrFo3d2SmOEcF83x/r+OOFgrAHYWF7cELjhV7UQo/6WAIUVl9JFl8a//HZ66VpbY3I9QKZqPru77lA+iOWAIr0hKxHCmmr0othSyeIl5y3qt4xT8gSNrKEZozs8Els67rgsLOZ+ygzwMfbtNhobfgzpEyGnz7htPtzUi6PuOoj7K0WF/MXiUFxwGajRD1hjYXHXI9p406qOyinp5/tiWcDHY0jIu4n64Qfq7kliB2gemag9QbOia0PbbDMbd43SHuvxFxrAocxins7MX5Kqbe1QixKBxoV4//PfAgGCu+Rlm4SvZizyDH+0reDHp92iO0BuX3bCfItl0PEwvYLqpwXG2MHlGsQ4S8pMJZv1JGmHiEoHQDdOjwmVlEP/nE9ADKjI8xLI0OOGITfy0SbeG/C2jKUDGSlDhM9I3IpK9iup6XnbRNC7yqueNsJCCIiXzdQhnaGN+46umnEdy5U5UbUJ48LFM9GkJo8BdDOiAZ7ZIQbKhYLMqvhU2wmNxjEAsS2AI7y4nWF64duePbk7YV3zvAVLEMD9AxJRNa3KDUibV7DjnkuprMEYjScFNcaR2ceP2u9R/5k1052Ryme5phAFRswlHjAudiP4dOy7CaxLgdJh9vUlU1702/+LPa1U9fvPi9qlA4XEUBJc3dFlpsR457IDl1iPqLp7o81NQgyV19iYU38uTiv975Pd3SiwQcsGjx+v4/6fl5T7EOOMTCtpbKxfemsQq/3olQZcminADAAI0cuGLHaHOFxbuGvRk/Z9u7CULqoVR6NE0yx1avj30oRhc/jWUoIALGxkz0dg1Dl9iaI7LqOOXKsXJFwjiuEAi70Jra2nW1PL08zLBhZsMABpW5csI7TPfew9ipFKcn5k1i+1KyCWKjC3W/8dF1d666+RaabBVTFTHacjoojBNDh0NDxk+IPTlwfqJkWpbnpFHXIbLbmpxEQ3ff/Z0g/mauXsoln9wDRjy/NHsQFw3P6vWuTJ43/+FZrk2cvAFRipCKdfD9y2+pjRj78s0KdCUDKJvdV91ChngV38T20TM+gghjpJaPlpFr2xbEz5g4A/NGt5rNwdwmYGeeeMXBSLHHUIc+6RsojRH9VTUm3/mLf/64b470XvoxoTKhlMBQ2jMEzo2PjxdGMppmn1RM24bWFJqaQv4BcuJa2Sam7Zokq1ldCsz06NCBHrhwqVQYpfFj42NZexz1EW9SR/kT58nEeQKJb2fPXjjp0u/YUkwHEgLeOnf2nOuf1TRTM02CLKLTPy60/x1CCztqn7Ev+BdsC3m+30decQvW/wBNTwU+CfUQAQAAAABJRU5ErkJggg==')";
-
-    if (options.baseSwitcher) {
-        var switcherContent = '<div class="base-map-switcher" title="Toggle Base Layer" style="';
-        switcherContent += 'position: absolute; top: 70px; left: 4px; border: solid black 1px; ';
-        switcherContent += 'height: 50px; width: 50px; z-index: 10; border-radius: 4px; background: ' + aerialCss + ';';
-        switcherContent += '"></div>';
-        $mapDiv.append(switcherContent);
-
-        $mapDiv.find('.base-map-switcher').click(function () {
-            "use strict";
-
-            osmLayer.setVisible(!osmLayer.getVisible());
-            satLayer.setVisible(!satLayer.getVisible());
-
-            if (osmLayer.getVisible()) {
-                (0, _jquery2.default)(this).css('background', aerialCss);
-            } else {
-                (0, _jquery2.default)(this).css('background', osmCss);
-            }
-        });
-    }
-
-    if (options.zoom < 0 || options.zoom > 28) {
-        throw 'zoom out of range';
-    }
-
-    if (options.center.x >= -180 && options.center.x <= 180 && options.center.y >= -90 && options.center.y <= 90) {
-        var p = new _ol2.default.geom.Point([options.center.x, options.center.y]);
-        p.transform("EPSG:4326", "EPSG:3857");
-        var coordinates = p.getCoordinates();
-        options.center.x = coordinates[0];
-        options.center.y = coordinates[1];
-    }
-
-    var map = new _ol2.default.Map({
-        layers: [osmLayer, satLayer],
-        target: options.divId,
-        controls: _ol2.default.control.defaults({
-            attributionOptions: { collapsible: false }
-        }),
-        view: new _ol2.default.View({
-            center: [options.center.x, options.center.y],
-            zoom: options.zoom,
-            minZoom: options.minZoom,
-            maxZoom: options.maxZoom
-        })
+        nm.resolutionToZoom = resolutionToZoom;
     });
-
-    if (options.fullScreen) {
-        map.addControl(new _ol2.default.control.FullScreen());
-    }
-
-    return map;
-}
-
-nm.quickMapBase = quickMapBase;
-exports.default = quickMapBase;
-
-},{"../jquery":302,"../ol/ol":319,"../util/provide":323}],317:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
 });
-exports.zoomToResolution = zoomToResolution;
-exports.resolutionToZoom = resolutionToZoom;
-
-var _provide = require('../util/provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var nm = (0, _provide2.default)('olHelpers.zoomResolutionConvert'); /**
-                                                                     * Created by gavorhes on 12/14/2015.
-                                                                     */
-
-var _zoomResLookup = [156543.03392804097, //0
-78271.51696402048, //1
-39135.75848201024, //2
-19567.87924100512, //3
-9783.93962050256, //4
-4891.96981025128, //5
-2445.98490512564, //6
-1222.99245256282, //7
-611.49622628141, //8
-305.748113140705, //9
-152.8740565703525, //10
-76.43702828517625, //11
-38.21851414258813, //12
-19.109257071294063, //13
-9.554628535647032, //14
-4.777314267823516, //15
-2.388657133911758, //16
-1.194328566955879, //17
-0.5971642834779395, //18
-0.29858214173896974, //19
-0.14929107086948487, //20
-0.07464553543474244, //21
-0.03732276771737122, //22
-0.01866138385868561, //23
-0.009330691929342804, //24
-0.004665345964671402, //25
-0.002332672982335701, //26
-0.0011663364911678506, //27
-0.0005831682455839253 //28
-];
-
-/**
- * Get the resolution given the zoom level
- * @param {number} zoomLevel - the zoom level
- * @returns {number|*} the map resolution
- */
-function zoomToResolution(zoomLevel) {
-    "use strict";
-
-    if (typeof zoomLevel == 'number') {
-        if (zoomLevel % 1 === 0 && zoomLevel >= 0 && zoomLevel <= 28) {
-            return _zoomResLookup[zoomLevel];
-        } else {
-            console.log('invalid zoom level provided: ' + zoomLevel);
-
-            return undefined;
-        }
-    } else {
-        return undefined;
-    }
-}
-nm.zoomToResolution = zoomToResolution;
-
-/**
- * Get resolution from the zoom level
- * @param {number} resolution - the resolution
- * @returns {number|*} the zoom level
- */
-function resolutionToZoom(resolution) {
-    for (var i = 0; i < _zoomResLookup.length; i++) {
-        if (resolution >= _zoomResLookup[i]) {
-            return i;
-        }
-    }
-
-    return 0;
-}
-
-nm.resolutionToZoom = resolutionToZoom;
 
 },{"../util/provide":323}],318:[function(require,module,exports){
 // OpenLayers 3. See http://openlayers.org/
@@ -21274,429 +21912,616 @@ xl.prototype.getExtent=xl.prototype.C;xl.prototype.transform=xl.prototype.o;F("o
 
 
 },{}],319:[function(require,module,exports){
-'use strict';
+(function (global, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(['exports', './ol-build'], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(exports, require('./ol-build'));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports, global.olBuild);
+    global.ol = mod.exports;
+  }
+})(this, function (exports) {
+  'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+  (function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+      define(['exports', './ol-build'], factory);
+    } else if (typeof exports !== "undefined") {
+      factory(exports);
+    } else {
+      var mod = {
+        exports: {}
+      };
+      factory(mod.exports, global.olBuild);
+      global.ol = mod.exports;
+    }
+  })(undefined, function (exports, ol) {
+    'use strict';
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = ol;
+  });
 });
-var ol = require('./ol-build');
-
-exports.default = ol;
 
 },{"./ol-build":318}],320:[function(require,module,exports){
-'use strict';
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', './provide'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('./provide'));
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports, global.provide);
+        global.checkDefined = mod.exports;
+    }
+})(this, function (exports) {
+    'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports', './provide'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports, global.provide);
+            global.checkDefined = mod.exports;
+        }
+    })(undefined, function (exports, _provide) {
+        'use strict';
+
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+        exports.undefinedOrNull = undefinedOrNull;
+        exports.definedAndNotNull = definedAndNotNull;
+
+        var _provide2 = _interopRequireDefault(_provide);
+
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
+        }
+
+        var nm = (0, _provide2.default)('util.checkDefined');
+
+        /**
+         * check if the input is undefined or null
+         * @param {*} input - input pointer
+         * @returns {boolean} true undefined or null
+         */
+        /**
+         * Created by gavorhes on 12/11/2015.
+         */
+        function undefinedOrNull(input) {
+            "use strict";
+
+            return typeof input === 'undefined' || input === null;
+        }
+
+        nm.undefinedOrNull = undefinedOrNull;
+
+        /**
+         * check if the input is defined and not null
+         * @param {*} input - input pointer
+         * @returns {boolean} true defined and not null
+         */
+        function definedAndNotNull(input) {
+            "use strict";
+
+            return !undefinedOrNull(input);
+        }
+
+        nm.definedAndNotNull = definedAndNotNull;
+    });
 });
-exports.undefinedOrNull = undefinedOrNull;
-exports.definedAndNotNull = definedAndNotNull;
-
-var _provide = require('./provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var nm = (0, _provide2.default)('util.checkDefined');
-
-/**
- * check if the input is undefined or null
- * @param {*} input - input pointer
- * @returns {boolean} true undefined or null
- */
-/**
- * Created by gavorhes on 12/11/2015.
- */
-function undefinedOrNull(input) {
-    "use strict";
-
-    return typeof input === 'undefined' || input === null;
-}
-
-nm.undefinedOrNull = undefinedOrNull;
-
-/**
- * check if the input is defined and not null
- * @param {*} input - input pointer
- * @returns {boolean} true defined and not null
- */
-function definedAndNotNull(input) {
-    "use strict";
-
-    return !undefinedOrNull(input);
-}
-
-nm.definedAndNotNull = definedAndNotNull;
 
 },{"./provide":323}],321:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.rgb2hex = rgb2hex;
-exports.hexAlphaToRgbOrRgba = hexAlphaToRgbOrRgba;
-exports.rgbToRgba = rgbToRgba;
-exports.makeBlueGreenRedGradient = makeBlueGreenRedGradient;
-exports.makeBlueGreenRedGradientZScore = makeBlueGreenRedGradientZScore;
-
-var _provide = require('./provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-var _checkDefined = require('./checkDefined');
-
-var chk = _interopRequireWildcard(_checkDefined);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Created by gavorhes on 11/3/2015.
- */
-
-var nm = (0, _provide2.default)('util.colors');
-
-/**
- * helper function to convert to hex
- * @param {number|string} x - the number to convert to hex
- * @returns {string} number as hex
- * @private
- */
-function _hex(x) {
-    var hexDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
-
-    return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
-}
-
-/**
- * converts an RGB string to hex
- * @param {string} rgb - rgb color
- * @returns {string} rbg as hex
- */
-function rgb2hex(rgb) {
-    var rgb1 = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-
-    return ("#" + _hex(rgb1[1]) + _hex(rgb1[2]) + _hex(rgb1[3])).toUpperCase();
-}
-
-nm.rgb2hex = rgb2hex;
-
-/**
- * Convert hex string to RGB or RGBA string
- * @param {string} hexString - hex color string
- * @param {number} [alphaVal=undefined] Alpha value
- * @returns {string} - rgb or rgba color
- */
-function hexAlphaToRgbOrRgba(hexString, alphaVal) {
-    hexString = hexString.charAt(0) == "#" ? hexString.substring(1, 7) : hexString;
-    var r = parseInt(hexString.substring(0, 2), 16).toString() || '0';
-    var g = parseInt(hexString.substring(2, 4), 16).toString() || '0';
-    var b = parseInt(hexString.substring(4, 6), 16).toString() || '0';
-    if (alphaVal) {
-        return 'rgba(' + r + ',' + g + ',' + b + ',' + alphaVal + ')';
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', './provide', './checkDefined'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('./provide'), require('./checkDefined'));
     } else {
-        return 'rgba(' + r + ',' + g + ',' + b + ')';
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports, global.provide, global.checkDefined);
+        global.colors = mod.exports;
     }
-}
+})(this, function (exports) {
+    'use strict';
 
-nm.hexAlphaToRgbOrRgba = hexAlphaToRgbOrRgba;
-
-/**
- * adds alpha value to rgb string 'rgb(r, b, g)', returns 'rgba(r, g, b, a)'
- * @param {string} rgb - rgb color
- * @param {number} alpha - alpha value 0 to 1
- * @returns {string} rgba color
- */
-function rgbToRgba(rgb, alpha) {
-    var pieces = rgb.split(',');
-    pieces[0] = pieces[0].replace('rgb', 'rgba');
-    pieces[2] = pieces[2].replace(')', '');
-    pieces.push(' ' + alpha.toFixed(1) + ')');
-
-    return pieces.join(',');
-}
-
-nm.rgbToRgba = rgbToRgba;
-
-/**
- * @typedef {function} colorLookupByNumber
- * @param {number} num - the number to use to retrieve the color
- * @returns {string} rgb color
- */
-
-/**
- * Make a blue green red gradient
- * @param {number} minVal - minimum value
- * @param {number} maxVal - maximum value
- * @param {boolean} flipColors - if the colors should be flipped
- * @returns {colorLookupByNumber} color lookup function
- */
-function makeBlueGreenRedGradient(minVal, maxVal, flipColors) {
-
-    if (typeof flipColors != "boolean") {
-        flipColors = false;
-    }
-
-    return function (theVal) {
-        var r = void 0,
-            g = void 0,
-            b = void 0;
-        var ratio = void 0;
-
-        if (chk.undefinedOrNull(theVal)) {
-            return 'rgb(100,100,100)';
-        }
-
-        var percent = (theVal - minVal) / (maxVal - minVal);
-
-        if (flipColors == true) {
-            percent = 1 - percent;
-        }
-
-        if (percent >= 1) {
-            r = 255;
-            g = 0;
-            b = 0;
-        } else if (percent <= 0) {
-            r = 0;
-            g = 0;
-            b = 255;
-        } else if (percent < .25) {
-            // green up, blue constant
-            r = 0;
-            g = Math.floor(255 * percent / 0.25);
-            b = 255;
-        } else if (percent < 0.50) {
-            //blue down, green constant
-            ratio = (percent - 0.25) / 0.25;
-            r = 0;
-            g = 255;
-            b = 255 - Math.floor(255 * ratio);
-        } else if (percent < 0.75) {
-            // red up, green constant
-            ratio = (percent - 0.5) / 0.25;
-            r = Math.floor(255 * ratio);
-            g = 255;
-            b = 0;
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports', './provide', './checkDefined'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
         } else {
-            // green down, red constant
-            ratio = (percent - 0.75) / 0.25;
-            r = 255;
-            g = 255 - Math.floor(255 * ratio);
-            b = 0;
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports, global.provide, global.checkDefined);
+            global.colors = mod.exports;
+        }
+    })(undefined, function (exports, _provide, _checkDefined) {
+        'use strict';
+
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+        exports.rgb2hex = rgb2hex;
+        exports.hexAlphaToRgbOrRgba = hexAlphaToRgbOrRgba;
+        exports.rgbToRgba = rgbToRgba;
+        exports.makeBlueGreenRedGradient = makeBlueGreenRedGradient;
+        exports.makeBlueGreenRedGradientZScore = makeBlueGreenRedGradientZScore;
+
+        var _provide2 = _interopRequireDefault(_provide);
+
+        var chk = _interopRequireWildcard(_checkDefined);
+
+        function _interopRequireWildcard(obj) {
+            if (obj && obj.__esModule) {
+                return obj;
+            } else {
+                var newObj = {};
+
+                if (obj != null) {
+                    for (var key in obj) {
+                        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+                    }
+                }
+
+                newObj.default = obj;
+                return newObj;
+            }
         }
 
-        r = r.toFixed();
-        g = g.toFixed();
-        b = b.toFixed();
-
-        return 'rgb(' + r + ',' + g + ',' + b + ')';
-    };
-}
-
-nm.makeBlueGreenRedGradient = makeBlueGreenRedGradient;
-
-/**
- * Create a function that will return colors based on a gradient
- * @param {number} median - median value
- * @param {number} stdDev - standard deviation
- * @param {boolean} flipColors - if the colors should be flipped
- * @returns {colorLookupByNumber} color lookup function
- */
-function makeBlueGreenRedGradientZScore(median, stdDev, flipColors) {
-
-    var grd = makeBlueGreenRedGradient(-2.5, 2.5, flipColors);
-
-    return function (theVal) {
-
-        var zScore = void 0;
-        if (theVal == null) {
-            zScore = null;
-        } else {
-            zScore = (theVal - median) / stdDev;
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
         }
 
-        return grd(zScore);
-    };
-}
+        /**
+         * Created by gavorhes on 11/3/2015.
+         */
 
-nm.makeBlueGreenRedGradientZScore = makeBlueGreenRedGradientZScore;
+        var nm = (0, _provide2.default)('util.colors');
+
+        /**
+         * helper function to convert to hex
+         * @param {number|string} x - the number to convert to hex
+         * @returns {string} number as hex
+         * @private
+         */
+        function _hex(x) {
+            var hexDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
+
+            return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+        }
+
+        /**
+         * converts an RGB string to hex
+         * @param {string} rgb - rgb color
+         * @returns {string} rbg as hex
+         */
+        function rgb2hex(rgb) {
+            var rgb1 = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+
+            return ("#" + _hex(rgb1[1]) + _hex(rgb1[2]) + _hex(rgb1[3])).toUpperCase();
+        }
+
+        nm.rgb2hex = rgb2hex;
+
+        /**
+         * Convert hex string to RGB or RGBA string
+         * @param {string} hexString - hex color string
+         * @param {number} [alphaVal=undefined] Alpha value
+         * @returns {string} - rgb or rgba color
+         */
+        function hexAlphaToRgbOrRgba(hexString, alphaVal) {
+            hexString = hexString.charAt(0) == "#" ? hexString.substring(1, 7) : hexString;
+            var r = parseInt(hexString.substring(0, 2), 16).toString() || '0';
+            var g = parseInt(hexString.substring(2, 4), 16).toString() || '0';
+            var b = parseInt(hexString.substring(4, 6), 16).toString() || '0';
+            if (alphaVal) {
+                return 'rgba(' + r + ',' + g + ',' + b + ',' + alphaVal + ')';
+            } else {
+                return 'rgba(' + r + ',' + g + ',' + b + ')';
+            }
+        }
+
+        nm.hexAlphaToRgbOrRgba = hexAlphaToRgbOrRgba;
+
+        /**
+         * adds alpha value to rgb string 'rgb(r, b, g)', returns 'rgba(r, g, b, a)'
+         * @param {string} rgb - rgb color
+         * @param {number} alpha - alpha value 0 to 1
+         * @returns {string} rgba color
+         */
+        function rgbToRgba(rgb, alpha) {
+            var pieces = rgb.split(',');
+            pieces[0] = pieces[0].replace('rgb', 'rgba');
+            pieces[2] = pieces[2].replace(')', '');
+            pieces.push(' ' + alpha.toFixed(1) + ')');
+
+            return pieces.join(',');
+        }
+
+        nm.rgbToRgba = rgbToRgba;
+
+        /**
+         * @typedef {function} colorLookupByNumber
+         * @param {number} num - the number to use to retrieve the color
+         * @returns {string} rgb color
+         */
+
+        /**
+         * Make a blue green red gradient
+         * @param {number} minVal - minimum value
+         * @param {number} maxVal - maximum value
+         * @param {boolean} flipColors - if the colors should be flipped
+         * @returns {colorLookupByNumber} color lookup function
+         */
+        function makeBlueGreenRedGradient(minVal, maxVal, flipColors) {
+
+            if (typeof flipColors != "boolean") {
+                flipColors = false;
+            }
+
+            return function (theVal) {
+                var r = void 0,
+                    g = void 0,
+                    b = void 0;
+                var ratio = void 0;
+
+                if (chk.undefinedOrNull(theVal)) {
+                    return 'rgb(100,100,100)';
+                }
+
+                var percent = (theVal - minVal) / (maxVal - minVal);
+
+                if (flipColors == true) {
+                    percent = 1 - percent;
+                }
+
+                if (percent >= 1) {
+                    r = 255;
+                    g = 0;
+                    b = 0;
+                } else if (percent <= 0) {
+                    r = 0;
+                    g = 0;
+                    b = 255;
+                } else if (percent < .25) {
+                    // green up, blue constant
+                    r = 0;
+                    g = Math.floor(255 * percent / 0.25);
+                    b = 255;
+                } else if (percent < 0.50) {
+                    //blue down, green constant
+                    ratio = (percent - 0.25) / 0.25;
+                    r = 0;
+                    g = 255;
+                    b = 255 - Math.floor(255 * ratio);
+                } else if (percent < 0.75) {
+                    // red up, green constant
+                    ratio = (percent - 0.5) / 0.25;
+                    r = Math.floor(255 * ratio);
+                    g = 255;
+                    b = 0;
+                } else {
+                    // green down, red constant
+                    ratio = (percent - 0.75) / 0.25;
+                    r = 255;
+                    g = 255 - Math.floor(255 * ratio);
+                    b = 0;
+                }
+
+                r = r.toFixed();
+                g = g.toFixed();
+                b = b.toFixed();
+
+                return 'rgb(' + r + ',' + g + ',' + b + ')';
+            };
+        }
+
+        nm.makeBlueGreenRedGradient = makeBlueGreenRedGradient;
+
+        /**
+         * Create a function that will return colors based on a gradient
+         * @param {number} median - median value
+         * @param {number} stdDev - standard deviation
+         * @param {boolean} flipColors - if the colors should be flipped
+         * @returns {colorLookupByNumber} color lookup function
+         */
+        function makeBlueGreenRedGradientZScore(median, stdDev, flipColors) {
+
+            var grd = makeBlueGreenRedGradient(-2.5, 2.5, flipColors);
+
+            return function (theVal) {
+
+                var zScore = void 0;
+                if (theVal == null) {
+                    zScore = null;
+                } else {
+                    zScore = (theVal - median) / stdDev;
+                }
+
+                return grd(zScore);
+            };
+        }
+
+        nm.makeBlueGreenRedGradientZScore = makeBlueGreenRedGradientZScore;
+    });
+});
 
 },{"./checkDefined":320,"./provide":323}],322:[function(require,module,exports){
-'use strict';
+(function (global, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(['exports', './provide'], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(exports, require('./provide'));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports, global.provide);
+    global.makeGuid = mod.exports;
+  }
+})(this, function (exports) {
+  'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+  (function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+      define(['exports', './provide'], factory);
+    } else if (typeof exports !== "undefined") {
+      factory(exports);
+    } else {
+      var mod = {
+        exports: {}
+      };
+      factory(mod.exports, global.provide);
+      global.makeGuid = mod.exports;
+    }
+  })(undefined, function (exports, _provide) {
+    'use strict';
 
-var _provide = require('./provide');
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
 
-var _provide2 = _interopRequireDefault(_provide);
+    var _provide2 = _interopRequireDefault(_provide);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {
+        default: obj
+      };
+    }
 
-var nm = (0, _provide2.default)('util');
+    var nm = (0, _provide2.default)('util');
 
-/**
- * guids are used to uniquely identify groups and features
- * @returns {string} a new guid
- */
-/**
- * Created by gavorhes on 11/3/2015.
- */
+    /**
+     * guids are used to uniquely identify groups and features
+     * @returns {string} a new guid
+     */
+    /**
+     * Created by gavorhes on 11/3/2015.
+     */
 
-function makeGuid() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    var r = Math.random() * 16 | 0,
-        v = c == 'x' ? r : r & 0x3 | 0x8;
+    function makeGuid() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0,
+            v = c == 'x' ? r : r & 0x3 | 0x8;
 
-    return v.toString(16);
+        return v.toString(16);
+      });
+    }
+    nm.makeGuid = makeGuid;
+    exports.default = makeGuid;
   });
-}
-nm.makeGuid = makeGuid;
-exports.default = makeGuid;
+});
 
 },{"./provide":323}],323:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-/**
- * Created by gavorhes on 12/10/2015.
- */
-
-/**
- * create a namespace on the gv object
- * @param {string} namespace to create
- * @returns {object} object representing the namespace
- */
-function provide(namespace) {
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(["exports"], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports);
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports);
+        global.provide = mod.exports;
+    }
+})(this, function (exports) {
     "use strict";
 
-    if (typeof window.gv == 'undefined') {
-        window.gv = {};
-    }
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['exports'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory(exports);
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(mod.exports);
+            global.provide = mod.exports;
+        }
+    })(undefined, function (exports) {
+        'use strict';
 
-    var parts = namespace.split('.');
-    var nameSpace = window.gv;
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+        /**
+         * Created by gavorhes on 12/10/2015.
+         */
 
-    for (var i = 0; i < parts.length; i++) {
-        var newObject = nameSpace[parts[i]];
+        /**
+         * create a namespace on the gv object
+         * @param {string} namespace to create
+         * @returns {object} object representing the namespace
+         */
+        function provide(namespace) {
+            "use strict";
 
-        if (typeof newObject == 'undefined') {
-            nameSpace[parts[i]] = {};
+            if (typeof window.gv == 'undefined') {
+                window.gv = {};
+            }
+
+            var parts = namespace.split('.');
+            var nameSpace = window.gv;
+
+            for (var i = 0; i < parts.length; i++) {
+                var newObject = nameSpace[parts[i]];
+
+                if (typeof newObject == 'undefined') {
+                    nameSpace[parts[i]] = {};
+                }
+
+                nameSpace = nameSpace[parts[i]];
+            }
+
+            return nameSpace;
         }
 
-        nameSpace = nameSpace[parts[i]];
-    }
+        provide('util');
+        window.gv.util.provide = provide;
 
-    return nameSpace;
-}
-
-provide('util');
-window.gv.util.provide = provide;
-
-exports.default = provide;
+        exports.default = provide;
+    });
+});
 
 },{}],324:[function(require,module,exports){
-'use strict';
-
-require('babel-polyfill');
-
-var _quickMap = require('../src/olHelpers/quickMap');
-
-var _quickMap2 = _interopRequireDefault(_quickMap);
-
-var _ItsLayerCollection = require('../src/collections/ItsLayerCollection');
-
-var _ItsLayerCollection2 = _interopRequireDefault(_ItsLayerCollection);
-
-var _LayerLegend = require('../src/collections/LayerLegend');
-
-var _LayerLegend2 = _interopRequireDefault(_LayerLegend);
-
-var _LayerItsInventory = require('../src/layers/LayerItsInventory');
-
-var _LayerItsInventory2 = _interopRequireDefault(_LayerItsInventory);
-
-var _LayerBaseVectorGeoJson = require('../src/layers/LayerBaseVectorGeoJson');
-
-var _LayerBaseVectorGeoJson2 = _interopRequireDefault(_LayerBaseVectorGeoJson);
-
-var _LayerEsriMapServer = require('../src/layers/LayerEsriMapServer');
-
-var _LayerEsriMapServer2 = _interopRequireDefault(_LayerEsriMapServer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var map = (0, _quickMap2.default)({ fullScreen: true });
-
-//
-// let inventLyr = new LayerItsInventory({name: 'Camera', itsType: 'cctv', minZoom: 4, itsIcon: 'cctv.png'});
-// map.addLayer(inventLyr.olLayer);
-//
-// inventLyr.visible = true;
-//
-// let newLayer = new LayerBaseVectorGeoJson('', {});
-//
-//
-//         let metamanagerSegments = new LayerEsriMapServer(
-//             'http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/MM_All_Segments/MapServer',
-//             {
-//                 minZoom: 3,
-//                 visible: true,
-//                 name: 'Metamanager Segments',
-//                 opacity: 0.6
-//             });
-//
-// // console.log(metamanagerSegments.visible);
-//
-// map.addLayer(metamanagerSegments.olLayer);
-
-/**
- * Created by gavorhes on 5/19/2016.
- */
-
-var itsLayerCollection = new _ItsLayerCollection2.default(map);
-
-var _iteratorNormalCompletion = true;
-var _didIteratorError = false;
-var _iteratorError = undefined;
-
-try {
-    for (var _iterator = itsLayerCollection.layers[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var l = _step.value;
-
-        console.log(l.visible);
-        console.log(l);
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(['exports', '../src/olHelpers/quickMap', '../src/collections/ItsLayerCollection', '../src/collections/LayerLegend', '../src/layers/LayerItsInventory', '../src/layers/LayerBaseVectorGeoJson', '../src/layers/LayerEsriMapServer', 'babel-polyfill'], factory);
+    } else if (typeof exports !== "undefined") {
+        factory(exports, require('../src/olHelpers/quickMap'), require('../src/collections/ItsLayerCollection'), require('../src/collections/LayerLegend'), require('../src/layers/LayerItsInventory'), require('../src/layers/LayerBaseVectorGeoJson'), require('../src/layers/LayerEsriMapServer'), require('babel-polyfill'));
+    } else {
+        var mod = {
+            exports: {}
+        };
+        factory(mod.exports, global.quickMap, global.ItsLayerCollection, global.LayerLegend, global.LayerItsInventory, global.LayerBaseVectorGeoJson, global.LayerEsriMapServer, global.babelPolyfill);
+        global.legendTest = mod.exports;
     }
-} catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-} finally {
-    try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-        }
-    } finally {
-        if (_didIteratorError) {
-            throw _iteratorError;
-        }
-    }
-}
+})(this, function (exports) {
+    'use strict';
 
-var layerArray = [{
-    groupName: 'ITS Inventory Layers',
-    collapse: false,
-    addCheck: true,
-    items: itsLayerCollection.layers
-}];
+    (function (global, factory) {
+        if (typeof define === "function" && define.amd) {
+            define(['../src/olHelpers/quickMap', '../src/collections/ItsLayerCollection', '../src/collections/LayerLegend', '../src/layers/LayerItsInventory', '../src/layers/LayerBaseVectorGeoJson', '../src/layers/LayerEsriMapServer', 'babel-polyfill'], factory);
+        } else if (typeof exports !== "undefined") {
+            factory();
+        } else {
+            var mod = {
+                exports: {}
+            };
+            factory(global.quickMap, global.ItsLayerCollection, global.LayerLegend, global.LayerItsInventory, global.LayerBaseVectorGeoJson, global.LayerEsriMapServer, global.babelPolyfill);
+            global.legendTest = mod.exports;
+        }
+    })(undefined, function (_quickMap, _ItsLayerCollection, _LayerLegend, _LayerItsInventory, _LayerBaseVectorGeoJson, _LayerEsriMapServer) {
+        'use strict';
 
-var legend = new _LayerLegend2.default(layerArray, 'legend-container', {});
+        var _quickMap2 = _interopRequireDefault(_quickMap);
+
+        var _ItsLayerCollection2 = _interopRequireDefault(_ItsLayerCollection);
+
+        var _LayerLegend2 = _interopRequireDefault(_LayerLegend);
+
+        var _LayerItsInventory2 = _interopRequireDefault(_LayerItsInventory);
+
+        var _LayerBaseVectorGeoJson2 = _interopRequireDefault(_LayerBaseVectorGeoJson);
+
+        var _LayerEsriMapServer2 = _interopRequireDefault(_LayerEsriMapServer);
+
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
+        }
+
+        var map = (0, _quickMap2.default)({ fullScreen: true });
+
+        //
+        // let inventLyr = new LayerItsInventory({name: 'Camera', itsType: 'cctv', minZoom: 4, itsIcon: 'cctv.png'});
+        // map.addLayer(inventLyr.olLayer);
+        //
+        // inventLyr.visible = true;
+        //
+        // let newLayer = new LayerBaseVectorGeoJson('', {});
+        //
+        //
+        //         let metamanagerSegments = new LayerEsriMapServer(
+        //             'http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/MM_All_Segments/MapServer',
+        //             {
+        //                 minZoom: 3,
+        //                 visible: true,
+        //                 name: 'Metamanager Segments',
+        //                 opacity: 0.6
+        //             });
+        //
+        // // console.log(metamanagerSegments.visible);
+        //
+        // map.addLayer(metamanagerSegments.olLayer);
+
+        /**
+         * Created by gavorhes on 5/19/2016.
+         */
+
+        var itsLayerCollection = new _ItsLayerCollection2.default(map);
+
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+            for (var _iterator = itsLayerCollection.layers[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var l = _step.value;
+
+                console.log(l.visible);
+                console.log(l);
+            }
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
+            }
+        }
+
+        var layerArray = [{
+            groupName: 'ITS Inventory Layers',
+            collapse: false,
+            addCheck: true,
+            items: itsLayerCollection.layers
+        }];
+
+        var legend = new _LayerLegend2.default(layerArray, 'legend-container', {});
+    });
+});
 
 },{"../src/collections/ItsLayerCollection":300,"../src/collections/LayerLegend":301,"../src/layers/LayerBaseVectorGeoJson":305,"../src/layers/LayerEsriMapServer":306,"../src/layers/LayerItsInventory":307,"../src/olHelpers/quickMap":315,"babel-polyfill":1}]},{},[324])
 
