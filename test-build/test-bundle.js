@@ -39936,7 +39936,7 @@ var ItsLayerCollection = function () {
 nm.ItsLayerCollection = ItsLayerCollection;
 exports.default = ItsLayerCollection;
 
-},{"../layers/LayerItsInventory":351,"../util/colors":365,"../util/provide":367}],342:[function(require,module,exports){
+},{"../layers/LayerItsInventory":350,"../util/colors":364,"../util/provide":366}],342:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39955,7 +39955,7 @@ var _createClass = function () {
       * Created by gavorhes on 12/16/2015.
       */
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -40392,26 +40392,7 @@ var LayerLegend = function () {
 nm.LayerLegend = LayerLegend;
 exports.default = LayerLegend;
 
-},{"../jquery":343,"../olHelpers/mapMove":354,"../util/makeGuid":366,"../util/provide":367}],343:[function(require,module,exports){
-(function (global){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-/**
- * Created by gavorhes on 5/3/2016.
- */
-var $ = require('jquery');
-
-global.$ = $;
-global.jQuery = $;
-
-exports.default = $;
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-
-},{"jquery":340}],344:[function(require,module,exports){
+},{"../jquery/jquery":344,"../olHelpers/mapMove":353,"../util/makeGuid":365,"../util/provide":366}],343:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -40425,7 +40406,7 @@ require('jquery-ui');
 
 exports.default = undefined;
 
-},{"jquery-ui":339}],345:[function(require,module,exports){
+},{"jquery-ui":339}],344:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -40441,7 +40422,7 @@ exports.default = jQuery;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"jquery":340}],346:[function(require,module,exports){
+},{"jquery":340}],345:[function(require,module,exports){
 'use strict';
 
 var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -40466,7 +40447,7 @@ var _createClass = function () {
     };
 }();
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -40923,7 +40904,7 @@ var LayerBase = function () {
 nm.LayerBase = LayerBase;
 exports.default = LayerBase;
 
-},{"../jquery":343,"../olHelpers/zoomResolutionConvert":361,"../util/makeGuid":366,"../util/provide":367}],347:[function(require,module,exports){
+},{"../jquery/jquery":344,"../olHelpers/zoomResolutionConvert":360,"../util/makeGuid":365,"../util/provide":366}],346:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -40972,7 +40953,7 @@ var _get = function get(object, property, receiver) {
     }
 };
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -41334,7 +41315,7 @@ var LayerBaseVector = function (_LayerBase) {
 nm.LayerBaseVector = LayerBaseVector;
 exports.default = LayerBaseVector;
 
-},{"../jquery":343,"../ol/ol":363,"../olHelpers/mapMove":354,"../util/provide":367,"./LayerBase":346}],348:[function(require,module,exports){
+},{"../jquery/jquery":344,"../ol/ol":362,"../olHelpers/mapMove":353,"../util/provide":366,"./LayerBase":345}],347:[function(require,module,exports){
 'use strict';
 
 var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41375,7 +41356,7 @@ var _get = function get(object, property, receiver) {
     }
 };
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -41386,10 +41367,6 @@ var _LayerBaseVector3 = _interopRequireDefault(_LayerBaseVector2);
 var _esriToOlStyle = require('../olHelpers/esriToOlStyle');
 
 var esriToOl = _interopRequireWildcard(_esriToOlStyle);
-
-var _mapMove = require('../olHelpers/mapMove');
-
-var _mapMove2 = _interopRequireDefault(_mapMove);
 
 var _provide = require('../util/provide');
 
@@ -41637,7 +41614,7 @@ var LayerBaseVectorEsri = function (_LayerBaseVector) {
 nm.LayerBaseVectorEsri = LayerBaseVectorEsri;
 exports.default = LayerBaseVectorEsri;
 
-},{"../jquery":343,"../ol/ol":363,"../olHelpers/esriToOlStyle":352,"../olHelpers/mapMove":354,"../util/provide":367,"./LayerBaseVector":347}],349:[function(require,module,exports){
+},{"../jquery/jquery":344,"../ol/ol":362,"../olHelpers/esriToOlStyle":351,"../util/provide":366,"./LayerBaseVector":346}],348:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41672,7 +41649,7 @@ var _get = function get(object, property, receiver) {
     }
 };
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -41829,7 +41806,7 @@ var LayerBaseVectorGeoJson = function (_LayerBaseVector) {
 nm.LayerBaseVectorGeoJson = LayerBaseVectorGeoJson;
 exports.default = LayerBaseVectorGeoJson;
 
-},{"../jquery":343,"../ol/ol":363,"../util/provide":367,"./LayerBaseVector":347}],350:[function(require,module,exports){
+},{"../jquery/jquery":344,"../ol/ol":362,"../util/provide":366,"./LayerBaseVector":346}],349:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41864,7 +41841,7 @@ var _get = function get(object, property, receiver) {
     }
 };
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -42105,7 +42082,7 @@ var LayerEsriMapServer = function (_LayerBase) {
 nm.LayerEsriMapServer = LayerEsriMapServer;
 exports.default = LayerEsriMapServer;
 
-},{"../jquery":343,"../ol/ol":363,"../olHelpers/esriToOlStyle":352,"../olHelpers/mapPopup":356,"../util/provide":367,"./LayerBase":346}],351:[function(require,module,exports){
+},{"../jquery/jquery":344,"../ol/ol":362,"../olHelpers/esriToOlStyle":351,"../olHelpers/mapPopup":355,"../util/provide":366,"./LayerBase":345}],350:[function(require,module,exports){
 'use strict';
 
 var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -42148,17 +42125,13 @@ var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "sym
     * Created by gavorhes on 12/8/2015.
     */
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
 var _LayerBaseVectorGeoJson = require('./LayerBaseVectorGeoJson');
 
 var _LayerBaseVectorGeoJson2 = _interopRequireDefault(_LayerBaseVectorGeoJson);
-
-var _mapMove = require('../olHelpers/mapMove');
-
-var _mapMove2 = _interopRequireDefault(_mapMove);
 
 var _mapPopup = require('../olHelpers/mapPopup');
 
@@ -42561,7 +42534,7 @@ var LayerItsInventory = function (_LayerBaseVectorGeoJs) {
 nm.LayerItsInventory = LayerItsInventory;
 exports.default = LayerItsInventory;
 
-},{"../jquery":343,"../ol/ol":363,"../olHelpers/mapMove":354,"../olHelpers/mapPopup":356,"../util/provide":367,"./LayerBaseVectorGeoJson":349}],352:[function(require,module,exports){
+},{"../jquery/jquery":344,"../ol/ol":362,"../olHelpers/mapPopup":355,"../util/provide":366,"./LayerBaseVectorGeoJson":348}],351:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -43055,7 +43028,7 @@ function makeMapServiceLegend(esriResponse) {
 
 nm.makeMapServiceLegend = makeMapServiceLegend;
 
-},{"../ol/ol":363,"../util/provide":367}],353:[function(require,module,exports){
+},{"../ol/ol":362,"../util/provide":366}],352:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43182,7 +43155,7 @@ var MapInteractionBase = function () {
 nm.MapInteractionBase = MapInteractionBase;
 exports.default = MapInteractionBase;
 
-},{"../util/provide":367}],354:[function(require,module,exports){
+},{"../util/provide":366}],353:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43205,7 +43178,7 @@ exports.default = new _mapMoveCls2.default(); /**
                                                * Created by gavorhes on 11/3/2015.
                                                */
 
-},{"./mapMoveCls":355}],355:[function(require,module,exports){
+},{"./mapMoveCls":354}],354:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -43240,7 +43213,7 @@ var _get = function get(object, property, receiver) {
     }
 };
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -43595,7 +43568,7 @@ var MapMoveCls = function (_MapInteractionBase) {
 nm.MapMoveCls = MapMoveCls;
 exports.default = MapMoveCls;
 
-},{"../jquery":343,"../util/checkDefined":364,"../util/makeGuid":366,"../util/provide":367,"./mapInteractionBase":353}],356:[function(require,module,exports){
+},{"../jquery/jquery":344,"../util/checkDefined":363,"../util/makeGuid":365,"../util/provide":366,"./mapInteractionBase":352}],355:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43618,7 +43591,7 @@ exports.default = new _mapPopupCls2.default(); /**
                                                 * Created by gavorhes on 11/3/2015.
                                                 */
 
-},{"./mapPopupCls":357}],357:[function(require,module,exports){
+},{"./mapPopupCls":356}],356:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -43655,7 +43628,7 @@ var _createClass = function () {
       * Created by gavorhes on 11/3/2015.
       */
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -44301,7 +44274,7 @@ var MapPopupCls = function (_MapInteractionBase) {
 nm.MapPopupCls = MapPopupCls;
 exports.default = MapPopupCls;
 
-},{"../jquery":343,"../ol/ol":363,"../olHelpers/propertiesZoomStyle":358,"../util/provide":367,"./mapInteractionBase":353}],358:[function(require,module,exports){
+},{"../jquery/jquery":344,"../ol/ol":362,"../olHelpers/propertiesZoomStyle":357,"../util/provide":366,"./mapInteractionBase":352}],357:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44364,7 +44337,7 @@ function propertiesZoomStyle(styleFunc) {
 nm.propertiesZoomStyle = propertiesZoomStyle;
 exports.default = propertiesZoomStyle;
 
-},{"../util/provide":367,"./zoomResolutionConvert":361}],359:[function(require,module,exports){
+},{"../util/provide":366,"./zoomResolutionConvert":360}],358:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44424,14 +44397,14 @@ function quickMap(options) {
 nm.quickMap = quickMap;
 exports.default = quickMap;
 
-},{"../util/provide":367,"./mapMove":354,"./mapPopup":356,"./quickMapBase":360}],360:[function(require,module,exports){
+},{"../util/provide":366,"./mapMove":353,"./mapPopup":355,"./quickMapBase":359}],359:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -44464,9 +44437,6 @@ var nm = (0, _provide2.default)('olHelpers');
  * @param {boolean} [options.baseSwitcher=true] if add base map switcher
  * @param {boolean} [options.fullScreen=false] if add base map switcher
  * @returns {ol.Map} the ol map
- */
-/**
- * Created by gavorhes on 3/25/2016.
  */
 
 /**
@@ -44549,7 +44519,7 @@ function quickMapBase(options) {
 nm.quickMapBase = quickMapBase;
 exports.default = quickMapBase;
 
-},{"../jquery":343,"../ol/ol":363,"../util/provide":367}],361:[function(require,module,exports){
+},{"../jquery/jquery":344,"../ol/ol":362,"../util/provide":366}],360:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44640,7 +44610,7 @@ function resolutionToZoom(resolution) {
 
 nm.resolutionToZoom = resolutionToZoom;
 
-},{"../util/provide":367}],362:[function(require,module,exports){
+},{"../util/provide":366}],361:[function(require,module,exports){
 // OpenLayers 3. See http://openlayers.org/
 // License: https://raw.githubusercontent.com/openlayers/ol3/master/LICENSE.md
 (function (root, factory) {
@@ -45042,7 +45012,7 @@ xl.prototype.getExtent=xl.prototype.C;xl.prototype.transform=xl.prototype.o;F("o
 }));
 
 
-},{}],363:[function(require,module,exports){
+},{}],362:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45052,7 +45022,7 @@ var ol = require('./ol-build');
 
 exports.default = ol;
 
-},{"./ol-build":362}],364:[function(require,module,exports){
+},{"./ol-build":361}],363:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45100,7 +45070,7 @@ function definedAndNotNull(input) {
 
 nm.definedAndNotNull = definedAndNotNull;
 
-},{"./provide":367}],365:[function(require,module,exports){
+},{"./provide":366}],364:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45308,7 +45278,7 @@ function makeBlueGreenRedGradientZScore(median, stdDev, flipColors) {
 
 nm.makeBlueGreenRedGradientZScore = makeBlueGreenRedGradientZScore;
 
-},{"./checkDefined":364,"./provide":367}],366:[function(require,module,exports){
+},{"./checkDefined":363,"./provide":366}],365:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45344,7 +45314,7 @@ function makeGuid() {
 nm.makeGuid = makeGuid;
 exports.default = makeGuid;
 
-},{"./provide":367}],367:[function(require,module,exports){
+},{"./provide":366}],366:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45387,7 +45357,7 @@ window.gv.util.provide = provide;
 
 exports.default = provide;
 
-},{}],368:[function(require,module,exports){
+},{}],367:[function(require,module,exports){
 'use strict';
 
 var _jquery = require('../src/jquery/jquery');
@@ -45417,7 +45387,7 @@ var acc = (0, _jquery2.default)("#accordion").accordion();
 // glob.acc = acc;
 // console.log(acc);
 
-},{"../src/jquery/jquery":345,"../src/jquery/jquery-ui":344}],369:[function(require,module,exports){
+},{"../src/jquery/jquery":344,"../src/jquery/jquery-ui":343}],368:[function(require,module,exports){
 'use strict';
 
 require('babel-polyfill');
@@ -45515,7 +45485,7 @@ var layerArray = [{
 
 var legend = new _LayerLegend2.default(layerArray, 'legend-container', {});
 
-},{"../src/collections/ItsLayerCollection":341,"../src/collections/LayerLegend":342,"../src/layers/LayerBaseVectorGeoJson":349,"../src/layers/LayerEsriMapServer":350,"../src/layers/LayerItsInventory":351,"../src/olHelpers/quickMap":359,"babel-polyfill":1}],370:[function(require,module,exports){
+},{"../src/collections/ItsLayerCollection":341,"../src/collections/LayerLegend":342,"../src/layers/LayerBaseVectorGeoJson":348,"../src/layers/LayerEsriMapServer":349,"../src/layers/LayerItsInventory":350,"../src/olHelpers/quickMap":358,"babel-polyfill":1}],369:[function(require,module,exports){
 'use strict';
 
 var _quickMap = require('../src/olHelpers/quickMap');
@@ -45590,7 +45560,7 @@ describe('karma test with 2', function () {
   });
 });
 
-},{"../src/layers/LayerBaseVectorEsri":348,"../src/olHelpers/quickMap":359,"chai":303}],371:[function(require,module,exports){
+},{"../src/layers/LayerBaseVectorEsri":347,"../src/olHelpers/quickMap":358,"chai":303}],370:[function(require,module,exports){
 'use strict';
 
 var _quickMap = require('../src/olHelpers/quickMap');
@@ -45659,7 +45629,7 @@ describe('karma test with 2adfaasdf', function () {
   });
 });
 
-},{"../src/olHelpers/quickMap":359,"chai":303}]},{},[368,369,370,371])
+},{"../src/olHelpers/quickMap":358,"chai":303}]},{},[367,368,369,370])
 
 
 //# sourceMappingURL=test-bundle.js.map

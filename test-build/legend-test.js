@@ -16888,7 +16888,7 @@ var _createClass = function () {
       * Created by gavorhes on 12/16/2015.
       */
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -17325,22 +17325,19 @@ var LayerLegend = function () {
 nm.LayerLegend = LayerLegend;
 exports.default = LayerLegend;
 
-},{"../jquery":302,"../olHelpers/mapMove":310,"../util/makeGuid":322,"../util/provide":323}],302:[function(require,module,exports){
+},{"../jquery/jquery":302,"../olHelpers/mapMove":310,"../util/makeGuid":322,"../util/provide":323}],302:[function(require,module,exports){
 (function (global){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-/**
- * Created by gavorhes on 5/3/2016.
- */
-var $ = require('jquery');
+var jQuery = require('jquery');
 
-global.$ = $;
-global.jQuery = $;
+global.$ = jQuery;
+global.jQuery = jQuery;
 
-exports.default = $;
+exports.default = jQuery;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
@@ -17369,7 +17366,7 @@ var _createClass = function () {
     };
 }();
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -17826,7 +17823,7 @@ var LayerBase = function () {
 nm.LayerBase = LayerBase;
 exports.default = LayerBase;
 
-},{"../jquery":302,"../olHelpers/zoomResolutionConvert":317,"../util/makeGuid":322,"../util/provide":323}],304:[function(require,module,exports){
+},{"../jquery/jquery":302,"../olHelpers/zoomResolutionConvert":317,"../util/makeGuid":322,"../util/provide":323}],304:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -17875,7 +17872,7 @@ var _get = function get(object, property, receiver) {
     }
 };
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -18237,7 +18234,7 @@ var LayerBaseVector = function (_LayerBase) {
 nm.LayerBaseVector = LayerBaseVector;
 exports.default = LayerBaseVector;
 
-},{"../jquery":302,"../ol/ol":319,"../olHelpers/mapMove":310,"../util/provide":323,"./LayerBase":303}],305:[function(require,module,exports){
+},{"../jquery/jquery":302,"../ol/ol":319,"../olHelpers/mapMove":310,"../util/provide":323,"./LayerBase":303}],305:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -18272,7 +18269,7 @@ var _get = function get(object, property, receiver) {
     }
 };
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -18429,7 +18426,7 @@ var LayerBaseVectorGeoJson = function (_LayerBaseVector) {
 nm.LayerBaseVectorGeoJson = LayerBaseVectorGeoJson;
 exports.default = LayerBaseVectorGeoJson;
 
-},{"../jquery":302,"../ol/ol":319,"../util/provide":323,"./LayerBaseVector":304}],306:[function(require,module,exports){
+},{"../jquery/jquery":302,"../ol/ol":319,"../util/provide":323,"./LayerBaseVector":304}],306:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -18464,7 +18461,7 @@ var _get = function get(object, property, receiver) {
     }
 };
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -18705,7 +18702,7 @@ var LayerEsriMapServer = function (_LayerBase) {
 nm.LayerEsriMapServer = LayerEsriMapServer;
 exports.default = LayerEsriMapServer;
 
-},{"../jquery":302,"../ol/ol":319,"../olHelpers/esriToOlStyle":308,"../olHelpers/mapPopup":312,"../util/provide":323,"./LayerBase":303}],307:[function(require,module,exports){
+},{"../jquery/jquery":302,"../ol/ol":319,"../olHelpers/esriToOlStyle":308,"../olHelpers/mapPopup":312,"../util/provide":323,"./LayerBase":303}],307:[function(require,module,exports){
 'use strict';
 
 var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -18748,17 +18745,13 @@ var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "sym
     * Created by gavorhes on 12/8/2015.
     */
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
 var _LayerBaseVectorGeoJson = require('./LayerBaseVectorGeoJson');
 
 var _LayerBaseVectorGeoJson2 = _interopRequireDefault(_LayerBaseVectorGeoJson);
-
-var _mapMove = require('../olHelpers/mapMove');
-
-var _mapMove2 = _interopRequireDefault(_mapMove);
 
 var _mapPopup = require('../olHelpers/mapPopup');
 
@@ -19161,7 +19154,7 @@ var LayerItsInventory = function (_LayerBaseVectorGeoJs) {
 nm.LayerItsInventory = LayerItsInventory;
 exports.default = LayerItsInventory;
 
-},{"../jquery":302,"../ol/ol":319,"../olHelpers/mapMove":310,"../olHelpers/mapPopup":312,"../util/provide":323,"./LayerBaseVectorGeoJson":305}],308:[function(require,module,exports){
+},{"../jquery/jquery":302,"../ol/ol":319,"../olHelpers/mapPopup":312,"../util/provide":323,"./LayerBaseVectorGeoJson":305}],308:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -19840,7 +19833,7 @@ var _get = function get(object, property, receiver) {
     }
 };
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -20195,7 +20188,7 @@ var MapMoveCls = function (_MapInteractionBase) {
 nm.MapMoveCls = MapMoveCls;
 exports.default = MapMoveCls;
 
-},{"../jquery":302,"../util/checkDefined":320,"../util/makeGuid":322,"../util/provide":323,"./mapInteractionBase":309}],312:[function(require,module,exports){
+},{"../jquery/jquery":302,"../util/checkDefined":320,"../util/makeGuid":322,"../util/provide":323,"./mapInteractionBase":309}],312:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20255,7 +20248,7 @@ var _createClass = function () {
       * Created by gavorhes on 11/3/2015.
       */
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -20901,7 +20894,7 @@ var MapPopupCls = function (_MapInteractionBase) {
 nm.MapPopupCls = MapPopupCls;
 exports.default = MapPopupCls;
 
-},{"../jquery":302,"../ol/ol":319,"../olHelpers/propertiesZoomStyle":314,"../util/provide":323,"./mapInteractionBase":309}],314:[function(require,module,exports){
+},{"../jquery/jquery":302,"../ol/ol":319,"../olHelpers/propertiesZoomStyle":314,"../util/provide":323,"./mapInteractionBase":309}],314:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21031,7 +21024,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _jquery = require('../jquery');
+var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -21064,9 +21057,6 @@ var nm = (0, _provide2.default)('olHelpers');
  * @param {boolean} [options.baseSwitcher=true] if add base map switcher
  * @param {boolean} [options.fullScreen=false] if add base map switcher
  * @returns {ol.Map} the ol map
- */
-/**
- * Created by gavorhes on 3/25/2016.
  */
 
 /**
@@ -21149,7 +21139,7 @@ function quickMapBase(options) {
 nm.quickMapBase = quickMapBase;
 exports.default = quickMapBase;
 
-},{"../jquery":302,"../ol/ol":319,"../util/provide":323}],317:[function(require,module,exports){
+},{"../jquery/jquery":302,"../ol/ol":319,"../util/provide":323}],317:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
