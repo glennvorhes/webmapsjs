@@ -62,7 +62,8 @@ gulp.task('build-tests', function () {
     
         let filesArr = [
             _makeInputOutput('legend-test.js'),
-            _makeInputOutput('jquery-test.js')
+            _makeInputOutput('jquery-test.js'),
+            _makeInputOutput('compare-test.js')
     ];
 
     gulpHelpers.bundleEs2015Multiple(filesArr, false);
