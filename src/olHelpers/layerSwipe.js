@@ -14,9 +14,11 @@ class LayerSwipe {
     /**
      *
      * @param {ol.Map} map - the map
+     * @param {string} [sliderContent=''] - additional html to be added inside the slider div
      */
-    constructor(map) {
+    constructor(map, sliderContent) {
 
+        sliderContent = sliderContent || '';
         /**
          *
          * @type {Array<LayerBase>}
@@ -31,11 +33,10 @@ class LayerSwipe {
 
         this._percentRight = 50;
         this.offset = null;
-        this.theTimeout = null;
 
         this._map = map;
         this.$mapElement = $(map.getTargetElement());
-        this.$mapElement.append(`<div class="layer-swiper"></div>`);
+        this.$mapElement.append(`<div class="layer-swiper">${sliderContent}</div>`);
 
 
         this.$swiper = this.$mapElement.find('.layer-swiper');
@@ -116,7 +117,7 @@ class LayerSwipe {
             ctx.restore();
         });
 
-        this.leftLayers.push(lyr);
+        this.rightLayers.push(lyr);
     }
 
     get percentRight() {
