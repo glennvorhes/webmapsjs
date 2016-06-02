@@ -31,10 +31,16 @@ class LayerEsriMapServer extends LayerBase {
      * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
      * @param {boolean} [options.legendContent] additional content to add to the legend
      * @param {boolean} [options.addPopup=false] if a popup should be added
+     * @param {undefined|Array<number>} [options.showLayers=undefined] if a popup should be added
      */
     constructor(url, options) {
         super(url, options);
-        this._source = new ol.source.TileArcGISRest({url: this.url == '' ? undefined : this.url});
+        this._source = new ol.source.TileArcGISRest(
+            {
+                url: this.url == '' ? undefined : this.url,
+                params: typeof options.showLayers == 'undefined' ? undefined : {layers: 'show:' + options.showLayers.join(',')}
+            }
+        );
 
         this.olLayer = new ol.layer.Tile({
             source: this._source,

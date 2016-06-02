@@ -27,10 +27,31 @@ let swiper = new LayerSwipe(map);
             name: 'Metamanager Segments'
         });
 
+    let truckSpeed2014 = new LayerEsriMapServer(
+        'http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/NPMRDS/compareDynamic/MapServer',
+        {
+            minZoom: 7,
+            visible: true,
+            name: 'truck2014',
+            showLayers: [8]
+        });
+
+    let truckSpeed2015 = new LayerEsriMapServer(
+        'http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/NPMRDS/compareDynamic/MapServer',
+        {
+            minZoom: 7,
+            visible: true,
+            name: 'truck2015',
+            showLayers: [9]
+        });
+
 map.addLayer(wisDotRegions.olLayer);
 map.addLayer(metamanagerSegments.olLayer);
+map.addLayer(truckSpeed2014.olLayer);
+map.addLayer(truckSpeed2015.olLayer);
 
 swiper.addLeftLayer(wisDotRegions);
 swiper.addRightLayer(metamanagerSegments);
 
-
+swiper.addLeftLayer(truckSpeed2014);
+swiper.addRightLayer(truckSpeed2015);

@@ -41928,6 +41928,7 @@ var LayerEsriMapServer = function (_LayerBase) {
      * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
      * @param {boolean} [options.legendContent] additional content to add to the legend
      * @param {boolean} [options.addPopup=false] if a popup should be added
+     * @param {undefined|Array<number>} [options.showLayers=undefined] if a popup should be added
      */
 
     function LayerEsriMapServer(url, options) {
@@ -41935,7 +41936,10 @@ var LayerEsriMapServer = function (_LayerBase) {
 
         var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(LayerEsriMapServer).call(this, url, options));
 
-        _this2._source = new _ol2.default.source.TileArcGISRest({ url: _this2.url == '' ? undefined : _this2.url });
+        _this2._source = new _ol2.default.source.TileArcGISRest({
+            url: _this2.url == '' ? undefined : _this2.url,
+            params: typeof options.showLayers == 'undefined' ? undefined : { layers: 'show:' + options.showLayers.join(',') }
+        });
 
         _this2.olLayer = new _ol2.default.layer.Tile({
             source: _this2._source,
@@ -43134,13 +43138,17 @@ var LayerSwipe = function () {
 
     /**
      *
-     * @param {LayerBase} lyr - layer to be added to left side
+     * @param {LayerBase|*} lyr - layer to be added to left side
      */
 
     _createClass(LayerSwipe, [{
         key: 'addLeftLayer',
         value: function addLeftLayer(lyr) {
             var _this2 = this;
+
+            if (this.leftLayers.indexOf(lyr) != -1) {
+                return;
+            }
 
             lyr.olLayer.on('precompose', function (event) {
                 var ctx = event.context;
@@ -43162,13 +43170,17 @@ var LayerSwipe = function () {
 
         /**
          *
-         * @param {LayerBase} lyr - layer to be added to right side
+         * @param {LayerBase|*} lyr - layer to be added to right side
          */
 
     }, {
         key: 'addRightLayer',
         value: function addRightLayer(lyr) {
             var _this3 = this;
+
+            if (this.rightLayers.indexOf(lyr) != -1) {
+                return;
+            }
 
             lyr.olLayer.on('precompose', function (event) {
                 var ctx = event.context;
@@ -45580,11 +45592,30 @@ var metamanagerSegments = new _LayerEsriMapServer2.default('http://transportal.c
     name: 'Metamanager Segments'
 });
 
+var truckSpeed2014 = new _LayerEsriMapServer2.default('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/NPMRDS/compareDynamic/MapServer', {
+    minZoom: 7,
+    visible: true,
+    name: 'truck2014',
+    showLayers: [8]
+});
+
+var truckSpeed2015 = new _LayerEsriMapServer2.default('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/NPMRDS/compareDynamic/MapServer', {
+    minZoom: 7,
+    visible: true,
+    name: 'truck2015',
+    showLayers: [9]
+});
+
 map.addLayer(wisDotRegions.olLayer);
 map.addLayer(metamanagerSegments.olLayer);
+map.addLayer(truckSpeed2014.olLayer);
+map.addLayer(truckSpeed2015.olLayer);
 
 swiper.addLeftLayer(wisDotRegions);
 swiper.addRightLayer(metamanagerSegments);
+
+swiper.addLeftLayer(truckSpeed2014);
+swiper.addRightLayer(truckSpeed2015);
 
 },{"../src/layers/LayerEsriMapServer":349,"../src/olHelpers/layerSwipe":352,"../src/olHelpers/quickMap":359}],369:[function(require,module,exports){
 'use strict';

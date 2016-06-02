@@ -73,9 +73,13 @@ class LayerSwipe {
 
     /**
      *
-     * @param {LayerBase} lyr - layer to be added to left side
+     * @param {LayerBase|*} lyr - layer to be added to left side
      */
     addLeftLayer(lyr) {
+
+        if (this.leftLayers.indexOf(lyr) != -1){
+            return;
+        }
 
         lyr.olLayer.on('precompose', (event) => {
             let ctx = event.context;
@@ -98,9 +102,13 @@ class LayerSwipe {
 
     /**
      *
-     * @param {LayerBase} lyr - layer to be added to right side
+     * @param {LayerBase|*} lyr - layer to be added to right side
      */
     addRightLayer(lyr) {
+
+        if (this.rightLayers.indexOf(lyr) != -1){
+            return;
+        }
 
         lyr.olLayer.on('precompose', (event) => {
             let ctx = event.context;
