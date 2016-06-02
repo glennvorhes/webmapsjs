@@ -43072,13 +43072,15 @@ var LayerSwipe = function () {
     /**
      *
      * @param {ol.Map} map - the map
+     * @param {string} [sliderContent=''] - additional html to be added inside the slider div
      */
 
-    function LayerSwipe(map) {
+    function LayerSwipe(map, sliderContent) {
         var _this = this;
 
         _classCallCheck(this, LayerSwipe);
 
+        sliderContent = sliderContent || '';
         /**
          *
          * @type {Array<LayerBase>}
@@ -43093,11 +43095,10 @@ var LayerSwipe = function () {
 
         this._percentRight = 50;
         this.offset = null;
-        this.theTimeout = null;
 
         this._map = map;
         this.$mapElement = (0, _jquery2.default)(map.getTargetElement());
-        this.$mapElement.append('<div class="layer-swiper"></div>');
+        this.$mapElement.append('<div class="layer-swiper">' + sliderContent + '</div>');
 
         this.$swiper = this.$mapElement.find('.layer-swiper');
         this.percentRight = this.percentRight;
@@ -43184,7 +43185,7 @@ var LayerSwipe = function () {
                 ctx.restore();
             });
 
-            this.leftLayers.push(lyr);
+            this.rightLayers.push(lyr);
         }
     }, {
         key: 'percentRight',
