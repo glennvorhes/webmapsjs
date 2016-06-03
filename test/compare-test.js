@@ -45,10 +45,10 @@ let swiper = new LayerSwipe(map);
             showLayers: [9]
         });
 
-map.addLayer(wisDotRegions.olLayer);
-map.addLayer(metamanagerSegments.olLayer);
-map.addLayer(truckSpeed2014.olLayer);
+map.addLayer(wisDotRegions.olLayer);map.addLayer(truckSpeed2014.olLayer);
 map.addLayer(truckSpeed2015.olLayer);
+map.addLayer(metamanagerSegments.olLayer);
+
 
 swiper.addLeftLayer(wisDotRegions);
 swiper.addRightLayer(metamanagerSegments);

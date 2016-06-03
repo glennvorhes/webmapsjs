@@ -18548,6 +18548,7 @@ var LayerEsriMapServer = function (_LayerBase) {
      * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
      * @param {boolean} [options.legendContent] additional content to add to the legend
      * @param {boolean} [options.addPopup=false] if a popup should be added
+     * @param {undefined|Array<number>} [options.showLayers=undefined] if a popup should be added
      */
 
     function LayerEsriMapServer(url, options) {
@@ -18555,7 +18556,10 @@ var LayerEsriMapServer = function (_LayerBase) {
 
         var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(LayerEsriMapServer).call(this, url, options));
 
-        _this2._source = new _ol2.default.source.TileArcGISRest({ url: _this2.url == '' ? undefined : _this2.url });
+        _this2._source = new _ol2.default.source.TileArcGISRest({
+            url: _this2.url == '' ? undefined : _this2.url,
+            params: typeof options.showLayers == 'undefined' ? undefined : { layers: 'show:' + options.showLayers.join(',') }
+        });
 
         _this2.olLayer = new _ol2.default.layer.Tile({
             source: _this2._source,
@@ -20416,7 +20420,7 @@ var MapPopupCls = function (_MapInteractionBase) {
             }
             var $map = (0, _jquery2.default)('#' + this.map.getTarget());
 
-            $map.append('<div class="ol-popup">' + '<a href="#" class="ol-popup-closer"></a>' + '<div class="popup-content"></div>' + '</div>');
+            $map.append('<div class="ol-popup">' + '<span class="ol-popup-closer">X</span>' + '<div class="popup-content"></div>' + '</div>');
 
             this._$popupContainer = $map.find('.ol-popup');
             this._$popupContent = $map.find('.popup-content');
@@ -20432,7 +20436,7 @@ var MapPopupCls = function (_MapInteractionBase) {
 
             this._map.addOverlay(this._popupOverlay);
 
-            this._$popupCloser.click(function () {
+            this._$popupCloser.click(function (evt) {
                 _this2.closePopup();
             });
 

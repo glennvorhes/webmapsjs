@@ -43993,7 +43993,7 @@ var MapPopupCls = function (_MapInteractionBase) {
             }
             var $map = (0, _jquery2.default)('#' + this.map.getTarget());
 
-            $map.append('<div class="ol-popup">' + '<a href="#" class="ol-popup-closer"></a>' + '<div class="popup-content"></div>' + '</div>');
+            $map.append('<div class="ol-popup">' + '<span class="ol-popup-closer">X</span>' + '<div class="popup-content"></div>' + '</div>');
 
             this._$popupContainer = $map.find('.ol-popup');
             this._$popupContent = $map.find('.popup-content');
@@ -44009,7 +44009,7 @@ var MapPopupCls = function (_MapInteractionBase) {
 
             this._map.addOverlay(this._popupOverlay);
 
-            this._$popupCloser.click(function () {
+            this._$popupCloser.click(function (evt) {
                 _this2.closePopup();
             });
 
@@ -45606,10 +45606,9 @@ var truckSpeed2015 = new _LayerEsriMapServer2.default('http://transportal.cee.wi
     showLayers: [9]
 });
 
-map.addLayer(wisDotRegions.olLayer);
-map.addLayer(metamanagerSegments.olLayer);
-map.addLayer(truckSpeed2014.olLayer);
+map.addLayer(wisDotRegions.olLayer);map.addLayer(truckSpeed2014.olLayer);
 map.addLayer(truckSpeed2015.olLayer);
+map.addLayer(metamanagerSegments.olLayer);
 
 swiper.addLeftLayer(wisDotRegions);
 swiper.addRightLayer(metamanagerSegments);

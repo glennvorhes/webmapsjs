@@ -118,7 +118,7 @@ class MapPopupCls extends MapInteractionBase {
 
         $map.append(
             '<div class="ol-popup">' +
-            '<a href="#" class="ol-popup-closer"></a>' +
+            '<span class="ol-popup-closer">X</span>' +
             '<div class="popup-content"></div>' +
             '</div>'
         );
@@ -137,7 +137,7 @@ class MapPopupCls extends MapInteractionBase {
 
         this._map.addOverlay(this._popupOverlay);
 
-        this._$popupCloser.click(() => {
+        this._$popupCloser.click((evt) => {
             this.closePopup();
         });
 
