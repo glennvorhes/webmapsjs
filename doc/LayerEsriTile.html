@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: LayerEsriMapServer</title>
+    <title>JSDoc: Class: LayerEsriTile</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: LayerEsriMapServer</h1>
+    <h1 class="page-title">Class: LayerEsriTile</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2>LayerEsriMapServer</h2>
+        <h2>LayerEsriTile</h2>
         
-            <div class="class-description">esri mapserver layer</div>
+            <div class="class-description">Esri tile</div>
         
     
 </header>
@@ -44,14 +44,14 @@
     <h2>Constructor</h2>
     
 
-    <h4 class="name" id="LayerEsriMapServer"><span class="type-signature"></span>new LayerEsriMapServer<span class="signature">(url, options)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="LayerEsriTile"><span class="type-signature"></span>new LayerEsriTile<span class="signature">(url, options)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    The base layer for all others
+    The Esri tile layer
 </div>
 
 
@@ -103,7 +103,7 @@
 
             
 
-            <td class="description last">resource url</td>
+            <td class="description last">url for source</td>
         </tr>
 
     
@@ -614,7 +614,7 @@
 
         <tr>
             
-                <td class="name"><code>addPopup</code></td>
+                <td class="name"><code>useEsriStyle</code></td>
             
 
             <td class="type">
@@ -646,47 +646,7 @@
                 </td>
             
 
-            <td class="description last">if a popup should be added</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>showLayers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">undefined</span>
-|
-
-<span class="param-type">Array.&lt;number></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">if a popup should be added</td>
+            <td class="description last">if the map service style should be used</td>
         </tr>
 
     
@@ -734,7 +694,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="layers_LayerEsriMapServer.js.html">layers/LayerEsriMapServer.js</a>, <a href="layers_LayerEsriMapServer.js.html#line16">line 16</a>
+        <a href="layers_LayerEsriTile.js.html">layers/LayerEsriTile.js</a>, <a href="layers_LayerEsriTile.js.html#line14">line 14</a>
     </li></ul></dd>
     
 
@@ -770,7 +730,7 @@
 
 
     <ul>
-        <li><a href="LayerBase.html">LayerBase</a></li>
+        <li><a href="LayerBaseXyzTile.html">LayerBaseXyzTile</a></li>
     </ul>
 
 
@@ -821,12 +781,12 @@
     
 
     
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
         <a href="LayerBase.html#legendContent">LayerBase#legendContent</a>
     </li></ul></dd>
+    
+
     
 
     
@@ -1295,12 +1255,12 @@
     
 
     
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
         <a href="LayerBase.html#name">LayerBase#name</a>
     </li></ul></dd>
+    
+
     
 
     
@@ -1372,12 +1332,12 @@
     
 
     
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
         <a href="LayerBase.html#opacity">LayerBase#opacity</a>
     </li></ul></dd>
+    
+
     
 
     
@@ -1449,12 +1409,12 @@
     
 
     
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
         <a href="LayerBase.html#params">LayerBase#params</a>
     </li></ul></dd>
+    
+
     
 
     
@@ -1512,12 +1472,12 @@
     
 
     
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="LayerBase.html#source">LayerBase#source</a>
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="LayerBaseXyzTile.html#source">LayerBaseXyzTile#source</a>
     </li></ul></dd>
+    
+
     
 
     
@@ -1539,7 +1499,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="layers_LayerEsriMapServer.js.html">layers/LayerEsriMapServer.js</a>, <a href="layers_LayerEsriMapServer.js.html#line150">line 150</a>
+        <a href="layers_LayerBaseXyzTile.js.html">layers/LayerBaseXyzTile.js</a>, <a href="layers_LayerBaseXyzTile.js.html#line92">line 92</a>
     </li></ul></dd>
     
 
@@ -1666,12 +1626,12 @@
     
 
     
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
         <a href="LayerBase.html#visible">LayerBase#visible</a>
     </li></ul></dd>
+    
+
     
 
     
@@ -1743,12 +1703,12 @@
     
 
     
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
         <a href="LayerBase.html#zIndex">LayerBase#zIndex</a>
     </li></ul></dd>
+    
+
     
 
     
@@ -1797,14 +1757,14 @@
 
     
 
-    <h4 class="name" id="_load"><span class="type-signature">(protected) </span>_load<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="_load"><span class="type-signature">(protected) </span>_load<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
 
     
 
 
 
 <div class="description">
-    overwrite the base load
+    base load function, sets _loaded = true if it is not already
 </div>
 
 
@@ -1826,10 +1786,8 @@
     
 
     
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
         <a href="LayerBase.html#_load">LayerBase#_load</a>
     </li></ul></dd>
     
@@ -1851,9 +1809,11 @@
     
 
     
+
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="layers_LayerEsriMapServer.js.html">layers/LayerEsriMapServer.js</a>, <a href="layers_LayerEsriMapServer.js.html#line143">line 143</a>
+        <a href="layers_LayerBase.js.html">layers/LayerBase.js</a>, <a href="layers_LayerBase.js.html#line94">line 94</a>
     </li></ul></dd>
     
 
@@ -1876,6 +1836,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    if already loaded
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1982,12 +1964,12 @@
     
 
     
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="LayerBase.html#addLegendContent">LayerBase#addLegendContent</a>
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="LayerBaseXyzTile.html#addLegendContent">LayerBaseXyzTile#addLegendContent</a>
     </li></ul></dd>
+    
+
     
 
     
@@ -2009,7 +1991,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="layers_LayerEsriMapServer.js.html">layers/LayerEsriMapServer.js</a>, <a href="layers_LayerEsriMapServer.js.html#line70">line 70</a>
+        <a href="layers_LayerBaseXyzTile.js.html">layers/LayerBaseXyzTile.js</a>, <a href="layers_LayerBaseXyzTile.js.html#line59">line 59</a>
     </li></ul></dd>
     
 

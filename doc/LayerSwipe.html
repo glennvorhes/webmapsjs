@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: RealEarthAnimate</title>
+    <title>JSDoc: Class: LayerSwipe</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: RealEarthAnimate</h1>
+    <h1 class="page-title">Class: LayerSwipe</h1>
 
     
 
@@ -28,9 +28,7 @@
 
 <header>
     
-        <h2>RealEarthAnimate</h2>
-        
-            <div class="class-description">Mixin to get the product timesBe sure to call getTimeInit after the mixin has been applied</div>
+        <h2>LayerSwipe</h2>
         
     
 </header>
@@ -41,10 +39,8 @@
         
 
     
-    <h2>Constructor</h2>
-    
 
-    <h4 class="name" id="RealEarthAnimate"><span class="type-signature"></span>new RealEarthAnimate<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="LayerSwipe"><span class="type-signature"></span>new LayerSwipe<span class="signature">(map, sliderContent<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
 
     
 
@@ -56,6 +52,110 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>map</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ol.Map</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">the map</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sliderContent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    ''
+                
+                </td>
+            
+
+            <td class="description last">additional html to be added inside the slider div</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -91,7 +191,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="mixin_RealEarthAnimate.js.html">mixin/RealEarthAnimate.js</a>, <a href="mixin_RealEarthAnimate.js.html#line20">line 20</a>
+        <a href="olHelpers_layerSwipe.js.html">olHelpers/layerSwipe.js</a>, <a href="olHelpers_layerSwipe.js.html#line19">line 19</a>
     </li></ul></dd>
     
 
@@ -135,12 +235,22 @@
 
         
             
-<h4 class="name" id="animationEnabled"><span class="type-signature"></span>animationEnabled<span class="type-signature"></span></h4>
+<h4 class="name" id="leftLayers"><span class="type-signature"></span>leftLayers<span class="type-signature"> :Array.&lt;<a href="LayerBase.html">LayerBase</a>></span></h4>
 
 
 
 
 
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;<a href="LayerBase.html">LayerBase</a>></span>
+
+
+        </li>
+    </ul>
 
 
 
@@ -175,7 +285,75 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="mixin_RealEarthAnimate.js.html">mixin/RealEarthAnimate.js</a>, <a href="mixin_RealEarthAnimate.js.html#line65">line 65</a>
+        <a href="olHelpers_layerSwipe.js.html">olHelpers/layerSwipe.js</a>, <a href="olHelpers_layerSwipe.js.html#line26">line 26</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="rightLayers"><span class="type-signature"></span>rightLayers<span class="type-signature"> :Array.&lt;<a href="LayerBase.html">LayerBase</a>></span></h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;<a href="LayerBase.html">LayerBase</a>></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="olHelpers_layerSwipe.js.html">olHelpers/layerSwipe.js</a>, <a href="olHelpers_layerSwipe.js.html#line32">line 32</a>
     </li></ul></dd>
     
 
@@ -202,15 +380,11 @@
 
     
 
-    <h4 class="name" id="_loadDates"><span class="type-signature">(protected) </span>_loadDates<span class="signature">(inString)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="addLeftLayer"><span class="type-signature"></span>addLeftLayer<span class="signature">(lyr)</span><span class="type-signature"></span></h4>
 
     
 
 
-
-<div class="description">
-    Given the raw time string, add to the arrays to keep track of dates and cache
-</div>
 
 
 
@@ -245,13 +419,16 @@
 
         <tr>
             
-                <td class="name"><code>inString</code></td>
+                <td class="name"><code>lyr</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><a href="LayerBase.html">LayerBase</a></span>
+|
+
+<span class="param-type">*</span>
 
 
             
@@ -261,7 +438,7 @@
 
             
 
-            <td class="description last">input string to parse</td>
+            <td class="description last">layer to be added to left side</td>
         </tr>
 
     
@@ -302,211 +479,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="mixin_RealEarthAnimate.js.html">mixin/RealEarthAnimate.js</a>, <a href="mixin_RealEarthAnimate.js.html#line75">line 75</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    the converted string
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="_loadLatest"><span class="type-signature">(protected) </span>_loadLatest<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="mixin_RealEarthAnimate.js.html">mixin/RealEarthAnimate.js</a>, <a href="mixin_RealEarthAnimate.js.html#line100">line 100</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    if should continue
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="load"><span class="type-signature"></span>load<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    override base layer load
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="mixin_RealEarthAnimate.js.html">mixin/RealEarthAnimate.js</a>, <a href="mixin_RealEarthAnimate.js.html#line25">line 25</a>
+        <a href="olHelpers_layerSwipe.js.html">olHelpers/layerSwipe.js</a>, <a href="olHelpers_layerSwipe.js.html#line78">line 78</a>
     </li></ul></dd>
     
 
@@ -537,7 +510,7 @@
 
     
 
-    <h4 class="name" id="setLayerTime"><span class="type-signature"></span>setLayerTime<span class="signature">(theTime)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="addRightLayer"><span class="type-signature"></span>addRightLayer<span class="signature">(lyr)</span><span class="type-signature"></span></h4>
 
     
 
@@ -576,13 +549,16 @@
 
         <tr>
             
-                <td class="name"><code>theTime</code></td>
+                <td class="name"><code>lyr</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type"><a href="LayerBase.html">LayerBase</a></span>
+|
+
+<span class="param-type">*</span>
 
 
             
@@ -592,7 +568,7 @@
 
             
 
-            <td class="description last">the time</td>
+            <td class="description last">layer to be added to right side</td>
         </tr>
 
     
@@ -633,111 +609,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="mixin_RealEarthAnimate.js.html">mixin/RealEarthAnimate.js</a>, <a href="mixin_RealEarthAnimate.js.html#line116">line 116</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    true if new index, false if the same or below lowest value
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="timeInit"><span class="type-signature"></span>timeInit<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Call this after the mixin has been applied
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="mixin_RealEarthAnimate.js.html">mixin/RealEarthAnimate.js</a>, <a href="mixin_RealEarthAnimate.js.html#line30">line 30</a>
+        <a href="olHelpers_layerSwipe.js.html">olHelpers/layerSwipe.js</a>, <a href="olHelpers_layerSwipe.js.html#line107">line 107</a>
     </li></ul></dd>
     
 

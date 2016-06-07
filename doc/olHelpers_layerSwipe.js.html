@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: layers/LayerBaseXyzTile.js</title>
+    <title>JSDoc: Source: olHelpers/layerSwipe.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: layers/LayerBaseXyzTile.js</h1>
+    <h1 class="page-title">Source: olHelpers/layerSwipe.js</h1>
 
     
 
@@ -27,103 +27,156 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Created by gavorhes on 12/4/2015.
+ * Created by gavorhes on 6/1/2016.
  */
-import $ from '../jquery/jquery';
-import LayerBase from './LayerBase';
-import * as esriToOl from '../olHelpers/esriToOlStyle';
-import provide from '../util/provide';
-import ol from '../ol/ol';
-const nm = provide('layers');
 
-/**
- * XYZ tile
- * @augments LayerBase
- */
-class LayerBaseXyzTile extends LayerBase {
+
+import provide from '../util/provide';
+import $ from '../jquery/jquery';
+
+let nm = provide('collections.layerSwipe');
+
+
+class LayerSwipe {
 
     /**
-     * The XYZ tile layer
-     * @param {string} url - url for source
-     * @param {object} options - config
-     * @param {string} [options.id] - layer id
-     * @param {string} [options.name=Unnamed Layer] - layer name
-     * @param {number} [options.opacity=1] - opacity
-     * @param {boolean} [options.visible=true] - default visible
-     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
-     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
-     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
-     * @param {number} [options.zIndex=0] the z index for the layer
-     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
-     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
-     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
-     * @param {boolean} [options.legendContent] additional content to add to the legend
-     * @param {boolean} [options.useEsriStyle=false] if the map service style should be used
+     *
+     * @param {ol.Map} map - the map
+     * @param {string} [sliderContent=''] - additional html to be added inside the slider div
      */
-    constructor(url, options) {
-        super(url, options);
-        this._source = new ol.source.XYZ({url: this.url == '' ? undefined : this.url});
-        this.olLayer = new ol.layer.Tile({
-            source: this._source,
-            visible: this.visible,
-            opacity: this.opacity,
-            minResolution: this._minResolution,
-            maxResolution: this._maxResolution,
-            zIndex: this._zIndex
+    constructor(map, sliderContent) {
+
+        sliderContent = sliderContent || '';
+        /**
+         *
+         * @type {Array&lt;LayerBase>}
+         */
+        this.leftLayers = [];
+
+        /**
+         *
+         * @type {Array&lt;LayerBase>}
+         */
+        this.rightLayers = [];
+
+        this._percentRight = 50;
+        this.offset = null;
+
+        this._map = map;
+        this.$mapElement = $(map.getTargetElement());
+        this.$mapElement.append(`&lt;div class="layer-swiper">${sliderContent}&lt;/div>`);
+
+
+        this.$swiper = this.$mapElement.find('.layer-swiper');
+        this.percentRight = this.percentRight;
+
+        this.dragging = false;
+
+        this.$mapElement.mouseleave(() => {
+            this.dragging = false;
         });
 
+        this.$swiper.bind('mousewheel DOMMouseScroll', function(evt){
+            evt.preventDefault();
+        });
 
-        this._useEsriStyle = typeof options.useEsriStyle == 'boolean' ? options.useEsriStyle : false;
+        this.$swiper.mousedown((evt) => {
+            this.dragging = true;
+            this.offset = evt.offsetX;
+        });
 
-        if (this._useEsriStyle) {
-            this.addLegendContent();
-        }
-    }
+        $(window).mouseup(() => {
+            this.dragging = false;
+        });
 
-    /**
-     * add additional content to the legend
-     * @param {string} [additionalContent=''] additional content for legend
-     */
-    addLegendContent(additionalContent) {
-        if (!this._useEsriStyle) {
-            super.addLegendContent(additionalContent);
-        } else {
-            let urlCopy = this.url;
+        this.$mapElement.mousemove((evt) => {
+            if (this.dragging) {
+                let mapLeft = this.$mapElement.position().left;
+                let mapWidth = this.$mapElement.width();
 
-            let mapServerIndex = urlCopy.toLowerCase().indexOf('mapserver');
-            if (mapServerIndex > -1) {
-                urlCopy = urlCopy.slice(0, mapServerIndex + 9);
-            } else {
-                return;
+                this.percentRight = 100 * (evt.pageX - this.offset - mapLeft) / mapWidth;
             }
-
-            if (urlCopy[urlCopy.length - 1] !== '/') {
-                urlCopy += '/';
-            }
-
-            urlCopy += 'legend?f=pjson&amp;callback=?';
-
-            let _this = this;
-            let superAddLegend = super.addLegendContent;
-
-            $.get(urlCopy, {}, function (d) {
-                let newHtml = esriToOl.makeMapServiceLegend(d);
-                superAddLegend.call(_this, newHtml);
-            }, 'json');
-        }
+        });
     }
 
     /**
      *
-     * @returns {ol.source.XYZ} the vector source
+     * @param {LayerBase|*} lyr - layer to be added to left side
      */
-    get source(){
-        return super.source;
+    addLeftLayer(lyr) {
+
+        if (this.leftLayers.indexOf(lyr) != -1){
+            return;
+        }
+
+        lyr.olLayer.on('precompose', (event) => {
+            let ctx = event.context;
+            let width = ctx.canvas.width * (this.percentRight / 100);
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.rect(0, 0, width, ctx.canvas.height);
+            ctx.clip();
+        });
+
+        lyr.olLayer.on('postcompose', function (event) {
+            let ctx = event.context;
+            ctx.restore();
+        });
+
+
+        this.leftLayers.push(lyr);
+    }
+
+    /**
+     *
+     * @param {LayerBase|*} lyr - layer to be added to right side
+     */
+    addRightLayer(lyr) {
+
+        if (this.rightLayers.indexOf(lyr) != -1){
+            return;
+        }
+
+        lyr.olLayer.on('precompose', (event) => {
+            let ctx = event.context;
+            let width = ctx.canvas.width * (this.percentRight / 100);
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.rect(width, 0, ctx.canvas.width - width, ctx.canvas.height);
+            ctx.clip();
+        });
+
+        lyr.olLayer.on('postcompose', function (event) {
+            let ctx = event.context;
+            ctx.restore();
+        });
+
+        this.rightLayers.push(lyr);
+    }
+
+    get percentRight() {
+        return this._percentRight;
+    }
+
+    set percentRight(pcnt) {
+        let maxed = this.$swiper.position().left + this.$swiper.width() > this.$mapElement.width();
+
+        if (pcnt &lt; 0) {
+            return;
+        } else if (maxed &amp;&amp; pcnt > this.percentRight) {
+            return;
+        }
+
+        this._percentRight = pcnt;
+        this.$swiper.css('left', `${this._percentRight.toFixed(2)}%`);
+        this._map.render();
     }
 }
 
-nm.LayerBaseXyzTile = LayerBaseXyzTile;
-export default LayerBaseXyzTile;
+nm.LayerSwipe = LayerSwipe;
+export default LayerSwipe;
 </code></pre>
         </article>
     </section>

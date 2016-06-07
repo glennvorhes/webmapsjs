@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: layers/LayerBaseXyzTile.js</title>
+    <title>JSDoc: Source: layers/LayerEsriTile.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: layers/LayerBaseXyzTile.js</h1>
+    <h1 class="page-title">Source: layers/LayerEsriTile.js</h1>
 
     
 
@@ -29,21 +29,20 @@
             <pre class="prettyprint source linenums"><code>/**
  * Created by gavorhes on 12/4/2015.
  */
-import $ from '../jquery/jquery';
-import LayerBase from './LayerBase';
-import * as esriToOl from '../olHelpers/esriToOlStyle';
 import provide from '../util/provide';
-import ol from '../ol/ol';
+import LayerBaseXyzTile from './LayerBaseXyzTile';
+
 const nm = provide('layers');
 
+
 /**
- * XYZ tile
- * @augments LayerBase
+ * Esri tile
+ * @augments LayerBaseXyzTile
  */
-class LayerBaseXyzTile extends LayerBase {
+class LayerEsriTile extends LayerBaseXyzTile {
 
     /**
-     * The XYZ tile layer
+     * The Esri tile layer
      * @param {string} url - url for source
      * @param {object} options - config
      * @param {string} [options.id] - layer id
@@ -60,70 +59,19 @@ class LayerBaseXyzTile extends LayerBase {
      * @param {boolean} [options.legendContent] additional content to add to the legend
      * @param {boolean} [options.useEsriStyle=false] if the map service style should be used
      */
+    
     constructor(url, options) {
+        if (url.search(/\/$/) == -1){
+            url += '/';
+        }
+        url += 'tile/{z}/{y}/{x}';
+        
         super(url, options);
-        this._source = new ol.source.XYZ({url: this.url == '' ? undefined : this.url});
-        this.olLayer = new ol.layer.Tile({
-            source: this._source,
-            visible: this.visible,
-            opacity: this.opacity,
-            minResolution: this._minResolution,
-            maxResolution: this._maxResolution,
-            zIndex: this._zIndex
-        });
-
-
-        this._useEsriStyle = typeof options.useEsriStyle == 'boolean' ? options.useEsriStyle : false;
-
-        if (this._useEsriStyle) {
-            this.addLegendContent();
-        }
-    }
-
-    /**
-     * add additional content to the legend
-     * @param {string} [additionalContent=''] additional content for legend
-     */
-    addLegendContent(additionalContent) {
-        if (!this._useEsriStyle) {
-            super.addLegendContent(additionalContent);
-        } else {
-            let urlCopy = this.url;
-
-            let mapServerIndex = urlCopy.toLowerCase().indexOf('mapserver');
-            if (mapServerIndex > -1) {
-                urlCopy = urlCopy.slice(0, mapServerIndex + 9);
-            } else {
-                return;
-            }
-
-            if (urlCopy[urlCopy.length - 1] !== '/') {
-                urlCopy += '/';
-            }
-
-            urlCopy += 'legend?f=pjson&amp;callback=?';
-
-            let _this = this;
-            let superAddLegend = super.addLegendContent;
-
-            $.get(urlCopy, {}, function (d) {
-                let newHtml = esriToOl.makeMapServiceLegend(d);
-                superAddLegend.call(_this, newHtml);
-            }, 'json');
-        }
-    }
-
-    /**
-     *
-     * @returns {ol.source.XYZ} the vector source
-     */
-    get source(){
-        return super.source;
     }
 }
 
-nm.LayerBaseXyzTile = LayerBaseXyzTile;
-export default LayerBaseXyzTile;
+nm.LayerBaseXyzTile = LayerEsriTile;
+export default LayerEsriTile;
 </code></pre>
         </article>
     </section>
