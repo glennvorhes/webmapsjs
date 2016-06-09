@@ -2,6 +2,7 @@
  * Created by gavorhes on 5/19/2016.
  */
 
+
 import 'babel-polyfill';
 import quickMap from '../src/olHelpers/quickMap';
 import ItsLayerCollection from '../src/collections/ItsLayerCollection';
@@ -40,8 +41,8 @@ let map = quickMap({fullScreen: true});
 let itsLayerCollection = new ItsLayerCollection(map);
 
 for (let l of itsLayerCollection.layers){
-    console.log(l.visible);
-    console.log(l);
+    // console.log(l.visible);
+    // console.log(l);
 }
 
 

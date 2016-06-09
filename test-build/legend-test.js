@@ -17326,7 +17326,6 @@ nm.LayerLegend = LayerLegend;
 exports.default = LayerLegend;
 
 },{"../jquery/jquery":302,"../olHelpers/mapMove":310,"../util/makeGuid":322,"../util/provide":323}],302:[function(require,module,exports){
-(function (global){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17334,12 +17333,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var jQuery = require('jquery');
 
-global.$ = jQuery;
-global.jQuery = jQuery;
-
 exports.default = jQuery;
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 },{"jquery":299}],303:[function(require,module,exports){
 'use strict';
@@ -22050,10 +22044,10 @@ var _iteratorError = undefined;
 
 try {
     for (var _iterator = itsLayerCollection.layers[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var l = _step.value;
+        // console.log(l.visible);
+        // console.log(l);
 
-        console.log(l.visible);
-        console.log(l);
+        var l = _step.value;
     }
 } catch (err) {
     _didIteratorError = true;

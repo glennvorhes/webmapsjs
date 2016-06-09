@@ -23,7 +23,7 @@ let itsConfig = [
             ]
         }
     },
-    {name: 'ATR', itsType: 'atr', minZoom: 9, itsIcon: 'atr.png'},
+    {name: 'ATR', itsType: 'atr', minZoom: 8, itsIcon: 'atr.png', visible: false},
     {name: 'Lighting', itsType: 'light', minZoom: 16, itsIcon: 'streetlight.png', visible: false, onDemand: true},
     {name: 'Bluetooth', itsType: 'blue', minZoom: 10, itsIcon: 'bluetooth.png', visible: false},
     {name: 'Cabinets', itsType: 'cabinet', minZoom: 10, itsIcon: 'cabinet.png', visible: false},
