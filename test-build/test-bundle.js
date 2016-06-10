@@ -39825,7 +39825,17 @@ function _classCallCheck(instance, Constructor) {
 
 var nm = (0, _provide2.default)('collections');
 
-var itsConfig = [{ name: 'Camera', itsType: 'cctv', minZoom: 11, itsIcon: 'cctv.png' }, {
+var itsConfig = [{
+    name: 'Camera',
+    itsType: 'cctv',
+    minZoom: 11,
+    itsIconConfig: {
+        prop: 'owner',
+        defaultName: 'WisDOT',
+        defaultIcon: 'cctv.png',
+        iconArray: [['City of Madison', 'Madison', 'cctv-mad.png']]
+    }
+}, {
     name: 'Message Signs',
     itsType: 'DMS',
     minZoom: 11,
@@ -39835,7 +39845,7 @@ var itsConfig = [{ name: 'Camera', itsType: 'cctv', minZoom: 11, itsIcon: 'cctv.
         defaultIcon: 'dms.png',
         iconArray: [['pcms', 'PCMS', 'pcms.png']]
     }
-}, { name: 'ATR', itsType: 'atr', minZoom: 9, itsIcon: 'atr.png' }, { name: 'Lighting', itsType: 'light', minZoom: 16, itsIcon: 'streetlight.png', visible: false, onDemand: true }, { name: 'Bluetooth', itsType: 'blue', minZoom: 10, itsIcon: 'bluetooth.png', visible: false }, { name: 'Cabinets', itsType: 'cabinet', minZoom: 10, itsIcon: 'cabinet.png', visible: false }, { name: 'Hut', itsType: 'hut', minZoom: 10, itsIcon: 'hut.png', visible: false }, { name: 'Vault', itsType: 'vault', minZoom: 13, itsIcon: 'vault.png', visible: false }, { name: 'Advisory Radio', itsType: 'har', minZoom: 10, itsIcon: 'har.png', visible: false }, {
+}, { name: 'ATR', itsType: 'atr', minZoom: 8, itsIcon: 'atr.png', visible: false }, { name: 'Lighting', itsType: 'light', minZoom: 16, itsIcon: 'streetlight.png', visible: false, onDemand: true }, { name: 'Bluetooth', itsType: 'blue', minZoom: 10, itsIcon: 'bluetooth.png', visible: false }, { name: 'Cabinets', itsType: 'cabinet', minZoom: 10, itsIcon: 'cabinet.png', visible: false }, { name: 'Hut', itsType: 'hut', minZoom: 10, itsIcon: 'hut.png', visible: false }, { name: 'Vault', itsType: 'vault', minZoom: 13, itsIcon: 'vault.png', visible: false }, { name: 'Advisory Radio', itsType: 'har', minZoom: 10, itsIcon: 'har.png', visible: false }, {
     name: 'Loop Detectors',
     itsType: 'loop',
     legendCollapse: true,

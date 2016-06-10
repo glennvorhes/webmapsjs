@@ -7,9 +7,20 @@ import * as colors from '../util/colors';
 import provide from '../util/provide';
 let nm = provide('collections');
 
-
 let itsConfig = [
-    {name: 'Camera', itsType: 'cctv', minZoom: 11, itsIcon: 'cctv.png'},
+    {
+        name: 'Camera',
+        itsType: 'cctv',
+        minZoom: 11,
+        itsIconConfig: {
+            prop: 'owner',
+            defaultName: 'WisDOT',
+            defaultIcon: 'cctv.png',
+            iconArray: [
+                ['City of Madison', 'Madison', 'cctv-mad.png']
+            ]
+        }
+    },
     {
         name: 'Message Signs',
         itsType: 'DMS',
