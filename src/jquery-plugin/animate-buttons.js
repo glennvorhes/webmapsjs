@@ -8,11 +8,12 @@ import $ from '../jquery/jquery';
 import provide from '../util/provide';
 import {} from './range-change';
 
+
 let nm = provide('jQueryPlugin');
 
 /**
  * @callback mediaCallback
- * @param {number} newValue
+ * @param {number} tm
  */
 
 function timeToLocalDateString(tm) {

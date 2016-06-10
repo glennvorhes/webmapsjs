@@ -3,6 +3,8 @@ require('jquery-ui/datepicker');
 import provide from '../util/provide';
 let nm = provide('jQueryPlugin');
 
+
+
 class DayRange {
 
     /**
@@ -85,6 +87,7 @@ class DayRange {
 }
 
 nm.DayRange = DayRange;
+let jQuery = $;
 
 /**
  * Adds day range control

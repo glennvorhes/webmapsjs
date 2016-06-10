@@ -7,6 +7,8 @@ let timeout = null;
 let dragged = false;
 let lastVal;
 
+
+
 /**
  * Created by gavorhes on 11/2/2015.
  */
