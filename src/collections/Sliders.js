@@ -429,7 +429,7 @@ class Sliders {
                 }
 
                 let $this = $(this);
-                let domId = this.id;
+                let domId = this['id'];
                 let sldr = _this.sliderLookup[domId];
 
                 let newValue = parseFloat($this.val());
@@ -448,7 +448,7 @@ class Sliders {
                 if (sum > 100) {
                     loop1:
                         while (true) {
-                            for (i = 0; i < _this.sliderList.length; i++) {
+                            for (let i = 0; i < _this.sliderList.length; i++) {
                                 let sld = _this.sliderList[i];
                                 if (sld.domId == domId || sld.locked || sld.atMin) {
                                     continue;
@@ -463,8 +463,8 @@ class Sliders {
                 } else if (sum < 100) {
                     loop1:
                         while (true) {
-                            for (i = 0; i < _this.sliderList.length; i++) {
-                                sld = _this.sliderList[i];
+                            for (let i = 0; i < _this.sliderList.length; i++) {
+                                let sld = _this.sliderList[i];
                                 if (sld.domId == domId || sld.locked || sld.atMax) {
                                     continue;
                                 }
@@ -488,7 +488,7 @@ class Sliders {
             if (_this.resetting) {
                 return;
             }
-            _this.sliderLookup[this.id.replace('_chg', '')].selectedParam = $(this).val();
+            _this.sliderLookup[this['id'].replace('_chg', '')].selectedParam = $(this).val();
         });
 
         //lock the slider and update the reserved percent
@@ -511,8 +511,8 @@ class Sliders {
                 _this.notLockedCount++;
             }
 
-            for (i = 0; i < _this.sliderList.length; i++) {
-                sld = _this.sliderList[i];
+            for (let i = 0; i < _this.sliderList.length; i++) {
+                let sld = _this.sliderList[i];
                 if (sld.locked) {
                     continue;
                 }
@@ -522,7 +522,7 @@ class Sliders {
             if (notLockedSliders.length == 1) {
                 notLockedSliders[0].min = notLockedSliders[0].weight;
             } else {
-                for (i = 0; i < notLockedSliders.length; i++) {
+                for (let i = 0; i < notLockedSliders.length; i++) {
                     notLockedSliders[i].min = 0;
                 }
             }
