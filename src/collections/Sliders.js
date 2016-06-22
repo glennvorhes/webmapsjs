@@ -4,7 +4,6 @@
 import provide from '../util/provide';
 let nm = provide('collections');
 import $ from '../jquery/jquery';
-import makeGuid from '../util/makeGuid';
 
 class _Slider {
 
@@ -18,8 +17,7 @@ class _Slider {
     constructor(name, selections, wgt, selected) {
         //let _this = this;
         this.name = name;
-        // this.domId = name.toLowerCase().replace(/ /g, '-');
-        this.domId = makeGuid();
+        this.domId = name.toLowerCase().replace(/ /g, '-');
         this._weight = wgt;
         this._weightDefault = this._weight;
 

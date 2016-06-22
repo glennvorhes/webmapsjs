@@ -9869,10 +9869,6 @@ var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _makeGuid = require('../util/makeGuid');
-
-var _makeGuid2 = _interopRequireDefault(_makeGuid);
-
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { default: obj };
 }
@@ -9900,8 +9896,7 @@ var _Slider = function () {
 
         //let _this = this;
         this.name = name;
-        // this.domId = name.toLowerCase().replace(/ /g, '-');
-        this.domId = (0, _makeGuid2.default)();
+        this.domId = name.toLowerCase().replace(/ /g, '-');
         this._weight = wgt;
         this._weightDefault = this._weight;
 
@@ -10465,7 +10460,7 @@ nm.Sliders = Sliders;
 window.gv['collections'].Sliders = Sliders;
 exports.default = Sliders;
 
-},{"../jquery/jquery":3,"../util/makeGuid":4,"../util/provide":5}],3:[function(require,module,exports){
+},{"../jquery/jquery":3,"../util/provide":4}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10476,42 +10471,6 @@ var jQuery = require('jquery');
 exports.default = jQuery;
 
 },{"jquery":1}],4:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _provide = require('./provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-var nm = (0, _provide2.default)('util');
-
-/**
- * guids are used to uniquely identify groups and features
- * @returns {string} a new guid
- */
-/**
- * Created by gavorhes on 11/3/2015.
- */
-
-function makeGuid() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    var r = Math.random() * 16 | 0,
-        v = c == 'x' ? r : r & 0x3 | 0x8;
-
-    return v.toString(16);
-  });
-}
-nm.makeGuid = makeGuid;
-exports.default = makeGuid;
-
-},{"./provide":5}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10554,7 +10513,7 @@ window.gv.util.provide = provide;
 
 exports.default = provide;
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 var _Sliders = require('../src/collections/Sliders');
@@ -10578,7 +10537,7 @@ for (var i = 0; i < sliderParamArray.length; i++) {
 
 var sliders = new _Sliders2.default(sliderParamArray, 'slider-container');
 
-},{"../src/collections/Sliders":2}]},{},[6])
+},{"../src/collections/Sliders":2}]},{},[5])
 
 
 //# sourceMappingURL=slider-test.js.map

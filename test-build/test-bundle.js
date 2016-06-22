@@ -40429,10 +40429,6 @@ var _jquery = require('../jquery/jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _makeGuid = require('../util/makeGuid');
-
-var _makeGuid2 = _interopRequireDefault(_makeGuid);
-
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { default: obj };
 }
@@ -40460,8 +40456,7 @@ var _Slider = function () {
 
         //let _this = this;
         this.name = name;
-        // this.domId = name.toLowerCase().replace(/ /g, '-');
-        this.domId = (0, _makeGuid2.default)();
+        this.domId = name.toLowerCase().replace(/ /g, '-');
         this._weight = wgt;
         this._weightDefault = this._weight;
 
@@ -41025,7 +41020,7 @@ nm.Sliders = Sliders;
 window.gv['collections'].Sliders = Sliders;
 exports.default = Sliders;
 
-},{"../jquery/jquery":345,"../util/makeGuid":367,"../util/provide":368}],344:[function(require,module,exports){
+},{"../jquery/jquery":345,"../util/provide":368}],344:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
