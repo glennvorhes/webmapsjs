@@ -94,7 +94,7 @@ class LayerBaseVector extends LayerBase {
          *
          * @type {ol.layer.Vector|ol.layer.Base}
          */
-        this.olLayer = new ol.layer.Vector(
+        this._olLayer = new ol.layer.Vector(
             {
                 source: this._source,
                 visible: this.visible,
@@ -267,6 +267,14 @@ class LayerBaseVector extends LayerBase {
      */
     get features(){
         return this.source.getFeatures();
+    }
+
+    /**
+     * 
+     * @returns {ol.layer|Vector|ol.layer.Base|undefined} the ol layer
+     */
+    get olLayer(){
+        return super.olLayer;
     }
 }
 

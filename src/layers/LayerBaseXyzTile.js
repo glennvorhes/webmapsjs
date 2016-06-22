@@ -35,7 +35,7 @@ class LayerBaseXyzTile extends LayerBase {
     constructor(url, options) {
         super(url, options);
         this._source = new ol.source.XYZ({url: this.url == '' ? undefined : this.url});
-        this.olLayer = new ol.layer.Tile({
+        this._olLayer = new ol.layer.Tile({
             source: this._source,
             visible: this.visible,
             opacity: this.opacity,
@@ -89,8 +89,16 @@ class LayerBaseXyzTile extends LayerBase {
      *
      * @returns {ol.source.XYZ} the vector source
      */
-    get source(){
+    get source() {
         return super.source;
+    }
+
+    /**
+     *
+     * @returns {ol.layer.Tile|ol.layer.Base|undefined} the ol layer
+     */
+    get olLayer() {
+        return super.olLayer;
     }
 }
 

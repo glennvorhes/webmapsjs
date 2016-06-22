@@ -42,7 +42,7 @@ class LayerEsriMapServer extends LayerBase {
             }
         );
 
-        this.olLayer = new ol.layer.Tile({
+        this._olLayer = new ol.layer.Tile({
             source: this._source,
             visible: this.visible,
             opacity: this.opacity,
@@ -149,6 +149,14 @@ class LayerEsriMapServer extends LayerBase {
      */
     get source() {
         return super.source;
+    }
+
+    /**
+     *
+     * @returns {ol.layer.Tile|ol.layer.Base|undefined} the ol layer
+     */
+    get olLayer() {
+        return super.olLayer;
     }
 }
 nm.LayerEsriMapServer = LayerEsriMapServer;

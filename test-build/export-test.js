@@ -10350,7 +10350,7 @@ var LayerBase = function () {
 nm.LayerBase = LayerBase;
 exports.default = LayerBase;
 
-},{"../jquery/jquery":2,"../olHelpers/zoomResolutionConvert":15,"../util/makeGuid":19,"../util/provide":20}],4:[function(require,module,exports){
+},{"../jquery/jquery":2,"../olHelpers/zoomResolutionConvert":14,"../util/makeGuid":18,"../util/provide":19}],4:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -10641,7 +10641,7 @@ var LayerEsriMapServer = function (_LayerBase) {
 nm.LayerEsriMapServer = LayerEsriMapServer;
 exports.default = LayerEsriMapServer;
 
-},{"../jquery/jquery":2,"../ol/ol":17,"../olHelpers/esriToOlStyle":5,"../olHelpers/mapPopup":10,"../util/provide":20,"./LayerBase":3}],5:[function(require,module,exports){
+},{"../jquery/jquery":2,"../ol/ol":16,"../olHelpers/esriToOlStyle":5,"../olHelpers/mapPopup":9,"../util/provide":19,"./LayerBase":3}],5:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -11135,200 +11135,7 @@ function makeMapServiceLegend(esriResponse) {
 
 nm.makeMapServiceLegend = makeMapServiceLegend;
 
-},{"../ol/ol":17,"../util/provide":20}],6:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () {
-    function defineProperties(target, props) {
-        for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-        }
-    }return function (Constructor, protoProps, staticProps) {
-        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-    };
-}(); /**
-      * Created by gavorhes on 6/1/2016.
-      */
-
-var _provide = require('../util/provide');
-
-var _provide2 = _interopRequireDefault(_provide);
-
-var _jquery = require('../jquery/jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { default: obj };
-}
-
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-        throw new TypeError("Cannot call a class as a function");
-    }
-}
-
-var nm = (0, _provide2.default)('collections.layerSwipe');
-
-var LayerSwipe = function () {
-
-    /**
-     *
-     * @param {ol.Map} map - the map
-     * @param {string} [sliderContent=''] - additional html to be added inside the slider div
-     */
-
-    function LayerSwipe(map, sliderContent) {
-        var _this = this;
-
-        _classCallCheck(this, LayerSwipe);
-
-        sliderContent = sliderContent || '';
-        /**
-         *
-         * @type {Array<LayerBase>}
-         */
-        this.leftLayers = [];
-
-        /**
-         *
-         * @type {Array<LayerBase>}
-         */
-        this.rightLayers = [];
-
-        this._percentRight = 50;
-        this.offset = null;
-
-        this._map = map;
-        this.$mapElement = (0, _jquery2.default)(map.getTargetElement());
-        this.$mapElement.append('<div class="layer-swiper">' + sliderContent + '</div>');
-
-        this.$swiper = this.$mapElement.find('.layer-swiper');
-        this.percentRight = this.percentRight;
-
-        this.dragging = false;
-
-        this.$mapElement.mouseleave(function () {
-            _this.dragging = false;
-        });
-
-        this.$swiper.bind('mousewheel DOMMouseScroll', function (evt) {
-            evt.preventDefault();
-        });
-
-        this.$swiper.mousedown(function (evt) {
-            _this.dragging = true;
-            _this.offset = evt.offsetX;
-        });
-
-        (0, _jquery2.default)(window).mouseup(function () {
-            _this.dragging = false;
-        });
-
-        this.$mapElement.mousemove(function (evt) {
-            if (_this.dragging) {
-                var mapLeft = _this.$mapElement.position().left;
-                var mapWidth = _this.$mapElement.width();
-
-                _this.percentRight = 100 * (evt.pageX - _this.offset - mapLeft) / mapWidth;
-            }
-        });
-    }
-
-    /**
-     *
-     * @param {LayerBase|*} lyr - layer to be added to left side
-     */
-
-    _createClass(LayerSwipe, [{
-        key: 'addLeftLayer',
-        value: function addLeftLayer(lyr) {
-            var _this2 = this;
-
-            if (this.leftLayers.indexOf(lyr) != -1) {
-                return;
-            }
-
-            lyr.olLayer.on('precompose', function (event) {
-                var ctx = event.context;
-                var width = ctx.canvas.width * (_this2.percentRight / 100);
-
-                ctx.save();
-                ctx.beginPath();
-                ctx.rect(0, 0, width, ctx.canvas.height);
-                ctx.clip();
-            });
-
-            lyr.olLayer.on('postcompose', function (event) {
-                var ctx = event.context;
-                ctx.restore();
-            });
-
-            this.leftLayers.push(lyr);
-        }
-
-        /**
-         *
-         * @param {LayerBase|*} lyr - layer to be added to right side
-         */
-
-    }, {
-        key: 'addRightLayer',
-        value: function addRightLayer(lyr) {
-            var _this3 = this;
-
-            if (this.rightLayers.indexOf(lyr) != -1) {
-                return;
-            }
-
-            lyr.olLayer.on('precompose', function (event) {
-                var ctx = event.context;
-                var width = ctx.canvas.width * (_this3.percentRight / 100);
-
-                ctx.save();
-                ctx.beginPath();
-                ctx.rect(width, 0, ctx.canvas.width - width, ctx.canvas.height);
-                ctx.clip();
-            });
-
-            lyr.olLayer.on('postcompose', function (event) {
-                var ctx = event.context;
-                ctx.restore();
-            });
-
-            this.rightLayers.push(lyr);
-        }
-    }, {
-        key: 'percentRight',
-        get: function get() {
-            return this._percentRight;
-        },
-        set: function set(pcnt) {
-            var maxed = this.$swiper.position().left + this.$swiper.width() > this.$mapElement.width();
-
-            if (pcnt < 0) {
-                return;
-            } else if (maxed && pcnt > this.percentRight) {
-                return;
-            }
-
-            this._percentRight = pcnt;
-            this.$swiper.css('left', this._percentRight.toFixed(2) + '%');
-            this._map.render();
-        }
-    }]);
-
-    return LayerSwipe;
-}();
-
-nm.LayerSwipe = LayerSwipe;
-exports.default = LayerSwipe;
-
-},{"../jquery/jquery":2,"../util/provide":20}],7:[function(require,module,exports){
+},{"../ol/ol":16,"../util/provide":19}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11455,7 +11262,7 @@ var MapInteractionBase = function () {
 nm.MapInteractionBase = MapInteractionBase;
 exports.default = MapInteractionBase;
 
-},{"../util/provide":20}],8:[function(require,module,exports){
+},{"../util/provide":19}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11478,7 +11285,7 @@ exports.default = new _mapMoveCls2.default(); /**
                                                * Created by gavorhes on 11/3/2015.
                                                */
 
-},{"./mapMoveCls":9}],9:[function(require,module,exports){
+},{"./mapMoveCls":8}],8:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -11868,7 +11675,7 @@ var MapMoveCls = function (_MapInteractionBase) {
 nm.MapMoveCls = MapMoveCls;
 exports.default = MapMoveCls;
 
-},{"../jquery/jquery":2,"../util/checkDefined":18,"../util/makeGuid":19,"../util/provide":20,"./mapInteractionBase":7}],10:[function(require,module,exports){
+},{"../jquery/jquery":2,"../util/checkDefined":17,"../util/makeGuid":18,"../util/provide":19,"./mapInteractionBase":6}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11891,7 +11698,7 @@ exports.default = new _mapPopupCls2.default(); /**
                                                 * Created by gavorhes on 11/3/2015.
                                                 */
 
-},{"./mapPopupCls":11}],11:[function(require,module,exports){
+},{"./mapPopupCls":10}],10:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -12574,7 +12381,7 @@ var MapPopupCls = function (_MapInteractionBase) {
 nm.MapPopupCls = MapPopupCls;
 exports.default = MapPopupCls;
 
-},{"../jquery/jquery":2,"../ol/ol":17,"../olHelpers/propertiesZoomStyle":12,"../util/provide":20,"./mapInteractionBase":7}],12:[function(require,module,exports){
+},{"../jquery/jquery":2,"../ol/ol":16,"../olHelpers/propertiesZoomStyle":11,"../util/provide":19,"./mapInteractionBase":6}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12637,7 +12444,7 @@ function propertiesZoomStyle(styleFunc) {
 nm.propertiesZoomStyle = propertiesZoomStyle;
 exports.default = propertiesZoomStyle;
 
-},{"../util/provide":20,"./zoomResolutionConvert":15}],13:[function(require,module,exports){
+},{"../util/provide":19,"./zoomResolutionConvert":14}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12697,7 +12504,7 @@ function quickMap(options) {
 nm.quickMap = quickMap;
 exports.default = quickMap;
 
-},{"../util/provide":20,"./mapMove":8,"./mapPopup":10,"./quickMapBase":14}],14:[function(require,module,exports){
+},{"../util/provide":19,"./mapMove":7,"./mapPopup":9,"./quickMapBase":13}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12819,7 +12626,7 @@ function quickMapBase(options) {
 nm.quickMapBase = quickMapBase;
 exports.default = quickMapBase;
 
-},{"../jquery/jquery":2,"../ol/ol":17,"../util/provide":20}],15:[function(require,module,exports){
+},{"../jquery/jquery":2,"../ol/ol":16,"../util/provide":19}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12910,7 +12717,7 @@ function resolutionToZoom(resolution) {
 
 nm.resolutionToZoom = resolutionToZoom;
 
-},{"../util/provide":20}],16:[function(require,module,exports){
+},{"../util/provide":19}],15:[function(require,module,exports){
 // OpenLayers 3. See http://openlayers.org/
 // License: https://raw.githubusercontent.com/openlayers/ol3/master/LICENSE.md
 (function (root, factory) {
@@ -13313,7 +13120,7 @@ Tc.prototype.getExtent=Tc.prototype.C;Tc.prototype.transform=Tc.prototype.o;E("o
 }));
 
 
-},{}],17:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -13323,7 +13130,7 @@ var ol = require('./ol-build');
 
 exports.default = ol;
 
-},{"./ol-build":16}],18:[function(require,module,exports){
+},{"./ol-build":15}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -13371,7 +13178,7 @@ function definedAndNotNull(input) {
 
 nm.definedAndNotNull = definedAndNotNull;
 
-},{"./provide":20}],19:[function(require,module,exports){
+},{"./provide":19}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -13407,7 +13214,7 @@ function makeGuid() {
 nm.makeGuid = makeGuid;
 exports.default = makeGuid;
 
-},{"./provide":20}],20:[function(require,module,exports){
+},{"./provide":19}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -13450,16 +13257,16 @@ window.gv.util.provide = provide;
 
 exports.default = provide;
 
-},{}],21:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
+
+var _jquery = require('../src/jquery/jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
 
 var _quickMap = require('../src/olHelpers/quickMap');
 
 var _quickMap2 = _interopRequireDefault(_quickMap);
-
-var _layerSwipe = require('../src/olHelpers/layerSwipe');
-
-var _layerSwipe2 = _interopRequireDefault(_layerSwipe);
 
 var _LayerEsriMapServer = require('../src/layers/LayerEsriMapServer');
 
@@ -13470,10 +13277,8 @@ function _interopRequireDefault(obj) {
 }
 
 var map = (0, _quickMap2.default)(); /**
-                                      * Created by gavorhes on 6/1/2016.
+                                      * Created by gavorhes on 6/22/2016.
                                       */
-
-var swiper = new _layerSwipe2.default(map);
 
 var wisDotRegions = new _LayerEsriMapServer2.default('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/Metamanager_regions/MapServer', {
     minZoom: 6,
@@ -13482,38 +13287,35 @@ var wisDotRegions = new _LayerEsriMapServer2.default('http://transportal.cee.wis
     useEsriStyle: true
 });
 
-var metamanagerSegments = new _LayerEsriMapServer2.default('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/MM_All_Segments/MapServer', {
-    minZoom: 7,
-    visible: true,
-    name: 'Metamanager Segments'
-});
-
-var truckSpeed2014 = new _LayerEsriMapServer2.default('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/NPMRDS/compareDynamic/MapServer', {
-    minZoom: 7,
-    visible: true,
-    name: 'truck2014',
-    showLayers: [8]
-});
-
-var truckSpeed2015 = new _LayerEsriMapServer2.default('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/NPMRDS/compareDynamic/MapServer', {
-    minZoom: 7,
-    visible: true,
-    name: 'truck2015',
-    showLayers: [9]
-});
-
 map.addLayer(wisDotRegions.olLayer);
-map.addLayer(truckSpeed2014.olLayer);
-map.addLayer(truckSpeed2015.olLayer);
-map.addLayer(metamanagerSegments.olLayer);
 
-swiper.addLeftLayer(wisDotRegions);
-swiper.addRightLayer(metamanagerSegments);
+(0, _jquery2.default)('#make-report').click(function () {
+    console.log('here');
+    map.once('postcompose', function (event) {
+        var canvas = event.context.canvas;
+        // console.log(canvas.toDataURL('image/png'));
+        var g = canvas.toDataURL('image/png');
+        console.log(g.length);
+    });
+    map.renderSync();
+    console.log('here');
+});
 
-swiper.addLeftLayer(truckSpeed2014);
-swiper.addRightLayer(truckSpeed2015);
+//
+//
+//
+//
+// let wisDotRegions = new LayerEsriMapServer(
+//     'http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/Metamanager_regions/MapServer',
+//     {
+//         minZoom: 6,
+//         maxZoom: 12,
+//         name: 'WisDOT Regions',
+//         useEsriStyle: true
+//     });
+//
 
-},{"../src/layers/LayerEsriMapServer":4,"../src/olHelpers/layerSwipe":6,"../src/olHelpers/quickMap":13}]},{},[21])
+},{"../src/jquery/jquery":2,"../src/layers/LayerEsriMapServer":4,"../src/olHelpers/quickMap":12}]},{},[20])
 
 
-//# sourceMappingURL=compare-test.js.map
+//# sourceMappingURL=export-test.js.map

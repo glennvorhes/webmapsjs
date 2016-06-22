@@ -54,7 +54,12 @@ class LayerBase {
         this._visible = typeof options.visible === 'boolean' ? options.visible : true;
         
         this._source = undefined;
-        this.olLayer = undefined;
+
+        /**
+         * 
+         * @protected
+         */
+        this._olLayer = undefined;
         this._loaded = false;
 
         this._maxResolution = zoomResolutionConvert.zoomToResolution(options.minZoom);
@@ -353,6 +358,14 @@ class LayerBase {
     set zIndex(newZ){
         this._zIndex = newZ;
         this.olLayer.setZIndex(this.zIndex);
+    }
+
+    /**
+     * 
+     * @returns {ol.layer.Base|undefined} the ol layer
+     */
+    get olLayer(){
+        return this._olLayer;
     }
 }
 
