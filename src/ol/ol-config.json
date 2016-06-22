@@ -68,6 +68,8 @@
     "ol.Map#removeInteraction",
     "ol.Map#beforeRender",
     "ol.Map#addControl",
+    "ol.Map#once",
+    "ol.Map#renderSync",
     "ol.source.Vector",
     "ol.source.Vector#getFeatures",
     "ol.source.Vector#getExtent",
