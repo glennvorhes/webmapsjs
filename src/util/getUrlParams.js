@@ -2,7 +2,7 @@
  * Created by gavorhes on 6/23/2016.
  */
 import provide from './provide';
-nm = provide('util');
+let nm = provide('util');
 
 /**
  *
