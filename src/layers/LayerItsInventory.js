@@ -114,7 +114,12 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
             }
 
             return [new ol.style.Style({
-                image: new ol.style.Icon({src: iconUrl})
+                image: new ol.style.Icon(
+                    {
+                        src: iconUrl,
+                        crossOrigin: 'anonymous'
+                    }
+                )
             })];
         };
     } else if (itsLineConfig) {
@@ -280,7 +285,7 @@ class LayerItsInventory extends LayerBaseVectorGeoJson {
         $.extend(options.params, {format: 'JSON', resource: options.itsType});
 
         super('http://transportal.cee.wisc.edu/its/inventory/', options);
-        
+
         //add any additional content to the legend
         this.addLegendContent(addToLegend);
 
