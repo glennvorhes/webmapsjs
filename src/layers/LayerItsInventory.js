@@ -90,7 +90,12 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
 
     if (itsIcon) {
         return new ol.style.Style({
-            image: new ol.style.Icon({src: _iconUrlRoot + itsIcon})
+            image: new ol.style.Icon(
+                {
+                    src: _iconUrlRoot + itsIcon,
+                    crossOrigin: 'anonymous'
+                }
+            )
         });
     } else if (itsLineStyle) {
         return new ol.style.Style({

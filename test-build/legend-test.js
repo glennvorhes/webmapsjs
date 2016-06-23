@@ -18916,7 +18916,10 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
 
     if (itsIcon) {
         return new _ol2.default.style.Style({
-            image: new _ol2.default.style.Icon({ src: _iconUrlRoot + itsIcon })
+            image: new _ol2.default.style.Icon({
+                src: _iconUrlRoot + itsIcon,
+                crossOrigin: 'anonymous'
+            })
         });
     } else if (itsLineStyle) {
         return new _ol2.default.style.Style({
@@ -18940,7 +18943,10 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
             }
 
             return [new _ol2.default.style.Style({
-                image: new _ol2.default.style.Icon({ src: iconUrl })
+                image: new _ol2.default.style.Icon({
+                    src: iconUrl,
+                    crossOrigin: 'anonymous'
+                })
             })];
         };
     } else if (itsLineConfig) {
