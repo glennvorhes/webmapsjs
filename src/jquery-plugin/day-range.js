@@ -1,5 +1,5 @@
 import $ from '../jquery/jquery';
-require('jquery-ui/datepicker');
+import '../jquery/jquery-ui';
 import provide from '../util/provide';
 let nm = provide('jQueryPlugin');
 
