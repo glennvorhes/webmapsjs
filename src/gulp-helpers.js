@@ -53,6 +53,8 @@ function _processOutDir(outputFile) {
 export function bundleEs2015(inputFile, outFile, production) {
     "use strict";
 
+
+
     if (typeof outFile == 'string') {
         outFile = _processOutDir(outFile);
     }
@@ -84,6 +86,7 @@ export function bundleEs2015(inputFile, outFile, production) {
 
 
     function runBundle() {
+        console.log(inputFile);
         let stream = bundler.bundle()
             .on('error', function (err) {
                 console.error(err);
