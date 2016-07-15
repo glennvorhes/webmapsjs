@@ -5,6 +5,8 @@
 
 import $ from '../src/jquery/jquery';
 import  '../src/jquery/jquery-ui';
+
+import '../src/jquery-plugin/day-range';
 //
 // // require('jquery-ui/accordion');
 //
@@ -15,7 +17,7 @@ import  '../src/jquery/jquery-ui';
 //
 //
 let acc = $("#accordion").accordion();
+$('#cat').dayRange(10);
 // glob.acc = acc;
-// console.log(acc);
-
+console.log(acc);
 
