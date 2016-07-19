@@ -39946,7 +39946,7 @@ var ItsLayerCollection = function () {
 nm.ItsLayerCollection = ItsLayerCollection;
 exports.default = ItsLayerCollection;
 
-},{"../layers/LayerItsInventory":351,"../util/colors":366,"../util/provide":368}],342:[function(require,module,exports){
+},{"../layers/LayerItsInventory":352,"../util/colors":367,"../util/provide":369}],342:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -40402,7 +40402,7 @@ var LayerLegend = function () {
 nm.LayerLegend = LayerLegend;
 exports.default = LayerLegend;
 
-},{"../jquery/jquery":345,"../olHelpers/mapMove":355,"../util/makeGuid":367,"../util/provide":368}],343:[function(require,module,exports){
+},{"../jquery/jquery":346,"../olHelpers/mapMove":356,"../util/makeGuid":368,"../util/provide":369}],343:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41020,7 +41020,144 @@ nm.Sliders = Sliders;
 window.gv['collections'].Sliders = Sliders;
 exports.default = Sliders;
 
-},{"../jquery/jquery":345,"../util/provide":368}],344:[function(require,module,exports){
+},{"../jquery/jquery":346,"../util/provide":369}],344:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+}();
+
+var _jquery = require('../jquery/jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+require('../jquery/jquery-ui');
+
+var _provide = require('../util/provide');
+
+var _provide2 = _interopRequireDefault(_provide);
+
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : { default: obj };
+}
+
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+    }
+}
+
+var nm = (0, _provide2.default)('jQueryPlugin');
+
+var DayRange = function () {
+
+    /**
+     * constructor for the date range
+     * @param {number} dayRange number of days
+     * @param {jQuery} jQueryRef reference to the jquery element
+     */
+
+    function DayRange(dayRange, jQueryRef) {
+        _classCallCheck(this, DayRange);
+
+        this._workingDayRange = dayRange - 1;
+
+        var pickerHtml = '<label for="start-date" style="width: 78px; display: inline-block; margin:5px;">Start Date</label>' + '<input type="text" readonly id="start-date" class="date-pick"  style="width: 90px;">' + '<br><label for="end-date" style="width: 78px; display: inline-block;  margin:5px;">End Date</label>' + '<input type="text" readonly id="end-date" class="date-pick" style="width: 90px;">';
+
+        jQueryRef.append(pickerHtml);
+
+        this._$startDate = (0, _jquery2.default)('#start-date');
+        this._$endDate = (0, _jquery2.default)('#end-date');
+
+        this._$startDate.datepicker();
+        this._$endDate.datepicker();
+
+        this._startDate = null;
+        this._endDate = null;
+
+        var dte1 = new Date();
+        dte1.setHours(0, 0, 0, 0);
+        var dte2 = new Date(dte1.getTime());
+        dte2.setDate(dte2.getDate() + dayRange);
+        dte2.setHours(23, 59, 59, 0);
+        this._maxDateRange = dte2 - dte1;
+
+        var _this = this;
+
+        //add event listeners
+        this._$startDate.change(function () {
+            _this.startDate = this.value;
+        });
+
+        this._$endDate.change(function () {
+            _this.endDate = this.value;
+        });
+
+        // initialize
+        this.endDate = new Date().getTime();
+    }
+
+    _createClass(DayRange, [{
+        key: 'startDate',
+        get: function get() {
+            return this._startDate;
+        },
+        set: function set(val) {
+            this._startDate = new Date(val);
+            this._startDate.setHours(0, 0, 0, 0);
+            this._$startDate.val(this._startDate.toLocaleDateString());
+
+            if (this.endDate == null || this._endDate - this._startDate > this._maxDateRange || this._endDate.getTime() - this._startDate.getTime() < 24 * 60 * 60 * 1000) {
+                var tmpDate = new Date(this._startDate.getTime());
+                tmpDate.setDate(tmpDate.getDate() + this._workingDayRange);
+                this.endDate = tmpDate.getTime();
+            }
+        }
+    }, {
+        key: 'endDate',
+        get: function get() {
+            return this._endDate;
+        },
+        set: function set(val) {
+            this._endDate = new Date(val);
+            this._endDate.setHours(23, 59, 59, 0);
+            this._$endDate.val(this._endDate.toLocaleDateString());
+            if (this._startDate == null || this._endDate - this.startDate > this._maxDateRange || this._endDate.getTime() - this._startDate.getTime() < 24 * 60 * 60 * 1000) {
+                var tmpDate = new Date(this._endDate.getTime());
+                tmpDate.setDate(tmpDate.getDate() - this._workingDayRange);
+                this.startDate = tmpDate.getTime();
+            }
+        }
+    }]);
+
+    return DayRange;
+}();
+
+nm.DayRange = DayRange;
+var jQuery = _jquery2.default;
+
+/**
+ * Adds day range control
+ * @param {number} dayRange the number of days
+ * @returns {DayRange} the day range object
+ */
+jQuery.fn.dayRange = function (dayRange) {
+    return new DayRange(dayRange, this);
+};
+
+exports.default = undefined;
+
+},{"../jquery/jquery":346,"../jquery/jquery-ui":345,"../util/provide":369}],345:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41034,7 +41171,7 @@ require('jquery-ui');
 
 exports.default = undefined;
 
-},{"jquery-ui":339}],345:[function(require,module,exports){
+},{"jquery-ui":339}],346:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41044,7 +41181,7 @@ var jQuery = require('jquery');
 
 exports.default = jQuery;
 
-},{"jquery":340}],346:[function(require,module,exports){
+},{"jquery":340}],347:[function(require,module,exports){
 'use strict';
 
 var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41542,7 +41679,7 @@ var LayerBase = function () {
 nm.LayerBase = LayerBase;
 exports.default = LayerBase;
 
-},{"../jquery/jquery":345,"../olHelpers/zoomResolutionConvert":362,"../util/makeGuid":367,"../util/provide":368}],347:[function(require,module,exports){
+},{"../jquery/jquery":346,"../olHelpers/zoomResolutionConvert":363,"../util/makeGuid":368,"../util/provide":369}],348:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41964,7 +42101,7 @@ var LayerBaseVector = function (_LayerBase) {
 nm.LayerBaseVector = LayerBaseVector;
 exports.default = LayerBaseVector;
 
-},{"../jquery/jquery":345,"../ol/ol":364,"../olHelpers/mapMove":355,"../util/provide":368,"./LayerBase":346}],348:[function(require,module,exports){
+},{"../jquery/jquery":346,"../ol/ol":365,"../olHelpers/mapMove":356,"../util/provide":369,"./LayerBase":347}],349:[function(require,module,exports){
 'use strict';
 
 var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -42263,7 +42400,7 @@ var LayerBaseVectorEsri = function (_LayerBaseVector) {
 nm.LayerBaseVectorEsri = LayerBaseVectorEsri;
 exports.default = LayerBaseVectorEsri;
 
-},{"../jquery/jquery":345,"../ol/ol":364,"../olHelpers/esriToOlStyle":352,"../util/provide":368,"./LayerBaseVector":347}],349:[function(require,module,exports){
+},{"../jquery/jquery":346,"../ol/ol":365,"../olHelpers/esriToOlStyle":353,"../util/provide":369,"./LayerBaseVector":348}],350:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -42455,7 +42592,7 @@ var LayerBaseVectorGeoJson = function (_LayerBaseVector) {
 nm.LayerBaseVectorGeoJson = LayerBaseVectorGeoJson;
 exports.default = LayerBaseVectorGeoJson;
 
-},{"../jquery/jquery":345,"../ol/ol":364,"../util/provide":368,"./LayerBaseVector":347}],350:[function(require,module,exports){
+},{"../jquery/jquery":346,"../ol/ol":365,"../util/provide":369,"./LayerBaseVector":348}],351:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -42746,7 +42883,7 @@ var LayerEsriMapServer = function (_LayerBase) {
 nm.LayerEsriMapServer = LayerEsriMapServer;
 exports.default = LayerEsriMapServer;
 
-},{"../jquery/jquery":345,"../ol/ol":364,"../olHelpers/esriToOlStyle":352,"../olHelpers/mapPopup":357,"../util/provide":368,"./LayerBase":346}],351:[function(require,module,exports){
+},{"../jquery/jquery":346,"../ol/ol":365,"../olHelpers/esriToOlStyle":353,"../olHelpers/mapPopup":358,"../util/provide":369,"./LayerBase":347}],352:[function(require,module,exports){
 'use strict';
 
 var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -43204,7 +43341,7 @@ var LayerItsInventory = function (_LayerBaseVectorGeoJs) {
 nm.LayerItsInventory = LayerItsInventory;
 exports.default = LayerItsInventory;
 
-},{"../jquery/jquery":345,"../ol/ol":364,"../olHelpers/mapPopup":357,"../util/provide":368,"./LayerBaseVectorGeoJson":349}],352:[function(require,module,exports){
+},{"../jquery/jquery":346,"../ol/ol":365,"../olHelpers/mapPopup":358,"../util/provide":369,"./LayerBaseVectorGeoJson":350}],353:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -43698,7 +43835,7 @@ function makeMapServiceLegend(esriResponse) {
 
 nm.makeMapServiceLegend = makeMapServiceLegend;
 
-},{"../ol/ol":364,"../util/provide":368}],353:[function(require,module,exports){
+},{"../ol/ol":365,"../util/provide":369}],354:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43891,7 +44028,7 @@ var LayerSwipe = function () {
 nm.LayerSwipe = LayerSwipe;
 exports.default = LayerSwipe;
 
-},{"../jquery/jquery":345,"../util/provide":368}],354:[function(require,module,exports){
+},{"../jquery/jquery":346,"../util/provide":369}],355:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44018,7 +44155,7 @@ var MapInteractionBase = function () {
 nm.MapInteractionBase = MapInteractionBase;
 exports.default = MapInteractionBase;
 
-},{"../util/provide":368}],355:[function(require,module,exports){
+},{"../util/provide":369}],356:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44041,7 +44178,7 @@ exports.default = new _mapMoveCls2.default(); /**
                                                * Created by gavorhes on 11/3/2015.
                                                */
 
-},{"./mapMoveCls":356}],356:[function(require,module,exports){
+},{"./mapMoveCls":357}],357:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -44431,7 +44568,7 @@ var MapMoveCls = function (_MapInteractionBase) {
 nm.MapMoveCls = MapMoveCls;
 exports.default = MapMoveCls;
 
-},{"../jquery/jquery":345,"../util/checkDefined":365,"../util/makeGuid":367,"../util/provide":368,"./mapInteractionBase":354}],357:[function(require,module,exports){
+},{"../jquery/jquery":346,"../util/checkDefined":366,"../util/makeGuid":368,"../util/provide":369,"./mapInteractionBase":355}],358:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44454,7 +44591,7 @@ exports.default = new _mapPopupCls2.default(); /**
                                                 * Created by gavorhes on 11/3/2015.
                                                 */
 
-},{"./mapPopupCls":358}],358:[function(require,module,exports){
+},{"./mapPopupCls":359}],359:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -45137,7 +45274,7 @@ var MapPopupCls = function (_MapInteractionBase) {
 nm.MapPopupCls = MapPopupCls;
 exports.default = MapPopupCls;
 
-},{"../jquery/jquery":345,"../ol/ol":364,"../olHelpers/propertiesZoomStyle":359,"../util/provide":368,"./mapInteractionBase":354}],359:[function(require,module,exports){
+},{"../jquery/jquery":346,"../ol/ol":365,"../olHelpers/propertiesZoomStyle":360,"../util/provide":369,"./mapInteractionBase":355}],360:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45200,7 +45337,7 @@ function propertiesZoomStyle(styleFunc) {
 nm.propertiesZoomStyle = propertiesZoomStyle;
 exports.default = propertiesZoomStyle;
 
-},{"../util/provide":368,"./zoomResolutionConvert":362}],360:[function(require,module,exports){
+},{"../util/provide":369,"./zoomResolutionConvert":363}],361:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45260,7 +45397,7 @@ function quickMap(options) {
 nm.quickMap = quickMap;
 exports.default = quickMap;
 
-},{"../util/provide":368,"./mapMove":355,"./mapPopup":357,"./quickMapBase":361}],361:[function(require,module,exports){
+},{"../util/provide":369,"./mapMove":356,"./mapPopup":358,"./quickMapBase":362}],362:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45381,7 +45518,7 @@ function quickMapBase(options) {
 nm.quickMapBase = quickMapBase;
 exports.default = quickMapBase;
 
-},{"../jquery/jquery":345,"../ol/ol":364,"../util/provide":368}],362:[function(require,module,exports){
+},{"../jquery/jquery":346,"../ol/ol":365,"../util/provide":369}],363:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45472,7 +45609,7 @@ function resolutionToZoom(resolution) {
 
 nm.resolutionToZoom = resolutionToZoom;
 
-},{"../util/provide":368}],363:[function(require,module,exports){
+},{"../util/provide":369}],364:[function(require,module,exports){
 // OpenLayers 3. See http://openlayers.org/
 // License: https://raw.githubusercontent.com/openlayers/ol3/master/LICENSE.md
 (function (root, factory) {
@@ -45875,7 +46012,7 @@ Tc.prototype.getExtent=Tc.prototype.C;Tc.prototype.transform=Tc.prototype.o;E("o
 }));
 
 
-},{}],364:[function(require,module,exports){
+},{}],365:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45885,7 +46022,7 @@ var ol = require('./ol-build');
 
 exports.default = ol;
 
-},{"./ol-build":363}],365:[function(require,module,exports){
+},{"./ol-build":364}],366:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45933,7 +46070,7 @@ function definedAndNotNull(input) {
 
 nm.definedAndNotNull = definedAndNotNull;
 
-},{"./provide":368}],366:[function(require,module,exports){
+},{"./provide":369}],367:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -46141,7 +46278,7 @@ function makeBlueGreenRedGradientZScore(median, stdDev, flipColors) {
 
 nm.makeBlueGreenRedGradientZScore = makeBlueGreenRedGradientZScore;
 
-},{"./checkDefined":365,"./provide":368}],367:[function(require,module,exports){
+},{"./checkDefined":366,"./provide":369}],368:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -46177,7 +46314,7 @@ function makeGuid() {
 nm.makeGuid = makeGuid;
 exports.default = makeGuid;
 
-},{"./provide":368}],368:[function(require,module,exports){
+},{"./provide":369}],369:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -46220,7 +46357,7 @@ window.gv.util.provide = provide;
 
 exports.default = provide;
 
-},{}],369:[function(require,module,exports){
+},{}],370:[function(require,module,exports){
 'use strict';
 
 var _quickMap = require('../src/olHelpers/quickMap');
@@ -46283,7 +46420,7 @@ swiper.addRightLayer(metamanagerSegments);
 swiper.addLeftLayer(truckSpeed2014);
 swiper.addRightLayer(truckSpeed2015);
 
-},{"../src/layers/LayerEsriMapServer":350,"../src/olHelpers/layerSwipe":353,"../src/olHelpers/quickMap":360}],370:[function(require,module,exports){
+},{"../src/layers/LayerEsriMapServer":351,"../src/olHelpers/layerSwipe":354,"../src/olHelpers/quickMap":361}],371:[function(require,module,exports){
 'use strict';
 
 var _jquery = require('../src/jquery/jquery');
@@ -46341,7 +46478,7 @@ map.addLayer(wisDotRegions.olLayer);
 //     });
 //
 
-},{"../src/jquery/jquery":345,"../src/layers/LayerEsriMapServer":350,"../src/olHelpers/quickMap":360}],371:[function(require,module,exports){
+},{"../src/jquery/jquery":346,"../src/layers/LayerEsriMapServer":351,"../src/olHelpers/quickMap":361}],372:[function(require,module,exports){
 'use strict';
 
 var _jquery = require('../src/jquery/jquery');
@@ -46350,8 +46487,10 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 require('../src/jquery/jquery-ui');
 
+require('../src/jquery-plugin/day-range');
+
 function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
+                                                            return obj && obj.__esModule ? obj : { default: obj };
 }
 
 //
@@ -46363,15 +46502,15 @@ function _interopRequireDefault(obj) {
 // console.log($);
 //
 //
-/**
- * Created by gavorhes on 5/23/2016.
- */
+var acc = (0, _jquery2.default)("#accordion").accordion(); /**
+                                                            * Created by gavorhes on 5/23/2016.
+                                                            */
 
-var acc = (0, _jquery2.default)("#accordion").accordion();
+(0, _jquery2.default)('#cat').dayRange(10);
 // glob.acc = acc;
-// console.log(acc);
+console.log(acc);
 
-},{"../src/jquery/jquery":345,"../src/jquery/jquery-ui":344}],372:[function(require,module,exports){
+},{"../src/jquery-plugin/day-range":344,"../src/jquery/jquery":346,"../src/jquery/jquery-ui":345}],373:[function(require,module,exports){
 'use strict';
 
 require('babel-polyfill');
@@ -46469,7 +46608,7 @@ var layerArray = [{
 
 var legend = new _LayerLegend2.default(layerArray, 'legend-container', {});
 
-},{"../src/collections/ItsLayerCollection":341,"../src/collections/LayerLegend":342,"../src/layers/LayerBaseVectorGeoJson":349,"../src/layers/LayerEsriMapServer":350,"../src/layers/LayerItsInventory":351,"../src/olHelpers/quickMap":360,"babel-polyfill":1}],373:[function(require,module,exports){
+},{"../src/collections/ItsLayerCollection":341,"../src/collections/LayerLegend":342,"../src/layers/LayerBaseVectorGeoJson":350,"../src/layers/LayerEsriMapServer":351,"../src/layers/LayerItsInventory":352,"../src/olHelpers/quickMap":361,"babel-polyfill":1}],374:[function(require,module,exports){
 'use strict';
 
 var _Sliders = require('../src/collections/Sliders');
@@ -46493,7 +46632,7 @@ for (var i = 0; i < sliderParamArray.length; i++) {
 
 var sliders = new _Sliders2.default(sliderParamArray, 'slider-container');
 
-},{"../src/collections/Sliders":343}],374:[function(require,module,exports){
+},{"../src/collections/Sliders":343}],375:[function(require,module,exports){
 'use strict';
 
 var _quickMap = require('../src/olHelpers/quickMap');
@@ -46568,7 +46707,7 @@ describe('karma test with 2', function () {
   });
 });
 
-},{"../src/layers/LayerBaseVectorEsri":348,"../src/olHelpers/quickMap":360,"chai":303}],375:[function(require,module,exports){
+},{"../src/layers/LayerBaseVectorEsri":349,"../src/olHelpers/quickMap":361,"chai":303}],376:[function(require,module,exports){
 'use strict';
 
 var _quickMap = require('../src/olHelpers/quickMap');
@@ -46637,7 +46776,7 @@ describe('karma test with 2adfaasdf', function () {
   });
 });
 
-},{"../src/olHelpers/quickMap":360,"chai":303}]},{},[369,370,371,372,373,374,375])
+},{"../src/olHelpers/quickMap":361,"chai":303}]},{},[370,371,372,373,374,375,376])
 
 
 //# sourceMappingURL=test-bundle.js.map
