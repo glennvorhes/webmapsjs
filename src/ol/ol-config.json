@@ -8,6 +8,7 @@
     "ol.format.EsriJSON#readFeature",
     "ol.style.Style",
     "ol.style.Circle",
+    "ol.style.RegularShape",
     "ol.style.Fill",
     "ol.style.Stroke",
     "ol.style.Icon",
