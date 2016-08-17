@@ -12,6 +12,7 @@
     "ol.style.Fill",
     "ol.style.Stroke",
     "ol.style.Icon",
+    "ol.style.Text",
     "ol.View",
     "ol.View#on",
     "ol.View#getZoom",
