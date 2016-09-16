@@ -98,5 +98,5 @@ jQuery.fn.dayRange = function (dayRange) {
     return new DayRange(dayRange, this);
 };
 
-export default undefined;
+export default DayRange;
 
