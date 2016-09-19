@@ -10,7 +10,7 @@ class DayRange {
     /**
      * constructor for the date range
      * @param {number} dayRange number of days
-     * @param {jQuery} jQueryRef reference to the jquery element
+     * @param {jQuery|HTMLElement|*} jQueryRef reference to the jquery element
      */
     constructor(dayRange, jQueryRef) {
         this._workingDayRange = dayRange - 1;
