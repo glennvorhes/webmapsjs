@@ -4,11 +4,17 @@ import * as checkDefined from '../util/checkDefined';
 import provide from '../util/provide';
 import makeGuid from '../util/makeGuid';
 import {ol} from 'custom-ol'
-import {extentObject} from '../_internalnterfaces'
 import Timer = NodeJS.Timer;
 const $ = require('jquery');
 const nm = provide('olHelpers');
 
+
+export interface extentObject{
+    minX: number;
+    minY: number;
+    maxX: number;
+    maxY: number;
+}
 
 export interface mapMoveCallbackFunction{
     /**

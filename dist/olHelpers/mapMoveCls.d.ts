@@ -1,8 +1,13 @@
 import LayerBaseVector from "../layers/LayerBaseVector";
 import MapInteractionBase from './mapInteractionBase';
 import { ol } from 'custom-ol';
-import { extentObject } from '../_internalnterfaces';
 import Timer = NodeJS.Timer;
+export interface extentObject {
+    minX: number;
+    minY: number;
+    maxX: number;
+    maxY: number;
+}
 export interface mapMoveCallbackFunction {
     /**
      *
