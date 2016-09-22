@@ -1,0 +1,13 @@
+{
+  "sourceMaps": true,
+  "presets": [
+    "latest"
+  ],
+  "ignore": [
+    "src\\ol\\ol-build.js",
+    "node_modules/**/*/js"
+  ],
+  "plugins": [
+
+  ]
+}

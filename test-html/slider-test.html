@@ -6,25 +6,58 @@
     <link rel="stylesheet" href="../css/all-ol-style.css">
     <link rel="stylesheet" href="../css/layer-swipe.css">
     <style>
-        body, html{
-            height:100%;
+        body, html {
+            height: 100%;
             width: 100%;
             margin: 0;
             padding: 20px;
             background-color: gray;
         }
 
-        #map{
-            height:80%;
+        #map {
+            height: 80%;
             width: 100%;
+        }
+
+        .percent-label{
+            margin-left: 20px;
         }
 
     </style>
 </head>
 <body>
-<div id="slider-container"></div>
+<div style="display: flex; height: 100%">
+    <div id="slider-container"></div>
+    <div>
+        <ul>
+            <li>
+                <select id="preset-selector">
+                    <option value="0" disabled>Custom</option>
+                </select>
+            </li>
+            <li><select id="region-selector">
+                    <option value="all" selected="">Viewable Extent</option>
+                    <option value="SE">Southeast</option>
+                    <option value="SW">Southwest</option>
+                    <option value="NW">Northwest</option>
+                    <option value="NC">North Central</option>
+                    <option value="NE">Northeast</option>
+                </select></select></li>
+            <li>
+                <select id="version-selector">
+                <option value="May 2016">May 2016</option>
+                <option value="December 2015">December 2015</option>
+                <option value="April 2015">April 2015</option>
+                <option value="April 2014">April 2014</option>
+                <option value="April 2013">April 2013</option>
+            </select>
+            </li>
+        </ul>
+    </div>
+</div>
+
 <!--<button id="make-report">export</button>-->
-<script src="../test-build/slider-test.js"></script>
+<script src="test_build/slider-test.js"></script>
 
 </body>
 </html>
