@@ -18,7 +18,7 @@ export interface TipPresetConfig {
 }
 
 export interface ChangeResponse{
-    paramWeights: {[s:string]: number}
+    paramWeights: Object;
     region: string;
     mmVersion: string;
 }
@@ -282,12 +282,12 @@ export class TipSliders {
     private _atMinList: Array<_Slider>;
     private _atMaxList: Array<_Slider>;
 
-    _presetArray: Array<TipPresets>;
-    _presetLookup: {[s: string]: TipPresets};
+    private _presetArray: Array<TipPresets>;
+    private _presetLookup: {[s: string]: TipPresets};
 
-    _$presetSelector: JQuery;
-    _$regionSelector: JQuery;
-    _$versionSelector: JQuery;
+    private _$presetSelector: JQuery;
+    private _$regionSelector: JQuery;
+    private _$versionSelector: JQuery;
 
     /**
      *
@@ -624,7 +624,7 @@ export class TipSliders {
 
     get paramWeightsRegionVersion(): ChangeResponse{
         return {paramWeights: this.getParams(),
-            region: this._$regionSelector.val(), mmVersion: this._$versionSelector.val()}
+            region: this._$regionSelector.val() as string, mmVersion: this._$versionSelector.val() as string}
     }
 }
 

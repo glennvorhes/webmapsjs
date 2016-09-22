@@ -12,10 +12,18 @@ export interface TipPresetConfig {
         value: number;
     }>;
 }
+export interface ChangeResponse {
+    paramWeights: Object;
+    region: string;
+    mmVersion: string;
+}
+export interface ChangeCallback {
+    (chg: ChangeResponse): any;
+}
 /**
  * class to keep track of the sliders
  */
-export declare class Sliders {
+export declare class TipSliders {
     $container: JQuery;
     reservedPercent: number;
     total: number;
@@ -23,20 +31,29 @@ export declare class Sliders {
     notLockedCount: number;
     private _sliderList;
     private _sliderLookup;
-    resetting: boolean;
+    private resetting;
+    changedCallback: ChangeCallback;
     private _lockedList;
     private _inRangeList;
     private _atMinList;
     private _atMaxList;
-    _slideFinishedFunctions: Array<Function>;
+    private _presetArray;
+    private _presetLookup;
+    private _$presetSelector;
+    private _$regionSelector;
+    private _$versionSelector;
     /**
      *
      * @param sliderConfigs
      * @param presetConfig
      * @param divId
+     * @param presetSelectorId
+     * @param regionSelectorId
+     * @param versionSelectorId
      */
-    constructor(sliderConfigs: Array<TipSliderConfig>, presetConfig: Array<TipPresetConfig>, divId: string);
-    addSlideFinishedFunction(finishedFunction: any): void;
+    constructor(sliderConfigs: Array<TipSliderConfig>, presetConfig: Array<TipPresetConfig>, divId: string, presetSelectorId: string, regionSelectorId: string, versionSelectorId: string, chgCallback?: ChangeCallback);
+    _runChangedCallback(): void;
+    setPresetValues(): void;
     /**
      * split array into subarrays holding the sliders
      * @private
@@ -49,10 +66,6 @@ export declare class Sliders {
      * @private
      */
     _handleRemainder(remain: any, skipDomId: any): void;
-    /**
-     * reset all
-     */
-    reset(): void;
     /**
      *
      * @param {object} keyValList key and value list
@@ -69,5 +82,6 @@ export declare class Sliders {
      */
     getParams(): {};
     _addEventListeners(): void;
+    paramWeightsRegionVersion: ChangeResponse;
 }
-export default Sliders;
+export default TipSliders;
