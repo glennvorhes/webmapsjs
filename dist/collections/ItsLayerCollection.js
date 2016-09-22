@@ -149,6 +149,7 @@ var ItsLayerCollection = (function () {
     });
     return ItsLayerCollection;
 }());
+exports.ItsLayerCollection = ItsLayerCollection;
 nm.ItsLayerCollection = ItsLayerCollection;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = ItsLayerCollection;

@@ -99,7 +99,7 @@ let itsConfig = [
 ];
 
 
-class ItsLayerCollection {
+export class ItsLayerCollection {
     _map: ol.Map;
     _layers: Array<LayerItsInventory>;
 

@@ -1,6 +1,6 @@
 import { ol } from 'custom-ol';
 import LayerItsInventory from "../layers/LayerItsInventory";
-declare class ItsLayerCollection {
+export declare class ItsLayerCollection {
     _map: ol.Map;
     _layers: Array<LayerItsInventory>;
     /**
