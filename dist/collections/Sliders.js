@@ -220,6 +220,7 @@ var TipSliders = (function () {
      * @param presetSelectorId
      * @param regionSelectorId
      * @param versionSelectorId
+     * @param chgCallback
      */
     function TipSliders(sliderConfigs, presetConfig, divId, presetSelectorId, regionSelectorId, versionSelectorId, chgCallback) {
         var _this = this;
@@ -227,7 +228,7 @@ var TipSliders = (function () {
         this.reservedPercent = 0.0;
         this.$container = $('#' + divId);
         this.$container.addClass('slider-container');
-        this.changedCallback = typeof chgCallback == 'function' ? chgCallback : function () { };
+        this._changedCallback = typeof chgCallback == 'function' ? chgCallback : function () { };
         this._$presetSelector = $('#' + presetSelectorId);
         this._$regionSelector = $('#' + regionSelectorId);
         this._$versionSelector = $('#' + versionSelectorId);
@@ -269,8 +270,19 @@ var TipSliders = (function () {
         this._addEventListeners();
     }
     TipSliders.prototype._runChangedCallback = function () {
-        this.changedCallback(this.paramWeightsRegionVersion);
+        this._changedCallback(this.paramWeightsRegionVersion);
     };
+    Object.defineProperty(TipSliders.prototype, "changedCallback", {
+        get: function () {
+            return this._changedCallback;
+        },
+        set: function (chg) {
+            this._changedCallback = chg;
+            this._runChangedCallback();
+        },
+        enumerable: true,
+        configurable: true
+    });
     TipSliders.prototype.setPresetValues = function () {
         var thePreset = this._presetLookup[this._$presetSelector.val()];
         for (var i = 0; i < thePreset.presets.length; i++) {

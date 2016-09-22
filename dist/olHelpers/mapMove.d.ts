@@ -2,5 +2,9 @@
  * Created by gavorhes on 11/3/2015.
  */
 import MapMoveCls from './mapMoveCls';
-declare var _default: MapMoveCls;
-export default _default;
+/**
+ * The single map move object catch is that it is common to multimap pages
+ * @type {MapMoveCls}
+ */
+export declare const mapMove: MapMoveCls;
+export default mapMove;

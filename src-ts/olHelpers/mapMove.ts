@@ -8,4 +8,6 @@ import MapMoveCls from './mapMoveCls';
  * The single map move object catch is that it is common to multimap pages
  * @type {MapMoveCls}
  */
-export default new MapMoveCls();
+
+export const mapMove = new MapMoveCls();
+export default mapMove;

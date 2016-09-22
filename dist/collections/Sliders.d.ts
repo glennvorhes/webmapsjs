@@ -32,7 +32,7 @@ export declare class TipSliders {
     private _sliderList;
     private _sliderLookup;
     private resetting;
-    changedCallback: ChangeCallback;
+    private _changedCallback;
     private _lockedList;
     private _inRangeList;
     private _atMinList;
@@ -50,9 +50,11 @@ export declare class TipSliders {
      * @param presetSelectorId
      * @param regionSelectorId
      * @param versionSelectorId
+     * @param chgCallback
      */
     constructor(sliderConfigs: Array<TipSliderConfig>, presetConfig: Array<TipPresetConfig>, divId: string, presetSelectorId: string, regionSelectorId: string, versionSelectorId: string, chgCallback?: ChangeCallback);
     _runChangedCallback(): void;
+    changedCallback: ChangeCallback;
     setPresetValues(): void;
     /**
      * split array into subarrays holding the sliders

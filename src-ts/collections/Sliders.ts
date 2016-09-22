@@ -275,7 +275,7 @@ export class TipSliders {
     private _sliderList: Array<_Slider>;
     private _sliderLookup: {[s: string]: _Slider};
     private resetting: boolean;
-    public changedCallback: ChangeCallback;
+    private _changedCallback: ChangeCallback;
 
     private _lockedList: Array<_Slider>;
     private _inRangeList: Array<_Slider>;
@@ -297,6 +297,7 @@ export class TipSliders {
      * @param presetSelectorId
      * @param regionSelectorId
      * @param versionSelectorId
+     * @param chgCallback
      */
     constructor(sliderConfigs: Array<TipSliderConfig>, presetConfig: Array<TipPresetConfig>,
                 divId: string, presetSelectorId: string, regionSelectorId: string, versionSelectorId: string,
@@ -306,7 +307,7 @@ export class TipSliders {
         this.$container = $('#' + divId);
         this.$container.addClass('slider-container');
 
-        this.changedCallback = typeof chgCallback == 'function' ? chgCallback : () => {};
+        this._changedCallback = typeof chgCallback == 'function' ? chgCallback : () => {};
 
         this._$presetSelector = $('#' + presetSelectorId);
         this._$regionSelector = $('#' + regionSelectorId);
@@ -366,7 +367,16 @@ export class TipSliders {
     }
 
     _runChangedCallback(){
-        this.changedCallback(this.paramWeightsRegionVersion);
+        this._changedCallback(this.paramWeightsRegionVersion);
+    }
+
+    get changedCallback(): ChangeCallback{
+        return this._changedCallback
+    }
+
+    set changedCallback(chg: ChangeCallback){
+        this._changedCallback = chg;
+        this._runChangedCallback();
     }
 
     setPresetValues() {
