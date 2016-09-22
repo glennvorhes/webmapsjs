@@ -17,7 +17,7 @@ export interface popupCallback {
      * @param featureProperties
      * @param jqRef
      */
-    (featureProperties: Object, jqRef: JQuery): string | boolean;
+    (featureProperties: Object, jqRef?: JQuery): string | boolean;
 }
 export declare class FeatureLayerProperties {
     feature: ol.Feature;
