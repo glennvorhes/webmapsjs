@@ -1,0 +1,10 @@
+{
+  "name": "webmapsjs",
+  "dependencies": {},
+  "globalDependencies": {
+    "react": "registry:dt/react#0.14.0+20160920055104"
+  },
+  "globalDevDependencies": {
+    "react": "registry:dt/react#0.14.0+20160920055104"
+  }
+}
