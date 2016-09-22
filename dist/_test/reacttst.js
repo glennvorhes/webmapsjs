@@ -1,7 +1,7 @@
 /**
  * Created by gavorhes on 9/22/2016.
  */
-"use strict";
+// import * as React from "react";
 // import * as ReactDOM from "react/lib/";
 //
 // import { Hello } from "../_scratch/Hello";

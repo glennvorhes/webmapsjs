@@ -1,5 +1,3 @@
-/// <reference path="../../definitions/jquery.d.ts" />
-/// <reference path="../../definitions/node.d.ts" />
 
 
 import {LayerBase, LayerBaseOptions} from './LayerBase';

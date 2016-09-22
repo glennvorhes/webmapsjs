@@ -1,4 +1,3 @@
-///// /// <reference path="../../definitions/openlayers.d.ts"/>
 import LayerBaseVector from "../layers/LayerBaseVector";
 import MapInteractionBase from './mapInteractionBase';
 import * as checkDefined from '../util/checkDefined';

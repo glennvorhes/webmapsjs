@@ -10,5 +10,10 @@
     "sourceMap": true,
     "jsx": "react"
   },
-  "exclude": ["node_modules", "ts-lib", "lib-ts", "definitions", "dist"]
+  "exclude": [
+    "node_modules", "dist", "typings"
+  ],
+  "include": [
+     "src-ts/**/*"
+  ]
 }

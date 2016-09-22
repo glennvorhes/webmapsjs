@@ -2,7 +2,7 @@
  * Created by gavorhes on 9/22/2016.
  */
 
-import * as React from "react";
+// import * as React from "react";
 // import * as ReactDOM from "react/lib/";
 //
 // import { Hello } from "../_scratch/Hello";
@@ -14,3 +14,4 @@ import * as React from "react";
 //     document.getElementById("example")
 // );
 //
+
