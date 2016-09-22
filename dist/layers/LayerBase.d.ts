@@ -1,5 +1,3 @@
-/// <reference path="../../definitions/jquery.d.ts" />
-/// <reference path="../../definitions/node.d.ts" />
 import { ol } from 'custom-ol';
 export interface LayerBaseOptions {
     id?: string;

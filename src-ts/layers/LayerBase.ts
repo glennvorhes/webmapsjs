@@ -1,10 +1,7 @@
-/// <reference path="../../definitions/jquery.d.ts" />
-/// <reference path="../../definitions/node.d.ts" />
-const $ = require('jquery');
-import makeGuid from '../util/makeGuid';
 import * as zoomResolutionConvert from '../olHelpers/zoomResolutionConvert';
 import provide from '../util/provide';
 import {ol} from 'custom-ol';
+import makeGuid from '../util/makeGuid';
 const nm = provide('layers');
 
 
