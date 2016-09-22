@@ -11,9 +11,10 @@
     "jsx": "react"
   },
   "exclude": [
-    "node_modules", "dist", "typings"
+    "node_modules", "dist"
   ],
   "include": [
-     "src-ts/**/*"
+     "src-ts/**/*",
+     "typings/globals/**/*"
   ]
 }

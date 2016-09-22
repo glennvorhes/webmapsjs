@@ -1,5 +1,3 @@
-/// <reference path="../../definitions/jquery.d.ts"/>
-
 /**
  * Created by gavorhes on 11/3/2015.
  */

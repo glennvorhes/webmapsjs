@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/olHelpers/mapPopupCls.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/glennvorhes/webmapsjs.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-bundleEs2015Multiple">bundleEs2015Multiple</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-processLessFile">processLessFile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-dirNameFilePath">dirNameFilePath</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">collections</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/ItsLayerCollection.js~ItsLayerCollection.html">ItsLayerCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/LayerLegend.js~LayerLegend.html">LayerLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/Sliders.js~Sliders.html">Sliders</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">domUtil</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/domUtil/SelectBoxBase.js~SelectBoxBase.html">SelectBoxBase</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">jquery</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-overflowScroll">overflowScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-responsiveScroll">responsiveScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-windowScroll">windowScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-jQuery">jQuery</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">jquery-plugin</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/jquery-plugin/day-range.js~DayRange.html">DayRange</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">layers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBase.js~LayerBase.html">LayerBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVector.js~LayerBaseVector.html">LayerBaseVector</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVectorEsri.js~LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVectorGeoJson.js~LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseXyzTile.js~LayerBaseXyzTile.html">LayerBaseXyzTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerEsriMapServer.js~LayerEsriMapServer.html">LayerEsriMapServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerEsriTile.js~LayerEsriTile.html">LayerEsriTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerItsInventory.js~LayerItsInventory.html">LayerItsInventory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerRealEarthTile.js~LayerRealEarthTile.html">LayerRealEarthTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerRealEarthVector.js~LayerVectorRealEarth.html">LayerVectorRealEarth</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">mixin</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimate.js~RealEarthAnimate.html">RealEarthAnimate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimateTile.js~RealEarthAnimateTile.html">RealEarthAnimateTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimateVector.js~RealEarthAnimateVector.html">RealEarthAnimateVector</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">ol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ol">ol</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">olHelpers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/SortedFeatures.js~SortedFeatures.html">SortedFeatures</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/layerSwipe.js~LayerSwipe.html">LayerSwipe</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapInteractionBase.js~MapInteractionBase.html">MapInteractionBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapMoveCls.js~MapMoveCls.html">MapMoveCls</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapPopupCls.js~MapPopupCls.html">MapPopupCls</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeMapServiceLegend">makeMapServiceLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-calculateExtent">calculateExtent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-fitToMap">fitToMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-propertiesZoomStyle">propertiesZoomStyle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMap">quickMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMapBase">quickMapBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMapMulti">quickMapMulti</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-resolutionToZoom">resolutionToZoom</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-zoomToResolution">zoomToResolution</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-styleAndLegend">styleAndLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-quickMapMultiReturn">quickMapMultiReturn</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-definedAndNotNull">definedAndNotNull</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-undefinedOrNull">undefinedOrNull</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-rgb2hex">rgb2hex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-rgbToRgba">rgbToRgba</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getUrlParams">getUrlParams</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeGuid">makeGuid</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-keyValPairs">keyValPairs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-provide">provide</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-colorLookupByNumber">colorLookupByNumber</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-keyValuePair">keyValuePair</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/olHelpers/mapPopupCls.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+import $ from &apos;../jquery/jquery&apos;;
+import MapInteractionBase from &apos;./mapInteractionBase&apos;;
+import propertiesZoomStyle from &apos;../olHelpers/propertiesZoomStyle&apos;;
+import provide from &apos;../util/provide&apos;;
+import ol from &apos;../ol/ol&apos;;
+
+
+const nm = provide(&apos;olHelpers&apos;);
+
+
+class _FeatureLayerProperties {
+
+    /**
+     *
+     * @param {ol.Feature} feature the feature
+     * @param {LayerBaseVector|*} layer - the layer in the popup
+     * @param {number} layerIndex - index of the layer
+     * @param {ol.layer.Vector} selectionLayer - the ol selection layer
+     * @param {string} [esriLayerName=undefined] - esri layer name
+     */
+    constructor(feature, layer, layerIndex, selectionLayer, esriLayerName) {
+        this.feature = feature;
+        this.layer = layer;
+        this.layerIndex = layerIndex;
+        this.selectionLayer = selectionLayer;
+        this.popupContent = &apos;&apos;;
+        this.esriLayerName = typeof esriLayerName == &apos;string&apos; ? esriLayerName : undefined;
+    }
+
+    get layerName() {
+        if (typeof this.esriLayerName == &apos;string&apos;) {
+            return this.esriLayerName;
+        } else {
+            return this.layer.name;
+        }
+    }
+}
+
+/**
+ * map popup class
+ * @augments MapInteractionBase
+ */
+class MapPopupCls extends MapInteractionBase {
+
+    /**
+     * Definition for openlayers style function
+     * @callback olStyleFunction
+     * &amp;param feature the openlayers vector feature
+     * $param
+     */
+
+    /**
+     * Definition for popup changed callback functions
+     * @callback popupChangedFunction
+     * @param $popContent jquery reference to the popup content
+     */
+
+    /**
+     * map popup constructor
+     */
+    constructor() {
+        super(&apos;map popup&apos;);
+        this._arrPopupLayerIds = [];
+        this._arrPopupLayerNames = [];
+        /**
+         *
+         * @type {Array&lt;LayerBaseVector&gt;}
+         * @private
+         */
+        this._arrPopupLayers = [];
+        this._arrPopupOlLayers = [];
+        this._arrPopupContentFunction = [];
+        this._$popupContainer = undefined;
+        this._$popupContent = undefined;
+        this._$popupCloser = undefined;
+        this._popupOverlay = undefined;
+        this._selectionLayers = [];
+        this._selectionLayerLookup = {};
+        this._mapClickFunctions = [];
+
+        //let a = function($jqueryContent){console.log($jqueryContent)};
+        //this._popupChangedLookup = {&apos;a&apos;: a};
+        this._popupChangedFunctions = [];
+        /**
+         *
+         * @type {Array&lt;LayerEsriMapServer&gt;}
+         * @private
+         */
+        this._esriMapServiceLayers = [];
+
+        this._popupOpen = false;
+        this._popupCoordinate = null;
+
+        /**
+         *
+         * @type {Array.&lt;_FeatureLayerProperties&gt;}
+         */
+        this._passThroughLayerFeatureArray = [];
+
+        this._currentPopupIndex = -1;
+        this._popupContentLength = 0;
+
+    }
+
+    /**
+     * map popup initialization
+     * @param {ol.Map} theMap - the ol map
+     */
+    init(theMap) {
+        if (super.init(theMap)) {
+            return;
+        }
+        let $map = $(&apos;#&apos; + this.map.getTarget());
+
+        $map.append(
+            &apos;&lt;div class=&quot;ol-popup&quot;&gt;&apos; +
+            &apos;&lt;span class=&quot;ol-popup-closer&quot;&gt;X&lt;/span&gt;&apos; +
+            &apos;&lt;div class=&quot;popup-content&quot;&gt;&lt;/div&gt;&apos; +
+            &apos;&lt;/div&gt;&apos;
+        );
+
+        this._$popupContainer = $map.find(&apos;.ol-popup&apos;);
+        this._$popupContent = $map.find(&apos;.popup-content&apos;);
+        this._$popupCloser = $map.find(&apos;.ol-popup-closer&apos;);
+
+        this._popupOverlay = new ol.Overlay({
+            element: this._$popupContainer[0],
+            autoPan: true,
+            autoPanAnimation: {
+                duration: 250
+            }
+        });
+
+        this._map.addOverlay(this._popupOverlay);
+
+        this._$popupCloser.click((evt) =&gt; {
+            this.closePopup();
+        });
+
+        // display popup on click
+        this._map.on(&apos;singleclick&apos;, (evt) =&gt; {
+            this.closePopup();
+            this._popupCoordinate = evt.coordinate;
+
+            if (this._esriMapServiceLayers.length &gt; 0) {
+                let queryParams = {
+                    geometry: evt.coordinate.join(&apos;,&apos;),
+                    geometryType: &apos;esriGeometryPoint&apos;,
+                    layers: &apos;all&apos;,
+                    sr: this._map.getView().getProjection().getCode().split(&apos;:&apos;)[1],
+                    mapExtent: this._map.getView().calculateExtent(this._map.getSize()).join(&apos;,&apos;),
+                    imageDisplay: this._map.getSize().join(&apos;,&apos;) + &apos;,96&apos;,
+                    returnGeometry: true,
+                    tolerance: 15,
+                    f: &apos;pjson&apos;
+                };
+
+                for (let l of this._esriMapServiceLayers) {
+                    l.getPopupInfo(queryParams, this._selectionLayerLookup[l.id]);
+                }
+            }
+
+            let layerFeatureObjectArray = this._featuresAtPixel(evt.pixel);
+
+            /**
+             *
+             * @type {Array.&lt;_FeatureLayerProperties&gt;}
+             */
+            this._passThroughLayerFeatureArray = [];
+            this._currentPopupIndex = -1;
+
+            for (let i = 0; i &lt; layerFeatureObjectArray.length; i++) {
+                let featObj = layerFeatureObjectArray[i];
+
+                let props = featObj.feature.getProperties();
+
+                let popupContentResponse = this._arrPopupContentFunction[featObj.layerIndex](props, this._$popupContent);
+
+                //skip if return was false
+                if (popupContentResponse === false) {
+                    //continue;
+                } else if (typeof popupContentResponse == &apos;string&apos;) {
+                    featObj.popupContent = popupContentResponse;
+                    this._passThroughLayerFeatureArray.push(featObj);
+                } else {
+                    featObj.selectionLayer.getSource().addFeature(featObj.feature);
+                }
+            }
+
+            this._popupContentLength = this._passThroughLayerFeatureArray.length;
+
+            this._currentPopupIndex = -1;
+
+            let popupHtml = &apos;&lt;div class=&quot;ol-popup-nav&quot;&gt;&apos;;
+            popupHtml += &apos;&lt;span class=&quot;previous-popup ol-popup-nav-arrow&quot;&gt;&amp;#9664;&lt;/span&gt;&apos;;
+            popupHtml += &apos;&lt;span class=&quot;next-popup ol-popup-nav-arrow&quot;&gt;&amp;#9654;&lt;/span&gt;&apos;;
+            popupHtml += `&lt;span class=&quot;current-popup-item-number&quot; style=&quot;font-weight: bold;&quot;&gt;&lt;/span&gt;`;
+            popupHtml += `&lt;span&gt;&amp;nbsp;of&amp;nbsp;&lt;/span&gt;`;
+            popupHtml += `&lt;span class=&quot;popup-content-length&quot; style=&quot;font-weight: bold;&quot;&gt;${this._popupContentLength}&lt;/span&gt;`;
+            popupHtml += `&lt;span&gt;&amp;nbsp;&amp;nbsp;-&amp;nbsp;&amp;nbsp;&lt;/span&gt;`;
+            popupHtml += `&lt;span class=&quot;current-popup-layer-name&quot;&gt;&lt;/span&gt;`;
+            popupHtml += &apos;&lt;/div&gt;&apos;;
+            popupHtml += &apos;&lt;div class=&quot;ol-popup-inner&quot;&gt;&apos;;
+
+            popupHtml += &apos;&lt;/div&gt;&apos;;
+
+            this._$popupContent.html(popupHtml);
+
+            this._$popupContent.find(&apos;.previous-popup&apos;).click(() =&gt; {
+                if (this._popupContentLength == 1) {
+                    return;
+                }
+
+                if (this._currentPopupIndex == 0) {
+                    this._currentPopupIndex = this._popupContentLength - 1;
+                } else {
+                    this._currentPopupIndex--;
+                }
+                this._triggerFeatSelect();
+            });
+
+            let nextPopup = this._$popupContent.find(&apos;.next-popup&apos;);
+
+            nextPopup.click(() =&gt; {
+                if (this._popupContentLength == 1 &amp;&amp; this._currentPopupIndex &gt; -1) {
+                    return;
+                }
+
+                if (this._currentPopupIndex == this._popupContentLength - 1) {
+                    this._currentPopupIndex = 0;
+                } else {
+                    this._currentPopupIndex++;
+                }
+                this._triggerFeatSelect();
+            });
+
+
+            if (this._popupContentLength &gt; 0) {
+                nextPopup.trigger(&apos;click&apos;);
+                this._popupOverlay.setPosition(this._popupCoordinate);
+                this._$popupContent.scrollTop(0);
+                this._popupOpen = true;
+            }
+        });
+
+        //change mouse cursor when over marker
+        this._map.on(&apos;pointermove&apos;, (e) =&gt; {
+            if (e.dragging) {
+                return;
+            }
+            let pixel = this.map.getEventPixel(e.originalEvent);
+            let hit = this.map.hasFeatureAtPixel(pixel, (lyrCandidate) =&gt; {
+                for (let olLayer of this._arrPopupOlLayers) {
+                    if (lyrCandidate == olLayer) {
+                        return true;
+                    }
+                }
+
+                return false;
+            });
+            this.map.getTargetElement().style.cursor = hit ? &apos;pointer&apos; : &apos;&apos;;
+        });
+    }
+
+    /**
+     * helper to select features
+     * @private
+     */
+    _triggerFeatSelect() {
+        let $currentPopupItemNumber = this._$popupContent.find(&apos;.current-popup-item-number&apos;);
+        let $innerPopup = this._$popupContent.find(&apos;.ol-popup-inner&apos;);
+        let $layerNameSpan = this._$popupContent.find(&apos;.current-popup-layer-name&apos;);
+        this.clearSelection();
+        let lyrFeatObj = this._passThroughLayerFeatureArray[this._currentPopupIndex];
+        $currentPopupItemNumber.html((this._currentPopupIndex + 1).toFixed());
+        $layerNameSpan.html(lyrFeatObj.layerName);
+        $innerPopup.html(lyrFeatObj.popupContent);
+        lyrFeatObj.selectionLayer.getSource().addFeature(lyrFeatObj.feature);
+        for (let f of this._popupChangedFunctions) {
+            f(this._$popupContent);
+        }
+    }
+
+
+    /**
+     *
+     * @param {ol.Feature} feature - the ol feature
+     * @param {LayerEsriMapServer} lyr - the map server layer
+     * @param {string} popupContent - popup content
+     * @param {string} esriName - esri layer name
+     */
+    addMapServicePopupContent(feature, lyr, popupContent, esriName) {
+
+        let featLayerObject = new _FeatureLayerProperties(
+            feature, lyr, this._popupContentLength, this._selectionLayerLookup[lyr.id], esriName
+        );
+        featLayerObject.popupContent = popupContent;
+
+        this._passThroughLayerFeatureArray.push(featLayerObject);
+        this._popupContentLength++;
+
+        $(&apos;.popup-content-length&apos;).html(this._popupContentLength.toFixed());
+
+        if (!this._popupOpen) {
+            this._$popupContent.find(&apos;.next-popup&apos;).trigger(&apos;click&apos;);
+
+            this._popupOverlay.setPosition(this._popupCoordinate);
+            this._$popupContent.scrollTop(0);
+            this._popupOpen = true;
+        }
+    }
+
+    /**
+     *
+     * @param {ol.Pixel} pixel - the ol pixel
+     * @returns {Array.&lt;_FeatureLayerProperties&gt;} - feature layer properties
+     * @private
+     */
+    _featuresAtPixel(pixel) {
+        let layerFeatureObjectArray = [];
+        this.map.forEachFeatureAtPixel(pixel, (feature, layer) =&gt; {
+            let lyrIndex = this._arrPopupOlLayers.indexOf(layer);
+
+            if (lyrIndex &gt; -1) {
+                layerFeatureObjectArray.push(new _FeatureLayerProperties(
+                    feature, this._arrPopupLayers[lyrIndex], lyrIndex, this._selectionLayers[lyrIndex]));
+            }
+        });
+
+        return layerFeatureObjectArray;
+    }
+
+    closePopup() {
+        this._checkInit();
+        this._popupOpen = false;
+        this._popupOverlay.setPosition(undefined);
+        this._$popupCloser[0].blur();
+        this.clearSelection();
+        this._$popupContent.html(&apos;&apos;);
+
+        return false;
+    };
+
+    /**
+     *
+     * @param {popupChangedFunction} chgFunction - popup change function
+     */
+    addPopupChangedFunction(chgFunction) {
+        this._popupChangedFunctions.push(chgFunction);
+    }
+
+    /**
+     *
+     * @param {LayerBase|*} lyr - the layer being acted on
+     * @param {object} [selectionStyle={}] the selection style configuration
+     * @param {string} [selectionStyle.color=rgba(255,170,0,0.5)] the selection color
+     * @param {number} [selectionStyle.width=10] the selection width for linear features
+     * @param {object|function} [selectionStyle.olStyle=undefined] an openlayers style object or function
+     * @returns {ol.layer.Vector} the new selection layer
+     * @private
+     */
+    _addPopupLayer(lyr, selectionStyle) {
+        this._checkInit();
+
+        selectionStyle = selectionStyle || {};
+        selectionStyle.color = selectionStyle.color || &apos;rgba(255,170,0,0.5)&apos;;
+        selectionStyle.width = selectionStyle.width || 10;
+
+        let theStyle;
+
+        if (selectionStyle.olStyle) {
+            theStyle = selectionStyle.olStyle;
+        } else {
+            theStyle = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: selectionStyle.color,
+                    width: selectionStyle.width
+                }),
+                image: new ol.style.Circle({
+                    radius: 7,
+                    fill: new ol.style.Fill({color: selectionStyle.color}),
+                    stroke: new ol.style.Stroke({color: selectionStyle.color, width: 1})
+                }),
+                fill: new ol.style.Fill({
+                    color: selectionStyle.color
+                })
+            });
+        }
+
+        let selectionLayer = new ol.layer.Vector(
+            {
+                source: new ol.source.Vector(),
+                style: theStyle,
+                zIndex: 100
+            }
+        );
+
+        this._selectionLayers.push(selectionLayer);
+        this._selectionLayerLookup[lyr.id] = selectionLayer;
+        this.map.addLayer(selectionLayer);
+
+        return selectionLayer;
+    }
+
+    /**
+     * The popup callback function
+     * @callback popupCallback
+     * @param {object} featureProperties - the feature properties
+     * @param {jQuery} jqRef reference to the div content to do some async stuff inside the div
+     * @returns {string} the html content to be added to the popup
+     */
+
+    /**
+     * Add popup to the map
+     * @param {LayerBase|*} lyr The layer that the popup with act on
+     * @param {popupCallback} popupContentFunction - popup content function that makes popup info
+     * @param {object} [selectionStyle={}] the selection style configuration
+     * @param {string} [selectionStyle.color=rgba(255,170,0,0.5)] the selection color
+     * @param {number} [selectionStyle.width=10] the selection width for linear features
+     * @param {object|function} [selectionStyle.olStyle=undefined] an openlayers style object or function
+     * @returns {object} a reference to the ol selection layer
+     */
+    addVectorPopup(lyr, popupContentFunction, selectionStyle) {
+        let selectionLayer = this._addPopupLayer(lyr, selectionStyle);
+        this._arrPopupLayerIds.push(lyr.id);
+        this._arrPopupLayerNames.push(lyr.name);
+        this._arrPopupLayers.push(lyr);
+        this._arrPopupOlLayers.push(lyr.olLayer);
+        this._arrPopupContentFunction.push(popupContentFunction);
+
+        return selectionLayer;
+    };
+
+    /**
+     *
+     * @param {LayerBase} lyr - layer
+     */
+    removeVectorPopup(lyr) {
+        let idx = this._arrPopupLayerIds.indexOf(lyr.id);
+
+        if (idx &gt; -1) {
+            this._arrPopupLayerIds.splice(idx, 1);
+            this._arrPopupLayerNames.splice(idx, 1);
+            this._arrPopupLayers.splice(idx, 1);
+            this._arrPopupOlLayers.splice(idx, 1);
+            this._arrPopupContentFunction.splice(idx, 1);
+            this._selectionLayers.splice(idx, 1);
+            delete this._selectionLayerLookup[lyr.id];
+        }
+    }
+
+    /**
+     *
+     * @param {LayerEsriMapServer} lyr - map server layer
+     * @param {object} [selectionStyle={}] the selection style configuration
+     * @param {string} [selectionStyle.color=rgba(255,170,0,0.5)] the selection color
+     * @param {number} [selectionStyle.width=10] the selection width for linear features
+     * @param {object|function} [selectionStyle.olStyle=undefined] an openlayers style object or function
+     * @returns {object} a reference to the ol selection layer
+     */
+    addMapServicePopup(lyr, selectionStyle) {
+        let selectionLayer = this._addPopupLayer(lyr, selectionStyle);
+        this._esriMapServiceLayers.push(lyr);
+
+        return selectionLayer;
+    }
+
+    clearSelection() {
+        this._checkInit();
+        for (let i = 0; i &lt; this._selectionLayers.length; i++) {
+            this._selectionLayers[i].getSource().clear();
+        }
+        for (let f of this._mapClickFunctions) {
+            f();
+        }
+    };
+
+    /**
+     * Add a function to be called when the map is clicked but before any popups are implemented
+     * @param {function} func - the map click function
+     */
+    addMapClickFunction(func) {
+        this._mapClickFunctions.push(func);
+    }
+}
+nm.MapPopupCls = MapPopupCls;
+export default MapPopupCls;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

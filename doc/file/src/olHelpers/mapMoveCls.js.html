@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/olHelpers/mapMoveCls.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/glennvorhes/webmapsjs.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-bundleEs2015Multiple">bundleEs2015Multiple</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-processLessFile">processLessFile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-dirNameFilePath">dirNameFilePath</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">collections</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/ItsLayerCollection.js~ItsLayerCollection.html">ItsLayerCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/LayerLegend.js~LayerLegend.html">LayerLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/Sliders.js~Sliders.html">Sliders</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">domUtil</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/domUtil/SelectBoxBase.js~SelectBoxBase.html">SelectBoxBase</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">jquery</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-overflowScroll">overflowScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-responsiveScroll">responsiveScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-windowScroll">windowScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-jQuery">jQuery</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">jquery-plugin</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/jquery-plugin/day-range.js~DayRange.html">DayRange</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">layers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBase.js~LayerBase.html">LayerBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVector.js~LayerBaseVector.html">LayerBaseVector</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVectorEsri.js~LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVectorGeoJson.js~LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseXyzTile.js~LayerBaseXyzTile.html">LayerBaseXyzTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerEsriMapServer.js~LayerEsriMapServer.html">LayerEsriMapServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerEsriTile.js~LayerEsriTile.html">LayerEsriTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerItsInventory.js~LayerItsInventory.html">LayerItsInventory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerRealEarthTile.js~LayerRealEarthTile.html">LayerRealEarthTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerRealEarthVector.js~LayerVectorRealEarth.html">LayerVectorRealEarth</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">mixin</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimate.js~RealEarthAnimate.html">RealEarthAnimate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimateTile.js~RealEarthAnimateTile.html">RealEarthAnimateTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimateVector.js~RealEarthAnimateVector.html">RealEarthAnimateVector</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">ol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ol">ol</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">olHelpers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/SortedFeatures.js~SortedFeatures.html">SortedFeatures</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/layerSwipe.js~LayerSwipe.html">LayerSwipe</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapInteractionBase.js~MapInteractionBase.html">MapInteractionBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapMoveCls.js~MapMoveCls.html">MapMoveCls</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapPopupCls.js~MapPopupCls.html">MapPopupCls</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeMapServiceLegend">makeMapServiceLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-calculateExtent">calculateExtent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-fitToMap">fitToMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-propertiesZoomStyle">propertiesZoomStyle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMap">quickMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMapBase">quickMapBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMapMulti">quickMapMulti</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-resolutionToZoom">resolutionToZoom</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-zoomToResolution">zoomToResolution</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-styleAndLegend">styleAndLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-quickMapMultiReturn">quickMapMultiReturn</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-definedAndNotNull">definedAndNotNull</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-undefinedOrNull">undefinedOrNull</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-rgb2hex">rgb2hex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-rgbToRgba">rgbToRgba</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getUrlParams">getUrlParams</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeGuid">makeGuid</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-keyValPairs">keyValPairs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-provide">provide</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-colorLookupByNumber">colorLookupByNumber</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-keyValuePair">keyValuePair</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/olHelpers/mapMoveCls.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+
+import $ from &apos;../jquery/jquery&apos;;
+import MapInteractionBase from &apos;./mapInteractionBase&apos;;
+import * as checkDefined from &apos;../util/checkDefined&apos;;
+import provide from &apos;../util/provide&apos;;
+import makeGuid from &apos;../util/makeGuid&apos;;
+const nm = provide(&apos;olHelpers&apos;);
+
+/**
+ * assists with map move interactions, trigger callback functions
+ * @augments MapInteractionBase
+ */
+class MapMoveCls extends MapInteractionBase {
+
+    /**
+     * constructor called implicitly
+     */
+    constructor() {
+        super(&apos;map move&apos;);
+        this._arrLyrRequest = [];
+        this._arrLyrTimeout = [];
+        this._arrLayer = [];
+        this._lookupLayer = {};
+
+        this._mapMoveCallbacks = [];
+        this._mapMoveCallbacksLookup = {};
+        this._mapMoveCallbackDelays = [];
+        this._mapMoveCallbackContext = [];
+        this._mapMoveCallbackTimeout = [];
+
+        this._mapExtent = undefined;
+        this._zoomLevel = undefined;
+    }
+
+    /**
+     * initialize the map move object
+     * @param {ol.Map} theMap - the ol map
+     */
+    init(theMap) {
+        if (super.init(theMap)) {
+            return;
+        }
+
+        let _this = this;
+
+        this.map.getView().on([&apos;change:center&apos;, &apos;change:resolution&apos;], function (e) {
+
+            _this._updateMapExtent();
+
+            // trigger the layer updates
+            for (let i = 0; i &lt; _this._arrLayer.length; i++) {
+                _this.triggerLyrLoad(_this._arrLayer[i], i, e.type);
+            }
+
+            // trigger the map callbacks
+            for (let i = 0; i &lt; _this._mapMoveCallbacks.length; i++) {
+                _this.triggerMoveCallback(i, e.type);
+            }
+        });
+    }
+
+    _updateMapExtent() {
+        let theView = this.map.getView();
+        this._zoomLevel = theView.getZoom();
+
+        let extentArray = theView.calculateExtent(this.map.getSize());
+
+        this._mapExtent = {
+            minX: extentArray[0],
+            minY: extentArray[1],
+            maxX: extentArray[2],
+            maxY: extentArray[3]
+        };
+    }
+
+    /**
+     * return the map extent
+     */
+    get mapExtent() {
+        if (!this._mapExtent) {
+            this._updateMapExtent();
+        }
+
+        return this._mapExtent;
+    }
+
+    /**
+     * Trigger the layer load
+     * @param {LayerBaseVector|*} lyr - the layer being acted on
+     * @param {number} [index=undefined] - index of the layer
+     * @param {string|*} [eventType=undefined] the event triggering the load, as &apos;change:center&apos; or &apos;change:resolution&apos;
+     */
+    triggerLyrLoad(lyr, index, eventType) {
+
+        if (checkDefined.undefinedOrNull(lyr) &amp;&amp; checkDefined.undefinedOrNull(index)) {
+            throw &apos;need to define lyr or index&apos;;
+        } else if (checkDefined.definedAndNotNull(lyr) &amp;&amp; checkDefined.undefinedOrNull(index)) {
+            index = this._arrLayer.indexOf(lyr);
+        } else if (checkDefined.undefinedOrNull(lyr) &amp;&amp; checkDefined.definedAndNotNull(index)) {
+            lyr = this._arrLayer[index];
+        }
+
+        // clear the timeout
+        if (this._arrLyrTimeout[index] != null) {
+            clearTimeout(this._arrLyrTimeout[index]);
+            this._arrLyrTimeout[index] = null;
+        }
+
+        // abort if necessary and clear the request
+        if (this._arrLyrRequest[index] != null &amp;&amp; this._arrLyrRequest[index] != 4) {
+            this._arrLyrRequest[index].abort();
+            this._arrLyrRequest[index] = null;
+        }
+
+        // dummy callback used if before load returns false
+        let callbackFunc = function () {};
+
+        if (lyr.mapMoveBefore(this._zoomLevel, eventType)) {
+            lyr.mapMoveMakeGetParams(this._mapExtent, this._zoomLevel);
+
+            let _this = this;
+
+            callbackFunc = function () {
+                function innerFunction(theLayer, theIndex) {
+                    let _innerThis = this;
+                    this._arrLyrRequest[theIndex] = $.get(
+                        theLayer.url,
+                        theLayer.mapMoveParams,
+                        function (d) {
+                            /**
+                             * @type {LayerBaseVector}
+                             */
+                            theLayer.mapMoveCallback(d);
+                            theLayer.loadCallback();
+                        }, &apos;json&apos;).fail(
+                        function (jqXHR) {
+                            if (jqXHR.statusText != &apos;abort&apos;) {
+                                console.log(&apos;failed&apos;);
+                                console.log(theLayer.url);
+                                console.log(theLayer.mapMoveParams);
+                            }
+                        }).always(
+                        function () {
+                            _innerThis._arrLyrTimeout[theIndex] = null;
+                            _innerThis._arrLyrRequest[theIndex] = null;
+                        });
+                }
+                innerFunction.call(_this, lyr, index);
+            };
+        } else {
+            lyr.clear();
+        }
+        this._arrLyrTimeout[index] = setTimeout(callbackFunc, lyr.onDemandDelay);
+    }
+
+    /**
+     * trigger the map move call back at the given index
+     * @param {number} ind - the index of the layer
+     * @param {string|*} [eventType=undefined] the event triggering the load as &apos;change:center&apos; or &apos;change:resolution&apos;
+     * @param {string} [functionId=undefined] the function id used to reference the added callback function
+     */
+    triggerMoveCallback(ind, eventType, functionId) {
+
+        if (typeof ind == &apos;undefined&apos; &amp;&amp; typeof functionId == &apos;undefined&apos;){
+            throw &apos;either the function index or the id must be defined&apos;;
+        }
+
+        if (typeof ind !== &apos;number&apos;){
+            ind = this._mapMoveCallbacks.indexOf(this._mapMoveCallbacksLookup[functionId]);
+        }
+
+        if (ind &lt; 0){
+            console.log(&apos;function not found&apos;);
+
+            return;
+        }
+
+        // clear the timeout
+        if (this._mapMoveCallbackTimeout[ind] != null) {
+            clearTimeout(this._mapMoveCallbackTimeout[ind]);
+            this._mapMoveCallbackTimeout[ind] = null;
+        }
+
+        let ctx = this._mapMoveCallbackContext[ind];
+        let theFunc = this._mapMoveCallbacks[ind];
+
+        let _this = this;
+
+        let f = function () {
+            if (ctx !== null) {
+                theFunc.call(ctx, _this._mapExtent, _this._zoomLevel, eventType);
+            } else {
+                theFunc(_this._mapExtent, _this._zoomLevel, eventType);
+            }
+        };
+
+        this._mapMoveCallbackTimeout[ind] = setTimeout(f, this._mapMoveCallbackDelays[ind]);
+    }
+
+    /**
+     * Add a layer to the interaction
+     * @param {LayerBaseVector|*} lyr - layer to add
+     * @param {boolean} [triggerOnAdd=true] - if the layer should be loaded on add
+     */
+    addVectorLayer(lyr, triggerOnAdd) {
+        if (this._arrLayer.indexOf(lyr) &gt; -1) {
+            console.log(&apos;already added &apos; + lyr.name + &apos; to map move&apos;);
+
+            return;
+        }
+        this._checkInit();
+
+        this._arrLyrRequest.push(null);
+        this._arrLyrTimeout.push(null);
+        this._arrLayer.push(lyr);
+        this._lookupLayer[lyr.id] = lyr;
+
+        triggerOnAdd = typeof triggerOnAdd == &apos;boolean&apos; ? triggerOnAdd : true;
+
+        if (triggerOnAdd) {
+            if (this._mapExtent === undefined) {
+                this._updateMapExtent();
+            }
+            this.triggerLyrLoad(lyr, this._arrLayer.length - 1);
+        }
+    }
+
+    /**
+     * This callback is displayed as a global member.
+     * @callback mapMoveCallbackFunction
+     * @param {object} extent - extent object
+     * @param {number} extent.minX - minX
+     * @param {number} extent.minY - minY
+     * @param {number} extent.maxX - maxX
+     * @param {number} extent.maxY - maxY
+     * @param {number} zoomLevel - zoom level
+     * @param {string} [evtType=undefined] undefined for initial load, otherwise one of &apos;change:center&apos;, &apos;change:resolution&apos;
+     */
+
+    /**
+     * add a callback to the map move event
+     * @param {mapMoveCallbackFunction} func - callback function
+     * @param {*} context - the context to use for this function
+     * @param {number} [delay=50] the delay before call load
+     * @param {boolean} [triggerOnAdd=true] if the layer should be loaded on add to mapMove
+     * @param {string} [functionId=undefined] optional id to reference the function later for outside triggering
+     */
+    addCallback(func, context, delay, triggerOnAdd, functionId) {
+
+        if (this._mapMoveCallbacks.indexOf(func) &gt; -1) {
+            console.log(&apos;this function already added to map move&apos;);
+
+            return;
+        }
+        this._checkInit();
+        if (!functionId){
+            functionId = makeGuid();
+        }
+
+        this._mapMoveCallbacks.push(func);
+        this._mapMoveCallbacksLookup[functionId] = func;
+        this._mapMoveCallbackDelays.push(typeof delay == &apos;number&apos; ? delay : 50);
+        this._mapMoveCallbackContext.push(checkDefined.definedAndNotNull(context) ? context : null);
+        this._mapMoveCallbackTimeout.push(null);
+
+        triggerOnAdd = typeof triggerOnAdd == &apos;boolean&apos; ? triggerOnAdd : true;
+
+        if (triggerOnAdd) {
+            if (this._mapExtent === undefined) {
+                this._updateMapExtent();
+            }
+            this.triggerMoveCallback(this._mapMoveCallbacks.length - 1);
+        }
+    }
+}
+
+nm.MapMoveCls = MapMoveCls;
+export default MapMoveCls;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

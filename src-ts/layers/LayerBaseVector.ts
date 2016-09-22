@@ -1,5 +1,3 @@
-
-
 import {LayerBase, LayerBaseOptions} from './LayerBase';
 import mapMove from '../olHelpers/mapMove';
 import MapMoveCls from '../olHelpers/mapMoveCls'

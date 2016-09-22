@@ -1,13 +1,12 @@
-/// <reference path="../../definitions/jquery.d.ts"/>
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-/**
- * Created by gavorhes on 11/3/2015.
- */
 var mapInteractionBase_1 = require('./mapInteractionBase');
 var provide_1 = require('../util/provide');
 var custom_ol_1 = require('custom-ol');

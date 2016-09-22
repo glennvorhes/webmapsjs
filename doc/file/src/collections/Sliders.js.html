@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/collections/Sliders.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/glennvorhes/webmapsjs.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-bundleEs2015Multiple">bundleEs2015Multiple</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-processLessFile">processLessFile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-dirNameFilePath">dirNameFilePath</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">collections</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/ItsLayerCollection.js~ItsLayerCollection.html">ItsLayerCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/LayerLegend.js~LayerLegend.html">LayerLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/Sliders.js~Sliders.html">Sliders</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">domUtil</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/domUtil/SelectBoxBase.js~SelectBoxBase.html">SelectBoxBase</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">jquery</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-overflowScroll">overflowScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-responsiveScroll">responsiveScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-windowScroll">windowScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-jQuery">jQuery</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">jquery-plugin</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/jquery-plugin/day-range.js~DayRange.html">DayRange</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">layers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBase.js~LayerBase.html">LayerBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVector.js~LayerBaseVector.html">LayerBaseVector</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVectorEsri.js~LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVectorGeoJson.js~LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseXyzTile.js~LayerBaseXyzTile.html">LayerBaseXyzTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerEsriMapServer.js~LayerEsriMapServer.html">LayerEsriMapServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerEsriTile.js~LayerEsriTile.html">LayerEsriTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerItsInventory.js~LayerItsInventory.html">LayerItsInventory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerRealEarthTile.js~LayerRealEarthTile.html">LayerRealEarthTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerRealEarthVector.js~LayerVectorRealEarth.html">LayerVectorRealEarth</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">mixin</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimate.js~RealEarthAnimate.html">RealEarthAnimate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimateTile.js~RealEarthAnimateTile.html">RealEarthAnimateTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimateVector.js~RealEarthAnimateVector.html">RealEarthAnimateVector</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">ol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ol">ol</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">olHelpers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/SortedFeatures.js~SortedFeatures.html">SortedFeatures</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/layerSwipe.js~LayerSwipe.html">LayerSwipe</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapInteractionBase.js~MapInteractionBase.html">MapInteractionBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapMoveCls.js~MapMoveCls.html">MapMoveCls</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapPopupCls.js~MapPopupCls.html">MapPopupCls</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeMapServiceLegend">makeMapServiceLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-calculateExtent">calculateExtent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-fitToMap">fitToMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-propertiesZoomStyle">propertiesZoomStyle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMap">quickMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMapBase">quickMapBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMapMulti">quickMapMulti</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-resolutionToZoom">resolutionToZoom</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-zoomToResolution">zoomToResolution</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-styleAndLegend">styleAndLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-quickMapMultiReturn">quickMapMultiReturn</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-definedAndNotNull">definedAndNotNull</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-undefinedOrNull">undefinedOrNull</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-rgb2hex">rgb2hex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-rgbToRgba">rgbToRgba</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getUrlParams">getUrlParams</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeGuid">makeGuid</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-keyValPairs">keyValPairs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-provide">provide</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-colorLookupByNumber">colorLookupByNumber</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-keyValuePair">keyValuePair</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/collections/Sliders.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Created by gavorhes on 12/10/2015.
+ */
+import provide from &apos;../util/provide&apos;;
+let nm = provide(&apos;collections&apos;);
+import $ from &apos;../jquery/jquery&apos;;
+
+class _Slider {
+
+    /**
+     * Slider constructor
+     * @param {string} name - the slider name
+     * @param {Array} selections - the selection
+     * @param {number} wgt - weight
+     * @param {boolean} selected - if selected
+     */
+    constructor(name, selections, wgt, selected) {
+        //let _this = this;
+        this.name = name;
+        this.domId = name.toLowerCase().replace(/ /g, &apos;-&apos;);
+        this._weight = wgt;
+        this._weightDefault = this._weight;
+
+        this.selectedParam = null;
+        this.selectedParamDefault = null;
+
+        this._locked = false;
+
+        this._min = 0.0;
+        this._max = 100;
+
+        this.labelLow = null;
+        this.labelHigh = null;
+        this.labelVal = null;
+        this.slider = null;
+        this.chk = null;
+
+        this.atMin = this._weight == this._min;
+        this.atMax = this._weight == this._max;
+
+
+        let sel = `&lt;select class=&quot;${selections.length == 1 ? &apos;hidden-select&apos; : &apos;show-select&apos;}&quot; id=&quot;${this.domId}_chg&quot;&gt;`;
+        for (let i = 0; i &lt; selections.length; i++) {
+            let itm = selections[i][0];
+            let itmSelected = itm === selected;
+
+            sel += `&lt;option value=&quot;${itm}&quot; ${itmSelected ? &apos; selected=&quot;selected&quot;&apos; : &apos;&apos;}&gt;${selections[i][1]}&lt;/option&gt;`;
+            if (itmSelected) {
+                this.selectedParam = itm;
+            }
+        }
+        sel += &apos;&lt;/select&gt;&apos;;
+
+        this.selectedParamDefault = this.selectedParam;
+
+        this.html = &apos;&lt;div class=&quot;slider-div&quot;&gt;&apos; +
+            `&lt;label for=&quot;${this.domId}_chk&quot; class=&quot;slider-label&quot;&gt;${this.name}&lt;/label&gt;` +
+            sel + `&lt;br&gt;` +
+            `&lt;input id=&quot;${this.domId}_chk&quot; type=&quot;checkbox&quot; title=&quot;Lock/Unlock Slider&quot;&gt;` +
+            `&lt;label id=&quot;${this.domId}_low&quot; class=&quot;low-high&quot;&gt;${this._min.toFixed(1)}&lt;/label&gt;` +
+            `&lt;input id=&quot;${this.domId}&quot; type=&quot;range&quot; value=&quot;${this._weight.toFixed(1)}&quot; min=&quot;0&quot; max=&quot;100&quot; step=&quot;0.1&quot;&gt;` +
+            `&lt;label id=&quot;${this.domId}_high&quot; class=&quot;low-high&quot;&gt;${this._max.toFixed(1)}&lt;/label&gt;` +
+            `&lt;label id=&quot;${this.domId}_lbl&quot; for=&quot;${this.domId}&quot; class=&quot;percent-label&quot;&gt;${this._weight.toFixed(1)}%&lt;/label&gt;&lt;/div&gt;`;
+    }
+
+    /**
+     * add html to dom
+     * @param {jQuery} $container - container element
+     */
+    addToDom($container) {
+        $container.append(this.html);
+        this.labelLow = $(`#${this.domId}_low`);
+        this.labelHigh = $(`#${this.domId}_high`);
+        this.labelVal = $(`#${this.domId}_lbl`);
+        this.slider = $(`#${this.domId}`);
+        this.selectionBox = $(`#${this.domId}_chg`);
+        this.chk = $(`#${this.domId}_chk`);
+    }
+
+    /**
+     * increment the slider
+     * @param {number} delta change delta
+     * @returns {number} the remainder not able to be allocated to this slider
+     */
+    increment(delta) {
+        let remainder = 0;
+        delta = Number(delta.toFixed(1));
+
+        this._weight += delta;
+        if (this._weight &lt; this._min) {
+            remainder = this._min - this._weight;
+            this._weight = this._min;
+            this.atMin = true;
+        } else if (this._weight &gt; this._max) {
+            remainder = this._max - this._weight;
+            this._weight = this._max;
+            this.atMax = true;
+        } else {
+            this.atMin = false;
+            this.atMax = false;
+        }
+
+        this.slider.val(this._weight.toFixed(1));
+        this.labelVal.html(this._weight.toFixed(1) + &apos;%&apos;);
+
+        return remainder;
+    }
+
+    /**
+     * reset to the original values
+     */
+    reset() {
+        this.weight = this._weightDefault;
+        this.slider.val(this._weightDefault.toFixed(1));
+        this.selectionBox.val(this.selectedParamDefault);
+        this.chk.attr(&apos;checked&apos;, false);
+        //let event = new CustomEvent(&apos;change&apos;);
+        //this.chk[0].dispatchEvent(event);
+    }
+
+    /**
+     * set the value and drop down
+     * @param {number} newVal the new value
+     * @param {string} selectedParam the selected parameter
+     */
+    setValAndDropDown(newVal, selectedParam) {
+        this.weight = newVal;
+        this.min = 0;
+        this.max = 100;
+        this.slider.val(newVal.toFixed(1));
+        this.selectionBox.val(selectedParam);
+        this.selectedParam = selectedParam;
+        this.locked = true;
+    }
+
+    /**
+     *
+     * @returns {boolean} if locked
+     */
+    get locked() {
+        return this._locked;
+    }
+
+    /**
+     *
+     * @param {boolean} val if locked
+     */
+    set locked(val) {
+        this._locked = val;
+        this.slider.prop(&apos;disabled&apos;, this._locked);
+        this.selectionBox.prop(&apos;disabled&apos;, this._locked);
+        this.chk.prop(&apos;checked&apos;, !this._locked);
+    }
+
+    /**
+     *
+     * @returns {number} the minimum
+     */
+    get min() {
+        return this._min;
+    }
+
+    /**
+     *
+     * @param {number} newVal new minimum
+     */
+    set min(newVal) {
+        this._min = Number(newVal.toFixed(1));
+        if (this._min &lt; 0) {
+            this._min = 0;
+        }
+        this.labelLow.html(this._min.toFixed(1));
+        this.slider.attr(&apos;min&apos;, this._min.toFixed(1));
+        this.atMin = this._weight == this._min;
+    }
+
+    /**
+     *
+     * @returns {number} the maximum
+     */
+    get max() {
+        return this._max;
+    }
+
+    /**
+     *
+     * @param {number} newVal the maximum
+     */
+    set max(newVal) {
+        this._max = Number(newVal.toFixed(1));
+        if (this._max &gt; 100) {
+            this._max = 100.0;
+        }
+        this.labelHigh.html(this._max.toFixed(1));
+        this.slider.attr(&apos;max&apos;, this._max.toFixed(1));
+        this.atMax = this._weight == this._max;
+    }
+
+    /**
+     *
+     * @returns {number} the weight
+     */
+    get weight() {
+        return this._weight;
+    }
+
+    /**
+     *
+     * @param {number} newVal the weight
+     */
+    set weight(newVal) {
+        this._weight = Number(newVal.toFixed(1));
+        this.labelVal.html(this._weight.toFixed(1) + &apos;%&apos;);
+        if (this._weight &lt;= this._min) {
+            this.atMin = true;
+            this.atMax = false;
+        } else if (this._weight &gt;= this._max) {
+            this.atMin = false;
+            this.atMax = true;
+        } else {
+            this.atMin = false;
+            this.atMax = false;
+        }
+    }
+}
+
+nm._Slider = _Slider;
+
+/**
+ * class to make a slider group
+ */
+class Sliders {
+    /**
+     *
+     * @param {Array} paramList list of parameters
+     * @param {string} divId the div id
+     */
+    constructor(paramList, divId) {
+        this.resetting = false;
+        this._slideFinishedFunctions = [];
+        this.reservedPercent = 0.0;
+        this.$container = $(&apos;#&apos; + divId);
+        this.$container.addClass(&apos;slider-container&apos;);
+
+        this.sliderList = [];
+        this.sliderLookup = {};
+
+        this.total = 0;
+
+        for (let i = 0; i &lt; paramList.length; i++) {
+            let p = paramList[i];
+
+            let sld = new _Slider(p[0], p[1], p[2], p[3]);
+            this.sliderList.push(sld);
+            this.sliderLookup[sld.domId] = sld;
+            sld.addToDom(this.$container);
+            this.total += sld._weight;
+        }
+
+        if (this.total != 100) {
+            alert(&apos;total not equal to 100&apos;);
+        }
+
+        this.lockedList = [];
+        this.inRangeList = [];
+        this.atMinList = [];
+        this.atMaxList = [];
+
+        this.lockedCount = 0;
+        this.notLockedCount = 0;
+
+        this._splitSliderArray();
+        this._addEventListeners();
+
+    }
+    
+    addSlideFinishedFunction (finishedFunction){
+        this._slideFinishedFunctions.push(finishedFunction);
+    }
+
+    /**
+     * split array into subarrays holding the sliders
+     * @private
+     */
+    _splitSliderArray() {
+        this.lockedList = [];
+        this.inRangeList = [];
+        this.atMinList = [];
+        this.atMaxList = [];
+
+        for (let i = 0; i &lt; this.sliderList.length; i++) {
+            let sld = this.sliderList[i];
+
+            if (sld.locked) {
+                this.lockedList.push(sld);
+            } else if (sld.atMin) {
+                this.atMinList.push(sld);
+            } else if (sld.atMax) {
+                this.atMaxList.push(sld);
+            } else {
+                this.inRangeList.push(sld);
+            }
+        }
+        this.lockedCount = this.lockedList.length;
+        this.notLockedCount = this.sliderList.length - this.lockedCount;
+    }
+
+    /**
+     * handle remainder, recursive to take care of min max overshoots
+     * @param {number} remain the remainder
+     * @param {string} skipDomId - this dom id
+     * @private
+     */
+    _handleRemainder(remain, skipDomId) {
+
+        remain = Number(remain.toFixed(1));
+        if (remain == 0) {
+            return;
+        }
+
+        this._splitSliderArray();
+
+        let canChangeArray = [];
+        for (let i = 0; i &lt; this.inRangeList.length; i++) {
+            let sld = this.inRangeList[i];
+            if (sld.domId == skipDomId) {
+                continue;
+            }
+            canChangeArray.push(sld);
+        }
+
+        if (remain &gt; 0) {
+            for (let i = 0; i &lt; this.atMaxList.length; i++) {
+                let sld = this.atMaxList[i];
+                if (sld.domId == skipDomId) {
+                    continue;
+                }
+                canChangeArray.push(sld);
+            }
+        } else {
+            for (let i = 0; i &lt; this.atMinList.length; i++) {
+                let sld = this.atMinList[i];
+                if (sld.domId == skipDomId) {
+                    continue;
+                }
+                canChangeArray.push(sld);
+            }
+        }
+
+        if (canChangeArray.length == 0) {
+            return;
+        }
+
+        let inc = -1 * Number((remain / canChangeArray.length).toFixed(1));
+
+        let newRemainder = 0;
+        for (let i = 0; i &lt; canChangeArray.length; i++) {
+            newRemainder += canChangeArray[i].increment(inc);
+        }
+
+        this._handleRemainder(newRemainder, skipDomId);
+    }
+
+    /**
+     * reset all
+     */
+    reset() {
+        this.resetting = true;
+        for (let i = 0; i &lt; this.sliderList.length; i++) {
+            let sld = this.sliderList[i];
+            sld.reset();
+        }
+        this.resetting = false;
+
+        if (this._slideFinishedFunctions != null) {
+            this._slideFinishedFunctions();
+        }
+    }
+
+    /**
+     *
+     * @param {object} keyValList key and value list
+     */
+    setValues(keyValList) {
+        this.resetting = true;
+        for (let k in keyValList) {
+            if (keyValList.hasOwnProperty(k)) {
+                this.sliderLookup[k].setValAndDropDown(keyValList[k][0], keyValList[k][1]);
+            }
+        }
+        this.resetting = false;
+    }
+
+    /**
+     * get the weight sum
+     * @returns {number} the weight sum
+     */
+    getSum () {
+        let total = 0;
+        for (let i = 0; i &lt; this.sliderList.length; i++) {
+            let sld = this.sliderList[i];
+            total += Number(sld.weight.toFixed(1));
+        }
+
+        return total;
+    }
+
+    /**
+     * get the parameter weights
+     * @returns {object} lookup with parameter weights
+     */
+    getParams  () {
+        let paramWeights = {};
+        for (let i = 0; i &lt; this.sliderList.length; i++) {
+            let sld = this.sliderList[i];
+            paramWeights[sld.selectedParam] = Number(sld.weight.toFixed(1));
+        }
+
+        return paramWeights;
+    }
+
+    _addEventListeners() {
+        let _this = this;
+
+        //change function
+        this.$container.find(&apos;input[type=&quot;range&quot;]&apos;).change(function () {
+                if (_this.resetting) {
+                    return;
+                }
+
+                let $this = $(this);
+                let domId = this[&apos;id&apos;];
+                let sldr = _this.sliderLookup[domId];
+
+                let newValue = parseFloat($this.val());
+
+                let oldValue = sldr.weight;
+                let diff = newValue - oldValue;
+                diff = Number(diff.toFixed(1));
+
+                sldr.weight = Number(newValue.toFixed(1));
+
+                _this._handleRemainder(diff, domId);
+
+                //cleanup, make sure the sum is still 100
+                let sum = Number(_this.getSum().toFixed(1));
+
+                if (sum &gt; 100) {
+                    loop1:
+                        while (true) {
+                            for (let i = 0; i &lt; _this.sliderList.length; i++) {
+                                let sld = _this.sliderList[i];
+                                if (sld.domId == domId || sld.locked || sld.atMin) {
+                                    continue;
+                                }
+                                sld.increment(-0.1);
+                                sum -= 0.1;
+                                if (sum.toFixed(1) == &apos;100.0&apos;) {
+                                    break loop1;
+                                }
+                            }
+                        }
+                } else if (sum &lt; 100) {
+                    loop1:
+                        while (true) {
+                            for (let i = 0; i &lt; _this.sliderList.length; i++) {
+                                let sld = _this.sliderList[i];
+                                if (sld.domId == domId || sld.locked || sld.atMax) {
+                                    continue;
+                                }
+                                sld.increment(0.1);
+                                sum += 0.1;
+                                if (sum.toFixed(1) == &apos;100.0&apos;) {
+                                    break loop1;
+                                }
+                            }
+                        }
+                }
+
+                for (let i = 0; i &lt; _this._slideFinishedFunctions.length; i++) {
+                    _this._slideFinishedFunctions[i]();
+                }
+            }
+        );
+
+        //update the selected parameter when the selection is changed
+        $(&apos;.show-select&apos;).change(function () {
+            if (_this.resetting) {
+                return;
+            }
+            _this.sliderLookup[this[&apos;id&apos;].replace(&apos;_chg&apos;, &apos;&apos;)].selectedParam = $(this).val();
+        });
+
+        //lock the slider and update the reserved percent
+        this.$container.find(&apos;input[type=&quot;checkbox&quot;]&apos;).change(function () {
+            let domEl = this;
+
+            _this.sliderLookup[domEl.id.replace(&apos;_chk&apos;, &apos;&apos;)].locked = !domEl.checked;
+            _this.reservedPercent = 0.0;
+            _this.notLockedCount = 0;
+
+            let notLockedSliders = [];
+
+            for (let i = 0; i &lt; _this.sliderList.length; i++) {
+                let sld = _this.sliderList[i];
+                if (sld.locked) {
+                    _this.reservedPercent += sld.weight;
+                    continue;
+                }
+                notLockedSliders.push(sld);
+                _this.notLockedCount++;
+            }
+
+            for (let i = 0; i &lt; _this.sliderList.length; i++) {
+                let sld = _this.sliderList[i];
+                if (sld.locked) {
+                    continue;
+                }
+                sld.max = 100 - _this.reservedPercent;
+            }
+
+            if (notLockedSliders.length == 1) {
+                notLockedSliders[0].min = notLockedSliders[0].weight;
+            } else {
+                for (let i = 0; i &lt; notLockedSliders.length; i++) {
+                    notLockedSliders[i].min = 0;
+                }
+            }
+        });
+
+    }
+}
+
+nm.Sliders = Sliders;
+window.gv[&apos;collections&apos;].Sliders = Sliders;
+export default Sliders;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/layers/LayerBase.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/glennvorhes/webmapsjs.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-bundleEs2015Multiple">bundleEs2015Multiple</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-processLessFile">processLessFile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-dirNameFilePath">dirNameFilePath</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">collections</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/ItsLayerCollection.js~ItsLayerCollection.html">ItsLayerCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/LayerLegend.js~LayerLegend.html">LayerLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/Sliders.js~Sliders.html">Sliders</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">domUtil</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/domUtil/SelectBoxBase.js~SelectBoxBase.html">SelectBoxBase</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">jquery</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-overflowScroll">overflowScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-responsiveScroll">responsiveScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-windowScroll">windowScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-jQuery">jQuery</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">jquery-plugin</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/jquery-plugin/day-range.js~DayRange.html">DayRange</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">layers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBase.js~LayerBase.html">LayerBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVector.js~LayerBaseVector.html">LayerBaseVector</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVectorEsri.js~LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVectorGeoJson.js~LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseXyzTile.js~LayerBaseXyzTile.html">LayerBaseXyzTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerEsriMapServer.js~LayerEsriMapServer.html">LayerEsriMapServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerEsriTile.js~LayerEsriTile.html">LayerEsriTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerItsInventory.js~LayerItsInventory.html">LayerItsInventory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerRealEarthTile.js~LayerRealEarthTile.html">LayerRealEarthTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerRealEarthVector.js~LayerVectorRealEarth.html">LayerVectorRealEarth</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">mixin</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimate.js~RealEarthAnimate.html">RealEarthAnimate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimateTile.js~RealEarthAnimateTile.html">RealEarthAnimateTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimateVector.js~RealEarthAnimateVector.html">RealEarthAnimateVector</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">ol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ol">ol</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">olHelpers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/SortedFeatures.js~SortedFeatures.html">SortedFeatures</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/layerSwipe.js~LayerSwipe.html">LayerSwipe</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapInteractionBase.js~MapInteractionBase.html">MapInteractionBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapMoveCls.js~MapMoveCls.html">MapMoveCls</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapPopupCls.js~MapPopupCls.html">MapPopupCls</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeMapServiceLegend">makeMapServiceLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-calculateExtent">calculateExtent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-fitToMap">fitToMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-propertiesZoomStyle">propertiesZoomStyle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMap">quickMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMapBase">quickMapBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMapMulti">quickMapMulti</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-resolutionToZoom">resolutionToZoom</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-zoomToResolution">zoomToResolution</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-styleAndLegend">styleAndLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-quickMapMultiReturn">quickMapMultiReturn</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-definedAndNotNull">definedAndNotNull</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-undefinedOrNull">undefinedOrNull</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-rgb2hex">rgb2hex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-rgbToRgba">rgbToRgba</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getUrlParams">getUrlParams</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeGuid">makeGuid</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-keyValPairs">keyValPairs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-provide">provide</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-colorLookupByNumber">colorLookupByNumber</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-keyValuePair">keyValuePair</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/layers/LayerBase.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import $ from &apos;../jquery/jquery&apos;;
+import makeGuid from &apos;../util/makeGuid&apos;;
+import * as zoomResolutionConvert from &apos;../olHelpers/zoomResolutionConvert&apos;;
+import provide from &apos;../util/provide&apos;;
+const nm = provide(&apos;layers&apos;);
+
+/**
+ * The base layer class
+ * @abstract
+ */
+class LayerBase {
+    /**
+     * The base layer for all others
+     * @param {string} url - url for source
+     * @param {object} options - config
+     * @param {string} [options.id=makeGuid()] - layer id
+     * @param {string} [options.name=Unnamed Layer] - layer name
+     * @param {number} [options.opacity=1] - opacity
+     * @param {boolean} [options.visible=true] - default visible
+     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+     * @param {object} [options.params={}] - the get parameters to include to retrieve the layer
+     * @param {number} [options.zIndex=0] - the z index for the layer
+     * @param {function} [options.loadCallback] - function to call on load, context this is the layer object
+     * @param {boolean} [options.legendCollapse=false] - if the legend item should be initially collapsed
+     * @param {boolean} [options.legendCheckbox=true] - if the legend item should have a checkbox for visibility
+     * @param {boolean} [options.legendContent=undefined] - additional content to add to the legend
+     */
+    constructor(url, options) {
+        options = options || {};
+
+        if (typeof url !== &apos;string&apos;) {
+            throw &apos;Invalid URL&apos;;
+        }
+        this._url = url;
+        
+        
+        
+        this._params = typeof options.params == &apos;object&apos; ? options.params : {};
+        this._legendCollapse = typeof options.legendCollapse == &apos;boolean&apos; ? options.legendCollapse : false;
+        this._legendCheckbox = typeof options.legendCheckbox == &apos;boolean&apos; ? options.legendCheckbox : true;
+
+        this.id = options.id || makeGuid();
+        this._name = options.name || &apos;Unnamed Layer&apos;;
+        this.animate = false;
+        this._opacity = typeof options.opacity == &apos;number&apos; ? options.opacity : 1;
+
+        if (this._opacity &gt; 1) {
+            this._opacity = 1;
+        } else if (this._opacity &lt; 0) {
+            this._opacity = 0;
+        }
+
+        this._visible = typeof options.visible === &apos;boolean&apos; ? options.visible : true;
+        
+        this._source = undefined;
+
+        /**
+         * 
+         * @protected
+         */
+        this._olLayer = undefined;
+        this._loaded = false;
+
+        this._maxResolution = zoomResolutionConvert.zoomToResolution(options.minZoom);
+        if (typeof this._maxResolution !== &apos;undefined&apos;) {
+            this._maxResolution += 0.00001;
+        }
+        this._minResolution = zoomResolutionConvert.zoomToResolution(options.maxZoom);
+
+        this._minZoom = typeof options.minZoom == &apos;number&apos; ? options.minZoom : undefined;
+        this._maxZoom = typeof options.maxZoom == &apos;number&apos; ? options.maxZoom : undefined;
+        this._zIndex = typeof options.zIndex == &apos;number&apos; ? options.zIndex : 0;
+
+        this.loadCallback = typeof options.loadCallback == &apos;function&apos; ? options.loadCallback : function () {
+        };
+
+
+        this._legendContent = &apos;&apos;;
+
+        if (this._legendCheckbox) {
+            this._legendContent += `&lt;input type=&quot;checkbox&quot; ${this.visible ? &apos;checked&apos; : &apos;&apos;} ` +
+                `class=&quot;legend-check&quot; id=&quot;${this.id}-legend-layer-check&quot;&gt;&lt;span&gt;&lt;/span&gt;`;
+            this._legendContent += `&lt;label for=&quot;${this.id}-legend-layer-check&quot; class=&quot;legend-layer-name&quot;&gt;${this.name}&lt;/label&gt;`;
+        } else {
+            this._legendContent += `&lt;label class=&quot;legend-layer-name&quot;&gt;${this.name}&lt;/label&gt;`;
+        }
+
+        this._$legendDiv = null;
+        this._applyCollapseCalled = false;
+        this._addLegendContent(typeof options.legendContent === &apos;string&apos; ? options.legendContent : undefined);
+    }
+
+    /**
+     * base load function, sets _loaded = true if it is not already
+     * @protected
+     * @returns {boolean} if already loaded
+     */
+    _load() {
+        if (this.loaded == true) {
+            return true;
+        } else {
+            this._loaded = true;
+
+            return false;
+        }
+    }
+
+    /**
+     * Get the legend html, be sure to only add to the DOM once
+     * @returns {string} html for layer wrapped in a div
+     */
+    getLegendDiv() {
+        return `&lt;div class=&quot;legend-layer-div&quot; id=&quot;${this.id}-legend-layer-div&quot;&gt;${this._legendContent}&lt;/div&gt;`;
+    }
+
+    /**
+     *
+     * @param {string|undefined} additionalContent - additional content to add to legend
+     * @private
+     */
+    _addLegendContent(additionalContent) {
+        additionalContent = typeof additionalContent == &apos;string&apos; ? additionalContent : &apos;&apos;;
+
+        let addCollapse = additionalContent.indexOf(&apos;&lt;ul&gt;&apos;) &gt; -1;
+
+        if (addCollapse) {
+            additionalContent = &apos;&lt;span class=&quot;legend-items-expander&quot; title=&quot;Expand/Collapse&quot;&gt;&amp;#9660;&lt;/span&gt;&apos; + additionalContent;
+        }
+
+        this._legendContent += additionalContent;
+
+        this._$legendDiv = $(`#${this.id}-legend-layer-div`);
+
+        if (this._$legendDiv.length &gt; 0) {
+            this._$legendDiv.append(additionalContent);
+            this.applyCollapse();
+        }
+    }
+
+    /**
+     * add additional content to the legend
+     * @param {string} [additionalContent=] - additonal content to add
+     */
+    addLegendContent(additionalContent) {
+        this._addLegendContent(additionalContent);
+    }
+
+    applyCollapse() {
+        if (this._applyCollapseCalled) {
+            console.log(&apos;collapse already applied&apos;);
+
+            return undefined;
+        }
+
+        this._$legendDiv = $(`#${this.id}-legend-layer-div`);
+
+        if (this._$legendDiv.length &gt; 0) {
+
+            let $expander = this._$legendDiv.find(&apos;.legend-items-expander&apos;);
+
+            if ($expander.length &gt; 0) {
+                this._applyCollapseCalled = true;
+
+                $expander.click(function () {
+                    let $this = $(this);
+
+                    $this.siblings(&apos;ul&apos;).slideToggle();
+
+                    if ($this.hasClass(&apos;legend-layer-group-collapsed&apos;)) {
+                        $this.removeClass(&apos;legend-layer-group-collapsed&apos;);
+                        $this.html(&apos;&amp;#9660;&apos;);
+                    } else {
+                        $this.addClass(&apos;legend-layer-group-collapsed&apos;);
+                        $this.html(&apos;&amp;#9654;&apos;);
+                    }
+                });
+
+                if (this._legendCollapse) {
+                    $expander.trigger(&apos;click&apos;);
+                }
+            }
+        }
+    }
+
+    /**
+     * trick to refresh the layer
+     */
+    refresh(){
+        if (this.source){
+            this.source.refresh();
+            //let src = this.source;
+            //this.olLayer.setSource(undefined);
+            //this.olLayer.setSource(src);
+        }
+    }
+
+
+    /**
+     * get the legend content
+     * @type {string}
+     */
+    get legendContent() {
+        return this._legendContent;
+    }
+
+    /**
+     * set the legend content directly
+     * @param {string} newVal - new content
+     * @protected
+     */
+    set legendContent(newVal) {
+        this._legendContent = newVal;
+    }
+
+    /**
+     * get the map get params
+     * @type {object}
+     */
+    get params() {
+        return this._params;
+    }
+
+    /**
+     * set the map get params
+     * @param {object} newParams - new get params
+     * @protected
+     */
+    set params(newParams){
+        this._params = newParams;
+    }
+
+    /**
+     * get the minimum resolution
+     * @type {number|*}
+     */
+    get minResolution() {
+        return this._minResolution;
+    }
+
+    /**
+     * get the maximum resolution
+     * @type {number|*}
+     */
+    get maxResolution() {
+        return this._maxResolution;
+    }
+
+    /**
+     * get min zoom
+     * @type {number|*}
+     */
+    get minZoom() {
+        return this._minZoom;
+    }
+
+    /**
+     * get max zoom
+     * @type {number|*}
+     */
+    get maxZoom() {
+        return this._maxZoom;
+    }
+
+    /**
+     * get the url
+     * @type {string}
+     */
+    get url() {
+        return this._url;
+    }
+
+    /**
+     * Get the layer visibility
+     * @type {boolean}
+     */
+    get visible() {
+        return this._visible;
+    }
+
+    /**
+     * Set the layer visibility
+     * @param {boolean} visibility - layer visibility
+     */
+    set visible(visibility) {
+        this._visible = visibility;
+        if (this.olLayer) {
+            this.olLayer.setVisible(this._visible);
+            if (visibility &amp;&amp; !this._loaded) {
+                this._load();
+            }
+        }
+    }
+
+    /**
+     * Get the layer opacity
+     * @type {number}
+     */
+    get opacity() {
+        return this._opacity;
+    }
+
+    /**
+     * Set the layer opacity
+     * @param {number} opacity - layer opacity
+     */
+    set opacity(opacity) {
+        this._opacity = opacity;
+        if (this.olLayer) {
+            this.olLayer.setOpacity(this._opacity);
+        }
+    }
+
+    /**
+     * Get the layer name
+     * @type {string}
+     */
+    get name() {
+        return this._name;
+    }
+
+    /**
+     * set the layer name
+     * @param {string} newName - the new name
+     */
+    set name(newName) {
+        this._name = newName;
+    }
+
+    /**
+     * Check if the layer is loaded
+     * @type {boolean}
+     */
+    get loaded() {
+        return this._loaded;
+    }
+
+    /**
+     * get the layer source
+     * @type {*}
+     */
+    get source() {
+        return this._source;
+    }
+
+    /**
+     * get the z index
+     * @type {number}
+     */
+    get zIndex(){
+        return this._zIndex;
+    }
+
+    /**
+     * set the z index
+     * @param {number} newZ - new Z index
+     */
+    set zIndex(newZ){
+        this._zIndex = newZ;
+        this.olLayer.setZIndex(this.zIndex);
+    }
+
+    /**
+     * 
+     * @returns {ol.layer.Base|undefined} the ol layer
+     */
+    get olLayer(){
+        return this._olLayer;
+    }
+}
+
+nm.LayerBase = LayerBase;
+export default LayerBase;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

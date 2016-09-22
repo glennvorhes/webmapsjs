@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/olHelpers/esriToOlStyle.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/glennvorhes/webmapsjs.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-bundleEs2015Multiple">bundleEs2015Multiple</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-processLessFile">processLessFile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-dirNameFilePath">dirNameFilePath</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">collections</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/ItsLayerCollection.js~ItsLayerCollection.html">ItsLayerCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/LayerLegend.js~LayerLegend.html">LayerLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/Sliders.js~Sliders.html">Sliders</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">domUtil</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/domUtil/SelectBoxBase.js~SelectBoxBase.html">SelectBoxBase</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">jquery</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-overflowScroll">overflowScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-responsiveScroll">responsiveScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-windowScroll">windowScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-jQuery">jQuery</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">jquery-plugin</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/jquery-plugin/day-range.js~DayRange.html">DayRange</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">layers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBase.js~LayerBase.html">LayerBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVector.js~LayerBaseVector.html">LayerBaseVector</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVectorEsri.js~LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVectorGeoJson.js~LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseXyzTile.js~LayerBaseXyzTile.html">LayerBaseXyzTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerEsriMapServer.js~LayerEsriMapServer.html">LayerEsriMapServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerEsriTile.js~LayerEsriTile.html">LayerEsriTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerItsInventory.js~LayerItsInventory.html">LayerItsInventory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerRealEarthTile.js~LayerRealEarthTile.html">LayerRealEarthTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerRealEarthVector.js~LayerVectorRealEarth.html">LayerVectorRealEarth</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">mixin</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimate.js~RealEarthAnimate.html">RealEarthAnimate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimateTile.js~RealEarthAnimateTile.html">RealEarthAnimateTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimateVector.js~RealEarthAnimateVector.html">RealEarthAnimateVector</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">ol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ol">ol</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">olHelpers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/SortedFeatures.js~SortedFeatures.html">SortedFeatures</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/layerSwipe.js~LayerSwipe.html">LayerSwipe</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapInteractionBase.js~MapInteractionBase.html">MapInteractionBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapMoveCls.js~MapMoveCls.html">MapMoveCls</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapPopupCls.js~MapPopupCls.html">MapPopupCls</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeMapServiceLegend">makeMapServiceLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-calculateExtent">calculateExtent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-fitToMap">fitToMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-propertiesZoomStyle">propertiesZoomStyle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMap">quickMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMapBase">quickMapBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMapMulti">quickMapMulti</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-resolutionToZoom">resolutionToZoom</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-zoomToResolution">zoomToResolution</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-styleAndLegend">styleAndLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-quickMapMultiReturn">quickMapMultiReturn</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-definedAndNotNull">definedAndNotNull</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-undefinedOrNull">undefinedOrNull</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-rgb2hex">rgb2hex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-rgbToRgba">rgbToRgba</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getUrlParams">getUrlParams</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeGuid">makeGuid</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-keyValPairs">keyValPairs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-provide">provide</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-colorLookupByNumber">colorLookupByNumber</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-keyValuePair">keyValuePair</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/olHelpers/esriToOlStyle.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Created by gavorhes on 1/4/2016.
+ */
+import provide from &apos;../util/provide&apos;;
+import ol from &apos;../ol/ol&apos;;
+const nm = provide(&apos;olHelpers.esriToOlStyle&apos;);
+
+/**
+ * This callback is displayed as part of the Requester class.
+ * @callback styleFunc
+ * @param {ol.Feature} feat - openlayers feature
+ * @param {number} resolution - map resolution
+ */
+
+/**
+ *
+ * @param {Array&lt;number&gt;} colorArray - input color array
+ * @param {number} opacity - the opacity 0 to 1
+ * @returns {string} rgba string
+ * @private
+ */
+function _colorArrayToRgba(colorArray, opacity) {
+    &quot;use strict&quot;;
+
+    return `rgba(${colorArray[0]},${colorArray[1]},${colorArray[2]},${opacity})`;
+}
+
+/**
+ * escape html charcters
+ * @param {string} str - input string
+ * @returns {string} escaped string
+ */
+function htmlEscape(str) {
+    return String(str)
+        .replace(/&amp;/g, &apos;&amp;amp;&apos;)
+        .replace(/&quot;/g, &apos;&amp;quot;&apos;)
+        .replace(/&apos;/g, &apos;&amp;#39;&apos;)
+        .replace(/&lt;/g, &apos;&amp;lt;&apos;)
+        .replace(/&gt;/g, &apos;&amp;gt;&apos;);
+}
+
+nm.htmlEscape = htmlEscape;
+
+
+class CommonSymbol {
+
+    /**
+     * 
+     * @param symbolObj
+     * @param {number} opacity
+     */
+    constructor(symbolObj, opacity) {
+        this.symbolObj = symbolObj;
+        this.opacity = opacity;
+        this.olStyle = undefined;
+        this.legendHtml = &apos;&apos;;
+    }
+}
+
+class PointSymbol extends CommonSymbol {
+    constructor(symbolObj, opacity) {
+        super(symbolObj, opacity);
+        switch (this.symbolObj[&apos;type&apos;]) {
+            case &apos;esriSMS&apos;:
+                let innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
+                let outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);
+                let outlineWidth = this.symbolObj.outline.width;
+                let radius = this.symbolObj.size;
+
+
+                this.olStyle = new ol.style.Style({
+                    image: new ol.style.Circle({
+                        radius: radius,
+                        fill: new ol.style.Fill({
+                            color: innerColor
+                        }),
+                        stroke: new ol.style.Stroke({color: outerColor, width: outlineWidth})
+                    })
+                });
+                this.legendHtml = `&lt;span class=&quot;legend-layer-icon&quot; style=&quot;color: ${innerColor}&quot;&gt;&amp;#9679;&lt;/span&gt;`;
+                break;
+            case &apos;esriPMS&apos;:
+                this.olStyle = new ol.style.Style({
+                    image: new ol.style.Icon({src: `data:image/png;base64,${this.symbolObj[&apos;imageData&apos;]}`})
+                });
+                this.legendHtml = `&lt;img class=&quot;legend-layer-icon&quot; height=&quot;17&quot; src=&quot;data:image/png;base64,${this.symbolObj[&apos;imageData&apos;]}&quot;&gt;`;
+                break;
+            default:
+                console.log(this.symbolObj);
+                alert(&apos;Point symbol does not handle symbol type: &apos; + this.symbolObj[&apos;type&apos;]);
+        }
+    }
+}
+
+class LineSymbol extends CommonSymbol {
+    constructor(symbolObj, opacity) {
+        super(symbolObj, opacity);
+        switch (this.symbolObj[&apos;type&apos;]) {
+            case &apos;esriSLS&apos;:
+                let innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
+                let lineWidth = this.symbolObj.width;
+
+                this.olStyle = new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: innerColor,
+                        //lineDash: [4],
+                        width: lineWidth
+                    })
+                });
+
+                this.legendHtml = `&lt;span class=&quot;legend-layer-icon&quot; `;
+                this.legendHtml += `style=&quot;`;
+                this.legendHtml += `background-color: ${innerColor};`;
+                this.legendHtml += `width: 40px;`;
+                this.legendHtml += `height: 4px;`;
+                this.legendHtml += `position: relative;`;
+                this.legendHtml += `display: inline-block;`;
+                this.legendHtml += `top: -1px;`;
+                this.legendHtml += `&quot;&gt;&lt;/span&gt;`;
+                break;
+            default:
+                console.log(this.symbolObj);
+                alert(&apos;Line symbol does not handle symbol type: &apos; + this.symbolObj[&apos;type&apos;]);
+        }
+    }
+}
+
+class PolygonSymbol extends CommonSymbol {
+    constructor(symbolObj, opacity) {
+        super(symbolObj, opacity);
+        switch (this.symbolObj[&apos;type&apos;]) {
+            case &apos;esriSFS&apos;:
+                let innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
+                let outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);
+                let outlineWidth = this.symbolObj.outline.width;
+
+                this.olStyle = new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: outerColor,
+                        //lineDash: [4],
+                        width: outlineWidth
+                    }),
+                    fill: new ol.style.Fill({
+                        color: innerColor
+                    })
+                });
+
+                this.legendHtml = `&lt;span class=&quot;legend-layer-icon&quot; `;
+                this.legendHtml += `style=&quot;`;
+                this.legendHtml += `background-color: ${innerColor};`;
+                this.legendHtml += `border: solid ${outerColor} 1px;`;
+                this.legendHtml += `width: 40px;`;
+                this.legendHtml += `height: 9px;`;
+                this.legendHtml += `position: relative;`;
+                this.legendHtml += `display: inline-block;`;
+                this.legendHtml += `top: 2px;`;
+                this.legendHtml += `&quot;&gt;&lt;/span&gt;`;
+                break;
+
+            default:
+                console.log(this.symbolObj);
+                alert(&apos;Polygon symbol does handle symbol type: &apos; + this.symbolObj[&apos;type&apos;]);
+        }
+    }
+}
+
+class SymbolGenerator {
+    constructor(esriResponse) {
+        this.opacity = (100 - (esriResponse[&apos;drawingInfo&apos;][&apos;transparency&apos;] || 0)) / 100;
+        this.renderer = esriResponse[&apos;drawingInfo&apos;][&apos;renderer&apos;];
+        this.olStyle = undefined;
+        this.legendHtml = &apos;&apos;;
+    }
+}
+
+class SingleSymbol extends SymbolGenerator {
+    /**
+     *
+     * @param {object} esriResponse - layer info
+     * @param {Constructor|*} SymbolClass - the symbol class to use
+     */
+    constructor(esriResponse, SymbolClass) {
+        super(esriResponse);
+        this.symbol = this.renderer[&apos;symbol&apos;];
+        let symbolObj = new SymbolClass(this.symbol, this.opacity);
+        this.olStyle = symbolObj.olStyle;
+        this.legendHtml = symbolObj.legendHtml;
+    }
+}
+
+class UniqueValueSymbol extends SymbolGenerator {
+    /**
+     *
+     * @param {object} esriResponse - layer info
+     * @param {Constructor|*} SymbolClass - the Symbol class definition
+     */
+    constructor(esriResponse, SymbolClass) {
+        super(esriResponse);
+        this.uniqueValueInfos = this.renderer[&apos;uniqueValueInfos&apos;];
+        this.propertyName = this.renderer[&apos;field1&apos;];
+        this.defaultSymbol = this.renderer[&apos;defaultSymbol&apos;];
+
+
+        if (this.defaultSymbol) {
+            let symbolObj = new SymbolClass(this.defaultSymbol, this.opacity);
+            this.defaultStyle = symbolObj.olStyle;
+            this.defaultLabelHtml = `&lt;span class=&quot;legend-layer-subitem&quot;&gt;${htmlEscape(this.renderer[&apos;defaultLabel&apos;])}&lt;/span&gt;` + symbolObj.legendHtml;
+        } else {
+            this.defaultStyle = undefined;
+            this.defaultLabelHtml = &apos;other&apos;;
+        }
+
+        this.valueArray = [];
+        this.labelArray = [];
+        this.legendArray = [];
+        this.propertyStyleLookup = {};
+
+        for (let uniqueVal of this.uniqueValueInfos) {
+            this.labelArray.push(uniqueVal[&apos;label&apos;]);
+            this.valueArray.push(uniqueVal[&apos;value&apos;]);
+            let uniqueSym = new SymbolClass(uniqueVal.symbol, this.opacity);
+            this.legendArray.push(`&lt;span class=&quot;legend-layer-subitem&quot;&gt;${htmlEscape(uniqueVal[&apos;label&apos;])}&lt;/span&gt;` + uniqueSym.legendHtml);
+            this.propertyStyleLookup[uniqueVal[&apos;value&apos;]] = uniqueSym.olStyle;
+        }
+
+        let _this = this;
+
+        this.olStyle = function (feature, resolution) {
+            let checkProperties = feature.getProperties();
+            let checkProperty = checkProperties[_this.propertyName];
+
+            let returnValue;
+            if (_this.propertyStyleLookup[checkProperty] !== undefined) {
+                returnValue = [_this.propertyStyleLookup[checkProperty]];
+            } else {
+               returnValue = [_this.defaultStyle];
+            }
+
+            return returnValue;
+        };
+
+        if (this.defaultLabelHtml !== null) {
+            this.legendArray.push(this.defaultLabelHtml);
+        }
+
+        this.legendHtml = &apos;&lt;ul&gt;&apos;;
+        for (let h of this.legendArray) {
+            this.legendHtml += `&lt;li&gt;${h}&lt;/li&gt;`;
+        }
+        this.legendHtml += &apos;&lt;/ul&gt;&apos;;
+    }
+}
+
+
+
+
+
+/**
+ * style and legend object
+ * @typedef {object} styleAndLegend
+ * @property {styleFunc} style - style function
+ * @property {string} legend - legend content
+ */
+
+/**
+ *
+ * @param {object} esriResponse - layer info
+ * @returns {styleAndLegend} style and legend object
+ */
+export function makeFeatureServiceLegendAndSymbol(esriResponse) {
+    &quot;use strict&quot;;
+    let renderer = esriResponse[&apos;drawingInfo&apos;][&apos;renderer&apos;];
+    let symbolLegendOut = null;
+
+    switch (renderer[&apos;type&apos;]) {
+        case &apos;simple&apos;:
+            switch (esriResponse[&apos;geometryType&apos;]) {
+                case &apos;esriGeometryPoint&apos;:
+                    symbolLegendOut = new SingleSymbol(esriResponse, PointSymbol);
+                    break;
+                case &apos;esriGeometryPolyline&apos;:
+                    symbolLegendOut = new SingleSymbol(esriResponse, LineSymbol);
+                    break;
+                case &apos;esriGeometryPolygon&apos;:
+                    symbolLegendOut = new SingleSymbol(esriResponse, PolygonSymbol);
+                    break;
+                default:
+                    console.log(esriResponse);
+                    alert(esriResponse[&apos;geometryType&apos;] + &apos; not handled&apos;);
+            }
+            break;
+        case &apos;uniqueValue&apos;:
+            switch (esriResponse[&apos;geometryType&apos;]) {
+                case &apos;esriGeometryPoint&apos;:
+                    symbolLegendOut = new UniqueValueSymbol(esriResponse, PointSymbol);
+                    break;
+                case &apos;esriGeometryPolyline&apos;:
+                    symbolLegendOut = new UniqueValueSymbol(esriResponse, LineSymbol);
+                    break;
+                case &apos;esriGeometryPolygon&apos;:
+                    symbolLegendOut = new UniqueValueSymbol(esriResponse, PolygonSymbol);
+                    break;
+                default:
+                    console.log(esriResponse);
+                    alert(esriResponse[&apos;geometryType&apos;] + &apos; not handled&apos;);
+            }
+            break;
+        default:
+            alert(&apos;not handled renderer type: &apos; + renderer[&apos;type&apos;]);
+    }
+
+    if (symbolLegendOut == null) {
+        return {style: undefined, legend: &apos;&apos;};
+    } else {
+        return {style: symbolLegendOut.olStyle, legend: symbolLegendOut.legendHtml};
+    }
+}
+
+nm.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
+
+/**
+ *
+ * @param {object} lyrObject - the layer as defined in the response
+ * @param {boolean} [iconsOnly=false] use only icons
+ * @returns {string} legend html
+ */
+function mapServiceLegendItem(lyrObject, iconsOnly) {
+
+
+    iconsOnly = typeof iconsOnly == &apos;boolean&apos; ? iconsOnly : false;
+    let layerName = lyrObject[&apos;layerName&apos;];
+    let legendItems = lyrObject[&apos;legend&apos;];
+    let legendHtml = &apos;&apos;;
+
+    if (legendItems.length == 1) {
+        legendHtml = `&lt;img class=&quot;legend-layer-icon&quot; height=&quot;17&quot; src=&quot;data:image/png;base64,${legendItems[0][&apos;imageData&apos;]}&quot;&gt;`;
+    } else {
+        legendHtml += &apos;&lt;span class=&quot;legend-items-expander&quot; title=&quot;Expand/Collapse&quot;&gt;&amp;#9660;&lt;/span&gt;&lt;ul&gt;&apos;;
+        for (let i = 0; i &lt; legendItems.length; i++) {
+            legendHtml += `&lt;li&gt;`;
+            legendHtml += `&lt;span class=&quot;legend-layer-subitem&quot;&gt;${htmlEscape(legendItems[i][&apos;label&apos;])}&lt;/span&gt;`;
+            legendHtml += `&lt;img class=&quot;legend-layer-icon&quot; height=&quot;17&quot; src=&quot;data:image/png;base64,${legendItems[i][&apos;imageData&apos;]}&quot;&gt;`;
+            legendHtml += `&lt;/li&gt;`;
+        }
+        legendHtml += &apos;&lt;/ul&gt;&apos;;
+    }
+
+    if (!iconsOnly) {
+        legendHtml = `&lt;span class=&quot;legend-layer-subitem&quot;&gt;${layerName}&lt;/span&gt;` + legendHtml;
+    }
+
+    return legendHtml;
+}
+
+/**
+ * make map service legent
+ * @param {object} esriResponse - layer info
+ * @returns {string} legend content
+ */
+export function makeMapServiceLegend(esriResponse) {
+    &quot;use strict&quot;;
+
+    let newLegendHtml = &apos;&apos;;
+
+    let layers = esriResponse[&apos;layers&apos;];
+
+    if (layers.length == 1) {
+        newLegendHtml += mapServiceLegendItem(layers[0], true);
+    } else {
+        newLegendHtml += &apos;&lt;ul&gt;&apos;;
+        for (let i = 0; i &lt; layers.length; i++) {
+            newLegendHtml += &apos;&lt;li&gt;&apos; + mapServiceLegendItem(layers[i]) + &apos;&lt;/li&gt;&apos;;
+        }
+        newLegendHtml += &apos;&lt;/ul&gt;&apos;;
+    }
+
+    return newLegendHtml;
+}
+
+nm.makeMapServiceLegend = makeMapServiceLegend;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

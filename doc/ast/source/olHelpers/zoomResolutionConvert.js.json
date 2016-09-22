@@ -1,0 +1,3812 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "provide",
+            "range": [
+              58,
+              65
+            ],
+            "loc": {
+              "start": {
+                "line": 5,
+                "column": 7
+              },
+              "end": {
+                "line": 5,
+                "column": 14
+              }
+            }
+          },
+          "range": [
+            58,
+            65
+          ],
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 7
+            },
+            "end": {
+              "line": 5,
+              "column": 14
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "../util/provide",
+        "raw": "'../util/provide'",
+        "range": [
+          71,
+          88
+        ],
+        "loc": {
+          "start": {
+            "line": 5,
+            "column": 20
+          },
+          "end": {
+            "line": 5,
+            "column": 37
+          }
+        }
+      },
+      "range": [
+        51,
+        89
+      ],
+      "loc": {
+        "start": {
+          "line": 5,
+          "column": 0
+        },
+        "end": {
+          "line": 5,
+          "column": 38
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Created by gavorhes on 12/14/2015.\r\n ",
+          "range": [
+            0,
+            47
+          ],
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "nm",
+            "range": [
+              97,
+              99
+            ],
+            "loc": {
+              "start": {
+                "line": 6,
+                "column": 6
+              },
+              "end": {
+                "line": 6,
+                "column": 8
+              }
+            }
+          },
+          "init": {
+            "type": "CallExpression",
+            "callee": {
+              "type": "Identifier",
+              "name": "provide",
+              "range": [
+                102,
+                109
+              ],
+              "loc": {
+                "start": {
+                  "line": 6,
+                  "column": 11
+                },
+                "end": {
+                  "line": 6,
+                  "column": 18
+                }
+              }
+            },
+            "arguments": [
+              {
+                "type": "Literal",
+                "value": "olHelpers.zoomResolutionConvert",
+                "raw": "'olHelpers.zoomResolutionConvert'",
+                "range": [
+                  110,
+                  143
+                ],
+                "loc": {
+                  "start": {
+                    "line": 6,
+                    "column": 19
+                  },
+                  "end": {
+                    "line": 6,
+                    "column": 52
+                  }
+                }
+              }
+            ],
+            "range": [
+              102,
+              144
+            ],
+            "loc": {
+              "start": {
+                "line": 6,
+                "column": 11
+              },
+              "end": {
+                "line": 6,
+                "column": 53
+              }
+            }
+          },
+          "range": [
+            97,
+            144
+          ],
+          "loc": {
+            "start": {
+              "line": 6,
+              "column": 6
+            },
+            "end": {
+              "line": 6,
+              "column": 53
+            }
+          }
+        }
+      ],
+      "kind": "const",
+      "range": [
+        91,
+        145
+      ],
+      "loc": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 54
+        }
+      }
+    },
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "_zoomResLookup",
+            "range": [
+              153,
+              167
+            ],
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 4
+              },
+              "end": {
+                "line": 8,
+                "column": 18
+              }
+            }
+          },
+          "init": {
+            "type": "ArrayExpression",
+            "elements": [
+              {
+                "type": "Literal",
+                "value": 156543.03392804097,
+                "raw": "156543.03392804097",
+                "range": [
+                  177,
+                  195
+                ],
+                "loc": {
+                  "start": {
+                    "line": 9,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 9,
+                    "column": 22
+                  }
+                }
+              },
+              {
+                "type": "Literal",
+                "value": 78271.51696402048,
+                "raw": "78271.51696402048",
+                "range": [
+                  206,
+                  223
+                ],
+                "loc": {
+                  "start": {
+                    "line": 10,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 10,
+                    "column": 21
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "0",
+                    "range": [
+                      197,
+                      200
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 9,
+                        "column": 24
+                      },
+                      "end": {
+                        "line": 9,
+                        "column": 27
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 39135.75848201024,
+                "raw": "39135.75848201024",
+                "range": [
+                  234,
+                  251
+                ],
+                "loc": {
+                  "start": {
+                    "line": 11,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 11,
+                    "column": 21
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "1",
+                    "range": [
+                      225,
+                      228
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 10,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 26
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 19567.87924100512,
+                "raw": "19567.87924100512",
+                "range": [
+                  262,
+                  279
+                ],
+                "loc": {
+                  "start": {
+                    "line": 12,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 12,
+                    "column": 21
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "2",
+                    "range": [
+                      253,
+                      256
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 11,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 11,
+                        "column": 26
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 9783.93962050256,
+                "raw": "9783.93962050256",
+                "range": [
+                  290,
+                  306
+                ],
+                "loc": {
+                  "start": {
+                    "line": 13,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 13,
+                    "column": 20
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "3",
+                    "range": [
+                      281,
+                      284
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 12,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 12,
+                        "column": 26
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 4891.96981025128,
+                "raw": "4891.96981025128",
+                "range": [
+                  317,
+                  333
+                ],
+                "loc": {
+                  "start": {
+                    "line": 14,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 14,
+                    "column": 20
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "4",
+                    "range": [
+                      308,
+                      311
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 13,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 13,
+                        "column": 25
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 2445.98490512564,
+                "raw": "2445.98490512564",
+                "range": [
+                  344,
+                  360
+                ],
+                "loc": {
+                  "start": {
+                    "line": 15,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 15,
+                    "column": 20
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "5",
+                    "range": [
+                      335,
+                      338
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 14,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 14,
+                        "column": 25
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 1222.99245256282,
+                "raw": "1222.99245256282",
+                "range": [
+                  371,
+                  387
+                ],
+                "loc": {
+                  "start": {
+                    "line": 16,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 16,
+                    "column": 20
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "6",
+                    "range": [
+                      362,
+                      365
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 15,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 15,
+                        "column": 25
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 611.49622628141,
+                "raw": "611.49622628141",
+                "range": [
+                  398,
+                  413
+                ],
+                "loc": {
+                  "start": {
+                    "line": 17,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 17,
+                    "column": 19
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "7",
+                    "range": [
+                      389,
+                      392
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 16,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 16,
+                        "column": 25
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 305.748113140705,
+                "raw": "305.748113140705",
+                "range": [
+                  424,
+                  440
+                ],
+                "loc": {
+                  "start": {
+                    "line": 18,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 18,
+                    "column": 20
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "8",
+                    "range": [
+                      415,
+                      418
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 17,
+                        "column": 21
+                      },
+                      "end": {
+                        "line": 17,
+                        "column": 24
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 152.8740565703525,
+                "raw": "152.8740565703525",
+                "range": [
+                  451,
+                  468
+                ],
+                "loc": {
+                  "start": {
+                    "line": 19,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 19,
+                    "column": 21
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "9",
+                    "range": [
+                      442,
+                      445
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 18,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 18,
+                        "column": 25
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 76.43702828517625,
+                "raw": "76.43702828517625",
+                "range": [
+                  480,
+                  497
+                ],
+                "loc": {
+                  "start": {
+                    "line": 20,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 20,
+                    "column": 21
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "10",
+                    "range": [
+                      470,
+                      474
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 19,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 19,
+                        "column": 27
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 38.21851414258813,
+                "raw": "38.21851414258813",
+                "range": [
+                  509,
+                  526
+                ],
+                "loc": {
+                  "start": {
+                    "line": 21,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 21,
+                    "column": 21
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "11",
+                    "range": [
+                      499,
+                      503
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 20,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 20,
+                        "column": 27
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 19.109257071294063,
+                "raw": "19.109257071294063",
+                "range": [
+                  538,
+                  556
+                ],
+                "loc": {
+                  "start": {
+                    "line": 22,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 22,
+                    "column": 22
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "12",
+                    "range": [
+                      528,
+                      532
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 21,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 21,
+                        "column": 27
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 9.554628535647032,
+                "raw": "9.554628535647032",
+                "range": [
+                  568,
+                  585
+                ],
+                "loc": {
+                  "start": {
+                    "line": 23,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 23,
+                    "column": 21
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "13",
+                    "range": [
+                      558,
+                      562
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 22,
+                        "column": 24
+                      },
+                      "end": {
+                        "line": 22,
+                        "column": 28
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 4.777314267823516,
+                "raw": "4.777314267823516",
+                "range": [
+                  597,
+                  614
+                ],
+                "loc": {
+                  "start": {
+                    "line": 24,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 24,
+                    "column": 21
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "14",
+                    "range": [
+                      587,
+                      591
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 23,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 23,
+                        "column": 27
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 2.388657133911758,
+                "raw": "2.388657133911758",
+                "range": [
+                  626,
+                  643
+                ],
+                "loc": {
+                  "start": {
+                    "line": 25,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 25,
+                    "column": 21
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "15",
+                    "range": [
+                      616,
+                      620
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 24,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 24,
+                        "column": 27
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 1.194328566955879,
+                "raw": "1.194328566955879",
+                "range": [
+                  655,
+                  672
+                ],
+                "loc": {
+                  "start": {
+                    "line": 26,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 26,
+                    "column": 21
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "16",
+                    "range": [
+                      645,
+                      649
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 25,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 25,
+                        "column": 27
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 0.5971642834779395,
+                "raw": "0.5971642834779395",
+                "range": [
+                  684,
+                  702
+                ],
+                "loc": {
+                  "start": {
+                    "line": 27,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 27,
+                    "column": 22
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "17",
+                    "range": [
+                      674,
+                      678
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 26,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 26,
+                        "column": 27
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 0.29858214173896974,
+                "raw": "0.29858214173896974",
+                "range": [
+                  714,
+                  733
+                ],
+                "loc": {
+                  "start": {
+                    "line": 28,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 28,
+                    "column": 23
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "18",
+                    "range": [
+                      704,
+                      708
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 27,
+                        "column": 24
+                      },
+                      "end": {
+                        "line": 27,
+                        "column": 28
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 0.14929107086948487,
+                "raw": "0.14929107086948487",
+                "range": [
+                  745,
+                  764
+                ],
+                "loc": {
+                  "start": {
+                    "line": 29,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 29,
+                    "column": 23
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "19",
+                    "range": [
+                      735,
+                      739
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 28,
+                        "column": 25
+                      },
+                      "end": {
+                        "line": 28,
+                        "column": 29
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 0.07464553543474244,
+                "raw": "0.07464553543474244",
+                "range": [
+                  776,
+                  795
+                ],
+                "loc": {
+                  "start": {
+                    "line": 30,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 30,
+                    "column": 23
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "20",
+                    "range": [
+                      766,
+                      770
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 29,
+                        "column": 25
+                      },
+                      "end": {
+                        "line": 29,
+                        "column": 29
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 0.03732276771737122,
+                "raw": "0.03732276771737122",
+                "range": [
+                  807,
+                  826
+                ],
+                "loc": {
+                  "start": {
+                    "line": 31,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 31,
+                    "column": 23
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "21",
+                    "range": [
+                      797,
+                      801
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 30,
+                        "column": 25
+                      },
+                      "end": {
+                        "line": 30,
+                        "column": 29
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 0.01866138385868561,
+                "raw": "0.01866138385868561",
+                "range": [
+                  838,
+                  857
+                ],
+                "loc": {
+                  "start": {
+                    "line": 32,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 32,
+                    "column": 23
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "22",
+                    "range": [
+                      828,
+                      832
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 31,
+                        "column": 25
+                      },
+                      "end": {
+                        "line": 31,
+                        "column": 29
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 0.009330691929342804,
+                "raw": "0.009330691929342804",
+                "range": [
+                  869,
+                  889
+                ],
+                "loc": {
+                  "start": {
+                    "line": 33,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 33,
+                    "column": 24
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "23",
+                    "range": [
+                      859,
+                      863
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 32,
+                        "column": 25
+                      },
+                      "end": {
+                        "line": 32,
+                        "column": 29
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 0.004665345964671402,
+                "raw": "0.004665345964671402",
+                "range": [
+                  901,
+                  921
+                ],
+                "loc": {
+                  "start": {
+                    "line": 34,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 34,
+                    "column": 24
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "24",
+                    "range": [
+                      891,
+                      895
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 33,
+                        "column": 26
+                      },
+                      "end": {
+                        "line": 33,
+                        "column": 30
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 0.002332672982335701,
+                "raw": "0.002332672982335701",
+                "range": [
+                  933,
+                  953
+                ],
+                "loc": {
+                  "start": {
+                    "line": 35,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 35,
+                    "column": 24
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "25",
+                    "range": [
+                      923,
+                      927
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 34,
+                        "column": 26
+                      },
+                      "end": {
+                        "line": 34,
+                        "column": 30
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 0.0011663364911678506,
+                "raw": "0.0011663364911678506",
+                "range": [
+                  965,
+                  986
+                ],
+                "loc": {
+                  "start": {
+                    "line": 36,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 36,
+                    "column": 25
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "26",
+                    "range": [
+                      955,
+                      959
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 35,
+                        "column": 26
+                      },
+                      "end": {
+                        "line": 35,
+                        "column": 30
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Literal",
+                "value": 0.0005831682455839253,
+                "raw": "0.0005831682455839253",
+                "range": [
+                  998,
+                  1019
+                ],
+                "loc": {
+                  "start": {
+                    "line": 37,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 37,
+                    "column": 25
+                  }
+                },
+                "leadingComments": [
+                  {
+                    "type": "Line",
+                    "value": "27",
+                    "range": [
+                      988,
+                      992
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 36,
+                        "column": 27
+                      },
+                      "end": {
+                        "line": 36,
+                        "column": 31
+                      }
+                    }
+                  }
+                ],
+                "trailingComments": [
+                  {
+                    "type": "Line",
+                    "value": "28",
+                    "range": [
+                      1020,
+                      1024
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 37,
+                        "column": 26
+                      },
+                      "end": {
+                        "line": 37,
+                        "column": 30
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "range": [
+              170,
+              1027
+            ],
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 21
+              },
+              "end": {
+                "line": 38,
+                "column": 1
+              }
+            }
+          },
+          "range": [
+            153,
+            1027
+          ],
+          "loc": {
+            "start": {
+              "line": 8,
+              "column": 4
+            },
+            "end": {
+              "line": 38,
+              "column": 1
+            }
+          }
+        }
+      ],
+      "kind": "let",
+      "range": [
+        149,
+        1028
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 0
+        },
+        "end": {
+          "line": 38,
+          "column": 2
+        }
+      },
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Get the resolution given the zoom level\r\n * @param {number} zoomLevel - the zoom level\r\n * @returns {number|*} the map resolution\r\n ",
+          "range": [
+            1032,
+            1174
+          ],
+          "loc": {
+            "start": {
+              "line": 40,
+              "column": 0
+            },
+            "end": {
+              "line": 44,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": {
+        "type": "FunctionDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "zoomToResolution",
+          "range": [
+            1192,
+            1208
+          ],
+          "loc": {
+            "start": {
+              "line": 45,
+              "column": 16
+            },
+            "end": {
+              "line": 45,
+              "column": 32
+            }
+          }
+        },
+        "params": [
+          {
+            "type": "Identifier",
+            "name": "zoomLevel",
+            "range": [
+              1209,
+              1218
+            ],
+            "loc": {
+              "start": {
+                "line": 45,
+                "column": 33
+              },
+              "end": {
+                "line": 45,
+                "column": 42
+              }
+            }
+          }
+        ],
+        "body": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ExpressionStatement",
+              "expression": {
+                "type": "Literal",
+                "value": "use strict",
+                "raw": "\"use strict\"",
+                "range": [
+                  1227,
+                  1239
+                ],
+                "loc": {
+                  "start": {
+                    "line": 46,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 16
+                  }
+                }
+              },
+              "range": [
+                1227,
+                1240
+              ],
+              "loc": {
+                "start": {
+                  "line": 46,
+                  "column": 4
+                },
+                "end": {
+                  "line": 46,
+                  "column": 17
+                }
+              }
+            },
+            {
+              "type": "IfStatement",
+              "test": {
+                "type": "BinaryExpression",
+                "operator": "==",
+                "left": {
+                  "type": "UnaryExpression",
+                  "operator": "typeof",
+                  "argument": {
+                    "type": "Identifier",
+                    "name": "zoomLevel",
+                    "range": [
+                      1259,
+                      1268
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 48,
+                        "column": 15
+                      },
+                      "end": {
+                        "line": 48,
+                        "column": 24
+                      }
+                    }
+                  },
+                  "prefix": true,
+                  "range": [
+                    1252,
+                    1268
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 48,
+                      "column": 8
+                    },
+                    "end": {
+                      "line": 48,
+                      "column": 24
+                    }
+                  }
+                },
+                "right": {
+                  "type": "Literal",
+                  "value": "number",
+                  "raw": "'number'",
+                  "range": [
+                    1272,
+                    1280
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 48,
+                      "column": 28
+                    },
+                    "end": {
+                      "line": 48,
+                      "column": 36
+                    }
+                  }
+                },
+                "range": [
+                  1252,
+                  1280
+                ],
+                "loc": {
+                  "start": {
+                    "line": 48,
+                    "column": 8
+                  },
+                  "end": {
+                    "line": 48,
+                    "column": 36
+                  }
+                }
+              },
+              "consequent": {
+                "type": "BlockStatement",
+                "body": [
+                  {
+                    "type": "IfStatement",
+                    "test": {
+                      "type": "LogicalExpression",
+                      "operator": "&&",
+                      "left": {
+                        "type": "LogicalExpression",
+                        "operator": "&&",
+                        "left": {
+                          "type": "BinaryExpression",
+                          "operator": "===",
+                          "left": {
+                            "type": "BinaryExpression",
+                            "operator": "%",
+                            "left": {
+                              "type": "Identifier",
+                              "name": "zoomLevel",
+                              "range": [
+                                1297,
+                                1306
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 49,
+                                  "column": 12
+                                },
+                                "end": {
+                                  "line": 49,
+                                  "column": 21
+                                }
+                              }
+                            },
+                            "right": {
+                              "type": "Literal",
+                              "value": 1,
+                              "raw": "1",
+                              "range": [
+                                1309,
+                                1310
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 49,
+                                  "column": 24
+                                },
+                                "end": {
+                                  "line": 49,
+                                  "column": 25
+                                }
+                              }
+                            },
+                            "range": [
+                              1297,
+                              1310
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 49,
+                                "column": 12
+                              },
+                              "end": {
+                                "line": 49,
+                                "column": 25
+                              }
+                            }
+                          },
+                          "right": {
+                            "type": "Literal",
+                            "value": 0,
+                            "raw": "0",
+                            "range": [
+                              1315,
+                              1316
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 49,
+                                "column": 30
+                              },
+                              "end": {
+                                "line": 49,
+                                "column": 31
+                              }
+                            }
+                          },
+                          "range": [
+                            1297,
+                            1316
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 49,
+                              "column": 12
+                            },
+                            "end": {
+                              "line": 49,
+                              "column": 31
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "BinaryExpression",
+                          "operator": ">=",
+                          "left": {
+                            "type": "Identifier",
+                            "name": "zoomLevel",
+                            "range": [
+                              1320,
+                              1329
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 49,
+                                "column": 35
+                              },
+                              "end": {
+                                "line": 49,
+                                "column": 44
+                              }
+                            }
+                          },
+                          "right": {
+                            "type": "Literal",
+                            "value": 0,
+                            "raw": "0",
+                            "range": [
+                              1333,
+                              1334
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 49,
+                                "column": 48
+                              },
+                              "end": {
+                                "line": 49,
+                                "column": 49
+                              }
+                            }
+                          },
+                          "range": [
+                            1320,
+                            1334
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 49,
+                              "column": 35
+                            },
+                            "end": {
+                              "line": 49,
+                              "column": 49
+                            }
+                          }
+                        },
+                        "range": [
+                          1297,
+                          1334
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 49,
+                            "column": 12
+                          },
+                          "end": {
+                            "line": 49,
+                            "column": 49
+                          }
+                        }
+                      },
+                      "right": {
+                        "type": "BinaryExpression",
+                        "operator": "<=",
+                        "left": {
+                          "type": "Identifier",
+                          "name": "zoomLevel",
+                          "range": [
+                            1338,
+                            1347
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 49,
+                              "column": 53
+                            },
+                            "end": {
+                              "line": 49,
+                              "column": 62
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "Literal",
+                          "value": 28,
+                          "raw": "28",
+                          "range": [
+                            1351,
+                            1353
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 49,
+                              "column": 66
+                            },
+                            "end": {
+                              "line": 49,
+                              "column": 68
+                            }
+                          }
+                        },
+                        "range": [
+                          1338,
+                          1353
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 49,
+                            "column": 53
+                          },
+                          "end": {
+                            "line": 49,
+                            "column": 68
+                          }
+                        }
+                      },
+                      "range": [
+                        1297,
+                        1353
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 49,
+                          "column": 12
+                        },
+                        "end": {
+                          "line": 49,
+                          "column": 68
+                        }
+                      }
+                    },
+                    "consequent": {
+                      "type": "BlockStatement",
+                      "body": [
+                        {
+                          "type": "ReturnStatement",
+                          "argument": {
+                            "type": "MemberExpression",
+                            "computed": true,
+                            "object": {
+                              "type": "Identifier",
+                              "name": "_zoomResLookup",
+                              "range": [
+                                1377,
+                                1391
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 50,
+                                  "column": 19
+                                },
+                                "end": {
+                                  "line": 50,
+                                  "column": 33
+                                }
+                              }
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "zoomLevel",
+                              "range": [
+                                1392,
+                                1401
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 50,
+                                  "column": 34
+                                },
+                                "end": {
+                                  "line": 50,
+                                  "column": 43
+                                }
+                              }
+                            },
+                            "range": [
+                              1377,
+                              1402
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 50,
+                                "column": 19
+                              },
+                              "end": {
+                                "line": 50,
+                                "column": 44
+                              }
+                            }
+                          },
+                          "range": [
+                            1370,
+                            1403
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 50,
+                              "column": 12
+                            },
+                            "end": {
+                              "line": 50,
+                              "column": 45
+                            }
+                          }
+                        }
+                      ],
+                      "range": [
+                        1355,
+                        1414
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 49,
+                          "column": 70
+                        },
+                        "end": {
+                          "line": 51,
+                          "column": 9
+                        }
+                      }
+                    },
+                    "alternate": {
+                      "type": "BlockStatement",
+                      "body": [
+                        {
+                          "type": "ExpressionStatement",
+                          "expression": {
+                            "type": "CallExpression",
+                            "callee": {
+                              "type": "MemberExpression",
+                              "computed": false,
+                              "object": {
+                                "type": "Identifier",
+                                "name": "console",
+                                "range": [
+                                  1435,
+                                  1442
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 52,
+                                    "column": 12
+                                  },
+                                  "end": {
+                                    "line": 52,
+                                    "column": 19
+                                  }
+                                }
+                              },
+                              "property": {
+                                "type": "Identifier",
+                                "name": "log",
+                                "range": [
+                                  1443,
+                                  1446
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 52,
+                                    "column": 20
+                                  },
+                                  "end": {
+                                    "line": 52,
+                                    "column": 23
+                                  }
+                                }
+                              },
+                              "range": [
+                                1435,
+                                1446
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 52,
+                                  "column": 12
+                                },
+                                "end": {
+                                  "line": 52,
+                                  "column": 23
+                                }
+                              }
+                            },
+                            "arguments": [
+                              {
+                                "type": "TemplateLiteral",
+                                "quasis": [
+                                  {
+                                    "type": "TemplateElement",
+                                    "value": {
+                                      "raw": "invalid zoom level provided: ",
+                                      "cooked": "invalid zoom level provided: "
+                                    },
+                                    "tail": false,
+                                    "range": [
+                                      1447,
+                                      1479
+                                    ],
+                                    "loc": {
+                                      "start": {
+                                        "line": 52,
+                                        "column": 24
+                                      },
+                                      "end": {
+                                        "line": 52,
+                                        "column": 56
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "type": "TemplateElement",
+                                    "value": {
+                                      "raw": "",
+                                      "cooked": ""
+                                    },
+                                    "tail": true,
+                                    "range": [
+                                      1488,
+                                      1490
+                                    ],
+                                    "loc": {
+                                      "start": {
+                                        "line": 52,
+                                        "column": 65
+                                      },
+                                      "end": {
+                                        "line": 52,
+                                        "column": 67
+                                      }
+                                    }
+                                  }
+                                ],
+                                "expressions": [
+                                  {
+                                    "type": "Identifier",
+                                    "name": "zoomLevel",
+                                    "range": [
+                                      1479,
+                                      1488
+                                    ],
+                                    "loc": {
+                                      "start": {
+                                        "line": 52,
+                                        "column": 56
+                                      },
+                                      "end": {
+                                        "line": 52,
+                                        "column": 65
+                                      }
+                                    }
+                                  }
+                                ],
+                                "range": [
+                                  1447,
+                                  1490
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 52,
+                                    "column": 24
+                                  },
+                                  "end": {
+                                    "line": 52,
+                                    "column": 67
+                                  }
+                                }
+                              }
+                            ],
+                            "range": [
+                              1435,
+                              1491
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 52,
+                                "column": 12
+                              },
+                              "end": {
+                                "line": 52,
+                                "column": 68
+                              }
+                            }
+                          },
+                          "range": [
+                            1435,
+                            1492
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 52,
+                              "column": 12
+                            },
+                            "end": {
+                              "line": 52,
+                              "column": 69
+                            }
+                          }
+                        },
+                        {
+                          "type": "ReturnStatement",
+                          "argument": {
+                            "type": "Identifier",
+                            "name": "undefined",
+                            "range": [
+                              1515,
+                              1524
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 54,
+                                "column": 19
+                              },
+                              "end": {
+                                "line": 54,
+                                "column": 28
+                              }
+                            }
+                          },
+                          "range": [
+                            1508,
+                            1525
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 54,
+                              "column": 12
+                            },
+                            "end": {
+                              "line": 54,
+                              "column": 29
+                            }
+                          }
+                        }
+                      ],
+                      "range": [
+                        1420,
+                        1536
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 51,
+                          "column": 15
+                        },
+                        "end": {
+                          "line": 55,
+                          "column": 9
+                        }
+                      }
+                    },
+                    "range": [
+                      1293,
+                      1536
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 49,
+                        "column": 8
+                      },
+                      "end": {
+                        "line": 55,
+                        "column": 9
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  1282,
+                  1543
+                ],
+                "loc": {
+                  "start": {
+                    "line": 48,
+                    "column": 38
+                  },
+                  "end": {
+                    "line": 56,
+                    "column": 5
+                  }
+                }
+              },
+              "alternate": {
+                "type": "BlockStatement",
+                "body": [
+                  {
+                    "type": "ReturnStatement",
+                    "argument": {
+                      "type": "Identifier",
+                      "name": "undefined",
+                      "range": [
+                        1567,
+                        1576
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 57,
+                          "column": 15
+                        },
+                        "end": {
+                          "line": 57,
+                          "column": 24
+                        }
+                      }
+                    },
+                    "range": [
+                      1560,
+                      1577
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 57,
+                        "column": 8
+                      },
+                      "end": {
+                        "line": 57,
+                        "column": 25
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  1549,
+                  1584
+                ],
+                "loc": {
+                  "start": {
+                    "line": 56,
+                    "column": 11
+                  },
+                  "end": {
+                    "line": 58,
+                    "column": 5
+                  }
+                }
+              },
+              "range": [
+                1248,
+                1584
+              ],
+              "loc": {
+                "start": {
+                  "line": 48,
+                  "column": 4
+                },
+                "end": {
+                  "line": 58,
+                  "column": 5
+                }
+              }
+            }
+          ],
+          "range": [
+            1220,
+            1587
+          ],
+          "loc": {
+            "start": {
+              "line": 45,
+              "column": 44
+            },
+            "end": {
+              "line": 59,
+              "column": 1
+            }
+          }
+        },
+        "generator": false,
+        "expression": false,
+        "range": [
+          1183,
+          1587
+        ],
+        "loc": {
+          "start": {
+            "line": 45,
+            "column": 7
+          },
+          "end": {
+            "line": 59,
+            "column": 1
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Line",
+            "value": "27",
+            "range": [
+              988,
+              992
+            ],
+            "loc": {
+              "start": {
+                "line": 36,
+                "column": 27
+              },
+              "end": {
+                "line": 36,
+                "column": 31
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "28",
+            "range": [
+              1020,
+              1024
+            ],
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 26
+              },
+              "end": {
+                "line": 37,
+                "column": 30
+              }
+            }
+          },
+          {
+            "type": "Block",
+            "value": "*\r\n * Get the resolution given the zoom level\r\n * @param {number} zoomLevel - the zoom level\r\n * @returns {number|*} the map resolution\r\n ",
+            "range": [
+              1032,
+              1174
+            ],
+            "loc": {
+              "start": {
+                "line": 40,
+                "column": 0
+              },
+              "end": {
+                "line": 44,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "specifiers": [],
+      "source": null,
+      "range": [
+        1176,
+        1587
+      ],
+      "loc": {
+        "start": {
+          "line": 45,
+          "column": 0
+        },
+        "end": {
+          "line": 59,
+          "column": 1
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Line",
+          "value": "27",
+          "range": [
+            988,
+            992
+          ],
+          "loc": {
+            "start": {
+              "line": 36,
+              "column": 27
+            },
+            "end": {
+              "line": 36,
+              "column": 31
+            }
+          }
+        },
+        {
+          "type": "Line",
+          "value": "28",
+          "range": [
+            1020,
+            1024
+          ],
+          "loc": {
+            "start": {
+              "line": 37,
+              "column": 26
+            },
+            "end": {
+              "line": 37,
+              "column": 30
+            }
+          }
+        },
+        {
+          "type": "Block",
+          "value": "*\r\n * Get the resolution given the zoom level\r\n * @param {number} zoomLevel - the zoom level\r\n * @returns {number|*} the map resolution\r\n ",
+          "range": [
+            1032,
+            1174
+          ],
+          "loc": {
+            "start": {
+              "line": 40,
+              "column": 0
+            },
+            "end": {
+              "line": 44,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "Identifier",
+            "name": "nm",
+            "range": [
+              1589,
+              1591
+            ],
+            "loc": {
+              "start": {
+                "line": 60,
+                "column": 0
+              },
+              "end": {
+                "line": 60,
+                "column": 2
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "zoomToResolution",
+            "range": [
+              1592,
+              1608
+            ],
+            "loc": {
+              "start": {
+                "line": 60,
+                "column": 3
+              },
+              "end": {
+                "line": 60,
+                "column": 19
+              }
+            }
+          },
+          "range": [
+            1589,
+            1608
+          ],
+          "loc": {
+            "start": {
+              "line": 60,
+              "column": 0
+            },
+            "end": {
+              "line": 60,
+              "column": 19
+            }
+          }
+        },
+        "right": {
+          "type": "Identifier",
+          "name": "zoomToResolution",
+          "range": [
+            1611,
+            1627
+          ],
+          "loc": {
+            "start": {
+              "line": 60,
+              "column": 22
+            },
+            "end": {
+              "line": 60,
+              "column": 38
+            }
+          }
+        },
+        "range": [
+          1589,
+          1627
+        ],
+        "loc": {
+          "start": {
+            "line": 60,
+            "column": 0
+          },
+          "end": {
+            "line": 60,
+            "column": 38
+          }
+        }
+      },
+      "range": [
+        1589,
+        1628
+      ],
+      "loc": {
+        "start": {
+          "line": 60,
+          "column": 0
+        },
+        "end": {
+          "line": 60,
+          "column": 39
+        }
+      },
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Get resolution from the zoom level\r\n * @param {number} resolution - the resolution\r\n * @returns {number|*} the zoom level\r\n ",
+          "range": [
+            1634,
+            1768
+          ],
+          "loc": {
+            "start": {
+              "line": 63,
+              "column": 0
+            },
+            "end": {
+              "line": 67,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": {
+        "type": "FunctionDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "resolutionToZoom",
+          "range": [
+            1786,
+            1802
+          ],
+          "loc": {
+            "start": {
+              "line": 68,
+              "column": 16
+            },
+            "end": {
+              "line": 68,
+              "column": 32
+            }
+          }
+        },
+        "params": [
+          {
+            "type": "Identifier",
+            "name": "resolution",
+            "range": [
+              1803,
+              1813
+            ],
+            "loc": {
+              "start": {
+                "line": 68,
+                "column": 33
+              },
+              "end": {
+                "line": 68,
+                "column": 43
+              }
+            }
+          }
+        ],
+        "body": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ForStatement",
+              "init": {
+                "type": "VariableDeclaration",
+                "declarations": [
+                  {
+                    "type": "VariableDeclarator",
+                    "id": {
+                      "type": "Identifier",
+                      "name": "i",
+                      "range": [
+                        1830,
+                        1831
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 69,
+                          "column": 13
+                        },
+                        "end": {
+                          "line": 69,
+                          "column": 14
+                        }
+                      }
+                    },
+                    "init": {
+                      "type": "Literal",
+                      "value": 0,
+                      "raw": "0",
+                      "range": [
+                        1834,
+                        1835
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 69,
+                          "column": 17
+                        },
+                        "end": {
+                          "line": 69,
+                          "column": 18
+                        }
+                      }
+                    },
+                    "range": [
+                      1830,
+                      1835
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 69,
+                        "column": 13
+                      },
+                      "end": {
+                        "line": 69,
+                        "column": 18
+                      }
+                    }
+                  }
+                ],
+                "kind": "let",
+                "range": [
+                  1826,
+                  1835
+                ],
+                "loc": {
+                  "start": {
+                    "line": 69,
+                    "column": 9
+                  },
+                  "end": {
+                    "line": 69,
+                    "column": 18
+                  }
+                }
+              },
+              "test": {
+                "type": "BinaryExpression",
+                "operator": "<",
+                "left": {
+                  "type": "Identifier",
+                  "name": "i",
+                  "range": [
+                    1837,
+                    1838
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 69,
+                      "column": 20
+                    },
+                    "end": {
+                      "line": 69,
+                      "column": 21
+                    }
+                  }
+                },
+                "right": {
+                  "type": "MemberExpression",
+                  "computed": false,
+                  "object": {
+                    "type": "Identifier",
+                    "name": "_zoomResLookup",
+                    "range": [
+                      1841,
+                      1855
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 69,
+                        "column": 24
+                      },
+                      "end": {
+                        "line": 69,
+                        "column": 38
+                      }
+                    }
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "name": "length",
+                    "range": [
+                      1856,
+                      1862
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 69,
+                        "column": 39
+                      },
+                      "end": {
+                        "line": 69,
+                        "column": 45
+                      }
+                    }
+                  },
+                  "range": [
+                    1841,
+                    1862
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 69,
+                      "column": 24
+                    },
+                    "end": {
+                      "line": 69,
+                      "column": 45
+                    }
+                  }
+                },
+                "range": [
+                  1837,
+                  1862
+                ],
+                "loc": {
+                  "start": {
+                    "line": 69,
+                    "column": 20
+                  },
+                  "end": {
+                    "line": 69,
+                    "column": 45
+                  }
+                }
+              },
+              "update": {
+                "type": "UpdateExpression",
+                "operator": "++",
+                "argument": {
+                  "type": "Identifier",
+                  "name": "i",
+                  "range": [
+                    1864,
+                    1865
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 69,
+                      "column": 47
+                    },
+                    "end": {
+                      "line": 69,
+                      "column": 48
+                    }
+                  }
+                },
+                "prefix": false,
+                "range": [
+                  1864,
+                  1867
+                ],
+                "loc": {
+                  "start": {
+                    "line": 69,
+                    "column": 47
+                  },
+                  "end": {
+                    "line": 69,
+                    "column": 50
+                  }
+                }
+              },
+              "body": {
+                "type": "BlockStatement",
+                "body": [
+                  {
+                    "type": "IfStatement",
+                    "test": {
+                      "type": "BinaryExpression",
+                      "operator": ">=",
+                      "left": {
+                        "type": "Identifier",
+                        "name": "resolution",
+                        "range": [
+                          1883,
+                          1893
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 70,
+                            "column": 12
+                          },
+                          "end": {
+                            "line": 70,
+                            "column": 22
+                          }
+                        }
+                      },
+                      "right": {
+                        "type": "MemberExpression",
+                        "computed": true,
+                        "object": {
+                          "type": "Identifier",
+                          "name": "_zoomResLookup",
+                          "range": [
+                            1897,
+                            1911
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 70,
+                              "column": 26
+                            },
+                            "end": {
+                              "line": 70,
+                              "column": 40
+                            }
+                          }
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "i",
+                          "range": [
+                            1912,
+                            1913
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 70,
+                              "column": 41
+                            },
+                            "end": {
+                              "line": 70,
+                              "column": 42
+                            }
+                          }
+                        },
+                        "range": [
+                          1897,
+                          1914
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 70,
+                            "column": 26
+                          },
+                          "end": {
+                            "line": 70,
+                            "column": 43
+                          }
+                        }
+                      },
+                      "range": [
+                        1883,
+                        1914
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 70,
+                          "column": 12
+                        },
+                        "end": {
+                          "line": 70,
+                          "column": 43
+                        }
+                      }
+                    },
+                    "consequent": {
+                      "type": "BlockStatement",
+                      "body": [
+                        {
+                          "type": "ReturnStatement",
+                          "argument": {
+                            "type": "Identifier",
+                            "name": "i",
+                            "range": [
+                              1938,
+                              1939
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 71,
+                                "column": 19
+                              },
+                              "end": {
+                                "line": 71,
+                                "column": 20
+                              }
+                            }
+                          },
+                          "range": [
+                            1931,
+                            1940
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 71,
+                              "column": 12
+                            },
+                            "end": {
+                              "line": 71,
+                              "column": 21
+                            }
+                          }
+                        }
+                      ],
+                      "range": [
+                        1916,
+                        1951
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 70,
+                          "column": 45
+                        },
+                        "end": {
+                          "line": 72,
+                          "column": 9
+                        }
+                      }
+                    },
+                    "alternate": null,
+                    "range": [
+                      1879,
+                      1951
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 70,
+                        "column": 8
+                      },
+                      "end": {
+                        "line": 72,
+                        "column": 9
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  1868,
+                  1958
+                ],
+                "loc": {
+                  "start": {
+                    "line": 69,
+                    "column": 51
+                  },
+                  "end": {
+                    "line": 73,
+                    "column": 5
+                  }
+                }
+              },
+              "range": [
+                1821,
+                1958
+              ],
+              "loc": {
+                "start": {
+                  "line": 69,
+                  "column": 4
+                },
+                "end": {
+                  "line": 73,
+                  "column": 5
+                }
+              }
+            },
+            {
+              "type": "ReturnStatement",
+              "argument": {
+                "type": "Literal",
+                "value": 0,
+                "raw": "0",
+                "range": [
+                  1973,
+                  1974
+                ],
+                "loc": {
+                  "start": {
+                    "line": 75,
+                    "column": 11
+                  },
+                  "end": {
+                    "line": 75,
+                    "column": 12
+                  }
+                }
+              },
+              "range": [
+                1966,
+                1975
+              ],
+              "loc": {
+                "start": {
+                  "line": 75,
+                  "column": 4
+                },
+                "end": {
+                  "line": 75,
+                  "column": 13
+                }
+              }
+            }
+          ],
+          "range": [
+            1814,
+            1978
+          ],
+          "loc": {
+            "start": {
+              "line": 68,
+              "column": 44
+            },
+            "end": {
+              "line": 76,
+              "column": 1
+            }
+          }
+        },
+        "generator": false,
+        "expression": false,
+        "range": [
+          1777,
+          1978
+        ],
+        "loc": {
+          "start": {
+            "line": 68,
+            "column": 7
+          },
+          "end": {
+            "line": 76,
+            "column": 1
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\r\n * Get resolution from the zoom level\r\n * @param {number} resolution - the resolution\r\n * @returns {number|*} the zoom level\r\n ",
+            "range": [
+              1634,
+              1768
+            ],
+            "loc": {
+              "start": {
+                "line": 63,
+                "column": 0
+              },
+              "end": {
+                "line": 67,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "specifiers": [],
+      "source": null,
+      "range": [
+        1770,
+        1978
+      ],
+      "loc": {
+        "start": {
+          "line": 68,
+          "column": 0
+        },
+        "end": {
+          "line": 76,
+          "column": 1
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Get resolution from the zoom level\r\n * @param {number} resolution - the resolution\r\n * @returns {number|*} the zoom level\r\n ",
+          "range": [
+            1634,
+            1768
+          ],
+          "loc": {
+            "start": {
+              "line": 63,
+              "column": 0
+            },
+            "end": {
+              "line": 67,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "Identifier",
+            "name": "nm",
+            "range": [
+              1982,
+              1984
+            ],
+            "loc": {
+              "start": {
+                "line": 78,
+                "column": 0
+              },
+              "end": {
+                "line": 78,
+                "column": 2
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "resolutionToZoom",
+            "range": [
+              1985,
+              2001
+            ],
+            "loc": {
+              "start": {
+                "line": 78,
+                "column": 3
+              },
+              "end": {
+                "line": 78,
+                "column": 19
+              }
+            }
+          },
+          "range": [
+            1982,
+            2001
+          ],
+          "loc": {
+            "start": {
+              "line": 78,
+              "column": 0
+            },
+            "end": {
+              "line": 78,
+              "column": 19
+            }
+          }
+        },
+        "right": {
+          "type": "Identifier",
+          "name": "resolutionToZoom",
+          "range": [
+            2004,
+            2020
+          ],
+          "loc": {
+            "start": {
+              "line": 78,
+              "column": 22
+            },
+            "end": {
+              "line": 78,
+              "column": 38
+            }
+          }
+        },
+        "range": [
+          1982,
+          2020
+        ],
+        "loc": {
+          "start": {
+            "line": 78,
+            "column": 0
+          },
+          "end": {
+            "line": 78,
+            "column": 38
+          }
+        }
+      },
+      "range": [
+        1982,
+        2021
+      ],
+      "loc": {
+        "start": {
+          "line": 78,
+          "column": 0
+        },
+        "end": {
+          "line": 78,
+          "column": 39
+        }
+      }
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    51,
+    2021
+  ],
+  "loc": {
+    "start": {
+      "line": 5,
+      "column": 0
+    },
+    "end": {
+      "line": 78,
+      "column": 39
+    }
+  },
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\r\n * Created by gavorhes on 12/14/2015.\r\n ",
+      "range": [
+        0,
+        47
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "0",
+      "range": [
+        197,
+        200
+      ],
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 24
+        },
+        "end": {
+          "line": 9,
+          "column": 27
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "1",
+      "range": [
+        225,
+        228
+      ],
+      "loc": {
+        "start": {
+          "line": 10,
+          "column": 23
+        },
+        "end": {
+          "line": 10,
+          "column": 26
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "2",
+      "range": [
+        253,
+        256
+      ],
+      "loc": {
+        "start": {
+          "line": 11,
+          "column": 23
+        },
+        "end": {
+          "line": 11,
+          "column": 26
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "3",
+      "range": [
+        281,
+        284
+      ],
+      "loc": {
+        "start": {
+          "line": 12,
+          "column": 23
+        },
+        "end": {
+          "line": 12,
+          "column": 26
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "4",
+      "range": [
+        308,
+        311
+      ],
+      "loc": {
+        "start": {
+          "line": 13,
+          "column": 22
+        },
+        "end": {
+          "line": 13,
+          "column": 25
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "5",
+      "range": [
+        335,
+        338
+      ],
+      "loc": {
+        "start": {
+          "line": 14,
+          "column": 22
+        },
+        "end": {
+          "line": 14,
+          "column": 25
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "6",
+      "range": [
+        362,
+        365
+      ],
+      "loc": {
+        "start": {
+          "line": 15,
+          "column": 22
+        },
+        "end": {
+          "line": 15,
+          "column": 25
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "7",
+      "range": [
+        389,
+        392
+      ],
+      "loc": {
+        "start": {
+          "line": 16,
+          "column": 22
+        },
+        "end": {
+          "line": 16,
+          "column": 25
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "8",
+      "range": [
+        415,
+        418
+      ],
+      "loc": {
+        "start": {
+          "line": 17,
+          "column": 21
+        },
+        "end": {
+          "line": 17,
+          "column": 24
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "9",
+      "range": [
+        442,
+        445
+      ],
+      "loc": {
+        "start": {
+          "line": 18,
+          "column": 22
+        },
+        "end": {
+          "line": 18,
+          "column": 25
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "10",
+      "range": [
+        470,
+        474
+      ],
+      "loc": {
+        "start": {
+          "line": 19,
+          "column": 23
+        },
+        "end": {
+          "line": 19,
+          "column": 27
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "11",
+      "range": [
+        499,
+        503
+      ],
+      "loc": {
+        "start": {
+          "line": 20,
+          "column": 23
+        },
+        "end": {
+          "line": 20,
+          "column": 27
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "12",
+      "range": [
+        528,
+        532
+      ],
+      "loc": {
+        "start": {
+          "line": 21,
+          "column": 23
+        },
+        "end": {
+          "line": 21,
+          "column": 27
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "13",
+      "range": [
+        558,
+        562
+      ],
+      "loc": {
+        "start": {
+          "line": 22,
+          "column": 24
+        },
+        "end": {
+          "line": 22,
+          "column": 28
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "14",
+      "range": [
+        587,
+        591
+      ],
+      "loc": {
+        "start": {
+          "line": 23,
+          "column": 23
+        },
+        "end": {
+          "line": 23,
+          "column": 27
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "15",
+      "range": [
+        616,
+        620
+      ],
+      "loc": {
+        "start": {
+          "line": 24,
+          "column": 23
+        },
+        "end": {
+          "line": 24,
+          "column": 27
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "16",
+      "range": [
+        645,
+        649
+      ],
+      "loc": {
+        "start": {
+          "line": 25,
+          "column": 23
+        },
+        "end": {
+          "line": 25,
+          "column": 27
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "17",
+      "range": [
+        674,
+        678
+      ],
+      "loc": {
+        "start": {
+          "line": 26,
+          "column": 23
+        },
+        "end": {
+          "line": 26,
+          "column": 27
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "18",
+      "range": [
+        704,
+        708
+      ],
+      "loc": {
+        "start": {
+          "line": 27,
+          "column": 24
+        },
+        "end": {
+          "line": 27,
+          "column": 28
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "19",
+      "range": [
+        735,
+        739
+      ],
+      "loc": {
+        "start": {
+          "line": 28,
+          "column": 25
+        },
+        "end": {
+          "line": 28,
+          "column": 29
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "20",
+      "range": [
+        766,
+        770
+      ],
+      "loc": {
+        "start": {
+          "line": 29,
+          "column": 25
+        },
+        "end": {
+          "line": 29,
+          "column": 29
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "21",
+      "range": [
+        797,
+        801
+      ],
+      "loc": {
+        "start": {
+          "line": 30,
+          "column": 25
+        },
+        "end": {
+          "line": 30,
+          "column": 29
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "22",
+      "range": [
+        828,
+        832
+      ],
+      "loc": {
+        "start": {
+          "line": 31,
+          "column": 25
+        },
+        "end": {
+          "line": 31,
+          "column": 29
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "23",
+      "range": [
+        859,
+        863
+      ],
+      "loc": {
+        "start": {
+          "line": 32,
+          "column": 25
+        },
+        "end": {
+          "line": 32,
+          "column": 29
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "24",
+      "range": [
+        891,
+        895
+      ],
+      "loc": {
+        "start": {
+          "line": 33,
+          "column": 26
+        },
+        "end": {
+          "line": 33,
+          "column": 30
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "25",
+      "range": [
+        923,
+        927
+      ],
+      "loc": {
+        "start": {
+          "line": 34,
+          "column": 26
+        },
+        "end": {
+          "line": 34,
+          "column": 30
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "26",
+      "range": [
+        955,
+        959
+      ],
+      "loc": {
+        "start": {
+          "line": 35,
+          "column": 26
+        },
+        "end": {
+          "line": 35,
+          "column": 30
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "27",
+      "range": [
+        988,
+        992
+      ],
+      "loc": {
+        "start": {
+          "line": 36,
+          "column": 27
+        },
+        "end": {
+          "line": 36,
+          "column": 31
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "28",
+      "range": [
+        1020,
+        1024
+      ],
+      "loc": {
+        "start": {
+          "line": 37,
+          "column": 26
+        },
+        "end": {
+          "line": 37,
+          "column": 30
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n * Get the resolution given the zoom level\r\n * @param {number} zoomLevel - the zoom level\r\n * @returns {number|*} the map resolution\r\n ",
+      "range": [
+        1032,
+        1174
+      ],
+      "loc": {
+        "start": {
+          "line": 40,
+          "column": 0
+        },
+        "end": {
+          "line": 44,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n * Get resolution from the zoom level\r\n * @param {number} resolution - the resolution\r\n * @returns {number|*} the zoom level\r\n ",
+      "range": [
+        1634,
+        1768
+      ],
+      "loc": {
+        "start": {
+          "line": 63,
+          "column": 0
+        },
+        "end": {
+          "line": 67,
+          "column": 3
+        }
+      }
+    }
+  ]
+}

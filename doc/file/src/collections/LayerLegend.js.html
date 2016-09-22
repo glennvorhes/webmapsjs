@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/collections/LayerLegend.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/glennvorhes/webmapsjs.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-bundleEs2015Multiple">bundleEs2015Multiple</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-processLessFile">processLessFile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-dirNameFilePath">dirNameFilePath</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">collections</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/ItsLayerCollection.js~ItsLayerCollection.html">ItsLayerCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/LayerLegend.js~LayerLegend.html">LayerLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/collections/Sliders.js~Sliders.html">Sliders</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">domUtil</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/domUtil/SelectBoxBase.js~SelectBoxBase.html">SelectBoxBase</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">jquery</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-overflowScroll">overflowScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-responsiveScroll">responsiveScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-windowScroll">windowScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-jQuery">jQuery</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">jquery-plugin</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/jquery-plugin/day-range.js~DayRange.html">DayRange</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">layers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBase.js~LayerBase.html">LayerBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVector.js~LayerBaseVector.html">LayerBaseVector</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVectorEsri.js~LayerBaseVectorEsri.html">LayerBaseVectorEsri</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseVectorGeoJson.js~LayerBaseVectorGeoJson.html">LayerBaseVectorGeoJson</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerBaseXyzTile.js~LayerBaseXyzTile.html">LayerBaseXyzTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerEsriMapServer.js~LayerEsriMapServer.html">LayerEsriMapServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerEsriTile.js~LayerEsriTile.html">LayerEsriTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerItsInventory.js~LayerItsInventory.html">LayerItsInventory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerRealEarthTile.js~LayerRealEarthTile.html">LayerRealEarthTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/layers/LayerRealEarthVector.js~LayerVectorRealEarth.html">LayerVectorRealEarth</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">mixin</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimate.js~RealEarthAnimate.html">RealEarthAnimate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimateTile.js~RealEarthAnimateTile.html">RealEarthAnimateTile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mixin/RealEarthAnimateVector.js~RealEarthAnimateVector.html">RealEarthAnimateVector</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">ol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ol">ol</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">olHelpers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/SortedFeatures.js~SortedFeatures.html">SortedFeatures</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/layerSwipe.js~LayerSwipe.html">LayerSwipe</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapInteractionBase.js~MapInteractionBase.html">MapInteractionBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapMoveCls.js~MapMoveCls.html">MapMoveCls</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/olHelpers/mapPopupCls.js~MapPopupCls.html">MapPopupCls</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeFeatureServiceLegendAndSymbol">makeFeatureServiceLegendAndSymbol</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeMapServiceLegend">makeMapServiceLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-calculateExtent">calculateExtent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-fitToMap">fitToMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-propertiesZoomStyle">propertiesZoomStyle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMap">quickMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMapBase">quickMapBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-quickMapMulti">quickMapMulti</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-resolutionToZoom">resolutionToZoom</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-zoomToResolution">zoomToResolution</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-styleAndLegend">styleAndLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-quickMapMultiReturn">quickMapMultiReturn</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-definedAndNotNull">definedAndNotNull</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-undefinedOrNull">undefinedOrNull</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hexAlphaToRgbOrRgba">hexAlphaToRgbOrRgba</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeBlueGreenRedGradient">makeBlueGreenRedGradient</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeBlueGreenRedGradientZScore">makeBlueGreenRedGradientZScore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-rgb2hex">rgb2hex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-rgbToRgba">rgbToRgba</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dateToYyyyMmDdHh000">dateToYyyyMmDdHh000</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dateToYyyyMmDdHhMmSs">dateToYyyyMmDdHhMmSs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getUrlParams">getUrlParams</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeGuid">makeGuid</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-keyValPairs">keyValPairs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-provide">provide</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-colorLookupByNumber">colorLookupByNumber</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-keyValuePair">keyValuePair</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/collections/LayerLegend.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Created by gavorhes on 12/16/2015.
+ */
+import $ from &apos;../jquery/jquery&apos;;
+import provide from &apos;../util/provide&apos;;
+import makeGuid from &apos;../util/makeGuid&apos;;
+import mapMove from &apos;../olHelpers/mapMove&apos;;
+let nm = provide(&apos;collections&apos;);
+
+class LayerGroup {
+
+    /**
+     *
+     * @param {object} [groupConfig={}] - group configuration object
+     * @param {string} groupConfig.groupName - the group name
+     * @param {boolean} [groupConfig.collapse=false] - if the group should be collapsed initially
+     * @param {boolean} [groupConfig.addCheck=true] - if the group should have a checkbox controlling visibility of all layers
+     * @param {LayerGroup} [parent=undefined] - the parent group
+     */
+    constructor(groupConfig, parent) {
+        this.groupLayers = [];
+        this.groupLayersLookup = {};
+        this.groupGroups = [];
+        this.groupGroupsLookup = {};
+        this.itemIdArray = [];
+
+        if (typeof groupConfig == &apos;undefined&apos;) {
+            this.parent = null;
+            this.groupId = &apos;root&apos;;
+            this.groupName = &apos;root&apos;;
+            this.allGroupLookup = {root: this};
+            this.allGroupArray = [this];
+            this.allLayerArray = [];
+            this.allLayerLookup = {};
+            this.layerParentLookup = {};
+            this.collapse = false;
+            this.addCheck = false;
+        } else {
+            this.groupId = makeGuid();
+            this.parent = parent;
+            this.groupName = groupConfig.groupName;
+            this.collapse = typeof  groupConfig.collapse == &apos;boolean&apos; ? groupConfig.collapse : false;
+            this.addCheck = typeof  groupConfig.addCheck == &apos;boolean&apos; ? groupConfig.addCheck : true;
+        }
+    }
+
+    /**
+     *
+     * @param {object} groupConfig - configuration object
+     * @param {string} groupConfig.groupName - the group name
+     * @param {boolean} groupConfig.collapse if the group should be collapsed initially
+     * @param {boolean} groupConfig.addCheck if the group should have a checkbox controlling visibility of all layers
+     * @param {Array&lt;LayerGroup&gt;} parents parent groups
+     * @returns {LayerGroup} the layer group just added
+     */
+    addGroup(groupConfig, parents) {
+        let parent;
+        if (parents.length &gt; 0) {
+            parent = parents[parents.length - 1];
+        } else {
+            parent = &apos;root&apos;;
+        }
+
+
+        /**
+         * @type {LayerGroup}
+         */
+        let parentGroup = this.allGroupLookup[parent];
+        let newGroup = new LayerGroup(groupConfig, parentGroup);
+        this.allGroupLookup[newGroup.groupId] = newGroup;
+        this.allGroupArray.push(newGroup);
+
+        parentGroup.groupGroups.push(newGroup);
+        parentGroup.groupGroupsLookup[newGroup.groupId] = newGroup;
+
+        if (parentGroup.itemIdArray.indexOf(newGroup.groupId) &gt; 0) {
+            console.log(newGroup.groupId);
+            throw &apos;layer and group ids must be unique&apos;;
+        }
+        parentGroup.itemIdArray.push(newGroup.groupId);
+
+        return newGroup;
+    }
+
+    /**
+     *
+     * @param {LayerBase} newLayer the layer to be added
+     * @param {Array} parents array
+     */
+    addLegendLayer(newLayer, parents) {
+        let parent;
+        if (parents.length &gt; 0) {
+            parent = parents[parents.length - 1];
+        } else {
+            parent = &apos;root&apos;;
+        }
+
+        this.allLayerLookup[newLayer.id] = newLayer;
+        this.allLayerArray.push(newLayer);
+
+        /**
+         * @type {LayerGroup}
+         */
+        let parentGroup = this.allGroupLookup[parent];
+
+        parentGroup.groupLayers.push(newLayer);
+        parentGroup.groupLayersLookup[newLayer.id] = newLayer;
+        if (parentGroup.itemIdArray.indexOf(newLayer.id) &gt; 0) {
+            console.log(newLayer.id);
+            throw &apos;layer and group ids must be unique&apos;;
+        }
+        parentGroup.itemIdArray.push(newLayer.id);
+
+        this.layerParentLookup[newLayer.id] = parentGroup;
+
+    }
+
+    getLegendHtml(legendId, options) {
+
+
+        let legendHtml = `&lt;ul id=&quot;${legendId}&quot; class=&quot;legend-container&quot;&gt;`;
+
+        legendHtml += `&lt;li&gt;${options.legendTitle}&lt;input type=&quot;checkbox&quot; checked id=&quot;suppress-by-extent-${legendId}&quot; class=&quot;suppress-by-extent&quot;&gt;` +
+            `&lt;label title=&quot;Suppress layers not visible at this zoom level&quot; for=&quot;suppress-by-extent-${legendId}&quot;&gt;` +
+            `&lt;span&gt;&lt;/span&gt;` +
+            `&lt;/label&gt;&lt;/li&gt;`;
+
+        legendHtml += this._buildLegend(this.itemIdArray, this, options.layerDivClasses) + &apos;&lt;/ul&gt;&apos;;
+
+        return legendHtml;
+    }
+
+    /**
+     * @param {Array} itemIds the items to process
+     * @param {LayerGroup} theGroup new group
+     * @param {Array} [layerDivClasses=[]] optional classes to apply to the layer divs
+     * @static
+     * @returns {string} html string
+     */
+    _buildLegend(itemIds, theGroup, layerDivClasses) {
+
+        if (itemIds.length == 0) {
+            return &apos;&apos;;
+        }
+
+        let theHml = &apos;&apos;;
+
+        let itemId = itemIds[0];
+
+        if (theGroup.groupLayersLookup[itemId]) {
+
+            /**
+             * @type {LayerBase}
+             */
+            let lyr = theGroup.groupLayersLookup[itemId];
+            theHml += `&lt;li id=&quot;${lyr.id}-layer-li&quot; class=&quot;legend-layer-li ${layerDivClasses.join(&apos; &apos;)}&quot;&gt;` + lyr.getLegendDiv() + &apos;&lt;/li&gt;&apos;;
+
+
+        } else if (theGroup.groupGroupsLookup[itemId]) {
+            /**
+             * type {LayerGroup}
+             */
+            let otherGroup = theGroup.groupGroupsLookup[itemId];
+
+            theHml += `&lt;li&gt;`;
+            theHml += `&lt;div id=&quot;${otherGroup.groupId}-legend-layer-div&quot; ` +
+                `class=&quot;legend-layer-group  ${layerDivClasses.join(&apos; &apos;)}&quot;&gt;`;
+
+            if (otherGroup.addCheck) {
+                theHml += `&lt;input type=&quot;checkbox&quot; checked id=&quot;${otherGroup.groupId}-group-chck&quot;&gt;` +
+                    `&lt;label for=&quot;${otherGroup.groupId}-group-chck&quot; title=&quot;Click arrow to expand or collapse&quot;&gt;${otherGroup.groupName}&lt;/label&gt;`;
+            } else {
+                theHml += `&lt;label title=&quot;Click arrow to expand or collapse&quot;&gt;${otherGroup.groupName}&lt;/label&gt;`;
+            }
+
+            theHml += `&lt;span title=&quot;Expand/Collapse&quot; class=&quot;layer-group-expander`;
+            theHml += `${otherGroup.collapse ? &apos; legend-layer-group-initial-collapse&apos; : &apos;&apos;}&quot;&gt;`;
+            theHml += otherGroup.collapse ? &apos;&amp;#9654;&apos; : &apos;&amp;#9660;&apos;;
+            theHml += &apos;&lt;/span&gt;&apos;;
+
+            //parents.push(groupId);
+            theHml += &apos;&lt;ul&gt;&apos; + this._buildLegend(otherGroup.itemIdArray, otherGroup, layerDivClasses) + &apos;&lt;/ul&gt;&apos;;
+            theHml += &apos;&lt;/div&gt;&apos;;
+            theHml += &apos;&lt;/li&gt;&apos;;
+        }
+
+        return theHml + this._buildLegend(itemIds.slice(1), theGroup, layerDivClasses);
+    }
+}
+
+/**
+ * a wrapper to make a legend
+ */
+class LayerLegend {
+
+    /**
+     *
+     * @param {Array} legendItems array of layers or objects with {groupName:  {string}, collapse: {boolean}, addCheck: {boolean}, items: {Array}}
+     * @param {string} divId the div where the legend should be added
+     * @param {object} options for legend
+     * @param {Array} [options.layerDivClasses=[]] optional array of classes to be applied to the layer legend divs for custom styling
+     * @param {string} [options.legendTitle=Legend] the legend title
+     * @param {bool} [options.scaleDependent=true] if legend display is scale dependent
+     */
+    constructor(legendItems, divId, options) {
+        for (let i of legendItems) {
+            if (typeof i == &apos;undefined&apos;) {
+                throw &apos;undefined item passed in array to legend constructor&apos;;
+            }
+        }
+
+        options = options || {};
+
+        options.legendTitle = typeof options.legendTitle == &apos;string&apos; ? options.legendTitle : &apos;Legend&apos;;
+        options.scaleDependent = typeof options.scaleDependent == &apos;boolean&apos; ? options.scaleDependent : true;
+        options.layerDivClasses = options.layerDivClasses || [];
+
+        // if legend display is scale dependent, make sure the mapMove object is initialized first
+        if (options.scaleDependent) {
+            mapMove.checkInit();
+        }
+
+        this.$divElement = $(&apos;#&apos; + divId);
+
+        this._legendItems = legendItems;
+
+        this.layerGroup = new LayerGroup();
+
+        this._buildTree(legendItems);
+
+        this.legendId = makeGuid();
+
+        this.$divElement.append(this.layerGroup.getLegendHtml(this.legendId, options));
+
+        for (let l of this.layerGroup.allLayerArray){
+            l.applyCollapse();
+        }
+
+        let _this = this;
+
+        //// if legend display is scale dependent, make sure the mapMove object is initialized first
+        if (options.scaleDependent) {
+            mapMove.checkInit();
+
+            mapMove.addCallback(function (ext, zoom, evt) {
+                if (typeof evt == &apos;undefined&apos; || evt == &apos;change:resolution&apos;) {
+                    for (let lyr of this.layerGroup.allLayerArray) {
+                        let $lyrLi = $(&apos;#&apos; + lyr.id + &apos;-layer-li&apos;);
+                        if (zoom &gt; lyr.maxZoom || zoom &lt; lyr.minZoom) {
+                            $lyrLi.addClass(&apos;layer-not-visible&apos;);
+                        } else {
+                            $lyrLi.removeClass(&apos;layer-not-visible&apos;);
+                        }
+                    }
+                }
+            }, this, 100, true, &apos;legend1&apos;);
+        }
+
+        // &lt;editor-fold desc=&quot;add event listeners&quot;&gt;
+
+        this.$divElement.find(&quot;.suppress-by-extent&quot;).change(function () {
+            let legendLayerLis = $(&apos;.legend-layer-li&apos;);
+            if (this.checked) {
+                legendLayerLis.removeClass(&apos;layer-force-show&apos;);
+            } else {
+                legendLayerLis.addClass(&apos;layer-force-show&apos;);
+            }
+        });
+
+
+        this.$divElement.find(&apos;.legend-check&apos;).change(function () {
+            let lyrId = this.id.replace(&apos;-legend-layer-check&apos;, &apos;&apos;);
+            _this.layerGroup.allLayerLookup[lyrId].visible = this.checked;
+        });
+
+        this.$divElement.find(&apos;.legend-layer-group &gt; input[type=checkbox]&apos;).change(function () {
+            $(this).siblings(&apos;ul&apos;).find(&apos;input[type=checkbox]&apos;).prop(&apos;checked&apos;, this.checked).trigger(&apos;change&apos;);
+        });
+
+        this.$divElement.find(&apos;.layer-group-expander&apos;).click(function () {
+            let $this = $(this);
+            $this.removeClass(&apos;legend-layer-group-initial-collapse&apos;);
+
+            $this.siblings(&apos;ul&apos;).slideToggle();
+
+            if ($this.hasClass(&apos;legend-layer-group-collapsed&apos;)){
+                $this.removeClass(&apos;legend-layer-group-collapsed&apos;);
+                $this.html(&apos;&amp;#9660;&apos;);
+            } else {
+                $this.addClass(&apos;legend-layer-group-collapsed&apos;);
+                $this.html(&apos;&amp;#9654;&apos;);
+            }
+        });
+
+        this.$divElement.find(&apos;.legend-layer-group-initial-collapse&apos;).trigger(&apos;click&apos;);
+        // &lt;/editor-fold&gt;
+    }
+
+    /**
+     * @param {Array} [legendItems=this._layerConfig] the legend items
+     * @param {Array} [parents=[]] the ordered list of groups in which this item is a member
+     * @private
+     */
+    _buildTree(legendItems, parents) {
+
+        if (legendItems.length == 0) {
+            return;
+        }
+
+        let oneItem = legendItems[0];
+
+        //reset the parent if the item is in the base array
+        if (this._legendItems.indexOf(oneItem) &gt; -1 || typeof parents == &apos;undefined&apos;) {
+            parents = [];
+        }
+
+        if (typeof oneItem[&apos;groupName&apos;] !== &apos;undefined&apos;) {
+            let groupItem = legendItems[0];
+            let newGroup = this.layerGroup.addGroup(groupItem, parents);
+            parents.push(newGroup.groupId);
+            this._buildTree(groupItem.items, parents);
+        } else {
+            /**
+             * @type {LayerBase}
+             */
+            let layerItem = legendItems[0];
+
+            this.layerGroup.addLegendLayer(layerItem, parents);
+        }
+
+        this._buildTree(legendItems.slice(1), parents);
+    }
+
+    set showAll(val) {
+
+    }
+}
+
+nm.LayerLegend = LayerLegend;
+export default LayerLegend;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
