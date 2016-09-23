@@ -75,6 +75,6 @@ export declare class MapMoveCls extends MapInteractionBase {
      * @param triggerOnAdd if the layer should be loaded on add to mapMove
      * @param functionId optional id to reference the function later for outside triggering
      */
-    addCallback(func: mapMoveCallbackFunction, context: any, delay?: number, triggerOnAdd?: boolean, functionId?: string): void;
+    addCallback(func: mapMoveCallbackFunction, context?: any, delay?: number, triggerOnAdd?: boolean, functionId?: string): void;
 }
 export default MapMoveCls;

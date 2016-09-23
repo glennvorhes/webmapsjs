@@ -263,7 +263,7 @@ export class MapMoveCls extends MapInteractionBase {
      * @param triggerOnAdd if the layer should be loaded on add to mapMove
      * @param functionId optional id to reference the function later for outside triggering
      */
-    addCallback(func: mapMoveCallbackFunction, context: any, delay?: number, triggerOnAdd? : boolean, functionId?: string) {
+    addCallback(func: mapMoveCallbackFunction, context?: any, delay?: number, triggerOnAdd? : boolean, functionId?: string) {
 
         if (this._mapMoveCallbacks.indexOf(func) > -1) {
             console.log('this function already added to map move');
