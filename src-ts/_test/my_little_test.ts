@@ -18,11 +18,11 @@ console.log('i am here5');
 
 
 
-function me (eat: number = 10){
+function me (eat: number = 1){
     console.log(eat, 'one');
 }
 
-me();
+me(1);
 
 var control = new MediaControl('map');
 

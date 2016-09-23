@@ -13,6 +13,7 @@
     "test": "node node_modules\\karma\\bin\\karma start karma.conf.js",
     "lint": "eslint src/**/*.js",
     "esdoc": "RD /S /Q doc & MD doc & esdoc -c .esdoc.json",
+    "typedoc": "RD /S /Q doc & MD doc & typedoc --out doc/ --module commonjs --target ES5 --includes typings src-ts/ ",
     "update-ol": "npm update custom-ol",
     "serve": "cd test-html & C:\\Python33\\python.exe -m http.server 5001",
     "pack": "webpack -w",
@@ -37,6 +38,8 @@
     "url": "https://github.com/glennvorhes/webmapsjs.git"
   },
   "dependencies": {
+    "@types/jquery": "^2.0.32",
+    "@types/node": "^6.0.41",
     "jquery": "2.2.3",
     "jquery-layout": "1.0.0",
     "jquery-ui": "1.10.5",

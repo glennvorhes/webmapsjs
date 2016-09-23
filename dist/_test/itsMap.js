@@ -18,4 +18,7 @@ var layerArray = [
 ];
 var legend = new LayerLegend_1.default(layerArray, 'legend-container', {});
 console.log('it works');
+console.log('it works');
+console.log('it works');
+console.log('it works');
 //# sourceMappingURL=itsMap.js.map

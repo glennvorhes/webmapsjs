@@ -25,3 +25,6 @@ let legend = new LayerLegend(layerArray, 'legend-container', {});
 
 
 console.log('it works');
+console.log('it works');
+console.log('it works');
+console.log('it works');

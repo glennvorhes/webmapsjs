@@ -11,10 +11,10 @@ console.log('eat this bird');
 // console.log(olx);
 console.log('i am here5');
 function me(eat) {
-    if (eat === void 0) { eat = 10; }
+    if (eat === void 0) { eat = 1; }
     console.log(eat, 'one');
 }
-me();
+me(1);
 var control = new animate_buttons_1.MediaControl('map');
 //
 //
