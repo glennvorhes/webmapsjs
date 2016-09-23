@@ -2,5 +2,9 @@
  * Created by gavorhes on 11/3/2015.
  */
 import MapPopupCls from './mapPopupCls';
-declare var _default: MapPopupCls;
-export default _default;
+/**
+ * The single popup object catch is that it is common to multimap pages
+ * @type {MapPopupCls}
+ */
+export declare const mapPopup: MapPopupCls;
+export default mapPopup;

@@ -14,7 +14,7 @@
     "lint": "eslint src/**/*.js",
     "esdoc": "RD /S /Q doc & MD doc & esdoc -c .esdoc.json",
     "typedoc": "RD /S /Q doc & MD doc & typedoc --out doc/ --module commonjs --target ES5 --includes typings src-ts/ ",
-    "update-ol": "npm update custom-ol",
+    "update-custom-ol": "npm update custom-ol",
     "serve": "cd test-html & C:\\Python33\\python.exe -m http.server 5001",
     "pack": "webpack -w",
     "pack-small": "webpack -w --optimize-minimize",
@@ -30,7 +30,8 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "source-map-loader": "^0.1.5",
-    "ts-loader": "^0.8.2"
+    "ts-loader": "^0.8.2",
+    "webpack": "^1.13.2"
   },
   "repository": {
     "type": "git",

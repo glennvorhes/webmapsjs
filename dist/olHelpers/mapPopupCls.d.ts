@@ -22,7 +22,7 @@ export interface popupCallback {
 }
 export declare class FeatureLayerProperties {
     feature: ol.Feature;
-    layer: LayerEsriMapServer;
+    layer: LayerBaseVector | LayerEsriMapServer;
     layerIndex: number;
     selectionLayer: ol.layer.Vector;
     popupContent: string;
@@ -35,7 +35,7 @@ export declare class FeatureLayerProperties {
      * @param selectionLayer - the ol selection layer
      * @param [esriLayerName=undefined] - esri layer name
      */
-    constructor(feature: ol.Feature, layer: LayerEsriMapServer, layerIndex: number, selectionLayer: ol.layer.Vector, esriLayerName?: string);
+    constructor(feature: ol.Feature, layer: LayerBaseVector | LayerEsriMapServer, layerIndex: number, selectionLayer: ol.layer.Vector, esriLayerName?: string);
     readonly layerName: string;
 }
 /**

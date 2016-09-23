@@ -8,4 +8,6 @@ import MapPopupCls from './mapPopupCls';
  * The single popup object catch is that it is common to multimap pages
  * @type {MapPopupCls}
  */
-export default new MapPopupCls();
+
+export const mapPopup = new MapPopupCls() as MapPopupCls;
+export default mapPopup;

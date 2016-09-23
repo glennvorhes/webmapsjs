@@ -40,7 +40,7 @@ interface mapEvent{
 export class FeatureLayerProperties {
 
     feature: ol.Feature;
-    layer: LayerEsriMapServer;
+    layer: LayerBaseVector|LayerEsriMapServer;
     layerIndex: number;
     selectionLayer: ol.layer.Vector;
     popupContent: string;
@@ -54,7 +54,7 @@ export class FeatureLayerProperties {
      * @param selectionLayer - the ol selection layer
      * @param [esriLayerName=undefined] - esri layer name
      */
-    constructor(feature: ol.Feature, layer: LayerEsriMapServer, layerIndex: number, selectionLayer: ol.layer.Vector, esriLayerName?: string) {
+    constructor(feature: ol.Feature, layer: LayerBaseVector|LayerEsriMapServer, layerIndex: number, selectionLayer: ol.layer.Vector, esriLayerName?: string) {
         this.feature = feature;
         this.layer = layer;
         this.layerIndex = layerIndex;
@@ -182,9 +182,11 @@ class MapPopupCls extends MapInteractionBase {
 
         // display popup on click
         this._map.on('singleclick', (evt) => {
+
             this.closePopup();
             this._popupCoordinate = evt['coordinate'];
 
+            // esri map service layers
             if (this._esriMapServiceLayers.length > 0) {
                 let queryParams = {
                     geometry: evt['coordinate'].join(','),
@@ -205,6 +207,7 @@ class MapPopupCls extends MapInteractionBase {
 
             let layerFeatureObjectArray = this._featuresAtPixel(evt['pixel']);
 
+            console.log(layerFeatureObjectArray);
 
             this._passThroughLayerFeatureArray = [];
             this._currentPopupIndex = -1;
@@ -360,14 +363,15 @@ class MapPopupCls extends MapInteractionBase {
      */
     _featuresAtPixel(pixel: ol.Pixel): Array<FeatureLayerProperties> {
         let layerFeatureObjectArray = [];
-        this.map.forEachFeatureAtPixel(pixel, (feature: ol.Feature, layer: ol.layer.Vector) => {
+
+        this.map.forEachFeatureAtPixel(pixel, (feature: ol.Feature, layer: ol.layer.Vector) =>{
             let lyrIndex = this._arrPopupOlLayers.indexOf(layer);
 
-            //TODO fix this
-            // if (lyrIndex > -1) {
-            //     layerFeatureObjectArray.push(new FeatureLayerProperties(
-            //         feature, this._arrPopupLayers[lyrIndex], lyrIndex, this._selectionLayers[lyrIndex]));
-            // }
+            if (lyrIndex > -1) {
+                layerFeatureObjectArray.push(
+                    new FeatureLayerProperties(
+                    feature, this._arrPopupLayers[lyrIndex], lyrIndex, this._selectionLayers[lyrIndex]));
+            }
         });
 
         return layerFeatureObjectArray;

@@ -118,6 +118,7 @@ var MapPopupCls = (function (_super) {
         this._map.on('singleclick', function (evt) {
             _this.closePopup();
             _this._popupCoordinate = evt['coordinate'];
+            // esri map service layers
             if (_this._esriMapServiceLayers.length > 0) {
                 var queryParams = {
                     geometry: evt['coordinate'].join(','),
@@ -136,6 +137,7 @@ var MapPopupCls = (function (_super) {
                 }
             }
             var layerFeatureObjectArray = _this._featuresAtPixel(evt['pixel']);
+            console.log(layerFeatureObjectArray);
             _this._passThroughLayerFeatureArray = [];
             _this._currentPopupIndex = -1;
             for (var i = 0; i < layerFeatureObjectArray.length; i++) {
@@ -268,11 +270,9 @@ var MapPopupCls = (function (_super) {
         var layerFeatureObjectArray = [];
         this.map.forEachFeatureAtPixel(pixel, function (feature, layer) {
             var lyrIndex = _this._arrPopupOlLayers.indexOf(layer);
-            //TODO fix this
-            // if (lyrIndex > -1) {
-            //     layerFeatureObjectArray.push(new FeatureLayerProperties(
-            //         feature, this._arrPopupLayers[lyrIndex], lyrIndex, this._selectionLayers[lyrIndex]));
-            // }
+            if (lyrIndex > -1) {
+                layerFeatureObjectArray.push(new FeatureLayerProperties(feature, _this._arrPopupLayers[lyrIndex], lyrIndex, _this._selectionLayers[lyrIndex]));
+            }
         });
         return layerFeatureObjectArray;
     };
