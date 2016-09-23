@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const fs = require('fs');
 
 const testAppDir = path.join(__dirname, 'dist/_test');
-const outDir = path.join(__dirname, 'test/test_build');
+const outDir = path.join(__dirname, 'test-html/js');
 
 const files = fs.readdirSync(testAppDir);
 const entries = {};

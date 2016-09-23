@@ -2,6 +2,8 @@
  * Created by gavorhes on 6/22/2016.
  */
 import {TipSliders, TipPresetConfig, TipSliderConfig} from '../collections/Sliders';
+const $ = require('jquery');
+
 
 let slidersConfig = [
     {
@@ -181,4 +183,6 @@ let sliders = new TipSliders(slidersConfig, presetConfig, 'slider-container',
 // sliders.changedCallback = (chg) => {console.log(chg)};
 
 window['glob'] = sliders;
+window['hat'] = sliders;
+window['bird'] = sliders;
 

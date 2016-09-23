@@ -36,7 +36,17 @@ class TipPresets implements TipPresetConfig {
     constructor(conf: TipPresetConfig) {
         this.label = conf.label;
         this.presets = conf.presets;
-        this.domId = this.label.replace(/ /g, '').toLowerCase()
+        this.domId = this.label.replace(/ /g, '').toLowerCase();
+
+        let theSum = 0;
+
+        for (let pr of this.presets){
+            theSum += pr.value;
+        }
+
+        if (theSum != 100){
+            throw 'preset sum does note equal 100';
+        }
     }
 }
 
@@ -70,7 +80,6 @@ class _Slider {
 
      */
     constructor(sliderConfig: TipSliderConfig) {
-        //let _this = this;
         this._dropdownSelection = null;
         this._weight = null;
         this.name = sliderConfig.label;

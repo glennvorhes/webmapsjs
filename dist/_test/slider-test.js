@@ -3,6 +3,7 @@
  * Created by gavorhes on 6/22/2016.
  */
 var Sliders_1 = require('../collections/Sliders');
+var $ = require('jquery');
 var slidersConfig = [
     {
         label: 'AADT',
@@ -173,4 +174,6 @@ var versionSelector = $('#version-selector');
 var sliders = new Sliders_1.TipSliders(slidersConfig, presetConfig, 'slider-container', presetSelector, regionSelector, versionSelector, function (chg) { console.log(chg); });
 // sliders.changedCallback = (chg) => {console.log(chg)};
 window['glob'] = sliders;
+window['hat'] = sliders;
+window['bird'] = sliders;
 //# sourceMappingURL=slider-test.js.map

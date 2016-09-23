@@ -10,6 +10,14 @@ var TipPresets = (function () {
         this.label = conf.label;
         this.presets = conf.presets;
         this.domId = this.label.replace(/ /g, '').toLowerCase();
+        var theSum = 0;
+        for (var _i = 0, _a = this.presets; _i < _a.length; _i++) {
+            var pr = _a[_i];
+            theSum += pr.value;
+        }
+        if (theSum != 100) {
+            throw 'preset sum does note equal 100';
+        }
     }
     return TipPresets;
 }());
@@ -20,7 +28,6 @@ var _Slider = (function () {
 
      */
     function _Slider(sliderConfig) {
-        //let _this = this;
         this._dropdownSelection = null;
         this._weight = null;
         this.name = sliderConfig.label;
