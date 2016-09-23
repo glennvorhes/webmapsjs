@@ -1,3 +1,4 @@
+/// <reference types="jquery" />
 export declare class DayRange {
     _workingDayRange: number;
     _$startDate: JQuery;

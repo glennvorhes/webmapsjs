@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import LayerBaseVector from "../layers/LayerBaseVector";
 import MapInteractionBase from './mapInteractionBase';
 import { ol } from 'custom-ol';
@@ -46,7 +47,7 @@ export declare class MapMoveCls extends MapInteractionBase {
     /**
      * return the map extent
      */
-    mapExtent: extentObject;
+    readonly mapExtent: extentObject;
     /**
      * Trigger the layer load
      * @param lyr the layer being acted on

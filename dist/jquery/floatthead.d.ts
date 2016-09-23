@@ -1,3 +1,4 @@
+/// <reference types="jquery" />
 /**
  * implement the default window scroll
  * @param {jQuery} $table - jquery reference to table

@@ -1,3 +1,4 @@
+/// <reference types="jquery" />
 export interface selectChangeCallback {
     /**
      *
@@ -30,7 +31,7 @@ export declare class SelectBoxBase {
      *
      * @returns {jQuery}
      */
-    box: JQuery;
+    readonly box: JQuery;
     changed(): void;
     /**
      *
@@ -47,6 +48,6 @@ export declare class SelectBoxBase {
      * @protected
      */
     selectedValue: any;
-    selectedText: string;
+    readonly selectedText: string;
 }
 export default SelectBoxBase;

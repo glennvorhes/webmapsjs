@@ -36,7 +36,7 @@ export interface EsriSymbol {
  * @returns {styleAndLegend} style and legend object
  */
 export declare function makeFeatureServiceLegendAndSymbol(esriResponse: EsriResponse): {
-    style: ol.style.Style | ol.style.Style[] | ol.style.StyleFunction;
+    style: ol.style.StyleFunction | ol.style.Style | ol.style.Style[];
     legend: string;
 };
 /**

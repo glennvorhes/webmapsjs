@@ -1,3 +1,5 @@
+/// <reference types="jquery" />
+/// <reference types="node" />
 import Timer = NodeJS.Timer;
 export declare class MediaControl {
     _container: JQuery;
@@ -17,10 +19,10 @@ export declare class MediaControl {
     _func: Function;
     constructor(element: JQuery | HTMLElement | string, min?: number, max?: number, val?: number, step?: number, func?: Function, playInterval?: number, showAsDate?: boolean);
     stopPlaying(): void;
-    playing: boolean;
-    min: number;
-    max: number;
-    step: number;
+    readonly playing: boolean;
+    readonly min: number;
+    readonly max: number;
+    readonly step: number;
     currentValue: number;
     /**
      * set min and max value with step

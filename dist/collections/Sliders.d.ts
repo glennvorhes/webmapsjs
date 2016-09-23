@@ -1,3 +1,4 @@
+/// <reference types="jquery" />
 export interface TipSliderConfig {
     label: string;
     yearOptions: Array<{
@@ -84,6 +85,6 @@ export declare class TipSliders {
      */
     getParams(): {};
     _addEventListeners(): void;
-    paramWeightsRegionVersion: ChangeResponse;
+    readonly paramWeightsRegionVersion: ChangeResponse;
 }
 export default TipSliders;

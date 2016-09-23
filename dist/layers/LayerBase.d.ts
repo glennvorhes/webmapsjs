@@ -1,3 +1,4 @@
+/// <reference types="jquery" />
 import { ol } from 'custom-ol';
 export interface LayerBaseOptions {
     id?: string;
@@ -108,27 +109,27 @@ export declare abstract class LayerBase {
      * get the minimum resolution
      * @type {number|*}
      */
-    minResolution: number;
+    readonly minResolution: number;
     /**
      * get the maximum resolution
      * @type {number|*}
      */
-    maxResolution: number;
+    readonly maxResolution: number;
     /**
      * get min zoom
      * @type {number|*}
      */
-    minZoom: number;
+    readonly minZoom: number;
     /**
      * get max zoom
      * @type {number|*}
      */
-    maxZoom: number;
+    readonly maxZoom: number;
     /**
      * get the url
      * @type {string}
      */
-    url: string;
+    readonly url: string;
     /**
      * Get the layer visibility
      * @type {boolean}
@@ -161,12 +162,12 @@ export declare abstract class LayerBase {
      * Check if the layer is loaded
      * @type {boolean}
      */
-    loaded: boolean;
+    readonly loaded: boolean;
     /**
      * get the layer source
      * @type {*}
      */
-    source: ol.source.Source;
+    readonly source: ol.source.Source;
     protected getSource(): ol.source.Source;
     /**
      * get the z index
@@ -179,7 +180,7 @@ export declare abstract class LayerBase {
     /**
      * the the ol layer
      */
-    olLayer: ol.layer.Layer;
+    readonly olLayer: ol.layer.Layer;
     protected getOlLayer(): ol.layer.Layer;
 }
 export default LayerBase;

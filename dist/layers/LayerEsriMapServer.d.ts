@@ -1,3 +1,4 @@
+/// <reference types="jquery" />
 /**
  * Created by gavorhes on 12/7/2015.
  */
@@ -45,11 +46,11 @@ export declare class LayerEsriMapServer extends LayerBase {
      *
      * @returns {ol.source.TileArcGISRest} the vector source
      */
-    source: ol.source.TileArcGISRest;
+    readonly source: ol.source.TileArcGISRest;
     /**
      *
      * @returns the ol layer
      */
-    olLayer: ol.layer.Tile;
+    readonly olLayer: ol.layer.Tile;
 }
 export default LayerEsriMapServer;

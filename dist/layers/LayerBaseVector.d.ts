@@ -95,11 +95,11 @@ export declare class LayerBaseVector extends LayerBase {
     /**
      * get on demand delay in miliseconds
      */
-    onDemandDelay: number;
+    readonly onDemandDelay: number;
     /**
      * get if the layer is autoloaded
      */
-    autoLoad: boolean;
+    readonly autoLoad: boolean;
     /**
      * get the style definition
      */
@@ -111,18 +111,18 @@ export declare class LayerBaseVector extends LayerBase {
     /**
      * get the map CRS if it is defined by the map move object
      */
-    mapCrs: string;
-    mapProj: ol.proj.Projection;
+    readonly mapCrs: string;
+    readonly mapProj: ol.proj.Projection;
     /**
      * get the map move object
      * @type {MapMoveCls|*}
      */
-    mapMove: MapMoveCls;
+    readonly mapMove: MapMoveCls;
     /**
      * map move params
      * @type {object}
      */
-    mapMoveParams: any;
+    readonly mapMoveParams: any;
     /**
      * Set the layer visibility
      * @type {boolean}
@@ -133,15 +133,15 @@ export declare class LayerBaseVector extends LayerBase {
      * get the layer vector source
      * @override
      */
-    source: ol.source.Vector;
+    readonly source: ol.source.Vector;
     /**
      * array of ol features
      */
-    features: Array<ol.Feature>;
+    readonly features: Array<ol.Feature>;
     /**
      *
      */
-    olLayer: ol.layer.Vector;
+    readonly olLayer: ol.layer.Vector;
     protected setZIndex(newZ: number): void;
 }
 export default LayerBaseVector;

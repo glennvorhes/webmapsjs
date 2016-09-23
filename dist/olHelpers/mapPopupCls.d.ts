@@ -1,3 +1,4 @@
+/// <reference types="jquery" />
 /**
  * Created by gavorhes on 11/3/2015.
  */
@@ -35,7 +36,7 @@ export declare class FeatureLayerProperties {
      * @param [esriLayerName=undefined] - esri layer name
      */
     constructor(feature: ol.Feature, layer: LayerEsriMapServer, layerIndex: number, selectionLayer: ol.layer.Vector, esriLayerName?: string);
-    layerName: string;
+    readonly layerName: string;
 }
 /**
  * map popup class
