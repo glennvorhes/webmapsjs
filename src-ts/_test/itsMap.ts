@@ -6,7 +6,7 @@ import ItsLayerCollection from '../collections/ItsLayerCollection';
 import LayerLegend from '../collections/LayerLegend';
 import quickMap from '../olHelpers/quickMap';
 
-let map = quickMap({zoom: 15, center: {x: -9957959, y: 5317407}});
+let map = quickMap();
 
 window['map'] = map;
 
