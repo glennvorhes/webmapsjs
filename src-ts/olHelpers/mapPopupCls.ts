@@ -207,8 +207,6 @@ class MapPopupCls extends MapInteractionBase {
 
             let layerFeatureObjectArray = this._featuresAtPixel(evt['pixel']);
 
-            console.log(layerFeatureObjectArray);
-
             this._passThroughLayerFeatureArray = [];
             this._currentPopupIndex = -1;
 

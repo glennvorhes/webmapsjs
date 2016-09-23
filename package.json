@@ -17,8 +17,8 @@
     "typedoc": "RD /S /Q doc & MD doc & typedoc --out doc/ --module commonjs --target ES5 --includes typings src-ts/ ",
     "update-custom-ol": "npm update custom-ol",
     "serve": "cd test-html & C:\\Python33\\python.exe -m http.server 5001",
-    "pack": "webpack -w",
-    "pack-small": "webpack -w --optimize-minimize",
+    "webpack": "webpack -w",
+    "webpack-min": "webpack -w --optimize-minimize",
     "tsc": "tsc -w"
   },
   "author": "TOPS Lab",

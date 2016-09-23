@@ -137,7 +137,6 @@ var MapPopupCls = (function (_super) {
                 }
             }
             var layerFeatureObjectArray = _this._featuresAtPixel(evt['pixel']);
-            console.log(layerFeatureObjectArray);
             _this._passThroughLayerFeatureArray = [];
             _this._currentPopupIndex = -1;
             for (var i = 0; i < layerFeatureObjectArray.length; i++) {
