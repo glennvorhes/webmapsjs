@@ -294,14 +294,15 @@ export class TipSliders {
      * @param sliderConfigs
      * @param presetConfig
      * @param divId
-     * @param presetSelectorId
-     * @param regionSelectorId
-     * @param versionSelectorId
+     * @param presetSelector
+     * @param regionSelector
+     * @param versionSelector
      * @param chgCallback
      */
     constructor(sliderConfigs: Array<TipSliderConfig>, presetConfig: Array<TipPresetConfig>,
-                divId: string, presetSelectorId: string, regionSelectorId: string, versionSelectorId: string,
+                divId: string, presetSelector: JQuery, regionSelector: JQuery, versionSelector: JQuery,
                 chgCallback?: ChangeCallback) {
+
         this.resetting = false;
         this.reservedPercent = 0.0;
         this.$container = $('#' + divId);
@@ -309,9 +310,9 @@ export class TipSliders {
 
         this._changedCallback = typeof chgCallback == 'function' ? chgCallback : () => {};
 
-        this._$presetSelector = $('#' + presetSelectorId);
-        this._$regionSelector = $('#' + regionSelectorId);
-        this._$versionSelector = $('#' + versionSelectorId);
+        this._$presetSelector = presetSelector;
+        this._$regionSelector = regionSelector;
+        this._$versionSelector = versionSelector;
 
         this._sliderList = [];
         this._sliderLookup = {};

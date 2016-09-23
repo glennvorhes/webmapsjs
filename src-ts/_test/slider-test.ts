@@ -170,9 +170,13 @@ let presetConfig = [
     }
 ] as Array<TipPresetConfig>;
 
+let presetSelector = $('#preset-selector');
+let regionSelector = $('#region-selector');
+let versionSelector = $('#version-selector');
+
 
 let sliders = new TipSliders(slidersConfig, presetConfig, 'slider-container',
-    'preset-selector', 'region-selector', 'version-selector', (chg) => {console.log(chg)});
+    presetSelector, regionSelector, versionSelector, (chg) => {console.log(chg)});
 
 // sliders.changedCallback = (chg) => {console.log(chg)};
 

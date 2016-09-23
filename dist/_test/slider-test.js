@@ -167,7 +167,10 @@ var presetConfig = [
         ]
     }
 ];
-var sliders = new Sliders_1.TipSliders(slidersConfig, presetConfig, 'slider-container', 'preset-selector', 'region-selector', 'version-selector', function (chg) { console.log(chg); });
+var presetSelector = $('#preset-selector');
+var regionSelector = $('#region-selector');
+var versionSelector = $('#version-selector');
+var sliders = new Sliders_1.TipSliders(slidersConfig, presetConfig, 'slider-container', presetSelector, regionSelector, versionSelector, function (chg) { console.log(chg); });
 // sliders.changedCallback = (chg) => {console.log(chg)};
 window['glob'] = sliders;
 //# sourceMappingURL=slider-test.js.map

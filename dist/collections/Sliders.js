@@ -217,21 +217,21 @@ var TipSliders = (function () {
      * @param sliderConfigs
      * @param presetConfig
      * @param divId
-     * @param presetSelectorId
-     * @param regionSelectorId
-     * @param versionSelectorId
+     * @param presetSelector
+     * @param regionSelector
+     * @param versionSelector
      * @param chgCallback
      */
-    function TipSliders(sliderConfigs, presetConfig, divId, presetSelectorId, regionSelectorId, versionSelectorId, chgCallback) {
+    function TipSliders(sliderConfigs, presetConfig, divId, presetSelector, regionSelector, versionSelector, chgCallback) {
         var _this = this;
         this.resetting = false;
         this.reservedPercent = 0.0;
         this.$container = $('#' + divId);
         this.$container.addClass('slider-container');
         this._changedCallback = typeof chgCallback == 'function' ? chgCallback : function () { };
-        this._$presetSelector = $('#' + presetSelectorId);
-        this._$regionSelector = $('#' + regionSelectorId);
-        this._$versionSelector = $('#' + versionSelectorId);
+        this._$presetSelector = presetSelector;
+        this._$regionSelector = regionSelector;
+        this._$versionSelector = versionSelector;
         this._sliderList = [];
         this._sliderLookup = {};
         for (var i = 0; i < sliderConfigs.length; i++) {

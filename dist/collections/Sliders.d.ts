@@ -47,12 +47,12 @@ export declare class TipSliders {
      * @param sliderConfigs
      * @param presetConfig
      * @param divId
-     * @param presetSelectorId
-     * @param regionSelectorId
-     * @param versionSelectorId
+     * @param presetSelector
+     * @param regionSelector
+     * @param versionSelector
      * @param chgCallback
      */
-    constructor(sliderConfigs: Array<TipSliderConfig>, presetConfig: Array<TipPresetConfig>, divId: string, presetSelectorId: string, regionSelectorId: string, versionSelectorId: string, chgCallback?: ChangeCallback);
+    constructor(sliderConfigs: Array<TipSliderConfig>, presetConfig: Array<TipPresetConfig>, divId: string, presetSelector: JQuery, regionSelector: JQuery, versionSelector: JQuery, chgCallback?: ChangeCallback);
     _runChangedCallback(): void;
     changedCallback: ChangeCallback;
     setPresetValues(): void;
