@@ -3,6 +3,7 @@ var zoomResolutionConvert = require('../olHelpers/zoomResolutionConvert');
 var provide_1 = require('../util/provide');
 var makeGuid_1 = require('../util/makeGuid');
 var nm = provide_1.default('layers');
+var $ = require('jquery');
 /**
  * The base layer class
  * @abstract

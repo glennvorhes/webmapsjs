@@ -175,6 +175,7 @@ exports.tipConfig = {
         }
     ]
 };
+exports.tipConfig.$presetSelector.append('<option value="0" disabled=>Custom</option>');
 var sliders = new Sliders_1.TipSliders(exports.tipConfig.slidersConfig, exports.tipConfig.presetConfig, 'slider-container', exports.tipConfig.$presetSelector, exports.tipConfig.$regionSelector, exports.tipConfig.$regionSelector, function (chg) { console.log(chg); });
 // sliders.changedCallback = (chg) => {console.log(chg)};
 window['glob'] = sliders;

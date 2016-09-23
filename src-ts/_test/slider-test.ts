@@ -195,6 +195,8 @@ export const tipConfig = {
 
 } as ITipConfig;
 
+tipConfig.$presetSelector.append('<option value="0" disabled=>Custom</option>');
+
 let sliders = new TipSliders(tipConfig.slidersConfig, tipConfig.presetConfig, 'slider-container',
     tipConfig.$presetSelector, tipConfig.$regionSelector, tipConfig.$regionSelector, (chg) => {console.log(chg)});
 

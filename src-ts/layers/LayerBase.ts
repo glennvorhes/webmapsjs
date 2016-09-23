@@ -3,6 +3,7 @@ import provide from '../util/provide';
 import {ol} from 'custom-ol';
 import makeGuid from '../util/makeGuid';
 const nm = provide('layers');
+const $ = require('jquery');
 
 
 export interface LayerBaseOptions{
