@@ -389,7 +389,7 @@ export class TipSliders {
     }
 
     setPresetValues() {
-        let idx = this._$presetSelector.val() || '0';
+        let idx = this._$presetSelector.val() || '1';
 
         let thePreset = this._presetLookup[idx];
 
