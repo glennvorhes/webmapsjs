@@ -215,7 +215,8 @@ var MapPopupCls = (function (_super) {
                 }
                 return false;
             });
-            _this.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+            var mapElement = _this.map.getTargetElement();
+            mapElement.style.cursor = hit ? 'pointer' : '';
         });
         return true;
     };

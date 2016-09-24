@@ -299,7 +299,8 @@ class MapPopupCls extends MapInteractionBase {
 
                 return false;
             });
-            this.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+            let mapElement = this.map.getTargetElement() as HTMLElement;
+            mapElement.style.cursor = hit ? 'pointer' : '';
         });
 
         return true;
