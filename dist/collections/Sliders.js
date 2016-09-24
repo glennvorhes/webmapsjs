@@ -291,7 +291,8 @@ var TipSliders = (function () {
         configurable: true
     });
     TipSliders.prototype.setPresetValues = function () {
-        var thePreset = this._presetLookup[this._$presetSelector.val()];
+        var idx = this._$presetSelector.val() || '0';
+        var thePreset = this._presetLookup[idx];
         for (var i = 0; i < thePreset.presets.length; i++) {
             var presetValues = thePreset.presets[i];
             var theSlider = this._sliderList[i];

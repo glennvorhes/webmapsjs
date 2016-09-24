@@ -27,7 +27,6 @@ export interface ChangeCallback {
 export declare class TipSliders {
     $container: JQuery;
     reservedPercent: number;
-    total: number;
     lockedCount: number;
     notLockedCount: number;
     private _sliderList;

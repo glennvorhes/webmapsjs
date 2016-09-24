@@ -278,7 +278,6 @@ nm._Slider = _Slider;
 export class TipSliders {
     $container: JQuery;
     reservedPercent: number;
-    total: number;
     lockedCount: number;
     notLockedCount: number;
     private _sliderList: Array<_Slider>;
@@ -390,7 +389,9 @@ export class TipSliders {
     }
 
     setPresetValues() {
-        let thePreset = this._presetLookup[this._$presetSelector.val()];
+        let idx = this._$presetSelector.val() || '0';
+
+        let thePreset = this._presetLookup[idx];
 
         for (let i = 0; i < thePreset.presets.length; i++) {
             let presetValues = thePreset.presets[i];
