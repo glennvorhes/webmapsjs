@@ -1,1 +1,2 @@
-dist/_**/**/*
+dist/_scratch/**/*
+dist/_test/**/*
