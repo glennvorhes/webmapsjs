@@ -7,7 +7,6 @@ import { ol } from 'custom-ol';
 export interface LayerEsriMapServerOptions extends LayerBaseOptions {
     addPopup?: boolean;
     showLayers?: Array<number>;
-    useEsriStyle?: boolean;
 }
 /**
  * esri mapserver layer

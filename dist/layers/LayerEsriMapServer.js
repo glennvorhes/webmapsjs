@@ -40,6 +40,7 @@ var LayerEsriMapServer = (function (_super) {
      * @param {undefined|Array<number>} [options.showLayers=undefined] if a popup should be added
      */
     function LayerEsriMapServer(url, options) {
+        if (options === void 0) { options = {}; }
         _super.call(this, url, options);
         this._source = new custom_ol_1.ol.source.TileArcGISRest({
             url: this.url == '' ? undefined : this.url,
@@ -66,16 +67,15 @@ var LayerEsriMapServer = (function (_super) {
      * @param {string} [additionalContent=''] additional content for legend
      */
     LayerEsriMapServer.prototype.addLegendContent = function (additionalContent) {
+        var _this = this;
         var urlCopy = this.url;
         if (urlCopy[urlCopy.length - 1] !== '/') {
             urlCopy += '/';
         }
         urlCopy += 'legend?f=pjson&callback=?';
-        var _this = this;
-        var superAddLegend = _super.prototype.addLegendContent;
         $.get(urlCopy, {}, function (d) {
             var newHtml = esriToOl.makeMapServiceLegend(d);
-            superAddLegend.call(_this, newHtml);
+            _super.prototype.addLegendContent.call(_this, newHtml);
         }, 'json');
     };
     LayerEsriMapServer.prototype.getPopupInfo = function (queryParams) {

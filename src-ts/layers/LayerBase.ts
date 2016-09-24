@@ -69,7 +69,7 @@ export abstract class LayerBase {
      * @param {boolean} [options.legendCheckbox=true] - if the legend item should have a checkbox for visibility
      * @param {boolean} [options.legendContent=undefined] - additional content to add to the legend
      */
-    constructor(url: string, options?: LayerBaseOptions) {
+    constructor(url: string, options: LayerBaseOptions = {}) {
         options = options || {} as LayerBaseOptions;
 
         if (typeof url !== 'string') {

@@ -10,8 +10,7 @@ var swiper = new layerSwipe_1.default(map);
 var wisDotRegions = new LayerEsriMapServer_1.LayerEsriMapServer('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/Metamanager_regions/MapServer', {
     minZoom: 6,
     maxZoom: 12,
-    name: 'WisDOT Regions',
-    useEsriStyle: true
+    name: 'WisDOT Regions'
 });
 var metamanagerSegments = new LayerEsriMapServer_1.LayerEsriMapServer('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/MM_All_Segments/MapServer', {
     minZoom: 7,

@@ -14,7 +14,6 @@ const $ = require('jquery');
 export interface LayerEsriMapServerOptions extends LayerBaseOptions{
     addPopup?: boolean;
     showLayers?: Array<number>;
-    useEsriStyle?: boolean
 }
 
 /**
@@ -44,7 +43,8 @@ export class LayerEsriMapServer extends LayerBase {
      * @param {boolean} [options.addPopup=false] if a popup should be added
      * @param {undefined|Array<number>} [options.showLayers=undefined] if a popup should be added
      */
-    constructor(url, options?: LayerEsriMapServerOptions) {
+    constructor(url, options: LayerEsriMapServerOptions = {}) {
+
         super(url, options);
         this._source = new ol.source.TileArcGISRest(
             {
@@ -87,12 +87,9 @@ export class LayerEsriMapServer extends LayerBase {
 
         urlCopy += 'legend?f=pjson&callback=?';
 
-        let _this = this;
-        let superAddLegend = super.addLegendContent;
-
-        $.get(urlCopy, {}, function (d) {
+        $.get(urlCopy, {}, (d) => {
             let newHtml = esriToOl.makeMapServiceLegend(d);
-            superAddLegend.call(_this, newHtml);
+            super.addLegendContent(newHtml);
         }, 'json');
     }
 

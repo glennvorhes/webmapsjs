@@ -44,6 +44,7 @@ var LayerBaseVector = (function (_super) {
      *
      */
     function LayerBaseVector(url, options) {
+        if (options === void 0) { options = {}; }
         _super.call(this, url, options);
         options = options;
         //prevent regular load if no url has been provided

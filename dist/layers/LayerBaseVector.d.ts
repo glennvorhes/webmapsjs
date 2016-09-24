@@ -60,7 +60,7 @@ export declare class LayerBaseVector extends LayerBase {
      * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
      *
      */
-    constructor(url: string, options: LayerBaseVectorOptions);
+    constructor(url: string, options?: LayerBaseVectorOptions);
     /**
      * dummy to be overridden
      * @param {object} featureCollection - geojson or esrijson object

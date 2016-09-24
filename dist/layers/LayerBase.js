@@ -27,6 +27,7 @@ var LayerBase = (function () {
      * @param {boolean} [options.legendContent=undefined] - additional content to add to the legend
      */
     function LayerBase(url, options) {
+        if (options === void 0) { options = {}; }
         options = options || {};
         if (typeof url !== 'string') {
             throw 'Invalid URL';

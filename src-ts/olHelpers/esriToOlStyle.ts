@@ -371,24 +371,32 @@ export function makeFeatureServiceLegendAndSymbol(esriResponse: EsriResponse) {
 
 nm.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
 
+
 /**
  *
  * @param {object} lyrObject - the layer as defined in the response
- * @param {boolean} [iconsOnly=false] use only icons
+ * @param {boolean} [skipLayerNameAndExpander=false] use only icons
  * @returns {string} legend html
  */
-function mapServiceLegendItem(lyrObject, iconsOnly: boolean = false) {
+function mapServiceLegendItem(lyrObject, skipLayerNameAndExpander: boolean = false) {
 
 
-    iconsOnly = typeof iconsOnly == 'boolean' ? iconsOnly : false;
+    skipLayerNameAndExpander = typeof skipLayerNameAndExpander == 'boolean' ? skipLayerNameAndExpander : false;
     let layerName = lyrObject['layerName'];
     let legendItems = lyrObject['legend'];
     let legendHtml = '';
 
+    if (!skipLayerNameAndExpander) {
+        legendHtml += `<span class="legend-layer-subitem">${layerName}</span>`;
+    }
+
     if (legendItems.length == 1) {
         legendHtml = `<img class="legend-layer-icon" height="17" src="data:image/png;base64,${legendItems[0]['imageData']}">`;
     } else {
-        legendHtml += '<span class="legend-items-expander" title="Expand/Collapse">&#9660;</span><ul>';
+        if (!skipLayerNameAndExpander) {
+            legendHtml += '<span class="legend-items-expander" title="Expand/Collapse">&#9660;</span>';
+        }
+        legendHtml += '<ul>';
         for (let i = 0; i < legendItems.length; i++) {
             legendHtml += `<li>`;
             legendHtml += `<span class="legend-layer-subitem">${htmlEscape(legendItems[i]['label'])}</span>`;
@@ -398,7 +406,7 @@ function mapServiceLegendItem(lyrObject, iconsOnly: boolean = false) {
         legendHtml += '</ul>';
     }
 
-    if (!iconsOnly) {
+    if (!skipLayerNameAndExpander) {
         legendHtml = `<span class="legend-layer-subitem">${layerName}</span>` + legendHtml;
     }
 

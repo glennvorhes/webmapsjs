@@ -16,8 +16,7 @@ let wisDotRegions = new LayerEsriMapServer(
     {
         minZoom: 6,
         maxZoom: 12,
-        name: 'WisDOT Regions',
-        useEsriStyle: true
+        name: 'WisDOT Regions'
     });
 
 let metamanagerSegments = new LayerEsriMapServer(
