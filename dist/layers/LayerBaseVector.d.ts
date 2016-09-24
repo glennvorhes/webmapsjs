@@ -18,6 +18,9 @@ export interface LayerBaseVectorOptions extends LayerBaseOptions {
     mapMoveMakeGetParams?: makeMapMoveParams;
     mapMoveObj?: MapMoveCls;
 }
+export interface customStyleFunction {
+    (feature: ol.Feature, resolution?: number): Array<ol.style.Style>;
+}
 /**
  * The Vector layer base
  * @augments LayerBase
@@ -26,7 +29,7 @@ export interface LayerBaseVectorOptions extends LayerBaseOptions {
 export declare class LayerBaseVector extends LayerBase {
     _olLayer: ol.layer.Vector;
     _source: ol.source.Vector;
-    _style: ol.style.Style | Array<ol.style.Style> | ol.style.StyleFunction;
+    _style: ol.style.Style | Array<ol.style.Style> | ol.style.StyleFunction | customStyleFunction;
     _autoLoad: boolean;
     _onDemand: boolean;
     _onDemandDelay: number;
@@ -107,7 +110,7 @@ export declare class LayerBaseVector extends LayerBase {
      * set the style
      * @param style - the style or function
      */
-    style: ol.style.StyleFunction | Array<ol.style.Style> | ol.style.Style;
+    style: ol.style.StyleFunction | Array<ol.style.Style> | ol.style.Style | customStyleFunction;
     /**
      * get the map CRS if it is defined by the map move object
      */

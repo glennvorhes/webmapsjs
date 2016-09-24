@@ -29,7 +29,9 @@ export interface LayerBaseVectorOptions extends LayerBaseOptions{
     mapMoveObj?: MapMoveCls;
 }
 
-
+export interface customStyleFunction{
+    (feature: ol.Feature, resolution?: number): Array<ol.style.Style>
+}
 
 /**
  * The Vector layer base
@@ -39,7 +41,7 @@ export interface LayerBaseVectorOptions extends LayerBaseOptions{
 export class LayerBaseVector extends LayerBase {
     _olLayer: ol.layer.Vector;
     _source: ol.source.Vector;
-    _style: ol.style.Style|Array<ol.style.Style>|ol.style.StyleFunction;
+    _style: ol.style.Style|Array<ol.style.Style>|ol.style.StyleFunction|customStyleFunction;
     _autoLoad: boolean;
     _onDemand: boolean;
     _onDemandDelay: number;
@@ -212,7 +214,7 @@ export class LayerBaseVector extends LayerBase {
     /**
      * get the style definition
      */
-    get style(): ol.style.StyleFunction|Array<ol.style.Style>|ol.style.Style {
+    get style(): ol.style.StyleFunction|Array<ol.style.Style>|ol.style.Style|customStyleFunction {
         return this._style;
     }
 
@@ -220,9 +222,9 @@ export class LayerBaseVector extends LayerBase {
      * set the style
      * @param style - the style or function
      */
-    set style(style: ol.style.StyleFunction|Array<ol.style.Style>|ol.style.Style) {
+    set style(style: ol.style.StyleFunction|Array<ol.style.Style>|ol.style.Style|customStyleFunction) {
         this._style = style;
-        this.olLayer.setStyle(this._style);
+        this.olLayer.setStyle(this._style as ol.style.Style);
     }
 
     /**
