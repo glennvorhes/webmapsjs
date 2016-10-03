@@ -2,12 +2,16 @@
  * Created by gavorhes on 12/23/2015.
  */
 import provide from '../util/provide';
+import {ol} from 'custom-ol'
 let nm = provide('olHelpers');
 
 /**
  * take an array of features and sort by a given property name
  */
 class SortedFeatures {
+    sortedFeatures: Array<ol.Feature>;
+    propertyName: string;
+    _propertyType: string;
 
     /**
      *
@@ -21,12 +25,26 @@ class SortedFeatures {
         if (this.sortedFeatures.length > 0) {
             this._propertyType = typeof this.sortedFeatures[0].getProperties()[this.propertyName];
 
-            let _this = this;
-            this.sortedFeatures.sort(function (a, b) {
-                if (_this._propertyType == 'number'){
-                    return (a['getProperties']()[_this.propertyName] - b['getProperties']()[_this.propertyName]);
-                } else if (_this._propertyType == 'string'){
-                    return (a['getProperties']()[_this.propertyName] > b['getProperties']()[_this.propertyName]);
+            let __this = this;
+            this.sortedFeatures.sort(function (a, b) : number {
+                if (__this._propertyType == 'number'){
+                    let aMinusB = a['getProperties']()[__this.propertyName] - b['getProperties']()[__this.propertyName];
+                    if (aMinusB == 0){
+                        return 0;
+                    } else {
+                        return aMinusB > 0 ? 1 : -1;
+                    }
+                } else if (__this._propertyType == 'string'){
+                    let propA = a['getProperties']()[__this.propertyName] || '';
+                    let propB = b['getProperties']()[__this.propertyName] || '';
+                    propA = propA.toString().trim();
+                    propB = propB.toString().trim();
+
+                    if (propA == propB){
+                        return 0;
+                    } else {
+                        return propA > propB ? 1 : 0;
+                    }
                 }
             });
         }
