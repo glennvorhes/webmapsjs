@@ -40,14 +40,9 @@ export declare class SelectBoxBase {
     addChangeListener(func: selectChangeCallback): void;
     /**
      *
-     * @returns {string|number}
-     */
-    /**
-     *
      * @param {string|number} v
-     * @protected
      */
-    selectedValue: any;
+    selectedValue: string | number;
     readonly selectedText: string;
 }
 export default SelectBoxBase;

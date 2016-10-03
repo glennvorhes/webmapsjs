@@ -71,10 +71,6 @@ var SelectBoxBase = (function () {
         this._changeListeners.push(func);
     };
     Object.defineProperty(SelectBoxBase.prototype, "selectedValue", {
-        /**
-         *
-         * @returns {string|number}
-         */
         get: function () {
             var theVal = this.box.val();
             if (theVal == null || typeof theVal == 'undefined') {
@@ -95,7 +91,6 @@ var SelectBoxBase = (function () {
         /**
          *
          * @param {string|number} v
-         * @protected
          */
         set: function (v) {
             this.box.val(v);

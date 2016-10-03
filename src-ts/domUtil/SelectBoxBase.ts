@@ -100,11 +100,8 @@ export class SelectBoxBase{
         this._changeListeners.push(func);
     }
 
-    /**
-     *
-     * @returns {string|number}
-     */
-    get selectedValue(){
+
+    get selectedValue(): string|number{
         let theVal = this.box.val();
 
         if (theVal == null || typeof theVal == 'undefined'){
@@ -123,9 +120,8 @@ export class SelectBoxBase{
     /**
      *
      * @param {string|number} v
-     * @protected
      */
-    set selectedValue(v){
+    set selectedValue(v: string|number){
         this.box.val(v);
     }
     
