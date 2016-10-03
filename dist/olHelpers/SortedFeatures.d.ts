@@ -19,6 +19,6 @@ declare class SortedFeatures {
      * @param {Array} [sortedFeatures=this.sortedFeatures] - the candidate features
      * @returns {ol.Feature|undefined} the feature matching the lookup
      */
-    getFeature(propertyValue: any, exactMatch: any, sortedFeatures: any): any;
+    getFeature(propertyValue: any, exactMatch?: boolean, sortedFeatures?: Array<ol.Feature>): any;
 }
 export default SortedFeatures;

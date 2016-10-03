@@ -52,11 +52,9 @@ var SortedFeatures = (function () {
      * @returns {ol.Feature|undefined} the feature matching the lookup
      */
     SortedFeatures.prototype.getFeature = function (propertyValue, exactMatch, sortedFeatures) {
+        if (exactMatch === void 0) { exactMatch = false; }
         if (typeof sortedFeatures == 'undefined') {
             sortedFeatures = this.sortedFeatures;
-        }
-        if (typeof exactMatch !== 'boolean') {
-            exactMatch = false;
         }
         if (sortedFeatures.length == 0) {
             return undefined;
