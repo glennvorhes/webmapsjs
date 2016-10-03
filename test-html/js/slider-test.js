@@ -10413,7 +10413,7 @@
 	        configurable: true
 	    });
 	    TipSliders.prototype.setPresetValues = function () {
-	        var idx = this._$presetSelector.val() || '0';
+	        var idx = this._$presetSelector.val() || '1';
 	        var thePreset = this._presetLookup[idx];
 	        for (var i = 0; i < thePreset.presets.length; i++) {
 	            var presetValues = thePreset.presets[i];

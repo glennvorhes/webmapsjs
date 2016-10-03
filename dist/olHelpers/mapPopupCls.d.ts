@@ -42,7 +42,7 @@ export declare class FeatureLayerProperties {
  * map popup class
  * @augments MapInteractionBase
  */
-declare class MapPopupCls extends MapInteractionBase {
+export declare class MapPopupCls extends MapInteractionBase {
     _popupOpen: boolean;
     _passThroughLayerFeatureArray: Array<FeatureLayerProperties>;
     _currentPopupIndex: number;

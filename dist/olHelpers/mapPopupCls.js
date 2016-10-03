@@ -408,6 +408,7 @@ var MapPopupCls = (function (_super) {
     };
     return MapPopupCls;
 }(mapInteractionBase_1.default));
+exports.MapPopupCls = MapPopupCls;
 nm.MapPopupCls = MapPopupCls;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = MapPopupCls;
