@@ -10,6 +10,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var LayerBaseVector_1 = require('./LayerBaseVector');
 var provide_1 = require('../util/provide');
 var custom_ol_1 = require('custom-ol');
+var proj = require('../olHelpers/projections');
 var nm = provide_1.default('layers');
 var $ = require('jquery');
 /**
@@ -49,7 +50,7 @@ var LayerBaseVectorGeoJson = (function (_super) {
         url = typeof url == 'string' ? url : '';
         _super.call(this, url, options);
         this._geoJsonFormat = new custom_ol_1.ol.format.GeoJSON();
-        this._transform = options.transform || { dataProjection: "EPSG:4326", featureProjection: "EPSG:3857" };
+        this._transform = options.transform || { dataProjection: proj.proj4326, featureProjection: proj.proj3857 };
         if (this.autoLoad || this.visible) {
             this._load();
         }

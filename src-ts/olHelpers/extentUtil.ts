@@ -12,7 +12,7 @@ const nm = provide('util');
  * @param {Array<LayerBaseVector>|Array<ol.layer.Vector>|LayerBaseVector|ol.layer.Vector|*} layers - array of layers or single
  * @returns {ol.Extent|Array<number>|*} - collective extent
  */
-export function calculateExtent(layers): ol.Extent|Array<number> {
+export function calculateExtent(layers): ol.Extent|Array<number>| ol.Extent| number[] {
     "use strict";
 
     if (layers.constructor.name != 'Array'){
@@ -74,7 +74,7 @@ export function fitToMap(layers, mp: ol.Map, zoomOut?: number){
         return;
     }
     
-    mp.getView().fit(ext, mp.getSize());
+    mp.getView().fit(ext as ol.Extent, mp.getSize());
     
     if (typeof zoomOut == 'number'){
         mp.getView().setZoom(mp.getView().getZoom() - zoomOut);

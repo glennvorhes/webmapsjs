@@ -172,7 +172,7 @@ var SingleSymbol = (function (_super) {
     /**
      *
      * @param {object} esriResponse - layer info
-     * @param {Constructor|*} SymbolClass - the symbol class to use
+     * @param SymbolClass - the symbol class to use
      */
     function SingleSymbol(esriResponse, SymbolClass) {
         _super.call(this, esriResponse);
@@ -188,7 +188,7 @@ var UniqueValueSymbol = (function (_super) {
     /**
      *
      * @param {object} esriResponse - layer info
-     * @param {Constructor|*} SymbolClass - the Symbol class definition
+     * @param SymbolClass - the Symbol class definition
      */
     function UniqueValueSymbol(esriResponse, SymbolClass) {
         var _this = this;

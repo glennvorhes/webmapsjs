@@ -4,7 +4,7 @@ import { ol } from 'custom-ol';
  * @param {Array<LayerBaseVector>|Array<ol.layer.Vector>|LayerBaseVector|ol.layer.Vector|*} layers - array of layers or single
  * @returns {ol.Extent|Array<number>|*} - collective extent
  */
-export declare function calculateExtent(layers: any): ol.Extent | Array<number>;
+export declare function calculateExtent(layers: any): ol.Extent | Array<number> | ol.Extent | number[];
 /**
  * given one or an array of layers, fit to the map
  * @param {Array<LayerBaseVector>|Array<ol.layer.Vector>|LayerBaseVector|ol.layer.Vector} layers - array of layers or single

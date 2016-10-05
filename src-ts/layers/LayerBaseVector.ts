@@ -20,18 +20,18 @@ export interface makeMapMoveParams {
 }
 
 
+
+
 export interface LayerBaseVectorOptions extends LayerBaseOptions{
     autoLoad?: boolean;
-    style?: ol.style.Style|Array<ol.style.Style>|ol.style.StyleFunction;
+    style?: ol.style.Style|Array<ol.style.Style>|ol.StyleFunction;
     onDemand?: boolean;
     onDemandDelay?: number;
     mapMoveMakeGetParams?: makeMapMoveParams;
     mapMoveObj?: MapMoveCls;
 }
 
-export interface customStyleFunction{
-    (feature: ol.Feature, resolution?: number): Array<ol.style.Style>
-}
+
 
 /**
  * The Vector layer base
@@ -41,7 +41,7 @@ export interface customStyleFunction{
 export class LayerBaseVector extends LayerBase {
     _olLayer: ol.layer.Vector;
     _source: ol.source.Vector;
-    _style: ol.style.Style|Array<ol.style.Style>|ol.style.StyleFunction|customStyleFunction;
+    _style: ol.style.Style|Array<ol.style.Style>|ol.StyleFunction;
     _autoLoad: boolean;
     _onDemand: boolean;
     _onDemandDelay: number;
@@ -118,16 +118,19 @@ export class LayerBaseVector extends LayerBase {
 
         this._source = new ol.source.Vector();
 
+
         this._olLayer = new ol.layer.Vector(
             {
                 source: this._source,
                 visible: this.visible,
                 style: this.style,
                 minResolution: this._minResolution,
-                maxResolution: this._maxResolution,
-                zIndex: this._zIndex
+                maxResolution: this._maxResolution
             }
         );
+
+        this.olLayer.setZIndex(this._zIndex);
+
 
         this._projectionMap = null;
         this._projection4326 = new ol.proj.Projection({code: "EPSG:4326"});
@@ -214,7 +217,7 @@ export class LayerBaseVector extends LayerBase {
     /**
      * get the style definition
      */
-    get style(): ol.style.StyleFunction|Array<ol.style.Style>|ol.style.Style|customStyleFunction {
+    get style(): ol.StyleFunction|Array<ol.style.Style>|ol.style.Style {
         return this._style;
     }
 
@@ -222,7 +225,7 @@ export class LayerBaseVector extends LayerBase {
      * set the style
      * @param style - the style or function
      */
-    set style(style: ol.style.StyleFunction|Array<ol.style.Style>|ol.style.Style|customStyleFunction) {
+    set style(style: ol.StyleFunction|Array<ol.style.Style>|ol.style.Style) {
         this._style = style;
         this.olLayer.setStyle(this._style as ol.style.Style);
     }

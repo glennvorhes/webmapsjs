@@ -94,7 +94,7 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
         });
     }
     else if (itsIconConfig) {
-        return function (feature, resolution) {
+        return function (feature) {
             var symbolProp = feature.getProperties()[itsIconConfig.prop];
             var iconUrl = _iconUrlRoot + itsIconConfig.defaultIcon;
             for (var i = 0; i < itsIconConfig.iconArray.length; i++) {

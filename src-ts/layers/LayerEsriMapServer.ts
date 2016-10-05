@@ -11,7 +11,7 @@ const nm = provide('layers');
 const $ = require('jquery');
 
 
-export interface LayerEsriMapServerOptions extends LayerBaseOptions{
+export interface LayerEsriMapServerOptions extends LayerBaseOptions {
     addPopup?: boolean;
     showLayers?: Array<number>;
 }
@@ -54,13 +54,14 @@ export class LayerEsriMapServer extends LayerBase {
         );
 
         this._olLayer = new ol.layer.Tile({
-            source: this._source,
+            source: this._source as ol.source.Tile,
             visible: this.visible,
             opacity: this.opacity,
             minResolution: this._minResolution,
-            maxResolution: this._maxResolution,
-            zIndex: this._zIndex
+            maxResolution: this._maxResolution
         });
+
+        this._olLayer.setZIndex(this._zIndex);
 
         options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
 

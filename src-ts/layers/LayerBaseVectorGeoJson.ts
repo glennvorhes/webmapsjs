@@ -4,20 +4,19 @@
 
 import {LayerBaseVector, LayerBaseVectorOptions} from './LayerBaseVector';
 import provide from '../util/provide';
-import {ol} from 'custom-ol';
+import {ol, olx} from 'custom-ol';
 import {MapMoveCls} from "../olHelpers/mapMoveCls";
+import * as proj from '../olHelpers/projections';
+
 let nm = provide('layers');
 const $ = require('jquery');
 
 export interface LayerBaseVectorGeoJsonOptions extends LayerBaseVectorOptions{
-    transform?: CrsTransform;
+    transform?: olx.format.ReadOptions;
     mapMoveObj?: MapMoveCls;
 }
 
-export interface CrsTransform{
-    dataProjection: ol.proj.Projection|string;
-    featureProjection: ol.proj.Projection|string;
-}
+
 
 /**
  * The Vector GeoJson Layer
@@ -25,7 +24,7 @@ export interface CrsTransform{
  */
 class LayerBaseVectorGeoJson extends LayerBaseVector {
     _geoJsonFormat: ol.format.GeoJSON;
-    _transform: CrsTransform;
+    _transform: olx.format.ReadOptions;
 
     /**
      * @param {string|undefined|null} url - resource url, set to '' to make blank layer
@@ -60,7 +59,7 @@ class LayerBaseVectorGeoJson extends LayerBaseVector {
 
         this._geoJsonFormat = new ol.format.GeoJSON();
 
-        this._transform = options.transform || {dataProjection: "EPSG:4326", featureProjection: "EPSG:3857"};
+        this._transform = options.transform || {dataProjection: proj.proj4326, featureProjection: proj.proj3857};
 
         if (this.autoLoad || this.visible) {
             this._load();
@@ -75,7 +74,7 @@ class LayerBaseVectorGeoJson extends LayerBaseVector {
         if (this._transform.dataProjection == 'EPSG:3857' && this._transform.featureProjection == 'EPSG:3857') {
             this._source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection));
         } else {
-            this._source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection, this._transform as Object));
+            this._source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection, this._transform));
         }
     }
 
@@ -111,7 +110,7 @@ class LayerBaseVectorGeoJson extends LayerBaseVector {
      */
     mapMoveCallback(d) {
         super.mapMoveCallback(d);
-        this._source.addFeatures(this._geoJsonFormat.readFeatures(d, this._transform as Object));
+        this._source.addFeatures(this._geoJsonFormat.readFeatures(d, this._transform));
     }
 }
 

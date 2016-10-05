@@ -13,14 +13,14 @@ const $ = require('jquery');
 
 const nm = provide('olHelpers');
 
-export interface popupChangedFunction{
+export interface popupChangedFunction {
     ($popContent: JQuery): any;
 }
 
 /**
  *
  */
-export interface popupCallback{
+export interface popupCallback {
     /**
      * Callback function for the popup
      * @param featureProperties
@@ -29,7 +29,7 @@ export interface popupCallback{
     (featureProperties: Object, jqRef?: JQuery): string | boolean;
 }
 
-interface mapEvent{
+interface mapEvent {
     coordinate: ol.Coordinate;
     pixel: ol.Pixel;
     dragging: boolean|any;
@@ -78,7 +78,7 @@ export class FeatureLayerProperties {
  */
 export class MapPopupCls extends MapInteractionBase {
     _popupOpen: boolean;
-    _passThroughLayerFeatureArray:  Array<FeatureLayerProperties>;
+    _passThroughLayerFeatureArray: Array<FeatureLayerProperties>;
     _currentPopupIndex: number;
     _popupContentLength: number;
     _esriMapServiceLayers: Array<LayerEsriMapServer>;
@@ -89,10 +89,10 @@ export class MapPopupCls extends MapInteractionBase {
     _arrPopupLayers: Array<LayerBaseVector>;
     _popupCoordinate: ol.Coordinate;
     _popupChangedFunctions: Array<popupChangedFunction>;
-     _mapClickFunctions: Array<Function>;
+    _mapClickFunctions: Array<Function>;
     _selectionLayerLookup: Object;
-     _arrPopupLayerIds: Array<string>;
-     _arrPopupLayerNames: Array<string>;
+    _arrPopupLayerIds: Array<string>;
+    _arrPopupLayerNames: Array<string>;
     _arrPopupOlLayers: Array<ol.layer.Vector>;
     _arrPopupContentFunction: Array<popupCallback>;
     _selectionLayers: Array<ol.layer.Vector>;
@@ -103,7 +103,6 @@ export class MapPopupCls extends MapInteractionBase {
      * &param feature the openlayers vector feature
      * $param
      */
-
 
 
     /**
@@ -149,7 +148,7 @@ export class MapPopupCls extends MapInteractionBase {
         let $map;
         let target = this.map.getTarget();
 
-        if(typeof target == 'string'){
+        if (typeof target == 'string') {
             $map = $('#' + target);
         }
         else {
@@ -168,11 +167,15 @@ export class MapPopupCls extends MapInteractionBase {
         this._$popupCloser = $map.find('.ol-popup-closer');
 
 
-        this._popupOverlay = new ol.Overlay({element: this._$popupContainer[0], autoPan: true,
+        this._popupOverlay = new ol.Overlay({
+            element: this._$popupContainer[0],
+            autoPan: true,
             autoPanAnimation: {
                 duration: 250,
-                source: theMap.getView().getCenter()
-            }});
+                source: theMap.getView().getCenter(),
+                easing: ol.easing.inAndOut
+            }
+        });
 
         this._map.addOverlay(this._popupOverlay);
 
@@ -188,13 +191,14 @@ export class MapPopupCls extends MapInteractionBase {
 
             // esri map service layers
             if (this._esriMapServiceLayers.length > 0) {
+
                 let queryParams = {
                     geometry: evt['coordinate'].join(','),
                     geometryType: 'esriGeometryPoint',
                     layers: 'all',
                     sr: this._map.getView().getProjection().getCode().split(':')[1],
-                    mapExtent: this._map.getView().calculateExtent(this._map.getSize()).join(','),
-                    imageDisplay: this._map.getSize().join(',') + ',96',
+                    mapExtent: (this._map.getView().calculateExtent(this._map.getSize()) as number[]).join(','),
+                    imageDisplay: (this._map.getSize() as number[]).join(',') + ',96',
                     returnGeometry: true,
                     tolerance: 15,
                     f: 'pjson'
@@ -363,13 +367,13 @@ export class MapPopupCls extends MapInteractionBase {
     _featuresAtPixel(pixel: ol.Pixel): Array<FeatureLayerProperties> {
         let layerFeatureObjectArray = [];
 
-        this.map.forEachFeatureAtPixel(pixel, (feature: ol.Feature, layer: ol.layer.Vector) =>{
+        this.map.forEachFeatureAtPixel(pixel, (feature: ol.Feature, layer: ol.layer.Vector) => {
             let lyrIndex = this._arrPopupOlLayers.indexOf(layer);
 
             if (lyrIndex > -1) {
                 layerFeatureObjectArray.push(
                     new FeatureLayerProperties(
-                    feature, this._arrPopupLayers[lyrIndex], lyrIndex, this._selectionLayers[lyrIndex]));
+                        feature, this._arrPopupLayers[lyrIndex], lyrIndex, this._selectionLayers[lyrIndex]));
             }
         });
 
@@ -437,10 +441,11 @@ export class MapPopupCls extends MapInteractionBase {
         let selectionLayer = new ol.layer.Vector(
             {
                 source: new ol.source.Vector(),
-                style: theStyle,
-                zIndex: 100
+                style: theStyle
             }
         );
+
+        selectionLayer.setZIndex(100);
 
         this._selectionLayers.push(selectionLayer);
         this._selectionLayerLookup[lyr.id] = selectionLayer;
@@ -448,7 +453,6 @@ export class MapPopupCls extends MapInteractionBase {
 
         return selectionLayer;
     }
-
 
 
     /**
@@ -462,7 +466,7 @@ export class MapPopupCls extends MapInteractionBase {
      * @returns {object} a reference to the ol selection layer
      */
     addVectorPopup(lyr: LayerBaseVector, popupContentFunction: popupCallback,
-                   selectionStyle?: ol.style.Style|Array<ol.style.Style>|ol.style.StyleFunction) {
+                   selectionStyle?: ol.style.Style|Array<ol.style.Style>|ol.StyleFunction) {
         let selectionLayer = this._addPopupLayer(lyr, selectionStyle);
         this._arrPopupLayerIds.push(lyr.id);
         this._arrPopupLayerNames.push(lyr.name);
@@ -501,7 +505,7 @@ export class MapPopupCls extends MapInteractionBase {
      * @param {object|function} [selectionStyle.olStyle=undefined] an openlayers style object or function
      * @returns {object} a reference to the ol selection layer
      */
-    addMapServicePopup(lyr, selectionStyle?: ol.style.Style|Array<ol.style.Style>|ol.style.StyleFunction) {
+    addMapServicePopup(lyr, selectionStyle?: ol.style.Style|Array<ol.style.Style>|ol.StyleFunction) {
         let selectionLayer = this._addPopupLayer(lyr, selectionStyle);
         this._esriMapServiceLayers.push(lyr);
 

@@ -80,9 +80,9 @@ var LayerBaseVector = (function (_super) {
             visible: this.visible,
             style: this.style,
             minResolution: this._minResolution,
-            maxResolution: this._maxResolution,
-            zIndex: this._zIndex
+            maxResolution: this._maxResolution
         });
+        this.olLayer.setZIndex(this._zIndex);
         this._projectionMap = null;
         this._projection4326 = new custom_ol_1.ol.proj.Projection({ code: "EPSG:4326" });
     }

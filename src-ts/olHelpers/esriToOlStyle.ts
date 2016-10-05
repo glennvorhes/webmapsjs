@@ -71,7 +71,7 @@ class CommonSymbol {
     legendHtml: string;
     opacity: number;
     symbolObj: EsriSymbol;
-    olStyle: ol.style.Style|Array<ol.style.Style>|ol.style.StyleFunction;
+    olStyle: ol.style.Style|Array<ol.style.Style>|ol.StyleFunction;
 
     /**
      *
@@ -202,7 +202,7 @@ class SymbolGenerator {
     opacity: number;
     renderer: EsriRenderer;
     legendHtml: string;
-    olStyle: ol.style.Style|Array<ol.style.Style>|ol.style.StyleFunction;
+    olStyle: ol.style.Style|Array<ol.style.Style>|ol.StyleFunction;
 
     constructor(esriResponse: EsriResponse) {
         this.opacity = (100 - (esriResponse['drawingInfo']['transparency'] || 0)) / 100;
@@ -217,7 +217,7 @@ class SingleSymbol extends SymbolGenerator {
     /**
      *
      * @param {object} esriResponse - layer info
-     * @param {Constructor|*} SymbolClass - the symbol class to use
+     * @param SymbolClass - the symbol class to use
      */
     constructor(esriResponse, SymbolClass: ICommonSymbol) {
         super(esriResponse);
@@ -232,7 +232,7 @@ class UniqueValueSymbol extends SymbolGenerator {
 
     propertyName: string;
     defaultSymbol: EsriSymbol;
-    defaultStyle: ol.style.Style|Array<ol.style.Style>|ol.style.StyleFunction;
+    defaultStyle: ol.style.Style|Array<ol.style.Style>|ol.StyleFunction;
     defaultLabelHtml: string;
     labelArray: Array<string>;
     legendArray: Array<string>;
@@ -243,9 +243,9 @@ class UniqueValueSymbol extends SymbolGenerator {
     /**
      *
      * @param {object} esriResponse - layer info
-     * @param {Constructor|*} SymbolClass - the Symbol class definition
+     * @param SymbolClass - the Symbol class definition
      */
-    constructor(esriResponse: EsriResponse, SymbolClass) {
+    constructor(esriResponse: EsriResponse, SymbolClass: ICommonSymbol) {
         super(esriResponse);
         this.uniqueValueInfos = this.renderer['uniqueValueInfos'];
         this.propertyName = this.renderer['field1'];

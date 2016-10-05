@@ -105,11 +105,15 @@ var MapPopupCls = (function (_super) {
         this._$popupContainer = $map.find('.ol-popup');
         this._$popupContent = $map.find('.popup-content');
         this._$popupCloser = $map.find('.ol-popup-closer');
-        this._popupOverlay = new custom_ol_1.ol.Overlay({ element: this._$popupContainer[0], autoPan: true,
+        this._popupOverlay = new custom_ol_1.ol.Overlay({
+            element: this._$popupContainer[0],
+            autoPan: true,
             autoPanAnimation: {
                 duration: 250,
-                source: theMap.getView().getCenter()
-            } });
+                source: theMap.getView().getCenter(),
+                easing: custom_ol_1.ol.easing.inAndOut
+            }
+        });
         this._map.addOverlay(this._popupOverlay);
         this._$popupCloser.click(function (evt) {
             _this.closePopup();
@@ -330,9 +334,9 @@ var MapPopupCls = (function (_super) {
         }
         var selectionLayer = new custom_ol_1.ol.layer.Vector({
             source: new custom_ol_1.ol.source.Vector(),
-            style: theStyle,
-            zIndex: 100
+            style: theStyle
         });
+        selectionLayer.setZIndex(100);
         this._selectionLayers.push(selectionLayer);
         this._selectionLayerLookup[lyr.id] = selectionLayer;
         this.map.addLayer(selectionLayer);

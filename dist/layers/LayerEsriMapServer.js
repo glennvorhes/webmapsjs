@@ -51,9 +51,9 @@ var LayerEsriMapServer = (function (_super) {
             visible: this.visible,
             opacity: this.opacity,
             minResolution: this._minResolution,
-            maxResolution: this._maxResolution,
-            zIndex: this._zIndex
+            maxResolution: this._maxResolution
         });
+        this._olLayer.setZIndex(this._zIndex);
         options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
         this._esriFormat = new custom_ol_1.ol.format.EsriJSON();
         this._popupRequest = null;

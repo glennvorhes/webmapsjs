@@ -82,7 +82,7 @@ function checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
  * @param {object} [itsLineConfig.lineArray=[]] an array, items with format [property, name, color, optional width]
  * @returns {*} undefined, style, or style function
  */
-function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) : ol.style.Style|Array<ol.style.Style>|ol.style.StyleFunction|Function{
+function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) : ol.style.Style|Array<ol.style.Style>|ol.StyleFunction{
     "use strict";
     checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig);
 
@@ -105,7 +105,7 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) : ol.s
             })
         });
     } else if (itsIconConfig) {
-        return function (feature, resolution) {
+        return function (feature: ol.Feature) {
             let symbolProp = feature.getProperties()[itsIconConfig.prop];
             let iconUrl = _iconUrlRoot + itsIconConfig.defaultIcon;
 
@@ -128,7 +128,7 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) : ol.s
             })];
         };
     } else if (itsLineConfig) {
-        return function (feature) {
+        return function (feature: ol.Feature) {
             let symbolProp = feature.getProperties()[itsLineConfig.prop];
             let colr = itsLineConfig.defaultColor || 'red';
             let width = itsLineConfig.defaultWidth || 5;

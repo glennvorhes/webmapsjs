@@ -124,7 +124,7 @@ export declare class MapPopupCls extends MapInteractionBase {
      * @param {object|function} [selectionStyle.olStyle=undefined] an openlayers style object or function
      * @returns {object} a reference to the ol selection layer
      */
-    addVectorPopup(lyr: LayerBaseVector, popupContentFunction: popupCallback, selectionStyle?: ol.style.Style | Array<ol.style.Style> | ol.style.StyleFunction): ol.layer.Vector;
+    addVectorPopup(lyr: LayerBaseVector, popupContentFunction: popupCallback, selectionStyle?: ol.style.Style | Array<ol.style.Style> | ol.StyleFunction): ol.layer.Vector;
     /**
      *
      * @param {LayerBase} lyr - layer
@@ -139,7 +139,7 @@ export declare class MapPopupCls extends MapInteractionBase {
      * @param {object|function} [selectionStyle.olStyle=undefined] an openlayers style object or function
      * @returns {object} a reference to the ol selection layer
      */
-    addMapServicePopup(lyr: any, selectionStyle?: ol.style.Style | Array<ol.style.Style> | ol.style.StyleFunction): ol.layer.Vector;
+    addMapServicePopup(lyr: any, selectionStyle?: ol.style.Style | Array<ol.style.Style> | ol.StyleFunction): ol.layer.Vector;
     clearSelection(): void;
     /**
      * Add a function to be called when the map is clicked but before any popups are implemented
