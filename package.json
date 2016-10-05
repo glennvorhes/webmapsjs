@@ -17,7 +17,7 @@
     "esdoc": "RD /S /Q doc & MD doc & esdoc -c .esdoc.json",
     "typedoc": "RD /S /Q doc & MD doc & typedoc --out doc/ --module commonjs --target ES5 --includes typings src-ts/ ",
     "update-custom-ol": "npm update custom-ol",
-    "serve": "cd test-html & C:\\Python33\\python.exe -m http.server 5001",
+    "serve": "cd test-html & C:\\Python33\\python.exe -m http.server 5002",
     "webpack": "webpack -w",
     "webpack-min": "webpack -w --optimize-minimize",
     "tsc": "tsc -w"

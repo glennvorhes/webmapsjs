@@ -10072,56 +10072,6 @@
 
 	"use strict";
 	exports.ol = __webpack_require__(6);
-	// // export default require('../ol/ol-build');
-	//
-	// const fish = 10;
-	// export = fish;
-	//
-	//
-	// export function cat(bird: string){
-	//     console.log('eat the fish')
-	// }
-	//
-	// export function nice(eat: number){
-	//     console.log('eat that fish');
-	// }
-	//
-	// export class Big{
-	//     glenn: string;
-	//
-	//     constructor(isGlenn){
-	//         this.glenn  = isGlenn;
-	//     }
-	//
-	//     set isGlenn(f: string){
-	//         console.log(this.glenn)
-	//     }
-	//
-	//     run(){
-	//         console.log(this.glenn + " can run");
-	//     }
-	// }
-	//
-	// export namespace HereIt{
-	//
-	//     export class Big2 {
-	//         glenn: string;
-	//
-	//         constructor(isGlenn) {
-	//             this.glenn = isGlenn;
-	//         }
-	//
-	//         set isGlenn(f: string) {
-	//             console.log(this.glenn)
-	//         }
-	//
-	//         run() {
-	//             console.log(this.glenn + " can run");
-	//         }
-	//     }
-	//
-	//
-	// } 
 
 
 /***/ },
@@ -11361,6 +11311,7 @@
 	    };
 	    return MapPopupCls;
 	}(mapInteractionBase_1.default));
+	exports.MapPopupCls = MapPopupCls;
 	nm.MapPopupCls = MapPopupCls;
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.default = MapPopupCls;

@@ -9,8 +9,8 @@ const outDir = path.join(__dirname, 'test-html/js');
 const files = fs.readdirSync(testAppDir);
 const entries = {};
 
-for (var i = 0; i < files.length(); i++) {
-    e = files[i];
+for (var i = 0; i < files.length; i++) {
+    var e = files[i];
     if (e.match(/\.js$/) == null) {
         continue;
     }
