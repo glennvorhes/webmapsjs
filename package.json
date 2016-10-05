@@ -33,8 +33,7 @@
     "react-dom": "^15.3.2",
     "source-map-loader": "^0.1.5",
     "ts-loader": "^0.8.2",
-    "webpack": "^1.13.2",
-    "custom-ol": "github:glennvorhes/custom-ol"
+    "webpack": "^1.13.2"
   },
   "repository": {
     "type": "git",
@@ -47,6 +46,8 @@
     "jquery-layout": "1.0.0",
     "jquery-ui": "1.10.5",
     "es6-mixins": "^1.0.2",
-    "floatthead": "^1.4.0"
+    "floatthead": "^1.4.0",
+    "custom-ol": "github:glennvorhes/custom-ol"
+
   }
 }
