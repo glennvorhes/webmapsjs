@@ -2,10 +2,10 @@
  * Created by gavorhes on 12/15/2015.
  */
 
-const $ = require('jquery');
 import provide from '../util/provide';
 import {ol} from 'custom-ol';
 const nm = provide('olHelpers');
+const $ = require('jquery');
 
 
 export interface quickMapOptions {

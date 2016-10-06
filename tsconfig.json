@@ -10,7 +10,8 @@
     "sourceMap": true,
     "jsx": "react",
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "node_modules/custom-ol/lib"
     ]
   },
   "exclude": [

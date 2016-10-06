@@ -96,6 +96,7 @@ var LayerBaseVectorGeoJson = (function (_super) {
     };
     return LayerBaseVectorGeoJson;
 }(LayerBaseVector_1.LayerBaseVector));
+exports.LayerBaseVectorGeoJson = LayerBaseVectorGeoJson;
 nm.LayerBaseVectorGeoJson = LayerBaseVectorGeoJson;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = LayerBaseVectorGeoJson;

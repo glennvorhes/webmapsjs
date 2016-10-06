@@ -2,10 +2,10 @@
  * Created by gavorhes on 12/15/2015.
  */
 "use strict";
-var $ = require('jquery');
 var provide_1 = require('../util/provide');
 var custom_ol_1 = require('custom-ol');
 var nm = provide_1.default('olHelpers');
+var $ = require('jquery');
 /**
  * Sets up a map with some default parameters and initializes
  * mapMove and mapPopup

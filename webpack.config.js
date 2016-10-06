@@ -1,6 +1,5 @@
 "use strict";
 const path = require('path');
-const webpack = require('webpack');
 const fs = require('fs');
 
 const testAppDir = path.join(__dirname, 'dist/_test');

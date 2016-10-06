@@ -22,7 +22,7 @@ export interface LayerBaseVectorGeoJsonOptions extends LayerBaseVectorOptions{
  * The Vector GeoJson Layer
  * @augments LayerBaseVector
  */
-class LayerBaseVectorGeoJson extends LayerBaseVector {
+export class LayerBaseVectorGeoJson extends LayerBaseVector {
     _geoJsonFormat: ol.format.GeoJSON;
     _transform: olx.format.ReadOptions;
 
