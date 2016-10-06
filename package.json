@@ -30,14 +30,14 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "source-map-loader": "^0.1.5",
-    "ts-loader": "^0.8.2"
+    "ts-loader": "^0.8.2",
+    "custom-ol": "git://github.com/glennvorhes/custom-ol.git#master"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/glennvorhes/webmapsjs.git"
   },
   "dependencies": {
-    "custom-ol": "git://github.com/glennvorhes/custom-ol.git#master",
     "@types/jquery": "^2.0.32",
     "@types/node": "^6.0.41",
     "jquery": "2.2.3",

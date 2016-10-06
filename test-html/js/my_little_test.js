@@ -46,7 +46,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var animate_buttons_1 = __webpack_require__(25);
+	var animate_buttons_1 = __webpack_require__(26);
 	//
 	//
 	console.log('eat this fish');
@@ -80,6 +80,42 @@
 /***/ },
 
 /***/ 3:
+/***/ function(module, exports) {
+
+	/**
+	 * Created by gavorhes on 12/10/2015.
+	 */
+	"use strict";
+	/**
+	 * create a namespace on the gv object
+	 * @param {string} namespace to create
+	 * @returns {object} object representing the namespace
+	 */
+	function provide(namespace) {
+	    "use strict";
+	    if (typeof window['gv'] == 'undefined') {
+	        window['gv'] = {};
+	    }
+	    var parts = namespace.split('.');
+	    var nameSpace = window['gv'];
+	    for (var i = 0; i < parts.length; i++) {
+	        var newObject = nameSpace[parts[i]];
+	        if (typeof newObject == 'undefined') {
+	            nameSpace[parts[i]] = {};
+	        }
+	        nameSpace = nameSpace[parts[i]];
+	    }
+	    return nameSpace;
+	}
+	provide('util');
+	window['gv'].util.provide = provide;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = provide;
+
+
+/***/ },
+
+/***/ 6:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -9928,52 +9964,16 @@
 
 /***/ },
 
-/***/ 4:
-/***/ function(module, exports) {
-
-	/**
-	 * Created by gavorhes on 12/10/2015.
-	 */
-	"use strict";
-	/**
-	 * create a namespace on the gv object
-	 * @param {string} namespace to create
-	 * @returns {object} object representing the namespace
-	 */
-	function provide(namespace) {
-	    "use strict";
-	    if (typeof window['gv'] == 'undefined') {
-	        window['gv'] = {};
-	    }
-	    var parts = namespace.split('.');
-	    var nameSpace = window['gv'];
-	    for (var i = 0; i < parts.length; i++) {
-	        var newObject = nameSpace[parts[i]];
-	        if (typeof newObject == 'undefined') {
-	            nameSpace[parts[i]] = {};
-	        }
-	        nameSpace = nameSpace[parts[i]];
-	    }
-	    return nameSpace;
-	}
-	provide('util');
-	window['gv'].util.provide = provide;
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.default = provide;
-
-
-/***/ },
-
-/***/ 25:
+/***/ 26:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/**
 	 * Created by gavorhes on 11/2/2015.
 	 */
-	var $ = __webpack_require__(3);
-	var provide_1 = __webpack_require__(4);
-	var range_change_1 = __webpack_require__(26);
+	var $ = __webpack_require__(6);
+	var provide_1 = __webpack_require__(3);
+	var range_change_1 = __webpack_require__(27);
 	var nm = provide_1.default('jQueryPlugin');
 	/**
 	 * @callback mediaCallback
@@ -10174,7 +10174,7 @@
 
 /***/ },
 
-/***/ 26:
+/***/ 27:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -10183,7 +10183,7 @@
 	var timeout = null;
 	var dragged = false;
 	var lastVal;
-	var $ = __webpack_require__(3);
+	var $ = __webpack_require__(6);
 	/**
 	 * Created by gavorhes on 11/2/2015.
 	 */

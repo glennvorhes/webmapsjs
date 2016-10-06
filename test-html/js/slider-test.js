@@ -49,8 +49,8 @@
 	/**
 	 * Created by gavorhes on 6/22/2016.
 	 */
-	var Sliders_1 = __webpack_require__(27);
-	var $ = __webpack_require__(3);
+	var Sliders_1 = __webpack_require__(28);
+	var $ = __webpack_require__(6);
 	exports.tipConfig = {
 	    $loadingGif: $('#loading-gif'),
 	    $presetSelector: $('#preset-selector'),
@@ -233,6 +233,42 @@
 /***/ },
 
 /***/ 3:
+/***/ function(module, exports) {
+
+	/**
+	 * Created by gavorhes on 12/10/2015.
+	 */
+	"use strict";
+	/**
+	 * create a namespace on the gv object
+	 * @param {string} namespace to create
+	 * @returns {object} object representing the namespace
+	 */
+	function provide(namespace) {
+	    "use strict";
+	    if (typeof window['gv'] == 'undefined') {
+	        window['gv'] = {};
+	    }
+	    var parts = namespace.split('.');
+	    var nameSpace = window['gv'];
+	    for (var i = 0; i < parts.length; i++) {
+	        var newObject = nameSpace[parts[i]];
+	        if (typeof newObject == 'undefined') {
+	            nameSpace[parts[i]] = {};
+	        }
+	        nameSpace = nameSpace[parts[i]];
+	    }
+	    return nameSpace;
+	}
+	provide('util');
+	window['gv'].util.provide = provide;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = provide;
+
+
+/***/ },
+
+/***/ 6:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10081,52 +10117,16 @@
 
 /***/ },
 
-/***/ 4:
-/***/ function(module, exports) {
-
-	/**
-	 * Created by gavorhes on 12/10/2015.
-	 */
-	"use strict";
-	/**
-	 * create a namespace on the gv object
-	 * @param {string} namespace to create
-	 * @returns {object} object representing the namespace
-	 */
-	function provide(namespace) {
-	    "use strict";
-	    if (typeof window['gv'] == 'undefined') {
-	        window['gv'] = {};
-	    }
-	    var parts = namespace.split('.');
-	    var nameSpace = window['gv'];
-	    for (var i = 0; i < parts.length; i++) {
-	        var newObject = nameSpace[parts[i]];
-	        if (typeof newObject == 'undefined') {
-	            nameSpace[parts[i]] = {};
-	        }
-	        nameSpace = nameSpace[parts[i]];
-	    }
-	    return nameSpace;
-	}
-	provide('util');
-	window['gv'].util.provide = provide;
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.default = provide;
-
-
-/***/ },
-
-/***/ 27:
+/***/ 28:
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Created by gavorhes on 12/10/2015.
 	 */
 	"use strict";
-	var provide_1 = __webpack_require__(4);
+	var provide_1 = __webpack_require__(3);
 	var nm = provide_1.default('collections');
-	var $ = __webpack_require__(3);
+	var $ = __webpack_require__(6);
 	var TipPresets = (function () {
 	    function TipPresets(conf) {
 	        this.label = conf.label;
