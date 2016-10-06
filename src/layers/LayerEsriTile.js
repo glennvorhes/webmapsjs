@@ -6,12 +6,11 @@ import LayerBaseXyzTile from './LayerBaseXyzTile';
 
 const nm = provide('layers');
 
-
 /**
  * Esri tile
  * @augments LayerBaseXyzTile
  */
-class LayerEsriTile extends LayerBaseXyzTile {
+export class LayerEsriTile extends LayerBaseXyzTile {
 
     /**
      * The Esri tile layer
@@ -31,7 +30,6 @@ class LayerEsriTile extends LayerBaseXyzTile {
      * @param {boolean} [options.legendContent] additional content to add to the legend
      * @param {boolean} [options.useEsriStyle=false] if the map service style should be used
      */
-    
     constructor(url, options) {
         if (url.search(/\/$/) == -1){
             url += '/';
@@ -43,4 +41,4 @@ class LayerEsriTile extends LayerBaseXyzTile {
 }
 
 nm.LayerBaseXyzTile = LayerEsriTile;
-export default LayerEsriTile;
+

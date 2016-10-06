@@ -2,14 +2,12 @@
   "name": "webmapsjs",
   "version": "1.0.0",
   "description": "Openlayers helpers",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "files": [
     "dist",
     "doc",
     "ext",
-    "css",
-    "src",
-    "src-ts"
+    "css"
   ],
   "scripts": {
     "test": "node node_modules\\karma\\bin\\karma start karma.conf.js",
