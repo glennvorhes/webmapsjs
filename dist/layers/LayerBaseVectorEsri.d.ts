@@ -2,7 +2,7 @@
  * Created by gavorhes on 11/2/2015.
  */
 import { LayerBaseVector, LayerBaseVectorOptions } from './LayerBaseVector';
-import { ol } from 'custom-ol';
+import ol from 'custom-ol';
 export interface LayerBaseVectorEsriOptions extends LayerBaseVectorOptions {
     format: string;
     outSR: number;

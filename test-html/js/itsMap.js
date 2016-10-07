@@ -48,7 +48,6 @@
 	/**
 	 * Created by gavorhes on 12/18/2015.
 	 */
-	// import 'babel-polyfill/dist/polyfill.min';
 	var ItsLayerCollection_1 = __webpack_require__(19);
 	var LayerLegend_1 = __webpack_require__(25);
 	var quickMap_1 = __webpack_require__(1);
@@ -64,9 +63,6 @@
 	    }
 	];
 	var legend = new LayerLegend_1.default(layerArray, 'legend-container', {});
-	console.log('it works');
-	console.log('it works');
-	console.log('it works');
 	console.log('it works');
 
 
@@ -148,7 +144,7 @@
 	    options.fullScreen = typeof options.fullScreen == 'boolean' ? options.fullScreen : false;
 	    var $mapDiv = $('#' + options.divId);
 	    $mapDiv.css('position', 'relative');
-	    var osmLayer = new custom_ol_1.ol.layer.Tile({ source: new custom_ol_1.ol.source.OSM() });
+	    var osmLayer = new custom_ol_1.default.layer.Tile({ source: new custom_ol_1.default.source.OSM() });
 	    // let satLayer = new ol.layer.Tile({visible: false, source: new ol.source.MapQuest({layer: 'sat'})});
 	    var osmCss = "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURQAAADQ1NDk5OURFREtLS1FHSFlZWGJRVGJiYWdmZWxsbHRmaXBpanN0c3V0dHp5eX5+fIVzd4F3eeV0jud5juZ8k4aHhomHhoyGh5eGj5OVlJiVlZiYl5qZmJydnKOTlaKZmqKdnaOioaqqqKuzsbOvrrSysLa3tbW4uLm6ub27ub+/vbGXwbCZwbCgxLKlxrOqyLStybO3yrSxyrWzzbW2y7a1zbK4y7W6zbW8y760yrTAzbTFzrPKzrLOzrTJzrTOzr7CwbXC0LXK0LTO0L3I0bPQz7TQz7PS0bXQ0LnR0brW1bzT0r7U077V1Lzc2dqNqteUsdyXscaquuOHneaGmueHnOeJnuiBleiKn+eNoOiOoOWUpOiRo+iSpeiUpeqYpumaqOmdrPSynemgruSqtOmisOmlsuuqtequuOW1vOuxu+uxvOq1ve+xvPK0pvW3o/W5pfO5qvS7qfCwvMOuwc2/wNenxNyyzNe/0Nq31Nq51dy72Oy3wOu4wOu+xey4wO+6xO2+xfTAr/TCsvfFtPHLvvTJuMPDwMfHxcXKyc3DxMvFyMvLyM3PzcDV08DV1MTX1cbY1s7X1sjZ1sra2Mnd3M7b2c7c2tfH1tnB1t7F2d7M29fX1tLY1tDd2tHe3NTf3NnS19rZ1tva2Nnf3t3d28rh3tXg3Nnh3tzj393k39ni4N7k4N7n5uXDyOfLz+zAxu3CyOzEyezKzeDJ3eLM3uvP0u3P0ePf2+7R0u7Q1u/U0+7U1ezc0+7a2e/d2+3f3vbFzvLOwfHN0PPQw/TUx/LWyvLYzPDQ1fPe0ubc4vve4uHh3+nh3+/h2u/h3vHj2vHl3uHm4eTn4uDp5ebo4+Xo5ODq6ebq6OTv6+nl4+/j4O7l4e7n5ujp4+np5Ozq5e7s5urt6O7t6Orw6u7x6u3x7vPj5PDl4fDo4vDq5fDt5vDu6PDv7PTv6fDx6vHx7fH17fXw6fXy7fb07/bz8fT18vn38vr39fr48/r59Pr6+P3++//+/gAAALNTSk0AAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wBT9wclAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4wLjlsM35OAAAFNElEQVRIS1VVCZxVUxi/9l0UIUT2bMnY43bVI2c0Y01kSWIaS0j2JEtkN41piomZrPPKQ2aQ7JKImOZlnm2493TJzDufuU1Zi+v/fee+mZ//793vnPOd7zvfes5zDBEZkBBjAcIjb+Iiotqgdhat8AMK0vl7/R9N7GiWtshqIr+EZ5gYKibyUsXY1l/mfFpssvUlWQ0FkU3gy4+RB/+kwYcO8pRSnldcOU/r2lAHARSwk2ORgEmOdC1EsuRiYSqMPwwroMIraZk5V2fYJQjCKfZrRmh3gSAZi2i4b7wSylWu8EqZwS59JkFUaW96JbNSc+CEUmt4rorwuZmWdDaoc+uZETuQlTCU5xYzR7muUnVUVo+BcRhre/VwUpasgJwhH7JkYIYA0sNxhmCwUK+lw6vCKBZehw01dEiyw4Q4aE0Z4ahDhKaFQsGnJ2BgqKoTBsNjFy0SlW6whRAZTdm8DBJmkBZhDi1j4xJQBk6ywrWUTymaCxac8lROcdauRGzQSNtA7EHUYhXyEwhhgjFUqRuO+rauhF1awFpzCsmwUbjIFBR0u1bKtyGpulW/H/cVVzkyGaIWTIR9pFAV6GK2gPMXMX8gPk9zzxXgI1kimcAltEYr+cjio1imlKpEa9rOipLm+p+CZ6Bw//qd1/f/O+GwMxbSLpyoZEcwkyh2jIks+3hmdd2jWUw4scxNysnHxU7nSspTRcJjCZGL3IsjsYJMMg5mwgx7gaIOLBFCogAgBBoNa9w+DE6I+Bs7FTgwwrJbHjWDgpYo2KwtBTcYEDuloC9geQw+k2RGnPGpTaOlq7AS+YICUz4DZVaX2TiNDhuYfTtY4geLi0IoCm3XccwM9hx4kU28StQEljDs3ZEpFGA+8dKzLmV9ymIwF5FOGn2GdJM8KLHDJbXyiYVMG9MRTLiXGGg2QKaxM3khPSRrwM9zEIardxU2w/EiA0gOeYKHzDR0V7/QGV3lKIA9ktrDArxO3gdA+k6SKoBiVwcm7NjZb9+Hnztg282TuHVZ9LOISFNt9MgyCetZVczSxnyDbl17Penq6mqpg1IhRaEO2aVLUO4/r17H8tTv6f13h71dduvZI3Y+uMdWksNSauLovJw5hsqiPIUvt0ku7/iBeUR3sksmomYWtRbAjbiLfv2lX9/V7LVG4uYnUZXhQ7f2OPCZEx9wrYWTcePEQqPEML8pl4mMdr/jlXlvHiRiJ2+MSTFY4TTSYStuvz2R/JXh+PPeGXm055J+3/YDWuNu3R3DArPutyg0ZgykMVDU9Ndm22+wYalr2rse48CnsTIFcMn73vfhNrktx1EUcZnPv6ah3Yy5cDTRdBEoGoBeah71dqFyjZDJLkWk3N3v4uuktssjWpzciMPxQeHj8nMKzcGuB0tAyzFhdCKOYWv4HwOQVwIxLG99a6uvH3sJCyO3h+k4EZ+G7+xj5f4XXksoaGrdMRzSc8ARA8+cdOuk2x6fffNNt5x+Ro1omPlrT/CQDlcNlpx4NBIWXhkx7Y3Zp3ofNR7Uv89Om/beW0TLIynHv3vs1VsOFpSWSXvfuPUf9BrRFyxgXdHoKJnQFegPOovvzz59ntrzye240ig8UQ3lDI2VqwagrKIQcLXNFL3wglN2OHdBQ6/vI3kENDVBwRb3k1XtczFbjWn4EzMYi7CF3129+JTYuRSdrGuS92g5dpqn6qXoJQs5xmL8p+Wt4hLbt0mx2OLNZR2bbPy8zJNQGFM/f/CfXZekRYFjGCWjIJpM+WiCzGBPWHhoyaAsjRT/B2Gy5yzYJkwUAAAAAElFTkSuQmCC')";
 	    var aerialCss = "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURQALBgIMDQgOBwQOEQcTBwUSCwoVDAwdBw8ZDgUREwYUGAYZFQYZGgkTFQoVGQsZFAwZHBMeDhIbFBEbHAwWIA4bIREcIQ4hCQwjFw4lHBgkDB8sDxUiExIiGhAoGxohFRshGRorHQcrKQsiIQwmKgooJA0pKQ81Jw8yLRMiIxImKxUrJREuKhslJB0rIhooKRUuMBMyLhkwJhozKh48LxUzMRM9MBwzMiUvFCMtGiMwEiwzFCgzHDI+GSIsISkvJSQxIiM2LiY5Jic+Lyk0JSo0Ky49JSs9KSU1NSM7NCs2NS8+NDM1JzU9Ljg7IDJCHS1DLSNAMitCMSxIOjREITZLIDZJKDlFIjpFKztKJT1LKzJBMzpHMD1JMjpKPD1RKjlQNC1DQj5QQEA8MEJGJkBKJUJNK0lLLEJMMkVMPEpONENSLUdZL0pTLkpaLkRUMkRSPEVZMktUM0pVOklZMklZNEpcNU1ZMk1ZNUxfMk5dNkxcOVFUM1RUOFJbNVFZOVNYPVFdOVJdPFVaOVVaPVVdOlVdPVpaNlpdO0phN01hOlBiN1NhPFNoP1piPWFbPmRjPENOQEtPSURTQkJVS0xVQk1VSkxbQkxcS0heUVFXRFRcQlJfTFxeQlpeS05lQk1kSFRjQVRjSlZpQ1tkQlxlSlxpRF1rSVVnUVtlU1llXF9tU1xoXlxwSl9ramRfQmJlQ2FhSWFlSWFlTmVlSWRmTGFoQWFpRWFsRmVpRWVtRmNsSmtlRGpqRmpsS2BmWGRsUmFrW2ptUmZyR2RxTGpxTWVyU2RyW2d5V2tzUmt0WW15VG15WXFuTHNtVnFxTXF4T3h0TnJzUnJ1XHJ4VXN6Wnp0VHx1W315VXp8XGR0YGx0YHVzZXJ0aHR9ZXV+aHl9YHOCXXqBXXeCYHyCY3iEaHyIYn+JaXqKcYB5WIN6Y4SCXoCDZIGEaYCIZoOLa4iCaImJbIOOdYuMco6OeIuVcpOKbZKPc5aQb5eXe5ufg6KjhAAAAAAAAAAAAAAAAOGCeQgAAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wBT9wclAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4wLjlsM35OAAAH80lEQVRISy1WbXQUVxm+6wqnk3Zmpxl2FG2EGg92C8GDlWptVTwa+uF3xcKmDfFzCUzDsJNsunXipglJXJbrtJWmwZNSnHD3jojRgUIm2UumIZ0JZ7JByrALbMWW0IBW8aRa4+cf76TeX3Nm3uc+z/s+7/vugl4r/aMTrT4e1pPTqnnmJNn5AyUzRnrRle/qE33dsvrBtAQVoxtpZNK3zSzYjUjviWO2Ag+R77dl7W36n/1Ep9KBPG/S+Py0PkjU/gPKQGqwTHryiWYFAXSvMairsio7SjyNsnCzh0qKImV9/7mhfHQZx2yN1O+7rXUm33MUPaboOkAJHaoIdXfJj2xWeyD8jMFEXkvIu5qzpU988gWB5zl+GS+sFe55trEVPdWZB2miq8bBVkNFO2R0qnrfkiXhcJhtDNXE6tbW97/s9O9/7ZfVhx86/CwrROpfvvxboMqeLsuqPr1j44qEwDNMOBximUiYoU8sw7BC/a7T72uEnyJDlGxZ9KcglZRyuqqrv/tSZErgOI4NgRBTIw9EmHAoFGZZnp6aGaJ2GTxfxYs8kKVUQh7WB5hQeC3LsUxoxVKW14l3BX2WcoUYPiZyLLe8teZ+iuT4GGhvV5KpKWkpyzxEr2MZgQ1xdRjfRBoH+2k6lIHjKTHPPBo8CSJISqqq4wGGOcWylIGlgvgNX1Gd8vF5f+IUIwb30ng+Gg2QfBRIMvy0jG8SVkYo4N0zvUXVRztbJ/L6xL7lUZEXBEHkuZqlS6gEAUgKJurnhFtfpACOYd8b/hVbJPqwi44a6KA0sPVjIi/SIyxb3u8KlAJ0S8jRVgrlW+nVHPdrhiXCxu42d86ByksDc80P3MkJFBFQ8Ho1lQegpWJRWFGsDsRwwv7pIyvuQW0ZkrX6NDVFbqcvaQI8vbyqzt5AARrsbKx5yhQEGs+wPO56bOK+0rcwMrOKkpUbZWYxV04UeZZv/cBKFhRL6Qdv9y4LfEDA7/thg7tTmv1a5/GnO0wl0dQg80wglZaHUmxRvjwAHOfyN0mxrpqLUpcjsK3NHYMo4R1o6eho2ZyIb2FoeOC3ILK8kZ2HQMOuWywGXUkJBCeTbYFS0+ym1h2/6UgmvnrvKYZZtIEXGf75C2cIAp5LHNd71x7uPoTjakrWH9e3KFpaatjUvJUysFw0KrLMYMW2lTg4PeUQx6kJEALvxXEmCdVyPLHtCSjBhc01XCjIgafxou+PE6KC1dhxSCwoBCc+N4P3btM84pmdSSjJnjO/nvY4LQfVyz5/I+v6IwjUOMjy+MVCxIbKupTJaEktp7cTKU42Pvjh2m/8cSpC6aPsaX/MHSuUQLVVsIa4RUTs/r/BVAexNdjdnsNG7j/rV93xheLMzKnFrPeTEQchCyCcKb25aAIn7lrAertrZwyNXM8N6zfWrFo3d2SmOEcF83x/r+OOFgrAHYWF7cELjhV7UQo/6WAIUVl9JFl8a//HZ66VpbY3I9QKZqPru77lA+iOWAIr0hKxHCmmr0othSyeIl5y3qt4xT8gSNrKEZozs8Els67rgsLOZ+ygzwMfbtNhobfgzpEyGnz7htPtzUi6PuOoj7K0WF/MXiUFxwGajRD1hjYXHXI9p406qOyinp5/tiWcDHY0jIu4n64Qfq7kliB2gemag9QbOia0PbbDMbd43SHuvxFxrAocxins7MX5Kqbe1QixKBxoV4//PfAgGCu+Rlm4SvZizyDH+0reDHp92iO0BuX3bCfItl0PEwvYLqpwXG2MHlGsQ4S8pMJZv1JGmHiEoHQDdOjwmVlEP/nE9ADKjI8xLI0OOGITfy0SbeG/C2jKUDGSlDhM9I3IpK9iup6XnbRNC7yqueNsJCCIiXzdQhnaGN+46umnEdy5U5UbUJ48LFM9GkJo8BdDOiAZ7ZIQbKhYLMqvhU2wmNxjEAsS2AI7y4nWF64duePbk7YV3zvAVLEMD9AxJRNa3KDUibV7DjnkuprMEYjScFNcaR2ceP2u9R/5k1052Ryme5phAFRswlHjAudiP4dOy7CaxLgdJh9vUlU1702/+LPa1U9fvPi9qlA4XEUBJc3dFlpsR457IDl1iPqLp7o81NQgyV19iYU38uTiv975Pd3SiwQcsGjx+v4/6fl5T7EOOMTCtpbKxfemsQq/3olQZcminADAAI0cuGLHaHOFxbuGvRk/Z9u7CULqoVR6NE0yx1avj30oRhc/jWUoIALGxkz0dg1Dl9iaI7LqOOXKsXJFwjiuEAi70Jra2nW1PL08zLBhZsMABpW5csI7TPfew9ipFKcn5k1i+1KyCWKjC3W/8dF1d666+RaabBVTFTHacjoojBNDh0NDxk+IPTlwfqJkWpbnpFHXIbLbmpxEQ3ff/Z0g/mauXsoln9wDRjy/NHsQFw3P6vWuTJ43/+FZrk2cvAFRipCKdfD9y2+pjRj78s0KdCUDKJvdV91ChngV38T20TM+gghjpJaPlpFr2xbEz5g4A/NGt5rNwdwmYGeeeMXBSLHHUIc+6RsojRH9VTUm3/mLf/64b470XvoxoTKhlMBQ2jMEzo2PjxdGMppmn1RM24bWFJqaQv4BcuJa2Sam7Zokq1ldCsz06NCBHrhwqVQYpfFj42NZexz1EW9SR/kT58nEeQKJb2fPXjjp0u/YUkwHEgLeOnf2nOuf1TRTM02CLKLTPy60/x1CCztqn7Ev+BdsC3m+30decQvW/wBNTwU+CfUQAQAAAABJRU5ErkJggg==')";
@@ -158,20 +154,20 @@
 	        throw 'zoom out of range';
 	    }
 	    if (options.center.x >= -180 && options.center.x <= 180 && options.center.y >= -90 && options.center.y <= 90) {
-	        var p = new custom_ol_1.ol.geom.Point([options.center.x, options.center.y]);
-	        new custom_ol_1.ol.proj.Projection({ code: "EPSG:4326" });
-	        p.transform(new custom_ol_1.ol.proj.Projection({ code: "EPSG:4326" }), new custom_ol_1.ol.proj.Projection({ code: "EPSG:3857" }));
+	        var p = new custom_ol_1.default.geom.Point([options.center.x, options.center.y]);
+	        new custom_ol_1.default.proj.Projection({ code: "EPSG:4326" });
+	        p.transform(new custom_ol_1.default.proj.Projection({ code: "EPSG:4326" }), new custom_ol_1.default.proj.Projection({ code: "EPSG:3857" }));
 	        var coordinates = p.getCoordinates();
 	        options.center.x = coordinates[0];
 	        options.center.y = coordinates[1];
 	    }
-	    var map = new custom_ol_1.ol.Map({
+	    var map = new custom_ol_1.default.Map({
 	        layers: [osmLayer],
 	        target: options.divId,
-	        controls: custom_ol_1.ol.control.defaults({
+	        controls: custom_ol_1.default.control.defaults({
 	            attributionOptions: { collapsible: false }
 	        }),
-	        view: new custom_ol_1.ol.View({
+	        view: new custom_ol_1.default.View({
 	            center: [options.center.x, options.center.y],
 	            zoom: options.zoom,
 	            minZoom: options.minZoom,
@@ -180,7 +176,7 @@
 	    });
 	    if (options.fullScreen) {
 	        //TODO add full screen options to ts
-	        map.addControl(new custom_ol_1.ol.control.FullScreen({}));
+	        map.addControl(new custom_ol_1.default.control.FullScreen({}));
 	    }
 	    return map;
 	}
@@ -230,8 +226,18 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var ol3 = __webpack_require__(5);
-	exports.ol = ol3;
+	var ol_build_1 = __webpack_require__(5);
+	// export type GlobalObject = Object;
+	exports.ol = ol_build_1.ol;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = ol_build_1.ol;
+	console.log(ol_build_1.ol);
+	console.log(ol_build_1.ol);
+	console.log(ol_build_1.ol);
+	console.log(ol_build_1.ol);
+	console.log(ol_build_1.ol);
+	console.log(ol_build_1.ol);
+	console.log(ol_build_1.ol);
 
 
 /***/ },
@@ -240,20 +246,10 @@
 
 	var require;var require;/* WEBPACK VAR INJECTION */(function(global) {// OpenLayers 3. See http://openlayers.org/
 	// License: https://raw.githubusercontent.com/openlayers/ol3/master/LICENSE.md
-	;(function (root, factory) {
-	  if (true) {
-	    module.exports = factory();
-	  } else if (typeof define === "function" && define.amd) {
-	    define([], factory);
-	  } else {
-	    root.ol = factory();
-	  }
-	}(this, function () {
-	  var OPENLAYERS = {};
-	  var n,aa=this;
+	var n,aa=this;
 	function ba(){var a=aa.setImmediate,b=typeof a;if("object"==b)if(a){if(a instanceof Array)return"array";if(a instanceof Object)return b;var c=Object.prototype.toString.call(a);if("[object Window]"==c)return"object";if("[object Array]"==c||"number"==typeof a.length&&"undefined"!=typeof a.splice&&"undefined"!=typeof a.propertyIsEnumerable&&!a.propertyIsEnumerable("splice"))return"array";if("[object Function]"==c||"undefined"!=typeof a.call&&"undefined"!=typeof a.propertyIsEnumerable&&!a.propertyIsEnumerable("call"))return"function"}else return"null";
 	else if("function"==b&&"undefined"==typeof a.call)return"object";return b}function ca(a,b,c){return a.call.apply(a.bind,arguments)}function da(a,b,c){if(!a)throw Error();if(2<arguments.length){var d=Array.prototype.slice.call(arguments,2);return function(){var c=Array.prototype.slice.call(arguments);Array.prototype.unshift.apply(c,d);return a.apply(b,c)}}return function(){return a.apply(b,arguments)}}
-	function ea(a,b,c){ea=Function.prototype.bind&&-1!=Function.prototype.bind.toString().indexOf("native code")?ca:da;return ea.apply(null,arguments)}function y(a,b){var c=a.split("."),d=OPENLAYERS||aa;c[0]in d||!d.execScript||d.execScript("var "+c[0]);for(var e;c.length&&(e=c.shift());)c.length||void 0===b?d[e]?d=d[e]:d=d[e]={}:d[e]=b};var fa;function B(a,b){a.prototype=Object.create(b.prototype);a.prototype.constructor=a}function I(){}function J(a){return a.ie||(a.ie=++ga)}var ga=0;if("undefined"!==typeof window)var K=window;else"undefined"!==typeof global?K=global:"undefined"!==typeof self&&(K=self);function ha(a){this.message="Assertion failed. See /doc/errors/#"+a+" for details.";this.code=a;this.name="AssertionError"}B(ha,Error);function L(a,b){if(!a)throw new ha(b);};function ia(a,b,c){return Math.min(Math.max(a,b),c)}var ja=function(){var a;"cosh"in Math?a=Math.cosh:a=function(a){a=Math.exp(a);return(a+1/a)/2};return a}();function ka(a){L(0<a,29);return Math.pow(2,Math.ceil(Math.log(a)/Math.LN2))}function la(a,b){var c=a%b;return 0>c*b?c+b:c};function ma(a){return function(b){if(b)return[ia(b[0],a[0],a[2]),ia(b[1],a[1],a[3])]}}function na(a){return a};function oa(a,b,c){this.center=a;this.resolution=b;this.rotation=c};var pa="function"===typeof Object.assign?Object.assign:function(a,b){if(!a||!a)throw new TypeError("Cannot convert undefined or null to object");for(var c=Object(a),d=1,e=arguments.length;d<e;++d){var f=arguments[d];if(void 0!==f&&null!==f)for(var g in f)f.hasOwnProperty(g)&&(c[g]=f[g])}return c};function qa(a){for(var b in a)delete a[b]}function ra(a){var b=[],c;for(c in a)b.push(a[c]);return b}function sa(a){for(var b in a)return!1;return!b};function ta(a){function b(b){var d=a.listener,e=a.jc||a.target;a.mc&&M(a);return d.call(e,b)}return a.kc=b}function ua(a,b,c,d){for(var e,f=0,g=a.length;f<g;++f)if(e=a[f],e.listener===b&&e.jc===c)return d&&(e.deleteIndex=f),e}function va(a,b){var c=a.ha;return c?c[b]:void 0}function wa(a){var b=a.ha;b||(b=a.ha={});return b}
+	function ea(a,b,c){ea=Function.prototype.bind&&-1!=Function.prototype.bind.toString().indexOf("native code")?ca:da;return ea.apply(null,arguments)}function y(a,b){var c=a.split("."),d=aa;c[0]in d||!d.execScript||d.execScript("var "+c[0]);for(var e;c.length&&(e=c.shift());)c.length||void 0===b?d[e]?d=d[e]:d=d[e]={}:d[e]=b};var fa;function B(a,b){a.prototype=Object.create(b.prototype);a.prototype.constructor=a}function I(){}function J(a){return a.ie||(a.ie=++ga)}var ga=0;if("undefined"!==typeof window)var K=window;else"undefined"!==typeof global?K=global:"undefined"!==typeof self&&(K=self);function ha(a){this.message="Assertion failed. See /doc/errors/#"+a+" for details.";this.code=a;this.name="AssertionError"}B(ha,Error);function L(a,b){if(!a)throw new ha(b);};function ia(a,b,c){return Math.min(Math.max(a,b),c)}var ja=function(){var a;"cosh"in Math?a=Math.cosh:a=function(a){a=Math.exp(a);return(a+1/a)/2};return a}();function ka(a){L(0<a,29);return Math.pow(2,Math.ceil(Math.log(a)/Math.LN2))}function la(a,b){var c=a%b;return 0>c*b?c+b:c};function ma(a){return function(b){if(b)return[ia(b[0],a[0],a[2]),ia(b[1],a[1],a[3])]}}function na(a){return a};function oa(a,b,c){this.center=a;this.resolution=b;this.rotation=c};var pa="function"===typeof Object.assign?Object.assign:function(a,b){if(!a||!a)throw new TypeError("Cannot convert undefined or null to object");for(var c=Object(a),d=1,e=arguments.length;d<e;++d){var f=arguments[d];if(void 0!==f&&null!==f)for(var g in f)f.hasOwnProperty(g)&&(c[g]=f[g])}return c};function qa(a){for(var b in a)delete a[b]}function ra(a){var b=[],c;for(c in a)b.push(a[c]);return b}function sa(a){for(var b in a)return!1;return!b};function ta(a){function b(b){var d=a.listener,e=a.jc||a.target;a.mc&&M(a);return d.call(e,b)}return a.kc=b}function ua(a,b,c,d){for(var e,f=0,g=a.length;f<g;++f)if(e=a[f],e.listener===b&&e.jc===c)return d&&(e.deleteIndex=f),e}function va(a,b){var c=a.ha;return c?c[b]:void 0}function wa(a){var b=a.ha;b||(b=a.ha={});return b}
 	function xa(a,b){var c=va(a,b);if(c){for(var d=0,e=c.length;d<e;++d)a.removeEventListener(b,c[d].kc),qa(c[d]);c.length=0;if(c=a.ha)delete c[b],0===Object.keys(c).length&&delete a.ha}}function R(a,b,c,d,e){var f=wa(a),g=f[b];g||(g=f[b]=[]);(f=ua(g,c,d,!1))?e||(f.mc=!1):(f={jc:d,mc:!!e,listener:c,target:a,type:b},a.addEventListener(b,ta(f)),g.push(f));return f}function ya(a,b,c,d){(a=va(a,b))&&(c=ua(a,c,d,!0))&&M(c)}
 	function M(a){if(a&&a.target){a.target.removeEventListener(a.type,a.kc);var b=va(a.target,a.type);if(b){var c="deleteIndex"in a?a.deleteIndex:b.indexOf(a);-1!==c&&b.splice(c,1);0===b.length&&xa(a.target,a.type)}qa(a)}}function za(a){var b=wa(a),c;for(c in b)xa(a,c)};function Aa(){}Aa.prototype.ra=!1;function Da(a){a.ra||(a.ra=!0,a.R())}Aa.prototype.R=I;function T(a){this.type=a;this.target=null}T.prototype.preventDefault=T.prototype.stopPropagation=function(){this.qe=!0};function Ea(a){a.stopPropagation()}function Fa(a){a.preventDefault()};function Ga(){this.ca={};this.K={};this.C={}}B(Ga,Aa);Ga.prototype.addEventListener=function(a,b){var c=this.C[a];c||(c=this.C[a]=[]);-1===c.indexOf(b)&&c.push(b)};function U(a,b){var c="string"===typeof b?new T(b):b,d=c.type;c.target=a;var e=a.C[d],f;if(e){d in a.K||(a.K[d]=0,a.ca[d]=0);++a.K[d];for(var g=0,h=e.length;g<h;++g)if(!1===e[g].call(a,c)||c.qe){f=!1;break}--a.K[d];if(0===a.K[d]){c=a.ca[d];for(delete a.ca[d];c--;)a.removeEventListener(d,I);delete a.K[d]}return f}}Ga.prototype.R=function(){za(this)};
 	function Ha(a,b){return b?b in a.C:0<Object.keys(a.C).length}Ga.prototype.removeEventListener=function(a,b){var c=this.C[a];if(c){var d=c.indexOf(b);a in this.ca?(c[d]=I,++this.ca[a]):(c.splice(d,1),0===c.length&&delete this.C[a])}};function Ia(){Ga.call(this);this.b=0}B(Ia,Ga);Ia.prototype.w=function(){++this.b;U(this,"change")};Ia.prototype.Y=function(a,b,c){if(Array.isArray(a)){for(var d=a.length,e=Array(d),f=0;f<d;++f)e[f]=R(this,a[f],b,c);return e}return R(this,a,b,c)};Ia.prototype.hd=function(a,b,c){if(Array.isArray(a)){for(var d=a.length,e=Array(d),f=0;f<d;++f)e[f]=R(this,a[f],b,c,!0);return e}return R(this,a,b,c,!0)};function Ja(a,b,c){T.call(this,a);this.key=b;this.oldValue=c}B(Ja,T);function V(a){Ia.call(this);J(this);this.M={};void 0!==a&&this.l(a)}B(V,Ia);var Ka={};function La(a){return Ka.hasOwnProperty(a)?Ka[a]:Ka[a]="change:"+a}V.prototype.get=function(a){var b;this.M.hasOwnProperty(a)&&(b=this.M[a]);return b};V.prototype.Ea=function(){return pa({},this.M)};V.prototype.set=function(a,b,c){c?this.M[a]=b:(c=this.M[a],this.M[a]=b,c!==b&&(b=La(a),U(this,new Ja(b,a,c)),U(this,new Ja("propertychange",a,c))))};
@@ -638,9 +634,6 @@
 	Xk.prototype.addFeatures=Xk.prototype.Gb;Xk.prototype.addFeature=Xk.prototype.Fb;Xk.prototype.clear=Xk.prototype.clear;Xk.prototype.forEachFeature=Xk.prototype.nd;Xk.prototype.refresh=Xk.prototype.Ja;y("ol.source.TileArcGISRest",Ql);Ql.prototype.refresh=Ql.prototype.Ja;y("ol.Overlay",gk);gk.prototype.setPosition=gk.prototype.Ac;y("ol.Feature",kk);kk.prototype.getProperties=kk.prototype.Ea;kk.prototype.setProperties=kk.prototype.l;kk.prototype.getGeometry=kk.prototype.S;y("ol.geom.Point",jc);
 	jc.prototype.transform=jc.prototype.transform;jc.prototype.getCoordinates=jc.prototype.za;jc.prototype.getExtent=jc.prototype.G;y("ol.geom.Polygon",qc);qc.prototype.getCoordinates=qc.prototype.za;qc.prototype.getExtent=qc.prototype.G;qc.prototype.transform=qc.prototype.transform;y("ol.geom.LineString",wk);wk.prototype.getCoordinates=wk.prototype.za;wk.prototype.getExtent=wk.prototype.G;wk.prototype.transform=wk.prototype.transform;y("ol.proj.Projection",Eb);Eb.prototype.getCode=Eb.prototype.l;
 	y("ol.interaction.Draw",el);el.prototype.on=el.prototype.Y;y("ol.animation.pan",Dc);y("ol.control.FullScreen",Xd);y("ol.easing.inAndOut",Bc);
-	  return OPENLAYERS.ol;
-	}));
-	
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
@@ -11016,13 +11009,16 @@
 	        this._$popupContainer = $map.find('.ol-popup');
 	        this._$popupContent = $map.find('.popup-content');
 	        this._$popupCloser = $map.find('.ol-popup-closer');
-	        this._popupOverlay = new custom_ol_1.ol.Overlay({
+	        var _ease = function (n) {
+	            return custom_ol_1.default.easing.inAndOut(n);
+	        };
+	        this._popupOverlay = new custom_ol_1.default.Overlay({
 	            element: this._$popupContainer[0],
 	            autoPan: true,
 	            autoPanAnimation: {
 	                duration: 250,
 	                source: theMap.getView().getCenter(),
-	                easing: custom_ol_1.ol.easing.inAndOut
+	                easing: _ease
 	            }
 	        });
 	        this._map.addOverlay(this._popupOverlay);
@@ -11228,23 +11224,23 @@
 	            theStyle = selectionStyle.olStyle;
 	        }
 	        else {
-	            theStyle = new custom_ol_1.ol.style.Style({
-	                stroke: new custom_ol_1.ol.style.Stroke({
+	            theStyle = new custom_ol_1.default.style.Style({
+	                stroke: new custom_ol_1.default.style.Stroke({
 	                    color: selectionStyle.color,
 	                    width: selectionStyle.width
 	                }),
-	                image: new custom_ol_1.ol.style.Circle({
+	                image: new custom_ol_1.default.style.Circle({
 	                    radius: 7,
-	                    fill: new custom_ol_1.ol.style.Fill({ color: selectionStyle.color }),
-	                    stroke: new custom_ol_1.ol.style.Stroke({ color: selectionStyle.color, width: 1 })
+	                    fill: new custom_ol_1.default.style.Fill({ color: selectionStyle.color }),
+	                    stroke: new custom_ol_1.default.style.Stroke({ color: selectionStyle.color, width: 1 })
 	                }),
-	                fill: new custom_ol_1.ol.style.Fill({
+	                fill: new custom_ol_1.default.style.Fill({
 	                    color: selectionStyle.color
 	                })
 	            });
 	        }
-	        var selectionLayer = new custom_ol_1.ol.layer.Vector({
-	            source: new custom_ol_1.ol.source.Vector(),
+	        var selectionLayer = new custom_ol_1.default.layer.Vector({
+	            source: new custom_ol_1.default.source.Vector(),
 	            style: theStyle
 	        });
 	        selectionLayer.setZIndex(100);
@@ -12207,16 +12203,16 @@
 	    checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig);
 	    var _iconUrlRoot = 'http://transportal.cee.wisc.edu/its/inventory/icons/';
 	    if (itsIcon) {
-	        return new custom_ol_1.ol.style.Style({
-	            image: new custom_ol_1.ol.style.Icon({
+	        return new custom_ol_1.default.style.Style({
+	            image: new custom_ol_1.default.style.Icon({
 	                src: _iconUrlRoot + itsIcon,
 	                crossOrigin: 'anonymous'
 	            })
 	        });
 	    }
 	    else if (itsLineStyle) {
-	        return new custom_ol_1.ol.style.Style({
-	            stroke: new custom_ol_1.ol.style.Stroke({
+	        return new custom_ol_1.default.style.Style({
+	            stroke: new custom_ol_1.default.style.Stroke({
 	                color: itsLineStyle.color,
 	                width: itsLineStyle.width
 	            })
@@ -12233,8 +12229,8 @@
 	                    break;
 	                }
 	            }
-	            return [new custom_ol_1.ol.style.Style({
-	                    image: new custom_ol_1.ol.style.Icon({
+	            return [new custom_ol_1.default.style.Style({
+	                    image: new custom_ol_1.default.style.Icon({
 	                        src: iconUrl,
 	                        crossOrigin: 'anonymous'
 	                    })
@@ -12254,8 +12250,8 @@
 	                    break;
 	                }
 	            }
-	            return [new custom_ol_1.ol.style.Style({
-	                    stroke: new custom_ol_1.ol.style.Stroke({
+	            return [new custom_ol_1.default.style.Style({
+	                    stroke: new custom_ol_1.default.style.Stroke({
 	                        color: colr,
 	                        width: width
 	                    })
@@ -12413,10 +12409,10 @@
 	     */
 	    LayerItsInventory.prototype.mapMoveMakeGetParams = function (extent, zoomLevel) {
 	        _super.prototype.mapMoveMakeGetParams.call(this, extent, zoomLevel);
-	        var lowerLeft = new custom_ol_1.ol.geom.Point([extent.minX, extent.minY]);
+	        var lowerLeft = new custom_ol_1.default.geom.Point([extent.minX, extent.minY]);
 	        lowerLeft.transform(this.mapProj, this._projection4326);
 	        var lowerLeftCoordinates = lowerLeft.getCoordinates();
-	        var upperRight = new custom_ol_1.ol.geom.Point([extent.maxX, extent.maxY]);
+	        var upperRight = new custom_ol_1.default.geom.Point([extent.maxX, extent.maxY]);
 	        upperRight.transform(this.mapProj, this._projection4326);
 	        var upperRightCoordinates = upperRight.getCoordinates();
 	        $.extend(this.mapMoveParams, {
@@ -12488,7 +12484,7 @@
 	    function LayerBaseVectorGeoJson(url, options) {
 	        url = typeof url == 'string' ? url : '';
 	        _super.call(this, url, options);
-	        this._geoJsonFormat = new custom_ol_1.ol.format.GeoJSON();
+	        this._geoJsonFormat = new custom_ol_1.default.format.GeoJSON();
 	        this._transform = options.transform || { dataProjection: proj.proj4326, featureProjection: proj.proj3857 };
 	        if (this.autoLoad || this.visible) {
 	            this._load();
@@ -12556,7 +12552,7 @@
 	var provide_1 = __webpack_require__(3);
 	var custom_ol_1 = __webpack_require__(4);
 	var $ = __webpack_require__(6);
-	var g = new custom_ol_1.ol.Map({});
+	var g = new custom_ol_1.default.Map({});
 	var nm = provide_1.default('layers');
 	/**
 	 * The Vector layer base
@@ -12621,8 +12617,8 @@
 	            this._mapMove.checkInit();
 	            this._mapMove.addVectorLayer(this);
 	        }
-	        this._source = new custom_ol_1.ol.source.Vector();
-	        this._olLayer = new custom_ol_1.ol.layer.Vector({
+	        this._source = new custom_ol_1.default.source.Vector();
+	        this._olLayer = new custom_ol_1.default.layer.Vector({
 	            source: this._source,
 	            visible: this.visible,
 	            style: this.style,
@@ -12631,7 +12627,7 @@
 	        });
 	        this.olLayer.setZIndex(this._zIndex);
 	        this._projectionMap = null;
-	        this._projection4326 = new custom_ol_1.ol.proj.Projection({ code: "EPSG:4326" });
+	        this._projection4326 = new custom_ol_1.default.proj.Projection({ code: "EPSG:4326" });
 	    }
 	    /**
 	     * dummy to be overridden
@@ -12845,9 +12841,9 @@
 	 * Created by gavorhes on 10/3/2016.
 	 */
 	var custom_ol_1 = __webpack_require__(4);
-	exports.proj4326 = new custom_ol_1.ol.proj.Projection({ code: 'EPSG:4326' });
-	exports.proj3857 = new custom_ol_1.ol.proj.Projection({ code: 'EPSG:3857' });
-	exports.proj3070 = new custom_ol_1.ol.proj.Projection({ code: 'EPSG:3070' });
+	exports.proj4326 = new custom_ol_1.default.proj.Projection({ code: 'EPSG:4326' });
+	exports.proj3857 = new custom_ol_1.default.proj.Projection({ code: 'EPSG:3857' });
+	exports.proj3070 = new custom_ol_1.default.proj.Projection({ code: 'EPSG:3070' });
 
 
 /***/ },

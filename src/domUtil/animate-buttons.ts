@@ -1,14 +1,11 @@
-
-
-import Timer = NodeJS.Timer;
 /**
  * Created by gavorhes on 11/2/2015.
  */
 
-const $ = require('jquery');
+import Timer = NodeJS.Timer;
 import provide from '../util/provide';
 import {rangeChange} from './range-change';
-
+const $ = require('jquery');
 
 let nm = provide('jQueryPlugin');
 

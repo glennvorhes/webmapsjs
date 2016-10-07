@@ -2,7 +2,6 @@
 /**
  * Created by gavorhes on 12/18/2015.
  */
-// import 'babel-polyfill/dist/polyfill.min';
 var ItsLayerCollection_1 = require('../collections/ItsLayerCollection');
 var LayerLegend_1 = require('../collections/LayerLegend');
 var quickMap_1 = require('../olHelpers/quickMap');
@@ -18,8 +17,5 @@ var layerArray = [
     }
 ];
 var legend = new LayerLegend_1.default(layerArray, 'legend-container', {});
-console.log('it works');
-console.log('it works');
-console.log('it works');
 console.log('it works');
 //# sourceMappingURL=itsMap.js.map

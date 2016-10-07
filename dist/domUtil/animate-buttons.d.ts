@@ -1,5 +1,8 @@
 /// <reference types="jquery" />
 /// <reference types="node" />
+/**
+ * Created by gavorhes on 11/2/2015.
+ */
 import Timer = NodeJS.Timer;
 export declare class MediaControl {
     _container: JQuery;

@@ -5,10 +5,10 @@
 import MapInteractionBase from './mapInteractionBase';
 import propertiesZoomStyle from '../olHelpers/propertiesZoomStyle';
 import provide from '../util/provide';
-import {ol} from 'custom-ol';
+import ol from 'custom-ol';
 import {LayerBaseVector} from "../layers/LayerBaseVector";
 import LayerEsriMapServer from "../layers/LayerEsriMapServer";
-import MapEvent = ol.MapEvent;
+
 const $ = require('jquery');
 
 const nm = provide('olHelpers');
@@ -166,6 +166,10 @@ export class MapPopupCls extends MapInteractionBase {
         this._$popupContent = $map.find('.popup-content');
         this._$popupCloser = $map.find('.ol-popup-closer');
 
+        let _ease = (n: number): number => {
+            return ol.easing.inAndOut(n);
+        };
+
 
         this._popupOverlay = new ol.Overlay({
             element: this._$popupContainer[0],
@@ -173,7 +177,7 @@ export class MapPopupCls extends MapInteractionBase {
             autoPanAnimation: {
                 duration: 250,
                 source: theMap.getView().getCenter(),
-                easing: ol.easing.inAndOut
+                easing: _ease
             }
         });
 

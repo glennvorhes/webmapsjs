@@ -2,10 +2,13 @@
  * Created by gavorhes on 11/2/2015.
  */
 import { LayerBaseVector, LayerBaseVectorOptions } from './LayerBaseVector';
-import { ol, olx } from 'custom-ol';
+import ol from 'custom-ol';
 import { MapMoveCls } from "../olHelpers/mapMoveCls";
 export interface LayerBaseVectorGeoJsonOptions extends LayerBaseVectorOptions {
-    transform?: olx.format.ReadOptions;
+    transform?: {
+        dataProjection: ol.ProjectionLike;
+        featureProjection: ol.ProjectionLike;
+    };
     mapMoveObj?: MapMoveCls;
 }
 /**
@@ -14,7 +17,10 @@ export interface LayerBaseVectorGeoJsonOptions extends LayerBaseVectorOptions {
  */
 export declare class LayerBaseVectorGeoJson extends LayerBaseVector {
     _geoJsonFormat: ol.format.GeoJSON;
-    _transform: olx.format.ReadOptions;
+    _transform: {
+        dataProjection: ol.ProjectionLike;
+        featureProjection: ol.ProjectionLike;
+    };
     /**
      * @param {string|undefined|null} url - resource url, set to '' to make blank layer
      * @param {object} options - config

@@ -2,7 +2,7 @@
  * Created by gavorhes on 12/4/2015.
  */
 import RealEarthAnimate from './RealEarthAnimate';
-import { ol } from 'custom-ol';
+import ol from 'custom-ol';
 /**
  * Animate real earth tile
  * @augments RealEarthAnimate

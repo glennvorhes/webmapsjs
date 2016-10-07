@@ -1,9 +1,7 @@
 /**
  * Created by gavorhes on 5/13/2016.
  */
-/**
- * Created by gavorhes on 5/12/2016.
- */
+
 import makeGuid from '../util/makeGuid';
 import provide from '../util/provide';
 const nm = provide('domUtil');

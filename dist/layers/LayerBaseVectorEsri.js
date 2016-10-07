@@ -60,7 +60,7 @@ var LayerBaseVectorEsri = (function (_super) {
         options.params['outSR'] = options.outSR || 3857;
         _super.call(this, url, options);
         this._outSR = this.params['outSR'];
-        this._esriFormat = new custom_ol_1.ol.format.EsriJSON();
+        this._esriFormat = new custom_ol_1.default.format.EsriJSON();
         if (this._url[this._url.length - 1] !== '/') {
             this._url += '/';
         }

@@ -46,6 +46,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
+	// let g = new
 	var animate_buttons_1 = __webpack_require__(26);
 	//
 	//
@@ -9967,13 +9968,13 @@
 /***/ 26:
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
 	/**
 	 * Created by gavorhes on 11/2/2015.
 	 */
-	var $ = __webpack_require__(6);
+	"use strict";
 	var provide_1 = __webpack_require__(3);
 	var range_change_1 = __webpack_require__(27);
+	var $ = __webpack_require__(6);
 	var nm = provide_1.default('jQueryPlugin');
 	/**
 	 * @callback mediaCallback

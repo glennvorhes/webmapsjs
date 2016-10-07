@@ -1,10 +1,10 @@
-"use strict";
 /**
  * Created by gavorhes on 11/2/2015.
  */
-var $ = require('jquery');
+"use strict";
 var provide_1 = require('../util/provide');
 var range_change_1 = require('./range-change');
+var $ = require('jquery');
 var nm = provide_1.default('jQueryPlugin');
 /**
  * @callback mediaCallback

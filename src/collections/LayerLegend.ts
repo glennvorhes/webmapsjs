@@ -5,8 +5,8 @@
 import provide from '../util/provide';
 import makeGuid from '../util/makeGuid';
 import mapMove from '../olHelpers/mapMove';
+
 let nm = provide('collections');
-import {ol} from 'custom-ol';
 const $ = require('jquery');
 
 class LayerGroup {

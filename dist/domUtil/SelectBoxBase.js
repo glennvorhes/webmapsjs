@@ -1,10 +1,7 @@
-"use strict";
 /**
  * Created by gavorhes on 5/13/2016.
  */
-/**
- * Created by gavorhes on 5/12/2016.
- */
+"use strict";
 var makeGuid_1 = require('../util/makeGuid');
 var provide_1 = require('../util/provide');
 var nm = provide_1.default('domUtil');

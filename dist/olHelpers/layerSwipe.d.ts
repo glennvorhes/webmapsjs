@@ -1,6 +1,6 @@
 /// <reference types="jquery" />
 import { LayerBase } from "../layers/LayerBase";
-import { ol } from 'custom-ol';
+import ol from 'custom-ol';
 declare class LayerSwipe {
     leftLayers: Array<LayerBase>;
     rightLayers: Array<LayerBase>;

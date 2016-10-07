@@ -1,4 +1,4 @@
-import { ol } from 'custom-ol';
+import ol from 'custom-ol';
 export interface EsriResponse {
     drawingInfo: {
         renderer: EsriRenderer;

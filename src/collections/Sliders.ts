@@ -2,7 +2,6 @@
  * Created by gavorhes on 12/10/2015.
  */
 
-
 import provide from '../util/provide';
 let nm = provide('collections');
 const $ = require('jquery');

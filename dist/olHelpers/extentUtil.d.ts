@@ -1,4 +1,4 @@
-import { ol } from 'custom-ol';
+import ol from 'custom-ol';
 /**
  *
  * @param {Array<LayerBaseVector>|Array<ol.layer.Vector>|LayerBaseVector|ol.layer.Vector|*} layers - array of layers or single

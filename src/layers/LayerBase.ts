@@ -1,6 +1,6 @@
 import * as zoomResolutionConvert from '../olHelpers/zoomResolutionConvert';
 import provide from '../util/provide';
-import {ol} from 'custom-ol';
+import ol from 'custom-ol'
 import makeGuid from '../util/makeGuid';
 const nm = provide('layers');
 const $ = require('jquery');

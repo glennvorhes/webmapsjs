@@ -1,4 +1,4 @@
-import { ol } from 'custom-ol';
+import ol from 'custom-ol';
 /**
  * take an array of features and sort by a given property name
  */

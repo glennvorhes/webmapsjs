@@ -65,20 +65,20 @@ var PointSymbol = (function (_super) {
                 var outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);
                 var outlineWidth = this.symbolObj.outline.width;
                 var radius = this.symbolObj.size;
-                this.olStyle = new custom_ol_1.ol.style.Style({
-                    image: new custom_ol_1.ol.style.Circle({
+                this.olStyle = new custom_ol_1.default.style.Style({
+                    image: new custom_ol_1.default.style.Circle({
                         radius: radius,
-                        fill: new custom_ol_1.ol.style.Fill({
+                        fill: new custom_ol_1.default.style.Fill({
                             color: innerColor
                         }),
-                        stroke: new custom_ol_1.ol.style.Stroke({ color: outerColor, width: outlineWidth })
+                        stroke: new custom_ol_1.default.style.Stroke({ color: outerColor, width: outlineWidth })
                     })
                 });
                 this.legendHtml = "<span class=\"legend-layer-icon\" style=\"color: " + innerColor + "\">&#9679;</span>";
                 break;
             case 'esriPMS':
-                this.olStyle = new custom_ol_1.ol.style.Style({
-                    image: new custom_ol_1.ol.style.Icon({ src: "data:image/png;base64," + this.symbolObj['imageData'] })
+                this.olStyle = new custom_ol_1.default.style.Style({
+                    image: new custom_ol_1.default.style.Icon({ src: "data:image/png;base64," + this.symbolObj['imageData'] })
                 });
                 this.legendHtml = "<img class=\"legend-layer-icon\" height=\"17\" src=\"data:image/png;base64," + this.symbolObj['imageData'] + "\">";
                 break;
@@ -97,8 +97,8 @@ var LineSymbol = (function (_super) {
             case 'esriSLS':
                 var innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
                 var lineWidth = this.symbolObj.width;
-                this.olStyle = new custom_ol_1.ol.style.Style({
-                    stroke: new custom_ol_1.ol.style.Stroke({
+                this.olStyle = new custom_ol_1.default.style.Style({
+                    stroke: new custom_ol_1.default.style.Stroke({
                         color: innerColor,
                         //lineDash: [4],
                         width: lineWidth
@@ -130,13 +130,13 @@ var PolygonSymbol = (function (_super) {
                 var innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
                 var outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);
                 var outlineWidth = this.symbolObj.outline.width;
-                this.olStyle = new custom_ol_1.ol.style.Style({
-                    stroke: new custom_ol_1.ol.style.Stroke({
+                this.olStyle = new custom_ol_1.default.style.Style({
+                    stroke: new custom_ol_1.default.style.Stroke({
                         color: outerColor,
                         //lineDash: [4],
                         width: outlineWidth
                     }),
-                    fill: new custom_ol_1.ol.style.Fill({
+                    fill: new custom_ol_1.default.style.Fill({
                         color: innerColor
                     })
                 });

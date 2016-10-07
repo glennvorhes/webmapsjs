@@ -2,7 +2,7 @@
  * Created by gavorhes on 1/4/2016.
  */
 import provide from '../util/provide';
-import {ol} from 'custom-ol';
+import ol from 'custom-ol';
 const nm = provide('olHelpers.esriToOlStyle');
 
 /**

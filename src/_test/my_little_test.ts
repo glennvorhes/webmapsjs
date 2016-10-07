@@ -1,3 +1,8 @@
+import ol3 from 'custom-ol';
+// let g = new
+
+
+
 
 import {MediaControl} from '../domUtil/animate-buttons'
 //

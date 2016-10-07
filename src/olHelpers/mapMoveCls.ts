@@ -3,7 +3,7 @@ import MapInteractionBase from './mapInteractionBase';
 import * as checkDefined from '../util/checkDefined';
 import provide from '../util/provide';
 import makeGuid from '../util/makeGuid';
-import {ol} from 'custom-ol'
+import ol from 'custom-ol';
 import Timer = NodeJS.Timer;
 const $ = require('jquery');
 const nm = provide('olHelpers');

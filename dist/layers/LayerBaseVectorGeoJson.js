@@ -49,7 +49,7 @@ var LayerBaseVectorGeoJson = (function (_super) {
     function LayerBaseVectorGeoJson(url, options) {
         url = typeof url == 'string' ? url : '';
         _super.call(this, url, options);
-        this._geoJsonFormat = new custom_ol_1.ol.format.GeoJSON();
+        this._geoJsonFormat = new custom_ol_1.default.format.GeoJSON();
         this._transform = options.transform || { dataProjection: proj.proj4326, featureProjection: proj.proj3857 };
         if (this.autoLoad || this.visible) {
             this._load();

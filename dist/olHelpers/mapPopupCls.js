@@ -105,13 +105,16 @@ var MapPopupCls = (function (_super) {
         this._$popupContainer = $map.find('.ol-popup');
         this._$popupContent = $map.find('.popup-content');
         this._$popupCloser = $map.find('.ol-popup-closer');
-        this._popupOverlay = new custom_ol_1.ol.Overlay({
+        var _ease = function (n) {
+            return custom_ol_1.default.easing.inAndOut(n);
+        };
+        this._popupOverlay = new custom_ol_1.default.Overlay({
             element: this._$popupContainer[0],
             autoPan: true,
             autoPanAnimation: {
                 duration: 250,
                 source: theMap.getView().getCenter(),
-                easing: custom_ol_1.ol.easing.inAndOut
+                easing: _ease
             }
         });
         this._map.addOverlay(this._popupOverlay);
@@ -317,23 +320,23 @@ var MapPopupCls = (function (_super) {
             theStyle = selectionStyle.olStyle;
         }
         else {
-            theStyle = new custom_ol_1.ol.style.Style({
-                stroke: new custom_ol_1.ol.style.Stroke({
+            theStyle = new custom_ol_1.default.style.Style({
+                stroke: new custom_ol_1.default.style.Stroke({
                     color: selectionStyle.color,
                     width: selectionStyle.width
                 }),
-                image: new custom_ol_1.ol.style.Circle({
+                image: new custom_ol_1.default.style.Circle({
                     radius: 7,
-                    fill: new custom_ol_1.ol.style.Fill({ color: selectionStyle.color }),
-                    stroke: new custom_ol_1.ol.style.Stroke({ color: selectionStyle.color, width: 1 })
+                    fill: new custom_ol_1.default.style.Fill({ color: selectionStyle.color }),
+                    stroke: new custom_ol_1.default.style.Stroke({ color: selectionStyle.color, width: 1 })
                 }),
-                fill: new custom_ol_1.ol.style.Fill({
+                fill: new custom_ol_1.default.style.Fill({
                     color: selectionStyle.color
                 })
             });
         }
-        var selectionLayer = new custom_ol_1.ol.layer.Vector({
-            source: new custom_ol_1.ol.source.Vector(),
+        var selectionLayer = new custom_ol_1.default.layer.Vector({
+            source: new custom_ol_1.default.source.Vector(),
             style: theStyle
         });
         selectionLayer.setZIndex(100);

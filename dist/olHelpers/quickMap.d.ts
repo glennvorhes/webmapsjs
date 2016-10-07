@@ -2,7 +2,7 @@
  * Created by gavorhes on 12/15/2015.
  */
 import { quickMapOptions } from './quickMapBase';
-import { ol } from 'custom-ol';
+import ol from 'custom-ol';
 /**
  * Sets up a map with some default parameters and initializes
  * mapMove and mapPopup

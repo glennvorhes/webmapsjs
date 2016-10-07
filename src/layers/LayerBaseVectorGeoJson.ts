@@ -4,19 +4,19 @@
 
 import {LayerBaseVector, LayerBaseVectorOptions} from './LayerBaseVector';
 import provide from '../util/provide';
-import {ol, olx} from 'custom-ol';
+import ol from 'custom-ol';
 import {MapMoveCls} from "../olHelpers/mapMoveCls";
 import * as proj from '../olHelpers/projections';
 
 let nm = provide('layers');
 const $ = require('jquery');
 
+
+
 export interface LayerBaseVectorGeoJsonOptions extends LayerBaseVectorOptions{
-    transform?: olx.format.ReadOptions;
+    transform?: {dataProjection: ol.ProjectionLike, featureProjection: ol.ProjectionLike};
     mapMoveObj?: MapMoveCls;
 }
-
-
 
 /**
  * The Vector GeoJson Layer
@@ -24,7 +24,7 @@ export interface LayerBaseVectorGeoJsonOptions extends LayerBaseVectorOptions{
  */
 export class LayerBaseVectorGeoJson extends LayerBaseVector {
     _geoJsonFormat: ol.format.GeoJSON;
-    _transform: olx.format.ReadOptions;
+    _transform: {dataProjection: ol.ProjectionLike, featureProjection: ol.ProjectionLike};
 
     /**
      * @param {string|undefined|null} url - resource url, set to '' to make blank layer

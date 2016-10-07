@@ -4,7 +4,7 @@
 import { quickMapOptions } from './quickMapBase';
 import MapMoveCls from './mapMoveCls';
 import MapPopupCls from './mapPopupCls';
-import { ol } from 'custom-ol';
+import ol from 'custom-ol';
 /**
  * @typedef {object} quickMapMultiReturn
  * @property {ol.Map} map The X Coordinate

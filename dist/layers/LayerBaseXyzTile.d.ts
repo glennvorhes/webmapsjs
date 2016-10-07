@@ -2,7 +2,7 @@
  * Created by gavorhes on 12/4/2015.
  */
 import { LayerBase, LayerBaseOptions } from './LayerBase';
-import { ol } from 'custom-ol';
+import ol from 'custom-ol';
 /**
  * XYZ tile
  * @augments LayerBase

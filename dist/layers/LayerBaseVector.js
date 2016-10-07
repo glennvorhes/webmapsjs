@@ -9,7 +9,7 @@ var mapMove_1 = require('../olHelpers/mapMove');
 var provide_1 = require('../util/provide');
 var custom_ol_1 = require('custom-ol');
 var $ = require('jquery');
-var g = new custom_ol_1.ol.Map({});
+var g = new custom_ol_1.default.Map({});
 var nm = provide_1.default('layers');
 /**
  * The Vector layer base
@@ -74,8 +74,8 @@ var LayerBaseVector = (function (_super) {
             this._mapMove.checkInit();
             this._mapMove.addVectorLayer(this);
         }
-        this._source = new custom_ol_1.ol.source.Vector();
-        this._olLayer = new custom_ol_1.ol.layer.Vector({
+        this._source = new custom_ol_1.default.source.Vector();
+        this._olLayer = new custom_ol_1.default.layer.Vector({
             source: this._source,
             visible: this.visible,
             style: this.style,
@@ -84,7 +84,7 @@ var LayerBaseVector = (function (_super) {
         });
         this.olLayer.setZIndex(this._zIndex);
         this._projectionMap = null;
-        this._projection4326 = new custom_ol_1.ol.proj.Projection({ code: "EPSG:4326" });
+        this._projection4326 = new custom_ol_1.default.proj.Projection({ code: "EPSG:4326" });
     }
     /**
      * dummy to be overridden

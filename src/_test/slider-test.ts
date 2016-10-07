@@ -3,7 +3,7 @@
  */
 import {TipSliders, TipPresetConfig, TipSliderConfig} from '../collections/Sliders';
 const $ = require('jquery');
-import {ol} from 'custom-ol';
+import ol from 'custom-ol'
 
 
 

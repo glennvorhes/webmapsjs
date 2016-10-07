@@ -1,7 +1,7 @@
 /// <reference types="node" />
 import LayerBaseVector from "../layers/LayerBaseVector";
 import MapInteractionBase from './mapInteractionBase';
-import { ol } from 'custom-ol';
+import ol from 'custom-ol';
 import Timer = NodeJS.Timer;
 export interface extentObject {
     minX: number;

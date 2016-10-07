@@ -3,7 +3,7 @@
  */
 import RealEarthAnimate from './RealEarthAnimate';
 import provide from '../util/provide';
-import {ol, olx} from 'custom-ol';
+import ol from 'custom-ol';
 const nm = provide('mixin');
 const $ = require('jquery');
 
@@ -16,7 +16,7 @@ class RealEarthAnimateVector extends RealEarthAnimate {
     _dataCache: Array<Array<Object>|Object>;
     _source: ol.source.Vector;
     _geoJsonFormat: ol.format.GeoJSON;
-    _transform: olx.format.ReadOptions;
+    _transform: {dataProjection: ol.ProjectionLike, featureProjection: ol.ProjectionLike};
     _rawTimesLookup: {[s: string]: any};
     _currentIndex: number;
 

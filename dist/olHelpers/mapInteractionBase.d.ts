@@ -1,4 +1,4 @@
-import { ol } from 'custom-ol';
+import ol from 'custom-ol';
 /**
  * base interaction
  */

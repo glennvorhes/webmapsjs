@@ -1,5 +1,5 @@
 /// <reference types="jquery" />
-import { ol } from 'custom-ol';
+import ol from 'custom-ol';
 export interface LayerBaseOptions {
     id?: string;
     name?: string;

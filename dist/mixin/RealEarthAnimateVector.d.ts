@@ -2,7 +2,7 @@
  * Created by gavorhes on 12/4/2015.
  */
 import RealEarthAnimate from './RealEarthAnimate';
-import { ol, olx } from 'custom-ol';
+import ol from 'custom-ol';
 /**
  * class mixin to animate RealEarth vector layers
  * @augments RealEarthAnimate
@@ -11,7 +11,10 @@ declare class RealEarthAnimateVector extends RealEarthAnimate {
     _dataCache: Array<Array<Object> | Object>;
     _source: ol.source.Vector;
     _geoJsonFormat: ol.format.GeoJSON;
-    _transform: olx.format.ReadOptions;
+    _transform: {
+        dataProjection: ol.ProjectionLike;
+        featureProjection: ol.ProjectionLike;
+    };
     _rawTimesLookup: {
         [s: string]: any;
     };

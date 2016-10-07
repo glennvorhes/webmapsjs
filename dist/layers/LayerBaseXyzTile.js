@@ -37,8 +37,8 @@ var LayerBaseXyzTile = (function (_super) {
      */
     function LayerBaseXyzTile(url, options) {
         _super.call(this, url, options);
-        this._source = new custom_ol_1.ol.source.XYZ({ url: this.url == '' ? undefined : this.url });
-        this._olLayer = new custom_ol_1.ol.layer.Tile({
+        this._source = new custom_ol_1.default.source.XYZ({ url: this.url == '' ? undefined : this.url });
+        this._olLayer = new custom_ol_1.default.layer.Tile({
             source: this._source,
             visible: this.visible,
             opacity: this.opacity,

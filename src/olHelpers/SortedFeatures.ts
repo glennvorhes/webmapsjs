@@ -2,7 +2,7 @@
  * Created by gavorhes on 12/23/2015.
  */
 import provide from '../util/provide';
-import {ol} from 'custom-ol'
+import ol from 'custom-ol';
 let nm = provide('olHelpers');
 
 /**

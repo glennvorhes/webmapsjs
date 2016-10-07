@@ -42,11 +42,11 @@ var LayerEsriMapServer = (function (_super) {
     function LayerEsriMapServer(url, options) {
         if (options === void 0) { options = {}; }
         _super.call(this, url, options);
-        this._source = new custom_ol_1.ol.source.TileArcGISRest({
+        this._source = new custom_ol_1.default.source.TileArcGISRest({
             url: this.url == '' ? undefined : this.url,
             params: typeof options.showLayers == 'undefined' ? undefined : { layers: 'show:' + options.showLayers.join(',') }
         });
-        this._olLayer = new custom_ol_1.ol.layer.Tile({
+        this._olLayer = new custom_ol_1.default.layer.Tile({
             source: this._source,
             visible: this.visible,
             opacity: this.opacity,
@@ -55,7 +55,7 @@ var LayerEsriMapServer = (function (_super) {
         });
         this._olLayer.setZIndex(this._zIndex);
         options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
-        this._esriFormat = new custom_ol_1.ol.format.EsriJSON();
+        this._esriFormat = new custom_ol_1.default.format.EsriJSON();
         this._popupRequest = null;
         this.addLegendContent();
         if (options.addPopup) {

@@ -78,16 +78,16 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
     checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig);
     var _iconUrlRoot = 'http://transportal.cee.wisc.edu/its/inventory/icons/';
     if (itsIcon) {
-        return new custom_ol_1.ol.style.Style({
-            image: new custom_ol_1.ol.style.Icon({
+        return new custom_ol_1.default.style.Style({
+            image: new custom_ol_1.default.style.Icon({
                 src: _iconUrlRoot + itsIcon,
                 crossOrigin: 'anonymous'
             })
         });
     }
     else if (itsLineStyle) {
-        return new custom_ol_1.ol.style.Style({
-            stroke: new custom_ol_1.ol.style.Stroke({
+        return new custom_ol_1.default.style.Style({
+            stroke: new custom_ol_1.default.style.Stroke({
                 color: itsLineStyle.color,
                 width: itsLineStyle.width
             })
@@ -104,8 +104,8 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
                     break;
                 }
             }
-            return [new custom_ol_1.ol.style.Style({
-                    image: new custom_ol_1.ol.style.Icon({
+            return [new custom_ol_1.default.style.Style({
+                    image: new custom_ol_1.default.style.Icon({
                         src: iconUrl,
                         crossOrigin: 'anonymous'
                     })
@@ -125,8 +125,8 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
                     break;
                 }
             }
-            return [new custom_ol_1.ol.style.Style({
-                    stroke: new custom_ol_1.ol.style.Stroke({
+            return [new custom_ol_1.default.style.Style({
+                    stroke: new custom_ol_1.default.style.Stroke({
                         color: colr,
                         width: width
                     })
@@ -284,10 +284,10 @@ var LayerItsInventory = (function (_super) {
      */
     LayerItsInventory.prototype.mapMoveMakeGetParams = function (extent, zoomLevel) {
         _super.prototype.mapMoveMakeGetParams.call(this, extent, zoomLevel);
-        var lowerLeft = new custom_ol_1.ol.geom.Point([extent.minX, extent.minY]);
+        var lowerLeft = new custom_ol_1.default.geom.Point([extent.minX, extent.minY]);
         lowerLeft.transform(this.mapProj, this._projection4326);
         var lowerLeftCoordinates = lowerLeft.getCoordinates();
-        var upperRight = new custom_ol_1.ol.geom.Point([extent.maxX, extent.maxY]);
+        var upperRight = new custom_ol_1.default.geom.Point([extent.maxX, extent.maxY]);
         upperRight.transform(this.mapProj, this._projection4326);
         var upperRightCoordinates = upperRight.getCoordinates();
         $.extend(this.mapMoveParams, {

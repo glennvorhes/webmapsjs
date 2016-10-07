@@ -5,7 +5,7 @@
 import LayerBaseVectorGeoJson from './LayerBaseVectorGeoJson';
 import mapPopup from '../olHelpers/mapPopup';
 import provide from '../util/provide';
-import {ol} from 'custom-ol';
+import ol from 'custom-ol';
 let nm = provide('layers');
 const $ = require('jquery');
 

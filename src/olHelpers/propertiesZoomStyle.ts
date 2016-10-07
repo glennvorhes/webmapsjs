@@ -4,7 +4,7 @@
 
 import provide from '../util/provide';
 import * as zoomResolutionConvert from './zoomResolutionConvert';
-import {ol} from 'custom-ol'
+import ol from 'custom-ol';
 const nm = provide('olHelpers');
 
 
