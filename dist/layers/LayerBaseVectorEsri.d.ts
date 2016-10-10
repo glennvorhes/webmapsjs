@@ -4,11 +4,11 @@
 import { LayerBaseVector, LayerBaseVectorOptions } from './LayerBaseVector';
 import ol from 'custom-ol';
 export interface LayerBaseVectorEsriOptions extends LayerBaseVectorOptions {
-    format: string;
-    outSR: number;
-    where: string;
-    outFields: string;
-    useEsriStyle: boolean;
+    format?: string;
+    outSR?: number;
+    where?: string;
+    outFields?: string;
+    useEsriStyle?: boolean;
 }
 /**
  * Base layer for esri vector layers

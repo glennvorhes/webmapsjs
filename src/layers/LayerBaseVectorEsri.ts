@@ -10,11 +10,11 @@ const $ = require('jquery');
 let nm = provide('layers');
 
 export interface LayerBaseVectorEsriOptions  extends LayerBaseVectorOptions{
-    format: string;
-    outSR: number;
-    where: string;
-    outFields: string;
-    useEsriStyle: boolean;
+    format?: string;
+    outSR?: number;
+    where?: string;
+    outFields?: string;
+    useEsriStyle?: boolean;
 }
 
 /**
