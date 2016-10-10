@@ -18,7 +18,7 @@ nm.leadingPad = leadingPad;
  * @returns {string} the formatted date string
  */
 function dateToYyyyMmDdHhMmSs(dte) {
-    var yr = dte.getYear() + 1900;
+    var yr = dte.getFullYear();
     var month = leadingPad(dte.getMonth() + 1);
     var day = leadingPad(dte.getDate());
     var hrs = leadingPad(dte.getHours());
@@ -34,7 +34,7 @@ nm.dateToYyyyMmDdHhMmSs = dateToYyyyMmDdHhMmSs;
  * @returns {string} the formatted date string
  */
 function dateToYyyyMmDdHh000(dte) {
-    var yr = dte.getYear() + 1900;
+    var yr = dte.getFullYear();
     var month = leadingPad(dte.getMonth() + 1);
     var day = leadingPad(dte.getDate());
     var hrs = leadingPad(dte.getHours());

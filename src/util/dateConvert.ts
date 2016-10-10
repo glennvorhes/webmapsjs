@@ -21,8 +21,8 @@ nm.leadingPad = leadingPad;
  * @param {Date} dte to convert
  * @returns {string} the formatted date string
  */
-export function dateToYyyyMmDdHhMmSs(dte) {
-    let yr = dte.getYear() + 1900;
+export function dateToYyyyMmDdHhMmSs(dte: Date): string {
+    let yr = dte.getFullYear();
     let month = leadingPad(dte.getMonth() + 1);
     let day = leadingPad(dte.getDate());
     let hrs = leadingPad(dte.getHours());
@@ -40,8 +40,9 @@ nm.dateToYyyyMmDdHhMmSs = dateToYyyyMmDdHhMmSs;
  * @param {Date} dte the input date
  * @returns {string} the formatted date string
  */
-export function dateToYyyyMmDdHh000(dte) {
-    let yr = dte.getYear() + 1900;
+export function dateToYyyyMmDdHh000(dte: Date): string {
+
+    let yr = dte.getFullYear();
     let month = leadingPad(dte.getMonth() + 1);
     let day = leadingPad(dte.getDate());
     let hrs = leadingPad(dte.getHours());
