@@ -224,17 +224,9 @@
 
 	"use strict";
 	var ol_build_1 = __webpack_require__(5);
-	// export type GlobalObject = Object;
 	exports.ol = ol_build_1.ol;
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.default = ol_build_1.ol;
-	console.log(ol_build_1.ol);
-	console.log(ol_build_1.ol);
-	console.log(ol_build_1.ol);
-	console.log(ol_build_1.ol);
-	console.log(ol_build_1.ol);
-	console.log(ol_build_1.ol);
-	console.log(ol_build_1.ol);
 
 
 /***/ },

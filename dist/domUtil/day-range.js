@@ -1,6 +1,6 @@
 "use strict";
 var provide_1 = require('../util/provide');
-var nm = provide_1.default('jQueryPlugin');
+var nm = provide_1.default('domUtil');
 var $ = require('jquery');
 require('jquery-ui');
 var DayRange = (function () {
@@ -48,6 +48,9 @@ var DayRange = (function () {
          * @param val
          */
         set: function (val) {
+            if (typeof val == 'string') {
+                val = new Date(val);
+            }
             this._startDate = val;
             this._startDate.setHours(0, 0, 0, 0);
             this._$startDate.val(this._startDate.toLocaleDateString());
@@ -67,6 +70,9 @@ var DayRange = (function () {
             return this._endDate;
         },
         set: function (val) {
+            if (typeof val == 'string') {
+                val = new Date(val);
+            }
             this._endDate = val;
             this._endDate.setHours(23, 59, 59, 0);
             this._$endDate.val(this._endDate.toLocaleDateString());

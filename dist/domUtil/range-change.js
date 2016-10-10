@@ -1,4 +1,6 @@
 "use strict";
+var provide_1 = require('../util/provide');
+var nm = provide_1.default('domUtil');
 var mouseIn = false;
 var mouseDown = false;
 var timeout = null;
@@ -91,4 +93,5 @@ function rangeChange($slider, callback, changeTimeout) {
     return this;
 }
 exports.rangeChange = rangeChange;
+nm.rangeChange = rangeChange;
 //# sourceMappingURL=range-change.js.map

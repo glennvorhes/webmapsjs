@@ -1,4 +1,6 @@
+import provide from '../util/provide';
 
+const nm = provide('domUtil');
 
 let mouseIn = false;
 let mouseDown = false;
@@ -139,4 +141,6 @@ export function rangeChange ($slider: JQuery, callback: rangeChangedCallback, ch
 
     return this;
 }
+
+nm.rangeChange = rangeChange;
 

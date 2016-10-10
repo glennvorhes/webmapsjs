@@ -9975,7 +9975,7 @@
 	var provide_1 = __webpack_require__(3);
 	var range_change_1 = __webpack_require__(27);
 	var $ = __webpack_require__(6);
-	var nm = provide_1.default('jQueryPlugin');
+	var nm = provide_1.default('domUtil');
 	/**
 	 * @callback mediaCallback
 	 * @param {number} tm
@@ -10179,6 +10179,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
+	var provide_1 = __webpack_require__(3);
+	var nm = provide_1.default('domUtil');
 	var mouseIn = false;
 	var mouseDown = false;
 	var timeout = null;
@@ -10271,6 +10273,7 @@
 	    return this;
 	}
 	exports.rangeChange = rangeChange;
+	nm.rangeChange = rangeChange;
 
 
 /***/ }

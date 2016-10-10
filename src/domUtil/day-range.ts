@@ -1,6 +1,5 @@
-
 import provide from '../util/provide';
-let nm = provide('jQueryPlugin');
+let nm = provide('domUtil');
 
 const $ = require('jquery');
 require('jquery-ui');
@@ -59,7 +58,7 @@ export class DayRange {
         this.endDate = new Date();
     }
 
-    get startDate() : Date{
+    get startDate(): Date {
         return this._startDate;
     }
 
@@ -68,6 +67,10 @@ export class DayRange {
      * @param val
      */
     set startDate(val: Date) {
+        if (typeof val == 'string') {
+            val = new Date(val as string);
+        }
+
         this._startDate = val;
         this._startDate.setHours(0, 0, 0, 0);
         this._$startDate.val(this._startDate.toLocaleDateString());
@@ -82,12 +85,16 @@ export class DayRange {
         }
     }
 
-    get endDate() : Date{
+    get endDate(): Date {
         return this._endDate;
     }
 
 
     set endDate(val: Date) {
+        if (typeof val == 'string') {
+            val = new Date(val as string);
+        }
+
         this._endDate = val;
         this._endDate.setHours(23, 59, 59, 0);
         this._$endDate.val(this._endDate.toLocaleDateString());
