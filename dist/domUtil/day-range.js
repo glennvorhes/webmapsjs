@@ -83,14 +83,6 @@ var DayRange = (function () {
 }());
 exports.DayRange = DayRange;
 nm.DayRange = DayRange;
-/**
- * Adds day range control
- * @param {number} dayRange the number of days
- * @returns {DayRange} the day range object
- */
-jQuery.fn.dayRange = function (dayRange) {
-    return new DayRange(dayRange, this);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = DayRange;
 //# sourceMappingURL=day-range.js.map

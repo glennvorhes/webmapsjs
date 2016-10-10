@@ -5,7 +5,7 @@
 var provide_1 = require('../util/provide');
 var range_change_1 = require('./range-change');
 var $ = require('jquery');
-var nm = provide_1.default('jQueryPlugin');
+var nm = provide_1.default('domUtil');
 /**
  * @callback mediaCallback
  * @param {number} tm

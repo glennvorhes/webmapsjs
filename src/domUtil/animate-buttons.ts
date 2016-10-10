@@ -7,7 +7,7 @@ import provide from '../util/provide';
 import {rangeChange} from './range-change';
 const $ = require('jquery');
 
-let nm = provide('jQueryPlugin');
+let nm = provide('domUtil');
 
 /**
  * @callback mediaCallback

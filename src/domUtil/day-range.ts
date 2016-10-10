@@ -18,7 +18,7 @@ export class DayRange {
      * @param {number} dayRange number of days
      * @param {jQuery|HTMLElement|*} jQueryRef reference to the jquery element
      */
-    constructor(dayRange, jQueryRef) {
+    constructor(dayRange: number, jQueryRef: JQuery) {
         this._workingDayRange = dayRange - 1;
 
         let pickerHtml = '<label for="start-date" style="width: 78px; display: inline-block; margin:5px;">Start Date</label>' +
@@ -101,14 +101,6 @@ export class DayRange {
 
 nm.DayRange = DayRange;
 
-/**
- * Adds day range control
- * @param {number} dayRange the number of days
- * @returns {DayRange} the day range object
- */
-jQuery.fn.dayRange = function (dayRange) {
-    return new DayRange(dayRange, this);
-};
 
 export default DayRange;
 

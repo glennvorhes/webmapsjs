@@ -11,7 +11,7 @@ export declare class DayRange {
      * @param {number} dayRange number of days
      * @param {jQuery|HTMLElement|*} jQueryRef reference to the jquery element
      */
-    constructor(dayRange: any, jQueryRef: any);
+    constructor(dayRange: number, jQueryRef: JQuery);
     /**
      *
      * @param val
