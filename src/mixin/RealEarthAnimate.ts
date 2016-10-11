@@ -74,7 +74,7 @@ export class RealEarthAnimate {
             for (let i = 0; i < d['times'].length; i++) {
                 this._loadDates.call(this, d['times'][i]);
             }
-            this.loadCallback.call(this.lyr);
+            this.loadCallback.call(this.lyr, this.lyr);
             this._loadLatest.call(this);
         }, 'json');
     }

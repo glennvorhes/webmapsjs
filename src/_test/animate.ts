@@ -3,17 +3,17 @@ import LayerRealEarthTile from "../layers/LayerRealEarthTile";
 import {MediaControl, changeFunction} from "../domUtil/media-control";
 import $ = require('jquery');
 
-let nexrhresConfig = {
-    products: 'nexrhres',
-    id: 'nexrhres-static',
-    opacity: 0.6,
-    animate: true,
-    name: 'Hybrid Reflectivity',
-    // maxZoom: 10,
-    loadCallback: null
-};
 
-let nexrhresStatic = new LayerRealEarthTile(nexrhresConfig);
+let nexrhresStatic = new LayerRealEarthTile({
+        products: 'nexrhres',
+        id: 'nexrhres-static',
+        opacity: 0.6,
+        animate: true,
+        name: 'Hybrid Reflectivity',
+        // maxZoom: 10,
+        timeLoadCallback: function(f){console.log(f);}
+    }
+);
 
 
 let d = new Date();
@@ -36,7 +36,6 @@ let media = new MediaControl(
         showAsDate: true
     }
 );
-
 
 
 let map = quickMap();

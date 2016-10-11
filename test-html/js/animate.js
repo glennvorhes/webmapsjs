@@ -52,16 +52,15 @@
 	var LayerRealEarthTile_1 = __webpack_require__(/*! ../layers/LayerRealEarthTile */ 31);
 	var media_control_1 = __webpack_require__(/*! ../domUtil/media-control */ 35);
 	var $ = __webpack_require__(/*! jquery */ 6);
-	var nexrhresConfig = {
+	var nexrhresStatic = new LayerRealEarthTile_1.default({
 	    products: 'nexrhres',
 	    id: 'nexrhres-static',
 	    opacity: 0.6,
 	    animate: true,
 	    name: 'Hybrid Reflectivity',
 	    // maxZoom: 10,
-	    loadCallback: null
-	};
-	var nexrhresStatic = new LayerRealEarthTile_1.default(nexrhresConfig);
+	    timeLoadCallback: function (f) { console.log(f); }
+	});
 	var d = new Date();
 	var endTime = d.getTime();
 	d.setHours(d.getHours() - 4);
@@ -12255,7 +12254,7 @@
 	            for (var i = 0; i < d['times'].length; i++) {
 	                _this._loadDates.call(_this, d['times'][i]);
 	            }
-	            _this.loadCallback.call(_this.lyr);
+	            _this.loadCallback.call(_this.lyr, _this.lyr);
 	            _this._loadLatest.call(_this);
 	        }, 'json');
 	    };

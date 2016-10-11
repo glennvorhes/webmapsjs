@@ -47,7 +47,7 @@ var RealEarthAnimate = (function () {
             for (var i = 0; i < d['times'].length; i++) {
                 _this._loadDates.call(_this, d['times'][i]);
             }
-            _this.loadCallback.call(_this.lyr);
+            _this.loadCallback.call(_this.lyr, _this.lyr);
             _this._loadLatest.call(_this);
         }, 'json');
     };

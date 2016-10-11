@@ -3,16 +3,15 @@ var quickMap_1 = require('../olHelpers/quickMap');
 var LayerRealEarthTile_1 = require("../layers/LayerRealEarthTile");
 var media_control_1 = require("../domUtil/media-control");
 var $ = require('jquery');
-var nexrhresConfig = {
+var nexrhresStatic = new LayerRealEarthTile_1.default({
     products: 'nexrhres',
     id: 'nexrhres-static',
     opacity: 0.6,
     animate: true,
     name: 'Hybrid Reflectivity',
     // maxZoom: 10,
-    loadCallback: null
-};
-var nexrhresStatic = new LayerRealEarthTile_1.default(nexrhresConfig);
+    timeLoadCallback: function (f) { console.log(f); }
+});
 var d = new Date();
 var endTime = d.getTime();
 d.setHours(d.getHours() - 4);
