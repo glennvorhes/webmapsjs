@@ -38,6 +38,7 @@ export interface mediaRangeConfig{
 }
 
 
+
 export class MediaControl {
     _container: JQuery;
     _min: number;
@@ -68,6 +69,7 @@ export class MediaControl {
         element: JQuery|HTMLElement|string,
         changeFunc: changeFunction = (): void => {return;},
         mediaConfig: mediaRangeConfig = {}) {
+        console.log('here');
 
         mediaConfig.min = typeof mediaConfig.min == 'number' ? mediaConfig.min : 0;
         mediaConfig.max = typeof mediaConfig.max == 'number' ? mediaConfig.max : 100;

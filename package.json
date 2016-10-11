@@ -43,7 +43,6 @@
     "jquery": "2.2.3",
     "jquery-layout": "1.0.0",
     "jquery-ui": "1.10.5",
-    "es6-mixins": "^1.0.2",
     "floatthead": "^1.4.0"
   }
 }
