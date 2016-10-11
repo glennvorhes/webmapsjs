@@ -21,6 +21,7 @@ var RealEarthAnimateVector = (function (_super) {
         _super.call(this, layer, loadCallback);
         this._source = layer.source;
         this._olLayer = layer.olLayer;
+        this._lyr = layer;
     }
     /**
      * Call this after the mixin has been applied
@@ -86,7 +87,7 @@ var RealEarthAnimateVector = (function (_super) {
      * @private
      */
     RealEarthAnimateVector.prototype._loadFeatures = function (geojObj) {
-        this._source.addFeatures(this._geoJsonFormat.readFeatures(geojObj, this._transform));
+        this._source.addFeatures(this._lyr._geoJsonFormat.readFeatures(geojObj, this._transform));
     };
     RealEarthAnimateVector.prototype.setLayerTime = function (theTime) {
         if (_super.prototype.setLayerTime.call(this, theTime)) {

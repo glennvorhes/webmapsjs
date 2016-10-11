@@ -29,7 +29,6 @@ var MediaControl = (function () {
         var _this = this;
         if (changeFunc === void 0) { changeFunc = function () { return; }; }
         if (mediaConfig === void 0) { mediaConfig = {}; }
-        console.log('here');
         mediaConfig.min = typeof mediaConfig.min == 'number' ? mediaConfig.min : 0;
         mediaConfig.max = typeof mediaConfig.max == 'number' ? mediaConfig.max : 100;
         mediaConfig.val = typeof mediaConfig.val == 'number' ? mediaConfig.val : 0;

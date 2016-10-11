@@ -11,7 +11,6 @@ import { LayerVectorRealEarth } from "../layers/LayerRealEarthVector";
 declare class RealEarthAnimateVector extends RealEarthAnimate {
     _dataCache: Array<Array<Object> | Object>;
     _source: ol.source.Vector;
-    _geoJsonFormat: ol.format.GeoJSON;
     _transform: {
         dataProjection: ol.ProjectionLike;
         featureProjection: ol.ProjectionLike;
@@ -21,6 +20,7 @@ declare class RealEarthAnimateVector extends RealEarthAnimate {
     };
     _currentIndex: number;
     _olLayer: ol.layer.Vector;
+    _lyr: LayerVectorRealEarth;
     constructor(layer: LayerVectorRealEarth, loadCallback?: (lyr: LayerVectorRealEarth) => void);
     /**
      * Call this after the mixin has been applied
