@@ -3,11 +3,11 @@
  */
 import { LayerBaseVectorGeoJson, LayerBaseVectorGeoJsonOptions } from './LayerBaseVectorGeoJson';
 import RealEarthAnimateVector from '../mixin/RealEarthAnimateVector';
-import { IRealEarthAnimate } from "../mixin/RealEarthAnimate";
+import { IRealEarthAnimate, timesLoadedCallback } from "../mixin/RealEarthAnimate";
 export interface LayerVectorRealEarthOptions extends LayerBaseVectorGeoJsonOptions {
     products: string;
     animate?: boolean;
-    animateInterval: number;
+    timeLoadCallback?: timesLoadedCallback;
 }
 /**
  * Vector real earth vector
@@ -16,7 +16,6 @@ export interface LayerVectorRealEarthOptions extends LayerBaseVectorGeoJsonOptio
 export declare class LayerVectorRealEarth extends LayerBaseVectorGeoJson implements IRealEarthAnimate {
     _products: string;
     animator: RealEarthAnimateVector;
-    animateInterval: number;
     /**
      * Real Earth vector layer
      * @param {object} options - config

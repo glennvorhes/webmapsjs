@@ -19,6 +19,10 @@ export interface IRealEarthAnimate{
     setLayerTime(theTime: number): boolean;
 }
 
+export interface timesLoadedCallback{
+    (lyr?: LayerRealEarthTile|LayerVectorRealEarth): void;
+}
+
 
 /**
  * Mixin to get the product times
@@ -30,19 +34,19 @@ export class RealEarthAnimate {
     _localDates: Date[];
     _rawDateStrings: string[];
     _products: string;
-    loadCallback: (lyr: LayerRealEarthTile|LayerVectorRealEarth) => void;
+    loadCallback: timesLoadedCallback;
     localTimes: number[];
     _currentTime: number;
 
     lyr: LayerRealEarthTile|LayerVectorRealEarth;
 
-    constructor(lyr: LayerRealEarthTile|LayerVectorRealEarth, loadCallback?: (lyr: LayerRealEarthTile|LayerVectorRealEarth) => void){
+    constructor(lyr: LayerRealEarthTile|LayerVectorRealEarth, loadCallback?: timesLoadedCallback){
         this.lyr = lyr;
         this._products = lyr._products;
         if (loadCallback){
             this.loadCallback = loadCallback;
         } else {
-            this.loadCallback = function(lyr: LayerRealEarthTile|LayerVectorRealEarth): void {return;};
+            this.loadCallback = function(): void {return;};
         }
     }
 

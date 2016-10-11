@@ -4,10 +4,11 @@
 import { LayerBaseXyzTile } from './LayerBaseXyzTile';
 import { LayerBaseOptions } from './LayerBase';
 import RealEarthAnimateTile from '../mixin/RealEarthAnimateTile';
-import { IRealEarthAnimate } from "../mixin/RealEarthAnimate";
+import { IRealEarthAnimate, timesLoadedCallback } from "../mixin/RealEarthAnimate";
 export interface LayerRealEarthTileOptions extends LayerBaseOptions {
     products: string;
     animate?: boolean;
+    timeLoadCallback?: timesLoadedCallback;
 }
 /**
  * Real earth tile

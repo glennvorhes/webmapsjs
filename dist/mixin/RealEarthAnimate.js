@@ -23,7 +23,7 @@ var RealEarthAnimate = (function () {
             this.loadCallback = loadCallback;
         }
         else {
-            this.loadCallback = function (lyr) { return; };
+            this.loadCallback = function () { return; };
         }
     }
     /**

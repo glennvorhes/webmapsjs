@@ -12015,7 +12015,7 @@
 	        if (options.animate) {
 	            _super.call(this, '', options);
 	            this._products = options.products;
-	            this.animator = new RealEarthAnimateTile_1.default(this);
+	            this.animator = new RealEarthAnimateTile_1.default(this, options.timeLoadCallback);
 	            this.animator.timeInit();
 	        }
 	        else {
@@ -12231,7 +12231,7 @@
 	            this.loadCallback = loadCallback;
 	        }
 	        else {
-	            this.loadCallback = function (lyr) { return; };
+	            this.loadCallback = function () { return; };
 	        }
 	    }
 	    /**

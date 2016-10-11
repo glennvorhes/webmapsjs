@@ -42,7 +42,7 @@ var LayerRealEarthTile = (function (_super) {
         if (options.animate) {
             _super.call(this, '', options);
             this._products = options.products;
-            this.animator = new RealEarthAnimateTile_1.default(this);
+            this.animator = new RealEarthAnimateTile_1.default(this, options.timeLoadCallback);
             this.animator.timeInit();
         }
         else {

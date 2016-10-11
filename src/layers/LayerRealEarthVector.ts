@@ -5,13 +5,13 @@
 import {LayerBaseVectorGeoJson, LayerBaseVectorGeoJsonOptions} from './LayerBaseVectorGeoJson';
 import RealEarthAnimateVector from '../mixin/RealEarthAnimateVector';
 import provide from '../util/provide';
-import {IRealEarthAnimate} from "../mixin/RealEarthAnimate";
+import {IRealEarthAnimate, timesLoadedCallback} from "../mixin/RealEarthAnimate";
 const nm = provide('layers');
 
 export interface LayerVectorRealEarthOptions extends LayerBaseVectorGeoJsonOptions {
     products: string;
     animate?: boolean;
-    animateInterval: number;
+    timeLoadCallback?: timesLoadedCallback;
 }
 
 
@@ -22,7 +22,6 @@ export interface LayerVectorRealEarthOptions extends LayerBaseVectorGeoJsonOptio
 export class LayerVectorRealEarth extends LayerBaseVectorGeoJson implements IRealEarthAnimate {
     _products: string;
     animator: RealEarthAnimateVector;
-    animateInterval: number;
 
     /**
      * Real Earth vector layer
@@ -59,7 +58,7 @@ export class LayerVectorRealEarth extends LayerBaseVectorGeoJson implements IRea
             options.autoLoad = false;
             super('', options);
             this._products = options.products;
-            this.animator = new RealEarthAnimateVector(this);
+            this.animator = new RealEarthAnimateVector(this, options.timeLoadCallback);
             this.animator.timeInit();
         } else {
             options.params = {products: options.products};

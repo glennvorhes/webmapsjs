@@ -6,12 +6,13 @@ import {LayerBaseXyzTile} from './LayerBaseXyzTile';
 import {LayerBaseOptions} from './LayerBase';
 import RealEarthAnimateTile from '../mixin/RealEarthAnimateTile';
 import provide from '../util/provide';
-import {IRealEarthAnimate} from "../mixin/RealEarthAnimate";
+import {IRealEarthAnimate, timesLoadedCallback} from "../mixin/RealEarthAnimate";
 const nm = provide('layers');
 
 export interface LayerRealEarthTileOptions extends LayerBaseOptions {
     products: string;
     animate?: boolean;
+    timeLoadCallback?: timesLoadedCallback;
 }
 
 
@@ -48,7 +49,7 @@ export class LayerRealEarthTile extends LayerBaseXyzTile implements IRealEarthAn
         if (options.animate) {
             super('', options);
             this._products = options.products;
-            this.animator = new RealEarthAnimateTile(this);
+            this.animator = new RealEarthAnimateTile(this, options.timeLoadCallback);
             this.animator.timeInit();
         } else {
             super(`http://realearth.ssec.wisc.edu/api/image?products=${options.products}&x={x}&y={y}&z={z}`, options);

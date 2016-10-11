@@ -52,7 +52,7 @@ var LayerVectorRealEarth = (function (_super) {
             options.autoLoad = false;
             _super.call(this, '', options);
             this._products = options.products;
-            this.animator = new RealEarthAnimateVector_1.default(this);
+            this.animator = new RealEarthAnimateVector_1.default(this, options.timeLoadCallback);
             this.animator.timeInit();
         }
         else {
