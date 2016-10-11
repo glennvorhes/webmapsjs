@@ -16,7 +16,6 @@ const $ = require('jquery');
 class RealEarthAnimateVector extends RealEarthAnimate {
     _dataCache: Array<Array<Object>|Object>;
     _source: ol.source.Vector;
-    _transform: {dataProjection: ol.ProjectionLike, featureProjection: ol.ProjectionLike};
     _rawTimesLookup: {[s: string]: any};
     _currentIndex: number;
     _olLayer: ol.layer.Vector;
@@ -100,7 +99,7 @@ class RealEarthAnimateVector extends RealEarthAnimate {
      * @private
      */
     _loadFeatures(geojObj) {
-        this._source.addFeatures(this._lyr._geoJsonFormat.readFeatures(geojObj, this._transform));
+        this._source.addFeatures(this._lyr._geoJsonFormat.readFeatures(geojObj, this._lyr._transform));
     }
 
     setLayerTime(theTime: number): boolean {

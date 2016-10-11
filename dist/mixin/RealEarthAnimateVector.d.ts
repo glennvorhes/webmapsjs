@@ -11,10 +11,6 @@ import { LayerVectorRealEarth } from "../layers/LayerRealEarthVector";
 declare class RealEarthAnimateVector extends RealEarthAnimate {
     _dataCache: Array<Array<Object> | Object>;
     _source: ol.source.Vector;
-    _transform: {
-        dataProjection: ol.ProjectionLike;
-        featureProjection: ol.ProjectionLike;
-    };
     _rawTimesLookup: {
         [s: string]: any;
     };

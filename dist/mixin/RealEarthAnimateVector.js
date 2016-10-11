@@ -87,7 +87,7 @@ var RealEarthAnimateVector = (function (_super) {
      * @private
      */
     RealEarthAnimateVector.prototype._loadFeatures = function (geojObj) {
-        this._source.addFeatures(this._lyr._geoJsonFormat.readFeatures(geojObj, this._transform));
+        this._source.addFeatures(this._lyr._geoJsonFormat.readFeatures(geojObj, this._lyr._transform));
     };
     RealEarthAnimateVector.prototype.setLayerTime = function (theTime) {
         if (_super.prototype.setLayerTime.call(this, theTime)) {
