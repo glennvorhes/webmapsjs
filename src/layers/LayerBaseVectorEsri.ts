@@ -21,7 +21,7 @@ export interface LayerBaseVectorEsriOptions  extends LayerBaseVectorOptions{
  * Base layer for esri vector layers
  * @augments LayerBaseVector
  */
-class LayerBaseVectorEsri extends LayerBaseVector {
+export class LayerBaseVectorEsri extends LayerBaseVector {
     _outSR: number;
     _esriFormat: ol.format.EsriJSON;
     _urlCopy: string;

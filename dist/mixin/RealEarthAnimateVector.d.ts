@@ -19,6 +19,8 @@ declare class RealEarthAnimateVector extends RealEarthAnimate {
         [s: string]: any;
     };
     _currentIndex: number;
+    _olLayer: ol.layer.Vector;
+    constructor(layer: ol.layer.Vector);
     /**
      * override base layer load
      */

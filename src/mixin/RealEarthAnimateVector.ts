@@ -19,6 +19,13 @@ class RealEarthAnimateVector extends RealEarthAnimate {
     _transform: {dataProjection: ol.ProjectionLike, featureProjection: ol.ProjectionLike};
     _rawTimesLookup: {[s: string]: any};
     _currentIndex: number;
+    _olLayer: ol.layer.Vector;
+
+    constructor(layer: ol.layer.Vector) {
+        this._source = layer.getSource();
+        this._olLayer = layer;
+
+    }
 
     /**
      * override base layer load
@@ -52,11 +59,12 @@ class RealEarthAnimateVector extends RealEarthAnimate {
      * @protected
      */
     _loadLatest(): boolean {
-        if(super._loadLatest()){
+        if (super._loadLatest()) {
             this._loadAtTimeIndex.call(this, this._currentIndex);
         }
         return true;
     }
+
     //
     //http://realearth.ssec.wisc.edu/api/image?products=nexrhres_20160108_212500&x=1&y=5&z=4
     //
@@ -100,7 +108,7 @@ class RealEarthAnimateVector extends RealEarthAnimate {
     }
 
     setLayerTime(theTime: number): boolean {
-        if (super.setLayerTime(theTime)){
+        if (super.setLayerTime(theTime)) {
             this._loadAtTimeIndex(this._currentIndex);
         } else {
             this._source.clear();

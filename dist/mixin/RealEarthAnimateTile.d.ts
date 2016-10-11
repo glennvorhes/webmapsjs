@@ -11,6 +11,7 @@ declare class RealEarthAnimateTile extends RealEarthAnimate {
     _sourceUrls: string[];
     _source: ol.source.XYZ;
     _olLayer: ol.layer.Tile;
+    constructor(layer: ol.layer.Tile);
     /**
      * override base layer load
      */

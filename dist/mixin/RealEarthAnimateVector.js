@@ -17,8 +17,9 @@ var $ = require('jquery');
  */
 var RealEarthAnimateVector = (function (_super) {
     __extends(RealEarthAnimateVector, _super);
-    function RealEarthAnimateVector() {
-        _super.apply(this, arguments);
+    function RealEarthAnimateVector(layer) {
+        this._source = layer.getSource();
+        this._olLayer = layer;
     }
     /**
      * override base layer load

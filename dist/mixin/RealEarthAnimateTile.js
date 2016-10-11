@@ -16,8 +16,9 @@ var nm = provide_1.default('mixin');
  */
 var RealEarthAnimateTile = (function (_super) {
     __extends(RealEarthAnimateTile, _super);
-    function RealEarthAnimateTile() {
-        _super.apply(this, arguments);
+    function RealEarthAnimateTile(layer) {
+        this._source = layer.getSource();
+        this._olLayer = layer;
     }
     /**
      * override base layer load

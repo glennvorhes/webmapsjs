@@ -166,6 +166,7 @@ var LayerBaseVectorEsri = (function (_super) {
     };
     return LayerBaseVectorEsri;
 }(LayerBaseVector_1.LayerBaseVector));
+exports.LayerBaseVectorEsri = LayerBaseVectorEsri;
 nm.LayerBaseVectorEsri = LayerBaseVectorEsri;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = LayerBaseVectorEsri;
