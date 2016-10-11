@@ -43,14 +43,17 @@
 /******/ ({
 
 /***/ 0:
+/*!***********************************!*\
+  !*** ./dist/_test/slider-test.js ***!
+  \***********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/**
 	 * Created by gavorhes on 6/22/2016.
 	 */
-	var Sliders_1 = __webpack_require__(28);
-	var $ = __webpack_require__(6);
+	var Sliders_1 = __webpack_require__(/*! ../collections/Sliders */ 30);
+	var $ = __webpack_require__(/*! jquery */ 6);
 	exports.tipConfig = {
 	    $loadingGif: $('#loading-gif'),
 	    $presetSelector: $('#preset-selector'),
@@ -233,6 +236,9 @@
 /***/ },
 
 /***/ 3:
+/*!******************************!*\
+  !*** ./dist/util/provide.js ***!
+  \******************************/
 /***/ function(module, exports) {
 
 	/**
@@ -269,6 +275,9 @@
 /***/ },
 
 /***/ 6:
+/*!*********************************!*\
+  !*** ./~/jquery/dist/jquery.js ***!
+  \*********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10117,16 +10126,19 @@
 
 /***/ },
 
-/***/ 28:
+/***/ 30:
+/*!*************************************!*\
+  !*** ./dist/collections/Sliders.js ***!
+  \*************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Created by gavorhes on 12/10/2015.
 	 */
 	"use strict";
-	var provide_1 = __webpack_require__(3);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
 	var nm = provide_1.default('collections');
-	var $ = __webpack_require__(6);
+	var $ = __webpack_require__(/*! jquery */ 6);
 	var TipPresets = (function () {
 	    function TipPresets(conf) {
 	        this.label = conf.label;

@@ -5,13 +5,13 @@
 import {LayerBaseVectorGeoJson, LayerBaseVectorGeoJsonOptions} from './LayerBaseVectorGeoJson';
 import RealEarthAnimateVector from '../mixin/RealEarthAnimateVector';
 import provide from '../util/provide';
-const mixIns = require('es6-mixins');
+import {IRealEarthAnimate} from "../mixin/RealEarthAnimate";
 const nm = provide('layers');
 
 export interface LayerVectorRealEarthOptions extends LayerBaseVectorGeoJsonOptions {
     products: string;
-    hasTimes?: boolean;
     animate?: boolean;
+    animateInterval: number;
 }
 
 
@@ -19,9 +19,10 @@ export interface LayerVectorRealEarthOptions extends LayerBaseVectorGeoJsonOptio
  * Vector real earth vector
  * @augments LayerBaseVectorGeoJson
  */
-class LayerVectorRealEarth extends LayerBaseVectorGeoJson {
+export class LayerVectorRealEarth extends LayerBaseVectorGeoJson implements IRealEarthAnimate {
     _products: string;
-    timeInit: Function;
+    animator: RealEarthAnimateVector;
+    animateInterval: number;
 
     /**
      * Real Earth vector layer
@@ -54,19 +55,34 @@ class LayerVectorRealEarth extends LayerBaseVectorGeoJson {
      */
     constructor(options: LayerVectorRealEarthOptions) {
         options.animate = typeof options.animate == 'boolean' ? options.animate : false;
-        if (!options.animate) {
-            options.params = {products: options.products};
-            super('http://realearth.ssec.wisc.edu/api/shapes', options);
-        } else {
+        if (options.animate) {
             options.autoLoad = false;
             super('', options);
             this._products = options.products;
-            if (!this.timeInit) {
-                mixIns([RealEarthAnimateVector], this);
-            }
-            this.timeInit();
+            this.animator = new RealEarthAnimateVector(this);
+            this.animator.timeInit();
+        } else {
+            options.params = {products: options.products};
+            super('http://realearth.ssec.wisc.edu/api/shapes', options);
         }
     }
+
+    setLayerTime(theTime: number): boolean {
+        if (this.animator) {
+            return this.animator.setLayerTime(theTime);
+        } else {
+            return false;
+        }
+    }
+
+    _load(): boolean{
+        if (this.animator){
+            return false;
+        }
+        return super._load();
+    }
+
+
 }
 
 nm.LayerVectorRealEarth = LayerVectorRealEarth;

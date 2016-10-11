@@ -4,6 +4,7 @@
 import RealEarthAnimate from './RealEarthAnimate';
 import provide from '../util/provide';
 import ol from 'custom-ol';
+import LayerRealEarthTile from "../layers/LayerRealEarthTile";
 const nm = provide('mixin');
 
 /**
@@ -15,18 +16,12 @@ class RealEarthAnimateTile extends RealEarthAnimate {
     _source: ol.source.XYZ;
     _olLayer: ol.layer.Tile;
 
-    constructor(layer: ol.layer.Tile){
-        this._source = layer.getSource() as ol.source.XYZ;
-        this._olLayer = layer;
-
+    constructor(layer: LayerRealEarthTile, loadCallback?: (lyr: LayerRealEarthTile) => void){
+        super(layer, loadCallback);
+        this._source = layer.source;
+        this._olLayer = layer.olLayer;
     }
 
-    /**
-     * override base layer load
-     */
-    load() {
-        super.load();
-    };
 
 
     timeInit() {

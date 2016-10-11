@@ -10,7 +10,6 @@ var __extends = (this && this.__extends) || function (d, b) {
 var LayerBaseVectorGeoJson_1 = require('./LayerBaseVectorGeoJson');
 var RealEarthAnimateVector_1 = require('../mixin/RealEarthAnimateVector');
 var provide_1 = require('../util/provide');
-var mixIns = require('es6-mixins');
 var nm = provide_1.default('layers');
 /**
  * Vector real earth vector
@@ -49,22 +48,35 @@ var LayerVectorRealEarth = (function (_super) {
      */
     function LayerVectorRealEarth(options) {
         options.animate = typeof options.animate == 'boolean' ? options.animate : false;
-        if (!options.animate) {
-            options.params = { products: options.products };
-            _super.call(this, 'http://realearth.ssec.wisc.edu/api/shapes', options);
-        }
-        else {
+        if (options.animate) {
             options.autoLoad = false;
             _super.call(this, '', options);
             this._products = options.products;
-            if (!this.timeInit) {
-                mixIns([RealEarthAnimateVector_1.default], this);
-            }
-            this.timeInit();
+            this.animator = new RealEarthAnimateVector_1.default(this);
+            this.animator.timeInit();
+        }
+        else {
+            options.params = { products: options.products };
+            _super.call(this, 'http://realearth.ssec.wisc.edu/api/shapes', options);
         }
     }
+    LayerVectorRealEarth.prototype.setLayerTime = function (theTime) {
+        if (this.animator) {
+            return this.animator.setLayerTime(theTime);
+        }
+        else {
+            return false;
+        }
+    };
+    LayerVectorRealEarth.prototype._load = function () {
+        if (this.animator) {
+            return false;
+        }
+        return _super.prototype._load.call(this);
+    };
     return LayerVectorRealEarth;
 }(LayerBaseVectorGeoJson_1.LayerBaseVectorGeoJson));
+exports.LayerVectorRealEarth = LayerVectorRealEarth;
 nm.LayerVectorRealEarth = LayerVectorRealEarth;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = LayerVectorRealEarth;

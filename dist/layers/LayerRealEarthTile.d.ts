@@ -3,18 +3,19 @@
  */
 import { LayerBaseXyzTile } from './LayerBaseXyzTile';
 import { LayerBaseOptions } from './LayerBase';
+import RealEarthAnimateTile from '../mixin/RealEarthAnimateTile';
+import { IRealEarthAnimate } from "../mixin/RealEarthAnimate";
 export interface LayerRealEarthTileOptions extends LayerBaseOptions {
     products: string;
-    hasTimes?: boolean;
     animate?: boolean;
 }
 /**
  * Real earth tile
  * @augments LayerBaseXyzTile
  */
-declare class LayerRealEarthTile extends LayerBaseXyzTile {
+export declare class LayerRealEarthTile extends LayerBaseXyzTile implements IRealEarthAnimate {
     _products: string;
-    timeInit: Function;
+    animator: RealEarthAnimateTile;
     /**
      * The base layer for all others
      * @param {object} options - config
@@ -36,5 +37,7 @@ declare class LayerRealEarthTile extends LayerBaseXyzTile {
      * @param {boolean} [options.animate=false] if the layer should be animated
      */
     constructor(options: LayerRealEarthTileOptions);
+    setLayerTime(theTime: number): boolean;
+    _load(): boolean;
 }
 export default LayerRealEarthTile;

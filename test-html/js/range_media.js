@@ -43,20 +43,26 @@
 /******/ ({
 
 /***/ 0:
+/*!***********************************!*\
+  !*** ./dist/_test/range_media.js ***!
+  \***********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Created by gavorhes on 10/10/2016.
 	 */
 	"use strict";
-	var day_range_1 = __webpack_require__(29);
-	var $ = __webpack_require__(6);
+	var day_range_1 = __webpack_require__(/*! ../domUtil/day-range */ 28);
+	var $ = __webpack_require__(/*! jquery */ 6);
 	var dayRange = new day_range_1.DayRange($('#day-range'), 10);
 
 
 /***/ },
 
 /***/ 3:
+/*!******************************!*\
+  !*** ./dist/util/provide.js ***!
+  \******************************/
 /***/ function(module, exports) {
 
 	/**
@@ -93,6 +99,9 @@
 /***/ },
 
 /***/ 6:
+/*!*********************************!*\
+  !*** ./~/jquery/dist/jquery.js ***!
+  \*********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -9941,14 +9950,17 @@
 
 /***/ },
 
-/***/ 29:
+/***/ 28:
+/*!***********************************!*\
+  !*** ./dist/domUtil/day-range.js ***!
+  \***********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var provide_1 = __webpack_require__(3);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
 	var nm = provide_1.default('domUtil');
-	var $ = __webpack_require__(6);
-	__webpack_require__(30);
+	var $ = __webpack_require__(/*! jquery */ 6);
+	__webpack_require__(/*! jquery-ui */ 29);
 	var DayRange = (function () {
 	    /**
 	     * constructor for the date range
@@ -10041,10 +10053,13 @@
 
 /***/ },
 
-/***/ 30:
+/***/ 29:
+/*!**********************************!*\
+  !*** ./~/jquery-ui/jquery-ui.js ***!
+  \**********************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var jQuery = __webpack_require__(6);
+	var jQuery = __webpack_require__(/*! jquery */ 6);
 	
 	/*! jQuery UI - v1.10.3 - 2013-05-03
 	* http://jqueryui.com

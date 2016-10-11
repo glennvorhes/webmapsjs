@@ -24,6 +24,19 @@ function timeToLocalDateString(tm) {
     return d.toLocaleDateString() + '<br>' + p2.join(':') + ' ' + p1[1];
 }
 
+export interface changeFunction{
+    (newVal?: number): void;
+}
+
+export interface mediaRangeConfig{
+    min?: number;
+    max?: number;
+    val?: number;
+    step?: number;
+    playInterval?: number;
+    showAsDate?: boolean;
+}
+
 
 export class MediaControl {
     _container: JQuery;
@@ -43,9 +56,25 @@ export class MediaControl {
     _interval: Timer;
     _showAsDate: boolean;
 
-    _func: Function;
+    _changeFunc: changeFunction;
 
-    constructor(element: JQuery|HTMLElement|string, min = 0, max = 100, val= 0, step = 5, func: Function = ()=>{}, playInterval = 5, showAsDate= false) {
+    /**
+     *
+     * @param element
+     * @param changeFunc
+     * @param mediaConfig
+     */
+    constructor(
+        element: JQuery|HTMLElement|string,
+        changeFunc: changeFunction = (): void => {return;},
+        mediaConfig: mediaRangeConfig = {}) {
+
+        mediaConfig.min = typeof mediaConfig.min == 'number' ? mediaConfig.min : 0;
+        mediaConfig.max = typeof mediaConfig.max == 'number' ? mediaConfig.max : 100;
+        mediaConfig.val = typeof mediaConfig.val == 'number' ? mediaConfig.val : 0;
+        mediaConfig.step = typeof mediaConfig.step == 'number' ? mediaConfig.step : 5;
+        mediaConfig.playInterval = typeof mediaConfig.playInterval == 'number' ? mediaConfig.playInterval : 500;
+        mediaConfig.showAsDate = typeof mediaConfig.showAsDate == 'boolean' ? mediaConfig.showAsDate : false;
 
         if (typeof  element == 'string'){
             this._container = $('#' + element);
@@ -57,11 +86,10 @@ export class MediaControl {
         }
 
         this._container.addClass('media-control-container');
-        this._playInterval = playInterval;
-        this._interval = undefined;
-        this._func = func;
+        this._playInterval = mediaConfig.playInterval;
+        this._changeFunc = changeFunc;
 
-        this._showAsDate = showAsDate;
+        this._showAsDate = mediaConfig.showAsDate;
 
         this._currentValue = undefined;
         this._min = undefined;
@@ -95,7 +123,7 @@ export class MediaControl {
         this._$valLabelVal = this._container.find('.media-control-value-label-val');
         this._$valLabelMax = this._container.find('.media-control-value-label-max');
 
-        this.setMinMaxValueStep(min, max, val, step);
+        this.setMinMaxValueStep(mediaConfig.min, mediaConfig.max, mediaConfig.val, mediaConfig.step);
 
         rangeChange(this._$slider,(newVal) => { this.currentValue = newVal;}, 100);
 
@@ -176,7 +204,7 @@ export class MediaControl {
             this._$valLabelVal.html(this.currentValue.toString());
         }
 
-        this._func(newValue);
+        this._changeFunc(newValue);
     }
 
     /**
@@ -216,8 +244,8 @@ export class MediaControl {
      *
      * @param {mediaCallback} newFunc the callback on change
      */
-    set changeFunction(newFunc) {
-        this._func = newFunc;
+    set changeFunction(newFunc: changeFunction) {
+        this._changeFunc = newFunc;
     }
 }
 

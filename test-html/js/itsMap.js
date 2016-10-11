@@ -42,15 +42,18 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
+/*!******************************!*\
+  !*** ./dist/_test/itsMap.js ***!
+  \******************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/**
 	 * Created by gavorhes on 12/18/2015.
 	 */
-	var ItsLayerCollection_1 = __webpack_require__(19);
-	var LayerLegend_1 = __webpack_require__(25);
-	var quickMap_1 = __webpack_require__(1);
+	var ItsLayerCollection_1 = __webpack_require__(/*! ../collections/ItsLayerCollection */ 19);
+	var LayerLegend_1 = __webpack_require__(/*! ../collections/LayerLegend */ 25);
+	var quickMap_1 = __webpack_require__(/*! ../olHelpers/quickMap */ 1);
 	var map = quickMap_1.default();
 	window['map'] = map;
 	var itsLayerCollection = new ItsLayerCollection_1.default(map);
@@ -68,16 +71,19 @@
 
 /***/ },
 /* 1 */
+/*!************************************!*\
+  !*** ./dist/olHelpers/quickMap.js ***!
+  \************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Created by gavorhes on 12/15/2015.
 	 */
 	"use strict";
-	var quickMapBase_1 = __webpack_require__(2);
-	var provide_1 = __webpack_require__(3);
-	var mapMove_1 = __webpack_require__(7);
-	var mapPopup_1 = __webpack_require__(12);
+	var quickMapBase_1 = __webpack_require__(/*! ./quickMapBase */ 2);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var mapMove_1 = __webpack_require__(/*! ./mapMove */ 7);
+	var mapPopup_1 = __webpack_require__(/*! ./mapPopup */ 12);
 	var nm = provide_1.default('olHelpers');
 	/**
 	 * Sets up a map with some default parameters and initializes
@@ -109,16 +115,19 @@
 
 /***/ },
 /* 2 */
+/*!****************************************!*\
+  !*** ./dist/olHelpers/quickMapBase.js ***!
+  \****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Created by gavorhes on 12/15/2015.
 	 */
 	"use strict";
-	var provide_1 = __webpack_require__(3);
-	var custom_ol_1 = __webpack_require__(4);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var custom_ol_1 = __webpack_require__(/*! custom-ol */ 4);
 	var nm = provide_1.default('olHelpers');
-	var $ = __webpack_require__(6);
+	var $ = __webpack_require__(/*! jquery */ 6);
 	/**
 	 * Sets up a map with some default parameters and initializes
 	 * mapMove and mapPopup
@@ -188,6 +197,9 @@
 
 /***/ },
 /* 3 */
+/*!******************************!*\
+  !*** ./dist/util/provide.js ***!
+  \******************************/
 /***/ function(module, exports) {
 
 	/**
@@ -223,10 +235,13 @@
 
 /***/ },
 /* 4 */
+/*!**********************************!*\
+  !*** ./~/custom-ol/lib/index.js ***!
+  \**********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var ol_build_1 = __webpack_require__(5);
+	var ol_build_1 = __webpack_require__(/*! ../ol/ol-build */ 5);
 	exports.ol = ol_build_1.ol;
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.default = ol_build_1.ol;
@@ -234,6 +249,9 @@
 
 /***/ },
 /* 5 */
+/*!************************************!*\
+  !*** ./~/custom-ol/ol/ol-build.js ***!
+  \************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;var require;/* WEBPACK VAR INJECTION */(function(global) {// OpenLayers 3. See http://openlayers.org/
@@ -631,6 +649,9 @@
 
 /***/ },
 /* 6 */
+/*!*********************************!*\
+  !*** ./~/jquery/dist/jquery.js ***!
+  \*********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10479,13 +10500,16 @@
 
 /***/ },
 /* 7 */
+/*!***********************************!*\
+  !*** ./dist/olHelpers/mapMove.js ***!
+  \***********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Created by gavorhes on 11/3/2015.
 	 */
 	"use strict";
-	var mapMoveCls_1 = __webpack_require__(8);
+	var mapMoveCls_1 = __webpack_require__(/*! ./mapMoveCls */ 8);
 	/**
 	 * The single map move object catch is that it is common to multimap pages
 	 * @type {MapMoveCls}
@@ -10497,6 +10521,9 @@
 
 /***/ },
 /* 8 */
+/*!**************************************!*\
+  !*** ./dist/olHelpers/mapMoveCls.js ***!
+  \**************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -10505,11 +10532,11 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var mapInteractionBase_1 = __webpack_require__(9);
-	var checkDefined = __webpack_require__(10);
-	var provide_1 = __webpack_require__(3);
-	var makeGuid_1 = __webpack_require__(11);
-	var $ = __webpack_require__(6);
+	var mapInteractionBase_1 = __webpack_require__(/*! ./mapInteractionBase */ 9);
+	var checkDefined = __webpack_require__(/*! ../util/checkDefined */ 10);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var makeGuid_1 = __webpack_require__(/*! ../util/makeGuid */ 11);
+	var $ = __webpack_require__(/*! jquery */ 6);
 	var nm = provide_1.default('olHelpers');
 	/**
 	 * assists with map move interactions, trigger callback functions
@@ -10735,13 +10762,16 @@
 
 /***/ },
 /* 9 */
+/*!**********************************************!*\
+  !*** ./dist/olHelpers/mapInteractionBase.js ***!
+  \**********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/**
 	 * Created by gavorhes on 12/8/2015.
 	 */
-	var provide_1 = __webpack_require__(3);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
 	var nm = provide_1.default('olHelpers');
 	/**
 	 * base interaction
@@ -10817,10 +10847,13 @@
 
 /***/ },
 /* 10 */
+/*!***********************************!*\
+  !*** ./dist/util/checkDefined.js ***!
+  \***********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var provide_1 = __webpack_require__(3);
+	var provide_1 = __webpack_require__(/*! ./provide */ 3);
 	var nm = provide_1.default('util.checkDefined');
 	/**
 	 * check if the input is undefined or null
@@ -10848,13 +10881,16 @@
 
 /***/ },
 /* 11 */
+/*!*******************************!*\
+  !*** ./dist/util/makeGuid.js ***!
+  \*******************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Created by gavorhes on 11/3/2015.
 	 */
 	"use strict";
-	var provide_1 = __webpack_require__(3);
+	var provide_1 = __webpack_require__(/*! ./provide */ 3);
 	var nm = provide_1.default('util');
 	/**
 	 * guids are used to uniquely identify groups and features
@@ -10874,13 +10910,16 @@
 
 /***/ },
 /* 12 */
+/*!************************************!*\
+  !*** ./dist/olHelpers/mapPopup.js ***!
+  \************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Created by gavorhes on 11/3/2015.
 	 */
 	"use strict";
-	var mapPopupCls_1 = __webpack_require__(13);
+	var mapPopupCls_1 = __webpack_require__(/*! ./mapPopupCls */ 13);
 	/**
 	 * The single popup object catch is that it is common to multimap pages
 	 * @type {MapPopupCls}
@@ -10892,6 +10931,9 @@
 
 /***/ },
 /* 13 */
+/*!***************************************!*\
+  !*** ./dist/olHelpers/mapPopupCls.js ***!
+  \***************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10903,10 +10945,10 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var mapInteractionBase_1 = __webpack_require__(9);
-	var provide_1 = __webpack_require__(3);
-	var custom_ol_1 = __webpack_require__(4);
-	var $ = __webpack_require__(6);
+	var mapInteractionBase_1 = __webpack_require__(/*! ./mapInteractionBase */ 9);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var custom_ol_1 = __webpack_require__(/*! custom-ol */ 4);
+	var $ = __webpack_require__(/*! jquery */ 6);
 	var nm = provide_1.default('olHelpers');
 	var FeatureLayerProperties = (function () {
 	    /**
@@ -11321,14 +11363,17 @@
 /* 14 */,
 /* 15 */,
 /* 16 */
+/*!**********************************!*\
+  !*** ./dist/layers/LayerBase.js ***!
+  \**********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var zoomResolutionConvert = __webpack_require__(17);
-	var provide_1 = __webpack_require__(3);
-	var makeGuid_1 = __webpack_require__(11);
+	var zoomResolutionConvert = __webpack_require__(/*! ../olHelpers/zoomResolutionConvert */ 17);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var makeGuid_1 = __webpack_require__(/*! ../util/makeGuid */ 11);
 	var nm = provide_1.default('layers');
-	var $ = __webpack_require__(6);
+	var $ = __webpack_require__(/*! jquery */ 6);
 	/**
 	 * The base layer class
 	 * @abstract
@@ -11709,13 +11754,16 @@
 
 /***/ },
 /* 17 */
+/*!*************************************************!*\
+  !*** ./dist/olHelpers/zoomResolutionConvert.js ***!
+  \*************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Created by gavorhes on 12/14/2015.
 	 */
 	"use strict";
-	var provide_1 = __webpack_require__(3);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
 	var nm = provide_1.default('olHelpers.zoomResolutionConvert');
 	var _zoomResLookup = [
 	    156543.03392804097,
@@ -11790,15 +11838,18 @@
 /***/ },
 /* 18 */,
 /* 19 */
+/*!************************************************!*\
+  !*** ./dist/collections/ItsLayerCollection.js ***!
+  \************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Created by gavorhes on 12/14/2015.
 	 */
 	"use strict";
-	var colors = __webpack_require__(20);
-	var provide_1 = __webpack_require__(3);
-	var LayerItsInventory_1 = __webpack_require__(21);
+	var colors = __webpack_require__(/*! ../util/colors */ 20);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var LayerItsInventory_1 = __webpack_require__(/*! ../layers/LayerItsInventory */ 21);
 	var nm = provide_1.default('collections');
 	var itsConfig = [
 	    {
@@ -11951,14 +12002,17 @@
 
 /***/ },
 /* 20 */
+/*!*****************************!*\
+  !*** ./dist/util/colors.js ***!
+  \*****************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/**
 	 * Created by gavorhes on 11/3/2015.
 	 */
-	var provide_1 = __webpack_require__(3);
-	var chk = __webpack_require__(10);
+	var provide_1 = __webpack_require__(/*! ./provide */ 3);
+	var chk = __webpack_require__(/*! ./checkDefined */ 10);
 	var nm = provide_1.default('util.colors');
 	/**
 	 * helper function to convert to hex
@@ -12113,6 +12167,9 @@
 
 /***/ },
 /* 21 */
+/*!******************************************!*\
+  !*** ./dist/layers/LayerItsInventory.js ***!
+  \******************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12124,12 +12181,12 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var LayerBaseVectorGeoJson_1 = __webpack_require__(22);
-	var mapPopup_1 = __webpack_require__(12);
-	var provide_1 = __webpack_require__(3);
-	var custom_ol_1 = __webpack_require__(4);
+	var LayerBaseVectorGeoJson_1 = __webpack_require__(/*! ./LayerBaseVectorGeoJson */ 22);
+	var mapPopup_1 = __webpack_require__(/*! ../olHelpers/mapPopup */ 12);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var custom_ol_1 = __webpack_require__(/*! custom-ol */ 4);
 	var nm = provide_1.default('layers');
-	var $ = __webpack_require__(6);
+	var $ = __webpack_require__(/*! jquery */ 6);
 	function checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
 	    "use strict";
 	    //make sure one and only one configuration is defined;
@@ -12423,6 +12480,9 @@
 
 /***/ },
 /* 22 */
+/*!***********************************************!*\
+  !*** ./dist/layers/LayerBaseVectorGeoJson.js ***!
+  \***********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12434,12 +12494,12 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var LayerBaseVector_1 = __webpack_require__(23);
-	var provide_1 = __webpack_require__(3);
-	var custom_ol_1 = __webpack_require__(4);
-	var proj = __webpack_require__(24);
+	var LayerBaseVector_1 = __webpack_require__(/*! ./LayerBaseVector */ 23);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var custom_ol_1 = __webpack_require__(/*! custom-ol */ 4);
+	var proj = __webpack_require__(/*! ../olHelpers/projections */ 24);
 	var nm = provide_1.default('layers');
-	var $ = __webpack_require__(6);
+	var $ = __webpack_require__(/*! jquery */ 6);
 	/**
 	 * The Vector GeoJson Layer
 	 * @augments LayerBaseVector
@@ -12531,6 +12591,9 @@
 
 /***/ },
 /* 23 */
+/*!****************************************!*\
+  !*** ./dist/layers/LayerBaseVector.js ***!
+  \****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -12539,11 +12602,11 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var LayerBase_1 = __webpack_require__(16);
-	var mapMove_1 = __webpack_require__(7);
-	var provide_1 = __webpack_require__(3);
-	var custom_ol_1 = __webpack_require__(4);
-	var $ = __webpack_require__(6);
+	var LayerBase_1 = __webpack_require__(/*! ./LayerBase */ 16);
+	var mapMove_1 = __webpack_require__(/*! ../olHelpers/mapMove */ 7);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var custom_ol_1 = __webpack_require__(/*! custom-ol */ 4);
+	var $ = __webpack_require__(/*! jquery */ 6);
 	var g = new custom_ol_1.default.Map({});
 	var nm = provide_1.default('layers');
 	/**
@@ -12826,13 +12889,16 @@
 
 /***/ },
 /* 24 */
+/*!***************************************!*\
+  !*** ./dist/olHelpers/projections.js ***!
+  \***************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/**
 	 * Created by gavorhes on 10/3/2016.
 	 */
-	var custom_ol_1 = __webpack_require__(4);
+	var custom_ol_1 = __webpack_require__(/*! custom-ol */ 4);
 	exports.proj4326 = new custom_ol_1.default.proj.Projection({ code: 'EPSG:4326' });
 	exports.proj3857 = new custom_ol_1.default.proj.Projection({ code: 'EPSG:3857' });
 	exports.proj3070 = new custom_ol_1.default.proj.Projection({ code: 'EPSG:3070' });
@@ -12840,17 +12906,20 @@
 
 /***/ },
 /* 25 */
+/*!*****************************************!*\
+  !*** ./dist/collections/LayerLegend.js ***!
+  \*****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Created by gavorhes on 12/16/2015.
 	 */
 	"use strict";
-	var provide_1 = __webpack_require__(3);
-	var makeGuid_1 = __webpack_require__(11);
-	var mapMove_1 = __webpack_require__(7);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var makeGuid_1 = __webpack_require__(/*! ../util/makeGuid */ 11);
+	var mapMove_1 = __webpack_require__(/*! ../olHelpers/mapMove */ 7);
 	var nm = provide_1.default('collections');
-	var $ = __webpack_require__(6);
+	var $ = __webpack_require__(/*! jquery */ 6);
 	var LayerGroup = (function () {
 	    /**
 	     *

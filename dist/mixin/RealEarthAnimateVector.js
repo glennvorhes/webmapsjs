@@ -17,17 +17,11 @@ var $ = require('jquery');
  */
 var RealEarthAnimateVector = (function (_super) {
     __extends(RealEarthAnimateVector, _super);
-    function RealEarthAnimateVector(layer) {
-        this._source = layer.getSource();
-        this._olLayer = layer;
+    function RealEarthAnimateVector(layer, loadCallback) {
+        _super.call(this, layer, loadCallback);
+        this._source = layer.source;
+        this._olLayer = layer.olLayer;
     }
-    /**
-     * override base layer load
-     */
-    RealEarthAnimateVector.prototype.load = function () {
-        _super.prototype.load.call(this);
-    };
-    ;
     /**
      * Call this after the mixin has been applied
      */

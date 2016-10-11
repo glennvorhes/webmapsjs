@@ -2,18 +2,21 @@
  * Created by gavorhes on 11/13/2015.
  */
 import { LayerBaseVectorGeoJson, LayerBaseVectorGeoJsonOptions } from './LayerBaseVectorGeoJson';
+import RealEarthAnimateVector from '../mixin/RealEarthAnimateVector';
+import { IRealEarthAnimate } from "../mixin/RealEarthAnimate";
 export interface LayerVectorRealEarthOptions extends LayerBaseVectorGeoJsonOptions {
     products: string;
-    hasTimes?: boolean;
     animate?: boolean;
+    animateInterval: number;
 }
 /**
  * Vector real earth vector
  * @augments LayerBaseVectorGeoJson
  */
-declare class LayerVectorRealEarth extends LayerBaseVectorGeoJson {
+export declare class LayerVectorRealEarth extends LayerBaseVectorGeoJson implements IRealEarthAnimate {
     _products: string;
-    timeInit: Function;
+    animator: RealEarthAnimateVector;
+    animateInterval: number;
     /**
      * Real Earth vector layer
      * @param {object} options - config
@@ -44,5 +47,7 @@ declare class LayerVectorRealEarth extends LayerBaseVectorGeoJson {
      * @param {boolean} [options.animate=false] if the layer should be animated
      */
     constructor(options: LayerVectorRealEarthOptions);
+    setLayerTime(theTime: number): boolean;
+    _load(): boolean;
 }
 export default LayerVectorRealEarth;

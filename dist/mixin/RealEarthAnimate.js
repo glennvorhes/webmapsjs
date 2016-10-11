@@ -16,52 +16,41 @@ var offsetMinutes = (new Date()).getTimezoneOffset();
  * Be sure to call getTimeInit after the mixin has been applied
  */
 var RealEarthAnimate = (function () {
-    function RealEarthAnimate() {
+    function RealEarthAnimate(lyr, loadCallback) {
+        this.lyr = lyr;
+        this._products = lyr._products;
+        if (loadCallback) {
+            this.loadCallback = loadCallback;
+        }
+        else {
+            this.loadCallback = function (lyr) { return; };
+        }
     }
-    /**
-     * override base layer load
-     */
-    RealEarthAnimate.prototype.load = function () { };
-    ;
     /**
      * Call this after the mixin has been applied
      */
     RealEarthAnimate.prototype.timeInit = function () {
-        if (!this._products) {
-            throw 'this mixin must be applied to one of the RealEarth layer objects with this.products defined';
-        }
+        var _this = this;
         this._rawDateStrings = [];
         this._localDates = [];
         this.localTimes = [];
         this._animateEnabled = true;
-        this._loaded = true;
+        // this._loaded = true;
         this._currentTime = undefined;
         this._currentIndex = undefined;
-        var __this = this;
         $.get('http://realearth.ssec.wisc.edu/api/products', { products: this._products }, function (d) {
             if (d.length == 0) {
-                console.log(__this._products + " layer not available or does not have times");
+                console.log(_this._products + " layer not available or does not have times");
                 return;
             }
             d = d[0];
             for (var i = 0; i < d['times'].length; i++) {
-                __this._loadDates.call(__this, d['times'][i]);
+                _this._loadDates.call(_this, d['times'][i]);
             }
-            __this.loadCallback.call(__this);
-            __this._loadLatest.call(__this);
+            _this.loadCallback.call(_this.lyr);
+            _this._loadLatest.call(_this);
         }, 'json');
     };
-    Object.defineProperty(RealEarthAnimate.prototype, "animationEnabled", {
-        /**
-         *
-         * @returns {boolean} if animation enabled
-         */
-        get: function () {
-            return this._animateEnabled;
-        },
-        enumerable: true,
-        configurable: true
-    });
     /**
      * Given the raw time string, add to the arrays to keep track of dates and cache
      * @param {string} inString - input string to parse
@@ -105,9 +94,6 @@ var RealEarthAnimate = (function () {
      * @returns {boolean} true if new index, false if the same or below lowest value
      */
     RealEarthAnimate.prototype.setLayerTime = function (theTime) {
-        if (!this._visible) {
-            return false;
-        }
         this._currentTime = theTime;
         var newIndex;
         if (theTime < this.localTimes[0]) {

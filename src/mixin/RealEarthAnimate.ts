@@ -3,6 +3,8 @@
  */
 import provide from '../util/provide';
 import mapPopup from '../olHelpers/mapPopup';
+import LayerRealEarthTile from "../layers/LayerRealEarthTile";
+import {LayerVectorRealEarth} from '../layers/LayerRealEarthVector'
 const $ = require('jquery');
 const nm = provide('mixin');
 
@@ -12,6 +14,10 @@ const nm = provide('mixin');
  * @type {number}
  */
 let offsetMinutes = (new Date()).getTimezoneOffset();
+
+export interface IRealEarthAnimate{
+    setLayerTime(theTime: number): boolean;
+}
 
 
 /**
@@ -24,59 +30,51 @@ export class RealEarthAnimate {
     _localDates: Date[];
     _rawDateStrings: string[];
     _products: string;
-    loadCallback: Function;
+    loadCallback: (lyr: LayerRealEarthTile|LayerVectorRealEarth) => void;
     localTimes: number[];
     _currentTime: number;
-    _loaded: boolean;
-    _visible: boolean;
 
+    lyr: LayerRealEarthTile|LayerVectorRealEarth;
 
-    /**
-     * override base layer load
-     */
-    load(){};
+    constructor(lyr: LayerRealEarthTile|LayerVectorRealEarth, loadCallback?: (lyr: LayerRealEarthTile|LayerVectorRealEarth) => void){
+        this.lyr = lyr;
+        this._products = lyr._products;
+        if (loadCallback){
+            this.loadCallback = loadCallback;
+        } else {
+            this.loadCallback = function(lyr: LayerRealEarthTile|LayerVectorRealEarth): void {return;};
+        }
+    }
+
 
     /**
      * Call this after the mixin has been applied
      */
     timeInit() {
-        if (!this._products) {
-            throw 'this mixin must be applied to one of the RealEarth layer objects with this.products defined';
-        }
 
         this._rawDateStrings = [];
         this._localDates = [];
         this.localTimes = [];
         this._animateEnabled = true;
-        this._loaded = true;
+        // this._loaded = true;
         this._currentTime = undefined;
         this._currentIndex = undefined;
 
-        let __this = this;
-
-        $.get('http://realearth.ssec.wisc.edu/api/products', {products: this._products}, function (d) {
+        $.get('http://realearth.ssec.wisc.edu/api/products', {products: this._products}, (d) => {
             if (d.length == 0) {
-                console.log(`${__this._products} layer not available or does not have times`);
+                console.log(`${this._products} layer not available or does not have times`);
 
                 return;
             }
             d = d[0];
             for (let i = 0; i < d['times'].length; i++) {
-                __this._loadDates.call(__this, d['times'][i]);
+                this._loadDates.call(this, d['times'][i]);
             }
-            __this.loadCallback.call(__this);
-            __this._loadLatest.call(__this);
+            this.loadCallback.call(this.lyr);
+            this._loadLatest.call(this);
         }, 'json');
     }
 
-
-    /**
-     *
-     * @returns {boolean} if animation enabled
-     */
-    get animationEnabled(): boolean{
-        return this._animateEnabled;
-    }
 
     /**
      * Given the raw time string, add to the arrays to keep track of dates and cache
@@ -126,9 +124,6 @@ export class RealEarthAnimate {
      * @returns {boolean} true if new index, false if the same or below lowest value
      */
     setLayerTime(theTime: number): boolean{
-        if (!this._visible){
-            return false;
-        }
 
         this._currentTime = theTime;
 

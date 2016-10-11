@@ -16,17 +16,11 @@ var nm = provide_1.default('mixin');
  */
 var RealEarthAnimateTile = (function (_super) {
     __extends(RealEarthAnimateTile, _super);
-    function RealEarthAnimateTile(layer) {
-        this._source = layer.getSource();
-        this._olLayer = layer;
+    function RealEarthAnimateTile(layer, loadCallback) {
+        _super.call(this, layer, loadCallback);
+        this._source = layer.source;
+        this._olLayer = layer.olLayer;
     }
-    /**
-     * override base layer load
-     */
-    RealEarthAnimateTile.prototype.load = function () {
-        _super.prototype.load.call(this);
-    };
-    ;
     RealEarthAnimateTile.prototype.timeInit = function () {
         _super.prototype.timeInit.call(this);
         this._sourceUrls = [];

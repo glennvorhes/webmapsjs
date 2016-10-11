@@ -42,50 +42,43 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/*!************************************!*\
-  !*** ./dist/_test/compare-test.js ***!
-  \************************************/
+/*!*******************************!*\
+  !*** ./dist/_test/animate.js ***!
+  \*******************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	/**
-	 * Created by gavorhes on 6/1/2016.
-	 */
 	var quickMap_1 = __webpack_require__(/*! ../olHelpers/quickMap */ 1);
-	var layerSwipe_1 = __webpack_require__(/*! ../olHelpers/layerSwipe */ 14);
-	var LayerEsriMapServer_1 = __webpack_require__(/*! ../layers/LayerEsriMapServer */ 15);
+	var LayerRealEarthTile_1 = __webpack_require__(/*! ../layers/LayerRealEarthTile */ 31);
+	var media_control_1 = __webpack_require__(/*! ../domUtil/media-control */ 35);
+	var $ = __webpack_require__(/*! jquery */ 6);
+	var nexrhresConfig = {
+	    products: 'nexrhres',
+	    id: 'nexrhres-static',
+	    opacity: 0.6,
+	    animate: true,
+	    name: 'Hybrid Reflectivity',
+	    // maxZoom: 10,
+	    loadCallback: null
+	};
+	var nexrhresStatic = new LayerRealEarthTile_1.default(nexrhresConfig);
+	var d = new Date();
+	var endTime = d.getTime();
+	d.setHours(d.getHours() - 4);
+	var startTime = d.getTime();
+	var rangeStep = Math.round((endTime - startTime) / 8);
+	var media = new media_control_1.MediaControl($('#control'), function (v) {
+	    nexrhresStatic.setLayerTime(v);
+	}, {
+	    min: startTime,
+	    max: endTime,
+	    val: endTime,
+	    step: rangeStep,
+	    playInterval: 750,
+	    showAsDate: true
+	});
 	var map = quickMap_1.quickMap();
-	var swiper = new layerSwipe_1.default(map);
-	var wisDotRegions = new LayerEsriMapServer_1.LayerEsriMapServer('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/Metamanager_regions/MapServer', {
-	    minZoom: 6,
-	    maxZoom: 12,
-	    name: 'WisDOT Regions'
-	});
-	var metamanagerSegments = new LayerEsriMapServer_1.LayerEsriMapServer('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/MM_All_Segments/MapServer', {
-	    minZoom: 7,
-	    visible: true,
-	    name: 'Metamanager Segments'
-	});
-	var truckSpeed2014 = new LayerEsriMapServer_1.LayerEsriMapServer('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/NPMRDS/compareDynamic/MapServer', {
-	    minZoom: 7,
-	    visible: true,
-	    name: 'truck2014',
-	    showLayers: [8]
-	});
-	var truckSpeed2015 = new LayerEsriMapServer_1.LayerEsriMapServer('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/NPMRDS/compareDynamic/MapServer', {
-	    minZoom: 7,
-	    visible: true,
-	    name: 'truck2015',
-	    showLayers: [9]
-	});
-	map.addLayer(wisDotRegions.olLayer);
-	map.addLayer(truckSpeed2014.olLayer);
-	map.addLayer(truckSpeed2015.olLayer);
-	map.addLayer(metamanagerSegments.olLayer);
-	swiper.addLeftLayer(wisDotRegions);
-	swiper.addRightLayer(metamanagerSegments);
-	swiper.addLeftLayer(truckSpeed2014);
-	swiper.addRightLayer(truckSpeed2015);
+	map.addLayer(nexrhresStatic.olLayer);
 
 
 /***/ },
@@ -11379,295 +11372,8 @@
 
 
 /***/ },
-/* 14 */
-/*!**************************************!*\
-  !*** ./dist/olHelpers/layerSwipe.js ***!
-  \**************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Created by gavorhes on 6/1/2016.
-	 */
-	"use strict";
-	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
-	var $ = __webpack_require__(/*! jquery */ 6);
-	var nm = provide_1.default('collections.layerSwipe');
-	var LayerSwipe = (function () {
-	    /**
-	     *
-	     * @param {ol.Map} map - the map
-	     * @param {string} [sliderContent=''] - additional html to be added inside the slider div
-	     */
-	    function LayerSwipe(map, sliderContent) {
-	        var _this = this;
-	        if (sliderContent === void 0) { sliderContent = ''; }
-	        sliderContent = sliderContent || '';
-	        /**
-	         *
-	         * @type {Array<LayerBase>}
-	         */
-	        this.leftLayers = [];
-	        /**
-	         *
-	         * @type {Array<LayerBase>}
-	         */
-	        this.rightLayers = [];
-	        this._percentRight = 50;
-	        this.offset = null;
-	        this._map = map;
-	        this.$mapElement = $(map.getTargetElement());
-	        this.$mapElement.append("<div class=\"layer-swiper\">" + sliderContent + "</div>");
-	        this.$swiper = this.$mapElement.find('.layer-swiper');
-	        this.percentRight = this.percentRight;
-	        this.dragging = false;
-	        this.$mapElement.mouseleave(function () {
-	            _this.dragging = false;
-	        });
-	        this.$swiper.bind('mousewheel DOMMouseScroll', function (evt) {
-	            evt.preventDefault();
-	        });
-	        this.$swiper.mousedown(function (evt) {
-	            _this.dragging = true;
-	            _this.offset = evt.offsetX;
-	        });
-	        $(window).mouseup(function () {
-	            _this.dragging = false;
-	        });
-	        this.$mapElement.mousemove(function (evt) {
-	            if (_this.dragging) {
-	                var mapLeft = _this.$mapElement.position().left;
-	                var mapWidth = _this.$mapElement.width();
-	                _this.percentRight = 100 * (evt.pageX - _this.offset - mapLeft) / mapWidth;
-	            }
-	        });
-	    }
-	    /**
-	     *
-	     * @param {LayerBase|*} lyr - layer to be added to left side
-	     */
-	    LayerSwipe.prototype.addLeftLayer = function (lyr) {
-	        var _this = this;
-	        if (this.leftLayers.indexOf(lyr) != -1) {
-	            return;
-	        }
-	        lyr.olLayer.on('precompose', function (event) {
-	            var ctx = event['context'];
-	            var width = ctx.canvas.width * (_this.percentRight / 100);
-	            ctx.save();
-	            ctx.beginPath();
-	            ctx.rect(0, 0, width, ctx.canvas.height);
-	            ctx.clip();
-	        });
-	        lyr.olLayer.on('postcompose', function (event) {
-	            var ctx = event['context'];
-	            ctx.restore();
-	        });
-	        this.leftLayers.push(lyr);
-	    };
-	    /**
-	     *
-	     * @param {LayerBase|*} lyr - layer to be added to right side
-	     */
-	    LayerSwipe.prototype.addRightLayer = function (lyr) {
-	        var _this = this;
-	        if (this.rightLayers.indexOf(lyr) != -1) {
-	            return;
-	        }
-	        lyr.olLayer.on('precompose', function (event) {
-	            var ctx = event['context'];
-	            var width = ctx.canvas.width * (_this.percentRight / 100);
-	            ctx.save();
-	            ctx.beginPath();
-	            ctx.rect(width, 0, ctx.canvas.width - width, ctx.canvas.height);
-	            ctx.clip();
-	        });
-	        lyr.olLayer.on('postcompose', function (event) {
-	            var ctx = event['context'];
-	            ctx.restore();
-	        });
-	        this.rightLayers.push(lyr);
-	    };
-	    Object.defineProperty(LayerSwipe.prototype, "percentRight", {
-	        get: function () {
-	            return this._percentRight;
-	        },
-	        set: function (percent) {
-	            var maxed = this.$swiper.position().left + this.$swiper.width() > this.$mapElement.width();
-	            if (percent < 0) {
-	                return;
-	            }
-	            else if (maxed && percent > this.percentRight) {
-	                return;
-	            }
-	            this._percentRight = percent;
-	            this.$swiper.css('left', this._percentRight.toFixed(2) + "%");
-	            this._map.render();
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    return LayerSwipe;
-	}());
-	nm.LayerSwipe = LayerSwipe;
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.default = LayerSwipe;
-
-
-/***/ },
-/* 15 */
-/*!*******************************************!*\
-  !*** ./dist/layers/LayerEsriMapServer.js ***!
-  \*******************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	/**
-	 * Created by gavorhes on 12/7/2015.
-	 */
-	var LayerBase_1 = __webpack_require__(/*! ./LayerBase */ 16);
-	var esriToOl = __webpack_require__(/*! ../olHelpers/esriToOlStyle */ 18);
-	var mapPopup_1 = __webpack_require__(/*! ../olHelpers/mapPopup */ 12);
-	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
-	var custom_ol_1 = __webpack_require__(/*! custom-ol */ 4);
-	var nm = provide_1.default('layers');
-	var $ = __webpack_require__(/*! jquery */ 6);
-	/**
-	 * esri mapserver layer
-	 * @augments LayerBase
-	 */
-	var LayerEsriMapServer = (function (_super) {
-	    __extends(LayerEsriMapServer, _super);
-	    /**
-	     * The base layer for all others
-	     * @param {string} url - resource url
-	     * @param {object} [options] - config
-	     * @param {string} [options.id] - layer id
-	     * @param {string} [options.name=Unnamed Layer] - layer name
-	     * @param {number} [options.opacity=1] - opacity
-	     * @param {boolean} [options.visible=true] - default visible
-	     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
-	     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
-	     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
-	     * @param {number} [options.zIndex=0] the z index for the layer
-	     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
-	     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
-	     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
-	     * @param {boolean} [options.legendContent] additional content to add to the legend
-	     * @param {boolean} [options.addPopup=false] if a popup should be added
-	     * @param {undefined|Array<number>} [options.showLayers=undefined] if a popup should be added
-	     */
-	    function LayerEsriMapServer(url, options) {
-	        if (options === void 0) { options = {}; }
-	        _super.call(this, url, options);
-	        this._source = new custom_ol_1.default.source.TileArcGISRest({
-	            url: this.url == '' ? undefined : this.url,
-	            params: typeof options.showLayers == 'undefined' ? undefined : { layers: 'show:' + options.showLayers.join(',') }
-	        });
-	        this._olLayer = new custom_ol_1.default.layer.Tile({
-	            source: this._source,
-	            visible: this.visible,
-	            opacity: this.opacity,
-	            minResolution: this._minResolution,
-	            maxResolution: this._maxResolution
-	        });
-	        this._olLayer.setZIndex(this._zIndex);
-	        options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
-	        this._esriFormat = new custom_ol_1.default.format.EsriJSON();
-	        this._popupRequest = null;
-	        this.addLegendContent();
-	        if (options.addPopup) {
-	            mapPopup_1.default.addMapServicePopup(this);
-	        }
-	    }
-	    /**
-	     * add additional content to the legend
-	     * @param {string} [additionalContent=''] additional content for legend
-	     */
-	    LayerEsriMapServer.prototype.addLegendContent = function (additionalContent) {
-	        var _this = this;
-	        var urlCopy = this.url;
-	        if (urlCopy[urlCopy.length - 1] !== '/') {
-	            urlCopy += '/';
-	        }
-	        urlCopy += 'legend?f=pjson&callback=?';
-	        $.get(urlCopy, {}, function (d) {
-	            var newHtml = esriToOl.makeMapServiceLegend(d);
-	            _super.prototype.addLegendContent.call(_this, newHtml);
-	        }, 'json');
-	    };
-	    LayerEsriMapServer.prototype.getPopupInfo = function (queryParams) {
-	        if (!this.visible) {
-	            return;
-	        }
-	        var urlCopy = this.url;
-	        if (urlCopy[urlCopy.length - 1] != '/') {
-	            urlCopy += '/';
-	        }
-	        urlCopy += 'identify?callback=?';
-	        var _this = this;
-	        if (this._popupRequest != null) {
-	            this._popupRequest.abort();
-	        }
-	        this._popupRequest = $.get(urlCopy, queryParams, function (d) {
-	            for (var _i = 0, _a = d['results']; _i < _a.length; _i++) {
-	                var r = _a[_i];
-	                var popupHtml = '<table class="esri-popup-table">';
-	                for (var a in r['attributes']) {
-	                    if (r['attributes'].hasOwnProperty(a)) {
-	                        var attrVal = r['attributes'][a];
-	                        if (attrVal == null || attrVal.toString().toLowerCase() == 'null') {
-	                            continue;
-	                        }
-	                        var attr = a;
-	                        if (attr.length > 14) {
-	                            attr = attr.slice(0, 11) + '...';
-	                        }
-	                        popupHtml += "<tr><td>" + attr + "</td><td>" + attrVal + "</td></tr>";
-	                    }
-	                }
-	                popupHtml += '</table>';
-	                mapPopup_1.default.addMapServicePopupContent(_this._esriFormat.readFeature(r), _this, popupHtml, r['layerName']);
-	            }
-	        }, 'json').always(function () {
-	            _this._popupRequest = null;
-	        });
-	    };
-	    Object.defineProperty(LayerEsriMapServer.prototype, "source", {
-	        /**
-	         *
-	         * @returns {ol.source.TileArcGISRest} the vector source
-	         */
-	        get: function () {
-	            return _super.prototype.getSource.call(this);
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(LayerEsriMapServer.prototype, "olLayer", {
-	        /**
-	         *
-	         * @returns the ol layer
-	         */
-	        get: function () {
-	            return _super.prototype.getOlLayer.call(this);
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    return LayerEsriMapServer;
-	}(LayerBase_1.LayerBase));
-	exports.LayerEsriMapServer = LayerEsriMapServer;
-	nm.LayerEsriMapServer = LayerEsriMapServer;
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.default = LayerEsriMapServer;
-
-
-/***/ },
+/* 14 */,
+/* 15 */,
 /* 16 */
 /*!**********************************!*\
   !*** ./dist/layers/LayerBase.js ***!
@@ -12142,9 +11848,207 @@
 
 
 /***/ },
-/* 18 */
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */
+/*!**************************************!*\
+  !*** ./dist/domUtil/range-change.js ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var nm = provide_1.default('domUtil');
+	var mouseIn = false;
+	var mouseDown = false;
+	var timeout = null;
+	var dragged = false;
+	var lastVal;
+	var $ = __webpack_require__(/*! jquery */ 6);
+	/**
+	 * Created by gavorhes on 11/2/2015.
+	 */
+	function triggerCallback(callback, evt) {
+	    "use strict";
+	    var val = parseFloat(this.value);
+	    var min = parseFloat(this.min);
+	    var max = parseFloat(this.max);
+	    var step = parseFloat(this.step);
+	    if (max - val < step) {
+	        val = max;
+	    }
+	    var percent = (val - min) / (max - min);
+	    if (typeof lastVal == 'number' && val == lastVal) {
+	        return;
+	    }
+	    lastVal = val;
+	    callback(val, percent, evt);
+	}
+	/**
+	 * Add a variety of listeners for range inputs applied to a common callback
+	 * @param  $slider - jquery reference to the slider
+	 * @param {rangeChangeCallback} callback - the callback
+	 * @param {number} [changeTimeout=75] before the callback is called
+	 * @this {jQuery}
+	 * @returns {jQuery} the jQuery object
+	 */
+	function rangeChange($slider, callback, changeTimeout) {
+	    changeTimeout = typeof changeTimeout == 'number' ? changeTimeout : 75;
+	    $slider.mouseenter(function () {
+	        mouseIn = true;
+	    });
+	    $slider.mouseleave(function () {
+	        mouseIn = false;
+	        mouseDown = false;
+	    });
+	    $slider.mousedown(function () {
+	        mouseDown = true;
+	    });
+	    $slider.mouseup(function () {
+	        mouseDown = false;
+	    });
+	    $slider.mousemove(
+	    /**
+	     *
+	     * @param {object} evt - event properties
+	     * @this {HTMLElement}
+	     */
+	    function (evt) {
+	        if (!(mouseIn && mouseDown)) {
+	            return;
+	        }
+	        dragged = true;
+	        if (lastVal == this['value']) {
+	            return;
+	        }
+	        lastVal = this['value'];
+	        if (timeout != null) {
+	            clearTimeout(timeout);
+	        }
+	        var _this = this;
+	        timeout = setTimeout(function () {
+	            triggerCallback.call(_this, callback, evt);
+	            timeout = null;
+	        }, changeTimeout);
+	    });
+	    $slider.keyup(
+	    /**
+	     *
+	     * @param {object} evt - event properties
+	     */
+	    function (evt) {
+	        if (evt.keyCode == 37 || evt.keyCode == 39) {
+	            triggerCallback.call(this, callback, evt);
+	        }
+	    });
+	    $slider.change(function (evt) {
+	        if (dragged) {
+	            dragged = false;
+	            return;
+	        }
+	        triggerCallback.call(this, callback, evt);
+	    });
+	    return this;
+	}
+	exports.rangeChange = rangeChange;
+	nm.rangeChange = rangeChange;
+
+
+/***/ },
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */
+/*!*******************************************!*\
+  !*** ./dist/layers/LayerRealEarthTile.js ***!
+  \*******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by gavorhes on 11/4/2015.
+	 */
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var LayerBaseXyzTile_1 = __webpack_require__(/*! ./LayerBaseXyzTile */ 32);
+	var RealEarthAnimateTile_1 = __webpack_require__(/*! ../mixin/RealEarthAnimateTile */ 33);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var nm = provide_1.default('layers');
+	/**
+	 * Real earth tile
+	 * @augments LayerBaseXyzTile
+	 */
+	var LayerRealEarthTile = (function (_super) {
+	    __extends(LayerRealEarthTile, _super);
+	    /**
+	     * The base layer for all others
+	     * @param {object} options - config
+	     * @param {string} [options.id] - layer id
+	     * @param {string} [options.name=Unnamed Layer] - layer name
+	     * @param {number} [options.opacity=1] - opacity
+	     * @param {boolean} [options.visible=true] - default visible
+	     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+	     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+	     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+	     * @param {number} [options.zIndex=0] the z index for the layer
+	     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+	     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+	     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+	     * @param {boolean} [options.legendContent] additional content to add to the legend
+	     *
+	     * @param {string} options.products - the products to request
+	     * @param {boolean} [options.hasTimes=false] If the layer is time dependent, fixed set of dates
+	     * @param {boolean} [options.animate=false] if the layer should be animated
+	     */
+	    function LayerRealEarthTile(options) {
+	        options.animate = typeof options.animate == 'boolean' ? options.animate : false;
+	        if (options.animate) {
+	            _super.call(this, '', options);
+	            this._products = options.products;
+	            this.animator = new RealEarthAnimateTile_1.default(this);
+	            this.animator.timeInit();
+	        }
+	        else {
+	            _super.call(this, "http://realearth.ssec.wisc.edu/api/image?products=" + options.products + "&x={x}&y={y}&z={z}", options);
+	            this._products = options.products;
+	        }
+	    }
+	    LayerRealEarthTile.prototype.setLayerTime = function (theTime) {
+	        if (this.animator) {
+	            return this.animator.setLayerTime(theTime);
+	        }
+	        else {
+	            return false;
+	        }
+	    };
+	    LayerRealEarthTile.prototype._load = function () {
+	        if (this.animator) {
+	            return false;
+	        }
+	        return _super.prototype._load.call(this);
+	    };
+	    return LayerRealEarthTile;
+	}(LayerBaseXyzTile_1.LayerBaseXyzTile));
+	exports.LayerRealEarthTile = LayerRealEarthTile;
+	nm.LayerRealEarthTile = LayerRealEarthTile;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = LayerRealEarthTile;
+
+
+/***/ },
+/* 32 */
 /*!*****************************************!*\
-  !*** ./dist/olHelpers/esriToOlStyle.js ***!
+  !*** ./dist/layers/LayerBaseXyzTile.js ***!
   \*****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -12155,363 +12059,498 @@
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	/**
-	 * Created by gavorhes on 1/4/2016.
+	 * Created by gavorhes on 12/4/2015.
 	 */
+	var LayerBase_1 = __webpack_require__(/*! ./LayerBase */ 16);
 	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
 	var custom_ol_1 = __webpack_require__(/*! custom-ol */ 4);
-	var nm = provide_1.default('olHelpers.esriToOlStyle');
+	var nm = provide_1.default('layers');
 	/**
-	 * This callback is displayed as part of the Requester class.
-	 * @callback styleFunc
-	 * @param {ol.Feature} feat - openlayers feature
-	 * @param {number} resolution - map resolution
+	 * XYZ tile
+	 * @augments LayerBase
 	 */
+	var LayerBaseXyzTile = (function (_super) {
+	    __extends(LayerBaseXyzTile, _super);
+	    /**
+	     * The XYZ tile layer
+	     * @param {string} url - url for source
+	     * @param {object} options - config
+	     * @param {string} [options.id] - layer id
+	     * @param {string} [options.name=Unnamed Layer] - layer name
+	     * @param {number} [options.opacity=1] - opacity
+	     * @param {boolean} [options.visible=true] - default visible
+	     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+	     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+	     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+	     * @param {number} [options.zIndex=0] the z index for the layer
+	     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+	     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+	     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+	     * @param {boolean} [options.legendContent] additional content to add to the legend
+	     * @param {boolean} [options.useEsriStyle=false] if the map service style should be used
+	     */
+	    function LayerBaseXyzTile(url, options) {
+	        _super.call(this, url, options);
+	        this._source = new custom_ol_1.default.source.XYZ({ url: this.url == '' ? undefined : this.url });
+	        this._olLayer = new custom_ol_1.default.layer.Tile({
+	            source: this._source,
+	            visible: this.visible,
+	            opacity: this.opacity,
+	            minResolution: this._minResolution,
+	            maxResolution: this._maxResolution
+	        });
+	        this._olLayer.setZIndex(this._zIndex);
+	    }
+	    Object.defineProperty(LayerBaseXyzTile.prototype, "source", {
+	        /**
+	         *
+	         * @returns {ol.source.XYZ} the vector source
+	         */
+	        get: function () {
+	            return this._source;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseXyzTile.prototype, "olLayer", {
+	        /**
+	         *
+	         * @returns {ol.layer.Tile|ol.layer.Base|undefined} the ol layer
+	         */
+	        get: function () {
+	            return this._olLayer;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    return LayerBaseXyzTile;
+	}(LayerBase_1.LayerBase));
+	exports.LayerBaseXyzTile = LayerBaseXyzTile;
+	nm.LayerBaseXyzTile = LayerBaseXyzTile;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = LayerBaseXyzTile;
+
+
+/***/ },
+/* 33 */
+/*!********************************************!*\
+  !*** ./dist/mixin/RealEarthAnimateTile.js ***!
+  \********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
 	/**
-	 *
-	 * @param {Array<number>} colorArray - input color array
-	 * @param {number} opacity - the opacity 0 to 1
-	 * @returns {string} rgba string
-	 * @private
+	 * Created by gavorhes on 12/4/2015.
 	 */
-	function _colorArrayToRgba(colorArray, opacity) {
-	    "use strict";
-	    return "rgba(" + colorArray[0] + "," + colorArray[1] + "," + colorArray[2] + "," + opacity + ")";
-	}
+	var RealEarthAnimate_1 = __webpack_require__(/*! ./RealEarthAnimate */ 34);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var nm = provide_1.default('mixin');
 	/**
-	 * escape html charcters
-	 * @param {string} str - input string
-	 * @returns {string} escaped string
+	 * Animate real earth tile
+	 * @augments RealEarthAnimate
 	 */
-	function htmlEscape(str) {
-	    return String(str)
-	        .replace(/&/g, '&amp;')
-	        .replace(/"/g, '&quot;')
-	        .replace(/'/g, '&#39;')
-	        .replace(/</g, '&lt;')
-	        .replace(/>/g, '&gt;');
-	}
-	nm.htmlEscape = htmlEscape;
-	var CommonSymbol = (function () {
+	var RealEarthAnimateTile = (function (_super) {
+	    __extends(RealEarthAnimateTile, _super);
+	    function RealEarthAnimateTile(layer, loadCallback) {
+	        _super.call(this, layer, loadCallback);
+	        this._source = layer.source;
+	        this._olLayer = layer.olLayer;
+	    }
+	    RealEarthAnimateTile.prototype.timeInit = function () {
+	        _super.prototype.timeInit.call(this);
+	        this._sourceUrls = [];
+	    };
+	    RealEarthAnimateTile.prototype._loadDates = function (inString) {
+	        var rawDte = _super.prototype._loadDates.call(this, inString);
+	        var dteProductUrl = "http://realearth.ssec.wisc.edu/api/image?products=" + this._products + "_" + rawDte + "&x={x}&y={y}&z={z}";
+	        this._sourceUrls.push(dteProductUrl);
+	        return '';
+	    };
 	    /**
-	     *
-	     * @param symbolObj
-	     * @param {number} opacity
+	     * @protected
 	     */
-	    function CommonSymbol(symbolObj, opacity) {
-	        this.symbolObj = symbolObj;
-	        this.opacity = opacity;
-	        this.olStyle = undefined;
-	        this.legendHtml = '';
-	    }
-	    return CommonSymbol;
-	}());
-	var PointSymbol = (function (_super) {
-	    __extends(PointSymbol, _super);
-	    function PointSymbol(symbolObj, opacity) {
-	        _super.call(this, symbolObj, opacity);
-	        switch (this.symbolObj.type) {
-	            case 'esriSMS':
-	                var innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
-	                var outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);
-	                var outlineWidth = this.symbolObj.outline.width;
-	                var radius = this.symbolObj.size;
-	                this.olStyle = new custom_ol_1.default.style.Style({
-	                    image: new custom_ol_1.default.style.Circle({
-	                        radius: radius,
-	                        fill: new custom_ol_1.default.style.Fill({
-	                            color: innerColor
-	                        }),
-	                        stroke: new custom_ol_1.default.style.Stroke({ color: outerColor, width: outlineWidth })
-	                    })
-	                });
-	                this.legendHtml = "<span class=\"legend-layer-icon\" style=\"color: " + innerColor + "\">&#9679;</span>";
-	                break;
-	            case 'esriPMS':
-	                this.olStyle = new custom_ol_1.default.style.Style({
-	                    image: new custom_ol_1.default.style.Icon({ src: "data:image/png;base64," + this.symbolObj['imageData'] })
-	                });
-	                this.legendHtml = "<img class=\"legend-layer-icon\" height=\"17\" src=\"data:image/png;base64," + this.symbolObj['imageData'] + "\">";
-	                break;
-	            default:
-	                console.log(this.symbolObj);
-	                alert('Point symbol does not handle symbol type: ' + this.symbolObj['type']);
+	    RealEarthAnimateTile.prototype._loadLatest = function () {
+	        if (_super.prototype._loadLatest.call(this)) {
+	            this._source.setUrl(this._sourceUrls[this._sourceUrls.length - 1]);
 	        }
-	    }
-	    return PointSymbol;
-	}(CommonSymbol));
-	var LineSymbol = (function (_super) {
-	    __extends(LineSymbol, _super);
-	    function LineSymbol(symbolObj, opacity) {
-	        _super.call(this, symbolObj, opacity);
-	        switch (this.symbolObj.type) {
-	            case 'esriSLS':
-	                var innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
-	                var lineWidth = this.symbolObj.width;
-	                this.olStyle = new custom_ol_1.default.style.Style({
-	                    stroke: new custom_ol_1.default.style.Stroke({
-	                        color: innerColor,
-	                        //lineDash: [4],
-	                        width: lineWidth
-	                    })
-	                });
-	                this.legendHtml = "<span class=\"legend-layer-icon\" ";
-	                this.legendHtml += "style=\"";
-	                this.legendHtml += "background-color: " + innerColor + ";";
-	                this.legendHtml += "width: 40px;";
-	                this.legendHtml += "height: 4px;";
-	                this.legendHtml += "position: relative;";
-	                this.legendHtml += "display: inline-block;";
-	                this.legendHtml += "top: -1px;";
-	                this.legendHtml += "\"></span>";
-	                break;
-	            default:
-	                console.log(this.symbolObj);
-	                alert('Line symbol does not handle symbol type: ' + this.symbolObj['type']);
-	        }
-	    }
-	    return LineSymbol;
-	}(CommonSymbol));
-	var PolygonSymbol = (function (_super) {
-	    __extends(PolygonSymbol, _super);
-	    function PolygonSymbol(symbolObj, opacity) {
-	        _super.call(this, symbolObj, opacity);
-	        switch (this.symbolObj['type']) {
-	            case 'esriSFS':
-	                var innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
-	                var outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);
-	                var outlineWidth = this.symbolObj.outline.width;
-	                this.olStyle = new custom_ol_1.default.style.Style({
-	                    stroke: new custom_ol_1.default.style.Stroke({
-	                        color: outerColor,
-	                        //lineDash: [4],
-	                        width: outlineWidth
-	                    }),
-	                    fill: new custom_ol_1.default.style.Fill({
-	                        color: innerColor
-	                    })
-	                });
-	                this.legendHtml = "<span class=\"legend-layer-icon\" ";
-	                this.legendHtml += "style=\"";
-	                this.legendHtml += "background-color: " + innerColor + ";";
-	                this.legendHtml += "border: solid " + outerColor + " 1px;";
-	                this.legendHtml += "width: 40px;";
-	                this.legendHtml += "height: 9px;";
-	                this.legendHtml += "position: relative;";
-	                this.legendHtml += "display: inline-block;";
-	                this.legendHtml += "top: 2px;";
-	                this.legendHtml += "\"></span>";
-	                break;
-	            default:
-	                console.log(this.symbolObj);
-	                alert('Polygon symbol does handle symbol type: ' + this.symbolObj['type']);
-	        }
-	    }
-	    return PolygonSymbol;
-	}(CommonSymbol));
-	var SymbolGenerator = (function () {
-	    function SymbolGenerator(esriResponse) {
-	        this.opacity = (100 - (esriResponse['drawingInfo']['transparency'] || 0)) / 100;
-	        this.renderer = esriResponse.drawingInfo.renderer;
-	        this.olStyle = undefined;
-	        this.legendHtml = '';
-	    }
-	    return SymbolGenerator;
-	}());
-	var SingleSymbol = (function (_super) {
-	    __extends(SingleSymbol, _super);
-	    /**
-	     *
-	     * @param {object} esriResponse - layer info
-	     * @param SymbolClass - the symbol class to use
-	     */
-	    function SingleSymbol(esriResponse, SymbolClass) {
-	        _super.call(this, esriResponse);
-	        this.symbol = this.renderer.symbol;
-	        var symbolObj = new SymbolClass(this.symbol, this.opacity);
-	        this.olStyle = symbolObj.olStyle;
-	        this.legendHtml = symbolObj.legendHtml;
-	    }
-	    return SingleSymbol;
-	}(SymbolGenerator));
-	var UniqueValueSymbol = (function (_super) {
-	    __extends(UniqueValueSymbol, _super);
-	    /**
-	     *
-	     * @param {object} esriResponse - layer info
-	     * @param SymbolClass - the Symbol class definition
-	     */
-	    function UniqueValueSymbol(esriResponse, SymbolClass) {
-	        var _this = this;
-	        _super.call(this, esriResponse);
-	        this.uniqueValueInfos = this.renderer['uniqueValueInfos'];
-	        this.propertyName = this.renderer['field1'];
-	        this.defaultSymbol = this.renderer['defaultSymbol'];
-	        if (this.defaultSymbol) {
-	            var symbolObj = new SymbolClass(this.defaultSymbol, this.opacity);
-	            this.defaultStyle = symbolObj.olStyle;
-	            this.defaultLabelHtml = ("<span class=\"legend-layer-subitem\">" + htmlEscape(this.renderer['defaultLabel']) + "</span>") + symbolObj.legendHtml;
+	        return true;
+	    };
+	    RealEarthAnimateTile.prototype.setLayerTime = function (theTime) {
+	        if (_super.prototype.setLayerTime.call(this, theTime)) {
+	            if (this._olLayer.getZIndex() < 0) {
+	                this._olLayer.setZIndex(0);
+	            }
+	            this._source.setUrl(this._sourceUrls[this._currentIndex]);
 	        }
 	        else {
-	            this.defaultStyle = undefined;
-	            this.defaultLabelHtml = 'other';
+	            this._olLayer.setZIndex(-1);
 	        }
-	        this.valueArray = [];
-	        this.labelArray = [];
-	        this.legendArray = [];
-	        this.propertyStyleLookup = {};
-	        for (var _i = 0, _a = this.uniqueValueInfos; _i < _a.length; _i++) {
-	            var uniqueVal = _a[_i];
-	            this.labelArray.push(uniqueVal['label']);
-	            this.valueArray.push(uniqueVal['value']);
-	            var uniqueSym = new SymbolClass(uniqueVal.symbol, this.opacity);
-	            this.legendArray.push(("<span class=\"legend-layer-subitem\">" + htmlEscape(uniqueVal['label']) + "</span>") + uniqueSym.legendHtml);
-	            this.propertyStyleLookup[uniqueVal['value']] = uniqueSym.olStyle;
+	        return true;
+	    };
+	    return RealEarthAnimateTile;
+	}(RealEarthAnimate_1.default));
+	nm.RealEarthAnimateTile = RealEarthAnimateTile;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = RealEarthAnimateTile;
+
+
+/***/ },
+/* 34 */
+/*!****************************************!*\
+  !*** ./dist/mixin/RealEarthAnimate.js ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	/**
+	 * Created by gavorhes on 12/4/2015.
+	 */
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var mapPopup_1 = __webpack_require__(/*! ../olHelpers/mapPopup */ 12);
+	var $ = __webpack_require__(/*! jquery */ 6);
+	var nm = provide_1.default('mixin');
+	/**
+	 * The GMT offset time in minutes
+	 * @type {number}
+	 */
+	var offsetMinutes = (new Date()).getTimezoneOffset();
+	/**
+	 * Mixin to get the product times
+	 * Be sure to call getTimeInit after the mixin has been applied
+	 */
+	var RealEarthAnimate = (function () {
+	    function RealEarthAnimate(lyr, loadCallback) {
+	        this.lyr = lyr;
+	        this._products = lyr._products;
+	        if (loadCallback) {
+	            this.loadCallback = loadCallback;
 	        }
-	        this.olStyle = function (feature) {
-	            var checkProperties = feature.getProperties();
-	            var checkProperty = checkProperties[_this.propertyName];
-	            var returnValue;
-	            if (_this.propertyStyleLookup[checkProperty] !== undefined) {
-	                returnValue = [_this.propertyStyleLookup[checkProperty]];
+	        else {
+	            this.loadCallback = function (lyr) { return; };
+	        }
+	    }
+	    /**
+	     * Call this after the mixin has been applied
+	     */
+	    RealEarthAnimate.prototype.timeInit = function () {
+	        var _this = this;
+	        this._rawDateStrings = [];
+	        this._localDates = [];
+	        this.localTimes = [];
+	        this._animateEnabled = true;
+	        // this._loaded = true;
+	        this._currentTime = undefined;
+	        this._currentIndex = undefined;
+	        $.get('http://realearth.ssec.wisc.edu/api/products', { products: this._products }, function (d) {
+	            if (d.length == 0) {
+	                console.log(_this._products + " layer not available or does not have times");
+	                return;
+	            }
+	            d = d[0];
+	            for (var i = 0; i < d['times'].length; i++) {
+	                _this._loadDates.call(_this, d['times'][i]);
+	            }
+	            _this.loadCallback.call(_this.lyr);
+	            _this._loadLatest.call(_this);
+	        }, 'json');
+	    };
+	    /**
+	     * Given the raw time string, add to the arrays to keep track of dates and cache
+	     * @param {string} inString - input string to parse
+	     * @returns {string} the converted string
+	     * @protected
+	     */
+	    RealEarthAnimate.prototype._loadDates = function (inString) {
+	        var yr = inString.slice(0, 4);
+	        var month = inString.slice(4, 6);
+	        var d = inString.slice(6, 8);
+	        var hr = inString.slice(9, 11);
+	        var mn = inString.slice(11, 13);
+	        var sec = inString.slice(13, 15);
+	        var rawDateStr = inString.replace('.', '_');
+	        this._rawDateStrings.push(rawDateStr);
+	        var dteStr = month + "/" + d + "/" + yr + " " + hr + ":" + mn + ":" + sec;
+	        var newDte = new Date(dteStr);
+	        newDte.setMinutes(newDte.getMinutes() - offsetMinutes);
+	        this._localDates.push(newDte);
+	        this.localTimes.push(newDte.getTime());
+	        return rawDateStr;
+	    };
+	    /**
+	     *
+	     * @protected
+	     * @returns {boolean} if should continue
+	     */
+	    RealEarthAnimate.prototype._loadLatest = function () {
+	        mapPopup_1.default.closePopup();
+	        if (this.localTimes.length > 0) {
+	            this._currentIndex = this.localTimes.length - 1;
+	            return true;
+	        }
+	        else {
+	            return false;
+	        }
+	    };
+	    /**
+	     *
+	     * @param {number} theTime - the time
+	     * @returns {boolean} true if new index, false if the same or below lowest value
+	     */
+	    RealEarthAnimate.prototype.setLayerTime = function (theTime) {
+	        this._currentTime = theTime;
+	        var newIndex;
+	        if (theTime < this.localTimes[0]) {
+	            return false;
+	        }
+	        else if (theTime > this.localTimes[this.localTimes.length - 1]) {
+	            newIndex = this.localTimes.length - 1;
+	        }
+	        for (var i = 0; i < this.localTimes.length; i++) {
+	            if (this.localTimes[i] >= theTime) {
+	                newIndex = i;
+	                break;
+	            }
+	        }
+	        if (newIndex == this._currentIndex) {
+	            return false;
+	        }
+	        else {
+	            this._currentIndex = newIndex;
+	            mapPopup_1.default.closePopup();
+	            return true;
+	        }
+	    };
+	    return RealEarthAnimate;
+	}());
+	exports.RealEarthAnimate = RealEarthAnimate;
+	nm.RealEarthAnimate = RealEarthAnimate;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = RealEarthAnimate;
+
+
+/***/ },
+/* 35 */
+/*!***************************************!*\
+  !*** ./dist/domUtil/media-control.js ***!
+  \***************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by gavorhes on 11/2/2015.
+	 */
+	"use strict";
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var range_change_1 = __webpack_require__(/*! ./range-change */ 27);
+	var $ = __webpack_require__(/*! jquery */ 6);
+	var nm = provide_1.default('domUtil');
+	/**
+	 * @callback mediaCallback
+	 * @param {number} tm
+	 */
+	function timeToLocalDateString(tm) {
+	    "use strict";
+	    var d = new Date(tm);
+	    var p1 = d.toLocaleTimeString().split(' ');
+	    var p2 = p1[0].split(':');
+	    p2 = p2.slice(0, 2);
+	    return d.toLocaleDateString() + '<br>' + p2.join(':') + ' ' + p1[1];
+	}
+	var MediaControl = (function () {
+	    /**
+	     *
+	     * @param element
+	     * @param changeFunc
+	     * @param mediaConfig
+	     */
+	    function MediaControl(element, changeFunc, mediaConfig) {
+	        var _this = this;
+	        if (changeFunc === void 0) { changeFunc = function () { return; }; }
+	        if (mediaConfig === void 0) { mediaConfig = {}; }
+	        mediaConfig.min = typeof mediaConfig.min == 'number' ? mediaConfig.min : 0;
+	        mediaConfig.max = typeof mediaConfig.max == 'number' ? mediaConfig.max : 100;
+	        mediaConfig.val = typeof mediaConfig.val == 'number' ? mediaConfig.val : 0;
+	        mediaConfig.step = typeof mediaConfig.step == 'number' ? mediaConfig.step : 5;
+	        mediaConfig.playInterval = typeof mediaConfig.playInterval == 'number' ? mediaConfig.playInterval : 500;
+	        mediaConfig.showAsDate = typeof mediaConfig.showAsDate == 'boolean' ? mediaConfig.showAsDate : false;
+	        if (typeof element == 'string') {
+	            this._container = $('#' + element);
+	        }
+	        else if (typeof element['style'] !== 'undefined') {
+	            this._container = $(element);
+	        }
+	        else {
+	            this._container = element;
+	        }
+	        this._container.addClass('media-control-container');
+	        this._playInterval = mediaConfig.playInterval;
+	        this._changeFunc = changeFunc;
+	        this._showAsDate = mediaConfig.showAsDate;
+	        this._currentValue = undefined;
+	        this._min = undefined;
+	        this._max = undefined;
+	        this._step = undefined;
+	        this._playing = false;
+	        var htmlStr = '<span class="media-player-button media-back"></span>' +
+	            '<span class="media-player-button media-play"></span>' +
+	            '<span class="media-player-button media-pause media-disabled"></span>' +
+	            '<span class="media-player-button media-stop media-disabled" ></span>' +
+	            '<span class="media-player-button media-ahead"></span>' +
+	            "<input type=\"range\">" +
+	            "<div class=\"media-control-value-label-container\">" +
+	            "<span class=\"media-control-value-label-min\"></span>" +
+	            "<span class=\"media-control-value-label-val\"></span>" +
+	            "<span class=\"media-control-value-label-max\"></span>" +
+	            "</div>";
+	        this._container.append(htmlStr);
+	        // let btnPause = this._container.find('.media-pause');
+	        var btnPlay = this._container.find('.media-play');
+	        this._$btnStop = this._container.find('.media-stop');
+	        var btnAhead = this._container.find('.media-ahead');
+	        var btnBack = this._container.find('.media-back');
+	        this._$slider = this._container.find('input[type=range]');
+	        this._$valLabelMin = this._container.find('.media-control-value-label-min');
+	        this._$valLabelVal = this._container.find('.media-control-value-label-val');
+	        this._$valLabelMax = this._container.find('.media-control-value-label-max');
+	        this.setMinMaxValueStep(mediaConfig.min, mediaConfig.max, mediaConfig.val, mediaConfig.step);
+	        range_change_1.rangeChange(this._$slider, function (newVal) { _this.currentValue = newVal; }, 100);
+	        var ___this = this;
+	        btnPlay.click(function () {
+	            var $this = $(this);
+	            $this.addClass('media-disabled');
+	            ___this._$btnStop.removeClass('media-disabled');
+	            btnAhead.addClass('media-locked');
+	            btnBack.addClass('media-locked');
+	            ___this._$slider.prop('disabled', true);
+	            ___this._playing = true;
+	            ___this._interval = setInterval(function () {
+	                ___this.currentValue += ___this._step;
+	            }, ___this._playInterval);
+	        });
+	        this._$btnStop.click(function () {
+	            clearInterval(___this._interval);
+	            var $this = $(this);
+	            $this.addClass('media-disabled');
+	            btnPlay.removeClass('media-disabled');
+	            btnAhead.removeClass('media-locked');
+	            btnBack.removeClass('media-locked');
+	            ___this._$slider.prop('disabled', false);
+	            ___this._playing = false;
+	        });
+	        btnAhead.click(function () {
+	            ___this.currentValue = ___this.currentValue + ___this._step;
+	        });
+	        btnBack.click(function () {
+	            ___this.currentValue = ___this.currentValue - ___this._step;
+	        });
+	    }
+	    MediaControl.prototype.stopPlaying = function () {
+	        if (this._playing) {
+	            this._$btnStop.trigger('click');
+	        }
+	    };
+	    Object.defineProperty(MediaControl.prototype, "playing", {
+	        get: function () {
+	            return this._playing;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MediaControl.prototype, "min", {
+	        get: function () {
+	            return this._min;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MediaControl.prototype, "max", {
+	        get: function () {
+	            return this._max;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MediaControl.prototype, "step", {
+	        get: function () {
+	            return this._step;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MediaControl.prototype, "currentValue", {
+	        get: function () {
+	            return this._currentValue;
+	        },
+	        set: function (newValue) {
+	            if (newValue > this._max) {
+	                newValue = this._min;
+	            }
+	            else if (newValue < this._min) {
+	                newValue = this._max;
+	            }
+	            this._currentValue = newValue;
+	            this._$slider.val(this._currentValue.toFixed(2));
+	            if (this._showAsDate) {
+	                this._$valLabelVal.html(timeToLocalDateString(this.currentValue));
 	            }
 	            else {
-	                returnValue = [_this.defaultStyle];
+	                this._$valLabelVal.html(this.currentValue.toString());
 	            }
-	            return returnValue;
-	        };
-	        if (this.defaultLabelHtml !== null) {
-	            this.legendArray.push(this.defaultLabelHtml);
+	            this._changeFunc(newValue);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /**
+	     * set min and max value with step
+	     * @param {number} newMin the new min
+	     * @param {number} newMax the new mas
+	     * @param {number} [newValue=newMin] the value to set
+	     * @param {number} [newStep=(newMax-newMin)/20] step value
+	     */
+	    MediaControl.prototype.setMinMaxValueStep = function (newMin, newMax, newValue, newStep) {
+	        this._min = newMin;
+	        this._max = newMax;
+	        newValue = typeof newValue == 'number' ? newValue : newMin;
+	        newStep = typeof newStep == 'number' ? newStep : (newMax - newMin) / 20;
+	        this._currentValue = newValue;
+	        this._step = newStep;
+	        this._$slider.prop('min', this.min.toString());
+	        this._$slider.prop('max', this.max.toString());
+	        this._$slider.prop('step', this.step.toString());
+	        this._$slider.val(this.currentValue.toString());
+	        if (this._showAsDate) {
+	            this._$valLabelMin.html(timeToLocalDateString(this._min));
+	            this._$valLabelVal.html(timeToLocalDateString(this.currentValue));
+	            this._$valLabelMax.html(timeToLocalDateString(this._max));
 	        }
-	        this.legendHtml = '<ul>';
-	        for (var _b = 0, _c = this.legendArray; _b < _c.length; _b++) {
-	            var h = _c[_b];
-	            this.legendHtml += "<li>" + h + "</li>";
+	        else {
+	            this._$valLabelMin.html(this._min.toString());
+	            this._$valLabelVal.html(this.currentValue.toString());
+	            this._$valLabelMax.html(this._max.toString());
 	        }
-	        this.legendHtml += '</ul>';
-	    }
-	    return UniqueValueSymbol;
-	}(SymbolGenerator));
-	/**
-	 * style and legend object
-	 * @typedef {object} styleAndLegend
-	 * @property {styleFunc} style - style function
-	 * @property {string} legend - legend content
-	 */
-	/**
-	 *
-	 * @param {object} esriResponse - layer info
-	 * @returns {styleAndLegend} style and legend object
-	 */
-	function makeFeatureServiceLegendAndSymbol(esriResponse) {
-	    "use strict";
-	    var renderer = esriResponse.drawingInfo.renderer;
-	    var symbolLegendOut = null;
-	    switch (renderer.type) {
-	        case 'simple':
-	            switch (esriResponse.geometryType) {
-	                case 'esriGeometryPoint':
-	                    symbolLegendOut = new SingleSymbol(esriResponse, PointSymbol);
-	                    break;
-	                case 'esriGeometryPolyline':
-	                    symbolLegendOut = new SingleSymbol(esriResponse, LineSymbol);
-	                    break;
-	                case 'esriGeometryPolygon':
-	                    symbolLegendOut = new SingleSymbol(esriResponse, PolygonSymbol);
-	                    break;
-	                default:
-	                    console.log(esriResponse);
-	                    alert(esriResponse.geometryType + ' not handled');
-	            }
-	            break;
-	        case 'uniqueValue':
-	            switch (esriResponse.geometryType) {
-	                case 'esriGeometryPoint':
-	                    symbolLegendOut = new UniqueValueSymbol(esriResponse, PointSymbol);
-	                    break;
-	                case 'esriGeometryPolyline':
-	                    symbolLegendOut = new UniqueValueSymbol(esriResponse, LineSymbol);
-	                    break;
-	                case 'esriGeometryPolygon':
-	                    symbolLegendOut = new UniqueValueSymbol(esriResponse, PolygonSymbol);
-	                    break;
-	                default:
-	                    console.log(esriResponse);
-	                    alert(esriResponse['geometryType'] + ' not handled');
-	            }
-	            break;
-	        default:
-	            alert('not handled renderer type: ' + renderer['type']);
-	    }
-	    if (symbolLegendOut == null) {
-	        return { style: undefined, legend: '' };
-	    }
-	    else {
-	        return { style: symbolLegendOut.olStyle, legend: symbolLegendOut.legendHtml };
-	    }
-	}
-	exports.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
-	nm.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
-	/**
-	 *
-	 * @param {object} lyrObject - the layer as defined in the response
-	 * @param {boolean} [skipLayerNameAndExpander=false] use only icons
-	 * @returns {string} legend html
-	 */
-	function mapServiceLegendItem(lyrObject, skipLayerNameAndExpander) {
-	    if (skipLayerNameAndExpander === void 0) { skipLayerNameAndExpander = false; }
-	    skipLayerNameAndExpander = typeof skipLayerNameAndExpander == 'boolean' ? skipLayerNameAndExpander : false;
-	    var layerName = lyrObject['layerName'];
-	    var legendItems = lyrObject['legend'];
-	    var legendHtml = '';
-	    if (!skipLayerNameAndExpander) {
-	        legendHtml += "<span class=\"legend-layer-subitem\">" + layerName + "</span>";
-	    }
-	    if (legendItems.length == 1) {
-	        legendHtml = "<img class=\"legend-layer-icon\" height=\"17\" src=\"data:image/png;base64," + legendItems[0]['imageData'] + "\">";
-	    }
-	    else {
-	        if (!skipLayerNameAndExpander) {
-	            legendHtml += '<span class="legend-items-expander" title="Expand/Collapse">&#9660;</span>';
-	        }
-	        legendHtml += '<ul>';
-	        for (var i = 0; i < legendItems.length; i++) {
-	            legendHtml += "<li>";
-	            legendHtml += "<span class=\"legend-layer-subitem\">" + htmlEscape(legendItems[i]['label']) + "</span>";
-	            legendHtml += "<img class=\"legend-layer-icon\" height=\"17\" src=\"data:image/png;base64," + legendItems[i]['imageData'] + "\">";
-	            legendHtml += "</li>";
-	        }
-	        legendHtml += '</ul>';
-	    }
-	    if (!skipLayerNameAndExpander) {
-	        legendHtml = ("<span class=\"legend-layer-subitem\">" + layerName + "</span>") + legendHtml;
-	    }
-	    return legendHtml;
-	}
-	/**
-	 * make map service legent
-	 * @param {object} esriResponse - layer info
-	 * @returns {string} legend content
-	 */
-	function makeMapServiceLegend(esriResponse) {
-	    "use strict";
-	    var newLegendHtml = '';
-	    var layers = esriResponse['layers'];
-	    if (layers.length == 1) {
-	        newLegendHtml += mapServiceLegendItem(layers[0], true);
-	    }
-	    else {
-	        newLegendHtml += '<ul>';
-	        for (var i = 0; i < layers.length; i++) {
-	            newLegendHtml += '<li>' + mapServiceLegendItem(layers[i]) + '</li>';
-	        }
-	        newLegendHtml += '</ul>';
-	    }
-	    return newLegendHtml;
-	}
-	exports.makeMapServiceLegend = makeMapServiceLegend;
-	nm.makeMapServiceLegend = makeMapServiceLegend;
+	    };
+	    Object.defineProperty(MediaControl.prototype, "changeFunction", {
+	        /**
+	         *
+	         * @param {mediaCallback} newFunc the callback on change
+	         */
+	        set: function (newFunc) {
+	            this._changeFunc = newFunc;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    return MediaControl;
+	}());
+	exports.MediaControl = MediaControl;
+	nm.MediaControl = MediaControl;
 
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=compare-test.js.map
+//# sourceMappingURL=animate.js.map

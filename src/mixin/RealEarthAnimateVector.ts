@@ -4,6 +4,7 @@
 import RealEarthAnimate from './RealEarthAnimate';
 import provide from '../util/provide';
 import ol from 'custom-ol';
+import {LayerVectorRealEarth} from "../layers/LayerRealEarthVector";
 const nm = provide('mixin');
 const $ = require('jquery');
 
@@ -21,18 +22,12 @@ class RealEarthAnimateVector extends RealEarthAnimate {
     _currentIndex: number;
     _olLayer: ol.layer.Vector;
 
-    constructor(layer: ol.layer.Vector) {
-        this._source = layer.getSource();
-        this._olLayer = layer;
-
+    constructor(layer: LayerVectorRealEarth, loadCallback?: (lyr: LayerVectorRealEarth) => void){
+        super(layer, loadCallback);
+        this._source = layer.source;
+        this._olLayer = layer.olLayer;
     }
 
-    /**
-     * override base layer load
-     */
-    load() {
-        super.load();
-    };
 
     /**
      * Call this after the mixin has been applied

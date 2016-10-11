@@ -1,3 +1,8 @@
+import LayerRealEarthTile from "../layers/LayerRealEarthTile";
+import { LayerVectorRealEarth } from '../layers/LayerRealEarthVector';
+export interface IRealEarthAnimate {
+    setLayerTime(theTime: number): boolean;
+}
 /**
  * Mixin to get the product times
  * Be sure to call getTimeInit after the mixin has been applied
@@ -8,24 +13,15 @@ export declare class RealEarthAnimate {
     _localDates: Date[];
     _rawDateStrings: string[];
     _products: string;
-    loadCallback: Function;
+    loadCallback: (lyr: LayerRealEarthTile | LayerVectorRealEarth) => void;
     localTimes: number[];
     _currentTime: number;
-    _loaded: boolean;
-    _visible: boolean;
-    /**
-     * override base layer load
-     */
-    load(): void;
+    lyr: LayerRealEarthTile | LayerVectorRealEarth;
+    constructor(lyr: LayerRealEarthTile | LayerVectorRealEarth, loadCallback?: (lyr: LayerRealEarthTile | LayerVectorRealEarth) => void);
     /**
      * Call this after the mixin has been applied
      */
     timeInit(): void;
-    /**
-     *
-     * @returns {boolean} if animation enabled
-     */
-    readonly animationEnabled: boolean;
     /**
      * Given the raw time string, add to the arrays to keep track of dates and cache
      * @param {string} inString - input string to parse

@@ -3,6 +3,7 @@
  */
 import RealEarthAnimate from './RealEarthAnimate';
 import ol from 'custom-ol';
+import { LayerVectorRealEarth } from "../layers/LayerRealEarthVector";
 /**
  * class mixin to animate RealEarth vector layers
  * @augments RealEarthAnimate
@@ -20,11 +21,7 @@ declare class RealEarthAnimateVector extends RealEarthAnimate {
     };
     _currentIndex: number;
     _olLayer: ol.layer.Vector;
-    constructor(layer: ol.layer.Vector);
-    /**
-     * override base layer load
-     */
-    load(): void;
+    constructor(layer: LayerVectorRealEarth, loadCallback?: (lyr: LayerVectorRealEarth) => void);
     /**
      * Call this after the mixin has been applied
      */

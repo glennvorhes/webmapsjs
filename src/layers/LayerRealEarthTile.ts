@@ -6,12 +6,11 @@ import {LayerBaseXyzTile} from './LayerBaseXyzTile';
 import {LayerBaseOptions} from './LayerBase';
 import RealEarthAnimateTile from '../mixin/RealEarthAnimateTile';
 import provide from '../util/provide';
-const mixIns = require('es6-mixins');
+import {IRealEarthAnimate} from "../mixin/RealEarthAnimate";
 const nm = provide('layers');
 
-export interface LayerRealEarthTileOptions extends LayerBaseOptions{
+export interface LayerRealEarthTileOptions extends LayerBaseOptions {
     products: string;
-    hasTimes?: boolean;
     animate?: boolean;
 }
 
@@ -20,9 +19,10 @@ export interface LayerRealEarthTileOptions extends LayerBaseOptions{
  * Real earth tile
  * @augments LayerBaseXyzTile
  */
-class LayerRealEarthTile extends LayerBaseXyzTile {
+export class LayerRealEarthTile extends LayerBaseXyzTile implements IRealEarthAnimate {
     _products: string;
-    timeInit: Function;
+    animator: RealEarthAnimateTile;
+
     /**
      * The base layer for all others
      * @param {object} options - config
@@ -45,18 +45,30 @@ class LayerRealEarthTile extends LayerBaseXyzTile {
      */
     constructor(options: LayerRealEarthTileOptions) {
         options.animate = typeof options.animate == 'boolean' ? options.animate : false;
-        if (!options.animate) {
-            super(`http://realearth.ssec.wisc.edu/api/image?products=${options.products}&x={x}&y={y}&z={z}`, options);
-            this._products = options.products;
-        } else {
+        if (options.animate) {
             super('', options);
             this._products = options.products;
-
-            if (!this.timeInit){
-                mixIns([RealEarthAnimateTile], this);
-            }
-            this.timeInit();
+            this.animator = new RealEarthAnimateTile(this);
+            this.animator.timeInit();
+        } else {
+            super(`http://realearth.ssec.wisc.edu/api/image?products=${options.products}&x={x}&y={y}&z={z}`, options);
+            this._products = options.products;
         }
+    }
+
+    setLayerTime(theTime: number): boolean {
+        if (this.animator) {
+            return this.animator.setLayerTime(theTime);
+        } else {
+            return false;
+        }
+    }
+
+    _load(): boolean {
+        if (this.animator) {
+            return false;
+        }
+        return super._load();
     }
 }
 

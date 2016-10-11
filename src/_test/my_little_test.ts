@@ -4,7 +4,7 @@ import ol3 from 'custom-ol';
 
 
 
-import {MediaControl} from '../domUtil/animate-buttons'
+import {MediaControl} from '../domUtil/media-control'
 //
 //
 

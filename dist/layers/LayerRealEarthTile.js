@@ -10,7 +10,6 @@ var __extends = (this && this.__extends) || function (d, b) {
 var LayerBaseXyzTile_1 = require('./LayerBaseXyzTile');
 var RealEarthAnimateTile_1 = require('../mixin/RealEarthAnimateTile');
 var provide_1 = require('../util/provide');
-var mixIns = require('es6-mixins');
 var nm = provide_1.default('layers');
 /**
  * Real earth tile
@@ -40,21 +39,34 @@ var LayerRealEarthTile = (function (_super) {
      */
     function LayerRealEarthTile(options) {
         options.animate = typeof options.animate == 'boolean' ? options.animate : false;
-        if (!options.animate) {
+        if (options.animate) {
+            _super.call(this, '', options);
+            this._products = options.products;
+            this.animator = new RealEarthAnimateTile_1.default(this);
+            this.animator.timeInit();
+        }
+        else {
             _super.call(this, "http://realearth.ssec.wisc.edu/api/image?products=" + options.products + "&x={x}&y={y}&z={z}", options);
             this._products = options.products;
         }
-        else {
-            _super.call(this, '', options);
-            this._products = options.products;
-            if (!this.timeInit) {
-                mixIns([RealEarthAnimateTile_1.default], this);
-            }
-            this.timeInit();
-        }
     }
+    LayerRealEarthTile.prototype.setLayerTime = function (theTime) {
+        if (this.animator) {
+            return this.animator.setLayerTime(theTime);
+        }
+        else {
+            return false;
+        }
+    };
+    LayerRealEarthTile.prototype._load = function () {
+        if (this.animator) {
+            return false;
+        }
+        return _super.prototype._load.call(this);
+    };
     return LayerRealEarthTile;
 }(LayerBaseXyzTile_1.LayerBaseXyzTile));
+exports.LayerRealEarthTile = LayerRealEarthTile;
 nm.LayerRealEarthTile = LayerRealEarthTile;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = LayerRealEarthTile;

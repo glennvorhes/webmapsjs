@@ -1,6 +1,6 @@
 "use strict";
 // let g = new
-var animate_buttons_1 = require('../domUtil/animate-buttons');
+var media_control_1 = require('../domUtil/media-control');
 //
 //
 console.log('eat this fish');
@@ -16,7 +16,7 @@ function me(eat) {
     console.log(eat, 'one');
 }
 me(1);
-var control = new animate_buttons_1.MediaControl('map');
+var control = new media_control_1.MediaControl('map');
 //
 //
 // console.log(ol3);
