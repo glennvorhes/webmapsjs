@@ -15,7 +15,7 @@
     "lint": "eslint src/**/*.js",
     "update-custom-ol": "npm update custom-ol",
     "serve": "cd test-html & C:\\Python33\\python.exe -m http.server 5002",
-    "typedoc": "typedoc --mode file --out doc src",
+    "typedoc": "typedoc --excludePrivate --mode file --out doc src",
     "webpack": "webpack -d -w",
     "tsc": "tsc -w"
   },
