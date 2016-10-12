@@ -38,7 +38,6 @@
   },
   "dependencies": {
     "@types/jquery": "^2.0.32",
-    "@types/node": "^6.0.41",
     "jquery": "2.2.3",
     "jquery-layout": "1.0.0",
     "jquery-ui": "1.10.5",
