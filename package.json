@@ -40,7 +40,6 @@
     "@types/jquery": "^2.0.32",
     "jquery": "2.2.3",
     "jquery-layout": "1.0.0",
-    "jquery-ui": "1.10.5",
-    "floatthead": "^1.4.0"
+    "jquery-ui": "1.10.5"
   }
 }
