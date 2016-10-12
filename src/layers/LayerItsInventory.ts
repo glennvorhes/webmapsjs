@@ -6,8 +6,9 @@ import LayerBaseVectorGeoJson from './LayerBaseVectorGeoJson';
 import mapPopup from '../olHelpers/mapPopup';
 import provide from '../util/provide';
 import ol from 'custom-ol';
+import $ = require('jquery');
+
 let nm = provide('layers');
-const $ = require('jquery');
 
 
 function checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {

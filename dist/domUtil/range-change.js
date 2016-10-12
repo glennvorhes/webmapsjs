@@ -6,7 +6,6 @@ var mouseDown = false;
 var timeout = null;
 var dragged = false;
 var lastVal;
-var $ = require('jquery');
 /**
  * Created by gavorhes on 11/2/2015.
  */

@@ -11,8 +11,8 @@ var LayerBaseVector_1 = require('./LayerBaseVector');
 var provide_1 = require('../util/provide');
 var custom_ol_1 = require('custom-ol');
 var proj = require('../olHelpers/projections');
-var nm = provide_1.default('layers');
 var $ = require('jquery');
+var nm = provide_1.default('layers');
 /**
  * The Vector GeoJson Layer
  * @augments LayerBaseVector

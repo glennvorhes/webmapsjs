@@ -9,8 +9,8 @@ var __extends = (this && this.__extends) || function (d, b) {
  */
 var RealEarthAnimate_1 = require('./RealEarthAnimate');
 var provide_1 = require('../util/provide');
-var nm = provide_1.default('mixin');
 var $ = require('jquery');
+var nm = provide_1.default('mixin');
 /**
  * class mixin to animate RealEarth vector layers
  * @augments RealEarthAnimate

@@ -1,8 +1,10 @@
 import provide from '../util/provide';
+import $ = require('jquery');
+import 'jquery-ui';
+
+
 let nm = provide('domUtil');
 
-const $ = require('jquery');
-require('jquery-ui');
 
 export class DayRange {
     _workingDayRange: number;

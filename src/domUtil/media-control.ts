@@ -2,10 +2,9 @@
  * Created by gavorhes on 11/2/2015.
  */
 
-import Timer = NodeJS.Timer;
 import provide from '../util/provide';
 import {rangeChange} from './range-change';
-const $ = require('jquery');
+import $ = require('jquery');
 
 let nm = provide('domUtil');
 
@@ -54,7 +53,7 @@ export class MediaControl {
     _$valLabelVal: JQuery;
     _$valLabelMin: JQuery;
     _$valLabelMax: JQuery;
-    _interval: Timer;
+    _interval: number;
     _showAsDate: boolean;
 
     _changeFunc: changeFunction;

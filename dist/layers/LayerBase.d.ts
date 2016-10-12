@@ -19,27 +19,27 @@ export interface LayerBaseOptions {
  * @abstract
  */
 export declare abstract class LayerBase {
-    _legendCheckbox: boolean;
-    _url: string;
-    _opacity: number;
-    _minZoom: number;
-    _maxZoom: number;
-    _visible: boolean;
-    _loaded: boolean;
-    _zIndex: number;
-    _legendContent: string;
-    _params: any;
-    id: string;
-    _name: string;
-    _source: ol.source.Source;
-    animate: boolean;
-    _legendCollapse: boolean;
-    _maxResolution: number;
-    _minResolution: number;
-    _$legendDiv: JQuery;
+    protected _legendCheckbox: boolean;
+    protected _url: string;
+    protected _opacity: number;
+    protected _minZoom: number;
+    protected _maxZoom: number;
+    protected _visible: boolean;
+    protected _loaded: boolean;
+    protected _zIndex: number;
+    protected _legendContent: string;
+    protected _params: any;
+    protected _id: string;
+    protected _name: string;
+    protected _source: ol.source.Source;
+    protected _animate: boolean;
+    protected _legendCollapse: boolean;
+    protected _maxResolution: number;
+    protected _minResolution: number;
+    protected _$legendDiv: JQuery;
     loadCallback: Function;
-    _olLayer: ol.layer.Layer;
-    _applyCollapseCalled: boolean;
+    protected _olLayer: ol.layer.Layer;
+    protected _applyCollapseCalled: boolean;
     /**
      * The base layer for all others
      * @param {string} url - url for source
@@ -71,10 +71,10 @@ export declare abstract class LayerBase {
     getLegendDiv(): string;
     /**
      *
-     * @param {string|undefined} additionalContent - additional content to add to legend
+     * @param additionalContent - additional content to add to legend
      * @private
      */
-    _addLegendContent(additionalContent: any): void;
+    _addLegendContent(additionalContent?: string): void;
     /**
      * add additional content to the legend
      * @param {string} [additionalContent=] - additonal content to add
@@ -85,6 +85,8 @@ export declare abstract class LayerBase {
      * trick to refresh the layer
      */
     refresh(): void;
+    id: string;
+    animate: boolean;
     /**
      * get the legend content
      * @type {string}

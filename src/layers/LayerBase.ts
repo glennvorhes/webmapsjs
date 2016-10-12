@@ -2,11 +2,9 @@ import * as zoomResolutionConvert from '../olHelpers/zoomResolutionConvert';
 import provide from '../util/provide';
 import ol from 'custom-ol'
 import makeGuid from '../util/makeGuid';
+import $ = require('jquery');
+
 const nm = provide('layers');
-const $ = require('jquery');
-
-
-
 
 
 export interface LayerBaseOptions{
@@ -31,27 +29,27 @@ export interface LayerBaseOptions{
  */
 export abstract class LayerBase {
 
-    _legendCheckbox: boolean;
-    _url: string;
-    _opacity: number;
-    _minZoom: number;
-    _maxZoom: number;
-    _visible: boolean;
-    _loaded: boolean;
-    _zIndex: number;
-    _legendContent: string;
-    _params: any;
-    id: string;
-    _name: string;
-    _source: ol.source.Source;
-    animate: boolean;
-    _legendCollapse: boolean;
-    _maxResolution: number;
-    _minResolution: number;
-    _$legendDiv: JQuery;
+    protected _legendCheckbox: boolean;
+    protected _url: string;
+    protected _opacity: number;
+    protected _minZoom: number;
+    protected _maxZoom: number;
+    protected _visible: boolean;
+    protected _loaded: boolean;
+    protected _zIndex: number;
+    protected _legendContent: string;
+    protected _params: any;
+    protected _id: string;
+    protected _name: string;
+    protected _source: ol.source.Source;
+    protected _animate: boolean;
+    protected _legendCollapse: boolean;
+    protected _maxResolution: number;
+    protected _minResolution: number;
+    protected  _$legendDiv: JQuery;
     loadCallback: Function;
-    _olLayer: ol.layer.Layer;
-    _applyCollapseCalled: boolean;
+    protected _olLayer: ol.layer.Layer;
+    protected _applyCollapseCalled: boolean;
 
 
 
@@ -161,11 +159,10 @@ export abstract class LayerBase {
 
     /**
      *
-     * @param {string|undefined} additionalContent - additional content to add to legend
+     * @param additionalContent - additional content to add to legend
      * @private
      */
-    _addLegendContent(additionalContent) {
-        additionalContent = typeof additionalContent == 'string' ? additionalContent : '';
+    _addLegendContent(additionalContent='') {
 
         let addCollapse = additionalContent.indexOf('<ul>') > -1;
 
@@ -237,6 +234,21 @@ export abstract class LayerBase {
         }
     }
 
+    get id(): string{
+        return this._id;
+    }
+
+    set id(newId: string){
+        this._id = newId;
+    }
+
+    get animate(): boolean{
+        return this._animate;
+    }
+
+    set animate(animate: boolean){
+        this._animate = animate;
+    }
 
     /**
      * get the legend content

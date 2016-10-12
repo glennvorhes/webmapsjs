@@ -1,9 +1,4 @@
 /// <reference types="jquery" />
-/// <reference types="node" />
-/**
- * Created by gavorhes on 11/2/2015.
- */
-import Timer = NodeJS.Timer;
 export interface changeFunction {
     (newVal?: number): void;
 }
@@ -28,7 +23,7 @@ export declare class MediaControl {
     _$valLabelVal: JQuery;
     _$valLabelMin: JQuery;
     _$valLabelMax: JQuery;
-    _interval: Timer;
+    _interval: number;
     _showAsDate: boolean;
     _changeFunc: changeFunction;
     /**

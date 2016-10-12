@@ -7,7 +7,7 @@ import makeGuid from '../util/makeGuid';
 import mapMove from '../olHelpers/mapMove';
 
 let nm = provide('collections');
-const $ = require('jquery');
+import $ = require('jquery');
 
 class LayerGroup {
     groupLayers: any;

@@ -6,9 +6,9 @@ import * as esriToOl from '../olHelpers/esriToOlStyle';
 import mapPopup from '../olHelpers/mapPopup';
 import provide from '../util/provide';
 import ol from 'custom-ol';
-const nm = provide('layers');
+import $ = require('jquery');
 
-const $ = require('jquery');
+const nm = provide('layers');
 
 
 export interface LayerEsriMapServerOptions extends LayerBaseOptions {
@@ -114,6 +114,7 @@ export class LayerEsriMapServer extends LayerBase {
             this._popupRequest.abort();
         }
 
+
         this._popupRequest = $.get(urlCopy, queryParams, function (d) {
             for (let r of d['results']) {
 
@@ -140,9 +141,12 @@ export class LayerEsriMapServer extends LayerBase {
 
                 mapPopup.addMapServicePopupContent(_this._esriFormat.readFeature(r), _this, popupHtml, r['layerName']);
             }
-        }, 'json').always(function () {
+        }, 'json');
+
+        this._popupRequest.always(function () {
             _this._popupRequest = null;
         });
+
     }
 
     /**

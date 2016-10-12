@@ -12,8 +12,8 @@ var esriToOl = require('../olHelpers/esriToOlStyle');
 var mapPopup_1 = require('../olHelpers/mapPopup');
 var provide_1 = require('../util/provide');
 var custom_ol_1 = require('custom-ol');
-var nm = provide_1.default('layers');
 var $ = require('jquery');
+var nm = provide_1.default('layers');
 /**
  * esri mapserver layer
  * @augments LayerBase
@@ -111,7 +111,8 @@ var LayerEsriMapServer = (function (_super) {
                 popupHtml += '</table>';
                 mapPopup_1.default.addMapServicePopupContent(_this._esriFormat.readFeature(r), _this, popupHtml, r['layerName']);
             }
-        }, 'json').always(function () {
+        }, 'json');
+        this._popupRequest.always(function () {
             _this._popupRequest = null;
         });
     };

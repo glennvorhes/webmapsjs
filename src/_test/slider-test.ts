@@ -2,7 +2,7 @@
  * Created by gavorhes on 6/22/2016.
  */
 import {TipSliders, TipPresetConfig, TipSliderConfig} from '../collections/Sliders';
-const $ = require('jquery');
+import $ = require('jquery');
 import ol from 'custom-ol'
 
 

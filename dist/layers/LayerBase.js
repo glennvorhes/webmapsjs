@@ -2,8 +2,8 @@
 var zoomResolutionConvert = require('../olHelpers/zoomResolutionConvert');
 var provide_1 = require('../util/provide');
 var makeGuid_1 = require('../util/makeGuid');
-var nm = provide_1.default('layers');
 var $ = require('jquery');
+var nm = provide_1.default('layers');
 /**
  * The base layer class
  * @abstract
@@ -100,11 +100,11 @@ var LayerBase = (function () {
     };
     /**
      *
-     * @param {string|undefined} additionalContent - additional content to add to legend
+     * @param additionalContent - additional content to add to legend
      * @private
      */
     LayerBase.prototype._addLegendContent = function (additionalContent) {
-        additionalContent = typeof additionalContent == 'string' ? additionalContent : '';
+        if (additionalContent === void 0) { additionalContent = ''; }
         var addCollapse = additionalContent.indexOf('<ul>') > -1;
         if (addCollapse) {
             additionalContent = '<span class="legend-items-expander" title="Expand/Collapse">&#9660;</span>' + additionalContent;
@@ -159,6 +159,26 @@ var LayerBase = (function () {
             this.source.refresh();
         }
     };
+    Object.defineProperty(LayerBase.prototype, "id", {
+        get: function () {
+            return this._id;
+        },
+        set: function (newId) {
+            this._id = newId;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LayerBase.prototype, "animate", {
+        get: function () {
+            return this._animate;
+        },
+        set: function (animate) {
+            this._animate = animate;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(LayerBase.prototype, "legendContent", {
         /**
          * get the legend content

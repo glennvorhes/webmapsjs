@@ -1,8 +1,6 @@
-/// <reference types="node" />
 import LayerBaseVector from "../layers/LayerBaseVector";
 import MapInteractionBase from './mapInteractionBase';
 import ol from 'custom-ol';
-import Timer = NodeJS.Timer;
 export interface extentObject {
     minX: number;
     minY: number;
@@ -27,8 +25,8 @@ export declare class MapMoveCls extends MapInteractionBase {
     _zoomLevel: number;
     _lookupLayer: Object;
     _arrLayer: Array<LayerBaseVector>;
-    _arrLyrTimeout: Array<Timer>;
-    _mapMoveCallbackTimeout: Array<Timer>;
+    _arrLyrTimeout: Array<number>;
+    _mapMoveCallbackTimeout: Array<number>;
     _mapMoveCallbackDelays: Array<number>;
     _mapMoveCallbacksLookup: Object;
     _mapMoveCallbackContext: Array<Object>;

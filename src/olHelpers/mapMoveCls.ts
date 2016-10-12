@@ -4,8 +4,7 @@ import * as checkDefined from '../util/checkDefined';
 import provide from '../util/provide';
 import makeGuid from '../util/makeGuid';
 import ol from 'custom-ol';
-import Timer = NodeJS.Timer;
-const $ = require('jquery');
+import $ = require('jquery');
 const nm = provide('olHelpers');
 
 
@@ -36,8 +35,8 @@ export class MapMoveCls extends MapInteractionBase {
     _zoomLevel: number;
     _lookupLayer: Object;
     _arrLayer: Array<LayerBaseVector>;
-    _arrLyrTimeout: Array<Timer>;
-    _mapMoveCallbackTimeout: Array<Timer>;
+    _arrLyrTimeout: Array<number>;
+    _mapMoveCallbackTimeout: Array<number>;
     _mapMoveCallbackDelays: Array<number>;
     _mapMoveCallbacksLookup: Object;
     _mapMoveCallbackContext: Array<Object>;

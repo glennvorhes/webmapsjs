@@ -8,8 +8,7 @@ import provide from '../util/provide';
 import ol from 'custom-ol';
 import {LayerBaseVector} from "../layers/LayerBaseVector";
 import LayerEsriMapServer from "../layers/LayerEsriMapServer";
-
-const $ = require('jquery');
+import $ = require('jquery');
 
 const nm = provide('olHelpers');
 

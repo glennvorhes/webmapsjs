@@ -1,4 +1,5 @@
 import provide from '../util/provide';
+import $ = require('jquery');
 
 const nm = provide('domUtil');
 
@@ -7,7 +8,6 @@ let mouseDown = false;
 let timeout = null;
 let dragged = false;
 let lastVal;
-const $ = require('jquery');
 
 
 /**

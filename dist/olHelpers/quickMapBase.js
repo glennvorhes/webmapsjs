@@ -4,8 +4,8 @@
 "use strict";
 var provide_1 = require('../util/provide');
 var custom_ol_1 = require('custom-ol');
-var nm = provide_1.default('olHelpers');
 var $ = require('jquery');
+var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
  * mapMove and mapPopup
@@ -48,21 +48,22 @@ function quickMapBase(options) {
         options.center.x = coordinates[0];
         options.center.y = coordinates[1];
     }
+    var controls = custom_ol_1.default.control.defaults({
+        attributionOptions: { collapsible: false }
+    });
+    var view = new custom_ol_1.default.View({
+        center: [options.center.x, options.center.y],
+        zoom: options.zoom,
+        minZoom: options.minZoom,
+        maxZoom: options.maxZoom
+    });
     var map = new custom_ol_1.default.Map({
         layers: [osmLayer],
         target: options.divId,
-        controls: custom_ol_1.default.control.defaults({
-            attributionOptions: { collapsible: false }
-        }),
-        view: new custom_ol_1.default.View({
-            center: [options.center.x, options.center.y],
-            zoom: options.zoom,
-            minZoom: options.minZoom,
-            maxZoom: options.maxZoom
-        })
+        controls: controls,
+        view: view
     });
     if (options.fullScreen) {
-        //TODO add full screen options to ts
         map.addControl(new custom_ol_1.default.control.FullScreen({}));
     }
     return map;

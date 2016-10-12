@@ -7,9 +7,9 @@ import provide from '../util/provide';
 import ol from 'custom-ol';
 import {MapMoveCls} from "../olHelpers/mapMoveCls";
 import * as proj from '../olHelpers/projections';
+import $ = require('jquery');
 
 let nm = provide('layers');
-const $ = require('jquery');
 
 
 

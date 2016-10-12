@@ -4,9 +4,8 @@
 
 import provide from '../util/provide';
 import ol from 'custom-ol';
+import $ = require('jquery');
 const nm = provide('olHelpers');
-const $ = require('jquery');
-
 
 export interface quickMapOptions {
     divId?: string;
@@ -86,22 +85,26 @@ export function quickMapBase(options?: quickMapOptions): ol.Map {
         options.center.y = coordinates[1];
     }
 
+    const controls = ol.control.defaults({
+            attributionOptions: {collapsible: false}
+        }
+    );
+
+    const view = new ol.View({
+        center: [options.center.x, options.center.y],
+        zoom: options.zoom,
+        minZoom: options.minZoom,
+        maxZoom: options.maxZoom
+    });
+
     let map = new ol.Map({
         layers: [osmLayer],
         target: options.divId,
-        controls: ol.control.defaults({
-            attributionOptions: {collapsible: false}
-        }),
-        view: new ol.View({
-            center: [options.center.x, options.center.y],
-            zoom: options.zoom,
-            minZoom: options.minZoom,
-            maxZoom: options.maxZoom
-        })
+        controls: controls,
+        view: view
     });
 
     if (options.fullScreen) {
-        //TODO add full screen options to ts
         map.addControl(new ol.control.FullScreen({}));
     }
 

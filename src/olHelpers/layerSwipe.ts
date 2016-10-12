@@ -6,8 +6,7 @@
 import provide from '../util/provide';
 import {LayerBase} from "../layers/LayerBase";
 import ol from 'custom-ol';
-
-const $ = require('jquery');
+import $ = require('jquery');
 
 let nm = provide('collections.layerSwipe');
 

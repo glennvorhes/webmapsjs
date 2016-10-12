@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+import 'jquery-ui';
 export declare class DayRange {
     _workingDayRange: number;
     _$startDate: JQuery;

@@ -11,8 +11,8 @@ var LayerBaseVectorGeoJson_1 = require('./LayerBaseVectorGeoJson');
 var mapPopup_1 = require('../olHelpers/mapPopup');
 var provide_1 = require('../util/provide');
 var custom_ol_1 = require('custom-ol');
-var nm = provide_1.default('layers');
 var $ = require('jquery');
+var nm = provide_1.default('layers');
 function checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
     "use strict";
     //make sure one and only one configuration is defined;

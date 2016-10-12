@@ -3,7 +3,7 @@
  */
 
 import {DayRange} from '../domUtil/day-range';
-const $ = require('jquery');
+import $ = require('jquery');
 
 let dayRange = new DayRange($('#day-range'), 10);
 

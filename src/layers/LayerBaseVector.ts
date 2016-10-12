@@ -3,7 +3,7 @@ import mapMove from '../olHelpers/mapMove';
 import MapMoveCls from '../olHelpers/mapMoveCls'
 import provide from '../util/provide';
 import ol from 'custom-ol'
-const $ = require('jquery');
+import $ = require('jquery');
 
 let g = new ol.Map({});
 

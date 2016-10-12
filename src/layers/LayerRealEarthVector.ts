@@ -6,6 +6,7 @@ import {LayerBaseVectorGeoJson, LayerBaseVectorGeoJsonOptions} from './LayerBase
 import RealEarthAnimateVector from '../mixin/RealEarthAnimateVector';
 import provide from '../util/provide';
 import {IRealEarthAnimate, timesLoadedCallback} from "../mixin/RealEarthAnimate";
+
 const nm = provide('layers');
 
 export interface LayerVectorRealEarthOptions extends LayerBaseVectorGeoJsonOptions {

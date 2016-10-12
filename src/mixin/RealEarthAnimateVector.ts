@@ -5,8 +5,8 @@ import RealEarthAnimate from './RealEarthAnimate';
 import provide from '../util/provide';
 import ol from 'custom-ol';
 import {LayerVectorRealEarth} from "../layers/LayerRealEarthVector";
+import $ = require('jquery');
 const nm = provide('mixin');
-const $ = require('jquery');
 
 
 /**

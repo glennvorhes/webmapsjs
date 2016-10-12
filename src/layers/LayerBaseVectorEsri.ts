@@ -6,7 +6,7 @@ import {LayerBaseVector, LayerBaseVectorOptions} from './LayerBaseVector';
 import * as esriToOl from '../olHelpers/esriToOlStyle';
 import provide from '../util/provide';
 import ol from 'custom-ol'
-const $ = require('jquery');
+import $ = require('jquery');
 let nm = provide('layers');
 
 export interface LayerBaseVectorEsriOptions  extends LayerBaseVectorOptions{

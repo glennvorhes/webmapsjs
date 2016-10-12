@@ -3,8 +3,9 @@
  */
 
 import provide from '../util/provide';
+import $ = require('jquery');
+
 let nm = provide('collections');
-const $ = require('jquery');
 
 export interface TipSliderConfig {
     label: string;

@@ -5,7 +5,8 @@ import provide from '../util/provide';
 import mapPopup from '../olHelpers/mapPopup';
 import LayerRealEarthTile from "../layers/LayerRealEarthTile";
 import {LayerVectorRealEarth} from '../layers/LayerRealEarthVector'
-const $ = require('jquery');
+import $ = require('jquery');
+
 const nm = provide('mixin');
 
 
