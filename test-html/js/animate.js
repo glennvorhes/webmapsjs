@@ -52,6 +52,8 @@
 	var LayerRealEarthTile_1 = __webpack_require__(/*! ../layers/LayerRealEarthTile */ 31);
 	var media_control_1 = __webpack_require__(/*! ../domUtil/media-control */ 35);
 	var $ = __webpack_require__(/*! jquery */ 6);
+	var LayerBaseVectorEsri_1 = __webpack_require__(/*! ../layers/LayerBaseVectorEsri */ 36);
+	var LayerEsriMapServer_1 = __webpack_require__(/*! ../layers/LayerEsriMapServer */ 15);
 	var nexrhresStatic = new LayerRealEarthTile_1.default({
 	    products: 'nexrhres',
 	    id: 'nexrhres-static',
@@ -59,7 +61,9 @@
 	    animate: true,
 	    name: 'Hybrid Reflectivity',
 	    // maxZoom: 10,
-	    timeLoadCallback: function (f) { console.log(f); }
+	    timeLoadCallback: function (f) {
+	        console.log(f);
+	    }
 	});
 	var d = new Date();
 	var endTime = d.getTime();
@@ -78,6 +82,34 @@
 	});
 	var map = quickMap_1.quickMap();
 	map.addLayer(nexrhresStatic.olLayer);
+	var coordinationLayer = new LayerBaseVectorEsri_1.LayerBaseVectorEsri('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/GLRTOC/GlrtocCoordination/MapServer/0', {
+	    visible: true,
+	    autoLoad: true,
+	    name: 'Coordination',
+	    useEsriStyle: true
+	});
+	map.addLayer(coordinationLayer.olLayer);
+	var oakRidgeLayers = [
+	    ['Cameras', 'cameras33'],
+	    ['HAR', 'HAR33'],
+	    ['DMS', 'MessageSigns33'],
+	    //['State Summary', 'statesummary'],
+	    ['Traffic Control', 'TrafficControl33'],
+	    ['Traffic Detection', 'TrafficDetectionMulti'],
+	    ['Weather', 'Weather33']
+	];
+	for (var i = 0; i < oakRidgeLayers.length; i++) {
+	    var oakRidgeLayer = new LayerEsriMapServer_1.LayerEsriMapServer("http://itsdpro.ornl.gov/arcgis/rest/services/ITSPublic/" + oakRidgeLayers[i][1] + "/MapServer", {
+	        id: oakRidgeLayers[i][1],
+	        name: oakRidgeLayers[i][0],
+	        visible: true,
+	        minZoom: 7,
+	        zIndex: 20,
+	        addPopup: true,
+	        legendCollapse: true
+	    });
+	    map.addLayer(oakRidgeLayer.olLayer);
+	}
 
 
 /***/ },
@@ -11372,7 +11404,160 @@
 
 /***/ },
 /* 14 */,
-/* 15 */,
+/* 15 */
+/*!*******************************************!*\
+  !*** ./dist/layers/LayerEsriMapServer.js ***!
+  \*******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	/**
+	 * Created by gavorhes on 12/7/2015.
+	 */
+	var LayerBase_1 = __webpack_require__(/*! ./LayerBase */ 16);
+	var esriToOl = __webpack_require__(/*! ../olHelpers/esriToOlStyle */ 18);
+	var mapPopup_1 = __webpack_require__(/*! ../olHelpers/mapPopup */ 12);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var custom_ol_1 = __webpack_require__(/*! custom-ol */ 4);
+	var nm = provide_1.default('layers');
+	var $ = __webpack_require__(/*! jquery */ 6);
+	/**
+	 * esri mapserver layer
+	 * @augments LayerBase
+	 */
+	var LayerEsriMapServer = (function (_super) {
+	    __extends(LayerEsriMapServer, _super);
+	    /**
+	     * The base layer for all others
+	     * @param {string} url - resource url
+	     * @param {object} [options] - config
+	     * @param {string} [options.id] - layer id
+	     * @param {string} [options.name=Unnamed Layer] - layer name
+	     * @param {number} [options.opacity=1] - opacity
+	     * @param {boolean} [options.visible=true] - default visible
+	     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+	     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+	     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+	     * @param {number} [options.zIndex=0] the z index for the layer
+	     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+	     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+	     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+	     * @param {boolean} [options.legendContent] additional content to add to the legend
+	     * @param {boolean} [options.addPopup=false] if a popup should be added
+	     * @param {undefined|Array<number>} [options.showLayers=undefined] if a popup should be added
+	     */
+	    function LayerEsriMapServer(url, options) {
+	        if (options === void 0) { options = {}; }
+	        _super.call(this, url, options);
+	        this._source = new custom_ol_1.default.source.TileArcGISRest({
+	            url: this.url == '' ? undefined : this.url,
+	            params: typeof options.showLayers == 'undefined' ? undefined : { layers: 'show:' + options.showLayers.join(',') }
+	        });
+	        this._olLayer = new custom_ol_1.default.layer.Tile({
+	            source: this._source,
+	            visible: this.visible,
+	            opacity: this.opacity,
+	            minResolution: this._minResolution,
+	            maxResolution: this._maxResolution
+	        });
+	        this._olLayer.setZIndex(this._zIndex);
+	        options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
+	        this._esriFormat = new custom_ol_1.default.format.EsriJSON();
+	        this._popupRequest = null;
+	        this.addLegendContent();
+	        if (options.addPopup) {
+	            mapPopup_1.default.addMapServicePopup(this);
+	        }
+	    }
+	    /**
+	     * add additional content to the legend
+	     * @param {string} [additionalContent=''] additional content for legend
+	     */
+	    LayerEsriMapServer.prototype.addLegendContent = function (additionalContent) {
+	        var _this = this;
+	        var urlCopy = this.url;
+	        if (urlCopy[urlCopy.length - 1] !== '/') {
+	            urlCopy += '/';
+	        }
+	        urlCopy += 'legend?f=pjson&callback=?';
+	        $.get(urlCopy, {}, function (d) {
+	            var newHtml = esriToOl.makeMapServiceLegend(d);
+	            _super.prototype.addLegendContent.call(_this, newHtml);
+	        }, 'json');
+	    };
+	    LayerEsriMapServer.prototype.getPopupInfo = function (queryParams) {
+	        if (!this.visible) {
+	            return;
+	        }
+	        var urlCopy = this.url;
+	        if (urlCopy[urlCopy.length - 1] != '/') {
+	            urlCopy += '/';
+	        }
+	        urlCopy += 'identify?callback=?';
+	        var _this = this;
+	        if (this._popupRequest != null) {
+	            this._popupRequest.abort();
+	        }
+	        this._popupRequest = $.get(urlCopy, queryParams, function (d) {
+	            for (var _i = 0, _a = d['results']; _i < _a.length; _i++) {
+	                var r = _a[_i];
+	                var popupHtml = '<table class="esri-popup-table">';
+	                for (var a in r['attributes']) {
+	                    if (r['attributes'].hasOwnProperty(a)) {
+	                        var attrVal = r['attributes'][a];
+	                        if (attrVal == null || attrVal.toString().toLowerCase() == 'null') {
+	                            continue;
+	                        }
+	                        var attr = a;
+	                        if (attr.length > 14) {
+	                            attr = attr.slice(0, 11) + '...';
+	                        }
+	                        popupHtml += "<tr><td>" + attr + "</td><td>" + attrVal + "</td></tr>";
+	                    }
+	                }
+	                popupHtml += '</table>';
+	                mapPopup_1.default.addMapServicePopupContent(_this._esriFormat.readFeature(r), _this, popupHtml, r['layerName']);
+	            }
+	        }, 'json').always(function () {
+	            _this._popupRequest = null;
+	        });
+	    };
+	    Object.defineProperty(LayerEsriMapServer.prototype, "source", {
+	        /**
+	         *
+	         * @returns {ol.source.TileArcGISRest} the vector source
+	         */
+	        get: function () {
+	            return _super.prototype.getSource.call(this);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerEsriMapServer.prototype, "olLayer", {
+	        /**
+	         *
+	         * @returns the ol layer
+	         */
+	        get: function () {
+	            return _super.prototype.getOlLayer.call(this);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    return LayerEsriMapServer;
+	}(LayerBase_1.LayerBase));
+	exports.LayerEsriMapServer = LayerEsriMapServer;
+	nm.LayerEsriMapServer = LayerEsriMapServer;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = LayerEsriMapServer;
+
+
+/***/ },
 /* 16 */
 /*!**********************************!*\
   !*** ./dist/layers/LayerBase.js ***!
@@ -11847,12 +12032,679 @@
 
 
 /***/ },
-/* 18 */,
+/* 18 */
+/*!*****************************************!*\
+  !*** ./dist/olHelpers/esriToOlStyle.js ***!
+  \*****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	/**
+	 * Created by gavorhes on 1/4/2016.
+	 */
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var custom_ol_1 = __webpack_require__(/*! custom-ol */ 4);
+	var nm = provide_1.default('olHelpers.esriToOlStyle');
+	/**
+	 * This callback is displayed as part of the Requester class.
+	 * @callback styleFunc
+	 * @param {ol.Feature} feat - openlayers feature
+	 * @param {number} resolution - map resolution
+	 */
+	/**
+	 *
+	 * @param {Array<number>} colorArray - input color array
+	 * @param {number} opacity - the opacity 0 to 1
+	 * @returns {string} rgba string
+	 * @private
+	 */
+	function _colorArrayToRgba(colorArray, opacity) {
+	    "use strict";
+	    return "rgba(" + colorArray[0] + "," + colorArray[1] + "," + colorArray[2] + "," + opacity + ")";
+	}
+	/**
+	 * escape html charcters
+	 * @param {string} str - input string
+	 * @returns {string} escaped string
+	 */
+	function htmlEscape(str) {
+	    return String(str)
+	        .replace(/&/g, '&amp;')
+	        .replace(/"/g, '&quot;')
+	        .replace(/'/g, '&#39;')
+	        .replace(/</g, '&lt;')
+	        .replace(/>/g, '&gt;');
+	}
+	nm.htmlEscape = htmlEscape;
+	var CommonSymbol = (function () {
+	    /**
+	     *
+	     * @param symbolObj
+	     * @param {number} opacity
+	     */
+	    function CommonSymbol(symbolObj, opacity) {
+	        this.symbolObj = symbolObj;
+	        this.opacity = opacity;
+	        this.olStyle = undefined;
+	        this.legendHtml = '';
+	    }
+	    return CommonSymbol;
+	}());
+	var PointSymbol = (function (_super) {
+	    __extends(PointSymbol, _super);
+	    function PointSymbol(symbolObj, opacity) {
+	        _super.call(this, symbolObj, opacity);
+	        switch (this.symbolObj.type) {
+	            case 'esriSMS':
+	                var innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
+	                var outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);
+	                var outlineWidth = this.symbolObj.outline.width;
+	                var radius = this.symbolObj.size;
+	                this.olStyle = new custom_ol_1.default.style.Style({
+	                    image: new custom_ol_1.default.style.Circle({
+	                        radius: radius,
+	                        fill: new custom_ol_1.default.style.Fill({
+	                            color: innerColor
+	                        }),
+	                        stroke: new custom_ol_1.default.style.Stroke({ color: outerColor, width: outlineWidth })
+	                    })
+	                });
+	                this.legendHtml = "<span class=\"legend-layer-icon\" style=\"color: " + innerColor + "\">&#9679;</span>";
+	                break;
+	            case 'esriPMS':
+	                this.olStyle = new custom_ol_1.default.style.Style({
+	                    image: new custom_ol_1.default.style.Icon({ src: "data:image/png;base64," + this.symbolObj['imageData'] })
+	                });
+	                this.legendHtml = "<img class=\"legend-layer-icon\" height=\"17\" src=\"data:image/png;base64," + this.symbolObj['imageData'] + "\">";
+	                break;
+	            default:
+	                console.log(this.symbolObj);
+	                alert('Point symbol does not handle symbol type: ' + this.symbolObj['type']);
+	        }
+	    }
+	    return PointSymbol;
+	}(CommonSymbol));
+	var LineSymbol = (function (_super) {
+	    __extends(LineSymbol, _super);
+	    function LineSymbol(symbolObj, opacity) {
+	        _super.call(this, symbolObj, opacity);
+	        switch (this.symbolObj.type) {
+	            case 'esriSLS':
+	                var innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
+	                var lineWidth = this.symbolObj.width;
+	                this.olStyle = new custom_ol_1.default.style.Style({
+	                    stroke: new custom_ol_1.default.style.Stroke({
+	                        color: innerColor,
+	                        //lineDash: [4],
+	                        width: lineWidth
+	                    })
+	                });
+	                this.legendHtml = "<span class=\"legend-layer-icon\" ";
+	                this.legendHtml += "style=\"";
+	                this.legendHtml += "background-color: " + innerColor + ";";
+	                this.legendHtml += "width: 40px;";
+	                this.legendHtml += "height: 4px;";
+	                this.legendHtml += "position: relative;";
+	                this.legendHtml += "display: inline-block;";
+	                this.legendHtml += "top: -1px;";
+	                this.legendHtml += "\"></span>";
+	                break;
+	            default:
+	                console.log(this.symbolObj);
+	                alert('Line symbol does not handle symbol type: ' + this.symbolObj['type']);
+	        }
+	    }
+	    return LineSymbol;
+	}(CommonSymbol));
+	var PolygonSymbol = (function (_super) {
+	    __extends(PolygonSymbol, _super);
+	    function PolygonSymbol(symbolObj, opacity) {
+	        _super.call(this, symbolObj, opacity);
+	        switch (this.symbolObj['type']) {
+	            case 'esriSFS':
+	                var innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
+	                var outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);
+	                var outlineWidth = this.symbolObj.outline.width;
+	                this.olStyle = new custom_ol_1.default.style.Style({
+	                    stroke: new custom_ol_1.default.style.Stroke({
+	                        color: outerColor,
+	                        //lineDash: [4],
+	                        width: outlineWidth
+	                    }),
+	                    fill: new custom_ol_1.default.style.Fill({
+	                        color: innerColor
+	                    })
+	                });
+	                this.legendHtml = "<span class=\"legend-layer-icon\" ";
+	                this.legendHtml += "style=\"";
+	                this.legendHtml += "background-color: " + innerColor + ";";
+	                this.legendHtml += "border: solid " + outerColor + " 1px;";
+	                this.legendHtml += "width: 40px;";
+	                this.legendHtml += "height: 9px;";
+	                this.legendHtml += "position: relative;";
+	                this.legendHtml += "display: inline-block;";
+	                this.legendHtml += "top: 2px;";
+	                this.legendHtml += "\"></span>";
+	                break;
+	            default:
+	                console.log(this.symbolObj);
+	                alert('Polygon symbol does handle symbol type: ' + this.symbolObj['type']);
+	        }
+	    }
+	    return PolygonSymbol;
+	}(CommonSymbol));
+	var SymbolGenerator = (function () {
+	    function SymbolGenerator(esriResponse) {
+	        this.opacity = (100 - (esriResponse['drawingInfo']['transparency'] || 0)) / 100;
+	        this.renderer = esriResponse.drawingInfo.renderer;
+	        this.olStyle = undefined;
+	        this.legendHtml = '';
+	    }
+	    return SymbolGenerator;
+	}());
+	var SingleSymbol = (function (_super) {
+	    __extends(SingleSymbol, _super);
+	    /**
+	     *
+	     * @param {object} esriResponse - layer info
+	     * @param SymbolClass - the symbol class to use
+	     */
+	    function SingleSymbol(esriResponse, SymbolClass) {
+	        _super.call(this, esriResponse);
+	        this.symbol = this.renderer.symbol;
+	        var symbolObj = new SymbolClass(this.symbol, this.opacity);
+	        this.olStyle = symbolObj.olStyle;
+	        this.legendHtml = symbolObj.legendHtml;
+	    }
+	    return SingleSymbol;
+	}(SymbolGenerator));
+	var UniqueValueSymbol = (function (_super) {
+	    __extends(UniqueValueSymbol, _super);
+	    /**
+	     *
+	     * @param {object} esriResponse - layer info
+	     * @param SymbolClass - the Symbol class definition
+	     */
+	    function UniqueValueSymbol(esriResponse, SymbolClass) {
+	        var _this = this;
+	        _super.call(this, esriResponse);
+	        this.uniqueValueInfos = this.renderer['uniqueValueInfos'];
+	        this.propertyName = this.renderer['field1'];
+	        this.defaultSymbol = this.renderer['defaultSymbol'];
+	        if (this.defaultSymbol) {
+	            var symbolObj = new SymbolClass(this.defaultSymbol, this.opacity);
+	            this.defaultStyle = symbolObj.olStyle;
+	            this.defaultLabelHtml = ("<span class=\"legend-layer-subitem\">" + htmlEscape(this.renderer['defaultLabel']) + "</span>") + symbolObj.legendHtml;
+	        }
+	        else {
+	            this.defaultStyle = undefined;
+	            this.defaultLabelHtml = 'other';
+	        }
+	        this.valueArray = [];
+	        this.labelArray = [];
+	        this.legendArray = [];
+	        this.propertyStyleLookup = {};
+	        for (var _i = 0, _a = this.uniqueValueInfos; _i < _a.length; _i++) {
+	            var uniqueVal = _a[_i];
+	            this.labelArray.push(uniqueVal['label']);
+	            this.valueArray.push(uniqueVal['value']);
+	            var uniqueSym = new SymbolClass(uniqueVal.symbol, this.opacity);
+	            this.legendArray.push(("<span class=\"legend-layer-subitem\">" + htmlEscape(uniqueVal['label']) + "</span>") + uniqueSym.legendHtml);
+	            this.propertyStyleLookup[uniqueVal['value']] = uniqueSym.olStyle;
+	        }
+	        this.olStyle = function (feature) {
+	            var checkProperties = feature.getProperties();
+	            var checkProperty = checkProperties[_this.propertyName];
+	            var returnValue;
+	            if (_this.propertyStyleLookup[checkProperty] !== undefined) {
+	                returnValue = [_this.propertyStyleLookup[checkProperty]];
+	            }
+	            else {
+	                returnValue = [_this.defaultStyle];
+	            }
+	            return returnValue;
+	        };
+	        if (this.defaultLabelHtml !== null) {
+	            this.legendArray.push(this.defaultLabelHtml);
+	        }
+	        this.legendHtml = '<ul>';
+	        for (var _b = 0, _c = this.legendArray; _b < _c.length; _b++) {
+	            var h = _c[_b];
+	            this.legendHtml += "<li>" + h + "</li>";
+	        }
+	        this.legendHtml += '</ul>';
+	    }
+	    return UniqueValueSymbol;
+	}(SymbolGenerator));
+	/**
+	 * style and legend object
+	 * @typedef {object} styleAndLegend
+	 * @property {styleFunc} style - style function
+	 * @property {string} legend - legend content
+	 */
+	/**
+	 *
+	 * @param {object} esriResponse - layer info
+	 * @returns {styleAndLegend} style and legend object
+	 */
+	function makeFeatureServiceLegendAndSymbol(esriResponse) {
+	    "use strict";
+	    var renderer = esriResponse.drawingInfo.renderer;
+	    var symbolLegendOut = null;
+	    switch (renderer.type) {
+	        case 'simple':
+	            switch (esriResponse.geometryType) {
+	                case 'esriGeometryPoint':
+	                    symbolLegendOut = new SingleSymbol(esriResponse, PointSymbol);
+	                    break;
+	                case 'esriGeometryPolyline':
+	                    symbolLegendOut = new SingleSymbol(esriResponse, LineSymbol);
+	                    break;
+	                case 'esriGeometryPolygon':
+	                    symbolLegendOut = new SingleSymbol(esriResponse, PolygonSymbol);
+	                    break;
+	                default:
+	                    console.log(esriResponse);
+	                    alert(esriResponse.geometryType + ' not handled');
+	            }
+	            break;
+	        case 'uniqueValue':
+	            switch (esriResponse.geometryType) {
+	                case 'esriGeometryPoint':
+	                    symbolLegendOut = new UniqueValueSymbol(esriResponse, PointSymbol);
+	                    break;
+	                case 'esriGeometryPolyline':
+	                    symbolLegendOut = new UniqueValueSymbol(esriResponse, LineSymbol);
+	                    break;
+	                case 'esriGeometryPolygon':
+	                    symbolLegendOut = new UniqueValueSymbol(esriResponse, PolygonSymbol);
+	                    break;
+	                default:
+	                    console.log(esriResponse);
+	                    alert(esriResponse['geometryType'] + ' not handled');
+	            }
+	            break;
+	        default:
+	            alert('not handled renderer type: ' + renderer['type']);
+	    }
+	    if (symbolLegendOut == null) {
+	        return { style: undefined, legend: '' };
+	    }
+	    else {
+	        return { style: symbolLegendOut.olStyle, legend: symbolLegendOut.legendHtml };
+	    }
+	}
+	exports.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
+	nm.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
+	/**
+	 *
+	 * @param {object} lyrObject - the layer as defined in the response
+	 * @param {boolean} [skipLayerNameAndExpander=false] use only icons
+	 * @returns {string} legend html
+	 */
+	function mapServiceLegendItem(lyrObject, skipLayerNameAndExpander) {
+	    if (skipLayerNameAndExpander === void 0) { skipLayerNameAndExpander = false; }
+	    skipLayerNameAndExpander = typeof skipLayerNameAndExpander == 'boolean' ? skipLayerNameAndExpander : false;
+	    var layerName = lyrObject['layerName'];
+	    var legendItems = lyrObject['legend'];
+	    var legendHtml = '';
+	    if (!skipLayerNameAndExpander) {
+	        legendHtml += "<span class=\"legend-layer-subitem\">" + layerName + "</span>";
+	    }
+	    if (legendItems.length == 1) {
+	        legendHtml = "<img class=\"legend-layer-icon\" height=\"17\" src=\"data:image/png;base64," + legendItems[0]['imageData'] + "\">";
+	    }
+	    else {
+	        if (!skipLayerNameAndExpander) {
+	            legendHtml += '<span class="legend-items-expander" title="Expand/Collapse">&#9660;</span>';
+	        }
+	        legendHtml += '<ul>';
+	        for (var i = 0; i < legendItems.length; i++) {
+	            legendHtml += "<li>";
+	            legendHtml += "<span class=\"legend-layer-subitem\">" + htmlEscape(legendItems[i]['label']) + "</span>";
+	            legendHtml += "<img class=\"legend-layer-icon\" height=\"17\" src=\"data:image/png;base64," + legendItems[i]['imageData'] + "\">";
+	            legendHtml += "</li>";
+	        }
+	        legendHtml += '</ul>';
+	    }
+	    if (!skipLayerNameAndExpander) {
+	        legendHtml = ("<span class=\"legend-layer-subitem\">" + layerName + "</span>") + legendHtml;
+	    }
+	    return legendHtml;
+	}
+	/**
+	 * make map service legent
+	 * @param {object} esriResponse - layer info
+	 * @returns {string} legend content
+	 */
+	function makeMapServiceLegend(esriResponse) {
+	    "use strict";
+	    var newLegendHtml = '';
+	    var layers = esriResponse['layers'];
+	    if (layers.length == 1) {
+	        newLegendHtml += mapServiceLegendItem(layers[0], true);
+	    }
+	    else {
+	        newLegendHtml += '<ul>';
+	        for (var i = 0; i < layers.length; i++) {
+	            newLegendHtml += '<li>' + mapServiceLegendItem(layers[i]) + '</li>';
+	        }
+	        newLegendHtml += '</ul>';
+	    }
+	    return newLegendHtml;
+	}
+	exports.makeMapServiceLegend = makeMapServiceLegend;
+	nm.makeMapServiceLegend = makeMapServiceLegend;
+
+
+/***/ },
 /* 19 */,
 /* 20 */,
 /* 21 */,
 /* 22 */,
-/* 23 */,
+/* 23 */
+/*!****************************************!*\
+  !*** ./dist/layers/LayerBaseVector.js ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var LayerBase_1 = __webpack_require__(/*! ./LayerBase */ 16);
+	var mapMove_1 = __webpack_require__(/*! ../olHelpers/mapMove */ 7);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var custom_ol_1 = __webpack_require__(/*! custom-ol */ 4);
+	var $ = __webpack_require__(/*! jquery */ 6);
+	var g = new custom_ol_1.default.Map({});
+	var nm = provide_1.default('layers');
+	/**
+	 * The Vector layer base
+	 * @augments LayerBase
+	 * @abstract
+	 */
+	var LayerBaseVector = (function (_super) {
+	    __extends(LayerBaseVector, _super);
+	    /**
+	     * The base vector layer
+	     * @param {string} url - pass an empty string to prevent default load and add from a json source
+	     * @param {object} options - config
+	     * @param {string} [options.id] - layer id
+	     * @param {string} [options.name=Unnamed Layer] - layer name
+	     * @param {number} [options.opacity=1] - opacity
+	     * @param {boolean} [options.visible=true] - default visible
+	     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+	     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+	     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+	     * @param {number} [options.zIndex=0] the z index for the layer
+	     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+	     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+	     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+	     * @param {boolean} [options.legendContent] additional content to add to the legend
+	     *
+	     * @param {boolean} [options.autoLoad=false] if the layer should auto load if not visible
+	     * @param {object} [options.style=undefined] the layer style, use openlayers default style if not defined
+	     * @param {boolean} [options.onDemand=false] if the layer should be loaded by extent on map move
+	     * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
+	     * @param {mapMoveMakeGetParams} [options.mapMoveMakeGetParams=function(lyr, extent, zoomLevel){}] function to create additional map move params
+	     * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
+	     *
+	     */
+	    function LayerBaseVector(url, options) {
+	        if (options === void 0) { options = {}; }
+	        _super.call(this, url, options);
+	        options = options;
+	        //prevent regular load if no url has been provided
+	        if (this.url.trim() == '') {
+	            this._loaded = true;
+	        }
+	        this._style = typeof options.style == 'undefined' ? undefined : options.style;
+	        if (this.visible) {
+	            this._autoLoad = true;
+	        }
+	        else {
+	            this._autoLoad = (typeof options['autoLoad'] == 'boolean' ? options['autoLoad'] : false);
+	        }
+	        this._onDemand = typeof options.onDemand == 'boolean' ? options.onDemand : false;
+	        this._onDemandDelay = typeof options.onDemandDelay == 'number' ? options.onDemandDelay : 300;
+	        if (options.mapMoveObj) {
+	            this._mapMove = options.mapMoveObj;
+	        }
+	        else {
+	            this._mapMove = this._onDemand ? mapMove_1.default : undefined;
+	        }
+	        this._mapMoveMakeGetParams = typeof options.mapMoveMakeGetParams == 'function' ? options.mapMoveMakeGetParams :
+	            function () { return {}; };
+	        if (this._onDemand) {
+	            this._loaded = true;
+	            this._mapMoveParams = {};
+	            this._mapMove.checkInit();
+	            this._mapMove.addVectorLayer(this);
+	        }
+	        this._source = new custom_ol_1.default.source.Vector();
+	        this._olLayer = new custom_ol_1.default.layer.Vector({
+	            source: this._source,
+	            visible: this.visible,
+	            style: this.style,
+	            minResolution: this._minResolution,
+	            maxResolution: this._maxResolution
+	        });
+	        this.olLayer.setZIndex(this._zIndex);
+	        this._projectionMap = null;
+	        this._projection4326 = new custom_ol_1.default.proj.Projection({ code: "EPSG:4326" });
+	    }
+	    /**
+	     * dummy to be overridden
+	     * @param {object} featureCollection - geojson or esrijson object
+	     */
+	    LayerBaseVector.prototype.addFeatures = function (featureCollection) {
+	        console.log('Layer vector base addFeatures is a placeholder and does nothing');
+	    };
+	    /**
+	     * Before call to map move callback, can prevent call by returning false
+	     * @param {number} zoom - zoom level
+	     * @param {string} [evtType=undefined] undefined for initial load, otherwise one of 'change:center', 'change:resolution'
+	     * @returns {boolean} if the call should proceed
+	     */
+	    LayerBaseVector.prototype.mapMoveBefore = function (zoom, evtType) {
+	        if (this.minZoom !== undefined) {
+	            if (zoom < this.minZoom) {
+	                return false;
+	            }
+	        }
+	        if (this.maxZoom !== undefined) {
+	            if (zoom > this.maxZoom) {
+	                return false;
+	            }
+	        }
+	        return this.visible;
+	    };
+	    /**
+	     * callback to generate the parameters passed in the get request
+	     * @param {object} extent - extent object
+	     * @param {number} extent.minX - minX
+	     * @param {number} extent.minY - minY
+	     * @param {number} extent.maxX - maxX
+	     * @param {number} extent.maxY - maxY
+	     * @param {number} zoomLevel - zoom level
+	     */
+	    LayerBaseVector.prototype.mapMoveMakeGetParams = function (extent, zoomLevel) {
+	        this._mapMoveParams = {};
+	        $.extend(this._mapMoveParams, this.params);
+	        $.extend(this._mapMoveParams, this._mapMoveMakeGetParams(this, extent, zoomLevel));
+	    };
+	    /**
+	     * callback function on map move
+	     * @param {object} d - the json response
+	     */
+	    LayerBaseVector.prototype.mapMoveCallback = function (d) {
+	        if (this.source) {
+	            this._source.clear();
+	        }
+	    };
+	    /**
+	     * clear features in the layer
+	     */
+	    LayerBaseVector.prototype.clear = function () {
+	        if (this._source) {
+	            this._source.clear();
+	        }
+	    };
+	    Object.defineProperty(LayerBaseVector.prototype, "onDemandDelay", {
+	        /**
+	         * get on demand delay in miliseconds
+	         */
+	        get: function () {
+	            return this._onDemandDelay;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "autoLoad", {
+	        /**
+	         * get if the layer is autoloaded
+	         */
+	        get: function () {
+	            return this._autoLoad;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "style", {
+	        /**
+	         * get the style definition
+	         */
+	        get: function () {
+	            return this._style;
+	        },
+	        /**
+	         * set the style
+	         * @param style - the style or function
+	         */
+	        set: function (style) {
+	            this._style = style;
+	            this.olLayer.setStyle(this._style);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "mapCrs", {
+	        /**
+	         * get the map CRS if it is defined by the map move object
+	         */
+	        get: function () {
+	            return this.mapProj == null ? null : this.mapProj.getCode();
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "mapProj", {
+	        get: function () {
+	            if (this._projectionMap != null) {
+	                return this._projectionMap;
+	            }
+	            if (this._mapMove) {
+	                this._projectionMap = this._mapMove.map.getView().getProjection();
+	                return this._projectionMap;
+	            }
+	            else {
+	                return null;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "mapMove", {
+	        /**
+	         * get the map move object
+	         * @type {MapMoveCls|*}
+	         */
+	        get: function () {
+	            return this._mapMove;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "mapMoveParams", {
+	        /**
+	         * map move params
+	         * @type {object}
+	         */
+	        get: function () {
+	            return this._mapMoveParams;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "visible", {
+	        get: function () {
+	            return this._visible;
+	        },
+	        /**
+	         * Set the layer visibility
+	         * @type {boolean}
+	         * @override
+	         */
+	        set: function (visibility) {
+	            _super.prototype.setVisible.call(this, visibility);
+	            if (this._onDemand) {
+	                this.mapMove.triggerLyrLoad(this);
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "source", {
+	        /**
+	         * get the layer vector source
+	         * @override
+	         */
+	        get: function () {
+	            return this.getSource();
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "features", {
+	        /**
+	         * array of ol features
+	         */
+	        get: function () {
+	            return this.source.getFeatures();
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "olLayer", {
+	        /**
+	         *
+	         */
+	        get: function () {
+	            return _super.prototype.getOlLayer.call(this);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    LayerBaseVector.prototype.setZIndex = function (newZ) {
+	        this.olLayer.setZIndex(newZ);
+	    };
+	    return LayerBaseVector;
+	}(LayerBase_1.LayerBase));
+	exports.LayerBaseVector = LayerBaseVector;
+	nm.LayerBaseVector = LayerBaseVector;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = LayerBaseVector;
+
+
+/***/ },
 /* 24 */,
 /* 25 */,
 /* 26 */,
@@ -12548,6 +13400,187 @@
 	}());
 	exports.MediaControl = MediaControl;
 	nm.MediaControl = MediaControl;
+
+
+/***/ },
+/* 36 */
+/*!********************************************!*\
+  !*** ./dist/layers/LayerBaseVectorEsri.js ***!
+  \********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by gavorhes on 11/2/2015.
+	 */
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var LayerBaseVector_1 = __webpack_require__(/*! ./LayerBaseVector */ 23);
+	var esriToOl = __webpack_require__(/*! ../olHelpers/esriToOlStyle */ 18);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var custom_ol_1 = __webpack_require__(/*! custom-ol */ 4);
+	var $ = __webpack_require__(/*! jquery */ 6);
+	var nm = provide_1.default('layers');
+	/**
+	 * Base layer for esri vector layers
+	 * @augments LayerBaseVector
+	 */
+	var LayerBaseVectorEsri = (function (_super) {
+	    __extends(LayerBaseVectorEsri, _super);
+	    /**
+	     * The base vector layer
+	     * @param {string} url - url for source
+	     * @param {object} options - config
+	     * @param {string} [options.id] - layer id
+	     * @param {string} [options.name=Unnamed Layer] - layer name
+	     * @param {number} [options.opacity=1] - opacity
+	     * @param {boolean} [options.visible=true] - default visible
+	     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+	     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+	     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+	     * @param {number} [options.zIndex=0] the z index for the layer
+	     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+	     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+	     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+	     * @param {boolean} [options.legendContent] additional content to add to the legend
+	     *
+	     * @param {boolean} [options.autoLoad=false] if the layer should auto load if not visible
+	     * @param {object} [options.style=undefined] the layer style, use openlayers default style if not defined
+	     * @param {boolean} [options.onDemand=false] if the layer should be loaded by extent on map move
+	     * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
+	     * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
+	     *
+	     * @param {string} [options.where=1=1] the layer filter clause
+	     * @param {string} [options.outFields=*] comma separated list of output fields, defaults to all
+	     * @param {string} [options.format=pjson] the format the retrieve the data
+	     * @param {number} [options.outSR=3857] the output spatial reference, defaults to web mercator
+	     * @param {boolean} [options.useEsriStyle=false] if the map service style should be used
+	     * @param {boolean} [options.collapseLegend=false] if the legend should be initially collapsed
+	     * @param {number} [options.mapMoveMakeGetParams=function(extent, zoomLevel){}] function to create additional map move params
+	     */
+	    function LayerBaseVectorEsri(url, options) {
+	        if (typeof options.params != 'object') {
+	            options.params = {};
+	        }
+	        options.params['where'] = options.where || '1=1';
+	        options.params['outFields'] = options.outFields || '*';
+	        options.params['f'] = options.format || 'pjson';
+	        options.params['outSR'] = options.outSR || 3857;
+	        _super.call(this, url, options);
+	        this._outSR = this.params['outSR'];
+	        this._esriFormat = new custom_ol_1.default.format.EsriJSON();
+	        if (this._url[this._url.length - 1] !== '/') {
+	            this._url += '/';
+	        }
+	        this._urlCopy = this.url;
+	        this._url += 'query?callback=?';
+	        if (this.autoLoad || this.visible) {
+	            this._load();
+	        }
+	        this._useEsriStyle = typeof options.useEsriStyle == 'boolean' ? options.useEsriStyle : false;
+	        if (this._useEsriStyle) {
+	            this.addLegendContent();
+	        }
+	    }
+	    /**
+	     * add additional content to the legend
+	     * @param {string} [additionalContent=''] additional content to add to legend
+	     */
+	    LayerBaseVectorEsri.prototype.addLegendContent = function (additionalContent) {
+	        var _this = this;
+	        if (!this._useEsriStyle) {
+	            _super.prototype.addLegendContent.call(this, additionalContent);
+	        }
+	        else {
+	            $.get(this._urlCopy + '?f=pjson&callback=?', {}, function (d) {
+	                if (d['subLayers'].length > 0) {
+	                    alert('should only use single feature layers, not groups');
+	                    return;
+	                }
+	                var newStyleAndLegend = esriToOl.makeFeatureServiceLegendAndSymbol(d);
+	                _this.style = newStyleAndLegend.style;
+	                _super.prototype.addLegendContent.call(_this, newStyleAndLegend.legend);
+	            }, 'json');
+	        }
+	    };
+	    /**
+	     * add feature collection
+	     * @param {object} featureCollection - features as esrijson
+	     */
+	    LayerBaseVectorEsri.prototype.addFeatures = function (featureCollection) {
+	        var feats = this._esriFormat.readFeatures(featureCollection);
+	        this.source.addFeatures(feats);
+	    };
+	    /**
+	     * trigger load features
+	     * @protected
+	     * @returns {boolean} if already loaded
+	     */
+	    LayerBaseVectorEsri.prototype._load = function () {
+	        var _this = this;
+	        if (_super.prototype._load.call(this)) {
+	            return true;
+	        }
+	        $.get(this._url, this.params, function (d) {
+	            _this.addFeatures(d);
+	            _this.loadCallback(_this);
+	        }, 'json').fail(function () {
+	            _this._loaded = false;
+	        });
+	        return false;
+	    };
+	    /**
+	     * callback to generate the parameters passed in the get request
+	     * @param {object} extent - extent object
+	     * @param {number} extent.minX - minX
+	     * @param {number} extent.minY - minY
+	     * @param {number} extent.maxX - maxX
+	     * @param {number} extent.maxY - maxY
+	     * @param {number} zoomLevel - zoom level
+	     */
+	    LayerBaseVectorEsri.prototype.mapMoveMakeGetParams = function (extent, zoomLevel) {
+	        _super.prototype.mapMoveMakeGetParams.call(this, extent, zoomLevel);
+	        this.mapMoveParams['geometry'] = extent.minX + "," + extent.minY + "," + extent.maxX + "," + extent.maxY;
+	        this.mapMoveParams['geometryType'] = 'esriGeometryEnvelope';
+	        this.mapMoveParams['spatialRel'] = 'esriSpatialRelIntersects';
+	        this.mapMoveParams['spatialRel'] = 'esriSpatialRelIntersects';
+	        this.mapMoveParams['inSR'] = 3857;
+	        if (this._outSR == 3857) {
+	            this.mapMoveParams['geometryPrecision'] = 1;
+	        }
+	    };
+	    /**
+	     * Before call to map move callback, can prevent call by returning false
+	     * @param {number} zoom - zoom level
+	     * @param {string} [evtType=undefined] undefined for initial load, otherwise one of 'change:center', 'change:resolution'
+	     * @returns {boolean} if the call should proceed
+	     */
+	    LayerBaseVectorEsri.prototype.mapMoveBefore = function (zoom, evtType) {
+	        return _super.prototype.mapMoveBefore.call(this, zoom, evtType);
+	        //if (super.mapMoveBefore(zoom, evtType)){
+	        //    //place holder for additional processing
+	        //    return true;
+	        //} else {
+	        //    return false;
+	        //}
+	    };
+	    /**
+	     * callback function on map move
+	     * @param {object} d - the json response
+	     */
+	    LayerBaseVectorEsri.prototype.mapMoveCallback = function (d) {
+	        _super.prototype.mapMoveCallback.call(this, d);
+	        this.source.addFeatures(this._esriFormat.readFeatures(d));
+	    };
+	    return LayerBaseVectorEsri;
+	}(LayerBaseVector_1.LayerBaseVector));
+	exports.LayerBaseVectorEsri = LayerBaseVectorEsri;
+	nm.LayerBaseVectorEsri = LayerBaseVectorEsri;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = LayerBaseVectorEsri;
 
 
 /***/ }
