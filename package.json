@@ -14,7 +14,7 @@
     "test": "node node_modules\\karma\\bin\\karma start karma.conf.js",
     "lint": "eslint src/**/*.js",
     "update-custom-ol": "npm update custom-ol",
-    "serve": "cd test-html & C:\\Python33\\python.exe -m http.server 5002",
+    "serve": "cd test-html & python -m http.server 5002",
     "typedoc": "typedoc --excludePrivate --mode file --out doc src",
     "webpack": "webpack -d -w",
     "tsc": "tsc -w"
