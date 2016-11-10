@@ -21,7 +21,7 @@ var nm = provide_1.default('olHelpers');
  * @param {number} [options.maxZoom=undefined] max zoom
  * @param {boolean} [options.baseSwitcher=true] if add base map switcher
  * @param {boolean} [options.fullScreen=false] if add base map switcher
- * @returns the ol map
+ * @returns {ol.Map} the ol map
  */
 function quickMap(options) {
     var m = quickMapBase_1.quickMapBase(options);

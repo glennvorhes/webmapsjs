@@ -43,25 +43,25 @@ export declare class FeatureLayerProperties {
  * @augments MapInteractionBase
  */
 export declare class MapPopupCls extends MapInteractionBase {
-    _popupOpen: boolean;
-    _passThroughLayerFeatureArray: Array<FeatureLayerProperties>;
-    _currentPopupIndex: number;
-    _popupContentLength: number;
-    _esriMapServiceLayers: Array<LayerEsriMapServer>;
-    _$popupCloser: JQuery;
-    _$popupContent: JQuery;
-    _$popupContainer: JQuery;
-    _popupOverlay: ol.Overlay;
-    _arrPopupLayers: Array<LayerBaseVector>;
-    _popupCoordinate: ol.Coordinate;
-    _popupChangedFunctions: Array<popupChangedFunction>;
-    _mapClickFunctions: Array<Function>;
-    _selectionLayerLookup: Object;
-    _arrPopupLayerIds: Array<string>;
-    _arrPopupLayerNames: Array<string>;
-    _arrPopupOlLayers: Array<ol.layer.Vector>;
-    _arrPopupContentFunction: Array<popupCallback>;
-    _selectionLayers: Array<ol.layer.Vector>;
+    private _popupOpen;
+    private _passThroughLayerFeatureArray;
+    private _currentPopupIndex;
+    private _popupContentLength;
+    private _esriMapServiceLayers;
+    private _$popupCloser;
+    private _$popupContent;
+    private _$popupContainer;
+    private _popupOverlay;
+    private _arrPopupLayers;
+    private _popupCoordinate;
+    private _popupChangedFunctions;
+    private _mapClickFunctions;
+    private _selectionLayerLookup;
+    private _arrPopupLayerIds;
+    private _arrPopupLayerNames;
+    private _arrPopupOlLayers;
+    private _arrPopupContentFunction;
+    private _selectionLayers;
     /**
      * Definition for openlayers style function
      * @callback olStyleFunction

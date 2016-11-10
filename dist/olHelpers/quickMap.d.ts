@@ -17,7 +17,7 @@ import ol from 'custom-ol';
  * @param {number} [options.maxZoom=undefined] max zoom
  * @param {boolean} [options.baseSwitcher=true] if add base map switcher
  * @param {boolean} [options.fullScreen=false] if add base map switcher
- * @returns the ol map
+ * @returns {ol.Map} the ol map
  */
 export declare function quickMap(options?: quickMapOptions): ol.Map;
 export default quickMap;

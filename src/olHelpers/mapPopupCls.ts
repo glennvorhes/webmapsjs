@@ -76,25 +76,25 @@ export class FeatureLayerProperties {
  * @augments MapInteractionBase
  */
 export class MapPopupCls extends MapInteractionBase {
-    _popupOpen: boolean;
-    _passThroughLayerFeatureArray: Array<FeatureLayerProperties>;
-    _currentPopupIndex: number;
-    _popupContentLength: number;
-    _esriMapServiceLayers: Array<LayerEsriMapServer>;
-    _$popupCloser: JQuery;
-    _$popupContent: JQuery;
-    _$popupContainer: JQuery;
-    _popupOverlay: ol.Overlay;
-    _arrPopupLayers: Array<LayerBaseVector>;
-    _popupCoordinate: ol.Coordinate;
-    _popupChangedFunctions: Array<popupChangedFunction>;
-    _mapClickFunctions: Array<Function>;
-    _selectionLayerLookup: Object;
-    _arrPopupLayerIds: Array<string>;
-    _arrPopupLayerNames: Array<string>;
-    _arrPopupOlLayers: Array<ol.layer.Vector>;
-    _arrPopupContentFunction: Array<popupCallback>;
-    _selectionLayers: Array<ol.layer.Vector>;
+    private _popupOpen: boolean;
+    private _passThroughLayerFeatureArray: Array<FeatureLayerProperties>;
+    private _currentPopupIndex: number;
+    private _popupContentLength: number;
+    private _esriMapServiceLayers: Array<LayerEsriMapServer>;
+    private _$popupCloser: JQuery;
+    private _$popupContent: JQuery;
+    private _$popupContainer: JQuery;
+    private _popupOverlay: ol.Overlay;
+    private _arrPopupLayers: Array<LayerBaseVector>;
+    private _popupCoordinate: ol.Coordinate;
+    private _popupChangedFunctions: Array<popupChangedFunction>;
+    private _mapClickFunctions: Array<Function>;
+    private _selectionLayerLookup: Object;
+    private _arrPopupLayerIds: Array<string>;
+    private _arrPopupLayerNames: Array<string>;
+    private _arrPopupOlLayers: Array<ol.layer.Vector>;
+    private _arrPopupContentFunction: Array<popupCallback>;
+    private _selectionLayers: Array<ol.layer.Vector>;
 
     /**
      * Definition for openlayers style function
