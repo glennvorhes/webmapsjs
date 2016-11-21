@@ -5,11 +5,6 @@
 var provide_1 = require('./provide');
 var nm = provide_1.default('util');
 /**
- * @typedef {object} keyValuePair
- * @property {string} key
- * @property {object} value
- */
-/**
  * iterate over the key value pairs of an object
  * @param {object} obj - the input object
  * @returns {Array<keyValuePair>} - array of key value pairs

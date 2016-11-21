@@ -11,13 +11,18 @@ let nm = provide('util');
  * @property {object} value
  */
 
+export interface keyVals {
+    key: string;
+    value: Object
+}
+
 
 /**
  * iterate over the key value pairs of an object
  * @param {object} obj - the input object
  * @returns {Array<keyValuePair>} - array of key value pairs
  */
-export function keyValPairs(obj) {
+export function keyValPairs(obj): keyVals[] {
     let outArray = [];
     for (let key of Object.keys(obj)) {
         outArray.push({'key': key, 'value': obj[key]});
