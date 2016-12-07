@@ -3,6 +3,7 @@
  */
 import provide from '../util/provide';
 import ol from 'custom-ol';
+import {LayerBaseVector} from "../layers/LayerBaseVector";
 
 
 const nm = provide('util');
@@ -12,12 +13,8 @@ const nm = provide('util');
  * @param {Array<LayerBaseVector>|Array<ol.layer.Vector>|LayerBaseVector|ol.layer.Vector|*} layers - array of layers or single
  * @returns {ol.Extent|Array<number>|*} - collective extent
  */
-export function calculateExtent(layers): ol.Extent|Array<number>| ol.Extent| number[] {
+export function calculateExtent(layers: ol.layer.Vector[]|LayerBaseVector[]): ol.Extent|Array<number>| ol.Extent| number[] {
     "use strict";
-
-    if (layers.constructor.name != 'Array'){
-        layers = [layers];
-    }
 
     let hasExtent = false;
 
@@ -57,17 +54,13 @@ nm.calculateExtent = calculateExtent;
 
 /**
  * given one or an array of layers, fit to the map
- * @param {Array<LayerBaseVector>|Array<ol.layer.Vector>|LayerBaseVector|ol.layer.Vector} layers - array of layers or single
- * @param {ol.Map} mp - the map to fit
- * @param {number|undefined} [zoomOut=undefined] - levels to zoom out after fit
+ * @param layers - array of layers or single
+ * @param  mp - the map to fit
+ * @param [zoomOut=undefined] - levels to zoom out after fit
  */
-export function fitToMap(layers, mp: ol.Map, zoomOut?: number){
+export function fitToMap(layers: ol.layer.Vector[]|LayerBaseVector[], mp: ol.Map, zoomOut?: number){
     "use strict";
 
-    /**
-     * 
-     * @type {ol.Extent|undefined}
-     */
     let ext = calculateExtent(layers);
     
     if (typeof ext == 'undefined'){
@@ -79,7 +72,6 @@ export function fitToMap(layers, mp: ol.Map, zoomOut?: number){
     if (typeof zoomOut == 'number'){
         mp.getView().setZoom(mp.getView().getZoom() - zoomOut);
     }
-    
 }
 
 nm.calculateExtent = calculateExtent;

@@ -11,9 +11,6 @@ var nm = provide_1.default('util');
  */
 function calculateExtent(layers) {
     "use strict";
-    if (layers.constructor.name != 'Array') {
-        layers = [layers];
-    }
     var hasExtent = false;
     var minX = 10E100;
     var minY = 10E100;
@@ -46,16 +43,12 @@ exports.calculateExtent = calculateExtent;
 nm.calculateExtent = calculateExtent;
 /**
  * given one or an array of layers, fit to the map
- * @param {Array<LayerBaseVector>|Array<ol.layer.Vector>|LayerBaseVector|ol.layer.Vector} layers - array of layers or single
- * @param {ol.Map} mp - the map to fit
- * @param {number|undefined} [zoomOut=undefined] - levels to zoom out after fit
+ * @param layers - array of layers or single
+ * @param  mp - the map to fit
+ * @param [zoomOut=undefined] - levels to zoom out after fit
  */
 function fitToMap(layers, mp, zoomOut) {
     "use strict";
-    /**
-     *
-     * @type {ol.Extent|undefined}
-     */
     var ext = calculateExtent(layers);
     if (typeof ext == 'undefined') {
         return;
