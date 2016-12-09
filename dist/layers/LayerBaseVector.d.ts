@@ -17,6 +17,7 @@ export interface LayerBaseVectorOptions extends LayerBaseOptions {
     onDemandDelay?: number;
     mapMoveMakeGetParams?: makeMapMoveParams;
     mapMoveObj?: MapMoveCls;
+    renderOrder?: (a: ol.Feature, b: ol.Feature) => number;
 }
 /**
  * The Vector layer base

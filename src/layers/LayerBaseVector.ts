@@ -29,6 +29,8 @@ export interface LayerBaseVectorOptions extends LayerBaseOptions{
     onDemandDelay?: number;
     mapMoveMakeGetParams?: makeMapMoveParams;
     mapMoveObj?: MapMoveCls;
+    renderOrder?: (a: ol.Feature, b: ol.Feature) => number;
+
 }
 
 
@@ -125,7 +127,8 @@ export class LayerBaseVector extends LayerBase {
                 visible: this.visible,
                 style: this.style,
                 minResolution: this._minResolution,
-                maxResolution: this._maxResolution
+                maxResolution: this._maxResolution,
+                renderOrder: options.renderOrder
             }
         );
 
