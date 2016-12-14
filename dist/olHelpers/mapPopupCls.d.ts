@@ -113,7 +113,11 @@ export declare class MapPopupCls extends MapInteractionBase {
      * @returns  the new selection layer
      * @private
      */
-    _addPopupLayer(lyr: any, selectionStyle: any): ol.layer.Vector;
+    _addPopupLayer(lyr: LayerBaseVector, selectionStyle: {
+        color?: string;
+        width?: number;
+        olStyle?: ol.style.Style;
+    }): ol.layer.Vector;
     /**
      * Add popup to the map
      * @param {LayerBase|*} lyr The layer that the popup with act on
