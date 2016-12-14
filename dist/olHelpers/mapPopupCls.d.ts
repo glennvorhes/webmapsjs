@@ -128,7 +128,11 @@ export declare class MapPopupCls extends MapInteractionBase {
      * @param {object|function} [selectionStyle.olStyle=undefined] an openlayers style object or function
      * @returns {object} a reference to the ol selection layer
      */
-    addVectorPopup(lyr: LayerBaseVector, popupContentFunction: popupCallback, selectionStyle?: ol.style.Style | Array<ol.style.Style> | ol.StyleFunction): ol.layer.Vector;
+    addVectorPopup(lyr: LayerBaseVector, popupContentFunction: popupCallback, selectionStyle?: {
+        color?: string;
+        width?: number;
+        olStyle?: ol.style.Style;
+    }): ol.layer.Vector;
     /**
      *
      * @param {LayerBase} lyr - layer
