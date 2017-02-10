@@ -3,7 +3,7 @@
  */
 import RealEarthAnimate from './RealEarthAnimate';
 import provide from '../util/provide';
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 import LayerRealEarthTile from "../layers/LayerRealEarthTile";
 const nm = provide('mixin');
 

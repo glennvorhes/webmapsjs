@@ -2,11 +2,11 @@
  * Created by gavorhes on 12/16/2015.
  */
 "use strict";
-var provide_1 = require('../util/provide');
-var makeGuid_1 = require('../util/makeGuid');
-var mapMove_1 = require('../olHelpers/mapMove');
+var provide_1 = require("../util/provide");
+var makeGuid_1 = require("../util/makeGuid");
+var mapMove_1 = require("../olHelpers/mapMove");
 var nm = provide_1.default('collections');
-var $ = require('jquery');
+var $ = require("jquery");
 var LayerGroup = (function () {
     /**
      *
@@ -105,7 +105,7 @@ var LayerGroup = (function () {
     };
     LayerGroup.prototype.getLegendHtml = function (legendId, options) {
         var legendHtml = "<ul id=\"" + legendId + "\" class=\"legend-container\">";
-        legendHtml += ("<li>" + options.legendTitle + "<input type=\"checkbox\" checked id=\"suppress-by-extent-" + legendId + "\" class=\"suppress-by-extent\">") +
+        legendHtml += "<li>" + options.legendTitle + "<input type=\"checkbox\" checked id=\"suppress-by-extent-" + legendId + "\" class=\"suppress-by-extent\">" +
             ("<label title=\"Suppress layers not visible at this zoom level\" for=\"suppress-by-extent-" + legendId + "\">") +
             "<span></span>" +
             "</label></li>";
@@ -130,7 +130,7 @@ var LayerGroup = (function () {
              * @type {LayerBase}
              */
             var lyr = theGroup.groupLayersLookup[itemId];
-            theHml += ("<li id=\"" + lyr.id + "-layer-li\" class=\"legend-layer-li " + layerDivClasses.join(' ') + "\">") + lyr.getLegendDiv() + '</li>';
+            theHml += "<li id=\"" + lyr.id + "-layer-li\" class=\"legend-layer-li " + layerDivClasses.join(' ') + "\">" + lyr.getLegendDiv() + '</li>';
         }
         else if (theGroup.groupGroupsLookup[itemId]) {
             /**
@@ -138,10 +138,10 @@ var LayerGroup = (function () {
              */
             var otherGroup = theGroup.groupGroupsLookup[itemId];
             theHml += "<li>";
-            theHml += ("<div id=\"" + otherGroup.groupId + "-legend-layer-div\" ") +
+            theHml += "<div id=\"" + otherGroup.groupId + "-legend-layer-div\" " +
                 ("class=\"legend-layer-group  " + layerDivClasses.join(' ') + "\">");
             if (otherGroup.addCheck) {
-                theHml += ("<input type=\"checkbox\" checked id=\"" + otherGroup.groupId + "-group-chck\">") +
+                theHml += "<input type=\"checkbox\" checked id=\"" + otherGroup.groupId + "-group-chck\">" +
                     ("<label for=\"" + otherGroup.groupId + "-group-chck\" title=\"Click arrow to expand or collapse\">" + otherGroup.groupName + "</label>");
             }
             else {

@@ -2,9 +2,9 @@
 /**
  * Created by gavorhes on 6/1/2016.
  */
-var quickMap_1 = require('../olHelpers/quickMap');
-var layerSwipe_1 = require('../olHelpers/layerSwipe');
-var LayerEsriMapServer_1 = require('../layers/LayerEsriMapServer');
+var quickMap_1 = require("../olHelpers/quickMap");
+var layerSwipe_1 = require("../olHelpers/layerSwipe");
+var LayerEsriMapServer_1 = require("../layers/LayerEsriMapServer");
 var map = quickMap_1.quickMap();
 var swiper = new layerSwipe_1.default(map);
 var wisDotRegions = new LayerEsriMapServer_1.LayerEsriMapServer('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/Metamanager_regions/MapServer', {

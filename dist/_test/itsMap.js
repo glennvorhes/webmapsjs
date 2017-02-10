@@ -1,10 +1,10 @@
-"use strict";
 /**
  * Created by gavorhes on 12/18/2015.
  */
-var ItsLayerCollection_1 = require('../collections/ItsLayerCollection');
-var LayerLegend_1 = require('../collections/LayerLegend');
-var quickMap_1 = require('../olHelpers/quickMap');
+"use strict";
+var ItsLayerCollection_1 = require("../collections/ItsLayerCollection");
+var LayerLegend_1 = require("../collections/LayerLegend");
+var quickMap_1 = require("../olHelpers/quickMap");
 var map = quickMap_1.default();
 window['map'] = map;
 var itsLayerCollection = new ItsLayerCollection_1.default(map);

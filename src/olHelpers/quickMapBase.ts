@@ -3,7 +3,7 @@
  */
 
 import provide from '../util/provide';
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 import $ = require('jquery');
 const nm = provide('olHelpers');
 

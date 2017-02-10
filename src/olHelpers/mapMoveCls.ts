@@ -3,7 +3,7 @@ import MapInteractionBase from './mapInteractionBase';
 import * as checkDefined from '../util/checkDefined';
 import provide from '../util/provide';
 import makeGuid from '../util/makeGuid';
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 import $ = require('jquery');
 const nm = provide('olHelpers');
 
@@ -146,7 +146,7 @@ export class MapMoveCls extends MapInteractionBase {
         if (lyr.mapMoveBefore(this._zoomLevel, eventType)) {
             lyr.mapMoveMakeGetParams(this._mapExtent, this._zoomLevel);
 
-            let _this = this;
+            let __this = this;
 
             callbackFunc = function () {
                 function innerFunction(theLayer, theIndex) {
@@ -173,7 +173,7 @@ export class MapMoveCls extends MapInteractionBase {
                             _innerThis._arrLyrRequest[theIndex] = null;
                         });
                 }
-                innerFunction.call(_this, lyr, index);
+                innerFunction.call(__this, lyr, index);
             };
         } else {
             lyr.clear();
@@ -212,13 +212,13 @@ export class MapMoveCls extends MapInteractionBase {
         let ctx = this._mapMoveCallbackContext[ind];
         let theFunc = this._mapMoveCallbacks[ind];
 
-        let _this = this;
+        let __this = this;
 
         let f = function () {
             if (ctx !== null) {
-                theFunc.call(ctx, _this._mapExtent, _this._zoomLevel, eventType);
+                theFunc.call(ctx, __this._mapExtent, __this._zoomLevel, eventType);
             } else {
-                theFunc(_this._mapExtent, _this._zoomLevel, eventType);
+                theFunc(__this._mapExtent, __this._zoomLevel, eventType);
             }
         };
 

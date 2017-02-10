@@ -1,4 +1,4 @@
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 import LayerItsInventory from "../layers/LayerItsInventory";
 export declare class ItsLayerCollection {
     _map: ol.Map;

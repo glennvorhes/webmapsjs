@@ -2,7 +2,7 @@
  * Created by gavorhes on 12/4/2015.
  */
 import RealEarthAnimate from './RealEarthAnimate';
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 import { LayerVectorRealEarth } from "../layers/LayerRealEarthVector";
 /**
  * class mixin to animate RealEarth vector layers

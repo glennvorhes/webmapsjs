@@ -5,7 +5,7 @@ import {LayerBase, LayerBaseOptions} from './LayerBase';
 import * as esriToOl from '../olHelpers/esriToOlStyle';
 import mapPopup from '../olHelpers/mapPopup';
 import provide from '../util/provide';
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 import $ = require('jquery');
 
 const nm = provide('layers');
@@ -108,7 +108,7 @@ export class LayerEsriMapServer extends LayerBase {
 
         urlCopy += 'identify?callback=?';
 
-        let _this = this;
+        let __this = this;
 
         if (this._popupRequest != null) {
             this._popupRequest.abort();
@@ -139,12 +139,12 @@ export class LayerEsriMapServer extends LayerBase {
 
                 popupHtml += '</table>';
 
-                mapPopup.addMapServicePopupContent(_this._esriFormat.readFeature(r), _this, popupHtml, r['layerName']);
+                mapPopup.addMapServicePopupContent(__this._esriFormat.readFeature(r), __this, popupHtml, r['layerName']);
             }
         }, 'json');
 
         this._popupRequest.always(function () {
-            _this._popupRequest = null;
+            __this._popupRequest = null;
         });
 
     }

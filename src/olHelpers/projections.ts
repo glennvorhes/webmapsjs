@@ -1,7 +1,7 @@
 /**
  * Created by gavorhes on 10/3/2016.
  */
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 
 
 export const proj4326 = new ol.proj.Projection({code: 'EPSG:4326'});

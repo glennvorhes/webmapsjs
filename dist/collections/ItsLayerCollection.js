@@ -2,8 +2,8 @@
  * Created by gavorhes on 12/14/2015.
  */
 "use strict";
-var colors = require('../util/colors');
-var provide_1 = require('../util/provide');
+var colors = require("../util/colors");
+var provide_1 = require("../util/provide");
 var LayerItsInventory_1 = require("../layers/LayerItsInventory");
 var nm = provide_1.default('collections');
 var itsConfig = [

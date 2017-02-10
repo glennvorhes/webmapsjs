@@ -2,7 +2,7 @@
 /**
  * Created by gavorhes on 7/18/2016.
  */
-var provide_1 = require('../util/provide');
+var provide_1 = require("../util/provide");
 var nm = provide_1.default('util');
 /**
  *

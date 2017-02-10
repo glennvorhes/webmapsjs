@@ -77,12 +77,11 @@ export class LayerEsriTile extends LayerBaseXyzTile {
 
             urlCopy += 'legend?f=pjson&callback=?';
 
-            let _this = this;
             let superAddLegend = super.addLegendContent;
 
-            $.get(urlCopy, {}, function (d) {
+            $.get(urlCopy, {}, (d) => {
                 let newHtml = esriToOl.makeMapServiceLegend(d);
-                superAddLegend.call(_this, newHtml);
+                superAddLegend.call(this, newHtml);
             }, 'json');
         }
     }

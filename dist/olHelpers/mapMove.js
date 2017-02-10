@@ -2,7 +2,7 @@
  * Created by gavorhes on 11/3/2015.
  */
 "use strict";
-var mapMoveCls_1 = require('./mapMoveCls');
+var mapMoveCls_1 = require("./mapMoveCls");
 /**
  * The single map move object catch is that it is common to multimap pages
  * @type {MapMoveCls}

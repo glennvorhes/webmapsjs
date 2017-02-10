@@ -4,12 +4,12 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var LayerBase_1 = require('./LayerBase');
-var mapMove_1 = require('../olHelpers/mapMove');
-var provide_1 = require('../util/provide');
-var custom_ol_1 = require('custom-ol');
-var $ = require('jquery');
-var g = new custom_ol_1.default.Map({});
+var LayerBase_1 = require("./LayerBase");
+var mapMove_1 = require("../olHelpers/mapMove");
+var provide_1 = require("../util/provide");
+var ol = require("custom-ol");
+var $ = require("jquery");
+var g = new ol.Map({});
 var nm = provide_1.default('layers');
 /**
  * The Vector layer base
@@ -45,47 +45,48 @@ var LayerBaseVector = (function (_super) {
      */
     function LayerBaseVector(url, options) {
         if (options === void 0) { options = {}; }
-        _super.call(this, url, options);
+        var _this = _super.call(this, url, options) || this;
         options = options;
         //prevent regular load if no url has been provided
-        if (this.url.trim() == '') {
-            this._loaded = true;
+        if (_this.url.trim() == '') {
+            _this._loaded = true;
         }
-        this._style = typeof options.style == 'undefined' ? undefined : options.style;
-        if (this.visible) {
-            this._autoLoad = true;
+        _this._style = typeof options.style == 'undefined' ? undefined : options.style;
+        if (_this.visible) {
+            _this._autoLoad = true;
         }
         else {
-            this._autoLoad = (typeof options['autoLoad'] == 'boolean' ? options['autoLoad'] : false);
+            _this._autoLoad = (typeof options['autoLoad'] == 'boolean' ? options['autoLoad'] : false);
         }
-        this._onDemand = typeof options.onDemand == 'boolean' ? options.onDemand : false;
-        this._onDemandDelay = typeof options.onDemandDelay == 'number' ? options.onDemandDelay : 300;
+        _this._onDemand = typeof options.onDemand == 'boolean' ? options.onDemand : false;
+        _this._onDemandDelay = typeof options.onDemandDelay == 'number' ? options.onDemandDelay : 300;
         if (options.mapMoveObj) {
-            this._mapMove = options.mapMoveObj;
+            _this._mapMove = options.mapMoveObj;
         }
         else {
-            this._mapMove = this._onDemand ? mapMove_1.default : undefined;
+            _this._mapMove = _this._onDemand ? mapMove_1.default : undefined;
         }
-        this._mapMoveMakeGetParams = typeof options.mapMoveMakeGetParams == 'function' ? options.mapMoveMakeGetParams :
+        _this._mapMoveMakeGetParams = typeof options.mapMoveMakeGetParams == 'function' ? options.mapMoveMakeGetParams :
             function () { return {}; };
-        if (this._onDemand) {
-            this._loaded = true;
-            this._mapMoveParams = {};
-            this._mapMove.checkInit();
-            this._mapMove.addVectorLayer(this);
+        if (_this._onDemand) {
+            _this._loaded = true;
+            _this._mapMoveParams = {};
+            _this._mapMove.checkInit();
+            _this._mapMove.addVectorLayer(_this);
         }
-        this._source = new custom_ol_1.default.source.Vector();
-        this._olLayer = new custom_ol_1.default.layer.Vector({
-            source: this._source,
-            visible: this.visible,
-            style: this.style,
-            minResolution: this._minResolution,
-            maxResolution: this._maxResolution,
+        _this._source = new ol.source.Vector();
+        _this._olLayer = new ol.layer.Vector({
+            source: _this._source,
+            visible: _this.visible,
+            style: _this.style,
+            minResolution: _this._minResolution,
+            maxResolution: _this._maxResolution,
             renderOrder: options.renderOrder
         });
-        this.olLayer.setZIndex(this._zIndex);
-        this._projectionMap = null;
-        this._projection4326 = new custom_ol_1.default.proj.Projection({ code: "EPSG:4326" });
+        _this.olLayer.setZIndex(_this._zIndex);
+        _this._projectionMap = null;
+        _this._projection4326 = new ol.proj.Projection({ code: "EPSG:4326" });
+        return _this;
     }
     /**
      * dummy to be overridden

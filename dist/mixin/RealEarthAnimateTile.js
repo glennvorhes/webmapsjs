@@ -7,8 +7,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 /**
  * Created by gavorhes on 12/4/2015.
  */
-var RealEarthAnimate_1 = require('./RealEarthAnimate');
-var provide_1 = require('../util/provide');
+var RealEarthAnimate_1 = require("./RealEarthAnimate");
+var provide_1 = require("../util/provide");
 var nm = provide_1.default('mixin');
 /**
  * Animate real earth tile
@@ -17,9 +17,10 @@ var nm = provide_1.default('mixin');
 var RealEarthAnimateTile = (function (_super) {
     __extends(RealEarthAnimateTile, _super);
     function RealEarthAnimateTile(layer, loadCallback) {
-        _super.call(this, layer, loadCallback);
-        this._source = layer.source;
-        this._olLayer = layer.olLayer;
+        var _this = _super.call(this, layer, loadCallback) || this;
+        _this._source = layer.source;
+        _this._olLayer = layer.olLayer;
+        return _this;
     }
     RealEarthAnimateTile.prototype.timeInit = function () {
         _super.prototype.timeInit.call(this);

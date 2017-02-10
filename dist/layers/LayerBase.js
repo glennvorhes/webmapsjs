@@ -1,8 +1,8 @@
 "use strict";
-var zoomResolutionConvert = require('../olHelpers/zoomResolutionConvert');
-var provide_1 = require('../util/provide');
-var makeGuid_1 = require('../util/makeGuid');
-var $ = require('jquery');
+var zoomResolutionConvert = require("../olHelpers/zoomResolutionConvert");
+var provide_1 = require("../util/provide");
+var makeGuid_1 = require("../util/makeGuid");
+var $ = require("jquery");
 var nm = provide_1.default('layers');
 /**
  * The base layer class
@@ -66,7 +66,7 @@ var LayerBase = (function () {
         };
         this._legendContent = '';
         if (this._legendCheckbox) {
-            this._legendContent += ("<input type=\"checkbox\" " + (this.visible ? 'checked' : '') + " ") +
+            this._legendContent += "<input type=\"checkbox\" " + (this.visible ? 'checked' : '') + " " +
                 ("class=\"legend-check\" id=\"" + this.id + "-legend-layer-check\"><span></span>");
             this._legendContent += "<label for=\"" + this.id + "-legend-layer-check\" class=\"legend-layer-name\">" + this.name + "</label>";
         }

@@ -2,7 +2,7 @@
  * Created by gavorhes on 11/4/2015.
  */
 "use strict";
-var provide_1 = require('./provide');
+var provide_1 = require("./provide");
 var nm = provide_1.default('util.dateConvert');
 function leadingPad(inNum) {
     var strNum = inNum.toFixed();

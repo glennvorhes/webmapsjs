@@ -17,20 +17,21 @@
     "serve": "cd test-html & python -m http.server 5002",
     "typedoc": "typedoc --excludePrivate --mode file --out doc src",
     "webpack": "webpack -d -w",
+    "webpack-prod": "webpack -p",
     "tsc": "tsc -w"
   },
   "author": "TOPS Lab",
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.5.0",
+    "custom-ol": "git://github.com/glennvorhes/custom-ol.git#master",
     "expect": "^1.20.1",
     "jasmine": "^2.4.1",
     "jasmine-core": "^2.4.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "source-map-loader": "^0.1.5",
-    "ts-loader": "^0.8.2",
-    "custom-ol": "git://github.com/glennvorhes/custom-ol.git#master"
+    "ts-loader": "^0.8.2"
   },
   "repository": {
     "type": "git",

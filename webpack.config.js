@@ -29,6 +29,8 @@ module.exports = {
         ]
     },
     externals: {
+        "jquery": "$",
+        "custom-ol": "ol",
         "react": "React",
         "react-dom": "ReactDOM"
     }

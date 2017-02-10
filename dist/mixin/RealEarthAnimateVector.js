@@ -7,9 +7,9 @@ var __extends = (this && this.__extends) || function (d, b) {
 /**
  * Created by gavorhes on 12/4/2015.
  */
-var RealEarthAnimate_1 = require('./RealEarthAnimate');
-var provide_1 = require('../util/provide');
-var $ = require('jquery');
+var RealEarthAnimate_1 = require("./RealEarthAnimate");
+var provide_1 = require("../util/provide");
+var $ = require("jquery");
 var nm = provide_1.default('mixin');
 /**
  * class mixin to animate RealEarth vector layers
@@ -18,10 +18,11 @@ var nm = provide_1.default('mixin');
 var RealEarthAnimateVector = (function (_super) {
     __extends(RealEarthAnimateVector, _super);
     function RealEarthAnimateVector(layer, loadCallback) {
-        _super.call(this, layer, loadCallback);
-        this._source = layer.source;
-        this._olLayer = layer.olLayer;
-        this._lyr = layer;
+        var _this = _super.call(this, layer, loadCallback) || this;
+        _this._source = layer.source;
+        _this._olLayer = layer.olLayer;
+        _this._lyr = layer;
+        return _this;
     }
     /**
      * Call this after the mixin has been applied
@@ -70,13 +71,13 @@ var RealEarthAnimateVector = (function (_super) {
             this._loadFeatures(this._dataCache[i]);
         }
         else {
-            var _this_1 = this;
+            var __this_1 = this;
             $.get('http://realearth.ssec.wisc.edu:80/api/shapes', { products: this._products + "_" + this._rawDateStrings[i] }, function (d) {
-                _this_1._dataCache[i] = d;
-                _this_1._rawTimesLookup[_this_1._rawDateStrings[i]] = d;
+                __this_1._dataCache[i] = d;
+                __this_1._rawTimesLookup[__this_1._rawDateStrings[i]] = d;
                 if (setAsSource) {
-                    _this_1._source.clear();
-                    _this_1._loadFeatures.call(_this_1, _this_1._dataCache[i]);
+                    __this_1._source.clear();
+                    __this_1._loadFeatures.call(__this_1, __this_1._dataCache[i]);
                 }
             }, 'json');
         }

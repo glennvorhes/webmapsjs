@@ -4,7 +4,7 @@
 
 import * as colors from '../util/colors';
 import provide from '../util/provide';
-import ol from 'custom-ol'
+import ol = require('custom-ol');
 import LayerItsInventory from "../layers/LayerItsInventory";
 let nm = provide('collections');
 

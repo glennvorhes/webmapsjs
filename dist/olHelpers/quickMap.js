@@ -2,10 +2,10 @@
  * Created by gavorhes on 12/15/2015.
  */
 "use strict";
-var quickMapBase_1 = require('./quickMapBase');
-var provide_1 = require('../util/provide');
-var mapMove_1 = require('./mapMove');
-var mapPopup_1 = require('./mapPopup');
+var quickMapBase_1 = require("./quickMapBase");
+var provide_1 = require("../util/provide");
+var mapMove_1 = require("./mapMove");
+var mapPopup_1 = require("./mapPopup");
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes

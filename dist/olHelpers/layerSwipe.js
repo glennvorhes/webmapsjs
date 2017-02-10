@@ -2,8 +2,8 @@
  * Created by gavorhes on 6/1/2016.
  */
 "use strict";
-var provide_1 = require('../util/provide');
-var $ = require('jquery');
+var provide_1 = require("../util/provide");
+var $ = require("jquery");
 var nm = provide_1.default('collections.layerSwipe');
 var LayerSwipe = (function () {
     /**
@@ -12,8 +12,8 @@ var LayerSwipe = (function () {
      * @param {string} [sliderContent=''] - additional html to be added inside the slider div
      */
     function LayerSwipe(map, sliderContent) {
-        var _this = this;
         if (sliderContent === void 0) { sliderContent = ''; }
+        var _this = this;
         sliderContent = sliderContent || '';
         /**
          *

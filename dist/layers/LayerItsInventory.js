@@ -7,11 +7,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var LayerBaseVectorGeoJson_1 = require('./LayerBaseVectorGeoJson');
-var mapPopup_1 = require('../olHelpers/mapPopup');
-var provide_1 = require('../util/provide');
-var custom_ol_1 = require('custom-ol');
-var $ = require('jquery');
+var LayerBaseVectorGeoJson_1 = require("./LayerBaseVectorGeoJson");
+var mapPopup_1 = require("../olHelpers/mapPopup");
+var provide_1 = require("../util/provide");
+var ol = require("custom-ol");
+var $ = require("jquery");
 var nm = provide_1.default('layers');
 function checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
     "use strict";
@@ -78,16 +78,16 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
     checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig);
     var _iconUrlRoot = 'http://transportal.cee.wisc.edu/its/inventory/icons/';
     if (itsIcon) {
-        return new custom_ol_1.default.style.Style({
-            image: new custom_ol_1.default.style.Icon({
+        return new ol.style.Style({
+            image: new ol.style.Icon({
                 src: _iconUrlRoot + itsIcon,
                 crossOrigin: 'anonymous'
             })
         });
     }
     else if (itsLineStyle) {
-        return new custom_ol_1.default.style.Style({
-            stroke: new custom_ol_1.default.style.Stroke({
+        return new ol.style.Style({
+            stroke: new ol.style.Stroke({
                 color: itsLineStyle.color,
                 width: itsLineStyle.width
             })
@@ -104,8 +104,8 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
                     break;
                 }
             }
-            return [new custom_ol_1.default.style.Style({
-                    image: new custom_ol_1.default.style.Icon({
+            return [new ol.style.Style({
+                    image: new ol.style.Icon({
                         src: iconUrl,
                         crossOrigin: 'anonymous'
                     })
@@ -125,8 +125,8 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
                     break;
                 }
             }
-            return [new custom_ol_1.default.style.Style({
-                    stroke: new custom_ol_1.default.style.Stroke({
+            return [new ol.style.Style({
+                    stroke: new ol.style.Stroke({
                         color: colr,
                         width: width
                     })
@@ -177,7 +177,7 @@ function defineLegend(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
             var a = _a[_i];
             outHtml += "<li><span class=\"legend-layer-subitem\">" + a[1] + "</span><img src=\"" + (_iconUrlRoot + a[2]) + "\" class=\"legend-layer-icon\" height=\"" + iconHeight + "\">";
         }
-        outHtml += ("<li><span class=\"legend-layer-subitem\">" + itsIconConfig.defaultName + "</span>") +
+        outHtml += "<li><span class=\"legend-layer-subitem\">" + itsIconConfig.defaultName + "</span>" +
             ("<img src=\"" + (_iconUrlRoot + itsIconConfig.defaultIcon) + "\" class=\"legend-layer-icon\" height=\"" + iconHeight + "\"></li>");
         outHtml += '</ul>';
         return outHtml;
@@ -187,10 +187,10 @@ function defineLegend(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
         outHtml += '<ul>';
         for (var _b = 0, _c = itsLineConfig.lineArray; _b < _c.length; _b++) {
             var ls = _c[_b];
-            outHtml += ("<li><span class=\"legend-layer-subitem\">" + ls[1] + "</span>") +
+            outHtml += "<li><span class=\"legend-layer-subitem\">" + ls[1] + "</span>" +
                 ("<hr style=\"height: " + ls[3] + "px; background-color: " + ls[2] + "\">");
         }
-        outHtml += ("<li><span class=\"legend-layer-subitem\">" + itsLineConfig.defaultName + "</span>") +
+        outHtml += "<li><span class=\"legend-layer-subitem\">" + itsLineConfig.defaultName + "</span>" +
             ("<hr style=\"height: " + itsLineConfig.defaultWidth + "px; background-color: " + itsLineConfig.defaultColor + "\"></li>");
         outHtml += '</ul>';
         return outHtml;
@@ -250,6 +250,7 @@ var LayerItsInventory = (function (_super) {
      * @param {object} [options.itsLineConfig.lineArray=[]] an array, items with format [property, name, color, optional width = 5]
      */
     function LayerItsInventory(options) {
+        var _this = this;
         if (typeof options.itsType !== 'string') {
             throw 'its type must be defined';
         }
@@ -261,16 +262,17 @@ var LayerItsInventory = (function (_super) {
         }
         options.params = typeof options.params == 'object' ? options.params : {};
         $.extend(options.params, { format: 'JSON', resource: options.itsType });
-        _super.call(this, 'http://transportal.cee.wisc.edu/its/inventory/', options);
+        _this = _super.call(this, 'http://transportal.cee.wisc.edu/its/inventory/', options) || this;
         //add any additional content to the legend
-        this.addLegendContent(addToLegend);
+        _this.addLegendContent(addToLegend);
         options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : true;
         if (options.addPopup) {
-            mapPopup_1.default.addVectorPopup(this, function (props) {
-                return ("<iframe src=\"http://transportal.cee.wisc.edu/its/inventory/?feature=" + props['featureGuid'] + "\" ") +
+            mapPopup_1.default.addVectorPopup(_this, function (props) {
+                return "<iframe src=\"http://transportal.cee.wisc.edu/its/inventory/?feature=" + props['featureGuid'] + "\" " +
                     "height=\"250\" width=\"350\"></iframe>";
             });
         }
+        return _this;
     }
     /**
      * callback to generate the parameters passed in the get request
@@ -284,10 +286,10 @@ var LayerItsInventory = (function (_super) {
      */
     LayerItsInventory.prototype.mapMoveMakeGetParams = function (extent, zoomLevel) {
         _super.prototype.mapMoveMakeGetParams.call(this, extent, zoomLevel);
-        var lowerLeft = new custom_ol_1.default.geom.Point([extent.minX, extent.minY]);
+        var lowerLeft = new ol.geom.Point([extent.minX, extent.minY]);
         lowerLeft.transform(this.mapProj, this._projection4326);
         var lowerLeftCoordinates = lowerLeft.getCoordinates();
-        var upperRight = new custom_ol_1.default.geom.Point([extent.maxX, extent.maxY]);
+        var upperRight = new ol.geom.Point([extent.maxX, extent.maxY]);
         upperRight.transform(this.mapProj, this._projection4326);
         var upperRightCoordinates = upperRight.getCoordinates();
         $.extend(this.mapMoveParams, {

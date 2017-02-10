@@ -2,7 +2,7 @@ import {LayerBase, LayerBaseOptions} from './LayerBase';
 import mapMove from '../olHelpers/mapMove';
 import MapMoveCls from '../olHelpers/mapMoveCls'
 import provide from '../util/provide';
-import ol from 'custom-ol'
+import ol = require('custom-ol');
 import $ = require('jquery');
 
 let g = new ol.Map({});

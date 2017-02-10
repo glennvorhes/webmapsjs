@@ -1,6 +1,6 @@
 "use strict";
 // let g = new
-var media_control_1 = require('../domUtil/media-control');
+var media_control_1 = require("../domUtil/media-control");
 //
 //
 console.log('eat this fish');

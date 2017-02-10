@@ -2,7 +2,7 @@
  * Created by gavorhes on 6/7/2016.
  */
 "use strict";
-var provide_1 = require('./provide');
+var provide_1 = require("./provide");
 var nm = provide_1.default('util');
 /**
  * iterate over the key value pairs of an object

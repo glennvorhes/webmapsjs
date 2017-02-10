@@ -7,8 +7,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 /**
  * Created by gavorhes on 1/4/2016.
  */
-var provide_1 = require('../util/provide');
-var custom_ol_1 = require('custom-ol');
+var provide_1 = require("../util/provide");
+var ol = require("custom-ol");
 var nm = provide_1.default('olHelpers.esriToOlStyle');
 /**
  * This callback is displayed as part of the Requester class.
@@ -58,103 +58,106 @@ var CommonSymbol = (function () {
 var PointSymbol = (function (_super) {
     __extends(PointSymbol, _super);
     function PointSymbol(symbolObj, opacity) {
-        _super.call(this, symbolObj, opacity);
-        switch (this.symbolObj.type) {
+        var _this = _super.call(this, symbolObj, opacity) || this;
+        switch (_this.symbolObj.type) {
             case 'esriSMS':
-                var innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
-                var outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);
-                var outlineWidth = this.symbolObj.outline.width;
-                var radius = this.symbolObj.size;
-                this.olStyle = new custom_ol_1.default.style.Style({
-                    image: new custom_ol_1.default.style.Circle({
+                var innerColor = _colorArrayToRgba(_this.symbolObj.color, _this.opacity);
+                var outerColor = _colorArrayToRgba(_this.symbolObj.outline.color, _this.opacity);
+                var outlineWidth = _this.symbolObj.outline.width;
+                var radius = _this.symbolObj.size;
+                _this.olStyle = new ol.style.Style({
+                    image: new ol.style.Circle({
                         radius: radius,
-                        fill: new custom_ol_1.default.style.Fill({
+                        fill: new ol.style.Fill({
                             color: innerColor
                         }),
-                        stroke: new custom_ol_1.default.style.Stroke({ color: outerColor, width: outlineWidth })
+                        stroke: new ol.style.Stroke({ color: outerColor, width: outlineWidth })
                     })
                 });
-                this.legendHtml = "<span class=\"legend-layer-icon\" style=\"color: " + innerColor + "\">&#9679;</span>";
+                _this.legendHtml = "<span class=\"legend-layer-icon\" style=\"color: " + innerColor + "\">&#9679;</span>";
                 break;
             case 'esriPMS':
-                this.olStyle = new custom_ol_1.default.style.Style({
-                    image: new custom_ol_1.default.style.Icon({ src: "data:image/png;base64," + this.symbolObj['imageData'] })
+                _this.olStyle = new ol.style.Style({
+                    image: new ol.style.Icon({ src: "data:image/png;base64," + _this.symbolObj['imageData'] })
                 });
-                this.legendHtml = "<img class=\"legend-layer-icon\" height=\"17\" src=\"data:image/png;base64," + this.symbolObj['imageData'] + "\">";
+                _this.legendHtml = "<img class=\"legend-layer-icon\" height=\"17\" src=\"data:image/png;base64," + _this.symbolObj['imageData'] + "\">";
                 break;
             default:
-                console.log(this.symbolObj);
-                alert('Point symbol does not handle symbol type: ' + this.symbolObj['type']);
+                console.log(_this.symbolObj);
+                alert('Point symbol does not handle symbol type: ' + _this.symbolObj['type']);
         }
+        return _this;
     }
     return PointSymbol;
 }(CommonSymbol));
 var LineSymbol = (function (_super) {
     __extends(LineSymbol, _super);
     function LineSymbol(symbolObj, opacity) {
-        _super.call(this, symbolObj, opacity);
-        switch (this.symbolObj.type) {
+        var _this = _super.call(this, symbolObj, opacity) || this;
+        switch (_this.symbolObj.type) {
             case 'esriSLS':
-                var innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
-                var lineWidth = this.symbolObj.width;
-                this.olStyle = new custom_ol_1.default.style.Style({
-                    stroke: new custom_ol_1.default.style.Stroke({
+                var innerColor = _colorArrayToRgba(_this.symbolObj.color, _this.opacity);
+                var lineWidth = _this.symbolObj.width;
+                _this.olStyle = new ol.style.Style({
+                    stroke: new ol.style.Stroke({
                         color: innerColor,
                         //lineDash: [4],
                         width: lineWidth
                     })
                 });
-                this.legendHtml = "<span class=\"legend-layer-icon\" ";
-                this.legendHtml += "style=\"";
-                this.legendHtml += "background-color: " + innerColor + ";";
-                this.legendHtml += "width: 40px;";
-                this.legendHtml += "height: 4px;";
-                this.legendHtml += "position: relative;";
-                this.legendHtml += "display: inline-block;";
-                this.legendHtml += "top: -1px;";
-                this.legendHtml += "\"></span>";
+                _this.legendHtml = "<span class=\"legend-layer-icon\" ";
+                _this.legendHtml += "style=\"";
+                _this.legendHtml += "background-color: " + innerColor + ";";
+                _this.legendHtml += "width: 40px;";
+                _this.legendHtml += "height: 4px;";
+                _this.legendHtml += "position: relative;";
+                _this.legendHtml += "display: inline-block;";
+                _this.legendHtml += "top: -1px;";
+                _this.legendHtml += "\"></span>";
                 break;
             default:
-                console.log(this.symbolObj);
-                alert('Line symbol does not handle symbol type: ' + this.symbolObj['type']);
+                console.log(_this.symbolObj);
+                alert('Line symbol does not handle symbol type: ' + _this.symbolObj['type']);
         }
+        return _this;
     }
     return LineSymbol;
 }(CommonSymbol));
 var PolygonSymbol = (function (_super) {
     __extends(PolygonSymbol, _super);
     function PolygonSymbol(symbolObj, opacity) {
-        _super.call(this, symbolObj, opacity);
-        switch (this.symbolObj['type']) {
+        var _this = _super.call(this, symbolObj, opacity) || this;
+        switch (_this.symbolObj['type']) {
             case 'esriSFS':
-                var innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
-                var outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);
-                var outlineWidth = this.symbolObj.outline.width;
-                this.olStyle = new custom_ol_1.default.style.Style({
-                    stroke: new custom_ol_1.default.style.Stroke({
+                var innerColor = _colorArrayToRgba(_this.symbolObj.color, _this.opacity);
+                var outerColor = _colorArrayToRgba(_this.symbolObj.outline.color, _this.opacity);
+                var outlineWidth = _this.symbolObj.outline.width;
+                _this.olStyle = new ol.style.Style({
+                    stroke: new ol.style.Stroke({
                         color: outerColor,
                         //lineDash: [4],
                         width: outlineWidth
                     }),
-                    fill: new custom_ol_1.default.style.Fill({
+                    fill: new ol.style.Fill({
                         color: innerColor
                     })
                 });
-                this.legendHtml = "<span class=\"legend-layer-icon\" ";
-                this.legendHtml += "style=\"";
-                this.legendHtml += "background-color: " + innerColor + ";";
-                this.legendHtml += "border: solid " + outerColor + " 1px;";
-                this.legendHtml += "width: 40px;";
-                this.legendHtml += "height: 9px;";
-                this.legendHtml += "position: relative;";
-                this.legendHtml += "display: inline-block;";
-                this.legendHtml += "top: 2px;";
-                this.legendHtml += "\"></span>";
+                _this.legendHtml = "<span class=\"legend-layer-icon\" ";
+                _this.legendHtml += "style=\"";
+                _this.legendHtml += "background-color: " + innerColor + ";";
+                _this.legendHtml += "border: solid " + outerColor + " 1px;";
+                _this.legendHtml += "width: 40px;";
+                _this.legendHtml += "height: 9px;";
+                _this.legendHtml += "position: relative;";
+                _this.legendHtml += "display: inline-block;";
+                _this.legendHtml += "top: 2px;";
+                _this.legendHtml += "\"></span>";
                 break;
             default:
-                console.log(this.symbolObj);
-                alert('Polygon symbol does handle symbol type: ' + this.symbolObj['type']);
+                console.log(_this.symbolObj);
+                alert('Polygon symbol does handle symbol type: ' + _this.symbolObj['type']);
         }
+        return _this;
     }
     return PolygonSymbol;
 }(CommonSymbol));
@@ -175,11 +178,12 @@ var SingleSymbol = (function (_super) {
      * @param SymbolClass - the symbol class to use
      */
     function SingleSymbol(esriResponse, SymbolClass) {
-        _super.call(this, esriResponse);
-        this.symbol = this.renderer.symbol;
-        var symbolObj = new SymbolClass(this.symbol, this.opacity);
-        this.olStyle = symbolObj.olStyle;
-        this.legendHtml = symbolObj.legendHtml;
+        var _this = _super.call(this, esriResponse) || this;
+        _this.symbol = _this.renderer.symbol;
+        var symbolObj = new SymbolClass(_this.symbol, _this.opacity);
+        _this.olStyle = symbolObj.olStyle;
+        _this.legendHtml = symbolObj.legendHtml;
+        return _this;
     }
     return SingleSymbol;
 }(SymbolGenerator));
@@ -191,33 +195,32 @@ var UniqueValueSymbol = (function (_super) {
      * @param SymbolClass - the Symbol class definition
      */
     function UniqueValueSymbol(esriResponse, SymbolClass) {
-        var _this = this;
-        _super.call(this, esriResponse);
-        this.uniqueValueInfos = this.renderer['uniqueValueInfos'];
-        this.propertyName = this.renderer['field1'];
-        this.defaultSymbol = this.renderer['defaultSymbol'];
-        if (this.defaultSymbol) {
-            var symbolObj = new SymbolClass(this.defaultSymbol, this.opacity);
-            this.defaultStyle = symbolObj.olStyle;
-            this.defaultLabelHtml = ("<span class=\"legend-layer-subitem\">" + htmlEscape(this.renderer['defaultLabel']) + "</span>") + symbolObj.legendHtml;
+        var _this = _super.call(this, esriResponse) || this;
+        _this.uniqueValueInfos = _this.renderer['uniqueValueInfos'];
+        _this.propertyName = _this.renderer['field1'];
+        _this.defaultSymbol = _this.renderer['defaultSymbol'];
+        if (_this.defaultSymbol) {
+            var symbolObj = new SymbolClass(_this.defaultSymbol, _this.opacity);
+            _this.defaultStyle = symbolObj.olStyle;
+            _this.defaultLabelHtml = "<span class=\"legend-layer-subitem\">" + htmlEscape(_this.renderer['defaultLabel']) + "</span>" + symbolObj.legendHtml;
         }
         else {
-            this.defaultStyle = undefined;
-            this.defaultLabelHtml = 'other';
+            _this.defaultStyle = undefined;
+            _this.defaultLabelHtml = 'other';
         }
-        this.valueArray = [];
-        this.labelArray = [];
-        this.legendArray = [];
-        this.propertyStyleLookup = {};
-        for (var _i = 0, _a = this.uniqueValueInfos; _i < _a.length; _i++) {
+        _this.valueArray = [];
+        _this.labelArray = [];
+        _this.legendArray = [];
+        _this.propertyStyleLookup = {};
+        for (var _i = 0, _a = _this.uniqueValueInfos; _i < _a.length; _i++) {
             var uniqueVal = _a[_i];
-            this.labelArray.push(uniqueVal['label']);
-            this.valueArray.push(uniqueVal['value']);
-            var uniqueSym = new SymbolClass(uniqueVal.symbol, this.opacity);
-            this.legendArray.push(("<span class=\"legend-layer-subitem\">" + htmlEscape(uniqueVal['label']) + "</span>") + uniqueSym.legendHtml);
-            this.propertyStyleLookup[uniqueVal['value']] = uniqueSym.olStyle;
+            _this.labelArray.push(uniqueVal['label']);
+            _this.valueArray.push(uniqueVal['value']);
+            var uniqueSym = new SymbolClass(uniqueVal.symbol, _this.opacity);
+            _this.legendArray.push("<span class=\"legend-layer-subitem\">" + htmlEscape(uniqueVal['label']) + "</span>" + uniqueSym.legendHtml);
+            _this.propertyStyleLookup[uniqueVal['value']] = uniqueSym.olStyle;
         }
-        this.olStyle = function (feature) {
+        _this.olStyle = function (feature) {
             var checkProperties = feature.getProperties();
             var checkProperty = checkProperties[_this.propertyName];
             var returnValue;
@@ -229,15 +232,16 @@ var UniqueValueSymbol = (function (_super) {
             }
             return returnValue;
         };
-        if (this.defaultLabelHtml !== null) {
-            this.legendArray.push(this.defaultLabelHtml);
+        if (_this.defaultLabelHtml !== null) {
+            _this.legendArray.push(_this.defaultLabelHtml);
         }
-        this.legendHtml = '<ul>';
-        for (var _b = 0, _c = this.legendArray; _b < _c.length; _b++) {
+        _this.legendHtml = '<ul>';
+        for (var _b = 0, _c = _this.legendArray; _b < _c.length; _b++) {
             var h = _c[_b];
-            this.legendHtml += "<li>" + h + "</li>";
+            _this.legendHtml += "<li>" + h + "</li>";
         }
-        this.legendHtml += '</ul>';
+        _this.legendHtml += '</ul>';
+        return _this;
     }
     return UniqueValueSymbol;
 }(SymbolGenerator));
@@ -333,7 +337,7 @@ function mapServiceLegendItem(lyrObject, skipLayerNameAndExpander) {
         legendHtml += '</ul>';
     }
     if (!skipLayerNameAndExpander) {
-        legendHtml = ("<span class=\"legend-layer-subitem\">" + layerName + "</span>") + legendHtml;
+        legendHtml = "<span class=\"legend-layer-subitem\">" + layerName + "</span>" + legendHtml;
     }
     return legendHtml;
 }

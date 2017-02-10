@@ -1,6 +1,6 @@
 import * as zoomResolutionConvert from '../olHelpers/zoomResolutionConvert';
 import provide from '../util/provide';
-import ol from 'custom-ol'
+import ol = require('custom-ol');
 import makeGuid from '../util/makeGuid';
 import $ = require('jquery');
 

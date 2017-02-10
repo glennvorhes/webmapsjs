@@ -1,5 +1,5 @@
 "use strict";
-var provide_1 = require('./provide');
+var provide_1 = require("./provide");
 var nm = provide_1.default('util.checkDefined');
 /**
  * check if the input is undefined or null

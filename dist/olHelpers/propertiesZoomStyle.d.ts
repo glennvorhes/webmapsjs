@@ -1,4 +1,4 @@
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 /**
  * A style function based on properties and zoom level, wraps normal feature, resolution function
  * @callback propertiesZoomStyle

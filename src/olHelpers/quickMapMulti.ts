@@ -6,7 +6,7 @@ import {quickMapBase, quickMapOptions} from './quickMapBase';
 import provide from '../util/provide';
 import MapMoveCls from './mapMoveCls';
 import MapPopupCls from './mapPopupCls';
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 let nm = provide('olHelpers');
 
 

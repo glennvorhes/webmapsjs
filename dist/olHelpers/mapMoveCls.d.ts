@@ -1,6 +1,6 @@
 import LayerBaseVector from "../layers/LayerBaseVector";
 import MapInteractionBase from './mapInteractionBase';
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 export interface extentObject {
     minX: number;
     minY: number;

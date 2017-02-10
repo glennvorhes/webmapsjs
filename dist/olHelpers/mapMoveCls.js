@@ -4,11 +4,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var mapInteractionBase_1 = require('./mapInteractionBase');
-var checkDefined = require('../util/checkDefined');
-var provide_1 = require('../util/provide');
-var makeGuid_1 = require('../util/makeGuid');
-var $ = require('jquery');
+var mapInteractionBase_1 = require("./mapInteractionBase");
+var checkDefined = require("../util/checkDefined");
+var provide_1 = require("../util/provide");
+var makeGuid_1 = require("../util/makeGuid");
+var $ = require("jquery");
 var nm = provide_1.default('olHelpers');
 /**
  * assists with map move interactions, trigger callback functions
@@ -20,18 +20,19 @@ var MapMoveCls = (function (_super) {
      * constructor called implicitly
      */
     function MapMoveCls() {
-        _super.call(this, 'map move');
-        this._arrLyrRequest = [];
-        this._arrLyrTimeout = [];
-        this._arrLayer = [];
-        this._lookupLayer = {};
-        this._mapMoveCallbacks = [];
-        this._mapMoveCallbacksLookup = {};
-        this._mapMoveCallbackDelays = [];
-        this._mapMoveCallbackContext = [];
-        this._mapMoveCallbackTimeout = [];
-        this._mapExtent = undefined;
-        this._zoomLevel = undefined;
+        var _this = _super.call(this, 'map move') || this;
+        _this._arrLyrRequest = [];
+        _this._arrLyrTimeout = [];
+        _this._arrLayer = [];
+        _this._lookupLayer = {};
+        _this._mapMoveCallbacks = [];
+        _this._mapMoveCallbacksLookup = {};
+        _this._mapMoveCallbackDelays = [];
+        _this._mapMoveCallbackContext = [];
+        _this._mapMoveCallbackTimeout = [];
+        _this._mapExtent = undefined;
+        _this._zoomLevel = undefined;
+        return _this;
     }
     /**
      * initialize the map move object
@@ -106,7 +107,7 @@ var MapMoveCls = (function (_super) {
         var callbackFunc = function () { };
         if (lyr.mapMoveBefore(this._zoomLevel, eventType)) {
             lyr.mapMoveMakeGetParams(this._mapExtent, this._zoomLevel);
-            var _this_1 = this;
+            var __this_1 = this;
             callbackFunc = function () {
                 function innerFunction(theLayer, theIndex) {
                     var _innerThis = this;
@@ -127,7 +128,7 @@ var MapMoveCls = (function (_super) {
                         _innerThis._arrLyrRequest[theIndex] = null;
                     });
                 }
-                innerFunction.call(_this_1, lyr, index);
+                innerFunction.call(__this_1, lyr, index);
             };
         }
         else {
@@ -159,13 +160,13 @@ var MapMoveCls = (function (_super) {
         }
         var ctx = this._mapMoveCallbackContext[ind];
         var theFunc = this._mapMoveCallbacks[ind];
-        var _this = this;
+        var __this = this;
         var f = function () {
             if (ctx !== null) {
-                theFunc.call(ctx, _this._mapExtent, _this._zoomLevel, eventType);
+                theFunc.call(ctx, __this._mapExtent, __this._zoomLevel, eventType);
             }
             else {
-                theFunc(_this._mapExtent, _this._zoomLevel, eventType);
+                theFunc(__this._mapExtent, __this._zoomLevel, eventType);
             }
         };
         this._mapMoveCallbackTimeout[ind] = setTimeout(f, this._mapMoveCallbackDelays[ind]);

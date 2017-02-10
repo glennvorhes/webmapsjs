@@ -2,8 +2,8 @@
  * Created by gavorhes on 12/14/2015.
  */
 "use strict";
-var provide_1 = require('../util/provide');
-var zoomResolutionConvert = require('./zoomResolutionConvert');
+var provide_1 = require("../util/provide");
+var zoomResolutionConvert = require("./zoomResolutionConvert");
 var nm = provide_1.default('olHelpers');
 /**
  * A style function based on properties and zoom level, wraps normal feature, resolution function

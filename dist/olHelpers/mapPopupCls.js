@@ -7,10 +7,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var mapInteractionBase_1 = require('./mapInteractionBase');
-var provide_1 = require('../util/provide');
-var custom_ol_1 = require('custom-ol');
-var $ = require('jquery');
+var mapInteractionBase_1 = require("./mapInteractionBase");
+var provide_1 = require("../util/provide");
+var ol = require("custom-ol");
+var $ = require("jquery");
 var nm = provide_1.default('olHelpers');
 var FeatureLayerProperties = (function () {
     /**
@@ -60,28 +60,29 @@ var MapPopupCls = (function (_super) {
      * map popup constructor
      */
     function MapPopupCls() {
-        _super.call(this, 'map popup');
-        this._arrPopupLayerIds = [];
-        this._arrPopupLayerNames = [];
-        this._arrPopupLayers = [];
-        this._arrPopupOlLayers = [];
-        this._arrPopupContentFunction = [];
-        this._$popupContainer = undefined;
-        this._$popupContent = undefined;
-        this._$popupCloser = undefined;
-        this._popupOverlay = undefined;
-        this._selectionLayers = [];
-        this._selectionLayerLookup = {};
-        this._mapClickFunctions = [];
+        var _this = _super.call(this, 'map popup') || this;
+        _this._arrPopupLayerIds = [];
+        _this._arrPopupLayerNames = [];
+        _this._arrPopupLayers = [];
+        _this._arrPopupOlLayers = [];
+        _this._arrPopupContentFunction = [];
+        _this._$popupContainer = undefined;
+        _this._$popupContent = undefined;
+        _this._$popupCloser = undefined;
+        _this._popupOverlay = undefined;
+        _this._selectionLayers = [];
+        _this._selectionLayerLookup = {};
+        _this._mapClickFunctions = [];
         //let a = function($jqueryContent){console.log($jqueryContent)};
         //this._popupChangedLookup = {'a': a};
-        this._popupChangedFunctions = [];
-        this._esriMapServiceLayers = [];
-        this._popupOpen = false;
-        this._popupCoordinate = null;
-        this._passThroughLayerFeatureArray = [];
-        this._currentPopupIndex = -1;
-        this._popupContentLength = 0;
+        _this._popupChangedFunctions = [];
+        _this._esriMapServiceLayers = [];
+        _this._popupOpen = false;
+        _this._popupCoordinate = null;
+        _this._passThroughLayerFeatureArray = [];
+        _this._currentPopupIndex = -1;
+        _this._popupContentLength = 0;
+        return _this;
     }
     /**
      * map popup initialization
@@ -106,9 +107,9 @@ var MapPopupCls = (function (_super) {
         this._$popupContent = $map.find('.popup-content');
         this._$popupCloser = $map.find('.ol-popup-closer');
         var _ease = function (n) {
-            return custom_ol_1.default.easing.inAndOut(n);
+            return ol.easing.inAndOut(n);
         };
-        this._popupOverlay = new custom_ol_1.default.Overlay({
+        this._popupOverlay = new ol.Overlay({
             element: this._$popupContainer[0],
             autoPan: true,
             autoPanAnimation: {
@@ -320,23 +321,23 @@ var MapPopupCls = (function (_super) {
             theStyle = selectionStyle.olStyle;
         }
         else {
-            theStyle = new custom_ol_1.default.style.Style({
-                stroke: new custom_ol_1.default.style.Stroke({
+            theStyle = new ol.style.Style({
+                stroke: new ol.style.Stroke({
                     color: selectionStyle.color,
                     width: selectionStyle.width
                 }),
-                image: new custom_ol_1.default.style.Circle({
+                image: new ol.style.Circle({
                     radius: 7,
-                    fill: new custom_ol_1.default.style.Fill({ color: selectionStyle.color }),
-                    stroke: new custom_ol_1.default.style.Stroke({ color: selectionStyle.color, width: 1 })
+                    fill: new ol.style.Fill({ color: selectionStyle.color }),
+                    stroke: new ol.style.Stroke({ color: selectionStyle.color, width: 1 })
                 }),
-                fill: new custom_ol_1.default.style.Fill({
+                fill: new ol.style.Fill({
                     color: selectionStyle.color
                 })
             });
         }
-        var selectionLayer = new custom_ol_1.default.layer.Vector({
-            source: new custom_ol_1.default.source.Vector(),
+        var selectionLayer = new ol.layer.Vector({
+            source: new ol.source.Vector(),
             style: theStyle
         });
         selectionLayer.setZIndex(100);

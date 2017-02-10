@@ -7,9 +7,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var LayerBaseXyzTile_1 = require('./LayerBaseXyzTile');
-var RealEarthAnimateTile_1 = require('../mixin/RealEarthAnimateTile');
-var provide_1 = require('../util/provide');
+var LayerBaseXyzTile_1 = require("./LayerBaseXyzTile");
+var RealEarthAnimateTile_1 = require("../mixin/RealEarthAnimateTile");
+var provide_1 = require("../util/provide");
 var nm = provide_1.default('layers');
 /**
  * Real earth tile
@@ -38,17 +38,19 @@ var LayerRealEarthTile = (function (_super) {
      * @param {boolean} [options.animate=false] if the layer should be animated
      */
     function LayerRealEarthTile(options) {
+        var _this = this;
         options.animate = typeof options.animate == 'boolean' ? options.animate : false;
         if (options.animate) {
-            _super.call(this, '', options);
-            this._products = options.products;
-            this.animator = new RealEarthAnimateTile_1.default(this, options.timeLoadCallback);
-            this.animator.timeInit();
+            _this = _super.call(this, '', options) || this;
+            _this._products = options.products;
+            _this.animator = new RealEarthAnimateTile_1.default(_this, options.timeLoadCallback);
+            _this.animator.timeInit();
         }
         else {
-            _super.call(this, "http://realearth.ssec.wisc.edu/api/image?products=" + options.products + "&x={x}&y={y}&z={z}", options);
-            this._products = options.products;
+            _this = _super.call(this, "http://realearth.ssec.wisc.edu/api/image?products=" + options.products + "&x={x}&y={y}&z={z}", options) || this;
+            _this._products = options.products;
         }
+        return _this;
     }
     LayerRealEarthTile.prototype.setLayerTime = function (theTime) {
         if (this.animator) {

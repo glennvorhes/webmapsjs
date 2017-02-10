@@ -2,9 +2,9 @@
  * Created by gavorhes on 11/2/2015.
  */
 "use strict";
-var provide_1 = require('../util/provide');
-var range_change_1 = require('./range-change');
-var $ = require('jquery');
+var provide_1 = require("../util/provide");
+var range_change_1 = require("./range-change");
+var $ = require("jquery");
 var nm = provide_1.default('domUtil');
 /**
  * @callback mediaCallback
@@ -26,9 +26,9 @@ var MediaControl = (function () {
      * @param mediaConfig
      */
     function MediaControl(element, changeFunc, mediaConfig) {
-        var _this = this;
         if (changeFunc === void 0) { changeFunc = function () { return; }; }
         if (mediaConfig === void 0) { mediaConfig = {}; }
+        var _this = this;
         mediaConfig.min = typeof mediaConfig.min == 'number' ? mediaConfig.min : 0;
         mediaConfig.max = typeof mediaConfig.max == 'number' ? mediaConfig.max : 100;
         mediaConfig.val = typeof mediaConfig.val == 'number' ? mediaConfig.val : 0;

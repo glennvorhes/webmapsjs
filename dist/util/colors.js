@@ -2,8 +2,8 @@
 /**
  * Created by gavorhes on 11/3/2015.
  */
-var provide_1 = require('./provide');
-var chk = require('./checkDefined');
+var provide_1 = require("./provide");
+var chk = require("./checkDefined");
 var nm = provide_1.default('util.colors');
 /**
  * helper function to convert to hex

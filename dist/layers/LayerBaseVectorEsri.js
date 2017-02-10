@@ -7,11 +7,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var LayerBaseVector_1 = require('./LayerBaseVector');
-var esriToOl = require('../olHelpers/esriToOlStyle');
-var provide_1 = require('../util/provide');
-var custom_ol_1 = require('custom-ol');
-var $ = require('jquery');
+var LayerBaseVector_1 = require("./LayerBaseVector");
+var esriToOl = require("../olHelpers/esriToOlStyle");
+var provide_1 = require("../util/provide");
+var ol = require("custom-ol");
+var $ = require("jquery");
 var nm = provide_1.default('layers');
 /**
  * Base layer for esri vector layers
@@ -51,6 +51,7 @@ var LayerBaseVectorEsri = (function (_super) {
      * @param {number} [options.mapMoveMakeGetParams=function(extent, zoomLevel){}] function to create additional map move params
      */
     function LayerBaseVectorEsri(url, options) {
+        var _this = this;
         if (typeof options.params != 'object') {
             options.params = {};
         }
@@ -58,21 +59,22 @@ var LayerBaseVectorEsri = (function (_super) {
         options.params['outFields'] = options.outFields || '*';
         options.params['f'] = options.format || 'pjson';
         options.params['outSR'] = options.outSR || 3857;
-        _super.call(this, url, options);
-        this._outSR = this.params['outSR'];
-        this._esriFormat = new custom_ol_1.default.format.EsriJSON();
-        if (this._url[this._url.length - 1] !== '/') {
-            this._url += '/';
+        _this = _super.call(this, url, options) || this;
+        _this._outSR = _this.params['outSR'];
+        _this._esriFormat = new ol.format.EsriJSON();
+        if (_this._url[_this._url.length - 1] !== '/') {
+            _this._url += '/';
         }
-        this._urlCopy = this.url;
-        this._url += 'query?callback=?';
-        if (this.autoLoad || this.visible) {
-            this._load();
+        _this._urlCopy = _this.url;
+        _this._url += 'query?callback=?';
+        if (_this.autoLoad || _this.visible) {
+            _this._load();
         }
-        this._useEsriStyle = typeof options.useEsriStyle == 'boolean' ? options.useEsriStyle : false;
-        if (this._useEsriStyle) {
-            this.addLegendContent();
+        _this._useEsriStyle = typeof options.useEsriStyle == 'boolean' ? options.useEsriStyle : false;
+        if (_this._useEsriStyle) {
+            _this.addLegendContent();
         }
+        return _this;
     }
     /**
      * add additional content to the legend

@@ -3,7 +3,7 @@
  * Created by gavorhes on 11/3/2015.
  */
 import MapInteractionBase from './mapInteractionBase';
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 import { LayerBaseVector } from "../layers/LayerBaseVector";
 import LayerEsriMapServer from "../layers/LayerEsriMapServer";
 export interface popupChangedFunction {

@@ -1,5 +1,5 @@
 "use strict";
-var provide_1 = require('../util/provide');
+var provide_1 = require("../util/provide");
 var nm = provide_1.default('domUtil');
 var mouseIn = false;
 var mouseDown = false;

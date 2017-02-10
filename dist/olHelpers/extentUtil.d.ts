@@ -1,4 +1,4 @@
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 import { LayerBaseVector } from "../layers/LayerBaseVector";
 /**
  *

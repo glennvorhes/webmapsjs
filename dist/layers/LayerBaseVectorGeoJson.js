@@ -7,11 +7,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var LayerBaseVector_1 = require('./LayerBaseVector');
-var provide_1 = require('../util/provide');
-var custom_ol_1 = require('custom-ol');
-var proj = require('../olHelpers/projections');
-var $ = require('jquery');
+var LayerBaseVector_1 = require("./LayerBaseVector");
+var provide_1 = require("../util/provide");
+var ol = require("custom-ol");
+var proj = require("../olHelpers/projections");
+var $ = require("jquery");
 var nm = provide_1.default('layers');
 /**
  * The Vector GeoJson Layer
@@ -47,13 +47,15 @@ var LayerBaseVectorGeoJson = (function (_super) {
      * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
      */
     function LayerBaseVectorGeoJson(url, options) {
+        var _this = this;
         url = typeof url == 'string' ? url : '';
-        _super.call(this, url, options);
-        this._geoJsonFormat = new custom_ol_1.default.format.GeoJSON();
-        this._transform = options.transform || { dataProjection: proj.proj4326, featureProjection: proj.proj3857 };
-        if (this.autoLoad || this.visible) {
-            this._load();
+        _this = _super.call(this, url, options) || this;
+        _this._geoJsonFormat = new ol.format.GeoJSON();
+        _this._transform = options.transform || { dataProjection: proj.proj4326, featureProjection: proj.proj3857 };
+        if (_this.autoLoad || _this.visible) {
+            _this._load();
         }
+        return _this;
     }
     /**
      * add feature collection

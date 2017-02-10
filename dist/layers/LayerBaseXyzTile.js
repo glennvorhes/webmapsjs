@@ -7,9 +7,9 @@ var __extends = (this && this.__extends) || function (d, b) {
 /**
  * Created by gavorhes on 12/4/2015.
  */
-var LayerBase_1 = require('./LayerBase');
-var provide_1 = require('../util/provide');
-var custom_ol_1 = require('custom-ol');
+var LayerBase_1 = require("./LayerBase");
+var provide_1 = require("../util/provide");
+var ol = require("custom-ol");
 var nm = provide_1.default('layers');
 /**
  * XYZ tile
@@ -36,16 +36,17 @@ var LayerBaseXyzTile = (function (_super) {
      * @param {boolean} [options.useEsriStyle=false] if the map service style should be used
      */
     function LayerBaseXyzTile(url, options) {
-        _super.call(this, url, options);
-        this._source = new custom_ol_1.default.source.XYZ({ url: this.url == '' ? undefined : this.url });
-        this._olLayer = new custom_ol_1.default.layer.Tile({
-            source: this._source,
-            visible: this.visible,
-            opacity: this.opacity,
-            minResolution: this._minResolution,
-            maxResolution: this._maxResolution
+        var _this = _super.call(this, url, options) || this;
+        _this._source = new ol.source.XYZ({ url: _this.url == '' ? undefined : _this.url });
+        _this._olLayer = new ol.layer.Tile({
+            source: _this._source,
+            visible: _this.visible,
+            opacity: _this.opacity,
+            minResolution: _this._minResolution,
+            maxResolution: _this._maxResolution
         });
-        this._olLayer.setZIndex(this._zIndex);
+        _this._olLayer.setZIndex(_this._zIndex);
+        return _this;
     }
     Object.defineProperty(LayerBaseXyzTile.prototype, "source", {
         /**

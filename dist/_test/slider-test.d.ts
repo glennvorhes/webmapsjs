@@ -3,7 +3,7 @@
  * Created by gavorhes on 6/22/2016.
  */
 import { TipSliders, TipPresetConfig, TipSliderConfig } from '../collections/Sliders';
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 export interface ITipConfig {
     slidersConfig: Array<TipSliderConfig>;
     presetConfig: Array<TipPresetConfig>;

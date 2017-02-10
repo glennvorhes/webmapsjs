@@ -2,7 +2,7 @@
  * Created by gavorhes on 7/18/2016.
  */
 import provide from '../util/provide';
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 import {LayerBaseVector} from "../layers/LayerBaseVector";
 
 

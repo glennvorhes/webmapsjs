@@ -2,8 +2,8 @@
  * Created by gavorhes on 12/10/2015.
  */
 "use strict";
-var provide_1 = require('../util/provide');
-var $ = require('jquery');
+var provide_1 = require("../util/provide");
+var $ = require("jquery");
 var nm = provide_1.default('collections');
 var TipPresets = (function () {
     function TipPresets(conf) {

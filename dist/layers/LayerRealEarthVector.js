@@ -7,9 +7,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var LayerBaseVectorGeoJson_1 = require('./LayerBaseVectorGeoJson');
-var RealEarthAnimateVector_1 = require('../mixin/RealEarthAnimateVector');
-var provide_1 = require('../util/provide');
+var LayerBaseVectorGeoJson_1 = require("./LayerBaseVectorGeoJson");
+var RealEarthAnimateVector_1 = require("../mixin/RealEarthAnimateVector");
+var provide_1 = require("../util/provide");
 var nm = provide_1.default('layers');
 /**
  * Vector real earth vector
@@ -47,18 +47,20 @@ var LayerVectorRealEarth = (function (_super) {
      * @param {boolean} [options.animate=false] if the layer should be animated
      */
     function LayerVectorRealEarth(options) {
+        var _this = this;
         options.animate = typeof options.animate == 'boolean' ? options.animate : false;
         if (options.animate) {
             options.autoLoad = false;
-            _super.call(this, '', options);
-            this._products = options.products;
-            this.animator = new RealEarthAnimateVector_1.default(this, options.timeLoadCallback);
-            this.animator.timeInit();
+            _this = _super.call(this, '', options) || this;
+            _this._products = options.products;
+            _this.animator = new RealEarthAnimateVector_1.default(_this, options.timeLoadCallback);
+            _this.animator.timeInit();
         }
         else {
             options.params = { products: options.products };
-            _super.call(this, 'http://realearth.ssec.wisc.edu/api/shapes', options);
+            _this = _super.call(this, 'http://realearth.ssec.wisc.edu/api/shapes', options) || this;
         }
+        return _this;
     }
     LayerVectorRealEarth.prototype.setLayerTime = function (theTime) {
         if (this.animator) {

@@ -7,9 +7,9 @@ var __extends = (this && this.__extends) || function (d, b) {
 /**
  * Created by gavorhes on 12/4/2015.
  */
-var provide_1 = require('../util/provide');
-var LayerBaseXyzTile_1 = require('./LayerBaseXyzTile');
-var esriToOl = require('../olHelpers/esriToOlStyle');
+var provide_1 = require("../util/provide");
+var LayerBaseXyzTile_1 = require("./LayerBaseXyzTile");
+var esriToOl = require("../olHelpers/esriToOlStyle");
 var nm = provide_1.default('layers');
 /**
  * Esri tile
@@ -36,21 +36,24 @@ var LayerEsriTile = (function (_super) {
      * @param {boolean} [options.useEsriStyle=false] if the map service style should be used
      */
     function LayerEsriTile(url, options) {
+        var _this = this;
         if (url.search(/\/$/) == -1) {
             url += '/';
         }
         url += 'tile/{z}/{y}/{x}';
-        _super.call(this, url, options);
-        this._useEsriStyle = typeof options.useEsriStyle == 'boolean' ? options.useEsriStyle : false;
-        if (this._useEsriStyle) {
-            this.addLegendContent();
+        _this = _super.call(this, url, options) || this;
+        _this._useEsriStyle = typeof options.useEsriStyle == 'boolean' ? options.useEsriStyle : false;
+        if (_this._useEsriStyle) {
+            _this.addLegendContent();
         }
+        return _this;
     }
     /**
      * add additional content to the legend
      * @param {string} [additionalContent=''] additional content for legend
      */
     LayerEsriTile.prototype.addLegendContent = function (additionalContent) {
+        var _this = this;
         if (additionalContent === void 0) { additionalContent = ''; }
         if (!this._useEsriStyle) {
             _super.prototype.addLegendContent.call(this, additionalContent);
@@ -68,11 +71,10 @@ var LayerEsriTile = (function (_super) {
                 urlCopy += '/';
             }
             urlCopy += 'legend?f=pjson&callback=?';
-            var _this_1 = this;
             var superAddLegend_1 = _super.prototype.addLegendContent;
             $.get(urlCopy, {}, function (d) {
                 var newHtml = esriToOl.makeMapServiceLegend(d);
-                superAddLegend_1.call(_this_1, newHtml);
+                superAddLegend_1.call(_this, newHtml);
             }, 'json');
         }
     };

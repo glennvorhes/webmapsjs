@@ -2,9 +2,9 @@
 /**
  * Created by gavorhes on 12/4/2015.
  */
-var provide_1 = require('../util/provide');
-var mapPopup_1 = require('../olHelpers/mapPopup');
-var $ = require('jquery');
+var provide_1 = require("../util/provide");
+var mapPopup_1 = require("../olHelpers/mapPopup");
+var $ = require("jquery");
 var nm = provide_1.default('mixin');
 /**
  * The GMT offset time in minutes

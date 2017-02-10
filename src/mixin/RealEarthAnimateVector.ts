@@ -3,7 +3,7 @@
  */
 import RealEarthAnimate from './RealEarthAnimate';
 import provide from '../util/provide';
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 import {LayerVectorRealEarth} from "../layers/LayerRealEarthVector";
 import $ = require('jquery');
 const nm = provide('mixin');
@@ -78,15 +78,15 @@ class RealEarthAnimateVector extends RealEarthAnimate {
             this._source.clear();
             this._loadFeatures(this._dataCache[i]);
         } else {
-            let _this = this;
+            let __this = this;
             $.get('http://realearth.ssec.wisc.edu:80/api/shapes',
                 {products: `${this._products}_${this._rawDateStrings[i]}`},
                 function (d) {
-                    _this._dataCache[i] = d;
-                    _this._rawTimesLookup[_this._rawDateStrings[i]] = d;
+                    __this._dataCache[i] = d;
+                    __this._rawTimesLookup[__this._rawDateStrings[i]] = d;
                     if (setAsSource) {
-                        _this._source.clear();
-                        _this._loadFeatures.call(_this, _this._dataCache[i]);
+                        __this._source.clear();
+                        __this._loadFeatures.call(__this, __this._dataCache[i]);
                     }
                 }, 'json'
             );

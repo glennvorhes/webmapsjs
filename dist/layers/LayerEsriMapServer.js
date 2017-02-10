@@ -7,12 +7,12 @@ var __extends = (this && this.__extends) || function (d, b) {
 /**
  * Created by gavorhes on 12/7/2015.
  */
-var LayerBase_1 = require('./LayerBase');
-var esriToOl = require('../olHelpers/esriToOlStyle');
-var mapPopup_1 = require('../olHelpers/mapPopup');
-var provide_1 = require('../util/provide');
-var custom_ol_1 = require('custom-ol');
-var $ = require('jquery');
+var LayerBase_1 = require("./LayerBase");
+var esriToOl = require("../olHelpers/esriToOlStyle");
+var mapPopup_1 = require("../olHelpers/mapPopup");
+var provide_1 = require("../util/provide");
+var ol = require("custom-ol");
+var $ = require("jquery");
 var nm = provide_1.default('layers');
 /**
  * esri mapserver layer
@@ -41,26 +41,27 @@ var LayerEsriMapServer = (function (_super) {
      */
     function LayerEsriMapServer(url, options) {
         if (options === void 0) { options = {}; }
-        _super.call(this, url, options);
-        this._source = new custom_ol_1.default.source.TileArcGISRest({
-            url: this.url == '' ? undefined : this.url,
+        var _this = _super.call(this, url, options) || this;
+        _this._source = new ol.source.TileArcGISRest({
+            url: _this.url == '' ? undefined : _this.url,
             params: typeof options.showLayers == 'undefined' ? undefined : { layers: 'show:' + options.showLayers.join(',') }
         });
-        this._olLayer = new custom_ol_1.default.layer.Tile({
-            source: this._source,
-            visible: this.visible,
-            opacity: this.opacity,
-            minResolution: this._minResolution,
-            maxResolution: this._maxResolution
+        _this._olLayer = new ol.layer.Tile({
+            source: _this._source,
+            visible: _this.visible,
+            opacity: _this.opacity,
+            minResolution: _this._minResolution,
+            maxResolution: _this._maxResolution
         });
-        this._olLayer.setZIndex(this._zIndex);
+        _this._olLayer.setZIndex(_this._zIndex);
         options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
-        this._esriFormat = new custom_ol_1.default.format.EsriJSON();
-        this._popupRequest = null;
-        this.addLegendContent();
+        _this._esriFormat = new ol.format.EsriJSON();
+        _this._popupRequest = null;
+        _this.addLegendContent();
         if (options.addPopup) {
-            mapPopup_1.default.addMapServicePopup(this);
+            mapPopup_1.default.addMapServicePopup(_this);
         }
+        return _this;
     }
     /**
      * add additional content to the legend
@@ -87,7 +88,7 @@ var LayerEsriMapServer = (function (_super) {
             urlCopy += '/';
         }
         urlCopy += 'identify?callback=?';
-        var _this = this;
+        var __this = this;
         if (this._popupRequest != null) {
             this._popupRequest.abort();
         }
@@ -109,11 +110,11 @@ var LayerEsriMapServer = (function (_super) {
                     }
                 }
                 popupHtml += '</table>';
-                mapPopup_1.default.addMapServicePopupContent(_this._esriFormat.readFeature(r), _this, popupHtml, r['layerName']);
+                mapPopup_1.default.addMapServicePopupContent(__this._esriFormat.readFeature(r), __this, popupHtml, r['layerName']);
             }
         }, 'json');
         this._popupRequest.always(function () {
-            _this._popupRequest = null;
+            __this._popupRequest = null;
         });
     };
     Object.defineProperty(LayerEsriMapServer.prototype, "source", {

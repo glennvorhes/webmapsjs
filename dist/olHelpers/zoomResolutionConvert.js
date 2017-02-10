@@ -2,7 +2,7 @@
  * Created by gavorhes on 12/14/2015.
  */
 "use strict";
-var provide_1 = require('../util/provide');
+var provide_1 = require("../util/provide");
 var nm = provide_1.default('olHelpers.zoomResolutionConvert');
 var _zoomResLookup = [
     156543.03392804097,

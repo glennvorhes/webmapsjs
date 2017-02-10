@@ -2,7 +2,7 @@
 /**
  * Created by gavorhes on 12/23/2015.
  */
-var provide_1 = require('../util/provide');
+var provide_1 = require("../util/provide");
 var nm = provide_1.default('olHelpers');
 /**
  * take an array of features and sort by a given property name

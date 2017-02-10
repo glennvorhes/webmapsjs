@@ -3,7 +3,7 @@
  * Created by gavorhes on 12/7/2015.
  */
 import { LayerBase, LayerBaseOptions } from './LayerBase';
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 export interface LayerEsriMapServerOptions extends LayerBaseOptions {
     addPopup?: boolean;
     showLayers?: Array<number>;

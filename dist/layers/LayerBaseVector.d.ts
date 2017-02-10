@@ -1,6 +1,6 @@
 import { LayerBase, LayerBaseOptions } from './LayerBase';
 import MapMoveCls from '../olHelpers/mapMoveCls';
-import ol from 'custom-ol';
+import ol = require('custom-ol');
 export interface makeMapMoveParams {
     /**
      *

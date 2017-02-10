@@ -1,6 +1,8 @@
 /**
  * Created by gavorhes on 12/18/2015.
  */
+
+
 import ItsLayerCollection from '../collections/ItsLayerCollection';
 import LayerLegend from '../collections/LayerLegend';
 import quickMap from '../olHelpers/quickMap';
@@ -23,4 +25,3 @@ let layerArray = [
 let legend = new LayerLegend(layerArray, 'legend-container', {});
 
 console.log('it works');
-

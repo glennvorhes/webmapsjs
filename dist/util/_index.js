@@ -2,7 +2,7 @@
  * Created by gavorhes on 9/22/2016.
  */
 "use strict";
-var checkDefinedf = require('./checkDefined');
+var checkDefinedf = require("./checkDefined");
 var checkDefined;
 (function (checkDefined) {
     checkDefined.undefinedOrNull = checkDefinedf.undefinedOrNull;
