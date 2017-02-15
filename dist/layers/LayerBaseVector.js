@@ -9,7 +9,6 @@ var mapMove_1 = require("../olHelpers/mapMove");
 var provide_1 = require("../util/provide");
 var ol = require("custom-ol");
 var $ = require("jquery");
-var g = new ol.Map({});
 var nm = provide_1.default('layers');
 /**
  * The Vector layer base

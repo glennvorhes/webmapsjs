@@ -5,8 +5,6 @@ import provide from '../util/provide';
 import ol = require('custom-ol');
 import $ = require('jquery');
 
-let g = new ol.Map({});
-
 const nm = provide('layers');
 
 export interface makeMapMoveParams {

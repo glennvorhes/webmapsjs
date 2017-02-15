@@ -1,2 +1,460 @@
-!function(e){function t(a){if(i[a])return i[a].exports;var n=i[a]={exports:{},id:a,loaded:!1};return e[a].call(n.exports,n,n.exports,t),n.loaded=!0,n.exports}var i={};return t.m=e,t.c=i,t.p="",t(0)}({0:function(e,t,i){"use strict";function a(e){void 0===e&&(e=1),console.log(e,"one")}var n=i(18);console.log("eat this fish"),console.log("eat this fish"),console.log("eat this bird"),console.log("i am here5"),a(1);new n.MediaControl("map")},1:function(e,t){"use strict";function i(e){"undefined"==typeof window.gv&&(window.gv={});for(var t=e.split("."),i=window.gv,a=0;a<t.length;a++){var n=i[t[a]];"undefined"==typeof n&&(i[t[a]]={}),i=i[t[a]]}return i}i("util"),window.gv.util.provide=i,Object.defineProperty(t,"__esModule",{value:!0}),t.default=i},2:function(e,t){e.exports=$},18:function(e,t,i){"use strict";function a(e){var t=new Date(e),i=t.toLocaleTimeString().split(" "),a=i[0].split(":");return a=a.slice(0,2),t.toLocaleDateString()+"<br>"+a.join(":")+" "+i[1]}var n=i(1),s=i(19),l=i(2),o=n.default("domUtil"),r=function(){function e(e,t,i){void 0===t&&(t=function(){}),void 0===i&&(i={});var a=this;i.min="number"==typeof i.min?i.min:0,i.max="number"==typeof i.max?i.max:100,i.val="number"==typeof i.val?i.val:0,i.step="number"==typeof i.step?i.step:5,i.playInterval="number"==typeof i.playInterval?i.playInterval:500,i.showAsDate="boolean"==typeof i.showAsDate&&i.showAsDate,"string"==typeof e?this._container=l("#"+e):"undefined"!=typeof e.style?this._container=l(e):this._container=e,this._container.addClass("media-control-container"),this._playInterval=i.playInterval,this._changeFunc=t,this._showAsDate=i.showAsDate,this._currentValue=void 0,this._min=void 0,this._max=void 0,this._step=void 0,this._playing=!1;var n='<span class="media-player-button media-back"></span><span class="media-player-button media-play"></span><span class="media-player-button media-pause media-disabled"></span><span class="media-player-button media-stop media-disabled" ></span><span class="media-player-button media-ahead"></span><input type="range"><div class="media-control-value-label-container"><span class="media-control-value-label-min"></span><span class="media-control-value-label-val"></span><span class="media-control-value-label-max"></span></div>';this._container.append(n);var o=this._container.find(".media-play");this._$btnStop=this._container.find(".media-stop");var r=this._container.find(".media-ahead"),u=this._container.find(".media-back");this._$slider=this._container.find("input[type=range]"),this._$valLabelMin=this._container.find(".media-control-value-label-min"),this._$valLabelVal=this._container.find(".media-control-value-label-val"),this._$valLabelMax=this._container.find(".media-control-value-label-max"),this.setMinMaxValueStep(i.min,i.max,i.val,i.step),s.rangeChange(this._$slider,function(e){a.currentValue=e},100);var c=this;o.click(function(){var e=l(this);e.addClass("media-disabled"),c._$btnStop.removeClass("media-disabled"),r.addClass("media-locked"),u.addClass("media-locked"),c._$slider.prop("disabled",!0),c._playing=!0,c._interval=setInterval(function(){c.currentValue+=c._step},c._playInterval)}),this._$btnStop.click(function(){clearInterval(c._interval);var e=l(this);e.addClass("media-disabled"),o.removeClass("media-disabled"),r.removeClass("media-locked"),u.removeClass("media-locked"),c._$slider.prop("disabled",!1),c._playing=!1}),r.click(function(){c.currentValue=c.currentValue+c._step}),u.click(function(){c.currentValue=c.currentValue-c._step})}return e.prototype.stopPlaying=function(){this._playing&&this._$btnStop.trigger("click")},Object.defineProperty(e.prototype,"playing",{get:function(){return this._playing},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"min",{get:function(){return this._min},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"max",{get:function(){return this._max},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"step",{get:function(){return this._step},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"currentValue",{get:function(){return this._currentValue},set:function(e){e>this._max?e=this._min:e<this._min&&(e=this._max),this._currentValue=e,this._$slider.val(this._currentValue.toFixed(2)),this._showAsDate?this._$valLabelVal.html(a(this.currentValue)):this._$valLabelVal.html(this.currentValue.toString()),this._changeFunc(e)},enumerable:!0,configurable:!0}),e.prototype.setMinMaxValueStep=function(e,t,i,n){this._min=e,this._max=t,i="number"==typeof i?i:e,n="number"==typeof n?n:(t-e)/20,this._currentValue=i,this._step=n,this._$slider.prop("min",this.min.toString()),this._$slider.prop("max",this.max.toString()),this._$slider.prop("step",this.step.toString()),this._$slider.val(this.currentValue.toString()),this._showAsDate?(this._$valLabelMin.html(a(this._min)),this._$valLabelVal.html(a(this.currentValue)),this._$valLabelMax.html(a(this._max))):(this._$valLabelMin.html(this._min.toString()),this._$valLabelVal.html(this.currentValue.toString()),this._$valLabelMax.html(this._max.toString()))},Object.defineProperty(e.prototype,"changeFunction",{set:function(e){this._changeFunc=e},enumerable:!0,configurable:!0}),e}();t.MediaControl=r,o.MediaControl=r},19:function(e,t,i){"use strict";function a(e,t){var i=parseFloat(this.value),a=parseFloat(this.min),n=parseFloat(this.max),l=parseFloat(this.step);n-i<l&&(i=n);var o=(i-a)/(n-a);"number"==typeof s&&i==s||(s=i,e(i,o,t))}function n(e,t,i){return i="number"==typeof i?i:75,e.mouseenter(function(){r=!0}),e.mouseleave(function(){r=!1,u=!1}),e.mousedown(function(){u=!0}),e.mouseup(function(){u=!1}),e.mousemove(function(e){if(r&&u&&(d=!0,s!=this.value)){s=this.value,null!=c&&clearTimeout(c);var n=this;c=setTimeout(function(){a.call(n,t,e),c=null},i)}}),e.keyup(function(e){37!=e.keyCode&&39!=e.keyCode||a.call(this,t,e)}),e.change(function(e){return d?void(d=!1):void a.call(this,t,e)}),this}var s,l=i(1),o=l.default("domUtil"),r=!1,u=!1,c=null,d=!1;t.rangeChange=n,o.rangeChange=n}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 0:
+/*!**************************************!*\
+  !*** ./dist/_test/my_little_test.js ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	// let g = new
+	var media_control_1 = __webpack_require__(/*! ../domUtil/media-control */ 19);
+	//
+	//
+	console.log('eat this fish');
+	console.log('eat this fish');
+	console.log('eat this bird');
+	//
+	// let g = new ol3.source.Vector();
+	//
+	// console.log(olx);
+	console.log('i am here5');
+	function me(eat) {
+	    if (eat === void 0) { eat = 1; }
+	    console.log(eat, 'one');
+	}
+	me(1);
+	var control = new media_control_1.MediaControl('map');
+	//
+	//
+	// console.log(ol3);
+	//
+	//
+	// console.log(definedAndNotNull("fish"));
+	// console.log(definedAndNotNull("fish"));
+	// console.log(definedAndNotNull("fish"));
+	// console.log(definedAndNotNull("fish"));
+	// console.log(definedAndNotNull("fish"));
+	// console.log('here');
+	//
+
+
+/***/ },
+
+/***/ 3:
+/*!******************************!*\
+  !*** ./dist/util/provide.js ***!
+  \******************************/
+/***/ function(module, exports) {
+
+	/**
+	 * Created by gavorhes on 12/10/2015.
+	 */
+	"use strict";
+	/**
+	 * create a namespace on the gv object
+	 * @param {string} namespace to create
+	 * @returns {object} object representing the namespace
+	 */
+	function provide(namespace) {
+	    "use strict";
+	    if (typeof window['gv'] == 'undefined') {
+	        window['gv'] = {};
+	    }
+	    var parts = namespace.split('.');
+	    var nameSpace = window['gv'];
+	    for (var i = 0; i < parts.length; i++) {
+	        var newObject = nameSpace[parts[i]];
+	        if (typeof newObject == 'undefined') {
+	            nameSpace[parts[i]] = {};
+	        }
+	        nameSpace = nameSpace[parts[i]];
+	    }
+	    return nameSpace;
+	}
+	provide('util');
+	window['gv'].util.provide = provide;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = provide;
+
+
+/***/ },
+
+/***/ 5:
+/*!********************!*\
+  !*** external "$" ***!
+  \********************/
+/***/ function(module, exports) {
+
+	module.exports = $;
+
+/***/ },
+
+/***/ 19:
+/*!***************************************!*\
+  !*** ./dist/domUtil/media-control.js ***!
+  \***************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by gavorhes on 11/2/2015.
+	 */
+	"use strict";
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var range_change_1 = __webpack_require__(/*! ./range-change */ 20);
+	var $ = __webpack_require__(/*! jquery */ 5);
+	var nm = provide_1.default('domUtil');
+	/**
+	 * @callback mediaCallback
+	 * @param {number} tm
+	 */
+	function timeToLocalDateString(tm) {
+	    "use strict";
+	    var d = new Date(tm);
+	    var p1 = d.toLocaleTimeString().split(' ');
+	    var p2 = p1[0].split(':');
+	    p2 = p2.slice(0, 2);
+	    return d.toLocaleDateString() + '<br>' + p2.join(':') + ' ' + p1[1];
+	}
+	var MediaControl = (function () {
+	    /**
+	     *
+	     * @param element
+	     * @param changeFunc
+	     * @param mediaConfig
+	     */
+	    function MediaControl(element, changeFunc, mediaConfig) {
+	        if (changeFunc === void 0) { changeFunc = function () { return; }; }
+	        if (mediaConfig === void 0) { mediaConfig = {}; }
+	        var _this = this;
+	        mediaConfig.min = typeof mediaConfig.min == 'number' ? mediaConfig.min : 0;
+	        mediaConfig.max = typeof mediaConfig.max == 'number' ? mediaConfig.max : 100;
+	        mediaConfig.val = typeof mediaConfig.val == 'number' ? mediaConfig.val : 0;
+	        mediaConfig.step = typeof mediaConfig.step == 'number' ? mediaConfig.step : 5;
+	        mediaConfig.playInterval = typeof mediaConfig.playInterval == 'number' ? mediaConfig.playInterval : 500;
+	        mediaConfig.showAsDate = typeof mediaConfig.showAsDate == 'boolean' ? mediaConfig.showAsDate : false;
+	        if (typeof element == 'string') {
+	            this._container = $('#' + element);
+	        }
+	        else if (typeof element['style'] !== 'undefined') {
+	            this._container = $(element);
+	        }
+	        else {
+	            this._container = element;
+	        }
+	        this._container.addClass('media-control-container');
+	        this._playInterval = mediaConfig.playInterval;
+	        this._changeFunc = changeFunc;
+	        this._showAsDate = mediaConfig.showAsDate;
+	        this._currentValue = undefined;
+	        this._min = undefined;
+	        this._max = undefined;
+	        this._step = undefined;
+	        this._playing = false;
+	        var htmlStr = '<span class="media-player-button media-back"></span>' +
+	            '<span class="media-player-button media-play"></span>' +
+	            '<span class="media-player-button media-pause media-disabled"></span>' +
+	            '<span class="media-player-button media-stop media-disabled" ></span>' +
+	            '<span class="media-player-button media-ahead"></span>' +
+	            "<input type=\"range\">" +
+	            "<div class=\"media-control-value-label-container\">" +
+	            "<span class=\"media-control-value-label-min\"></span>" +
+	            "<span class=\"media-control-value-label-val\"></span>" +
+	            "<span class=\"media-control-value-label-max\"></span>" +
+	            "</div>";
+	        this._container.append(htmlStr);
+	        // let btnPause = this._container.find('.media-pause');
+	        var btnPlay = this._container.find('.media-play');
+	        this._$btnStop = this._container.find('.media-stop');
+	        var btnAhead = this._container.find('.media-ahead');
+	        var btnBack = this._container.find('.media-back');
+	        this._$slider = this._container.find('input[type=range]');
+	        this._$valLabelMin = this._container.find('.media-control-value-label-min');
+	        this._$valLabelVal = this._container.find('.media-control-value-label-val');
+	        this._$valLabelMax = this._container.find('.media-control-value-label-max');
+	        this.setMinMaxValueStep(mediaConfig.min, mediaConfig.max, mediaConfig.val, mediaConfig.step);
+	        range_change_1.rangeChange(this._$slider, function (newVal) { _this.currentValue = newVal; }, 100);
+	        var ___this = this;
+	        btnPlay.click(function () {
+	            var $this = $(this);
+	            $this.addClass('media-disabled');
+	            ___this._$btnStop.removeClass('media-disabled');
+	            btnAhead.addClass('media-locked');
+	            btnBack.addClass('media-locked');
+	            ___this._$slider.prop('disabled', true);
+	            ___this._playing = true;
+	            ___this._interval = setInterval(function () {
+	                ___this.currentValue += ___this._step;
+	            }, ___this._playInterval);
+	        });
+	        this._$btnStop.click(function () {
+	            clearInterval(___this._interval);
+	            var $this = $(this);
+	            $this.addClass('media-disabled');
+	            btnPlay.removeClass('media-disabled');
+	            btnAhead.removeClass('media-locked');
+	            btnBack.removeClass('media-locked');
+	            ___this._$slider.prop('disabled', false);
+	            ___this._playing = false;
+	        });
+	        btnAhead.click(function () {
+	            ___this.currentValue = ___this.currentValue + ___this._step;
+	        });
+	        btnBack.click(function () {
+	            ___this.currentValue = ___this.currentValue - ___this._step;
+	        });
+	    }
+	    MediaControl.prototype.stopPlaying = function () {
+	        if (this._playing) {
+	            this._$btnStop.trigger('click');
+	        }
+	    };
+	    Object.defineProperty(MediaControl.prototype, "playing", {
+	        get: function () {
+	            return this._playing;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MediaControl.prototype, "min", {
+	        get: function () {
+	            return this._min;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MediaControl.prototype, "max", {
+	        get: function () {
+	            return this._max;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MediaControl.prototype, "step", {
+	        get: function () {
+	            return this._step;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MediaControl.prototype, "currentValue", {
+	        get: function () {
+	            return this._currentValue;
+	        },
+	        set: function (newValue) {
+	            if (newValue > this._max) {
+	                newValue = this._min;
+	            }
+	            else if (newValue < this._min) {
+	                newValue = this._max;
+	            }
+	            this._currentValue = newValue;
+	            this._$slider.val(this._currentValue.toFixed(2));
+	            if (this._showAsDate) {
+	                this._$valLabelVal.html(timeToLocalDateString(this.currentValue));
+	            }
+	            else {
+	                this._$valLabelVal.html(this.currentValue.toString());
+	            }
+	            this._changeFunc(newValue);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /**
+	     * set min and max value with step
+	     * @param {number} newMin the new min
+	     * @param {number} newMax the new mas
+	     * @param {number} [newValue=newMin] the value to set
+	     * @param {number} [newStep=(newMax-newMin)/20] step value
+	     */
+	    MediaControl.prototype.setMinMaxValueStep = function (newMin, newMax, newValue, newStep) {
+	        this._min = newMin;
+	        this._max = newMax;
+	        newValue = typeof newValue == 'number' ? newValue : newMin;
+	        newStep = typeof newStep == 'number' ? newStep : (newMax - newMin) / 20;
+	        this._currentValue = newValue;
+	        this._step = newStep;
+	        this._$slider.prop('min', this.min.toString());
+	        this._$slider.prop('max', this.max.toString());
+	        this._$slider.prop('step', this.step.toString());
+	        this._$slider.val(this.currentValue.toString());
+	        if (this._showAsDate) {
+	            this._$valLabelMin.html(timeToLocalDateString(this._min));
+	            this._$valLabelVal.html(timeToLocalDateString(this.currentValue));
+	            this._$valLabelMax.html(timeToLocalDateString(this._max));
+	        }
+	        else {
+	            this._$valLabelMin.html(this._min.toString());
+	            this._$valLabelVal.html(this.currentValue.toString());
+	            this._$valLabelMax.html(this._max.toString());
+	        }
+	    };
+	    Object.defineProperty(MediaControl.prototype, "changeFunction", {
+	        /**
+	         *
+	         * @param {mediaCallback} newFunc the callback on change
+	         */
+	        set: function (newFunc) {
+	            this._changeFunc = newFunc;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    return MediaControl;
+	}());
+	exports.MediaControl = MediaControl;
+	nm.MediaControl = MediaControl;
+
+
+/***/ },
+
+/***/ 20:
+/*!**************************************!*\
+  !*** ./dist/domUtil/range-change.js ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var nm = provide_1.default('domUtil');
+	var mouseIn = false;
+	var mouseDown = false;
+	var timeout = null;
+	var dragged = false;
+	var lastVal;
+	/**
+	 * Created by gavorhes on 11/2/2015.
+	 */
+	function triggerCallback(callback, evt) {
+	    "use strict";
+	    var val = parseFloat(this.value);
+	    var min = parseFloat(this.min);
+	    var max = parseFloat(this.max);
+	    var step = parseFloat(this.step);
+	    if (max - val < step) {
+	        val = max;
+	    }
+	    var percent = (val - min) / (max - min);
+	    if (typeof lastVal == 'number' && val == lastVal) {
+	        return;
+	    }
+	    lastVal = val;
+	    callback(val, percent, evt);
+	}
+	/**
+	 * Add a variety of listeners for range inputs applied to a common callback
+	 * @param  $slider - jquery reference to the slider
+	 * @param {rangeChangeCallback} callback - the callback
+	 * @param {number} [changeTimeout=75] before the callback is called
+	 * @this {jQuery}
+	 * @returns {jQuery} the jQuery object
+	 */
+	function rangeChange($slider, callback, changeTimeout) {
+	    changeTimeout = typeof changeTimeout == 'number' ? changeTimeout : 75;
+	    $slider.mouseenter(function () {
+	        mouseIn = true;
+	    });
+	    $slider.mouseleave(function () {
+	        mouseIn = false;
+	        mouseDown = false;
+	    });
+	    $slider.mousedown(function () {
+	        mouseDown = true;
+	    });
+	    $slider.mouseup(function () {
+	        mouseDown = false;
+	    });
+	    $slider.mousemove(
+	    /**
+	     *
+	     * @param {object} evt - event properties
+	     * @this {HTMLElement}
+	     */
+	    function (evt) {
+	        if (!(mouseIn && mouseDown)) {
+	            return;
+	        }
+	        dragged = true;
+	        if (lastVal == this['value']) {
+	            return;
+	        }
+	        lastVal = this['value'];
+	        if (timeout != null) {
+	            clearTimeout(timeout);
+	        }
+	        var _this = this;
+	        timeout = setTimeout(function () {
+	            triggerCallback.call(_this, callback, evt);
+	            timeout = null;
+	        }, changeTimeout);
+	    });
+	    $slider.keyup(
+	    /**
+	     *
+	     * @param {object} evt - event properties
+	     */
+	    function (evt) {
+	        if (evt.keyCode == 37 || evt.keyCode == 39) {
+	            triggerCallback.call(this, callback, evt);
+	        }
+	    });
+	    $slider.change(function (evt) {
+	        if (dragged) {
+	            dragged = false;
+	            return;
+	        }
+	        triggerCallback.call(this, callback, evt);
+	    });
+	    return this;
+	}
+	exports.rangeChange = rangeChange;
+	nm.rangeChange = rangeChange;
+
+
+/***/ }
+
+/******/ });
 //# sourceMappingURL=my_little_test.js.map

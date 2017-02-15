@@ -1,3 +1,3365 @@
-!function(e){function t(n){if(o[n])return o[n].exports;var r=o[n]={exports:{},id:n,loaded:!1};return e[n].call(r.exports,r,r.exports,t),r.loaded=!0,r.exports}var o={};return t.m=e,t.c=o,t.p="",t(0)}([function(e,t,o){"use strict";var n=o(12),r=o(28),a=o(18),i=o(2),l=o(24),s=o(16),p=new r.default({products:"nexrhres",id:"nexrhres-static",opacity:.6,animate:!0,name:"Hybrid Reflectivity",timeLoadCallback:function(e){console.log(e)}}),u=new Date,c=u.getTime();u.setHours(u.getHours()-4);var d=u.getTime(),h=Math.round((c-d)/8),y=(new a.MediaControl(i("#control"),function(e){p.setLayerTime(e)},{min:d,max:c,val:c,step:h,playInterval:750,showAsDate:!0}),n.quickMap());y.addLayer(p.olLayer);var m=new l.LayerBaseVectorEsri("http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/GLRTOC/GlrtocCoordination/MapServer/0",{visible:!0,autoLoad:!0,name:"Coordination",useEsriStyle:!0});y.addLayer(m.olLayer);for(var f=[["Cameras","cameras33"],["HAR","HAR33"],["DMS","MessageSigns33"],["Traffic Control","TrafficControl33"],["Traffic Detection","TrafficDetectionMulti"],["Weather","Weather33"]],_=0;_<f.length;_++){var g=new s.LayerEsriMapServer("http://itsdpro.ornl.gov/arcgis/rest/services/ITSPublic/"+f[_][1]+"/MapServer",{id:f[_][1],name:f[_][0],visible:!0,minZoom:7,zIndex:20,addPopup:!0,legendCollapse:!0});y.addLayer(g.olLayer)}},function(e,t){"use strict";function o(e){"undefined"==typeof window.gv&&(window.gv={});for(var t=e.split("."),o=window.gv,n=0;n<t.length;n++){var r=o[t[n]];"undefined"==typeof r&&(o[t[n]]={}),o=o[t[n]]}return o}o("util"),window.gv.util.provide=o,Object.defineProperty(t,"__esModule",{value:!0}),t.default=o},function(e,t){e.exports=$},function(e,t){e.exports=ol},function(e,t,o){"use strict";function n(){return"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,function(e){var t=16*Math.random()|0,o="x"==e?t:3&t|8;return o.toString(16)})}var r=o(1),a=r.default("util");a.makeGuid=n,Object.defineProperty(t,"__esModule",{value:!0}),t.default=n},function(e,t,o){"use strict";var n=o(11);t.mapPopup=new n.default,Object.defineProperty(t,"__esModule",{value:!0}),t.default=t.mapPopup},function(e,t,o){"use strict";var n=o(1),r=n.default("olHelpers"),a=function(){function e(e){this._map=null,this._initialized=!1,this._subtype=e}return e.prototype.init=function(e){this._initialized||(this._map=e,this._initialized=!0)},Object.defineProperty(e.prototype,"map",{get:function(){return this._map},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"initialized",{get:function(){return this._initialized},enumerable:!0,configurable:!0}),e.prototype._checkInit=function(){if(!this.initialized){var e=this._subtype+" object not initialized";throw alert(e),console.log(e),e}},e.prototype.checkInit=function(){this._checkInit()},e}();t.MapInteractionBase=a,r.MapInteractionBase=a,Object.defineProperty(t,"__esModule",{value:!0}),t.default=a},function(e,t,o){"use strict";var n=o(10);t.mapMove=new n.default,Object.defineProperty(t,"__esModule",{value:!0}),t.default=t.mapMove},function(e,t,o){"use strict";var n=o(14),r=o(1),a=o(4),i=o(2),l=r.default("layers"),s=function(){function e(e,t){if(void 0===t&&(t={}),t=t||{},"string"!=typeof e)throw"Invalid URL";this._url=e,this._params="object"==typeof t.params?t.params:{},this._legendCollapse="boolean"==typeof t.legendCollapse&&t.legendCollapse,this._legendCheckbox="boolean"!=typeof t.legendCheckbox||t.legendCheckbox,this.id=t.id||a.default(),this._name=t.name||"Unnamed Layer",this.animate=!1,this._opacity="number"==typeof t.opacity?t.opacity:1,this._opacity>1?this._opacity=1:this._opacity<0&&(this._opacity=0),this._visible="boolean"!=typeof t.visible||t.visible,this._source=void 0,this._olLayer=void 0,this._loaded=!1,this._maxResolution=n.zoomToResolution(t.minZoom),"undefined"!=typeof this._maxResolution&&(this._maxResolution+=1e-5),this._minResolution=n.zoomToResolution(t.maxZoom),this._minZoom="number"==typeof t.minZoom?t.minZoom:void 0,this._maxZoom="number"==typeof t.maxZoom?t.maxZoom:void 0,this._zIndex="number"==typeof t.zIndex?t.zIndex:0,this.loadCallback="function"==typeof t.loadCallback?t.loadCallback:function(){},this._legendContent="",this._legendCheckbox?(this._legendContent+='<input type="checkbox" '+(this.visible?"checked":"")+" "+('class="legend-check" id="'+this.id+'-legend-layer-check"><span></span>'),this._legendContent+='<label for="'+this.id+'-legend-layer-check" class="legend-layer-name">'+this.name+"</label>"):this._legendContent+='<label class="legend-layer-name">'+this.name+"</label>",this._$legendDiv=null,this._applyCollapseCalled=!1,this._addLegendContent("string"==typeof t.legendContent?t.legendContent:void 0)}return e.prototype._load=function(){return 1==this.loaded||(this._loaded=!0,!1)},e.prototype.getLegendDiv=function(){return'<div class="legend-layer-div" id="'+this.id+'-legend-layer-div">'+this._legendContent+"</div>"},e.prototype._addLegendContent=function(e){void 0===e&&(e="");var t=e.indexOf("<ul>")>-1;t&&(e='<span class="legend-items-expander" title="Expand/Collapse">&#9660;</span>'+e),this._legendContent+=e,this._$legendDiv=i("#"+this.id+"-legend-layer-div"),this._$legendDiv.length>0&&(this._$legendDiv.append(e),this.applyCollapse())},e.prototype.addLegendContent=function(e){this._addLegendContent(e)},e.prototype.applyCollapse=function(){if(this._applyCollapseCalled)return void console.log("collapse already applied");if(this._$legendDiv=i("#"+this.id+"-legend-layer-div"),this._$legendDiv.length>0){var e=this._$legendDiv.find(".legend-items-expander");e.length>0&&(this._applyCollapseCalled=!0,e.click(function(){var e=i(this);e.siblings("ul").slideToggle(),e.hasClass("legend-layer-group-collapsed")?(e.removeClass("legend-layer-group-collapsed"),e.html("&#9660;")):(e.addClass("legend-layer-group-collapsed"),e.html("&#9654;"))}),this._legendCollapse&&e.trigger("click"))}},e.prototype.refresh=function(){this.source&&this.source.refresh()},Object.defineProperty(e.prototype,"id",{get:function(){return this._id},set:function(e){this._id=e},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"animate",{get:function(){return this._animate},set:function(e){this._animate=e},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"legendContent",{get:function(){return this._legendContent},set:function(e){this._legendContent=e},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"params",{get:function(){return this._params},set:function(e){this._params=e},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"minResolution",{get:function(){return this._minResolution},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"maxResolution",{get:function(){return this._maxResolution},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"minZoom",{get:function(){return this._minZoom},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"maxZoom",{get:function(){return this._maxZoom},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"url",{get:function(){return this._url},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"visible",{get:function(){return this._visible},set:function(e){this.setVisible(e)},enumerable:!0,configurable:!0}),e.prototype.setVisible=function(e){this._visible=e,this.olLayer&&(this.olLayer.setVisible(this._visible),e&&!this._loaded&&this._load())},Object.defineProperty(e.prototype,"opacity",{get:function(){return this._opacity},set:function(e){this._opacity=e,this.olLayer&&this.olLayer.setOpacity(this._opacity)},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"name",{get:function(){return this._name},set:function(e){this._name=e},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"loaded",{get:function(){return this._loaded},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"source",{get:function(){return this.getSource()},enumerable:!0,configurable:!0}),e.prototype.getSource=function(){return this._source},Object.defineProperty(e.prototype,"zIndex",{get:function(){return this._zIndex},set:function(e){this._zIndex=e},enumerable:!0,configurable:!0}),e.prototype.setZIndex=function(e){},Object.defineProperty(e.prototype,"olLayer",{get:function(){return this.getOlLayer()},enumerable:!0,configurable:!0}),e.prototype.getOlLayer=function(){return this._olLayer},e}();t.LayerBase=s,l.LayerBase=s,Object.defineProperty(t,"__esModule",{value:!0}),t.default=s},function(e,t,o){"use strict";function n(e){return"undefined"==typeof e||null===e}function r(e){return!n(e)}var a=o(1),i=a.default("util.checkDefined");t.undefinedOrNull=n,i.undefinedOrNull=n,t.definedAndNotNull=r,i.definedAndNotNull=r},function(e,t,o){"use strict";var n=this&&this.__extends||function(e,t){function o(){this.constructor=e}for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n]);e.prototype=null===t?Object.create(t):(o.prototype=t.prototype,new o)},r=o(6),a=o(9),i=o(1),l=o(4),s=o(2),p=i.default("olHelpers"),u=function(e){function t(){var t=e.call(this,"map move")||this;return t._arrLyrRequest=[],t._arrLyrTimeout=[],t._arrLayer=[],t._lookupLayer={},t._mapMoveCallbacks=[],t._mapMoveCallbacksLookup={},t._mapMoveCallbackDelays=[],t._mapMoveCallbackContext=[],t._mapMoveCallbackTimeout=[],t._mapExtent=void 0,t._zoomLevel=void 0,t}return n(t,e),t.prototype.init=function(t){var o=this;e.prototype.init.call(this,t),this.map.getView().on(["change:center","change:resolution"],function(e){o._updateMapExtent();for(var t=0;t<o._arrLayer.length;t++)o.triggerLyrLoad(o._arrLayer[t],t,e.type);for(var t=0;t<o._mapMoveCallbacks.length;t++)o.triggerMoveCallback(t,e.type)})},t.prototype._updateMapExtent=function(){var e=this.map.getView();this._zoomLevel=e.getZoom();var t=e.calculateExtent(this.map.getSize());this._mapExtent={minX:t[0],minY:t[1],maxX:t[2],maxY:t[3]}},Object.defineProperty(t.prototype,"mapExtent",{get:function(){return this._mapExtent||this._updateMapExtent(),this._mapExtent},enumerable:!0,configurable:!0}),t.prototype.triggerLyrLoad=function(e,t,o){if(a.undefinedOrNull(e)&&a.undefinedOrNull(t))throw"need to define lyr or index";a.definedAndNotNull(e)&&a.undefinedOrNull(t)?t=this._arrLayer.indexOf(e):a.undefinedOrNull(e)&&a.definedAndNotNull(t)&&(e=this._arrLayer[t]),null!=this._arrLyrTimeout[t]&&(clearTimeout(this._arrLyrTimeout[t]),this._arrLyrTimeout[t]=null),null!=this._arrLyrRequest[t]&&4!=this._arrLyrRequest[t]&&(this._arrLyrRequest[t].abort(),this._arrLyrRequest[t]=null);var n=function(){};if(e.mapMoveBefore(this._zoomLevel,o)){e.mapMoveMakeGetParams(this._mapExtent,this._zoomLevel);var r=this;n=function(){function o(e,t){var o=this;this._arrLyrRequest[t]=s.get(e.url,e.mapMoveParams,function(t){e.mapMoveCallback(t),e.loadCallback()},"json").fail(function(t){"abort"!=t.statusText&&(console.log("failed"),console.log(e.url),console.log(e.mapMoveParams))}).always(function(){o._arrLyrTimeout[t]=null,o._arrLyrRequest[t]=null})}o.call(r,e,t)}}else e.clear();this._arrLyrTimeout[t]=setTimeout(n,e.onDemandDelay)},t.prototype.triggerMoveCallback=function(e,t,o){if("undefined"==typeof e&&"undefined"==typeof o)throw"either the function index or the id must be defined";if("number"!=typeof e&&(e=this._mapMoveCallbacks.indexOf(this._mapMoveCallbacksLookup[o])),e<0)return void console.log("function not found");null!=this._mapMoveCallbackTimeout[e]&&(clearTimeout(this._mapMoveCallbackTimeout[e]),this._mapMoveCallbackTimeout[e]=null);var n=this._mapMoveCallbackContext[e],r=this._mapMoveCallbacks[e],a=this,i=function(){null!==n?r.call(n,a._mapExtent,a._zoomLevel,t):r(a._mapExtent,a._zoomLevel,t)};this._mapMoveCallbackTimeout[e]=setTimeout(i,this._mapMoveCallbackDelays[e])},t.prototype.addVectorLayer=function(e,t){return void 0===t&&(t=!0),this._arrLayer.indexOf(e)>-1?void console.log("already added "+e.name+" to map move"):(this._checkInit(),this._arrLyrRequest.push(null),this._arrLyrTimeout.push(null),this._arrLayer.push(e),this._lookupLayer[e.id]=e,t="boolean"!=typeof t||t,void(t&&(void 0===this._mapExtent&&this._updateMapExtent(),this.triggerLyrLoad(e,this._arrLayer.length-1))))},t.prototype.addCallback=function(e,t,o,n,r){return this._mapMoveCallbacks.indexOf(e)>-1?void console.log("this function already added to map move"):(this._checkInit(),r||(r=l.default()),this._mapMoveCallbacks.push(e),this._mapMoveCallbacksLookup[r]=r,this._mapMoveCallbackDelays.push("number"==typeof o?o:50),this._mapMoveCallbackContext.push(a.definedAndNotNull(t)?t:null),this._mapMoveCallbackTimeout.push(null),n="boolean"!=typeof n||n,void(n&&(void 0===this._mapExtent&&this._updateMapExtent(),this.triggerMoveCallback(this._mapMoveCallbacks.length-1))))},t}(r.default);t.MapMoveCls=u,p.MapMoveCls=u,Object.defineProperty(t,"__esModule",{value:!0}),t.default=u},function(e,t,o){"use strict";var n=this&&this.__extends||function(e,t){function o(){this.constructor=e}for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n]);e.prototype=null===t?Object.create(t):(o.prototype=t.prototype,new o)},r=o(6),a=o(1),i=o(3),l=o(2),s=a.default("olHelpers"),p=function(){function e(e,t,o,n,r){this.feature=e,this.layer=t,this.layerIndex=o,this.selectionLayer=n,this.popupContent="",this.esriLayerName="string"==typeof r?r:void 0}return Object.defineProperty(e.prototype,"layerName",{get:function(){return"string"==typeof this.esriLayerName?this.esriLayerName:this.layer.name},enumerable:!0,configurable:!0}),e}();t.FeatureLayerProperties=p;var u=function(e){function t(){var t=e.call(this,"map popup")||this;return t._arrPopupLayerIds=[],t._arrPopupLayerNames=[],t._arrPopupLayers=[],t._arrPopupOlLayers=[],t._arrPopupContentFunction=[],t._$popupContainer=void 0,t._$popupContent=void 0,t._$popupCloser=void 0,t._popupOverlay=void 0,t._selectionLayers=[],t._selectionLayerLookup={},t._mapClickFunctions=[],t._popupChangedFunctions=[],t._esriMapServiceLayers=[],t._popupOpen=!1,t._popupCoordinate=null,t._passThroughLayerFeatureArray=[],t._currentPopupIndex=-1,t._popupContentLength=0,t}return n(t,e),t.prototype.init=function(t){var o=this;e.prototype.init.call(this,t);var n,r=this.map.getTarget();n=l("string"==typeof r?"#"+r:r),n.append('<div class="ol-popup"><span class="ol-popup-closer">X</span><div class="popup-content"></div></div>'),this._$popupContainer=n.find(".ol-popup"),this._$popupContent=n.find(".popup-content"),this._$popupCloser=n.find(".ol-popup-closer");var a=function(e){return i.easing.inAndOut(e)};return this._popupOverlay=new i.Overlay({element:this._$popupContainer[0],autoPan:!0,autoPanAnimation:{duration:250,source:t.getView().getCenter(),easing:a}}),this._map.addOverlay(this._popupOverlay),this._$popupCloser.click(function(e){o.closePopup()}),this._map.on("singleclick",function(e){if(o.closePopup(),o._popupCoordinate=e.coordinate,o._esriMapServiceLayers.length>0)for(var t={geometry:e.coordinate.join(","),geometryType:"esriGeometryPoint",layers:"all",sr:o._map.getView().getProjection().getCode().split(":")[1],mapExtent:o._map.getView().calculateExtent(o._map.getSize()).join(","),imageDisplay:o._map.getSize().join(",")+",96",returnGeometry:!0,tolerance:15,f:"pjson"},n=0,r=o._esriMapServiceLayers;n<r.length;n++){var a=r[n];a.getPopupInfo(t)}var i=o._featuresAtPixel(e.pixel);o._passThroughLayerFeatureArray=[],o._currentPopupIndex=-1;for(var l=0;l<i.length;l++){var s=i[l],p=s.feature.getProperties(),u=o._arrPopupContentFunction[s.layerIndex](p,o._$popupContent);u===!1||("string"==typeof u?(s.popupContent=u,o._passThroughLayerFeatureArray.push(s)):s.selectionLayer.getSource().addFeature(s.feature))}o._popupContentLength=o._passThroughLayerFeatureArray.length,o._currentPopupIndex=-1;var c='<div class="ol-popup-nav">';c+='<span class="previous-popup ol-popup-nav-arrow">&#9664;</span>',c+='<span class="next-popup ol-popup-nav-arrow">&#9654;</span>',c+='<span class="current-popup-item-number" style="font-weight: bold;"></span>',c+="<span>&nbsp;of&nbsp;</span>",c+='<span class="popup-content-length" style="font-weight: bold;">'+o._popupContentLength+"</span>",c+="<span>&nbsp;&nbsp;-&nbsp;&nbsp;</span>",c+='<span class="current-popup-layer-name"></span>',c+="</div>",c+='<div class="ol-popup-inner">',c+="</div>",o._$popupContent.html(c),o._$popupContent.find(".previous-popup").click(function(){1!=o._popupContentLength&&(0==o._currentPopupIndex?o._currentPopupIndex=o._popupContentLength-1:o._currentPopupIndex--,o._triggerFeatSelect())});var d=o._$popupContent.find(".next-popup");d.click(function(){1==o._popupContentLength&&o._currentPopupIndex>-1||(o._currentPopupIndex==o._popupContentLength-1?o._currentPopupIndex=0:o._currentPopupIndex++,o._triggerFeatSelect())}),o._popupContentLength>0&&(d.trigger("click"),o._popupOverlay.setPosition(o._popupCoordinate),o._$popupContent.scrollTop(0),o._popupOpen=!0)}),this._map.on("pointermove",function(e){if(!e.dragging){var t=o.map.getEventPixel(e.originalEvent),n=o.map.hasFeatureAtPixel(t,function(e){for(var t=0,n=o._arrPopupOlLayers;t<n.length;t++){var r=n[t];if(e==r)return!0}return!1}),r=o.map.getTargetElement();r.style.cursor=n?"pointer":""}}),!0},t.prototype._triggerFeatSelect=function(){var e=this._$popupContent.find(".current-popup-item-number"),t=this._$popupContent.find(".ol-popup-inner"),o=this._$popupContent.find(".current-popup-layer-name");this.clearSelection();var n=this._passThroughLayerFeatureArray[this._currentPopupIndex];e.html((this._currentPopupIndex+1).toFixed()),o.html(n.layerName),t.html(n.popupContent),n.selectionLayer.getSource().addFeature(n.feature);for(var r=0,a=this._popupChangedFunctions;r<a.length;r++){var i=a[r];i(this._$popupContent)}},t.prototype.addMapServicePopupContent=function(e,t,o,n){var r=new p(e,t,this._popupContentLength,this._selectionLayerLookup[t.id],n);r.popupContent=o,this._passThroughLayerFeatureArray.push(r),this._popupContentLength++,l(".popup-content-length").html(this._popupContentLength.toFixed()),this._popupOpen||(this._$popupContent.find(".next-popup").trigger("click"),this._popupOverlay.setPosition(this._popupCoordinate),this._$popupContent.scrollTop(0),this._popupOpen=!0)},t.prototype._featuresAtPixel=function(e){var t=this,o=[];return this.map.forEachFeatureAtPixel(e,function(e,n){var r=t._arrPopupOlLayers.indexOf(n);r>-1&&o.push(new p(e,t._arrPopupLayers[r],r,t._selectionLayers[r]))}),o},t.prototype.closePopup=function(){return this._checkInit(),this._popupOpen=!1,this._popupOverlay.setPosition(void 0),this._$popupCloser[0].blur(),this.clearSelection(),this._$popupContent.html(""),!1},t.prototype.addPopupChangedFunction=function(e){this._popupChangedFunctions.push(e)},t.prototype._addPopupLayer=function(e,t){this._checkInit(),t=t||{},t.color=t.color||"rgba(255,170,0,0.5)",t.width=t.width||10;var o;o=t.olStyle?t.olStyle:new i.style.Style({stroke:new i.style.Stroke({color:t.color,width:t.width}),image:new i.style.Circle({radius:7,fill:new i.style.Fill({color:t.color}),stroke:new i.style.Stroke({color:t.color,width:1})}),fill:new i.style.Fill({color:t.color})});var n=new i.layer.Vector({source:new i.source.Vector,style:o});return n.setZIndex(100),this._selectionLayers.push(n),this._selectionLayerLookup[e.id]=n,this.map.addLayer(n),n},t.prototype.addVectorPopup=function(e,t,o){var n=this._addPopupLayer(e,o);return this._arrPopupLayerIds.push(e.id),this._arrPopupLayerNames.push(e.name),this._arrPopupLayers.push(e),this._arrPopupOlLayers.push(e.olLayer),this._arrPopupContentFunction.push(t),n},t.prototype.removeVectorPopup=function(e){var t=this._arrPopupLayerIds.indexOf(e.id);t>-1&&(this._arrPopupLayerIds.splice(t,1),this._arrPopupLayerNames.splice(t,1),this._arrPopupLayers.splice(t,1),this._arrPopupOlLayers.splice(t,1),this._arrPopupContentFunction.splice(t,1),this._selectionLayers.splice(t,1),delete this._selectionLayerLookup[e.id])},t.prototype.addMapServicePopup=function(e,t){var o=this._addPopupLayer(e,t);return this._esriMapServiceLayers.push(e),o},t.prototype.clearSelection=function(){this._checkInit();for(var e=0;e<this._selectionLayers.length;e++)this._selectionLayers[e].getSource().clear();for(var t=0,o=this._mapClickFunctions;t<o.length;t++){var n=o[t];n()}},t.prototype.addMapClickFunction=function(e){this._mapClickFunctions.push(e)},t}(r.default);t.MapPopupCls=u,s.MapPopupCls=u,Object.defineProperty(t,"__esModule",{value:!0}),t.default=u},function(e,t,o){"use strict";function n(e){var t=r.quickMapBase(e);return i.default.init(t),l.default.init(t),t}var r=o(13),a=o(1),i=o(7),l=o(5),s=a.default("olHelpers");t.quickMap=n,s.quickMap=n,Object.defineProperty(t,"__esModule",{value:!0}),t.default=n},function(e,t,o){"use strict";function n(e){e=e||{},e.divId=e.divId||"map",e.center=e.center||{x:-10018378,y:5574910},e.zoom="number"==typeof e.zoom?e.zoom:7,e.baseSwitcher="boolean"!=typeof e.baseSwitcher||e.baseSwitcher,e.fullScreen="boolean"==typeof e.fullScreen&&e.fullScreen;var t=i("#"+e.divId);t.css("position","relative");var o=new a.layer.Tile({source:new a.source.OSM});if(e.baseSwitcher,e.zoom<0||e.zoom>28)throw"zoom out of range";if(e.center.x>=-180&&e.center.x<=180&&e.center.y>=-90&&e.center.y<=90){var n=new a.geom.Point([e.center.x,e.center.y]);new a.proj.Projection({code:"EPSG:4326"}),n.transform(new a.proj.Projection({code:"EPSG:4326"}),new a.proj.Projection({code:"EPSG:3857"}));var r=n.getCoordinates();e.center.x=r[0],e.center.y=r[1]}var l=a.control.defaults({attributionOptions:{collapsible:!1}}),s=new a.View({center:[e.center.x,e.center.y],zoom:e.zoom,minZoom:e.minZoom,maxZoom:e.maxZoom}),p=new a.Map({layers:[o],target:e.divId,controls:l,view:s});return e.fullScreen&&p.addControl(new a.control.FullScreen({})),p}var r=o(1),a=o(3),i=o(2),l=r.default("olHelpers");t.quickMapBase=n,l.quickMapBase=n,Object.defineProperty(t,"__esModule",{value:!0}),t.default=n},function(e,t,o){"use strict";function n(e){return"number"==typeof e?e%1===0&&e>=0&&e<=28?l[e]:void console.log("invalid zoom level provided: "+e):void 0}function r(e){for(var t=0;t<l.length;t++)if(e>=l[t])return t;return 0}var a=o(1),i=a.default("olHelpers.zoomResolutionConvert"),l=[156543.03392804097,78271.51696402048,39135.75848201024,19567.87924100512,9783.93962050256,4891.96981025128,2445.98490512564,1222.99245256282,611.49622628141,305.748113140705,152.8740565703525,76.43702828517625,38.21851414258813,19.109257071294063,9.554628535647032,4.777314267823516,2.388657133911758,1.194328566955879,.5971642834779395,.29858214173896974,.14929107086948487,.07464553543474244,.03732276771737122,.01866138385868561,.009330691929342804,.004665345964671402,.002332672982335701,.0011663364911678506,.0005831682455839253];t.zoomToResolution=n,i.zoomToResolution=n,t.resolutionToZoom=r,i.resolutionToZoom=r},function(e,t,o){"use strict";function n(e,t){return"rgba("+e[0]+","+e[1]+","+e[2]+","+t+")"}function r(e){return String(e).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/'/g,"&#39;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}function a(e){var t=e.drawingInfo.renderer,o=null;switch(t.type){case"simple":switch(e.geometryType){case"esriGeometryPoint":o=new _(e,h);break;case"esriGeometryPolyline":o=new _(e,y);break;case"esriGeometryPolygon":o=new _(e,m);break;default:console.log(e),alert(e.geometryType+" not handled")}break;case"uniqueValue":switch(e.geometryType){case"esriGeometryPoint":o=new g(e,h);break;case"esriGeometryPolyline":o=new g(e,y);break;case"esriGeometryPolygon":o=new g(e,m);break;default:console.log(e),alert(e.geometryType+" not handled")}break;default:alert("not handled renderer type: "+t.type)}return null==o?{style:void 0,legend:""}:{style:o.olStyle,legend:o.legendHtml}}function i(e,t){void 0===t&&(t=!1),t="boolean"==typeof t&&t;var o=e.layerName,n=e.legend,a="";if(t||(a+='<span class="legend-layer-subitem">'+o+"</span>"),1==n.length)a='<img class="legend-layer-icon" height="17" src="data:image/png;base64,'+n[0].imageData+'">';else{t||(a+='<span class="legend-items-expander" title="Expand/Collapse">&#9660;</span>'),a+="<ul>";for(var i=0;i<n.length;i++)a+="<li>",a+='<span class="legend-layer-subitem">'+r(n[i].label)+"</span>",a+='<img class="legend-layer-icon" height="17" src="data:image/png;base64,'+n[i].imageData+'">',a+="</li>";a+="</ul>"}return t||(a='<span class="legend-layer-subitem">'+o+"</span>"+a),a}function l(e){var t="",o=e.layers;if(1==o.length)t+=i(o[0],!0);else{t+="<ul>";for(var n=0;n<o.length;n++)t+="<li>"+i(o[n])+"</li>";t+="</ul>"}return t}var s=this&&this.__extends||function(e,t){function o(){this.constructor=e}for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n]);e.prototype=null===t?Object.create(t):(o.prototype=t.prototype,new o)},p=o(1),u=o(3),c=p.default("olHelpers.esriToOlStyle");c.htmlEscape=r;var d=function(){function e(e,t){this.symbolObj=e,this.opacity=t,this.olStyle=void 0,this.legendHtml=""}return e}(),h=function(e){function t(t,o){var r=e.call(this,t,o)||this;switch(r.symbolObj.type){case"esriSMS":var a=n(r.symbolObj.color,r.opacity),i=n(r.symbolObj.outline.color,r.opacity),l=r.symbolObj.outline.width,s=r.symbolObj.size;r.olStyle=new u.style.Style({image:new u.style.Circle({radius:s,fill:new u.style.Fill({color:a}),stroke:new u.style.Stroke({color:i,width:l})})}),r.legendHtml='<span class="legend-layer-icon" style="color: '+a+'">&#9679;</span>';break;case"esriPMS":r.olStyle=new u.style.Style({image:new u.style.Icon({src:"data:image/png;base64,"+r.symbolObj.imageData})}),r.legendHtml='<img class="legend-layer-icon" height="17" src="data:image/png;base64,'+r.symbolObj.imageData+'">';break;default:console.log(r.symbolObj),alert("Point symbol does not handle symbol type: "+r.symbolObj.type)}return r}return s(t,e),t}(d),y=function(e){function t(t,o){var r=e.call(this,t,o)||this;switch(r.symbolObj.type){case"esriSLS":var a=n(r.symbolObj.color,r.opacity),i=r.symbolObj.width;r.olStyle=new u.style.Style({stroke:new u.style.Stroke({color:a,width:i})}),r.legendHtml='<span class="legend-layer-icon" ',r.legendHtml+='style="',r.legendHtml+="background-color: "+a+";",r.legendHtml+="width: 40px;",r.legendHtml+="height: 4px;",r.legendHtml+="position: relative;",r.legendHtml+="display: inline-block;",r.legendHtml+="top: -1px;",r.legendHtml+='"></span>';break;default:console.log(r.symbolObj),alert("Line symbol does not handle symbol type: "+r.symbolObj.type)}return r}return s(t,e),t}(d),m=function(e){function t(t,o){var r=e.call(this,t,o)||this;switch(r.symbolObj.type){case"esriSFS":var a=n(r.symbolObj.color,r.opacity),i=n(r.symbolObj.outline.color,r.opacity),l=r.symbolObj.outline.width;r.olStyle=new u.style.Style({stroke:new u.style.Stroke({color:i,width:l}),fill:new u.style.Fill({color:a})}),r.legendHtml='<span class="legend-layer-icon" ',r.legendHtml+='style="',r.legendHtml+="background-color: "+a+";",r.legendHtml+="border: solid "+i+" 1px;",r.legendHtml+="width: 40px;",r.legendHtml+="height: 9px;",r.legendHtml+="position: relative;",r.legendHtml+="display: inline-block;",r.legendHtml+="top: 2px;",r.legendHtml+='"></span>';break;default:console.log(r.symbolObj),alert("Polygon symbol does handle symbol type: "+r.symbolObj.type)}return r}return s(t,e),t}(d),f=function(){function e(e){this.opacity=(100-(e.drawingInfo.transparency||0))/100,this.renderer=e.drawingInfo.renderer,this.olStyle=void 0,this.legendHtml=""}return e}(),_=function(e){function t(t,o){var n=e.call(this,t)||this;n.symbol=n.renderer.symbol;var r=new o(n.symbol,n.opacity);return n.olStyle=r.olStyle,n.legendHtml=r.legendHtml,n}return s(t,e),t}(f),g=function(e){function t(t,o){var n=e.call(this,t)||this;if(n.uniqueValueInfos=n.renderer.uniqueValueInfos,n.propertyName=n.renderer.field1,n.defaultSymbol=n.renderer.defaultSymbol,n.defaultSymbol){var a=new o(n.defaultSymbol,n.opacity);n.defaultStyle=a.olStyle,n.defaultLabelHtml='<span class="legend-layer-subitem">'+r(n.renderer.defaultLabel)+"</span>"+a.legendHtml}else n.defaultStyle=void 0,n.defaultLabelHtml="other";n.valueArray=[],n.labelArray=[],n.legendArray=[],n.propertyStyleLookup={};for(var i=0,l=n.uniqueValueInfos;i<l.length;i++){var s=l[i];n.labelArray.push(s.label),n.valueArray.push(s.value);var p=new o(s.symbol,n.opacity);n.legendArray.push('<span class="legend-layer-subitem">'+r(s.label)+"</span>"+p.legendHtml),n.propertyStyleLookup[s.value]=p.olStyle}n.olStyle=function(e){var t,o=e.getProperties(),r=o[n.propertyName];return t=void 0!==n.propertyStyleLookup[r]?[n.propertyStyleLookup[r]]:[n.defaultStyle]},null!==n.defaultLabelHtml&&n.legendArray.push(n.defaultLabelHtml),n.legendHtml="<ul>";for(var u=0,c=n.legendArray;u<c.length;u++){var d=c[u];n.legendHtml+="<li>"+d+"</li>"}return n.legendHtml+="</ul>",n}return s(t,e),t}(f);t.makeFeatureServiceLegendAndSymbol=a,c.makeFeatureServiceLegendAndSymbol=a,t.makeMapServiceLegend=l,c.makeMapServiceLegend=l},function(e,t,o){"use strict";var n=this&&this.__extends||function(e,t){function o(){this.constructor=e}for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n]);e.prototype=null===t?Object.create(t):(o.prototype=t.prototype,new o)},r=o(8),a=o(15),i=o(5),l=o(1),s=o(3),p=o(2),u=l.default("layers"),c=function(e){function t(t,o){void 0===o&&(o={});var n=e.call(this,t,o)||this;return n._source=new s.source.TileArcGISRest({url:""==n.url?void 0:n.url,params:"undefined"==typeof o.showLayers?void 0:{layers:"show:"+o.showLayers.join(",")}}),n._olLayer=new s.layer.Tile({source:n._source,visible:n.visible,opacity:n.opacity,minResolution:n._minResolution,maxResolution:n._maxResolution}),n._olLayer.setZIndex(n._zIndex),o.addPopup="boolean"==typeof o.addPopup&&o.addPopup,n._esriFormat=new s.format.EsriJSON,n._popupRequest=null,n.addLegendContent(),o.addPopup&&i.default.addMapServicePopup(n),n}return n(t,e),t.prototype.addLegendContent=function(t){var o=this,n=this.url;"/"!==n[n.length-1]&&(n+="/"),n+="legend?f=pjson&callback=?",p.get(n,{},function(t){var n=a.makeMapServiceLegend(t);e.prototype.addLegendContent.call(o,n)},"json")},t.prototype.getPopupInfo=function(e){if(this.visible){var t=this.url;"/"!=t[t.length-1]&&(t+="/"),t+="identify?callback=?";var o=this;null!=this._popupRequest&&this._popupRequest.abort(),this._popupRequest=p.get(t,e,function(e){for(var t=0,n=e.results;t<n.length;t++){var r=n[t],a='<table class="esri-popup-table">';for(var l in r.attributes)if(r.attributes.hasOwnProperty(l)){var s=r.attributes[l];if(null==s||"null"==s.toString().toLowerCase())continue;var p=l;p.length>14&&(p=p.slice(0,11)+"..."),a+="<tr><td>"+p+"</td><td>"+s+"</td></tr>"}a+="</table>",i.default.addMapServicePopupContent(o._esriFormat.readFeature(r),o,a,r.layerName)}},"json"),this._popupRequest.always(function(){o._popupRequest=null})}},Object.defineProperty(t.prototype,"source",{get:function(){return e.prototype.getSource.call(this)},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"olLayer",{get:function(){return e.prototype.getOlLayer.call(this)},enumerable:!0,configurable:!0}),t}(r.LayerBase);t.LayerEsriMapServer=c,u.LayerEsriMapServer=c,Object.defineProperty(t,"__esModule",{value:!0}),t.default=c},,function(e,t,o){"use strict";function n(e){var t=new Date(e),o=t.toLocaleTimeString().split(" "),n=o[0].split(":");return n=n.slice(0,2),t.toLocaleDateString()+"<br>"+n.join(":")+" "+o[1]}var r=o(1),a=o(19),i=o(2),l=r.default("domUtil"),s=function(){function e(e,t,o){void 0===t&&(t=function(){}),void 0===o&&(o={});var n=this;o.min="number"==typeof o.min?o.min:0,o.max="number"==typeof o.max?o.max:100,o.val="number"==typeof o.val?o.val:0,o.step="number"==typeof o.step?o.step:5,o.playInterval="number"==typeof o.playInterval?o.playInterval:500,o.showAsDate="boolean"==typeof o.showAsDate&&o.showAsDate,"string"==typeof e?this._container=i("#"+e):"undefined"!=typeof e.style?this._container=i(e):this._container=e,this._container.addClass("media-control-container"),this._playInterval=o.playInterval,this._changeFunc=t,this._showAsDate=o.showAsDate,this._currentValue=void 0,this._min=void 0,this._max=void 0,this._step=void 0,this._playing=!1;var r='<span class="media-player-button media-back"></span><span class="media-player-button media-play"></span><span class="media-player-button media-pause media-disabled"></span><span class="media-player-button media-stop media-disabled" ></span><span class="media-player-button media-ahead"></span><input type="range"><div class="media-control-value-label-container"><span class="media-control-value-label-min"></span><span class="media-control-value-label-val"></span><span class="media-control-value-label-max"></span></div>';
-this._container.append(r);var l=this._container.find(".media-play");this._$btnStop=this._container.find(".media-stop");var s=this._container.find(".media-ahead"),p=this._container.find(".media-back");this._$slider=this._container.find("input[type=range]"),this._$valLabelMin=this._container.find(".media-control-value-label-min"),this._$valLabelVal=this._container.find(".media-control-value-label-val"),this._$valLabelMax=this._container.find(".media-control-value-label-max"),this.setMinMaxValueStep(o.min,o.max,o.val,o.step),a.rangeChange(this._$slider,function(e){n.currentValue=e},100);var u=this;l.click(function(){var e=i(this);e.addClass("media-disabled"),u._$btnStop.removeClass("media-disabled"),s.addClass("media-locked"),p.addClass("media-locked"),u._$slider.prop("disabled",!0),u._playing=!0,u._interval=setInterval(function(){u.currentValue+=u._step},u._playInterval)}),this._$btnStop.click(function(){clearInterval(u._interval);var e=i(this);e.addClass("media-disabled"),l.removeClass("media-disabled"),s.removeClass("media-locked"),p.removeClass("media-locked"),u._$slider.prop("disabled",!1),u._playing=!1}),s.click(function(){u.currentValue=u.currentValue+u._step}),p.click(function(){u.currentValue=u.currentValue-u._step})}return e.prototype.stopPlaying=function(){this._playing&&this._$btnStop.trigger("click")},Object.defineProperty(e.prototype,"playing",{get:function(){return this._playing},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"min",{get:function(){return this._min},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"max",{get:function(){return this._max},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"step",{get:function(){return this._step},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"currentValue",{get:function(){return this._currentValue},set:function(e){e>this._max?e=this._min:e<this._min&&(e=this._max),this._currentValue=e,this._$slider.val(this._currentValue.toFixed(2)),this._showAsDate?this._$valLabelVal.html(n(this.currentValue)):this._$valLabelVal.html(this.currentValue.toString()),this._changeFunc(e)},enumerable:!0,configurable:!0}),e.prototype.setMinMaxValueStep=function(e,t,o,r){this._min=e,this._max=t,o="number"==typeof o?o:e,r="number"==typeof r?r:(t-e)/20,this._currentValue=o,this._step=r,this._$slider.prop("min",this.min.toString()),this._$slider.prop("max",this.max.toString()),this._$slider.prop("step",this.step.toString()),this._$slider.val(this.currentValue.toString()),this._showAsDate?(this._$valLabelMin.html(n(this._min)),this._$valLabelVal.html(n(this.currentValue)),this._$valLabelMax.html(n(this._max))):(this._$valLabelMin.html(this._min.toString()),this._$valLabelVal.html(this.currentValue.toString()),this._$valLabelMax.html(this._max.toString()))},Object.defineProperty(e.prototype,"changeFunction",{set:function(e){this._changeFunc=e},enumerable:!0,configurable:!0}),e}();t.MediaControl=s,l.MediaControl=s},function(e,t,o){"use strict";function n(e,t){var o=parseFloat(this.value),n=parseFloat(this.min),r=parseFloat(this.max),i=parseFloat(this.step);r-o<i&&(o=r);var l=(o-n)/(r-n);"number"==typeof a&&o==a||(a=o,e(o,l,t))}function r(e,t,o){return o="number"==typeof o?o:75,e.mouseenter(function(){s=!0}),e.mouseleave(function(){s=!1,p=!1}),e.mousedown(function(){p=!0}),e.mouseup(function(){p=!1}),e.mousemove(function(e){if(s&&p&&(c=!0,a!=this.value)){a=this.value,null!=u&&clearTimeout(u);var r=this;u=setTimeout(function(){n.call(r,t,e),u=null},o)}}),e.keyup(function(e){37!=e.keyCode&&39!=e.keyCode||n.call(this,t,e)}),e.change(function(e){return c?void(c=!1):void n.call(this,t,e)}),this}var a,i=o(1),l=i.default("domUtil"),s=!1,p=!1,u=null,c=!1;t.rangeChange=r,l.rangeChange=r},function(e,t,o){"use strict";var n=this&&this.__extends||function(e,t){function o(){this.constructor=e}for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n]);e.prototype=null===t?Object.create(t):(o.prototype=t.prototype,new o)},r=o(8),a=o(7),i=o(1),l=o(3),s=o(2),p=(new l.Map({}),i.default("layers")),u=function(e){function t(t,o){void 0===o&&(o={});var n=e.call(this,t,o)||this;return o=o,""==n.url.trim()&&(n._loaded=!0),n._style="undefined"==typeof o.style?void 0:o.style,n.visible?n._autoLoad=!0:n._autoLoad="boolean"==typeof o.autoLoad&&o.autoLoad,n._onDemand="boolean"==typeof o.onDemand&&o.onDemand,n._onDemandDelay="number"==typeof o.onDemandDelay?o.onDemandDelay:300,o.mapMoveObj?n._mapMove=o.mapMoveObj:n._mapMove=n._onDemand?a.default:void 0,n._mapMoveMakeGetParams="function"==typeof o.mapMoveMakeGetParams?o.mapMoveMakeGetParams:function(){return{}},n._onDemand&&(n._loaded=!0,n._mapMoveParams={},n._mapMove.checkInit(),n._mapMove.addVectorLayer(n)),n._source=new l.source.Vector,n._olLayer=new l.layer.Vector({source:n._source,visible:n.visible,style:n.style,minResolution:n._minResolution,maxResolution:n._maxResolution,renderOrder:o.renderOrder}),n.olLayer.setZIndex(n._zIndex),n._projectionMap=null,n._projection4326=new l.proj.Projection({code:"EPSG:4326"}),n}return n(t,e),t.prototype.addFeatures=function(e){console.log("Layer vector base addFeatures is a placeholder and does nothing")},t.prototype.mapMoveBefore=function(e,t){return!(void 0!==this.minZoom&&e<this.minZoom)&&(!(void 0!==this.maxZoom&&e>this.maxZoom)&&this.visible)},t.prototype.mapMoveMakeGetParams=function(e,t){this._mapMoveParams={},s.extend(this._mapMoveParams,this.params),s.extend(this._mapMoveParams,this._mapMoveMakeGetParams(this,e,t))},t.prototype.mapMoveCallback=function(e){this.source&&this._source.clear()},t.prototype.clear=function(){this._source&&this._source.clear()},Object.defineProperty(t.prototype,"onDemandDelay",{get:function(){return this._onDemandDelay},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"autoLoad",{get:function(){return this._autoLoad},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"style",{get:function(){return this._style},set:function(e){this._style=e,this.olLayer.setStyle(this._style)},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"mapCrs",{get:function(){return null==this.mapProj?null:this.mapProj.getCode()},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"mapProj",{get:function(){return null!=this._projectionMap?this._projectionMap:this._mapMove?(this._projectionMap=this._mapMove.map.getView().getProjection(),this._projectionMap):null},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"mapMove",{get:function(){return this._mapMove},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"mapMoveParams",{get:function(){return this._mapMoveParams},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"visible",{get:function(){return this._visible},set:function(t){e.prototype.setVisible.call(this,t),this._onDemand&&this.mapMove.triggerLyrLoad(this)},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"source",{get:function(){return this.getSource()},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"features",{get:function(){return this.source.getFeatures()},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"olLayer",{get:function(){return e.prototype.getOlLayer.call(this)},enumerable:!0,configurable:!0}),t.prototype.setZIndex=function(e){this.olLayer.setZIndex(e)},t}(r.LayerBase);t.LayerBaseVector=u,p.LayerBaseVector=u,Object.defineProperty(t,"__esModule",{value:!0}),t.default=u},,,,function(e,t,o){"use strict";var n=this&&this.__extends||function(e,t){function o(){this.constructor=e}for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n]);e.prototype=null===t?Object.create(t):(o.prototype=t.prototype,new o)},r=o(20),a=o(15),i=o(1),l=o(3),s=o(2),p=i.default("layers"),u=function(e){function t(t,o){var n=this;return"object"!=typeof o.params&&(o.params={}),o.params.where=o.where||"1=1",o.params.outFields=o.outFields||"*",o.params.f=o.format||"pjson",o.params.outSR=o.outSR||3857,n=e.call(this,t,o)||this,n._outSR=n.params.outSR,n._esriFormat=new l.format.EsriJSON,"/"!==n._url[n._url.length-1]&&(n._url+="/"),n._urlCopy=n.url,n._url+="query?callback=?",(n.autoLoad||n.visible)&&n._load(),n._useEsriStyle="boolean"==typeof o.useEsriStyle&&o.useEsriStyle,n._useEsriStyle&&n.addLegendContent(),n}return n(t,e),t.prototype.addLegendContent=function(t){var o=this;this._useEsriStyle?s.get(this._urlCopy+"?f=pjson&callback=?",{},function(t){if(t.subLayers.length>0)return void alert("should only use single feature layers, not groups");var n=a.makeFeatureServiceLegendAndSymbol(t);o.style=n.style,e.prototype.addLegendContent.call(o,n.legend)},"json"):e.prototype.addLegendContent.call(this,t)},t.prototype.addFeatures=function(e){var t=this._esriFormat.readFeatures(e);this.source.addFeatures(t)},t.prototype._load=function(){var t=this;return!!e.prototype._load.call(this)||(s.get(this._url,this.params,function(e){t.addFeatures(e),t.loadCallback(t)},"json").fail(function(){t._loaded=!1}),!1)},t.prototype.mapMoveMakeGetParams=function(t,o){e.prototype.mapMoveMakeGetParams.call(this,t,o),this.mapMoveParams.geometry=t.minX+","+t.minY+","+t.maxX+","+t.maxY,this.mapMoveParams.geometryType="esriGeometryEnvelope",this.mapMoveParams.spatialRel="esriSpatialRelIntersects",this.mapMoveParams.spatialRel="esriSpatialRelIntersects",this.mapMoveParams.inSR=3857,3857==this._outSR&&(this.mapMoveParams.geometryPrecision=1)},t.prototype.mapMoveBefore=function(t,o){return e.prototype.mapMoveBefore.call(this,t,o)},t.prototype.mapMoveCallback=function(t){e.prototype.mapMoveCallback.call(this,t),this.source.addFeatures(this._esriFormat.readFeatures(t))},t}(r.LayerBaseVector);t.LayerBaseVectorEsri=u,p.LayerBaseVectorEsri=u,Object.defineProperty(t,"__esModule",{value:!0}),t.default=u},,function(e,t,o){"use strict";var n=this&&this.__extends||function(e,t){function o(){this.constructor=e}for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n]);e.prototype=null===t?Object.create(t):(o.prototype=t.prototype,new o)},r=o(8),a=o(1),i=o(3),l=a.default("layers"),s=function(e){function t(t,o){var n=e.call(this,t,o)||this;return n._source=new i.source.XYZ({url:""==n.url?void 0:n.url}),n._olLayer=new i.layer.Tile({source:n._source,visible:n.visible,opacity:n.opacity,minResolution:n._minResolution,maxResolution:n._maxResolution}),n._olLayer.setZIndex(n._zIndex),n}return n(t,e),Object.defineProperty(t.prototype,"source",{get:function(){return this._source},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"olLayer",{get:function(){return this._olLayer},enumerable:!0,configurable:!0}),t}(r.LayerBase);t.LayerBaseXyzTile=s,l.LayerBaseXyzTile=s,Object.defineProperty(t,"__esModule",{value:!0}),t.default=s},,function(e,t,o){"use strict";var n=this&&this.__extends||function(e,t){function o(){this.constructor=e}for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n]);e.prototype=null===t?Object.create(t):(o.prototype=t.prototype,new o)},r=o(26),a=o(30),i=o(1),l=i.default("layers"),s=function(e){function t(t){var o=this;return t.animate="boolean"==typeof t.animate&&t.animate,t.animate?(o=e.call(this,"",t)||this,o._products=t.products,o.animator=new a.default(o,t.timeLoadCallback),o.animator.timeInit()):(o=e.call(this,"http://realearth.ssec.wisc.edu/api/image?products="+t.products+"&x={x}&y={y}&z={z}",t)||this,o._products=t.products),o}return n(t,e),t.prototype.setLayerTime=function(e){return!!this.animator&&this.animator.setLayerTime(e)},t.prototype._load=function(){return!this.animator&&e.prototype._load.call(this)},t}(r.LayerBaseXyzTile);t.LayerRealEarthTile=s,l.LayerRealEarthTile=s,Object.defineProperty(t,"__esModule",{value:!0}),t.default=s},function(e,t,o){"use strict";var n=o(1),r=o(5),a=o(2),i=n.default("mixin"),l=(new Date).getTimezoneOffset(),s=function(){function e(e,t){this.lyr=e,this._products=e._products,t?this.loadCallback=t:this.loadCallback=function(){}}return e.prototype.timeInit=function(){var e=this;this._rawDateStrings=[],this._localDates=[],this.localTimes=[],this._animateEnabled=!0,this._currentTime=void 0,this._currentIndex=void 0,a.get("http://realearth.ssec.wisc.edu/api/products",{products:this._products},function(t){if(0==t.length)return void console.log(e._products+" layer not available or does not have times");t=t[0];for(var o=0;o<t.times.length;o++)e._loadDates.call(e,t.times[o]);e.loadCallback.call(e.lyr,e.lyr),e._loadLatest.call(e)},"json")},e.prototype._loadDates=function(e){var t=e.slice(0,4),o=e.slice(4,6),n=e.slice(6,8),r=e.slice(9,11),a=e.slice(11,13),i=e.slice(13,15),s=e.replace(".","_");this._rawDateStrings.push(s);var p=o+"/"+n+"/"+t+" "+r+":"+a+":"+i,u=new Date(p);return u.setMinutes(u.getMinutes()-l),this._localDates.push(u),this.localTimes.push(u.getTime()),s},e.prototype._loadLatest=function(){return r.default.closePopup(),this.localTimes.length>0&&(this._currentIndex=this.localTimes.length-1,!0)},e.prototype.setLayerTime=function(e){this._currentTime=e;var t;if(e<this.localTimes[0])return!1;e>this.localTimes[this.localTimes.length-1]&&(t=this.localTimes.length-1);for(var o=0;o<this.localTimes.length;o++)if(this.localTimes[o]>=e){t=o;break}return t!=this._currentIndex&&(this._currentIndex=t,r.default.closePopup(),!0)},e}();t.RealEarthAnimate=s,i.RealEarthAnimate=s,Object.defineProperty(t,"__esModule",{value:!0}),t.default=s},function(e,t,o){"use strict";var n=this&&this.__extends||function(e,t){function o(){this.constructor=e}for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n]);e.prototype=null===t?Object.create(t):(o.prototype=t.prototype,new o)},r=o(29),a=o(1),i=a.default("mixin"),l=function(e){function t(t,o){var n=e.call(this,t,o)||this;return n._source=t.source,n._olLayer=t.olLayer,n}return n(t,e),t.prototype.timeInit=function(){e.prototype.timeInit.call(this),this._sourceUrls=[]},t.prototype._loadDates=function(t){var o=e.prototype._loadDates.call(this,t),n="http://realearth.ssec.wisc.edu/api/image?products="+this._products+"_"+o+"&x={x}&y={y}&z={z}";return this._sourceUrls.push(n),""},t.prototype._loadLatest=function(){return e.prototype._loadLatest.call(this)&&this._source.setUrl(this._sourceUrls[this._sourceUrls.length-1]),!0},t.prototype.setLayerTime=function(t){return e.prototype.setLayerTime.call(this,t)?(this._olLayer.getZIndex()<0&&this._olLayer.setZIndex(0),this._source.setUrl(this._sourceUrls[this._currentIndex])):this._olLayer.setZIndex(-1),!0},t}(r.default);i.RealEarthAnimateTile=l,Object.defineProperty(t,"__esModule",{value:!0}),t.default=l}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/*!*******************************!*\
+  !*** ./dist/_test/animate.js ***!
+  \*******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var quickMap_1 = __webpack_require__(/*! ../olHelpers/quickMap */ 1);
+	var LayerRealEarthTile_1 = __webpack_require__(/*! ../layers/LayerRealEarthTile */ 13);
+	var media_control_1 = __webpack_require__(/*! ../domUtil/media-control */ 19);
+	var $ = __webpack_require__(/*! jquery */ 5);
+	var LayerBaseVectorEsri_1 = __webpack_require__(/*! ../layers/LayerBaseVectorEsri */ 21);
+	var LayerEsriMapServer_1 = __webpack_require__(/*! ../layers/LayerEsriMapServer */ 24);
+	var nexrhresStatic = new LayerRealEarthTile_1.default({
+	    products: 'nexrhres',
+	    id: 'nexrhres-static',
+	    opacity: 0.6,
+	    animate: true,
+	    name: 'Hybrid Reflectivity',
+	    // maxZoom: 10,
+	    timeLoadCallback: function (f) {
+	        console.log(f);
+	    }
+	});
+	var d = new Date();
+	var endTime = d.getTime();
+	d.setHours(d.getHours() - 4);
+	var startTime = d.getTime();
+	var rangeStep = Math.round((endTime - startTime) / 8);
+	var media = new media_control_1.MediaControl($('#control'), function (v) {
+	    nexrhresStatic.setLayerTime(v);
+	}, {
+	    min: startTime,
+	    max: endTime,
+	    val: endTime,
+	    step: rangeStep,
+	    playInterval: 750,
+	    showAsDate: true
+	});
+	var map = quickMap_1.quickMap();
+	map.addLayer(nexrhresStatic.olLayer);
+	var coordinationLayer = new LayerBaseVectorEsri_1.LayerBaseVectorEsri('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/GLRTOC/GlrtocCoordination/MapServer/0', {
+	    visible: true,
+	    autoLoad: true,
+	    name: 'Coordination',
+	    useEsriStyle: true
+	});
+	map.addLayer(coordinationLayer.olLayer);
+	var oakRidgeLayers = [
+	    ['Cameras', 'cameras33'],
+	    ['HAR', 'HAR33'],
+	    ['DMS', 'MessageSigns33'],
+	    //['State Summary', 'statesummary'],
+	    ['Traffic Control', 'TrafficControl33'],
+	    ['Traffic Detection', 'TrafficDetectionMulti'],
+	    ['Weather', 'Weather33']
+	];
+	for (var i = 0; i < oakRidgeLayers.length; i++) {
+	    var oakRidgeLayer = new LayerEsriMapServer_1.LayerEsriMapServer("http://itsdpro.ornl.gov/arcgis/rest/services/ITSPublic/" + oakRidgeLayers[i][1] + "/MapServer", {
+	        id: oakRidgeLayers[i][1],
+	        name: oakRidgeLayers[i][0],
+	        visible: true,
+	        minZoom: 7,
+	        zIndex: 20,
+	        addPopup: true,
+	        legendCollapse: true
+	    });
+	    map.addLayer(oakRidgeLayer.olLayer);
+	}
+
+
+/***/ },
+/* 1 */
+/*!************************************!*\
+  !*** ./dist/olHelpers/quickMap.js ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by gavorhes on 12/15/2015.
+	 */
+	"use strict";
+	var quickMapBase_1 = __webpack_require__(/*! ./quickMapBase */ 2);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var mapMove_1 = __webpack_require__(/*! ./mapMove */ 6);
+	var mapPopup_1 = __webpack_require__(/*! ./mapPopup */ 11);
+	var nm = provide_1.default('olHelpers');
+	/**
+	 * Sets up a map with some default parameters and initializes
+	 * mapMove and mapPopup
+	 *
+	 * @param {object} [options={}] config options
+	 * @param {string} [options.divId=map] map div id
+	 * @param {object} [options.center={}] center config object
+	 * @param {number} [options.center.x=-10018378] center x, web mercator x or lon
+	 * @param {number} [options.center.y=5574910] center y, web mercator y or lat
+	 * @param {number} [options.zoom=7] zoom level
+	 * @param {number} [options.minZoom=undefined] min zoom
+	 * @param {number} [options.maxZoom=undefined] max zoom
+	 * @param {boolean} [options.baseSwitcher=true] if add base map switcher
+	 * @param {boolean} [options.fullScreen=false] if add base map switcher
+	 * @returns {ol.Map} the ol map
+	 */
+	function quickMap(options) {
+	    var m = quickMapBase_1.quickMapBase(options);
+	    mapMove_1.default.init(m);
+	    mapPopup_1.default.init(m);
+	    return m;
+	}
+	exports.quickMap = quickMap;
+	nm.quickMap = quickMap;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = quickMap;
+
+
+/***/ },
+/* 2 */
+/*!****************************************!*\
+  !*** ./dist/olHelpers/quickMapBase.js ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by gavorhes on 12/15/2015.
+	 */
+	"use strict";
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var ol = __webpack_require__(/*! custom-ol */ 4);
+	var $ = __webpack_require__(/*! jquery */ 5);
+	var nm = provide_1.default('olHelpers');
+	/**
+	 * Sets up a map with some default parameters and initializes
+	 * mapMove and mapPopup
+	 *
+	 * @param [options={}] config options
+	 * @param [options.divId=map] map div id
+	 * @param [options.center={}] center config object
+	 * @param [options.center.x=-10018378] center x, web mercator x or lon
+	 * @param [options.center.y=5574910] center y, web mercator y or lat
+	 * @param [options.zoom=7] zoom level
+	 * @param [options.minZoom=undefined] min zoom
+	 * @param [options.maxZoom=undefined] max zoom
+	 * @param [options.baseSwitcher=true] if add base map switcher
+	 * @param [options.fullScreen=false] if add base map switcher
+	 * @returns the ol map
+	 */
+	function quickMapBase(options) {
+	    options = options || {};
+	    options.divId = options.divId || 'map';
+	    options.center = options.center || { x: -10018378, y: 5574910 };
+	    options.zoom = typeof options.zoom == 'number' ? options.zoom : 7;
+	    options.baseSwitcher = typeof options.baseSwitcher == 'boolean' ? options.baseSwitcher : true;
+	    options.fullScreen = typeof options.fullScreen == 'boolean' ? options.fullScreen : false;
+	    var $mapDiv = $('#' + options.divId);
+	    $mapDiv.css('position', 'relative');
+	    var osmLayer = new ol.layer.Tile({ source: new ol.source.OSM() });
+	    // let satLayer = new ol.layer.Tile({visible: false, source: new ol.source.MapQuest({layer: 'sat'})});
+	    var osmCss = "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURQAAADQ1NDk5OURFREtLS1FHSFlZWGJRVGJiYWdmZWxsbHRmaXBpanN0c3V0dHp5eX5+fIVzd4F3eeV0jud5juZ8k4aHhomHhoyGh5eGj5OVlJiVlZiYl5qZmJydnKOTlaKZmqKdnaOioaqqqKuzsbOvrrSysLa3tbW4uLm6ub27ub+/vbGXwbCZwbCgxLKlxrOqyLStybO3yrSxyrWzzbW2y7a1zbK4y7W6zbW8y760yrTAzbTFzrPKzrLOzrTJzrTOzr7CwbXC0LXK0LTO0L3I0bPQz7TQz7PS0bXQ0LnR0brW1bzT0r7U077V1Lzc2dqNqteUsdyXscaquuOHneaGmueHnOeJnuiBleiKn+eNoOiOoOWUpOiRo+iSpeiUpeqYpumaqOmdrPSynemgruSqtOmisOmlsuuqtequuOW1vOuxu+uxvOq1ve+xvPK0pvW3o/W5pfO5qvS7qfCwvMOuwc2/wNenxNyyzNe/0Nq31Nq51dy72Oy3wOu4wOu+xey4wO+6xO2+xfTAr/TCsvfFtPHLvvTJuMPDwMfHxcXKyc3DxMvFyMvLyM3PzcDV08DV1MTX1cbY1s7X1sjZ1sra2Mnd3M7b2c7c2tfH1tnB1t7F2d7M29fX1tLY1tDd2tHe3NTf3NnS19rZ1tva2Nnf3t3d28rh3tXg3Nnh3tzj393k39ni4N7k4N7n5uXDyOfLz+zAxu3CyOzEyezKzeDJ3eLM3uvP0u3P0ePf2+7R0u7Q1u/U0+7U1ezc0+7a2e/d2+3f3vbFzvLOwfHN0PPQw/TUx/LWyvLYzPDQ1fPe0ubc4vve4uHh3+nh3+/h2u/h3vHj2vHl3uHm4eTn4uDp5ebo4+Xo5ODq6ebq6OTv6+nl4+/j4O7l4e7n5ujp4+np5Ozq5e7s5urt6O7t6Orw6u7x6u3x7vPj5PDl4fDo4vDq5fDt5vDu6PDv7PTv6fDx6vHx7fH17fXw6fXy7fb07/bz8fT18vn38vr39fr48/r59Pr6+P3++//+/gAAALNTSk0AAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wBT9wclAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4wLjlsM35OAAAFNElEQVRIS1VVCZxVUxi/9l0UIUT2bMnY43bVI2c0Y01kSWIaS0j2JEtkN41piomZrPPKQ2aQ7JKImOZlnm2493TJzDufuU1Zi+v/fee+mZ//793vnPOd7zvfes5zDBEZkBBjAcIjb+Iiotqgdhat8AMK0vl7/R9N7GiWtshqIr+EZ5gYKibyUsXY1l/mfFpssvUlWQ0FkU3gy4+RB/+kwYcO8pRSnldcOU/r2lAHARSwk2ORgEmOdC1EsuRiYSqMPwwroMIraZk5V2fYJQjCKfZrRmh3gSAZi2i4b7wSylWu8EqZwS59JkFUaW96JbNSc+CEUmt4rorwuZmWdDaoc+uZETuQlTCU5xYzR7muUnVUVo+BcRhre/VwUpasgJwhH7JkYIYA0sNxhmCwUK+lw6vCKBZehw01dEiyw4Q4aE0Z4ahDhKaFQsGnJ2BgqKoTBsNjFy0SlW6whRAZTdm8DBJmkBZhDi1j4xJQBk6ywrWUTymaCxac8lROcdauRGzQSNtA7EHUYhXyEwhhgjFUqRuO+rauhF1awFpzCsmwUbjIFBR0u1bKtyGpulW/H/cVVzkyGaIWTIR9pFAV6GK2gPMXMX8gPk9zzxXgI1kimcAltEYr+cjio1imlKpEa9rOipLm+p+CZ6Bw//qd1/f/O+GwMxbSLpyoZEcwkyh2jIks+3hmdd2jWUw4scxNysnHxU7nSspTRcJjCZGL3IsjsYJMMg5mwgx7gaIOLBFCogAgBBoNa9w+DE6I+Bs7FTgwwrJbHjWDgpYo2KwtBTcYEDuloC9geQw+k2RGnPGpTaOlq7AS+YICUz4DZVaX2TiNDhuYfTtY4geLi0IoCm3XccwM9hx4kU28StQEljDs3ZEpFGA+8dKzLmV9ymIwF5FOGn2GdJM8KLHDJbXyiYVMG9MRTLiXGGg2QKaxM3khPSRrwM9zEIardxU2w/EiA0gOeYKHzDR0V7/QGV3lKIA9ktrDArxO3gdA+k6SKoBiVwcm7NjZb9+Hnztg282TuHVZ9LOISFNt9MgyCetZVczSxnyDbl17Penq6mqpg1IhRaEO2aVLUO4/r17H8tTv6f13h71dduvZI3Y+uMdWksNSauLovJw5hsqiPIUvt0ku7/iBeUR3sksmomYWtRbAjbiLfv2lX9/V7LVG4uYnUZXhQ7f2OPCZEx9wrYWTcePEQqPEML8pl4mMdr/jlXlvHiRiJ2+MSTFY4TTSYStuvz2R/JXh+PPeGXm055J+3/YDWuNu3R3DArPutyg0ZgykMVDU9Ndm22+wYalr2rse48CnsTIFcMn73vfhNrktx1EUcZnPv6ah3Yy5cDTRdBEoGoBeah71dqFyjZDJLkWk3N3v4uuktssjWpzciMPxQeHj8nMKzcGuB0tAyzFhdCKOYWv4HwOQVwIxLG99a6uvH3sJCyO3h+k4EZ+G7+xj5f4XXksoaGrdMRzSc8ARA8+cdOuk2x6fffNNt5x+Ro1omPlrT/CQDlcNlpx4NBIWXhkx7Y3Zp3ofNR7Uv89Om/beW0TLIynHv3vs1VsOFpSWSXvfuPUf9BrRFyxgXdHoKJnQFegPOovvzz59ntrzye240ig8UQ3lDI2VqwagrKIQcLXNFL3wglN2OHdBQ6/vI3kENDVBwRb3k1XtczFbjWn4EzMYi7CF3129+JTYuRSdrGuS92g5dpqn6qXoJQs5xmL8p+Wt4hLbt0mx2OLNZR2bbPy8zJNQGFM/f/CfXZekRYFjGCWjIJpM+WiCzGBPWHhoyaAsjRT/B2Gy5yzYJkwUAAAAAElFTkSuQmCC')";
+	    var aerialCss = "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURQALBgIMDQgOBwQOEQcTBwUSCwoVDAwdBw8ZDgUREwYUGAYZFQYZGgkTFQoVGQsZFAwZHBMeDhIbFBEbHAwWIA4bIREcIQ4hCQwjFw4lHBgkDB8sDxUiExIiGhAoGxohFRshGRorHQcrKQsiIQwmKgooJA0pKQ81Jw8yLRMiIxImKxUrJREuKhslJB0rIhooKRUuMBMyLhkwJhozKh48LxUzMRM9MBwzMiUvFCMtGiMwEiwzFCgzHDI+GSIsISkvJSQxIiM2LiY5Jic+Lyk0JSo0Ky49JSs9KSU1NSM7NCs2NS8+NDM1JzU9Ljg7IDJCHS1DLSNAMitCMSxIOjREITZLIDZJKDlFIjpFKztKJT1LKzJBMzpHMD1JMjpKPD1RKjlQNC1DQj5QQEA8MEJGJkBKJUJNK0lLLEJMMkVMPEpONENSLUdZL0pTLkpaLkRUMkRSPEVZMktUM0pVOklZMklZNEpcNU1ZMk1ZNUxfMk5dNkxcOVFUM1RUOFJbNVFZOVNYPVFdOVJdPFVaOVVaPVVdOlVdPVpaNlpdO0phN01hOlBiN1NhPFNoP1piPWFbPmRjPENOQEtPSURTQkJVS0xVQk1VSkxbQkxcS0heUVFXRFRcQlJfTFxeQlpeS05lQk1kSFRjQVRjSlZpQ1tkQlxlSlxpRF1rSVVnUVtlU1llXF9tU1xoXlxwSl9ramRfQmJlQ2FhSWFlSWFlTmVlSWRmTGFoQWFpRWFsRmVpRWVtRmNsSmtlRGpqRmpsS2BmWGRsUmFrW2ptUmZyR2RxTGpxTWVyU2RyW2d5V2tzUmt0WW15VG15WXFuTHNtVnFxTXF4T3h0TnJzUnJ1XHJ4VXN6Wnp0VHx1W315VXp8XGR0YGx0YHVzZXJ0aHR9ZXV+aHl9YHOCXXqBXXeCYHyCY3iEaHyIYn+JaXqKcYB5WIN6Y4SCXoCDZIGEaYCIZoOLa4iCaImJbIOOdYuMco6OeIuVcpOKbZKPc5aQb5eXe5ufg6KjhAAAAAAAAAAAAAAAAOGCeQgAAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wBT9wclAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4wLjlsM35OAAAH80lEQVRISy1WbXQUVxm+6wqnk3Zmpxl2FG2EGg92C8GDlWptVTwa+uF3xcKmDfFzCUzDsJNsunXipglJXJbrtJWmwZNSnHD3jojRgUIm2UumIZ0JZ7JByrALbMWW0IBW8aRa4+cf76TeX3Nm3uc+z/s+7/vugl4r/aMTrT4e1pPTqnnmJNn5AyUzRnrRle/qE33dsvrBtAQVoxtpZNK3zSzYjUjviWO2Ag+R77dl7W36n/1Ep9KBPG/S+Py0PkjU/gPKQGqwTHryiWYFAXSvMairsio7SjyNsnCzh0qKImV9/7mhfHQZx2yN1O+7rXUm33MUPaboOkAJHaoIdXfJj2xWeyD8jMFEXkvIu5qzpU988gWB5zl+GS+sFe55trEVPdWZB2miq8bBVkNFO2R0qnrfkiXhcJhtDNXE6tbW97/s9O9/7ZfVhx86/CwrROpfvvxboMqeLsuqPr1j44qEwDNMOBximUiYoU8sw7BC/a7T72uEnyJDlGxZ9KcglZRyuqqrv/tSZErgOI4NgRBTIw9EmHAoFGZZnp6aGaJ2GTxfxYs8kKVUQh7WB5hQeC3LsUxoxVKW14l3BX2WcoUYPiZyLLe8teZ+iuT4GGhvV5KpKWkpyzxEr2MZgQ1xdRjfRBoH+2k6lIHjKTHPPBo8CSJISqqq4wGGOcWylIGlgvgNX1Gd8vF5f+IUIwb30ng+Gg2QfBRIMvy0jG8SVkYo4N0zvUXVRztbJ/L6xL7lUZEXBEHkuZqlS6gEAUgKJurnhFtfpACOYd8b/hVbJPqwi44a6KA0sPVjIi/SIyxb3u8KlAJ0S8jRVgrlW+nVHPdrhiXCxu42d86ByksDc80P3MkJFBFQ8Ho1lQegpWJRWFGsDsRwwv7pIyvuQW0ZkrX6NDVFbqcvaQI8vbyqzt5AARrsbKx5yhQEGs+wPO56bOK+0rcwMrOKkpUbZWYxV04UeZZv/cBKFhRL6Qdv9y4LfEDA7/thg7tTmv1a5/GnO0wl0dQg80wglZaHUmxRvjwAHOfyN0mxrpqLUpcjsK3NHYMo4R1o6eho2ZyIb2FoeOC3ILK8kZ2HQMOuWywGXUkJBCeTbYFS0+ym1h2/6UgmvnrvKYZZtIEXGf75C2cIAp5LHNd71x7uPoTjakrWH9e3KFpaatjUvJUysFw0KrLMYMW2lTg4PeUQx6kJEALvxXEmCdVyPLHtCSjBhc01XCjIgafxou+PE6KC1dhxSCwoBCc+N4P3btM84pmdSSjJnjO/nvY4LQfVyz5/I+v6IwjUOMjy+MVCxIbKupTJaEktp7cTKU42Pvjh2m/8cSpC6aPsaX/MHSuUQLVVsIa4RUTs/r/BVAexNdjdnsNG7j/rV93xheLMzKnFrPeTEQchCyCcKb25aAIn7lrAertrZwyNXM8N6zfWrFo3d2SmOEcF83x/r+OOFgrAHYWF7cELjhV7UQo/6WAIUVl9JFl8a//HZ66VpbY3I9QKZqPru77lA+iOWAIr0hKxHCmmr0othSyeIl5y3qt4xT8gSNrKEZozs8Els67rgsLOZ+ygzwMfbtNhobfgzpEyGnz7htPtzUi6PuOoj7K0WF/MXiUFxwGajRD1hjYXHXI9p406qOyinp5/tiWcDHY0jIu4n64Qfq7kliB2gemag9QbOia0PbbDMbd43SHuvxFxrAocxins7MX5Kqbe1QixKBxoV4//PfAgGCu+Rlm4SvZizyDH+0reDHp92iO0BuX3bCfItl0PEwvYLqpwXG2MHlGsQ4S8pMJZv1JGmHiEoHQDdOjwmVlEP/nE9ADKjI8xLI0OOGITfy0SbeG/C2jKUDGSlDhM9I3IpK9iup6XnbRNC7yqueNsJCCIiXzdQhnaGN+46umnEdy5U5UbUJ48LFM9GkJo8BdDOiAZ7ZIQbKhYLMqvhU2wmNxjEAsS2AI7y4nWF64duePbk7YV3zvAVLEMD9AxJRNa3KDUibV7DjnkuprMEYjScFNcaR2ceP2u9R/5k1052Ryme5phAFRswlHjAudiP4dOy7CaxLgdJh9vUlU1702/+LPa1U9fvPi9qlA4XEUBJc3dFlpsR457IDl1iPqLp7o81NQgyV19iYU38uTiv975Pd3SiwQcsGjx+v4/6fl5T7EOOMTCtpbKxfemsQq/3olQZcminADAAI0cuGLHaHOFxbuGvRk/Z9u7CULqoVR6NE0yx1avj30oRhc/jWUoIALGxkz0dg1Dl9iaI7LqOOXKsXJFwjiuEAi70Jra2nW1PL08zLBhZsMABpW5csI7TPfew9ipFKcn5k1i+1KyCWKjC3W/8dF1d666+RaabBVTFTHacjoojBNDh0NDxk+IPTlwfqJkWpbnpFHXIbLbmpxEQ3ff/Z0g/mauXsoln9wDRjy/NHsQFw3P6vWuTJ43/+FZrk2cvAFRipCKdfD9y2+pjRj78s0KdCUDKJvdV91ChngV38T20TM+gghjpJaPlpFr2xbEz5g4A/NGt5rNwdwmYGeeeMXBSLHHUIc+6RsojRH9VTUm3/mLf/64b470XvoxoTKhlMBQ2jMEzo2PjxdGMppmn1RM24bWFJqaQv4BcuJa2Sam7Zokq1ldCsz06NCBHrhwqVQYpfFj42NZexz1EW9SR/kT58nEeQKJb2fPXjjp0u/YUkwHEgLeOnf2nOuf1TRTM02CLKLTPy60/x1CCztqn7Ev+BdsC3m+30decQvW/wBNTwU+CfUQAQAAAABJRU5ErkJggg==')";
+	    if (options.baseSwitcher) {
+	    }
+	    if (options.zoom < 0 || options.zoom > 28) {
+	        throw 'zoom out of range';
+	    }
+	    if (options.center.x >= -180 && options.center.x <= 180 && options.center.y >= -90 && options.center.y <= 90) {
+	        var p = new ol.geom.Point([options.center.x, options.center.y]);
+	        new ol.proj.Projection({ code: "EPSG:4326" });
+	        p.transform(new ol.proj.Projection({ code: "EPSG:4326" }), new ol.proj.Projection({ code: "EPSG:3857" }));
+	        var coordinates = p.getCoordinates();
+	        options.center.x = coordinates[0];
+	        options.center.y = coordinates[1];
+	    }
+	    var controls = ol.control.defaults({
+	        attributionOptions: { collapsible: false }
+	    });
+	    var view = new ol.View({
+	        center: [options.center.x, options.center.y],
+	        zoom: options.zoom,
+	        minZoom: options.minZoom,
+	        maxZoom: options.maxZoom
+	    });
+	    var map = new ol.Map({
+	        layers: [osmLayer],
+	        target: options.divId,
+	        controls: controls,
+	        view: view
+	    });
+	    if (options.fullScreen) {
+	        map.addControl(new ol.control.FullScreen({}));
+	    }
+	    return map;
+	}
+	exports.quickMapBase = quickMapBase;
+	nm.quickMapBase = quickMapBase;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = quickMapBase;
+
+
+/***/ },
+/* 3 */
+/*!******************************!*\
+  !*** ./dist/util/provide.js ***!
+  \******************************/
+/***/ function(module, exports) {
+
+	/**
+	 * Created by gavorhes on 12/10/2015.
+	 */
+	"use strict";
+	/**
+	 * create a namespace on the gv object
+	 * @param {string} namespace to create
+	 * @returns {object} object representing the namespace
+	 */
+	function provide(namespace) {
+	    "use strict";
+	    if (typeof window['gv'] == 'undefined') {
+	        window['gv'] = {};
+	    }
+	    var parts = namespace.split('.');
+	    var nameSpace = window['gv'];
+	    for (var i = 0; i < parts.length; i++) {
+	        var newObject = nameSpace[parts[i]];
+	        if (typeof newObject == 'undefined') {
+	            nameSpace[parts[i]] = {};
+	        }
+	        nameSpace = nameSpace[parts[i]];
+	    }
+	    return nameSpace;
+	}
+	provide('util');
+	window['gv'].util.provide = provide;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = provide;
+
+
+/***/ },
+/* 4 */
+/*!*********************!*\
+  !*** external "ol" ***!
+  \*********************/
+/***/ function(module, exports) {
+
+	module.exports = ol;
+
+/***/ },
+/* 5 */
+/*!********************!*\
+  !*** external "$" ***!
+  \********************/
+/***/ function(module, exports) {
+
+	module.exports = $;
+
+/***/ },
+/* 6 */
+/*!***********************************!*\
+  !*** ./dist/olHelpers/mapMove.js ***!
+  \***********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by gavorhes on 11/3/2015.
+	 */
+	"use strict";
+	var mapMoveCls_1 = __webpack_require__(/*! ./mapMoveCls */ 7);
+	/**
+	 * The single map move object catch is that it is common to multimap pages
+	 * @type {MapMoveCls}
+	 */
+	exports.mapMove = new mapMoveCls_1.default();
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = exports.mapMove;
+
+
+/***/ },
+/* 7 */
+/*!**************************************!*\
+  !*** ./dist/olHelpers/mapMoveCls.js ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var mapInteractionBase_1 = __webpack_require__(/*! ./mapInteractionBase */ 8);
+	var checkDefined = __webpack_require__(/*! ../util/checkDefined */ 9);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var makeGuid_1 = __webpack_require__(/*! ../util/makeGuid */ 10);
+	var $ = __webpack_require__(/*! jquery */ 5);
+	var nm = provide_1.default('olHelpers');
+	/**
+	 * assists with map move interactions, trigger callback functions
+	 * @augments MapInteractionBase
+	 */
+	var MapMoveCls = (function (_super) {
+	    __extends(MapMoveCls, _super);
+	    /**
+	     * constructor called implicitly
+	     */
+	    function MapMoveCls() {
+	        var _this = _super.call(this, 'map move') || this;
+	        _this._arrLyrRequest = [];
+	        _this._arrLyrTimeout = [];
+	        _this._arrLayer = [];
+	        _this._lookupLayer = {};
+	        _this._mapMoveCallbacks = [];
+	        _this._mapMoveCallbacksLookup = {};
+	        _this._mapMoveCallbackDelays = [];
+	        _this._mapMoveCallbackContext = [];
+	        _this._mapMoveCallbackTimeout = [];
+	        _this._mapExtent = undefined;
+	        _this._zoomLevel = undefined;
+	        return _this;
+	    }
+	    /**
+	     * initialize the map move object
+	     * @param theMap - the ol map
+	     */
+	    MapMoveCls.prototype.init = function (theMap) {
+	        var _this = this;
+	        _super.prototype.init.call(this, theMap);
+	        this.map.getView().on(['change:center', 'change:resolution'], function (e) {
+	            _this._updateMapExtent();
+	            // trigger the layer updates
+	            for (var i = 0; i < _this._arrLayer.length; i++) {
+	                _this.triggerLyrLoad(_this._arrLayer[i], i, e.type);
+	            }
+	            // trigger the map callbacks
+	            for (var i = 0; i < _this._mapMoveCallbacks.length; i++) {
+	                _this.triggerMoveCallback(i, e.type);
+	            }
+	        });
+	    };
+	    MapMoveCls.prototype._updateMapExtent = function () {
+	        var theView = this.map.getView();
+	        this._zoomLevel = theView.getZoom();
+	        var extentArray = theView.calculateExtent(this.map.getSize());
+	        this._mapExtent = {
+	            minX: extentArray[0],
+	            minY: extentArray[1],
+	            maxX: extentArray[2],
+	            maxY: extentArray[3]
+	        };
+	    };
+	    Object.defineProperty(MapMoveCls.prototype, "mapExtent", {
+	        /**
+	         * return the map extent
+	         */
+	        get: function () {
+	            if (!this._mapExtent) {
+	                this._updateMapExtent();
+	            }
+	            return this._mapExtent;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /**
+	     * Trigger the layer load
+	     * @param lyr the layer being acted on
+	     * @param index index of the layer
+	     * @param eventType the event triggering the load, as 'change:center' or 'change:resolution'
+	     */
+	    MapMoveCls.prototype.triggerLyrLoad = function (lyr, index, eventType) {
+	        if (checkDefined.undefinedOrNull(lyr) && checkDefined.undefinedOrNull(index)) {
+	            throw 'need to define lyr or index';
+	        }
+	        else if (checkDefined.definedAndNotNull(lyr) && checkDefined.undefinedOrNull(index)) {
+	            index = this._arrLayer.indexOf(lyr);
+	        }
+	        else if (checkDefined.undefinedOrNull(lyr) && checkDefined.definedAndNotNull(index)) {
+	            lyr = this._arrLayer[index];
+	        }
+	        // clear the timeout
+	        if (this._arrLyrTimeout[index] != null) {
+	            clearTimeout(this._arrLyrTimeout[index]);
+	            this._arrLyrTimeout[index] = null;
+	        }
+	        // abort if necessary and clear the request
+	        if (this._arrLyrRequest[index] != null && this._arrLyrRequest[index] != 4) {
+	            this._arrLyrRequest[index].abort();
+	            this._arrLyrRequest[index] = null;
+	        }
+	        // dummy callback used if before load returns false
+	        var callbackFunc = function () { };
+	        if (lyr.mapMoveBefore(this._zoomLevel, eventType)) {
+	            lyr.mapMoveMakeGetParams(this._mapExtent, this._zoomLevel);
+	            var __this_1 = this;
+	            callbackFunc = function () {
+	                function innerFunction(theLayer, theIndex) {
+	                    var _innerThis = this;
+	                    this._arrLyrRequest[theIndex] = $.get(theLayer.url, theLayer.mapMoveParams, function (d) {
+	                        /**
+	                         * @type {LayerBaseVector}
+	                         */
+	                        theLayer.mapMoveCallback(d);
+	                        theLayer.loadCallback();
+	                    }, 'json').fail(function (jqXHR) {
+	                        if (jqXHR.statusText != 'abort') {
+	                            console.log('failed');
+	                            console.log(theLayer.url);
+	                            console.log(theLayer.mapMoveParams);
+	                        }
+	                    }).always(function () {
+	                        _innerThis._arrLyrTimeout[theIndex] = null;
+	                        _innerThis._arrLyrRequest[theIndex] = null;
+	                    });
+	                }
+	                innerFunction.call(__this_1, lyr, index);
+	            };
+	        }
+	        else {
+	            lyr.clear();
+	        }
+	        this._arrLyrTimeout[index] = setTimeout(callbackFunc, lyr.onDemandDelay);
+	    };
+	    /**
+	     * trigger the map move call back at the given index
+	     * @param ind - the index of the layer
+	     * @param eventType=undefined the event triggering the load as 'change:center' or 'change:resolution'
+	     * @param functionId=undefined the function id used to reference the added callback function
+	     */
+	    MapMoveCls.prototype.triggerMoveCallback = function (ind, eventType, functionId) {
+	        if (typeof ind == 'undefined' && typeof functionId == 'undefined') {
+	            throw 'either the function index or the id must be defined';
+	        }
+	        if (typeof ind !== 'number') {
+	            ind = this._mapMoveCallbacks.indexOf(this._mapMoveCallbacksLookup[functionId]);
+	        }
+	        if (ind < 0) {
+	            console.log('function not found');
+	            return;
+	        }
+	        // clear the timeout
+	        if (this._mapMoveCallbackTimeout[ind] != null) {
+	            clearTimeout(this._mapMoveCallbackTimeout[ind]);
+	            this._mapMoveCallbackTimeout[ind] = null;
+	        }
+	        var ctx = this._mapMoveCallbackContext[ind];
+	        var theFunc = this._mapMoveCallbacks[ind];
+	        var __this = this;
+	        var f = function () {
+	            if (ctx !== null) {
+	                theFunc.call(ctx, __this._mapExtent, __this._zoomLevel, eventType);
+	            }
+	            else {
+	                theFunc(__this._mapExtent, __this._zoomLevel, eventType);
+	            }
+	        };
+	        this._mapMoveCallbackTimeout[ind] = setTimeout(f, this._mapMoveCallbackDelays[ind]);
+	    };
+	    /**
+	     * Add a layer to the interaction
+	     * @param  lyr - layer to add
+	     * @param triggerOnAdd - if the layer should be loaded on add
+	     */
+	    MapMoveCls.prototype.addVectorLayer = function (lyr, triggerOnAdd) {
+	        if (triggerOnAdd === void 0) { triggerOnAdd = true; }
+	        if (this._arrLayer.indexOf(lyr) > -1) {
+	            console.log('already added ' + lyr.name + ' to map move');
+	            return;
+	        }
+	        this._checkInit();
+	        this._arrLyrRequest.push(null);
+	        this._arrLyrTimeout.push(null);
+	        this._arrLayer.push(lyr);
+	        this._lookupLayer[lyr.id] = lyr;
+	        triggerOnAdd = typeof triggerOnAdd == 'boolean' ? triggerOnAdd : true;
+	        if (triggerOnAdd) {
+	            if (this._mapExtent === undefined) {
+	                this._updateMapExtent();
+	            }
+	            this.triggerLyrLoad(lyr, this._arrLayer.length - 1);
+	        }
+	    };
+	    /**
+	     * add a callback to the map move event
+	     * @param func - callback function
+	     * @param context - the context to use for this function
+	     * @param delay=50 the delay before call load
+	     * @param triggerOnAdd if the layer should be loaded on add to mapMove
+	     * @param functionId optional id to reference the function later for outside triggering
+	     */
+	    MapMoveCls.prototype.addCallback = function (func, context, delay, triggerOnAdd, functionId) {
+	        if (this._mapMoveCallbacks.indexOf(func) > -1) {
+	            console.log('this function already added to map move');
+	            return;
+	        }
+	        this._checkInit();
+	        if (!functionId) {
+	            functionId = makeGuid_1.default();
+	        }
+	        this._mapMoveCallbacks.push(func);
+	        this._mapMoveCallbacksLookup[functionId] = functionId;
+	        this._mapMoveCallbackDelays.push(typeof delay == 'number' ? delay : 50);
+	        this._mapMoveCallbackContext.push(checkDefined.definedAndNotNull(context) ? context : null);
+	        this._mapMoveCallbackTimeout.push(null);
+	        triggerOnAdd = typeof triggerOnAdd == 'boolean' ? triggerOnAdd : true;
+	        if (triggerOnAdd) {
+	            if (this._mapExtent === undefined) {
+	                this._updateMapExtent();
+	            }
+	            this.triggerMoveCallback(this._mapMoveCallbacks.length - 1);
+	        }
+	    };
+	    return MapMoveCls;
+	}(mapInteractionBase_1.default));
+	exports.MapMoveCls = MapMoveCls;
+	nm.MapMoveCls = MapMoveCls;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = MapMoveCls;
+
+
+/***/ },
+/* 8 */
+/*!**********************************************!*\
+  !*** ./dist/olHelpers/mapInteractionBase.js ***!
+  \**********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	/**
+	 * Created by gavorhes on 12/8/2015.
+	 */
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var nm = provide_1.default('olHelpers');
+	/**
+	 * base interaction
+	 */
+	var MapInteractionBase = (function () {
+	    /**
+	     * map interaction base
+	     * @param subtype - the interaction subtype
+	     */
+	    function MapInteractionBase(subtype) {
+	        this._map = null;
+	        this._initialized = false;
+	        this._subtype = subtype;
+	    }
+	    /**
+	     * base initializer, returns true for already initialized
+	     * @param theMap - the ol Map
+	     * @returns true for already initialized
+	     */
+	    MapInteractionBase.prototype.init = function (theMap) {
+	        if (!this._initialized) {
+	            this._map = theMap;
+	            this._initialized = true;
+	        }
+	    };
+	    Object.defineProperty(MapInteractionBase.prototype, "map", {
+	        /**
+	         * get reference to the ol map object
+	         * @returns {ol.Map} the map object
+	         */
+	        get: function () {
+	            return this._map;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MapInteractionBase.prototype, "initialized", {
+	        /**
+	         * get if is initialized
+	         * @returns {boolean} is initialized
+	         */
+	        get: function () {
+	            return this._initialized;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /**
+	     * Check the initialization status and throw exception if not valid yet
+	     * @protected
+	     */
+	    MapInteractionBase.prototype._checkInit = function () {
+	        if (!this.initialized) {
+	            var msg = this._subtype + " object not initialized";
+	            alert(msg);
+	            console.log(msg);
+	            throw msg;
+	        }
+	    };
+	    /**
+	     * Check the initialization status and throw exception if not valid yet
+	     */
+	    MapInteractionBase.prototype.checkInit = function () {
+	        this._checkInit();
+	    };
+	    return MapInteractionBase;
+	}());
+	exports.MapInteractionBase = MapInteractionBase;
+	nm.MapInteractionBase = MapInteractionBase;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = MapInteractionBase;
+
+
+/***/ },
+/* 9 */
+/*!***********************************!*\
+  !*** ./dist/util/checkDefined.js ***!
+  \***********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var provide_1 = __webpack_require__(/*! ./provide */ 3);
+	var nm = provide_1.default('util.checkDefined');
+	/**
+	 * check if the input is undefined or null
+	 * @param input - input pointer
+	 * @returns true undefined or null
+	 */
+	function undefinedOrNull(input) {
+	    "use strict";
+	    return (typeof input === 'undefined' || input === null);
+	}
+	exports.undefinedOrNull = undefinedOrNull;
+	nm.undefinedOrNull = undefinedOrNull;
+	/**
+	 * check if the input is defined and not null
+	 * @param input - input pointer
+	 * @returns true defined and not null
+	 */
+	function definedAndNotNull(input) {
+	    "use strict";
+	    return !(undefinedOrNull(input));
+	}
+	exports.definedAndNotNull = definedAndNotNull;
+	nm.definedAndNotNull = definedAndNotNull;
+
+
+/***/ },
+/* 10 */
+/*!*******************************!*\
+  !*** ./dist/util/makeGuid.js ***!
+  \*******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by gavorhes on 11/3/2015.
+	 */
+	"use strict";
+	var provide_1 = __webpack_require__(/*! ./provide */ 3);
+	var nm = provide_1.default('util');
+	/**
+	 * guids are used to uniquely identify groups and features
+	 * @returns {string} a new guid
+	 */
+	function makeGuid() {
+	    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+	        .replace(/[xy]/g, function (c) {
+	        var r = Math.random() * 16 | 0, v = c == 'x' ? r : r & 0x3 | 0x8;
+	        return v.toString(16);
+	    });
+	}
+	nm.makeGuid = makeGuid;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = makeGuid;
+
+
+/***/ },
+/* 11 */
+/*!************************************!*\
+  !*** ./dist/olHelpers/mapPopup.js ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by gavorhes on 11/3/2015.
+	 */
+	"use strict";
+	var mapPopupCls_1 = __webpack_require__(/*! ./mapPopupCls */ 12);
+	/**
+	 * The single popup object catch is that it is common to multimap pages
+	 * @type {MapPopupCls}
+	 */
+	exports.mapPopup = new mapPopupCls_1.default();
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = exports.mapPopup;
+
+
+/***/ },
+/* 12 */
+/*!***************************************!*\
+  !*** ./dist/olHelpers/mapPopupCls.js ***!
+  \***************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by gavorhes on 11/3/2015.
+	 */
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var mapInteractionBase_1 = __webpack_require__(/*! ./mapInteractionBase */ 8);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var ol = __webpack_require__(/*! custom-ol */ 4);
+	var $ = __webpack_require__(/*! jquery */ 5);
+	var nm = provide_1.default('olHelpers');
+	var FeatureLayerProperties = (function () {
+	    /**
+	     *
+	     * @param feature the feature
+	     * @param layer - the layer in the popup
+	     * @param layerIndex - index of the layer
+	     * @param selectionLayer - the ol selection layer
+	     * @param [esriLayerName=undefined] - esri layer name
+	     */
+	    function FeatureLayerProperties(feature, layer, layerIndex, selectionLayer, esriLayerName) {
+	        this.feature = feature;
+	        this.layer = layer;
+	        this.layerIndex = layerIndex;
+	        this.selectionLayer = selectionLayer;
+	        this.popupContent = '';
+	        this.esriLayerName = typeof esriLayerName == 'string' ? esriLayerName : undefined;
+	    }
+	    Object.defineProperty(FeatureLayerProperties.prototype, "layerName", {
+	        get: function () {
+	            if (typeof this.esriLayerName == 'string') {
+	                return this.esriLayerName;
+	            }
+	            else {
+	                return this.layer.name;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    return FeatureLayerProperties;
+	}());
+	exports.FeatureLayerProperties = FeatureLayerProperties;
+	/**
+	 * map popup class
+	 * @augments MapInteractionBase
+	 */
+	var MapPopupCls = (function (_super) {
+	    __extends(MapPopupCls, _super);
+	    /**
+	     * Definition for openlayers style function
+	     * @callback olStyleFunction
+	     * &param feature the openlayers vector feature
+	     * $param
+	     */
+	    /**
+	     * map popup constructor
+	     */
+	    function MapPopupCls() {
+	        var _this = _super.call(this, 'map popup') || this;
+	        _this._arrPopupLayerIds = [];
+	        _this._arrPopupLayerNames = [];
+	        _this._arrPopupLayers = [];
+	        _this._arrPopupOlLayers = [];
+	        _this._arrPopupContentFunction = [];
+	        _this._$popupContainer = undefined;
+	        _this._$popupContent = undefined;
+	        _this._$popupCloser = undefined;
+	        _this._popupOverlay = undefined;
+	        _this._selectionLayers = [];
+	        _this._selectionLayerLookup = {};
+	        _this._mapClickFunctions = [];
+	        //let a = function($jqueryContent){console.log($jqueryContent)};
+	        //this._popupChangedLookup = {'a': a};
+	        _this._popupChangedFunctions = [];
+	        _this._esriMapServiceLayers = [];
+	        _this._popupOpen = false;
+	        _this._popupCoordinate = null;
+	        _this._passThroughLayerFeatureArray = [];
+	        _this._currentPopupIndex = -1;
+	        _this._popupContentLength = 0;
+	        return _this;
+	    }
+	    /**
+	     * map popup initialization
+	     * @param {ol.Map} theMap - the ol map
+	     */
+	    MapPopupCls.prototype.init = function (theMap) {
+	        var _this = this;
+	        _super.prototype.init.call(this, theMap);
+	        var $map;
+	        var target = this.map.getTarget();
+	        if (typeof target == 'string') {
+	            $map = $('#' + target);
+	        }
+	        else {
+	            $map = $(target);
+	        }
+	        $map.append('<div class="ol-popup">' +
+	            '<span class="ol-popup-closer">X</span>' +
+	            '<div class="popup-content"></div>' +
+	            '</div>');
+	        this._$popupContainer = $map.find('.ol-popup');
+	        this._$popupContent = $map.find('.popup-content');
+	        this._$popupCloser = $map.find('.ol-popup-closer');
+	        var _ease = function (n) {
+	            return ol.easing.inAndOut(n);
+	        };
+	        this._popupOverlay = new ol.Overlay({
+	            element: this._$popupContainer[0],
+	            autoPan: true,
+	            autoPanAnimation: {
+	                duration: 250,
+	                source: theMap.getView().getCenter(),
+	                easing: _ease
+	            }
+	        });
+	        this._map.addOverlay(this._popupOverlay);
+	        this._$popupCloser.click(function (evt) {
+	            _this.closePopup();
+	        });
+	        // display popup on click
+	        this._map.on('singleclick', function (evt) {
+	            _this.closePopup();
+	            _this._popupCoordinate = evt['coordinate'];
+	            // esri map service layers
+	            if (_this._esriMapServiceLayers.length > 0) {
+	                var queryParams = {
+	                    geometry: evt['coordinate'].join(','),
+	                    geometryType: 'esriGeometryPoint',
+	                    layers: 'all',
+	                    sr: _this._map.getView().getProjection().getCode().split(':')[1],
+	                    mapExtent: _this._map.getView().calculateExtent(_this._map.getSize()).join(','),
+	                    imageDisplay: _this._map.getSize().join(',') + ',96',
+	                    returnGeometry: true,
+	                    tolerance: 15,
+	                    f: 'pjson'
+	                };
+	                for (var _i = 0, _a = _this._esriMapServiceLayers; _i < _a.length; _i++) {
+	                    var l = _a[_i];
+	                    l.getPopupInfo(queryParams);
+	                }
+	            }
+	            var layerFeatureObjectArray = _this._featuresAtPixel(evt['pixel']);
+	            _this._passThroughLayerFeatureArray = [];
+	            _this._currentPopupIndex = -1;
+	            for (var i = 0; i < layerFeatureObjectArray.length; i++) {
+	                var featObj = layerFeatureObjectArray[i];
+	                var props = featObj.feature.getProperties();
+	                var popupContentResponse = _this._arrPopupContentFunction[featObj.layerIndex](props, _this._$popupContent);
+	                //skip if return was false
+	                if (popupContentResponse === false) {
+	                }
+	                else if (typeof popupContentResponse == 'string') {
+	                    featObj.popupContent = popupContentResponse;
+	                    _this._passThroughLayerFeatureArray.push(featObj);
+	                }
+	                else {
+	                    featObj.selectionLayer.getSource().addFeature(featObj.feature);
+	                }
+	            }
+	            _this._popupContentLength = _this._passThroughLayerFeatureArray.length;
+	            _this._currentPopupIndex = -1;
+	            var popupHtml = '<div class="ol-popup-nav">';
+	            popupHtml += '<span class="previous-popup ol-popup-nav-arrow">&#9664;</span>';
+	            popupHtml += '<span class="next-popup ol-popup-nav-arrow">&#9654;</span>';
+	            popupHtml += "<span class=\"current-popup-item-number\" style=\"font-weight: bold;\"></span>";
+	            popupHtml += "<span>&nbsp;of&nbsp;</span>";
+	            popupHtml += "<span class=\"popup-content-length\" style=\"font-weight: bold;\">" + _this._popupContentLength + "</span>";
+	            popupHtml += "<span>&nbsp;&nbsp;-&nbsp;&nbsp;</span>";
+	            popupHtml += "<span class=\"current-popup-layer-name\"></span>";
+	            popupHtml += '</div>';
+	            popupHtml += '<div class="ol-popup-inner">';
+	            popupHtml += '</div>';
+	            _this._$popupContent.html(popupHtml);
+	            _this._$popupContent.find('.previous-popup').click(function () {
+	                if (_this._popupContentLength == 1) {
+	                    return;
+	                }
+	                if (_this._currentPopupIndex == 0) {
+	                    _this._currentPopupIndex = _this._popupContentLength - 1;
+	                }
+	                else {
+	                    _this._currentPopupIndex--;
+	                }
+	                _this._triggerFeatSelect();
+	            });
+	            var nextPopup = _this._$popupContent.find('.next-popup');
+	            nextPopup.click(function () {
+	                if (_this._popupContentLength == 1 && _this._currentPopupIndex > -1) {
+	                    return;
+	                }
+	                if (_this._currentPopupIndex == _this._popupContentLength - 1) {
+	                    _this._currentPopupIndex = 0;
+	                }
+	                else {
+	                    _this._currentPopupIndex++;
+	                }
+	                _this._triggerFeatSelect();
+	            });
+	            if (_this._popupContentLength > 0) {
+	                nextPopup.trigger('click');
+	                _this._popupOverlay.setPosition(_this._popupCoordinate);
+	                _this._$popupContent.scrollTop(0);
+	                _this._popupOpen = true;
+	            }
+	        });
+	        //change mouse cursor when over marker
+	        this._map.on('pointermove', function (evt) {
+	            if (evt['dragging']) {
+	                return;
+	            }
+	            var pixel = _this.map.getEventPixel(evt['originalEvent']);
+	            var hit = _this.map.hasFeatureAtPixel(pixel, function (lyrCandidate) {
+	                for (var _i = 0, _a = _this._arrPopupOlLayers; _i < _a.length; _i++) {
+	                    var olLayer = _a[_i];
+	                    if (lyrCandidate == olLayer) {
+	                        return true;
+	                    }
+	                }
+	                return false;
+	            });
+	            var mapElement = _this.map.getTargetElement();
+	            mapElement.style.cursor = hit ? 'pointer' : '';
+	        });
+	        return true;
+	    };
+	    /**
+	     * helper to select features
+	     * @private
+	     */
+	    MapPopupCls.prototype._triggerFeatSelect = function () {
+	        var $currentPopupItemNumber = this._$popupContent.find('.current-popup-item-number');
+	        var $innerPopup = this._$popupContent.find('.ol-popup-inner');
+	        var $layerNameSpan = this._$popupContent.find('.current-popup-layer-name');
+	        this.clearSelection();
+	        var lyrFeatObj = this._passThroughLayerFeatureArray[this._currentPopupIndex];
+	        $currentPopupItemNumber.html((this._currentPopupIndex + 1).toFixed());
+	        $layerNameSpan.html(lyrFeatObj.layerName);
+	        $innerPopup.html(lyrFeatObj.popupContent);
+	        lyrFeatObj.selectionLayer.getSource().addFeature(lyrFeatObj.feature);
+	        for (var _i = 0, _a = this._popupChangedFunctions; _i < _a.length; _i++) {
+	            var f = _a[_i];
+	            f(this._$popupContent);
+	        }
+	    };
+	    /**
+	     *
+	     * @param feature - the ol feature
+	     * @param {LayerEsriMapServer} lyr - the map server layer
+	     * @param {string} popupContent - popup content
+	     * @param {string} esriName - esri layer name
+	     */
+	    MapPopupCls.prototype.addMapServicePopupContent = function (feature, lyr, popupContent, esriName) {
+	        var featLayerObject = new FeatureLayerProperties(feature, lyr, this._popupContentLength, this._selectionLayerLookup[lyr.id], esriName);
+	        featLayerObject.popupContent = popupContent;
+	        this._passThroughLayerFeatureArray.push(featLayerObject);
+	        this._popupContentLength++;
+	        $('.popup-content-length').html(this._popupContentLength.toFixed());
+	        if (!this._popupOpen) {
+	            this._$popupContent.find('.next-popup').trigger('click');
+	            this._popupOverlay.setPosition(this._popupCoordinate);
+	            this._$popupContent.scrollTop(0);
+	            this._popupOpen = true;
+	        }
+	    };
+	    /**
+	     *
+	     * @param  pixel - the ol pixel
+	     * @returns  feature layer properties
+	     * @private
+	     */
+	    MapPopupCls.prototype._featuresAtPixel = function (pixel) {
+	        var _this = this;
+	        var layerFeatureObjectArray = [];
+	        this.map.forEachFeatureAtPixel(pixel, function (feature, layer) {
+	            var lyrIndex = _this._arrPopupOlLayers.indexOf(layer);
+	            if (lyrIndex > -1) {
+	                layerFeatureObjectArray.push(new FeatureLayerProperties(feature, _this._arrPopupLayers[lyrIndex], lyrIndex, _this._selectionLayers[lyrIndex]));
+	            }
+	        });
+	        return layerFeatureObjectArray;
+	    };
+	    MapPopupCls.prototype.closePopup = function () {
+	        this._checkInit();
+	        this._popupOpen = false;
+	        this._popupOverlay.setPosition(undefined);
+	        this._$popupCloser[0].blur();
+	        this.clearSelection();
+	        this._$popupContent.html('');
+	        return false;
+	    };
+	    ;
+	    /**
+	     *
+	     * @param chgFunction - popup change function
+	     */
+	    MapPopupCls.prototype.addPopupChangedFunction = function (chgFunction) {
+	        this._popupChangedFunctions.push(chgFunction);
+	    };
+	    /**
+	     *
+	     * @param {LayerBase|*} lyr - the layer being acted on
+	     * @param {object} [selectionStyle={}] the selection style configuration
+	     * @param {string} [selectionStyle.color=rgba(255,170,0,0.5)] the selection color
+	     * @param {number} [selectionStyle.width=10] the selection width for linear features
+	     * @param {object|function} [selectionStyle.olStyle=undefined] an openlayers style object or function
+	     * @returns  the new selection layer
+	     * @private
+	     */
+	    MapPopupCls.prototype._addPopupLayer = function (lyr, selectionStyle) {
+	        this._checkInit();
+	        selectionStyle = selectionStyle || {};
+	        selectionStyle.color = selectionStyle.color || 'rgba(255,170,0,0.5)';
+	        selectionStyle.width = selectionStyle.width || 10;
+	        var theStyle;
+	        if (selectionStyle.olStyle) {
+	            theStyle = selectionStyle.olStyle;
+	        }
+	        else {
+	            theStyle = new ol.style.Style({
+	                stroke: new ol.style.Stroke({
+	                    color: selectionStyle.color,
+	                    width: selectionStyle.width
+	                }),
+	                image: new ol.style.Circle({
+	                    radius: 7,
+	                    fill: new ol.style.Fill({ color: selectionStyle.color }),
+	                    stroke: new ol.style.Stroke({ color: selectionStyle.color, width: 1 })
+	                }),
+	                fill: new ol.style.Fill({
+	                    color: selectionStyle.color
+	                })
+	            });
+	        }
+	        var selectionLayer = new ol.layer.Vector({
+	            source: new ol.source.Vector(),
+	            style: theStyle
+	        });
+	        selectionLayer.setZIndex(100);
+	        this._selectionLayers.push(selectionLayer);
+	        this._selectionLayerLookup[lyr.id] = selectionLayer;
+	        this.map.addLayer(selectionLayer);
+	        return selectionLayer;
+	    };
+	    /**
+	     * Add popup to the map
+	     * @param {LayerBase|*} lyr The layer that the popup with act on
+	     * @param {popupCallback} popupContentFunction - popup content function that makes popup info
+	     * @param {object} [selectionStyle={}] the selection style configuration
+	     * @param {string} [selectionStyle.color=rgba(255,170,0,0.5)] the selection color
+	     * @param {number} [selectionStyle.width=10] the selection width for linear features
+	     * @param {object|function} [selectionStyle.olStyle=undefined] an openlayers style object or function
+	     * @returns {object} a reference to the ol selection layer
+	     */
+	    MapPopupCls.prototype.addVectorPopup = function (lyr, popupContentFunction, selectionStyle) {
+	        var selectionLayer = this._addPopupLayer(lyr, selectionStyle);
+	        this._arrPopupLayerIds.push(lyr.id);
+	        this._arrPopupLayerNames.push(lyr.name);
+	        this._arrPopupLayers.push(lyr);
+	        this._arrPopupOlLayers.push(lyr.olLayer);
+	        this._arrPopupContentFunction.push(popupContentFunction);
+	        return selectionLayer;
+	    };
+	    ;
+	    /**
+	     *
+	     * @param {LayerBase} lyr - layer
+	     */
+	    MapPopupCls.prototype.removeVectorPopup = function (lyr) {
+	        var idx = this._arrPopupLayerIds.indexOf(lyr.id);
+	        if (idx > -1) {
+	            this._arrPopupLayerIds.splice(idx, 1);
+	            this._arrPopupLayerNames.splice(idx, 1);
+	            this._arrPopupLayers.splice(idx, 1);
+	            this._arrPopupOlLayers.splice(idx, 1);
+	            this._arrPopupContentFunction.splice(idx, 1);
+	            this._selectionLayers.splice(idx, 1);
+	            delete this._selectionLayerLookup[lyr.id];
+	        }
+	    };
+	    /**
+	     *
+	     * @param {LayerEsriMapServer} lyr - map server layer
+	     * @param {object} [selectionStyle={}] the selection style configuration
+	     * @param {string} [selectionStyle.color=rgba(255,170,0,0.5)] the selection color
+	     * @param {number} [selectionStyle.width=10] the selection width for linear features
+	     * @param {object|function} [selectionStyle.olStyle=undefined] an openlayers style object or function
+	     * @returns {object} a reference to the ol selection layer
+	     */
+	    MapPopupCls.prototype.addMapServicePopup = function (lyr, selectionStyle) {
+	        var selectionLayer = this._addPopupLayer(lyr, selectionStyle);
+	        this._esriMapServiceLayers.push(lyr);
+	        return selectionLayer;
+	    };
+	    MapPopupCls.prototype.clearSelection = function () {
+	        this._checkInit();
+	        for (var i = 0; i < this._selectionLayers.length; i++) {
+	            this._selectionLayers[i].getSource().clear();
+	        }
+	        for (var _i = 0, _a = this._mapClickFunctions; _i < _a.length; _i++) {
+	            var f = _a[_i];
+	            f();
+	        }
+	    };
+	    ;
+	    /**
+	     * Add a function to be called when the map is clicked but before any popups are implemented
+	     * @param {function} func - the map click function
+	     */
+	    MapPopupCls.prototype.addMapClickFunction = function (func) {
+	        this._mapClickFunctions.push(func);
+	    };
+	    return MapPopupCls;
+	}(mapInteractionBase_1.default));
+	exports.MapPopupCls = MapPopupCls;
+	nm.MapPopupCls = MapPopupCls;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = MapPopupCls;
+
+
+/***/ },
+/* 13 */
+/*!*******************************************!*\
+  !*** ./dist/layers/LayerRealEarthTile.js ***!
+  \*******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by gavorhes on 11/4/2015.
+	 */
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var LayerBaseXyzTile_1 = __webpack_require__(/*! ./LayerBaseXyzTile */ 14);
+	var RealEarthAnimateTile_1 = __webpack_require__(/*! ../mixin/RealEarthAnimateTile */ 17);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var nm = provide_1.default('layers');
+	/**
+	 * Real earth tile
+	 * @augments LayerBaseXyzTile
+	 */
+	var LayerRealEarthTile = (function (_super) {
+	    __extends(LayerRealEarthTile, _super);
+	    /**
+	     * The base layer for all others
+	     * @param {object} options - config
+	     * @param {string} [options.id] - layer id
+	     * @param {string} [options.name=Unnamed Layer] - layer name
+	     * @param {number} [options.opacity=1] - opacity
+	     * @param {boolean} [options.visible=true] - default visible
+	     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+	     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+	     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+	     * @param {number} [options.zIndex=0] the z index for the layer
+	     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+	     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+	     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+	     * @param {boolean} [options.legendContent] additional content to add to the legend
+	     *
+	     * @param {string} options.products - the products to request
+	     * @param {boolean} [options.hasTimes=false] If the layer is time dependent, fixed set of dates
+	     * @param {boolean} [options.animate=false] if the layer should be animated
+	     */
+	    function LayerRealEarthTile(options) {
+	        var _this = this;
+	        options.animate = typeof options.animate == 'boolean' ? options.animate : false;
+	        if (options.animate) {
+	            _this = _super.call(this, '', options) || this;
+	            _this._products = options.products;
+	            _this.animator = new RealEarthAnimateTile_1.default(_this, options.timeLoadCallback);
+	            _this.animator.timeInit();
+	        }
+	        else {
+	            _this = _super.call(this, "http://realearth.ssec.wisc.edu/api/image?products=" + options.products + "&x={x}&y={y}&z={z}", options) || this;
+	            _this._products = options.products;
+	        }
+	        return _this;
+	    }
+	    LayerRealEarthTile.prototype.setLayerTime = function (theTime) {
+	        if (this.animator) {
+	            return this.animator.setLayerTime(theTime);
+	        }
+	        else {
+	            return false;
+	        }
+	    };
+	    LayerRealEarthTile.prototype._load = function () {
+	        if (this.animator) {
+	            return false;
+	        }
+	        return _super.prototype._load.call(this);
+	    };
+	    return LayerRealEarthTile;
+	}(LayerBaseXyzTile_1.LayerBaseXyzTile));
+	exports.LayerRealEarthTile = LayerRealEarthTile;
+	nm.LayerRealEarthTile = LayerRealEarthTile;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = LayerRealEarthTile;
+
+
+/***/ },
+/* 14 */
+/*!*****************************************!*\
+  !*** ./dist/layers/LayerBaseXyzTile.js ***!
+  \*****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	/**
+	 * Created by gavorhes on 12/4/2015.
+	 */
+	var LayerBase_1 = __webpack_require__(/*! ./LayerBase */ 15);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var ol = __webpack_require__(/*! custom-ol */ 4);
+	var nm = provide_1.default('layers');
+	/**
+	 * XYZ tile
+	 * @augments LayerBase
+	 */
+	var LayerBaseXyzTile = (function (_super) {
+	    __extends(LayerBaseXyzTile, _super);
+	    /**
+	     * The XYZ tile layer
+	     * @param {string} url - url for source
+	     * @param {object} options - config
+	     * @param {string} [options.id] - layer id
+	     * @param {string} [options.name=Unnamed Layer] - layer name
+	     * @param {number} [options.opacity=1] - opacity
+	     * @param {boolean} [options.visible=true] - default visible
+	     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+	     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+	     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+	     * @param {number} [options.zIndex=0] the z index for the layer
+	     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+	     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+	     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+	     * @param {boolean} [options.legendContent] additional content to add to the legend
+	     * @param {boolean} [options.useEsriStyle=false] if the map service style should be used
+	     */
+	    function LayerBaseXyzTile(url, options) {
+	        var _this = _super.call(this, url, options) || this;
+	        _this._source = new ol.source.XYZ({ url: _this.url == '' ? undefined : _this.url });
+	        _this._olLayer = new ol.layer.Tile({
+	            source: _this._source,
+	            visible: _this.visible,
+	            opacity: _this.opacity,
+	            minResolution: _this._minResolution,
+	            maxResolution: _this._maxResolution
+	        });
+	        _this._olLayer.setZIndex(_this._zIndex);
+	        return _this;
+	    }
+	    Object.defineProperty(LayerBaseXyzTile.prototype, "source", {
+	        /**
+	         *
+	         * @returns {ol.source.XYZ} the vector source
+	         */
+	        get: function () {
+	            return this._source;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseXyzTile.prototype, "olLayer", {
+	        /**
+	         *
+	         * @returns {ol.layer.Tile|ol.layer.Base|undefined} the ol layer
+	         */
+	        get: function () {
+	            return this._olLayer;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    return LayerBaseXyzTile;
+	}(LayerBase_1.LayerBase));
+	exports.LayerBaseXyzTile = LayerBaseXyzTile;
+	nm.LayerBaseXyzTile = LayerBaseXyzTile;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = LayerBaseXyzTile;
+
+
+/***/ },
+/* 15 */
+/*!**********************************!*\
+  !*** ./dist/layers/LayerBase.js ***!
+  \**********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var zoomResolutionConvert = __webpack_require__(/*! ../olHelpers/zoomResolutionConvert */ 16);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var makeGuid_1 = __webpack_require__(/*! ../util/makeGuid */ 10);
+	var $ = __webpack_require__(/*! jquery */ 5);
+	var nm = provide_1.default('layers');
+	/**
+	 * The base layer class
+	 * @abstract
+	 */
+	var LayerBase = (function () {
+	    /**
+	     * The base layer for all others
+	     * @param {string} url - url for source
+	     * @param {object} options - config
+	     * @param {string} [options.id=makeGuid()] - layer id
+	     * @param {string} [options.name=Unnamed Layer] - layer name
+	     * @param {number} [options.opacity=1] - opacity
+	     * @param {boolean} [options.visible=true] - default visible
+	     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+	     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+	     * @param {object} [options.params={}] - the get parameters to include to retrieve the layer
+	     * @param {number} [options.zIndex=0] - the z index for the layer
+	     * @param {function} [options.loadCallback] - function to call on load, context this is the layer object
+	     * @param {boolean} [options.legendCollapse=false] - if the legend item should be initially collapsed
+	     * @param {boolean} [options.legendCheckbox=true] - if the legend item should have a checkbox for visibility
+	     * @param {boolean} [options.legendContent=undefined] - additional content to add to the legend
+	     */
+	    function LayerBase(url, options) {
+	        if (options === void 0) { options = {}; }
+	        options = options || {};
+	        if (typeof url !== 'string') {
+	            throw 'Invalid URL';
+	        }
+	        this._url = url;
+	        this._params = typeof options.params == 'object' ? options.params : {};
+	        this._legendCollapse = typeof options.legendCollapse == 'boolean' ? options.legendCollapse : false;
+	        this._legendCheckbox = typeof options.legendCheckbox == 'boolean' ? options.legendCheckbox : true;
+	        this.id = options.id || makeGuid_1.default();
+	        this._name = options.name || 'Unnamed Layer';
+	        this.animate = false;
+	        this._opacity = typeof options.opacity == 'number' ? options.opacity : 1;
+	        if (this._opacity > 1) {
+	            this._opacity = 1;
+	        }
+	        else if (this._opacity < 0) {
+	            this._opacity = 0;
+	        }
+	        this._visible = typeof options.visible === 'boolean' ? options.visible : true;
+	        this._source = undefined;
+	        /**
+	         *
+	         * @protected
+	         */
+	        this._olLayer = undefined;
+	        this._loaded = false;
+	        this._maxResolution = zoomResolutionConvert.zoomToResolution(options.minZoom);
+	        if (typeof this._maxResolution !== 'undefined') {
+	            this._maxResolution += 0.00001;
+	        }
+	        this._minResolution = zoomResolutionConvert.zoomToResolution(options.maxZoom);
+	        this._minZoom = typeof options.minZoom == 'number' ? options.minZoom : undefined;
+	        this._maxZoom = typeof options.maxZoom == 'number' ? options.maxZoom : undefined;
+	        this._zIndex = typeof options.zIndex == 'number' ? options.zIndex : 0;
+	        this.loadCallback = typeof options.loadCallback == 'function' ? options.loadCallback : function () {
+	        };
+	        this._legendContent = '';
+	        if (this._legendCheckbox) {
+	            this._legendContent += "<input type=\"checkbox\" " + (this.visible ? 'checked' : '') + " " +
+	                ("class=\"legend-check\" id=\"" + this.id + "-legend-layer-check\"><span></span>");
+	            this._legendContent += "<label for=\"" + this.id + "-legend-layer-check\" class=\"legend-layer-name\">" + this.name + "</label>";
+	        }
+	        else {
+	            this._legendContent += "<label class=\"legend-layer-name\">" + this.name + "</label>";
+	        }
+	        this._$legendDiv = null;
+	        this._applyCollapseCalled = false;
+	        this._addLegendContent(typeof options.legendContent === 'string' ? options.legendContent : undefined);
+	    }
+	    /**
+	     * base load function, sets _loaded = true if it is not already
+	     * @protected
+	     * @returns {boolean} if already loaded
+	     */
+	    LayerBase.prototype._load = function () {
+	        if (this.loaded == true) {
+	            return true;
+	        }
+	        else {
+	            this._loaded = true;
+	            return false;
+	        }
+	    };
+	    /**
+	     * Get the legend html, be sure to only add to the DOM once
+	     * @returns {string} html for layer wrapped in a div
+	     */
+	    LayerBase.prototype.getLegendDiv = function () {
+	        return "<div class=\"legend-layer-div\" id=\"" + this.id + "-legend-layer-div\">" + this._legendContent + "</div>";
+	    };
+	    /**
+	     *
+	     * @param additionalContent - additional content to add to legend
+	     * @private
+	     */
+	    LayerBase.prototype._addLegendContent = function (additionalContent) {
+	        if (additionalContent === void 0) { additionalContent = ''; }
+	        var addCollapse = additionalContent.indexOf('<ul>') > -1;
+	        if (addCollapse) {
+	            additionalContent = '<span class="legend-items-expander" title="Expand/Collapse">&#9660;</span>' + additionalContent;
+	        }
+	        this._legendContent += additionalContent;
+	        this._$legendDiv = $("#" + this.id + "-legend-layer-div");
+	        if (this._$legendDiv.length > 0) {
+	            this._$legendDiv.append(additionalContent);
+	            this.applyCollapse();
+	        }
+	    };
+	    /**
+	     * add additional content to the legend
+	     * @param {string} [additionalContent=] - additonal content to add
+	     */
+	    LayerBase.prototype.addLegendContent = function (additionalContent) {
+	        this._addLegendContent(additionalContent);
+	    };
+	    LayerBase.prototype.applyCollapse = function () {
+	        if (this._applyCollapseCalled) {
+	            console.log('collapse already applied');
+	            return undefined;
+	        }
+	        this._$legendDiv = $("#" + this.id + "-legend-layer-div");
+	        if (this._$legendDiv.length > 0) {
+	            var $expander = this._$legendDiv.find('.legend-items-expander');
+	            if ($expander.length > 0) {
+	                this._applyCollapseCalled = true;
+	                $expander.click(function () {
+	                    var $this = $(this);
+	                    $this.siblings('ul').slideToggle();
+	                    if ($this.hasClass('legend-layer-group-collapsed')) {
+	                        $this.removeClass('legend-layer-group-collapsed');
+	                        $this.html('&#9660;');
+	                    }
+	                    else {
+	                        $this.addClass('legend-layer-group-collapsed');
+	                        $this.html('&#9654;');
+	                    }
+	                });
+	                if (this._legendCollapse) {
+	                    $expander.trigger('click');
+	                }
+	            }
+	        }
+	    };
+	    /**
+	     * trick to refresh the layer
+	     */
+	    LayerBase.prototype.refresh = function () {
+	        if (this.source) {
+	            this.source.refresh();
+	        }
+	    };
+	    Object.defineProperty(LayerBase.prototype, "id", {
+	        get: function () {
+	            return this._id;
+	        },
+	        set: function (newId) {
+	            this._id = newId;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBase.prototype, "animate", {
+	        get: function () {
+	            return this._animate;
+	        },
+	        set: function (animate) {
+	            this._animate = animate;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBase.prototype, "legendContent", {
+	        /**
+	         * get the legend content
+	         * @type {string}
+	         */
+	        get: function () {
+	            return this._legendContent;
+	        },
+	        /**
+	         * set the legend content directly
+	         * @param {string} newVal - new content
+	         * @protected
+	         */
+	        set: function (newVal) {
+	            this._legendContent = newVal;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBase.prototype, "params", {
+	        /**
+	         * get the map get params
+	         * @type {object}
+	         */
+	        get: function () {
+	            return this._params;
+	        },
+	        /**
+	         * set the map get params
+	         * @param {object} newParams - new get params
+	         * @protected
+	         */
+	        set: function (newParams) {
+	            this._params = newParams;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBase.prototype, "minResolution", {
+	        /**
+	         * get the minimum resolution
+	         * @type {number|*}
+	         */
+	        get: function () {
+	            return this._minResolution;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBase.prototype, "maxResolution", {
+	        /**
+	         * get the maximum resolution
+	         * @type {number|*}
+	         */
+	        get: function () {
+	            return this._maxResolution;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBase.prototype, "minZoom", {
+	        /**
+	         * get min zoom
+	         * @type {number|*}
+	         */
+	        get: function () {
+	            return this._minZoom;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBase.prototype, "maxZoom", {
+	        /**
+	         * get max zoom
+	         * @type {number|*}
+	         */
+	        get: function () {
+	            return this._maxZoom;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBase.prototype, "url", {
+	        /**
+	         * get the url
+	         * @type {string}
+	         */
+	        get: function () {
+	            return this._url;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBase.prototype, "visible", {
+	        /**
+	         * Get the layer visibility
+	         * @type {boolean}
+	         */
+	        get: function () {
+	            return this._visible;
+	        },
+	        /**
+	         * set the visibility
+	         * @param visibility
+	         */
+	        set: function (visibility) {
+	            this.setVisible(visibility);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    LayerBase.prototype.setVisible = function (visibility) {
+	        this._visible = visibility;
+	        if (this.olLayer) {
+	            this.olLayer.setVisible(this._visible);
+	            if (visibility && !this._loaded) {
+	                this._load();
+	            }
+	        }
+	    };
+	    Object.defineProperty(LayerBase.prototype, "opacity", {
+	        /**
+	         * Get the layer opacity
+	         * @type {number}
+	         */
+	        get: function () {
+	            return this._opacity;
+	        },
+	        /**
+	         * Set the layer opacity
+	         * @param {number} opacity - layer opacity
+	         */
+	        set: function (opacity) {
+	            this._opacity = opacity;
+	            if (this.olLayer) {
+	                this.olLayer.setOpacity(this._opacity);
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBase.prototype, "name", {
+	        /**
+	         * Get the layer name
+	         * @type {string}
+	         */
+	        get: function () {
+	            return this._name;
+	        },
+	        /**
+	         * set the layer name
+	         * @param {string} newName - the new name
+	         */
+	        set: function (newName) {
+	            this._name = newName;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBase.prototype, "loaded", {
+	        /**
+	         * Check if the layer is loaded
+	         * @type {boolean}
+	         */
+	        get: function () {
+	            return this._loaded;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBase.prototype, "source", {
+	        /**
+	         * get the layer source
+	         * @type {*}
+	         */
+	        get: function () {
+	            return this.getSource();
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    LayerBase.prototype.getSource = function () {
+	        return this._source;
+	    };
+	    Object.defineProperty(LayerBase.prototype, "zIndex", {
+	        /**
+	         * get the z index
+	         */
+	        get: function () {
+	            return this._zIndex;
+	        },
+	        /**
+	         * set the z index
+	         */
+	        set: function (newZ) {
+	            this._zIndex = newZ;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    LayerBase.prototype.setZIndex = function (newZ) {
+	    };
+	    Object.defineProperty(LayerBase.prototype, "olLayer", {
+	        /**
+	         * the the ol layer
+	         */
+	        get: function () {
+	            return this.getOlLayer();
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    LayerBase.prototype.getOlLayer = function () {
+	        return this._olLayer;
+	    };
+	    return LayerBase;
+	}());
+	exports.LayerBase = LayerBase;
+	nm.LayerBase = LayerBase;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = LayerBase;
+
+
+/***/ },
+/* 16 */
+/*!*************************************************!*\
+  !*** ./dist/olHelpers/zoomResolutionConvert.js ***!
+  \*************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by gavorhes on 12/14/2015.
+	 */
+	"use strict";
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var nm = provide_1.default('olHelpers.zoomResolutionConvert');
+	var _zoomResLookup = [
+	    156543.03392804097,
+	    78271.51696402048,
+	    39135.75848201024,
+	    19567.87924100512,
+	    9783.93962050256,
+	    4891.96981025128,
+	    2445.98490512564,
+	    1222.99245256282,
+	    611.49622628141,
+	    305.748113140705,
+	    152.8740565703525,
+	    76.43702828517625,
+	    38.21851414258813,
+	    19.109257071294063,
+	    9.554628535647032,
+	    4.777314267823516,
+	    2.388657133911758,
+	    1.194328566955879,
+	    0.5971642834779395,
+	    0.29858214173896974,
+	    0.14929107086948487,
+	    0.07464553543474244,
+	    0.03732276771737122,
+	    0.01866138385868561,
+	    0.009330691929342804,
+	    0.004665345964671402,
+	    0.002332672982335701,
+	    0.0011663364911678506,
+	    0.0005831682455839253 //28
+	];
+	/**
+	 * Get the resolution given the zoom level
+	 * @param {number} zoomLevel - the zoom level
+	 * @returns {number|*} the map resolution
+	 */
+	function zoomToResolution(zoomLevel) {
+	    "use strict";
+	    if (typeof zoomLevel == 'number') {
+	        if (zoomLevel % 1 === 0 && zoomLevel >= 0 && zoomLevel <= 28) {
+	            return _zoomResLookup[zoomLevel];
+	        }
+	        else {
+	            console.log("invalid zoom level provided: " + zoomLevel);
+	            return undefined;
+	        }
+	    }
+	    else {
+	        return undefined;
+	    }
+	}
+	exports.zoomToResolution = zoomToResolution;
+	nm.zoomToResolution = zoomToResolution;
+	/**
+	 * Get resolution from the zoom level
+	 * @param {number} resolution - the resolution
+	 * @returns {number|*} the zoom level
+	 */
+	function resolutionToZoom(resolution) {
+	    for (var i = 0; i < _zoomResLookup.length; i++) {
+	        if (resolution >= _zoomResLookup[i]) {
+	            return i;
+	        }
+	    }
+	    return 0;
+	}
+	exports.resolutionToZoom = resolutionToZoom;
+	nm.resolutionToZoom = resolutionToZoom;
+
+
+/***/ },
+/* 17 */
+/*!********************************************!*\
+  !*** ./dist/mixin/RealEarthAnimateTile.js ***!
+  \********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	/**
+	 * Created by gavorhes on 12/4/2015.
+	 */
+	var RealEarthAnimate_1 = __webpack_require__(/*! ./RealEarthAnimate */ 18);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var nm = provide_1.default('mixin');
+	/**
+	 * Animate real earth tile
+	 * @augments RealEarthAnimate
+	 */
+	var RealEarthAnimateTile = (function (_super) {
+	    __extends(RealEarthAnimateTile, _super);
+	    function RealEarthAnimateTile(layer, loadCallback) {
+	        var _this = _super.call(this, layer, loadCallback) || this;
+	        _this._source = layer.source;
+	        _this._olLayer = layer.olLayer;
+	        return _this;
+	    }
+	    RealEarthAnimateTile.prototype.timeInit = function () {
+	        _super.prototype.timeInit.call(this);
+	        this._sourceUrls = [];
+	    };
+	    RealEarthAnimateTile.prototype._loadDates = function (inString) {
+	        var rawDte = _super.prototype._loadDates.call(this, inString);
+	        var dteProductUrl = "http://realearth.ssec.wisc.edu/api/image?products=" + this._products + "_" + rawDte + "&x={x}&y={y}&z={z}";
+	        this._sourceUrls.push(dteProductUrl);
+	        return '';
+	    };
+	    /**
+	     * @protected
+	     */
+	    RealEarthAnimateTile.prototype._loadLatest = function () {
+	        if (_super.prototype._loadLatest.call(this)) {
+	            this._source.setUrl(this._sourceUrls[this._sourceUrls.length - 1]);
+	        }
+	        return true;
+	    };
+	    RealEarthAnimateTile.prototype.setLayerTime = function (theTime) {
+	        if (_super.prototype.setLayerTime.call(this, theTime)) {
+	            if (this._olLayer.getZIndex() < 0) {
+	                this._olLayer.setZIndex(0);
+	            }
+	            this._source.setUrl(this._sourceUrls[this._currentIndex]);
+	        }
+	        else {
+	            this._olLayer.setZIndex(-1);
+	        }
+	        return true;
+	    };
+	    return RealEarthAnimateTile;
+	}(RealEarthAnimate_1.default));
+	nm.RealEarthAnimateTile = RealEarthAnimateTile;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = RealEarthAnimateTile;
+
+
+/***/ },
+/* 18 */
+/*!****************************************!*\
+  !*** ./dist/mixin/RealEarthAnimate.js ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	/**
+	 * Created by gavorhes on 12/4/2015.
+	 */
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var mapPopup_1 = __webpack_require__(/*! ../olHelpers/mapPopup */ 11);
+	var $ = __webpack_require__(/*! jquery */ 5);
+	var nm = provide_1.default('mixin');
+	/**
+	 * The GMT offset time in minutes
+	 * @type {number}
+	 */
+	var offsetMinutes = (new Date()).getTimezoneOffset();
+	/**
+	 * Mixin to get the product times
+	 * Be sure to call getTimeInit after the mixin has been applied
+	 */
+	var RealEarthAnimate = (function () {
+	    function RealEarthAnimate(lyr, loadCallback) {
+	        this.lyr = lyr;
+	        this._products = lyr._products;
+	        if (loadCallback) {
+	            this.loadCallback = loadCallback;
+	        }
+	        else {
+	            this.loadCallback = function () { return; };
+	        }
+	    }
+	    /**
+	     * Call this after the mixin has been applied
+	     */
+	    RealEarthAnimate.prototype.timeInit = function () {
+	        var _this = this;
+	        this._rawDateStrings = [];
+	        this._localDates = [];
+	        this.localTimes = [];
+	        this._animateEnabled = true;
+	        // this._loaded = true;
+	        this._currentTime = undefined;
+	        this._currentIndex = undefined;
+	        $.get('http://realearth.ssec.wisc.edu/api/products', { products: this._products }, function (d) {
+	            if (d.length == 0) {
+	                console.log(_this._products + " layer not available or does not have times");
+	                return;
+	            }
+	            d = d[0];
+	            for (var i = 0; i < d['times'].length; i++) {
+	                _this._loadDates.call(_this, d['times'][i]);
+	            }
+	            _this.loadCallback.call(_this.lyr, _this.lyr);
+	            _this._loadLatest.call(_this);
+	        }, 'json');
+	    };
+	    /**
+	     * Given the raw time string, add to the arrays to keep track of dates and cache
+	     * @param {string} inString - input string to parse
+	     * @returns {string} the converted string
+	     * @protected
+	     */
+	    RealEarthAnimate.prototype._loadDates = function (inString) {
+	        var yr = inString.slice(0, 4);
+	        var month = inString.slice(4, 6);
+	        var d = inString.slice(6, 8);
+	        var hr = inString.slice(9, 11);
+	        var mn = inString.slice(11, 13);
+	        var sec = inString.slice(13, 15);
+	        var rawDateStr = inString.replace('.', '_');
+	        this._rawDateStrings.push(rawDateStr);
+	        var dteStr = month + "/" + d + "/" + yr + " " + hr + ":" + mn + ":" + sec;
+	        var newDte = new Date(dteStr);
+	        newDte.setMinutes(newDte.getMinutes() - offsetMinutes);
+	        this._localDates.push(newDte);
+	        this.localTimes.push(newDte.getTime());
+	        return rawDateStr;
+	    };
+	    /**
+	     *
+	     * @protected
+	     * @returns {boolean} if should continue
+	     */
+	    RealEarthAnimate.prototype._loadLatest = function () {
+	        mapPopup_1.default.closePopup();
+	        if (this.localTimes.length > 0) {
+	            this._currentIndex = this.localTimes.length - 1;
+	            return true;
+	        }
+	        else {
+	            return false;
+	        }
+	    };
+	    /**
+	     *
+	     * @param {number} theTime - the time
+	     * @returns {boolean} true if new index, false if the same or below lowest value
+	     */
+	    RealEarthAnimate.prototype.setLayerTime = function (theTime) {
+	        this._currentTime = theTime;
+	        var newIndex;
+	        if (theTime < this.localTimes[0]) {
+	            return false;
+	        }
+	        else if (theTime > this.localTimes[this.localTimes.length - 1]) {
+	            newIndex = this.localTimes.length - 1;
+	        }
+	        for (var i = 0; i < this.localTimes.length; i++) {
+	            if (this.localTimes[i] >= theTime) {
+	                newIndex = i;
+	                break;
+	            }
+	        }
+	        if (newIndex == this._currentIndex) {
+	            return false;
+	        }
+	        else {
+	            this._currentIndex = newIndex;
+	            mapPopup_1.default.closePopup();
+	            return true;
+	        }
+	    };
+	    return RealEarthAnimate;
+	}());
+	exports.RealEarthAnimate = RealEarthAnimate;
+	nm.RealEarthAnimate = RealEarthAnimate;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = RealEarthAnimate;
+
+
+/***/ },
+/* 19 */
+/*!***************************************!*\
+  !*** ./dist/domUtil/media-control.js ***!
+  \***************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by gavorhes on 11/2/2015.
+	 */
+	"use strict";
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var range_change_1 = __webpack_require__(/*! ./range-change */ 20);
+	var $ = __webpack_require__(/*! jquery */ 5);
+	var nm = provide_1.default('domUtil');
+	/**
+	 * @callback mediaCallback
+	 * @param {number} tm
+	 */
+	function timeToLocalDateString(tm) {
+	    "use strict";
+	    var d = new Date(tm);
+	    var p1 = d.toLocaleTimeString().split(' ');
+	    var p2 = p1[0].split(':');
+	    p2 = p2.slice(0, 2);
+	    return d.toLocaleDateString() + '<br>' + p2.join(':') + ' ' + p1[1];
+	}
+	var MediaControl = (function () {
+	    /**
+	     *
+	     * @param element
+	     * @param changeFunc
+	     * @param mediaConfig
+	     */
+	    function MediaControl(element, changeFunc, mediaConfig) {
+	        if (changeFunc === void 0) { changeFunc = function () { return; }; }
+	        if (mediaConfig === void 0) { mediaConfig = {}; }
+	        var _this = this;
+	        mediaConfig.min = typeof mediaConfig.min == 'number' ? mediaConfig.min : 0;
+	        mediaConfig.max = typeof mediaConfig.max == 'number' ? mediaConfig.max : 100;
+	        mediaConfig.val = typeof mediaConfig.val == 'number' ? mediaConfig.val : 0;
+	        mediaConfig.step = typeof mediaConfig.step == 'number' ? mediaConfig.step : 5;
+	        mediaConfig.playInterval = typeof mediaConfig.playInterval == 'number' ? mediaConfig.playInterval : 500;
+	        mediaConfig.showAsDate = typeof mediaConfig.showAsDate == 'boolean' ? mediaConfig.showAsDate : false;
+	        if (typeof element == 'string') {
+	            this._container = $('#' + element);
+	        }
+	        else if (typeof element['style'] !== 'undefined') {
+	            this._container = $(element);
+	        }
+	        else {
+	            this._container = element;
+	        }
+	        this._container.addClass('media-control-container');
+	        this._playInterval = mediaConfig.playInterval;
+	        this._changeFunc = changeFunc;
+	        this._showAsDate = mediaConfig.showAsDate;
+	        this._currentValue = undefined;
+	        this._min = undefined;
+	        this._max = undefined;
+	        this._step = undefined;
+	        this._playing = false;
+	        var htmlStr = '<span class="media-player-button media-back"></span>' +
+	            '<span class="media-player-button media-play"></span>' +
+	            '<span class="media-player-button media-pause media-disabled"></span>' +
+	            '<span class="media-player-button media-stop media-disabled" ></span>' +
+	            '<span class="media-player-button media-ahead"></span>' +
+	            "<input type=\"range\">" +
+	            "<div class=\"media-control-value-label-container\">" +
+	            "<span class=\"media-control-value-label-min\"></span>" +
+	            "<span class=\"media-control-value-label-val\"></span>" +
+	            "<span class=\"media-control-value-label-max\"></span>" +
+	            "</div>";
+	        this._container.append(htmlStr);
+	        // let btnPause = this._container.find('.media-pause');
+	        var btnPlay = this._container.find('.media-play');
+	        this._$btnStop = this._container.find('.media-stop');
+	        var btnAhead = this._container.find('.media-ahead');
+	        var btnBack = this._container.find('.media-back');
+	        this._$slider = this._container.find('input[type=range]');
+	        this._$valLabelMin = this._container.find('.media-control-value-label-min');
+	        this._$valLabelVal = this._container.find('.media-control-value-label-val');
+	        this._$valLabelMax = this._container.find('.media-control-value-label-max');
+	        this.setMinMaxValueStep(mediaConfig.min, mediaConfig.max, mediaConfig.val, mediaConfig.step);
+	        range_change_1.rangeChange(this._$slider, function (newVal) { _this.currentValue = newVal; }, 100);
+	        var ___this = this;
+	        btnPlay.click(function () {
+	            var $this = $(this);
+	            $this.addClass('media-disabled');
+	            ___this._$btnStop.removeClass('media-disabled');
+	            btnAhead.addClass('media-locked');
+	            btnBack.addClass('media-locked');
+	            ___this._$slider.prop('disabled', true);
+	            ___this._playing = true;
+	            ___this._interval = setInterval(function () {
+	                ___this.currentValue += ___this._step;
+	            }, ___this._playInterval);
+	        });
+	        this._$btnStop.click(function () {
+	            clearInterval(___this._interval);
+	            var $this = $(this);
+	            $this.addClass('media-disabled');
+	            btnPlay.removeClass('media-disabled');
+	            btnAhead.removeClass('media-locked');
+	            btnBack.removeClass('media-locked');
+	            ___this._$slider.prop('disabled', false);
+	            ___this._playing = false;
+	        });
+	        btnAhead.click(function () {
+	            ___this.currentValue = ___this.currentValue + ___this._step;
+	        });
+	        btnBack.click(function () {
+	            ___this.currentValue = ___this.currentValue - ___this._step;
+	        });
+	    }
+	    MediaControl.prototype.stopPlaying = function () {
+	        if (this._playing) {
+	            this._$btnStop.trigger('click');
+	        }
+	    };
+	    Object.defineProperty(MediaControl.prototype, "playing", {
+	        get: function () {
+	            return this._playing;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MediaControl.prototype, "min", {
+	        get: function () {
+	            return this._min;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MediaControl.prototype, "max", {
+	        get: function () {
+	            return this._max;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MediaControl.prototype, "step", {
+	        get: function () {
+	            return this._step;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MediaControl.prototype, "currentValue", {
+	        get: function () {
+	            return this._currentValue;
+	        },
+	        set: function (newValue) {
+	            if (newValue > this._max) {
+	                newValue = this._min;
+	            }
+	            else if (newValue < this._min) {
+	                newValue = this._max;
+	            }
+	            this._currentValue = newValue;
+	            this._$slider.val(this._currentValue.toFixed(2));
+	            if (this._showAsDate) {
+	                this._$valLabelVal.html(timeToLocalDateString(this.currentValue));
+	            }
+	            else {
+	                this._$valLabelVal.html(this.currentValue.toString());
+	            }
+	            this._changeFunc(newValue);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /**
+	     * set min and max value with step
+	     * @param {number} newMin the new min
+	     * @param {number} newMax the new mas
+	     * @param {number} [newValue=newMin] the value to set
+	     * @param {number} [newStep=(newMax-newMin)/20] step value
+	     */
+	    MediaControl.prototype.setMinMaxValueStep = function (newMin, newMax, newValue, newStep) {
+	        this._min = newMin;
+	        this._max = newMax;
+	        newValue = typeof newValue == 'number' ? newValue : newMin;
+	        newStep = typeof newStep == 'number' ? newStep : (newMax - newMin) / 20;
+	        this._currentValue = newValue;
+	        this._step = newStep;
+	        this._$slider.prop('min', this.min.toString());
+	        this._$slider.prop('max', this.max.toString());
+	        this._$slider.prop('step', this.step.toString());
+	        this._$slider.val(this.currentValue.toString());
+	        if (this._showAsDate) {
+	            this._$valLabelMin.html(timeToLocalDateString(this._min));
+	            this._$valLabelVal.html(timeToLocalDateString(this.currentValue));
+	            this._$valLabelMax.html(timeToLocalDateString(this._max));
+	        }
+	        else {
+	            this._$valLabelMin.html(this._min.toString());
+	            this._$valLabelVal.html(this.currentValue.toString());
+	            this._$valLabelMax.html(this._max.toString());
+	        }
+	    };
+	    Object.defineProperty(MediaControl.prototype, "changeFunction", {
+	        /**
+	         *
+	         * @param {mediaCallback} newFunc the callback on change
+	         */
+	        set: function (newFunc) {
+	            this._changeFunc = newFunc;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    return MediaControl;
+	}());
+	exports.MediaControl = MediaControl;
+	nm.MediaControl = MediaControl;
+
+
+/***/ },
+/* 20 */
+/*!**************************************!*\
+  !*** ./dist/domUtil/range-change.js ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var nm = provide_1.default('domUtil');
+	var mouseIn = false;
+	var mouseDown = false;
+	var timeout = null;
+	var dragged = false;
+	var lastVal;
+	/**
+	 * Created by gavorhes on 11/2/2015.
+	 */
+	function triggerCallback(callback, evt) {
+	    "use strict";
+	    var val = parseFloat(this.value);
+	    var min = parseFloat(this.min);
+	    var max = parseFloat(this.max);
+	    var step = parseFloat(this.step);
+	    if (max - val < step) {
+	        val = max;
+	    }
+	    var percent = (val - min) / (max - min);
+	    if (typeof lastVal == 'number' && val == lastVal) {
+	        return;
+	    }
+	    lastVal = val;
+	    callback(val, percent, evt);
+	}
+	/**
+	 * Add a variety of listeners for range inputs applied to a common callback
+	 * @param  $slider - jquery reference to the slider
+	 * @param {rangeChangeCallback} callback - the callback
+	 * @param {number} [changeTimeout=75] before the callback is called
+	 * @this {jQuery}
+	 * @returns {jQuery} the jQuery object
+	 */
+	function rangeChange($slider, callback, changeTimeout) {
+	    changeTimeout = typeof changeTimeout == 'number' ? changeTimeout : 75;
+	    $slider.mouseenter(function () {
+	        mouseIn = true;
+	    });
+	    $slider.mouseleave(function () {
+	        mouseIn = false;
+	        mouseDown = false;
+	    });
+	    $slider.mousedown(function () {
+	        mouseDown = true;
+	    });
+	    $slider.mouseup(function () {
+	        mouseDown = false;
+	    });
+	    $slider.mousemove(
+	    /**
+	     *
+	     * @param {object} evt - event properties
+	     * @this {HTMLElement}
+	     */
+	    function (evt) {
+	        if (!(mouseIn && mouseDown)) {
+	            return;
+	        }
+	        dragged = true;
+	        if (lastVal == this['value']) {
+	            return;
+	        }
+	        lastVal = this['value'];
+	        if (timeout != null) {
+	            clearTimeout(timeout);
+	        }
+	        var _this = this;
+	        timeout = setTimeout(function () {
+	            triggerCallback.call(_this, callback, evt);
+	            timeout = null;
+	        }, changeTimeout);
+	    });
+	    $slider.keyup(
+	    /**
+	     *
+	     * @param {object} evt - event properties
+	     */
+	    function (evt) {
+	        if (evt.keyCode == 37 || evt.keyCode == 39) {
+	            triggerCallback.call(this, callback, evt);
+	        }
+	    });
+	    $slider.change(function (evt) {
+	        if (dragged) {
+	            dragged = false;
+	            return;
+	        }
+	        triggerCallback.call(this, callback, evt);
+	    });
+	    return this;
+	}
+	exports.rangeChange = rangeChange;
+	nm.rangeChange = rangeChange;
+
+
+/***/ },
+/* 21 */
+/*!********************************************!*\
+  !*** ./dist/layers/LayerBaseVectorEsri.js ***!
+  \********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by gavorhes on 11/2/2015.
+	 */
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var LayerBaseVector_1 = __webpack_require__(/*! ./LayerBaseVector */ 22);
+	var esriToOl = __webpack_require__(/*! ../olHelpers/esriToOlStyle */ 23);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var ol = __webpack_require__(/*! custom-ol */ 4);
+	var $ = __webpack_require__(/*! jquery */ 5);
+	var nm = provide_1.default('layers');
+	/**
+	 * Base layer for esri vector layers
+	 * @augments LayerBaseVector
+	 */
+	var LayerBaseVectorEsri = (function (_super) {
+	    __extends(LayerBaseVectorEsri, _super);
+	    /**
+	     * The base vector layer
+	     * @param {string} url - url for source
+	     * @param {object} options - config
+	     * @param {string} [options.id] - layer id
+	     * @param {string} [options.name=Unnamed Layer] - layer name
+	     * @param {number} [options.opacity=1] - opacity
+	     * @param {boolean} [options.visible=true] - default visible
+	     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+	     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+	     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+	     * @param {number} [options.zIndex=0] the z index for the layer
+	     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+	     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+	     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+	     * @param {boolean} [options.legendContent] additional content to add to the legend
+	     *
+	     * @param {boolean} [options.autoLoad=false] if the layer should auto load if not visible
+	     * @param {object} [options.style=undefined] the layer style, use openlayers default style if not defined
+	     * @param {boolean} [options.onDemand=false] if the layer should be loaded by extent on map move
+	     * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
+	     * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
+	     *
+	     * @param {string} [options.where=1=1] the layer filter clause
+	     * @param {string} [options.outFields=*] comma separated list of output fields, defaults to all
+	     * @param {string} [options.format=pjson] the format the retrieve the data
+	     * @param {number} [options.outSR=3857] the output spatial reference, defaults to web mercator
+	     * @param {boolean} [options.useEsriStyle=false] if the map service style should be used
+	     * @param {boolean} [options.collapseLegend=false] if the legend should be initially collapsed
+	     * @param {number} [options.mapMoveMakeGetParams=function(extent, zoomLevel){}] function to create additional map move params
+	     */
+	    function LayerBaseVectorEsri(url, options) {
+	        var _this = this;
+	        if (typeof options.params != 'object') {
+	            options.params = {};
+	        }
+	        options.params['where'] = options.where || '1=1';
+	        options.params['outFields'] = options.outFields || '*';
+	        options.params['f'] = options.format || 'pjson';
+	        options.params['outSR'] = options.outSR || 3857;
+	        _this = _super.call(this, url, options) || this;
+	        _this._outSR = _this.params['outSR'];
+	        _this._esriFormat = new ol.format.EsriJSON();
+	        if (_this._url[_this._url.length - 1] !== '/') {
+	            _this._url += '/';
+	        }
+	        _this._urlCopy = _this.url;
+	        _this._url += 'query?callback=?';
+	        if (_this.autoLoad || _this.visible) {
+	            _this._load();
+	        }
+	        _this._useEsriStyle = typeof options.useEsriStyle == 'boolean' ? options.useEsriStyle : false;
+	        if (_this._useEsriStyle) {
+	            _this.addLegendContent();
+	        }
+	        return _this;
+	    }
+	    /**
+	     * add additional content to the legend
+	     * @param {string} [additionalContent=''] additional content to add to legend
+	     */
+	    LayerBaseVectorEsri.prototype.addLegendContent = function (additionalContent) {
+	        var _this = this;
+	        if (!this._useEsriStyle) {
+	            _super.prototype.addLegendContent.call(this, additionalContent);
+	        }
+	        else {
+	            $.get(this._urlCopy + '?f=pjson&callback=?', {}, function (d) {
+	                if (d['subLayers'].length > 0) {
+	                    alert('should only use single feature layers, not groups');
+	                    return;
+	                }
+	                var newStyleAndLegend = esriToOl.makeFeatureServiceLegendAndSymbol(d);
+	                _this.style = newStyleAndLegend.style;
+	                _super.prototype.addLegendContent.call(_this, newStyleAndLegend.legend);
+	            }, 'json');
+	        }
+	    };
+	    /**
+	     * add feature collection
+	     * @param {object} featureCollection - features as esrijson
+	     */
+	    LayerBaseVectorEsri.prototype.addFeatures = function (featureCollection) {
+	        var feats = this._esriFormat.readFeatures(featureCollection);
+	        this.source.addFeatures(feats);
+	    };
+	    /**
+	     * trigger load features
+	     * @protected
+	     * @returns {boolean} if already loaded
+	     */
+	    LayerBaseVectorEsri.prototype._load = function () {
+	        var _this = this;
+	        if (_super.prototype._load.call(this)) {
+	            return true;
+	        }
+	        $.get(this._url, this.params, function (d) {
+	            _this.addFeatures(d);
+	            _this.loadCallback(_this);
+	        }, 'json').fail(function () {
+	            _this._loaded = false;
+	        });
+	        return false;
+	    };
+	    /**
+	     * callback to generate the parameters passed in the get request
+	     * @param {object} extent - extent object
+	     * @param {number} extent.minX - minX
+	     * @param {number} extent.minY - minY
+	     * @param {number} extent.maxX - maxX
+	     * @param {number} extent.maxY - maxY
+	     * @param {number} zoomLevel - zoom level
+	     */
+	    LayerBaseVectorEsri.prototype.mapMoveMakeGetParams = function (extent, zoomLevel) {
+	        _super.prototype.mapMoveMakeGetParams.call(this, extent, zoomLevel);
+	        this.mapMoveParams['geometry'] = extent.minX + "," + extent.minY + "," + extent.maxX + "," + extent.maxY;
+	        this.mapMoveParams['geometryType'] = 'esriGeometryEnvelope';
+	        this.mapMoveParams['spatialRel'] = 'esriSpatialRelIntersects';
+	        this.mapMoveParams['spatialRel'] = 'esriSpatialRelIntersects';
+	        this.mapMoveParams['inSR'] = 3857;
+	        if (this._outSR == 3857) {
+	            this.mapMoveParams['geometryPrecision'] = 1;
+	        }
+	    };
+	    /**
+	     * Before call to map move callback, can prevent call by returning false
+	     * @param {number} zoom - zoom level
+	     * @param {string} [evtType=undefined] undefined for initial load, otherwise one of 'change:center', 'change:resolution'
+	     * @returns {boolean} if the call should proceed
+	     */
+	    LayerBaseVectorEsri.prototype.mapMoveBefore = function (zoom, evtType) {
+	        return _super.prototype.mapMoveBefore.call(this, zoom, evtType);
+	        //if (super.mapMoveBefore(zoom, evtType)){
+	        //    //place holder for additional processing
+	        //    return true;
+	        //} else {
+	        //    return false;
+	        //}
+	    };
+	    /**
+	     * callback function on map move
+	     * @param {object} d - the json response
+	     */
+	    LayerBaseVectorEsri.prototype.mapMoveCallback = function (d) {
+	        _super.prototype.mapMoveCallback.call(this, d);
+	        this.source.addFeatures(this._esriFormat.readFeatures(d));
+	    };
+	    return LayerBaseVectorEsri;
+	}(LayerBaseVector_1.LayerBaseVector));
+	exports.LayerBaseVectorEsri = LayerBaseVectorEsri;
+	nm.LayerBaseVectorEsri = LayerBaseVectorEsri;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = LayerBaseVectorEsri;
+
+
+/***/ },
+/* 22 */
+/*!****************************************!*\
+  !*** ./dist/layers/LayerBaseVector.js ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var LayerBase_1 = __webpack_require__(/*! ./LayerBase */ 15);
+	var mapMove_1 = __webpack_require__(/*! ../olHelpers/mapMove */ 6);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var ol = __webpack_require__(/*! custom-ol */ 4);
+	var $ = __webpack_require__(/*! jquery */ 5);
+	var nm = provide_1.default('layers');
+	/**
+	 * The Vector layer base
+	 * @augments LayerBase
+	 * @abstract
+	 */
+	var LayerBaseVector = (function (_super) {
+	    __extends(LayerBaseVector, _super);
+	    /**
+	     * The base vector layer
+	     * @param {string} url - pass an empty string to prevent default load and add from a json source
+	     * @param {object} options - config
+	     * @param {string} [options.id] - layer id
+	     * @param {string} [options.name=Unnamed Layer] - layer name
+	     * @param {number} [options.opacity=1] - opacity
+	     * @param {boolean} [options.visible=true] - default visible
+	     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+	     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+	     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+	     * @param {number} [options.zIndex=0] the z index for the layer
+	     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+	     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+	     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+	     * @param {boolean} [options.legendContent] additional content to add to the legend
+	     *
+	     * @param {boolean} [options.autoLoad=false] if the layer should auto load if not visible
+	     * @param {object} [options.style=undefined] the layer style, use openlayers default style if not defined
+	     * @param {boolean} [options.onDemand=false] if the layer should be loaded by extent on map move
+	     * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
+	     * @param {mapMoveMakeGetParams} [options.mapMoveMakeGetParams=function(lyr, extent, zoomLevel){}] function to create additional map move params
+	     * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
+	     *
+	     */
+	    function LayerBaseVector(url, options) {
+	        if (options === void 0) { options = {}; }
+	        var _this = _super.call(this, url, options) || this;
+	        options = options;
+	        //prevent regular load if no url has been provided
+	        if (_this.url.trim() == '') {
+	            _this._loaded = true;
+	        }
+	        _this._style = typeof options.style == 'undefined' ? undefined : options.style;
+	        if (_this.visible) {
+	            _this._autoLoad = true;
+	        }
+	        else {
+	            _this._autoLoad = (typeof options['autoLoad'] == 'boolean' ? options['autoLoad'] : false);
+	        }
+	        _this._onDemand = typeof options.onDemand == 'boolean' ? options.onDemand : false;
+	        _this._onDemandDelay = typeof options.onDemandDelay == 'number' ? options.onDemandDelay : 300;
+	        if (options.mapMoveObj) {
+	            _this._mapMove = options.mapMoveObj;
+	        }
+	        else {
+	            _this._mapMove = _this._onDemand ? mapMove_1.default : undefined;
+	        }
+	        _this._mapMoveMakeGetParams = typeof options.mapMoveMakeGetParams == 'function' ? options.mapMoveMakeGetParams :
+	            function () { return {}; };
+	        if (_this._onDemand) {
+	            _this._loaded = true;
+	            _this._mapMoveParams = {};
+	            _this._mapMove.checkInit();
+	            _this._mapMove.addVectorLayer(_this);
+	        }
+	        _this._source = new ol.source.Vector();
+	        _this._olLayer = new ol.layer.Vector({
+	            source: _this._source,
+	            visible: _this.visible,
+	            style: _this.style,
+	            minResolution: _this._minResolution,
+	            maxResolution: _this._maxResolution,
+	            renderOrder: options.renderOrder
+	        });
+	        _this.olLayer.setZIndex(_this._zIndex);
+	        _this._projectionMap = null;
+	        _this._projection4326 = new ol.proj.Projection({ code: "EPSG:4326" });
+	        return _this;
+	    }
+	    /**
+	     * dummy to be overridden
+	     * @param {object} featureCollection - geojson or esrijson object
+	     */
+	    LayerBaseVector.prototype.addFeatures = function (featureCollection) {
+	        console.log('Layer vector base addFeatures is a placeholder and does nothing');
+	    };
+	    /**
+	     * Before call to map move callback, can prevent call by returning false
+	     * @param {number} zoom - zoom level
+	     * @param {string} [evtType=undefined] undefined for initial load, otherwise one of 'change:center', 'change:resolution'
+	     * @returns {boolean} if the call should proceed
+	     */
+	    LayerBaseVector.prototype.mapMoveBefore = function (zoom, evtType) {
+	        if (this.minZoom !== undefined) {
+	            if (zoom < this.minZoom) {
+	                return false;
+	            }
+	        }
+	        if (this.maxZoom !== undefined) {
+	            if (zoom > this.maxZoom) {
+	                return false;
+	            }
+	        }
+	        return this.visible;
+	    };
+	    /**
+	     * callback to generate the parameters passed in the get request
+	     * @param {object} extent - extent object
+	     * @param {number} extent.minX - minX
+	     * @param {number} extent.minY - minY
+	     * @param {number} extent.maxX - maxX
+	     * @param {number} extent.maxY - maxY
+	     * @param {number} zoomLevel - zoom level
+	     */
+	    LayerBaseVector.prototype.mapMoveMakeGetParams = function (extent, zoomLevel) {
+	        this._mapMoveParams = {};
+	        $.extend(this._mapMoveParams, this.params);
+	        $.extend(this._mapMoveParams, this._mapMoveMakeGetParams(this, extent, zoomLevel));
+	    };
+	    /**
+	     * callback function on map move
+	     * @param {object} d - the json response
+	     */
+	    LayerBaseVector.prototype.mapMoveCallback = function (d) {
+	        if (this.source) {
+	            this._source.clear();
+	        }
+	    };
+	    /**
+	     * clear features in the layer
+	     */
+	    LayerBaseVector.prototype.clear = function () {
+	        if (this._source) {
+	            this._source.clear();
+	        }
+	    };
+	    Object.defineProperty(LayerBaseVector.prototype, "onDemandDelay", {
+	        /**
+	         * get on demand delay in miliseconds
+	         */
+	        get: function () {
+	            return this._onDemandDelay;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "autoLoad", {
+	        /**
+	         * get if the layer is autoloaded
+	         */
+	        get: function () {
+	            return this._autoLoad;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "style", {
+	        /**
+	         * get the style definition
+	         */
+	        get: function () {
+	            return this._style;
+	        },
+	        /**
+	         * set the style
+	         * @param style - the style or function
+	         */
+	        set: function (style) {
+	            this._style = style;
+	            this.olLayer.setStyle(this._style);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "mapCrs", {
+	        /**
+	         * get the map CRS if it is defined by the map move object
+	         */
+	        get: function () {
+	            return this.mapProj == null ? null : this.mapProj.getCode();
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "mapProj", {
+	        get: function () {
+	            if (this._projectionMap != null) {
+	                return this._projectionMap;
+	            }
+	            if (this._mapMove) {
+	                this._projectionMap = this._mapMove.map.getView().getProjection();
+	                return this._projectionMap;
+	            }
+	            else {
+	                return null;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "mapMove", {
+	        /**
+	         * get the map move object
+	         * @type {MapMoveCls|*}
+	         */
+	        get: function () {
+	            return this._mapMove;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "mapMoveParams", {
+	        /**
+	         * map move params
+	         * @type {object}
+	         */
+	        get: function () {
+	            return this._mapMoveParams;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "visible", {
+	        get: function () {
+	            return this._visible;
+	        },
+	        /**
+	         * Set the layer visibility
+	         * @type {boolean}
+	         * @override
+	         */
+	        set: function (visibility) {
+	            _super.prototype.setVisible.call(this, visibility);
+	            if (this._onDemand) {
+	                this.mapMove.triggerLyrLoad(this);
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "source", {
+	        /**
+	         * get the layer vector source
+	         * @override
+	         */
+	        get: function () {
+	            return this.getSource();
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "features", {
+	        /**
+	         * array of ol features
+	         */
+	        get: function () {
+	            return this.source.getFeatures();
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerBaseVector.prototype, "olLayer", {
+	        /**
+	         *
+	         */
+	        get: function () {
+	            return _super.prototype.getOlLayer.call(this);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    LayerBaseVector.prototype.setZIndex = function (newZ) {
+	        this.olLayer.setZIndex(newZ);
+	    };
+	    return LayerBaseVector;
+	}(LayerBase_1.LayerBase));
+	exports.LayerBaseVector = LayerBaseVector;
+	nm.LayerBaseVector = LayerBaseVector;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = LayerBaseVector;
+
+
+/***/ },
+/* 23 */
+/*!*****************************************!*\
+  !*** ./dist/olHelpers/esriToOlStyle.js ***!
+  \*****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	/**
+	 * Created by gavorhes on 1/4/2016.
+	 */
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var ol = __webpack_require__(/*! custom-ol */ 4);
+	var nm = provide_1.default('olHelpers.esriToOlStyle');
+	/**
+	 * This callback is displayed as part of the Requester class.
+	 * @callback styleFunc
+	 * @param {ol.Feature} feat - openlayers feature
+	 * @param {number} resolution - map resolution
+	 */
+	/**
+	 *
+	 * @param {Array<number>} colorArray - input color array
+	 * @param {number} opacity - the opacity 0 to 1
+	 * @returns {string} rgba string
+	 * @private
+	 */
+	function _colorArrayToRgba(colorArray, opacity) {
+	    "use strict";
+	    return "rgba(" + colorArray[0] + "," + colorArray[1] + "," + colorArray[2] + "," + opacity + ")";
+	}
+	/**
+	 * escape html charcters
+	 * @param {string} str - input string
+	 * @returns {string} escaped string
+	 */
+	function htmlEscape(str) {
+	    return String(str)
+	        .replace(/&/g, '&amp;')
+	        .replace(/"/g, '&quot;')
+	        .replace(/'/g, '&#39;')
+	        .replace(/</g, '&lt;')
+	        .replace(/>/g, '&gt;');
+	}
+	nm.htmlEscape = htmlEscape;
+	var CommonSymbol = (function () {
+	    /**
+	     *
+	     * @param symbolObj
+	     * @param {number} opacity
+	     */
+	    function CommonSymbol(symbolObj, opacity) {
+	        this.symbolObj = symbolObj;
+	        this.opacity = opacity;
+	        this.olStyle = undefined;
+	        this.legendHtml = '';
+	    }
+	    return CommonSymbol;
+	}());
+	var PointSymbol = (function (_super) {
+	    __extends(PointSymbol, _super);
+	    function PointSymbol(symbolObj, opacity) {
+	        var _this = _super.call(this, symbolObj, opacity) || this;
+	        switch (_this.symbolObj.type) {
+	            case 'esriSMS':
+	                var innerColor = _colorArrayToRgba(_this.symbolObj.color, _this.opacity);
+	                var outerColor = _colorArrayToRgba(_this.symbolObj.outline.color, _this.opacity);
+	                var outlineWidth = _this.symbolObj.outline.width;
+	                var radius = _this.symbolObj.size;
+	                _this.olStyle = new ol.style.Style({
+	                    image: new ol.style.Circle({
+	                        radius: radius,
+	                        fill: new ol.style.Fill({
+	                            color: innerColor
+	                        }),
+	                        stroke: new ol.style.Stroke({ color: outerColor, width: outlineWidth })
+	                    })
+	                });
+	                _this.legendHtml = "<span class=\"legend-layer-icon\" style=\"color: " + innerColor + "\">&#9679;</span>";
+	                break;
+	            case 'esriPMS':
+	                _this.olStyle = new ol.style.Style({
+	                    image: new ol.style.Icon({ src: "data:image/png;base64," + _this.symbolObj['imageData'] })
+	                });
+	                _this.legendHtml = "<img class=\"legend-layer-icon\" height=\"17\" src=\"data:image/png;base64," + _this.symbolObj['imageData'] + "\">";
+	                break;
+	            default:
+	                console.log(_this.symbolObj);
+	                alert('Point symbol does not handle symbol type: ' + _this.symbolObj['type']);
+	        }
+	        return _this;
+	    }
+	    return PointSymbol;
+	}(CommonSymbol));
+	var LineSymbol = (function (_super) {
+	    __extends(LineSymbol, _super);
+	    function LineSymbol(symbolObj, opacity) {
+	        var _this = _super.call(this, symbolObj, opacity) || this;
+	        switch (_this.symbolObj.type) {
+	            case 'esriSLS':
+	                var innerColor = _colorArrayToRgba(_this.symbolObj.color, _this.opacity);
+	                var lineWidth = _this.symbolObj.width;
+	                _this.olStyle = new ol.style.Style({
+	                    stroke: new ol.style.Stroke({
+	                        color: innerColor,
+	                        //lineDash: [4],
+	                        width: lineWidth
+	                    })
+	                });
+	                _this.legendHtml = "<span class=\"legend-layer-icon\" ";
+	                _this.legendHtml += "style=\"";
+	                _this.legendHtml += "background-color: " + innerColor + ";";
+	                _this.legendHtml += "width: 40px;";
+	                _this.legendHtml += "height: 4px;";
+	                _this.legendHtml += "position: relative;";
+	                _this.legendHtml += "display: inline-block;";
+	                _this.legendHtml += "top: -1px;";
+	                _this.legendHtml += "\"></span>";
+	                break;
+	            default:
+	                console.log(_this.symbolObj);
+	                alert('Line symbol does not handle symbol type: ' + _this.symbolObj['type']);
+	        }
+	        return _this;
+	    }
+	    return LineSymbol;
+	}(CommonSymbol));
+	var PolygonSymbol = (function (_super) {
+	    __extends(PolygonSymbol, _super);
+	    function PolygonSymbol(symbolObj, opacity) {
+	        var _this = _super.call(this, symbolObj, opacity) || this;
+	        switch (_this.symbolObj['type']) {
+	            case 'esriSFS':
+	                var innerColor = _colorArrayToRgba(_this.symbolObj.color, _this.opacity);
+	                var outerColor = _colorArrayToRgba(_this.symbolObj.outline.color, _this.opacity);
+	                var outlineWidth = _this.symbolObj.outline.width;
+	                _this.olStyle = new ol.style.Style({
+	                    stroke: new ol.style.Stroke({
+	                        color: outerColor,
+	                        //lineDash: [4],
+	                        width: outlineWidth
+	                    }),
+	                    fill: new ol.style.Fill({
+	                        color: innerColor
+	                    })
+	                });
+	                _this.legendHtml = "<span class=\"legend-layer-icon\" ";
+	                _this.legendHtml += "style=\"";
+	                _this.legendHtml += "background-color: " + innerColor + ";";
+	                _this.legendHtml += "border: solid " + outerColor + " 1px;";
+	                _this.legendHtml += "width: 40px;";
+	                _this.legendHtml += "height: 9px;";
+	                _this.legendHtml += "position: relative;";
+	                _this.legendHtml += "display: inline-block;";
+	                _this.legendHtml += "top: 2px;";
+	                _this.legendHtml += "\"></span>";
+	                break;
+	            default:
+	                console.log(_this.symbolObj);
+	                alert('Polygon symbol does handle symbol type: ' + _this.symbolObj['type']);
+	        }
+	        return _this;
+	    }
+	    return PolygonSymbol;
+	}(CommonSymbol));
+	var SymbolGenerator = (function () {
+	    function SymbolGenerator(esriResponse) {
+	        this.opacity = (100 - (esriResponse['drawingInfo']['transparency'] || 0)) / 100;
+	        this.renderer = esriResponse.drawingInfo.renderer;
+	        this.olStyle = undefined;
+	        this.legendHtml = '';
+	    }
+	    return SymbolGenerator;
+	}());
+	var SingleSymbol = (function (_super) {
+	    __extends(SingleSymbol, _super);
+	    /**
+	     *
+	     * @param {object} esriResponse - layer info
+	     * @param SymbolClass - the symbol class to use
+	     */
+	    function SingleSymbol(esriResponse, SymbolClass) {
+	        var _this = _super.call(this, esriResponse) || this;
+	        _this.symbol = _this.renderer.symbol;
+	        var symbolObj = new SymbolClass(_this.symbol, _this.opacity);
+	        _this.olStyle = symbolObj.olStyle;
+	        _this.legendHtml = symbolObj.legendHtml;
+	        return _this;
+	    }
+	    return SingleSymbol;
+	}(SymbolGenerator));
+	var UniqueValueSymbol = (function (_super) {
+	    __extends(UniqueValueSymbol, _super);
+	    /**
+	     *
+	     * @param {object} esriResponse - layer info
+	     * @param SymbolClass - the Symbol class definition
+	     */
+	    function UniqueValueSymbol(esriResponse, SymbolClass) {
+	        var _this = _super.call(this, esriResponse) || this;
+	        _this.uniqueValueInfos = _this.renderer['uniqueValueInfos'];
+	        _this.propertyName = _this.renderer['field1'];
+	        _this.defaultSymbol = _this.renderer['defaultSymbol'];
+	        if (_this.defaultSymbol) {
+	            var symbolObj = new SymbolClass(_this.defaultSymbol, _this.opacity);
+	            _this.defaultStyle = symbolObj.olStyle;
+	            _this.defaultLabelHtml = "<span class=\"legend-layer-subitem\">" + htmlEscape(_this.renderer['defaultLabel']) + "</span>" + symbolObj.legendHtml;
+	        }
+	        else {
+	            _this.defaultStyle = undefined;
+	            _this.defaultLabelHtml = 'other';
+	        }
+	        _this.valueArray = [];
+	        _this.labelArray = [];
+	        _this.legendArray = [];
+	        _this.propertyStyleLookup = {};
+	        for (var _i = 0, _a = _this.uniqueValueInfos; _i < _a.length; _i++) {
+	            var uniqueVal = _a[_i];
+	            _this.labelArray.push(uniqueVal['label']);
+	            _this.valueArray.push(uniqueVal['value']);
+	            var uniqueSym = new SymbolClass(uniqueVal.symbol, _this.opacity);
+	            _this.legendArray.push("<span class=\"legend-layer-subitem\">" + htmlEscape(uniqueVal['label']) + "</span>" + uniqueSym.legendHtml);
+	            _this.propertyStyleLookup[uniqueVal['value']] = uniqueSym.olStyle;
+	        }
+	        _this.olStyle = function (feature) {
+	            var checkProperties = feature.getProperties();
+	            var checkProperty = checkProperties[_this.propertyName];
+	            var returnValue;
+	            if (_this.propertyStyleLookup[checkProperty] !== undefined) {
+	                returnValue = [_this.propertyStyleLookup[checkProperty]];
+	            }
+	            else {
+	                returnValue = [_this.defaultStyle];
+	            }
+	            return returnValue;
+	        };
+	        if (_this.defaultLabelHtml !== null) {
+	            _this.legendArray.push(_this.defaultLabelHtml);
+	        }
+	        _this.legendHtml = '<ul>';
+	        for (var _b = 0, _c = _this.legendArray; _b < _c.length; _b++) {
+	            var h = _c[_b];
+	            _this.legendHtml += "<li>" + h + "</li>";
+	        }
+	        _this.legendHtml += '</ul>';
+	        return _this;
+	    }
+	    return UniqueValueSymbol;
+	}(SymbolGenerator));
+	/**
+	 * style and legend object
+	 * @typedef {object} styleAndLegend
+	 * @property {styleFunc} style - style function
+	 * @property {string} legend - legend content
+	 */
+	/**
+	 *
+	 * @param {object} esriResponse - layer info
+	 * @returns {styleAndLegend} style and legend object
+	 */
+	function makeFeatureServiceLegendAndSymbol(esriResponse) {
+	    "use strict";
+	    var renderer = esriResponse.drawingInfo.renderer;
+	    var symbolLegendOut = null;
+	    switch (renderer.type) {
+	        case 'simple':
+	            switch (esriResponse.geometryType) {
+	                case 'esriGeometryPoint':
+	                    symbolLegendOut = new SingleSymbol(esriResponse, PointSymbol);
+	                    break;
+	                case 'esriGeometryPolyline':
+	                    symbolLegendOut = new SingleSymbol(esriResponse, LineSymbol);
+	                    break;
+	                case 'esriGeometryPolygon':
+	                    symbolLegendOut = new SingleSymbol(esriResponse, PolygonSymbol);
+	                    break;
+	                default:
+	                    console.log(esriResponse);
+	                    alert(esriResponse.geometryType + ' not handled');
+	            }
+	            break;
+	        case 'uniqueValue':
+	            switch (esriResponse.geometryType) {
+	                case 'esriGeometryPoint':
+	                    symbolLegendOut = new UniqueValueSymbol(esriResponse, PointSymbol);
+	                    break;
+	                case 'esriGeometryPolyline':
+	                    symbolLegendOut = new UniqueValueSymbol(esriResponse, LineSymbol);
+	                    break;
+	                case 'esriGeometryPolygon':
+	                    symbolLegendOut = new UniqueValueSymbol(esriResponse, PolygonSymbol);
+	                    break;
+	                default:
+	                    console.log(esriResponse);
+	                    alert(esriResponse['geometryType'] + ' not handled');
+	            }
+	            break;
+	        default:
+	            alert('not handled renderer type: ' + renderer['type']);
+	    }
+	    if (symbolLegendOut == null) {
+	        return { style: undefined, legend: '' };
+	    }
+	    else {
+	        return { style: symbolLegendOut.olStyle, legend: symbolLegendOut.legendHtml };
+	    }
+	}
+	exports.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
+	nm.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
+	/**
+	 *
+	 * @param {object} lyrObject - the layer as defined in the response
+	 * @param {boolean} [skipLayerNameAndExpander=false] use only icons
+	 * @returns {string} legend html
+	 */
+	function mapServiceLegendItem(lyrObject, skipLayerNameAndExpander) {
+	    if (skipLayerNameAndExpander === void 0) { skipLayerNameAndExpander = false; }
+	    skipLayerNameAndExpander = typeof skipLayerNameAndExpander == 'boolean' ? skipLayerNameAndExpander : false;
+	    var layerName = lyrObject['layerName'];
+	    var legendItems = lyrObject['legend'];
+	    var legendHtml = '';
+	    if (!skipLayerNameAndExpander) {
+	        legendHtml += "<span class=\"legend-layer-subitem\">" + layerName + "</span>";
+	    }
+	    if (legendItems.length == 1) {
+	        legendHtml = "<img class=\"legend-layer-icon\" height=\"17\" src=\"data:image/png;base64," + legendItems[0]['imageData'] + "\">";
+	    }
+	    else {
+	        if (!skipLayerNameAndExpander) {
+	            legendHtml += '<span class="legend-items-expander" title="Expand/Collapse">&#9660;</span>';
+	        }
+	        legendHtml += '<ul>';
+	        for (var i = 0; i < legendItems.length; i++) {
+	            legendHtml += "<li>";
+	            legendHtml += "<span class=\"legend-layer-subitem\">" + htmlEscape(legendItems[i]['label']) + "</span>";
+	            legendHtml += "<img class=\"legend-layer-icon\" height=\"17\" src=\"data:image/png;base64," + legendItems[i]['imageData'] + "\">";
+	            legendHtml += "</li>";
+	        }
+	        legendHtml += '</ul>';
+	    }
+	    if (!skipLayerNameAndExpander) {
+	        legendHtml = "<span class=\"legend-layer-subitem\">" + layerName + "</span>" + legendHtml;
+	    }
+	    return legendHtml;
+	}
+	/**
+	 * make map service legent
+	 * @param {object} esriResponse - layer info
+	 * @returns {string} legend content
+	 */
+	function makeMapServiceLegend(esriResponse) {
+	    "use strict";
+	    var newLegendHtml = '';
+	    var layers = esriResponse['layers'];
+	    if (layers.length == 1) {
+	        newLegendHtml += mapServiceLegendItem(layers[0], true);
+	    }
+	    else {
+	        newLegendHtml += '<ul>';
+	        for (var i = 0; i < layers.length; i++) {
+	            newLegendHtml += '<li>' + mapServiceLegendItem(layers[i]) + '</li>';
+	        }
+	        newLegendHtml += '</ul>';
+	    }
+	    return newLegendHtml;
+	}
+	exports.makeMapServiceLegend = makeMapServiceLegend;
+	nm.makeMapServiceLegend = makeMapServiceLegend;
+
+
+/***/ },
+/* 24 */
+/*!*******************************************!*\
+  !*** ./dist/layers/LayerEsriMapServer.js ***!
+  \*******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	/**
+	 * Created by gavorhes on 12/7/2015.
+	 */
+	var LayerBase_1 = __webpack_require__(/*! ./LayerBase */ 15);
+	var esriToOl = __webpack_require__(/*! ../olHelpers/esriToOlStyle */ 23);
+	var mapPopup_1 = __webpack_require__(/*! ../olHelpers/mapPopup */ 11);
+	var provide_1 = __webpack_require__(/*! ../util/provide */ 3);
+	var ol = __webpack_require__(/*! custom-ol */ 4);
+	var $ = __webpack_require__(/*! jquery */ 5);
+	var nm = provide_1.default('layers');
+	/**
+	 * esri mapserver layer
+	 * @augments LayerBase
+	 */
+	var LayerEsriMapServer = (function (_super) {
+	    __extends(LayerEsriMapServer, _super);
+	    /**
+	     * The base layer for all others
+	     * @param {string} url - resource url
+	     * @param {object} [options] - config
+	     * @param {string} [options.id] - layer id
+	     * @param {string} [options.name=Unnamed Layer] - layer name
+	     * @param {number} [options.opacity=1] - opacity
+	     * @param {boolean} [options.visible=true] - default visible
+	     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+	     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+	     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+	     * @param {number} [options.zIndex=0] the z index for the layer
+	     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+	     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+	     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+	     * @param {boolean} [options.legendContent] additional content to add to the legend
+	     * @param {boolean} [options.addPopup=false] if a popup should be added
+	     * @param {undefined|Array<number>} [options.showLayers=undefined] if a popup should be added
+	     */
+	    function LayerEsriMapServer(url, options) {
+	        if (options === void 0) { options = {}; }
+	        var _this = _super.call(this, url, options) || this;
+	        _this._source = new ol.source.TileArcGISRest({
+	            url: _this.url == '' ? undefined : _this.url,
+	            params: typeof options.showLayers == 'undefined' ? undefined : { layers: 'show:' + options.showLayers.join(',') }
+	        });
+	        _this._olLayer = new ol.layer.Tile({
+	            source: _this._source,
+	            visible: _this.visible,
+	            opacity: _this.opacity,
+	            minResolution: _this._minResolution,
+	            maxResolution: _this._maxResolution
+	        });
+	        _this._olLayer.setZIndex(_this._zIndex);
+	        options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
+	        _this._esriFormat = new ol.format.EsriJSON();
+	        _this._popupRequest = null;
+	        _this.addLegendContent();
+	        if (options.addPopup) {
+	            mapPopup_1.default.addMapServicePopup(_this);
+	        }
+	        return _this;
+	    }
+	    /**
+	     * add additional content to the legend
+	     * @param {string} [additionalContent=''] additional content for legend
+	     */
+	    LayerEsriMapServer.prototype.addLegendContent = function (additionalContent) {
+	        var _this = this;
+	        var urlCopy = this.url;
+	        if (urlCopy[urlCopy.length - 1] !== '/') {
+	            urlCopy += '/';
+	        }
+	        urlCopy += 'legend?f=pjson&callback=?';
+	        $.get(urlCopy, {}, function (d) {
+	            var newHtml = esriToOl.makeMapServiceLegend(d);
+	            _super.prototype.addLegendContent.call(_this, newHtml);
+	        }, 'json');
+	    };
+	    LayerEsriMapServer.prototype.getPopupInfo = function (queryParams) {
+	        if (!this.visible) {
+	            return;
+	        }
+	        var urlCopy = this.url;
+	        if (urlCopy[urlCopy.length - 1] != '/') {
+	            urlCopy += '/';
+	        }
+	        urlCopy += 'identify?callback=?';
+	        var __this = this;
+	        if (this._popupRequest != null) {
+	            this._popupRequest.abort();
+	        }
+	        this._popupRequest = $.get(urlCopy, queryParams, function (d) {
+	            for (var _i = 0, _a = d['results']; _i < _a.length; _i++) {
+	                var r = _a[_i];
+	                var popupHtml = '<table class="esri-popup-table">';
+	                for (var a in r['attributes']) {
+	                    if (r['attributes'].hasOwnProperty(a)) {
+	                        var attrVal = r['attributes'][a];
+	                        if (attrVal == null || attrVal.toString().toLowerCase() == 'null') {
+	                            continue;
+	                        }
+	                        var attr = a;
+	                        if (attr.length > 14) {
+	                            attr = attr.slice(0, 11) + '...';
+	                        }
+	                        popupHtml += "<tr><td>" + attr + "</td><td>" + attrVal + "</td></tr>";
+	                    }
+	                }
+	                popupHtml += '</table>';
+	                mapPopup_1.default.addMapServicePopupContent(__this._esriFormat.readFeature(r), __this, popupHtml, r['layerName']);
+	            }
+	        }, 'json');
+	        this._popupRequest.always(function () {
+	            __this._popupRequest = null;
+	        });
+	    };
+	    Object.defineProperty(LayerEsriMapServer.prototype, "source", {
+	        /**
+	         *
+	         * @returns {ol.source.TileArcGISRest} the vector source
+	         */
+	        get: function () {
+	            return _super.prototype.getSource.call(this);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(LayerEsriMapServer.prototype, "olLayer", {
+	        /**
+	         *
+	         * @returns the ol layer
+	         */
+	        get: function () {
+	            return _super.prototype.getOlLayer.call(this);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    return LayerEsriMapServer;
+	}(LayerBase_1.LayerBase));
+	exports.LayerEsriMapServer = LayerEsriMapServer;
+	nm.LayerEsriMapServer = LayerEsriMapServer;
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = LayerEsriMapServer;
+
+
+/***/ }
+/******/ ]);
 //# sourceMappingURL=animate.js.map
