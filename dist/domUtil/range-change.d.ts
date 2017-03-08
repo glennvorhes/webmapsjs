@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jqueryui" />
 /**
  * callback on range change interaction, context of this is the firing dom element
  * @callback rangeChangeCallback

@@ -13,7 +13,7 @@
   "scripts": {
     "test": "node node_modules\\karma\\bin\\karma start karma.conf.js",
     "lint": "eslint src/**/*.js",
-    "update-custom-ol": "npm update custom-ol & COPY /y node_modules\\custom-ol\\lib\\custom-ol-build.js test-html\\lib\\custom-ol-build.js",
+    "update-custom-ol": "npm update custom-ol & COPY /y node_modules\\custom-ol\\lib\\index.js test-html\\lib\\ol.js",
     "serve": "cd test-html & python -m http.server 5002",
     "typedoc": "typedoc --excludePrivate --mode file --out doc src",
     "webpack": "webpack -d -w",
@@ -24,6 +24,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/d3": "^4.5.0",
+    "@types/jqueryui": "^1.11.32",
     "chai": "^3.5.0",
     "custom-ol": "git://github.com/glennvorhes/custom-ol.git#master",
     "expect": "^1.20.1",

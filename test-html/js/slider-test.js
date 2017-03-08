@@ -52,7 +52,7 @@
 	/**
 	 * Created by gavorhes on 6/22/2016.
 	 */
-	var Sliders_1 = __webpack_require__(/*! ../collections/Sliders */ 34);
+	var Sliders_1 = __webpack_require__(/*! ../collections/Sliders */ 33);
 	var $ = __webpack_require__(/*! jquery */ 5);
 	exports.tipConfig = {
 	    $loadingGif: $('#loading-gif'),
@@ -284,7 +284,7 @@
 
 /***/ },
 
-/***/ 34:
+/***/ 33:
 /*!*************************************!*\
   !*** ./dist/collections/Sliders.js ***!
   \*************************************/

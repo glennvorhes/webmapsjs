@@ -1,10 +1,8 @@
 import provide from '../util/provide';
 import $ = require('jquery');
-import 'jquery-ui';
-
+// import 'jquery-ui';
 
 let nm = provide('domUtil');
-
 
 export class DayRange {
     _workingDayRange: number;
@@ -32,8 +30,8 @@ export class DayRange {
         this._$startDate = $('#start-date');
         this._$endDate = $('#end-date');
 
-        this._$startDate['datepicker']();
-        this._$endDate['datepicker']();
+        this._$startDate.datepicker();
+        this._$endDate.datepicker();
 
         this._startDate = null;
         this._endDate = null;
@@ -109,7 +107,6 @@ export class DayRange {
 }
 
 nm.DayRange = DayRange;
-
 
 export default DayRange;
 

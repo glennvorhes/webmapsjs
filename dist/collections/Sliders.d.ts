@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jqueryui" />
 export interface TipSliderConfig {
     label: string;
     yearOptions: Array<{

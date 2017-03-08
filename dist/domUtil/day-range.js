@@ -1,7 +1,7 @@
 "use strict";
 var provide_1 = require("../util/provide");
 var $ = require("jquery");
-require("jquery-ui");
+// import 'jquery-ui';
 var nm = provide_1.default('domUtil');
 var DayRange = (function () {
     /**
@@ -18,8 +18,8 @@ var DayRange = (function () {
         jQueryRef.append(pickerHtml);
         this._$startDate = $('#start-date');
         this._$endDate = $('#end-date');
-        this._$startDate['datepicker']();
-        this._$endDate['datepicker']();
+        this._$startDate.datepicker();
+        this._$endDate.datepicker();
         this._startDate = null;
         this._endDate = null;
         var dte1 = new Date();

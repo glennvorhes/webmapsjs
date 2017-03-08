@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jqueryui" />
 import { LayerBase } from "../layers/LayerBase";
 import ol = require('custom-ol');
 declare class LayerSwipe {

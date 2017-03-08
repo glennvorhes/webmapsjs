@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jqueryui" />
 /**
  * Created by gavorhes on 6/22/2016.
  */

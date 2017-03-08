@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jqueryui" />
 import ol = require('custom-ol');
 export interface LayerBaseOptions {
     id?: string;
