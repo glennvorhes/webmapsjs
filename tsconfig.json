@@ -3,7 +3,7 @@
   "version": "2.0.3",
   "compilerOptions": {
     "module": "commonjs",
-    "declaration": true,
+    "declaration": false,
     "outDir": "dist",
     "target": "es5",
     "rootDir": "src",
