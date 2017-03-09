@@ -7,7 +7,7 @@
     "outDir": "dist",
     "target": "es5",
     "rootDir": "src",
-    "inlineSourceMap": true,
+    "sourceMap": true,
     "inlineSources": true,
     "jsx": "react"
   },
