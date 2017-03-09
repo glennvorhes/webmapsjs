@@ -27,7 +27,7 @@ export declare class LayerEsriTile extends LayerBaseXyzTile {
      * @param {boolean} [options.legendContent] additional content to add to the legend
      * @param {boolean} [options.useEsriStyle=false] if the map service style should be used
      */
-    constructor(url: string, options: LayerEsriTileOptions);
+    constructor(url: string, options?: LayerEsriTileOptions);
     /**
      * add additional content to the legend
      * @param {string} [additionalContent=''] additional content for legend

@@ -26,7 +26,7 @@ export declare class LayerBaseXyzTile extends LayerBase {
      * @param {boolean} [options.legendContent] additional content to add to the legend
      * @param {boolean} [options.useEsriStyle=false] if the map service style should be used
      */
-    constructor(url: string, options: LayerBaseOptions);
+    constructor(url: string, options?: LayerBaseOptions);
     /**
      *
      * @returns {ol.source.XYZ} the vector source

@@ -2,7 +2,8 @@
  * Created by gavorhes on 10/10/2016.
  */
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var day_range_1 = require("../domUtil/day-range");
 var $ = require("jquery");
 var dayRange = new day_range_1.DayRange($('#day-range'), 10);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmFuZ2VfbWVkaWEuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvX3Rlc3QvcmFuZ2VfbWVkaWEudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0dBRUc7O0FBRUgsa0RBQThDO0FBQzlDLDBCQUE2QjtBQUU3QixJQUFJLFFBQVEsR0FBRyxJQUFJLG9CQUFRLENBQUMsQ0FBQyxDQUFDLFlBQVksQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXHJcbiAqIENyZWF0ZWQgYnkgZ2F2b3JoZXMgb24gMTAvMTAvMjAxNi5cclxuICovXHJcblxyXG5pbXBvcnQge0RheVJhbmdlfSBmcm9tICcuLi9kb21VdGlsL2RheS1yYW5nZSc7XHJcbmltcG9ydCAkID0gcmVxdWlyZSgnanF1ZXJ5Jyk7XHJcblxyXG5sZXQgZGF5UmFuZ2UgPSBuZXcgRGF5UmFuZ2UoJCgnI2RheS1yYW5nZScpLCAxMCk7XHJcblxyXG5cclxuXHJcblxyXG5cclxuXHJcbiJdfQ==
+//# sourceMappingURL=range_media.js.map

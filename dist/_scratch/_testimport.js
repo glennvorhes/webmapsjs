@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var ol = require("custom-ol");
 console.log(ol.animation.bounce({ duration: 10, resolution: 30, start: 4, easing: function (t) { return 5; } }));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiX3Rlc3RpbXBvcnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvX3NjcmF0Y2gvX3Rlc3RpbXBvcnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUNBLDhCQUFpQztBQUNqQyxPQUFPLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxTQUFTLENBQUMsTUFBTSxDQUFDLEVBQUMsUUFBUSxFQUFFLEVBQUUsRUFBRSxVQUFVLEVBQUUsRUFBRSxFQUFFLEtBQUssRUFBRSxDQUFDLEVBQUUsTUFBTSxFQUFFLFVBQUMsQ0FBQyxJQUFNLE1BQU0sQ0FBQyxDQUFDLENBQUEsQ0FBQSxDQUFDLEVBQUMsQ0FBQyxDQUFDLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuaW1wb3J0IG9sID0gcmVxdWlyZSgnY3VzdG9tLW9sJyk7XHJcbmNvbnNvbGUubG9nKG9sLmFuaW1hdGlvbi5ib3VuY2Uoe2R1cmF0aW9uOiAxMCwgcmVzb2x1dGlvbjogMzAsIHN0YXJ0OiA0LCBlYXNpbmc6ICh0KSA9PiB7cmV0dXJuIDV9fSkpOyJdfQ==
+//# sourceMappingURL=_testimport.js.map

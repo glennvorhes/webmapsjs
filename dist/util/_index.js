@@ -2,10 +2,11 @@
  * Created by gavorhes on 9/22/2016.
  */
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var checkDefinedf = require("./checkDefined");
 var checkDefined;
 (function (checkDefined) {
     checkDefined.undefinedOrNull = checkDefinedf.undefinedOrNull;
     checkDefined.definedAndNotNull = checkDefinedf.definedAndNotNull;
 })(checkDefined = exports.checkDefined || (exports.checkDefined = {}));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiX2luZGV4LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL3V0aWwvX2luZGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztHQUVHOztBQUVILDhDQUFnRDtBQUdoRCxJQUFpQixZQUFZLENBRzVCO0FBSEQsV0FBaUIsWUFBWTtJQUNaLDRCQUFlLEdBQUcsYUFBYSxDQUFDLGVBQWUsQ0FBQztJQUNoRCw4QkFBaUIsR0FBRyxhQUFhLENBQUMsaUJBQWlCLENBQUM7QUFDckUsQ0FBQyxFQUhnQixZQUFZLEdBQVosb0JBQVksS0FBWixvQkFBWSxRQUc1QiIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxyXG4gKiBDcmVhdGVkIGJ5IGdhdm9yaGVzIG9uIDkvMjIvMjAxNi5cclxuICovXHJcblxyXG5pbXBvcnQgKiBhcyBjaGVja0RlZmluZWRmIGZyb20gJy4vY2hlY2tEZWZpbmVkJztcclxuXHJcblxyXG5leHBvcnQgbmFtZXNwYWNlIGNoZWNrRGVmaW5lZCB7XHJcbiAgICBleHBvcnQgY29uc3QgdW5kZWZpbmVkT3JOdWxsID0gY2hlY2tEZWZpbmVkZi51bmRlZmluZWRPck51bGw7XHJcbiAgICBleHBvcnQgY29uc3QgZGVmaW5lZEFuZE5vdE51bGwgPSBjaGVja0RlZmluZWRmLmRlZmluZWRBbmROb3ROdWxsO1xyXG59XHJcblxyXG5cclxuXHJcbiJdfQ==
+//# sourceMappingURL=_index.js.map
