@@ -32,7 +32,7 @@ export class LayerBaseXyzTile extends LayerBase {
      * @param {boolean} [options.legendContent] additional content to add to the legend
      * @param {boolean} [options.useEsriStyle=false] if the map service style should be used
      */
-    constructor(url: string, options: LayerBaseOptions) {
+    constructor(url: string, options: LayerBaseOptions = {}) {
         super(url, options);
         this._source = new ol.source.XYZ({url: this.url == '' ? undefined : this.url});
 

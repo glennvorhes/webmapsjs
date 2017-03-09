@@ -53,7 +53,7 @@ export class LayerBaseVectorGeoJson extends LayerBaseVector {
      * @param {mapMoveMakeGetParams} [options.mapMoveMakeGetParams=function(lyr, extent, zoomLevel){}] function to create additional map move params
      * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
      */
-    constructor(url, options?: LayerBaseVectorGeoJsonOptions) {
+    constructor(url, options: LayerBaseVectorGeoJsonOptions = {}) {
         url = typeof url == 'string' ? url : '';
         super(url, options);
 
