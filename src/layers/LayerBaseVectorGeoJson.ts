@@ -5,16 +5,22 @@
 import {LayerBaseVector, LayerBaseVectorOptions} from './LayerBaseVector';
 import provide from '../util/provide';
 import ol = require('custom-ol');
+import $ = require('jquery');
 import {MapMoveCls} from "../olHelpers/mapMoveCls";
 import * as proj from '../olHelpers/projections';
-import $ = require('jquery');
+import {proj3857} from "../olHelpers/projections";
 
 let nm = provide('layers');
 
 
+export interface crsTransform {
+    dataProjection?: ol.proj.Projection;
+    featureProjection?: ol.proj.Projection;
+}
 
-export interface LayerBaseVectorGeoJsonOptions extends LayerBaseVectorOptions{
-    transform?: {dataProjection: ol.ProjectionLike, featureProjection: ol.ProjectionLike};
+
+export interface LayerBaseVectorGeoJsonOptions extends LayerBaseVectorOptions {
+    transform?: crsTransform;
     mapMoveObj?: MapMoveCls;
 }
 
@@ -24,7 +30,7 @@ export interface LayerBaseVectorGeoJsonOptions extends LayerBaseVectorOptions{
  */
 export class LayerBaseVectorGeoJson extends LayerBaseVector {
     _geoJsonFormat: ol.format.GeoJSON;
-    _transform: {dataProjection: ol.ProjectionLike, featureProjection: ol.ProjectionLike};
+    _transform: crsTransform;
 
     /**
      * @param {string|undefined|null} url - resource url, set to '' to make blank layer
@@ -59,7 +65,9 @@ export class LayerBaseVectorGeoJson extends LayerBaseVector {
 
         this._geoJsonFormat = new ol.format.GeoJSON();
 
-        this._transform = options.transform || {dataProjection: proj.proj4326, featureProjection: proj.proj3857};
+        this._transform = options.transform || {};
+        this._transform.dataProjection = this._transform.dataProjection || proj.proj4326;
+        this._transform.featureProjection = this._transform.featureProjection || proj3857;
 
         if (this.autoLoad || this.visible) {
             this._load();
@@ -70,13 +78,11 @@ export class LayerBaseVectorGeoJson extends LayerBaseVector {
      * add feature collection
      * @param {object} featureCollection - as geojson object
      */
-    addFeatures(featureCollection: JSON) {
-        if (this._transform.dataProjection == 'EPSG:3857' && this._transform.featureProjection == 'EPSG:3857') {
-            this._source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection));
-        } else {
-            this._source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection, this._transform));
-        }
+    addFeatures(featureCollection: any) {
+
+        this.source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection));
     }
+
 
     /**
      * trigger load features
@@ -110,7 +116,8 @@ export class LayerBaseVectorGeoJson extends LayerBaseVector {
      */
     mapMoveCallback(d) {
         super.mapMoveCallback(d);
-        this._source.addFeatures(this._geoJsonFormat.readFeatures(d, this._transform));
+        this._source.addFeatures(this._geoJsonFormat.readFeatures(d,
+            {featureProjection: this._transform.featureProjection, dataProjection: this._transform.dataProjection}));
     }
 }
 

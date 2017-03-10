@@ -99,7 +99,8 @@ class RealEarthAnimateVector extends RealEarthAnimate {
      * @private
      */
     _loadFeatures(geojObj) {
-        this._source.addFeatures(this._lyr._geoJsonFormat.readFeatures(geojObj, this._lyr._transform));
+        this._source.addFeatures(this._lyr._geoJsonFormat.readFeatures(geojObj,
+            {featureProjection: this._lyr._transform.featureProjection, dataProjection: this._lyr._transform.dataProjection}));
     }
 
     setLayerTime(theTime: number): boolean {

@@ -16,8 +16,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var LayerBaseVector_1 = require("./LayerBaseVector");
 var provide_1 = require("../util/provide");
 var ol = require("custom-ol");
-var proj = require("../olHelpers/projections");
 var $ = require("jquery");
+var proj = require("../olHelpers/projections");
+var projections_1 = require("../olHelpers/projections");
 var nm = provide_1.default('layers');
 /**
  * The Vector GeoJson Layer
@@ -58,7 +59,9 @@ var LayerBaseVectorGeoJson = (function (_super) {
         url = typeof url == 'string' ? url : '';
         _this = _super.call(this, url, options) || this;
         _this._geoJsonFormat = new ol.format.GeoJSON();
-        _this._transform = options.transform || { dataProjection: proj.proj4326, featureProjection: proj.proj3857 };
+        _this._transform = options.transform || {};
+        _this._transform.dataProjection = _this._transform.dataProjection || proj.proj4326;
+        _this._transform.featureProjection = _this._transform.featureProjection || projections_1.proj3857;
         if (_this.autoLoad || _this.visible) {
             _this._load();
         }
@@ -69,12 +72,7 @@ var LayerBaseVectorGeoJson = (function (_super) {
      * @param {object} featureCollection - as geojson object
      */
     LayerBaseVectorGeoJson.prototype.addFeatures = function (featureCollection) {
-        if (this._transform.dataProjection == 'EPSG:3857' && this._transform.featureProjection == 'EPSG:3857') {
-            this._source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection));
-        }
-        else {
-            this._source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection, this._transform));
-        }
+        this.source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection));
     };
     /**
      * trigger load features
@@ -101,7 +99,7 @@ var LayerBaseVectorGeoJson = (function (_super) {
      */
     LayerBaseVectorGeoJson.prototype.mapMoveCallback = function (d) {
         _super.prototype.mapMoveCallback.call(this, d);
-        this._source.addFeatures(this._geoJsonFormat.readFeatures(d, this._transform));
+        this._source.addFeatures(this._geoJsonFormat.readFeatures(d, { featureProjection: this._transform.featureProjection, dataProjection: this._transform.dataProjection }));
     };
     return LayerBaseVectorGeoJson;
 }(LayerBaseVector_1.LayerBaseVector));

@@ -9,18 +9,25 @@ module.exports = function (config) {
 
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['jasmine', 'source-map-support'],
+        frameworks: ['jasmine', 'karma-typescript'],
 
 
         // list of files / patterns to load in the browser
         files: [
-            'node_modules/jquery/dist/jquery.min.js',
-            'node_modules/custom-ol/lib/index.js',
-            'spec/build/**/*.js',
-            {
-                pattern: 'spec/build/**/*.js.map',
-                included: false
-            },
+            {pattern: 'node_modules/jquery/dist/jquery.min.js', watched: false},
+            {pattern: 'node_modules/custom-ol/lib/index.js', watched: false},
+            {pattern: 'spec/**/*.ts', watched: false},
+            // {pattern: 'spec/**/*.js.map', watched: false},
+
+            // 'spec/build/**/*.js',
+            // {
+            //     pattern: 'spec/build/**/*.js.map',
+            //     included: false
+            // },
+            // {
+            //     pattern: 'dist/**/*.js',
+            //     included: false
+            // },
             // 'spec/**/*.ts',
             // 'src/**/*.ts'
         ],
@@ -33,43 +40,41 @@ module.exports = function (config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            // 'spec/build/**/*.js': ['sourcemap']
+            'spec/**/*.ts': ["karma-typescript", 'webpack', 'sourcemap'],
         },
 
-        // webpack: {
-        //     // karma watches the test entry points
-        //     // (you don't need to specify the entry option)
-        //     // webpack watches dependencies
-        //
-        //     // webpack configuration
-        //     debug: true,
-        //     devtool: 'inline-source-map',
-        //     module: {
-        //         loaders: [
-        //             {test: /\.js$/, loader: "source-map-loader"}
-        //         ]
-        //     },
-        //     externals: {
-        //         "jquery": "$",
-        //         "custom-ol": "ol",
-        //         "react": "React",
-        //         "react-dom": "ReactDOM"
-        //     }
-        // },
-        //
-        // webpackMiddleware: {
-        //     // webpack-dev-middleware configuration
-        //     // i. e.
-        //     stats: {
-        //         colors: true
-        //     }
-        // },
+        webpack: {
+            // karma watches the test entry points
+            // (you don't need to specify the entry option)
+            // webpack watches dependencies
+
+            // webpack configuration
+            // debug: true,
+            // devtool: 'source-map',
+            // module: {
+            //     loaders: [
+            //         {test: /\.js$/, loader: "source-map-loader"}
+            //     ]
+            // },
+            externals: {
+                "jquery": "$",
+                "custom-ol": "ol",
+                "react": "React",
+                "react-dom": "ReactDOM"
+            }
+        },
+
+        webpackMiddleware: {
+            // webpack-dev-middleware configuration
+            // i. e.
+            stats: 'errors-only'
+        },
 
 
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['progress'],
+        reporters: ['progress', "karma-typescript"],
 
 
         // web server port
@@ -82,11 +87,13 @@ module.exports = function (config) {
 
         // level of logging
         // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-        logLevel: config.LOG_ERROR,
+        logLevel: config.LOG_INFO,
 
 
         // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: true,
+        autoWatch: false,
+
+        autoWatchBatchDelay: 100,
 
 
         // start these browsers

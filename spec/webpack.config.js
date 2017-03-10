@@ -27,7 +27,7 @@ function getFiles() {
         files.forEach(function (file) {
             var maybeDirectory = dir + '/' + file;
 
-            if (fs.statSync(maybeDirectory).isDirectory() && !maybeDirectory.match(/\/build|node_modules/)) {
+            if (fs.statSync(maybeDirectory).isDirectory() && !maybeDirectory.match(/\/build|node_modules|data/)) {
                 filelist = walkSync(dir + '/' + file, filelist);
             }
             else {

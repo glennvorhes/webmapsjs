@@ -59,6 +59,7 @@
 	        console.log('here');
 	        console.log('here');
 	        expect(1).toBeGreaterThan(0);
+	        expect(1).toBeGreaterThan(1);
 	    });
 	});
 

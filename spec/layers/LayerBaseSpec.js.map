@@ -1,1 +1,1 @@
-{"version":3,"file":"LayerBaseSpec.js","sourceRoot":"","sources":["LayerBaseSpec.ts"],"names":[],"mappings":"AAAA;;GAEG;;AAEH,yDAAwE;AAExE,QAAQ,CAAC,YAAY,EAAE;IAEnB,EAAE,CAAC,QAAQ,EAAE;QACT,MAAM,CAAC,qBAAS,CAAC,CAAC,WAAW,EAAE,CAAA;IAEnC,CAAC,CAAC,CAAA;AAGN,CAAC,CAAC,CAAC"}
+{"version":3,"file":"LayerBaseSpec.js","sourceRoot":"","sources":["LayerBaseSpec.ts"],"names":[],"mappings":"AAAA,MAAM;AACN,mCAAmC;AACnC,MAAM;AACN,EAAE;AACF,2EAA2E;AAC3E,EAAE;AACF,uCAAuC;AACvC,EAAE;AACF,iCAAiC;AACjC,0CAA0C;AAC1C,EAAE;AACF,SAAS;AACT,EAAE;AACF,EAAE;AACF,MAAM"}

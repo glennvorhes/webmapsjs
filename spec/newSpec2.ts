@@ -6,7 +6,7 @@
 
 // var d = require('custom-ol')
 
-describe('a cat', function () {
+describe('a cat2', function () {
 
     it('should eat', function () {
 
@@ -17,5 +17,12 @@ describe('a cat', function () {
         console.log('here');
         console.log('here');
        expect(1).toBeGreaterThan(0);
+       expect(1).toBeGreaterThan(0);
+       expect(1).toBeGreaterThan(0);
+       // expect(1).toBeGreaterThan(1);
+       // expect(0).toBeGreaterThan(0);
+
+
+
     })
 });
