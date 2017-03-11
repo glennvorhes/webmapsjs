@@ -12,7 +12,6 @@ import {proj3857} from "../olHelpers/projections";
 
 let nm = provide('layers');
 
-
 export interface crsTransform {
     dataProjection?: ol.proj.Projection;
     featureProjection?: ol.proj.Projection;
@@ -33,7 +32,7 @@ export class LayerBaseVectorGeoJson extends LayerBaseVector {
     _transform: crsTransform;
 
     /**
-     * @param {string|undefined|null} url - resource url, set to '' to make blank layer
+     * @param {string|null} url - resource url, set to '' to make blank layer
      * @param {object} options - config
      * @param {string} [options.id] - layer id
      * @param {string} [options.name=Unnamed Layer] - layer name
@@ -59,7 +58,7 @@ export class LayerBaseVectorGeoJson extends LayerBaseVector {
      * @param {mapMoveMakeGetParams} [options.mapMoveMakeGetParams=function(lyr, extent, zoomLevel){}] function to create additional map move params
      * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
      */
-    constructor(url, options: LayerBaseVectorGeoJsonOptions = {}) {
+    constructor(url?: string, options: LayerBaseVectorGeoJsonOptions = {}) {
         url = typeof url == 'string' ? url : '';
         super(url, options);
 

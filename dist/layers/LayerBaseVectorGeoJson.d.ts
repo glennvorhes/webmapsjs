@@ -20,7 +20,7 @@ export declare class LayerBaseVectorGeoJson extends LayerBaseVector {
     _geoJsonFormat: ol.format.GeoJSON;
     _transform: crsTransform;
     /**
-     * @param {string|undefined|null} url - resource url, set to '' to make blank layer
+     * @param {string|null} url - resource url, set to '' to make blank layer
      * @param {object} options - config
      * @param {string} [options.id] - layer id
      * @param {string} [options.name=Unnamed Layer] - layer name
@@ -46,7 +46,7 @@ export declare class LayerBaseVectorGeoJson extends LayerBaseVector {
      * @param {mapMoveMakeGetParams} [options.mapMoveMakeGetParams=function(lyr, extent, zoomLevel){}] function to create additional map move params
      * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
      */
-    constructor(url: any, options?: LayerBaseVectorGeoJsonOptions);
+    constructor(url?: string, options?: LayerBaseVectorGeoJsonOptions);
     /**
      * add feature collection
      * @param {object} featureCollection - as geojson object
