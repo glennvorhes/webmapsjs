@@ -1,9 +1,9 @@
-import {quickMap} from '../olHelpers/quickMap';
-import LayerRealEarthTile from "../layers/LayerRealEarthTile";
-import {MediaControl, changeFunction} from "../domUtil/media-control";
+import {quickMap} from '../../src/olHelpers/quickMap';
+import LayerRealEarthTile from "../../src/layers/LayerRealEarthTile";
+import {MediaControl, changeFunction} from "../../src/domUtil/media-control";
 import $ = require('jquery');
-import {LayerBaseVectorEsri} from "../layers/LayerBaseVectorEsri";
-import {LayerEsriMapServer} from "../layers/LayerEsriMapServer";
+import {LayerBaseVectorEsri} from "../../src/layers/LayerBaseVectorEsri";
+import {LayerEsriMapServer} from "../../src/layers/LayerEsriMapServer";
 import 'jquery-ui';
 
 

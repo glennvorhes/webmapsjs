@@ -29,7 +29,7 @@ module.exports = function (config) {
             'test/specs/spec.ts': ['webpack', 'sourcemap'],
         },
 
-        webpack: require('./webpack.config'),
+        webpack: require('./webpack.base.js'),
 
         webpackMiddleware: {
             // webpack-dev-middleware configuration

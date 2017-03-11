@@ -1,7 +1,7 @@
 /**
  * Created by gavorhes on 6/22/2016.
  */
-import {TipSliders, TipPresetConfig, TipSliderConfig} from '../collections/Sliders';
+import {TipSliders, TipPresetConfig, TipSliderConfig} from '../../src/collections/Sliders';
 import $ = require('jquery');
 import ol = require('custom-ol');
 import 'jquery-ui';

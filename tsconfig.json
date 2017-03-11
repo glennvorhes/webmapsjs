@@ -1,19 +1,14 @@
 {
   "compileOnSave": true,
-  "version": "2.0.3",
+  "version": "2.2.1",
   "compilerOptions": {
     "module": "commonjs",
-    "declaration": true,
-    "outDir": "./dist",
     "target": "es5",
-    "inlineSourceMap": true,
+    "sourceMap": true,
     "inlineSources": true,
     "jsx": "react",
     "noEmitOnError": true
   },
-  "exclude": [
-//    "node_modules", "dist"
-  ],
   "include": [
     "src/**/*"
   ]

@@ -15,9 +15,9 @@
     "update-custom-ol": "npm update custom-ol & COPY /y node_modules\\custom-ol\\lib\\index.js test-html\\lib\\ol.js",
     "serve-demos": "cd test\\serve & python -m http.server 5002",
     "typedoc": "typedoc --excludePrivate --mode file --out doc src",
-    "webpack": "webpack -d -w",
-    "webpack-prod": "webpack -p",
-    "tsc": "node_modules\\.bin\\tsc --rootDir src --outDir dist",
+    "webpack": "node_modules\\.bin\\webpack -d -w",
+    "webpack-prod": "node_modules\\.bin\\webpack -p -w",
+    "tsc": "node_modules\\.bin\\tsc --rootDir .\\src --outDir ./dist -d",
     "karma": "node_modules\\.bin\\karma start"
   },
   "author": "TOPS Lab",

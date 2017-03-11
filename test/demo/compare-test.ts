@@ -1,9 +1,9 @@
 /**
  * Created by gavorhes on 6/1/2016.
  */
-import {quickMap} from '../olHelpers/quickMap';
-import LayerSwipe from '../olHelpers/layerSwipe';
-import {LayerEsriMapServer} from '../layers/LayerEsriMapServer';
+import {quickMap} from '../../src/olHelpers/quickMap';
+import LayerSwipe from '../../src/olHelpers/layerSwipe';
+import {LayerEsriMapServer} from '../../src/layers/LayerEsriMapServer';
 
 let map = quickMap();
 

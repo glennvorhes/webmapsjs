@@ -3,9 +3,9 @@
  */
 
 
-import ItsLayerCollection from '../collections/ItsLayerCollection';
-import LayerLegend from '../collections/LayerLegend';
-import quickMap from '../olHelpers/quickMap';
+import ItsLayerCollection from '../../src/collections/ItsLayerCollection';
+import LayerLegend from '../../src/collections/LayerLegend';
+import quickMap from '../../src/olHelpers/quickMap';
 
 let map = quickMap();
 

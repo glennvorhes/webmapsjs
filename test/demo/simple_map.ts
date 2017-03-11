@@ -1,9 +1,9 @@
 /**
  * Created by gavorhes on 9/23/2016.
  */
-import {quickMap} from '../olHelpers/quickMap';
-import {LayerEsriMapServer} from "../layers/LayerEsriMapServer";
-import LayerLegend from '../collections/LayerLegend';
+import {quickMap} from '../../src/olHelpers/quickMap';
+import {LayerEsriMapServer} from "../../src/layers/LayerEsriMapServer";
+import LayerLegend from '../../src/collections/LayerLegend';
 
 
 let map = quickMap();

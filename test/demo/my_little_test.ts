@@ -4,7 +4,7 @@ import ol = require('custom-ol');
 
 
 
-import {MediaControl} from '../domUtil/media-control'
+import {MediaControl} from '../../src/domUtil/media-control'
 //
 //
 

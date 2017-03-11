@@ -29,7 +29,7 @@ export function quickMap(options? : quickMapOptions): ol.Map {
     let m = quickMapBase(options);
     mapMove.init(m);
     mapPopup.init(m);
-
+    console.log('making map');
     return m;
 }
 
