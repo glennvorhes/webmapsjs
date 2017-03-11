@@ -1,0 +1,24 @@
+@import "../../css/all-ol-style";
+
+html, body {
+  height: 100%;
+  width: 100%;
+
+  > div {
+    display: flex;
+    height:100%;
+
+    > div{
+      height: 100%
+    }
+
+    > div:first-of-type{
+      width: 30%;
+      min-width: 300px;
+    }
+
+    > div:last-of-type{
+      flex: 1;
+    }
+  }
+}
