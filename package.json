@@ -24,7 +24,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/d3": "^4.7.0",
-    "@types/jasmine": "^2.5.43",
+    "@types/jasmine": "^2.5.44",
     "@types/jquery": "^2.0.40",
     "@types/jqueryui": "^1.11.32",
     "custom-ol": "github:glennvorhes/custom-ol",

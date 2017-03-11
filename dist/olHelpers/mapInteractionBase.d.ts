@@ -21,7 +21,7 @@ export declare class MapInteractionBase {
      * get reference to the ol map object
      * @returns {ol.Map} the map object
      */
-    readonly map: any;
+    readonly map: ol.Map;
     /**
      * get if is initialized
      * @returns {boolean} is initialized
