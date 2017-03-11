@@ -15,7 +15,7 @@
     "update-custom-ol": "npm update custom-ol & COPY /y node_modules\\custom-ol\\lib\\index.js test-html\\lib\\ol.js",
     "serve-demos": "cd test\\serve & python -m http.server 5002",
     "typedoc": "typedoc --excludePrivate --mode file --out doc src",
-    "webpack": "node_modules\\.bin\\webpack -d -w",
+    "webpack": "node_modules\\.bin\\webpack -w",
     "webpack-prod": "node_modules\\.bin\\webpack -p -w",
     "tsc": "node_modules\\.bin\\tsc -d --rootDir .\\src --outDir ./dist",
     "karma": "node_modules\\.bin\\karma start"
@@ -44,6 +44,7 @@
     "phantomjs-prebuilt": "^2.1.14",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "source-map-loader": "^0.2.0",
     "ts-loader": "^2.0.1",
     "typescript": "^2.2.1",
     "webpack": "^2.2.1"

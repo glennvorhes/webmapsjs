@@ -3,7 +3,8 @@ module.exports = {
     devtool: 'source-map',
     module: {
         loaders: [
-            {test: /\.tsx?$/, loader: "ts-loader"}
+            {test: /\.tsx?$/, loader: "ts-loader"},
+            {test: /\.js$/, loader: "source-map-loader", enforce: "pre"}
         ]
     },
     resolve: {
