@@ -8,7 +8,8 @@
     "target": "es5",
     "inlineSourceMap": true,
     "inlineSources": true,
-    "jsx": "react"
+    "jsx": "react",
+    "noEmitOnError": true
   },
   "exclude": [
 //    "node_modules", "dist"
