@@ -17,7 +17,7 @@
     "typedoc": "typedoc --excludePrivate --mode file --out doc src",
     "webpack": "node_modules\\.bin\\webpack -d -w",
     "webpack-prod": "node_modules\\.bin\\webpack -p -w",
-    "tsc": "node_modules\\.bin\\tsc --rootDir .\\src --outDir ./dist -d",
+    "tsc": "node_modules\\.bin\\tsc --rootDir .\\src --outDir ./dist",
     "karma": "node_modules\\.bin\\karma start"
   },
   "author": "TOPS Lab",
@@ -27,6 +27,8 @@
     "@types/jasmine": "^2.5.44",
     "@types/jquery": "^2.0.40",
     "@types/jqueryui": "^1.11.32",
+    "@types/react": "^15.0.15",
+    "@types/react-dom": "^0.14.23",
     "custom-ol": "github:glennvorhes/custom-ol",
     "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",

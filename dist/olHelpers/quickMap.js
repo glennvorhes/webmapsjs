@@ -28,7 +28,6 @@ function quickMap(options) {
     var m = quickMapBase_1.quickMapBase(options);
     mapMove_1.default.init(m);
     mapPopup_1.default.init(m);
-    console.log('making map');
     return m;
 }
 exports.quickMap = quickMap;
