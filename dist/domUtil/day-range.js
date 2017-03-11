@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = require("../util/provide");
 var $ = require("jquery");
-// import 'jquery-ui';
+require("jquery-ui");
 var nm = provide_1.default('domUtil');
 var DayRange = (function () {
     /**

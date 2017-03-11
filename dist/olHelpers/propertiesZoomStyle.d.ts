@@ -1,4 +1,3 @@
-import ol = require('custom-ol');
 /**
  * A style function based on properties and zoom level, wraps normal feature, resolution function
  * @callback propertiesZoomStyle
@@ -11,5 +10,5 @@ import ol = require('custom-ol');
  * @param {propertiesZoomStyle|*} styleFunc - style function
  * @returns {function|*} new function
  */
-declare function propertiesZoomStyle(styleFunc: any): (feature: ol.Feature, resolution: any) => void;
+declare function propertiesZoomStyle(styleFunc: any): (feature: any, resolution: any) => void;
 export default propertiesZoomStyle;

@@ -4,6 +4,7 @@
 import {TipSliders, TipPresetConfig, TipSliderConfig} from '../collections/Sliders';
 import $ = require('jquery');
 import ol = require('custom-ol');
+import 'jquery-ui';
 
 
 

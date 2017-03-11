@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var Sliders_1 = require("../collections/Sliders");
 var $ = require("jquery");
+require("jquery-ui");
 exports.tipConfig = {
     $loadingGif: $('#loading-gif'),
     $presetSelector: $('#preset-selector'),

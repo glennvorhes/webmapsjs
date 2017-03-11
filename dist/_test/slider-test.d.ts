@@ -5,6 +5,7 @@
  */
 import { TipSliders, TipPresetConfig, TipSliderConfig } from '../collections/Sliders';
 import ol = require('custom-ol');
+import 'jquery-ui';
 export interface ITipConfig {
     slidersConfig: Array<TipSliderConfig>;
     presetConfig: Array<TipPresetConfig>;

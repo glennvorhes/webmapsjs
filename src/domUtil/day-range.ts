@@ -1,6 +1,6 @@
 import provide from '../util/provide';
 import $ = require('jquery');
-// import 'jquery-ui';
+import 'jquery-ui';
 
 let nm = provide('domUtil');
 

@@ -6,6 +6,7 @@ var media_control_1 = require("../domUtil/media-control");
 var $ = require("jquery");
 var LayerBaseVectorEsri_1 = require("../layers/LayerBaseVectorEsri");
 var LayerEsriMapServer_1 = require("../layers/LayerEsriMapServer");
+require("jquery-ui");
 var nexrhresStatic = new LayerRealEarthTile_1.default({
     products: 'nexrhres',
     id: 'nexrhres-static',

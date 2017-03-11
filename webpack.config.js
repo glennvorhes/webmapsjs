@@ -32,6 +32,7 @@ module.exports = {
         "jquery": "$",
         "custom-ol": "ol",
         "react": "React",
-        "react-dom": "ReactDOM"
+        "react-dom": "ReactDOM",
+        "jquery-ui": true
     }
 };

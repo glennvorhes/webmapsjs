@@ -1,4 +1,3 @@
-import ol = require('custom-ol');
 export interface EsriResponse {
     drawingInfo: {
         renderer: EsriRenderer;
@@ -36,7 +35,7 @@ export interface EsriSymbol {
  * @returns {styleAndLegend} style and legend object
  */
 export declare function makeFeatureServiceLegendAndSymbol(esriResponse: EsriResponse): {
-    style: ol.style.Style | ol.style.Style[] | ol.StyleFunction;
+    style: any;
     legend: string;
 };
 /**
