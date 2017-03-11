@@ -9,27 +9,13 @@ module.exports = function (config) {
 
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['jasmine', 'karma-typescript'],
-
+        frameworks: ['jasmine'],
 
         // list of files / patterns to load in the browser
         files: [
             {pattern: 'node_modules/jquery/dist/jquery.min.js', watched: false},
             {pattern: 'node_modules/custom-ol/lib/index.js', watched: false},
-            {pattern: 'spec/**/*.ts', watched: false},
-            // {pattern: 'spec/**/*.js.map', watched: false},
-
-            // 'spec/build/**/*.js',
-            // {
-            //     pattern: 'spec/build/**/*.js.map',
-            //     included: false
-            // },
-            // {
-            //     pattern: 'dist/**/*.js',
-            //     included: false
-            // },
-            // 'spec/**/*.ts',
-            // 'src/**/*.ts'
+            'test/specs/spec.ts',
         ],
 
 
@@ -40,29 +26,10 @@ module.exports = function (config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'spec/**/*.ts': ["karma-typescript", 'webpack', 'sourcemap'],
+            'test/specs/spec.ts': ['webpack', 'sourcemap'],
         },
 
-        webpack: {
-            // karma watches the test entry points
-            // (you don't need to specify the entry option)
-            // webpack watches dependencies
-
-            // webpack configuration
-            // debug: true,
-            // devtool: 'source-map',
-            // module: {
-            //     loaders: [
-            //         {test: /\.js$/, loader: "source-map-loader"}
-            //     ]
-            // },
-            externals: {
-                "jquery": "$",
-                "custom-ol": "ol",
-                "react": "React",
-                "react-dom": "ReactDOM"
-            }
-        },
+        webpack: require('./webpack.config'),
 
         webpackMiddleware: {
             // webpack-dev-middleware configuration
@@ -74,7 +41,7 @@ module.exports = function (config) {
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['progress', "karma-typescript"],
+        reporters: ['progress'],
 
 
         // web server port
@@ -91,29 +58,29 @@ module.exports = function (config) {
 
 
         // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: false,
+        autoWatch: true,
 
-        autoWatchBatchDelay: 100,
+        // autoWatchBatchDelay: 100,
 
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        // browsers: ['Chrome', 'PhantomJS'],
-        browsers: ['Chrome'],
+        browsers: ['Chrome', 'PhantomJS'],
+        // browsers: ['Chrome'],
         // browsers: ['PhantomJS'],
 
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
-        singleRun: false,
+        singleRun: true,
 
         // Concurrency level
         // how many browser should be started simultaneous
         concurrency: Infinity,
 
-        phantomjsLauncher: {
-            // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
-            exitOnResourceError: true
+        mime: {
+            'text/x-typescript': ['ts', 'tsx']
         }
+
     })
 };

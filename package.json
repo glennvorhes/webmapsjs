@@ -13,12 +13,12 @@
     "test": "node node_modules\\karma\\bin\\karma start karma.conf.js",
     "lint": "eslint src/**/*.js",
     "update-custom-ol": "npm update custom-ol & COPY /y node_modules\\custom-ol\\lib\\index.js test-html\\lib\\ol.js",
-    "serve": "cd test-html & python -m http.server 5002",
+    "serve-demos": "cd test\\serve & python -m http.server 5002",
     "typedoc": "typedoc --excludePrivate --mode file --out doc src",
     "webpack": "webpack -d -w",
     "webpack-prod": "webpack -p",
-    "tsc": "node_modules\\.bin\\tsc -w",
-    "karma": "karma start"
+    "tsc": "node_modules\\.bin\\tsc --rootDir src --outDir dist",
+    "karma": "node_modules\\.bin\\karma start"
   },
   "author": "TOPS Lab",
   "license": "ISC",

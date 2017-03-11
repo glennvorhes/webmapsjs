@@ -3,11 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ITipConfig | webmapsjs</title>
+	<title>quickMapOptions | webmapsjs</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
-	<script src="../assets/js/modernizr.js"></script>
 </head>
 <body>
 <header>
@@ -57,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="itipconfig.html">ITipConfig</a>
+					<a href="quickmapoptions.html">quickMapOptions</a>
 				</li>
 			</ul>
-			<h1>Interface ITipConfig</h1>
+			<h1>Interface quickMapOptions</h1>
 		</div>
 	</div>
 </header>
@@ -71,7 +70,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ITipConfig</span>
+						<span class="target">quickMapOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -82,18 +81,13 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itipconfig.html#_loadinggif" class="tsd-kind-icon">$loading<wbr>Gif</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itipconfig.html#_presetselector" class="tsd-kind-icon">$preset<wbr>Selector</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itipconfig.html#_regionselector" class="tsd-kind-icon">$region<wbr>Selector</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itipconfig.html#_versionselector" class="tsd-kind-icon">$version<wbr>Selector</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itipconfig.html#_map" class="tsd-kind-icon">_map</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itipconfig.html#itslayercollection" class="tsd-kind-icon">its<wbr>Layer<wbr>Collection</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itipconfig.html#metamanagersegments" class="tsd-kind-icon">metamanager<wbr>Segments</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itipconfig.html#presetconfig" class="tsd-kind-icon">preset<wbr>Config</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itipconfig.html#sliders" class="tsd-kind-icon">sliders</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itipconfig.html#slidersconfig" class="tsd-kind-icon">sliders<wbr>Config</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itipconfig.html#tipsegmentlayer" class="tsd-kind-icon">tip<wbr>Segment<wbr>Layer</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itipconfig.html#tipsegmentlayerminzoom" class="tsd-kind-icon">tip<wbr>Segment<wbr>Layer<wbr>Min<wbr>Zoom</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="quickmapoptions.html#baseswitcher" class="tsd-kind-icon">base<wbr>Switcher</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="quickmapoptions.html#center" class="tsd-kind-icon">center</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="quickmapoptions.html#divid" class="tsd-kind-icon">div<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="quickmapoptions.html#fullscreen" class="tsd-kind-icon">full<wbr>Screen</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="quickmapoptions.html#maxzoom" class="tsd-kind-icon">max<wbr>Zoom</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="quickmapoptions.html#minzoom" class="tsd-kind-icon">min<wbr>Zoom</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="quickmapoptions.html#zoom" class="tsd-kind-icon">zoom</a></li>
 							</ul>
 						</section>
 					</div>
@@ -102,122 +96,83 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="_loadinggif" class="tsd-anchor"></a>
-					<h3>$loading<wbr>Gif</h3>
-					<div class="tsd-signature tsd-kind-icon">$loading<wbr>Gif<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JQuery</span></div>
+					<a name="baseswitcher" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> base<wbr>Switcher</h3>
+					<div class="tsd-signature tsd-kind-icon">base<wbr>Switcher<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/fc4be3c/src/_test/slider-test.ts#L16">_test/slider-test.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/57ecc93/src/olHelpers/quickMapBase.ts#L16">olHelpers/quickMapBase.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="_presetselector" class="tsd-anchor"></a>
-					<h3>$preset<wbr>Selector</h3>
-					<div class="tsd-signature tsd-kind-icon">$preset<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JQuery</span></div>
+					<a name="center" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> center</h3>
+					<div class="tsd-signature tsd-kind-icon">center<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/fc4be3c/src/_test/slider-test.ts#L17">_test/slider-test.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/57ecc93/src/olHelpers/quickMapBase.ts#L12">olHelpers/quickMapBase.ts:12</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="divid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> div<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">div<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/57ecc93/src/olHelpers/quickMapBase.ts#L11">olHelpers/quickMapBase.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="_regionselector" class="tsd-anchor"></a>
-					<h3>$region<wbr>Selector</h3>
-					<div class="tsd-signature tsd-kind-icon">$region<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JQuery</span></div>
+					<a name="fullscreen" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> full<wbr>Screen</h3>
+					<div class="tsd-signature tsd-kind-icon">full<wbr>Screen<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/fc4be3c/src/_test/slider-test.ts#L18">_test/slider-test.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/57ecc93/src/olHelpers/quickMapBase.ts#L17">olHelpers/quickMapBase.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="_versionselector" class="tsd-anchor"></a>
-					<h3>$version<wbr>Selector</h3>
-					<div class="tsd-signature tsd-kind-icon">$version<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JQuery</span></div>
+					<a name="maxzoom" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> max<wbr>Zoom</h3>
+					<div class="tsd-signature tsd-kind-icon">max<wbr>Zoom<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/fc4be3c/src/_test/slider-test.ts#L19">_test/slider-test.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/57ecc93/src/olHelpers/quickMapBase.ts#L15">olHelpers/quickMapBase.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="_map" class="tsd-anchor"></a>
-					<h3>_map</h3>
-					<div class="tsd-signature tsd-kind-icon">_map<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span></div>
+					<a name="minzoom" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> min<wbr>Zoom</h3>
+					<div class="tsd-signature tsd-kind-icon">min<wbr>Zoom<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/fc4be3c/src/_test/slider-test.ts#L15">_test/slider-test.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/57ecc93/src/olHelpers/quickMapBase.ts#L14">olHelpers/quickMapBase.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="itslayercollection" class="tsd-anchor"></a>
-					<h3>its<wbr>Layer<wbr>Collection</h3>
-					<div class="tsd-signature tsd-kind-icon">its<wbr>Layer<wbr>Collection<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<a name="zoom" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> zoom</h3>
+					<div class="tsd-signature tsd-kind-icon">zoom<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/fc4be3c/src/_test/slider-test.ts#L20">_test/slider-test.ts:20</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="metamanagersegments" class="tsd-anchor"></a>
-					<h3>metamanager<wbr>Segments</h3>
-					<div class="tsd-signature tsd-kind-icon">metamanager<wbr>Segments<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/fc4be3c/src/_test/slider-test.ts#L22">_test/slider-test.ts:22</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="presetconfig" class="tsd-anchor"></a>
-					<h3>preset<wbr>Config</h3>
-					<div class="tsd-signature tsd-kind-icon">preset<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="tippresetconfig.html" class="tsd-signature-type">TipPresetConfig</a><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/fc4be3c/src/_test/slider-test.ts#L12">_test/slider-test.ts:12</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="sliders" class="tsd-anchor"></a>
-					<h3>sliders</h3>
-					<div class="tsd-signature tsd-kind-icon">sliders<span class="tsd-signature-symbol">:</span> <a href="../classes/tipsliders.html" class="tsd-signature-type">TipSliders</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/fc4be3c/src/_test/slider-test.ts#L14">_test/slider-test.ts:14</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="slidersconfig" class="tsd-anchor"></a>
-					<h3>sliders<wbr>Config</h3>
-					<div class="tsd-signature tsd-kind-icon">sliders<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="tipsliderconfig.html" class="tsd-signature-type">TipSliderConfig</a><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/fc4be3c/src/_test/slider-test.ts#L11">_test/slider-test.ts:11</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="tipsegmentlayer" class="tsd-anchor"></a>
-					<h3>tip<wbr>Segment<wbr>Layer</h3>
-					<div class="tsd-signature tsd-kind-icon">tip<wbr>Segment<wbr>Layer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/fc4be3c/src/_test/slider-test.ts#L21">_test/slider-test.ts:21</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="tipsegmentlayerminzoom" class="tsd-anchor"></a>
-					<h3>tip<wbr>Segment<wbr>Layer<wbr>Min<wbr>Zoom</h3>
-					<div class="tsd-signature tsd-kind-icon">tip<wbr>Segment<wbr>Layer<wbr>Min<wbr>Zoom<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/fc4be3c/src/_test/slider-test.ts#L13">_test/slider-test.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/57ecc93/src/olHelpers/quickMapBase.ts#L13">olHelpers/quickMapBase.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -236,43 +191,28 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="itipconfig.html" class="tsd-kind-icon">ITip<wbr>Config</a>
+						<a href="quickmapoptions.html" class="tsd-kind-icon">quick<wbr>Map<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itipconfig.html#_loadinggif" class="tsd-kind-icon">$loading<wbr>Gif</a>
+								<a href="quickmapoptions.html#baseswitcher" class="tsd-kind-icon">base<wbr>Switcher</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itipconfig.html#_presetselector" class="tsd-kind-icon">$preset<wbr>Selector</a>
+								<a href="quickmapoptions.html#center" class="tsd-kind-icon">center</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itipconfig.html#_regionselector" class="tsd-kind-icon">$region<wbr>Selector</a>
+								<a href="quickmapoptions.html#divid" class="tsd-kind-icon">div<wbr>Id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itipconfig.html#_versionselector" class="tsd-kind-icon">$version<wbr>Selector</a>
+								<a href="quickmapoptions.html#fullscreen" class="tsd-kind-icon">full<wbr>Screen</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itipconfig.html#_map" class="tsd-kind-icon">_map</a>
+								<a href="quickmapoptions.html#maxzoom" class="tsd-kind-icon">max<wbr>Zoom</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itipconfig.html#itslayercollection" class="tsd-kind-icon">its<wbr>Layer<wbr>Collection</a>
+								<a href="quickmapoptions.html#minzoom" class="tsd-kind-icon">min<wbr>Zoom</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itipconfig.html#metamanagersegments" class="tsd-kind-icon">metamanager<wbr>Segments</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itipconfig.html#presetconfig" class="tsd-kind-icon">preset<wbr>Config</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itipconfig.html#sliders" class="tsd-kind-icon">sliders</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itipconfig.html#slidersconfig" class="tsd-kind-icon">sliders<wbr>Config</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itipconfig.html#tipsegmentlayer" class="tsd-kind-icon">tip<wbr>Segment<wbr>Layer</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itipconfig.html#tipsegmentlayerminzoom" class="tsd-kind-icon">tip<wbr>Segment<wbr>Layer<wbr>Min<wbr>Zoom</a>
+								<a href="quickmapoptions.html#zoom" class="tsd-kind-icon">zoom</a>
 							</li>
 						</ul>
 					</li>
@@ -343,7 +283,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.io" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>

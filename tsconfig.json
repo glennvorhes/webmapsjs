@@ -6,8 +6,7 @@
     "declaration": true,
     "outDir": "./dist",
     "target": "es5",
-    "rootDir": "./src",
-    "sourceMap": true,
+    "inlineSourceMap": true,
     "inlineSources": true,
     "jsx": "react"
   },

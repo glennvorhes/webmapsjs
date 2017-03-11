@@ -17,16 +17,20 @@ for (var i = 0; i < files.length; i++) {
 }
 
 module.exports = {
-    entry: entries,
-    devtool: 'source-map',
+    // entry: entries,
     output: {
         path: outDir,
         filename: "[name].js"
     },
+    devtool: 'source-map',
+    watch: true,
     module: {
         loaders: [
-            {test: /\.js$/, loader: "source-map-loader"}
+            {test: /\.tsx?$/, loader: "ts-loader"}
         ]
+    },
+    resolve: {
+        extensions: [".ts", ".tsx", ".js", '.jsx']
     },
     externals: {
         "jquery": "$",
