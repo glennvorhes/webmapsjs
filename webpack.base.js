@@ -4,7 +4,7 @@ module.exports = {
     module: {
         loaders: [
             {test: /\.tsx?$/, loader: "ts-loader"},
-            {test: /\.js$/, loader: "source-map-loader", enforce: "pre"}
+            {test: /\.js$/, loader: "source-map-loader"}
         ]
     },
     resolve: {
