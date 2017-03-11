@@ -1,14 +1,16 @@
 /**
  * Created by gavorhes on 12/15/2015.
  */
-
-import {quickMapOptions, quickMapBase} from './quickMapBase';
-import provide from '../util/provide';
-import mapMove from './mapMove';
-import mapPopup from './mapPopup';
+import { quickMapOptions } from './quickMapBase';
+import MapMoveCls from './mapMoveCls';
+import MapPopupCls from './mapPopupCls';
 import ol = require('custom-ol');
-let nm = provide('olHelpers');
-
+/**
+ * @typedef {object} quickMapMultiReturn
+ * @property {ol.Map} map The X Coordinate
+ * @property {MapMoveCls} mapMove The Y Coordinate
+ * @property {MapPopupCls} mapPopup The Y Coordinate
+ */
 /**
  * Sets up a map with some default parameters and initializes
  * mapMove and mapPopup
@@ -23,15 +25,11 @@ let nm = provide('olHelpers');
  * @param {number} [options.maxZoom=undefined] max zoom
  * @param {boolean} [options.baseSwitcher=true] if add base map switcher
  * @param {boolean} [options.fullScreen=false] if add base map switcher
- * @returns {ol.Map} the ol map
+ * @returns return object with map, map move, and map popup objects
  */
-export function quickMap(options? : quickMapOptions): ol.Map {
-    let m = quickMapBase(options);
-    mapMove.init(m);
-    mapPopup.init(m);
-    return m;
-}
-
-
-nm.quickMap = quickMap;
-export default quickMap;
+declare function quickMapMulti(options: quickMapOptions): {
+    map: ol.Map;
+    mapMove: MapMoveCls;
+    mapPopup: MapPopupCls;
+};
+export default quickMapMulti;

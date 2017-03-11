@@ -1,14 +1,8 @@
 /**
  * Created by gavorhes on 12/15/2015.
  */
-
-import {quickMapOptions, quickMapBase} from './quickMapBase';
-import provide from '../util/provide';
-import mapMove from './mapMove';
-import mapPopup from './mapPopup';
+import { quickMapOptions } from './quickMapBase';
 import ol = require('custom-ol');
-let nm = provide('olHelpers');
-
 /**
  * Sets up a map with some default parameters and initializes
  * mapMove and mapPopup
@@ -25,13 +19,5 @@ let nm = provide('olHelpers');
  * @param {boolean} [options.fullScreen=false] if add base map switcher
  * @returns {ol.Map} the ol map
  */
-export function quickMap(options? : quickMapOptions): ol.Map {
-    let m = quickMapBase(options);
-    mapMove.init(m);
-    mapPopup.init(m);
-    return m;
-}
-
-
-nm.quickMap = quickMap;
+export declare function quickMap(options?: quickMapOptions): ol.Map;
 export default quickMap;
