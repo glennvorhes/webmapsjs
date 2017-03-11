@@ -1,6 +1,5 @@
 import provide from '../util/provide';
 import $ = require('jquery');
-import 'jquery-ui';
 
 let nm = provide('domUtil');
 
@@ -18,6 +17,7 @@ export class DayRange {
      * @param {jQuery|HTMLElement|*} jQueryRef reference to the jquery element
      */
     constructor(jQueryRef: JQuery, dayRange: number) {
+        console.log('make day range');
         this._workingDayRange = dayRange - 1;
 
         let pickerHtml = '<label for="start-date" style="width: 78px; display: inline-block; margin:5px;">Start Date</label>' +

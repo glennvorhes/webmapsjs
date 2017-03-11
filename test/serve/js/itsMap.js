@@ -1609,8 +1609,7 @@ nm.resolutionToZoom = resolutionToZoom;
 
 /***/ }),
 /* 15 */,
-/* 16 */,
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1903,6 +1902,7 @@ exports.default = LayerLegend;
 
 
 /***/ }),
+/* 17 */,
 /* 18 */,
 /* 19 */,
 /* 20 */
@@ -3003,7 +3003,7 @@ nm.makeBlueGreenRedGradientZScore = makeBlueGreenRedGradientZScore;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var ItsLayerCollection_1 = __webpack_require__(22);
-var LayerLegend_1 = __webpack_require__(17);
+var LayerLegend_1 = __webpack_require__(16);
 var quickMap_1 = __webpack_require__(7);
 var map = quickMap_1.default();
 window['map'] = map;

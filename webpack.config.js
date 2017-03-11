@@ -19,6 +19,4 @@ config.output = {
     filename: "[name]"
 };
 
-console.log(config);
-
 module.exports = config;

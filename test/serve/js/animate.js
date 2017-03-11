@@ -767,7 +767,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by gavorhes on 12/7/2015.
  */
 var LayerBase_1 = __webpack_require__(8);
-var esriToOl = __webpack_require__(16);
+var esriToOl = __webpack_require__(15);
 var mapPopup_1 = __webpack_require__(4);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
@@ -1767,12 +1767,6 @@ nm.resolutionToZoom = resolutionToZoom;
 
 /***/ }),
 /* 15 */
-/***/ (function(module, exports) {
-
-module.exports = jquery-ui;
-
-/***/ }),
-/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2151,8 +2145,8 @@ nm.makeMapServiceLegend = makeMapServiceLegend;
 
 
 /***/ }),
-/* 17 */,
-/* 18 */
+/* 16 */,
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2369,6 +2363,7 @@ nm.MediaControl = MediaControl;
 
 
 /***/ }),
+/* 18 */,
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2798,7 +2793,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var LayerBaseVector_1 = __webpack_require__(20);
-var esriToOl = __webpack_require__(16);
+var esriToOl = __webpack_require__(15);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
@@ -3357,11 +3352,10 @@ exports.default = RealEarthAnimateTile;
 Object.defineProperty(exports, "__esModule", { value: true });
 var quickMap_1 = __webpack_require__(7);
 var LayerRealEarthTile_1 = __webpack_require__(26);
-var media_control_1 = __webpack_require__(18);
+var media_control_1 = __webpack_require__(17);
 var $ = __webpack_require__(1);
 var LayerBaseVectorEsri_1 = __webpack_require__(25);
 var LayerEsriMapServer_1 = __webpack_require__(10);
-__webpack_require__(15);
 var nexrhresStatic = new LayerRealEarthTile_1.default({
     products: 'nexrhres',
     id: 'nexrhres-static',

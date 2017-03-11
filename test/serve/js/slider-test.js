@@ -112,7 +112,7 @@ module.exports = $;
 
 /***/ }),
 
-/***/ 15:
+/***/ 18:
 /***/ (function(module, exports) {
 
 module.exports = jquery-ui;
@@ -659,7 +659,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var Sliders_1 = __webpack_require__(23);
 var $ = __webpack_require__(1);
-__webpack_require__(15);
+__webpack_require__(18);
 exports.tipConfig = {
     $loadingGif: $('#loading-gif'),
     $presetSelector: $('#preset-selector'),

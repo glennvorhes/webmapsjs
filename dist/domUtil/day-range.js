@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = require("../util/provide");
 var $ = require("jquery");
-require("jquery-ui");
 var nm = provide_1.default('domUtil');
 var DayRange = (function () {
     /**
@@ -11,6 +10,7 @@ var DayRange = (function () {
      * @param {jQuery|HTMLElement|*} jQueryRef reference to the jquery element
      */
     function DayRange(jQueryRef, dayRange) {
+        console.log('make day range');
         this._workingDayRange = dayRange - 1;
         var pickerHtml = '<label for="start-date" style="width: 78px; display: inline-block; margin:5px;">Start Date</label>' +
             '<input type="text" readonly id="start-date" class="date-pick"  style="width: 90px;">' +

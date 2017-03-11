@@ -112,7 +112,7 @@ module.exports = $;
 
 /***/ }),
 
-/***/ 18:
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -441,7 +441,7 @@ nm.rangeChange = rangeChange;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 // let g = new
-var media_control_1 = __webpack_require__(18);
+var media_control_1 = __webpack_require__(17);
 //
 //
 console.log('eat this fish');

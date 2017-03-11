@@ -767,7 +767,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by gavorhes on 12/7/2015.
  */
 var LayerBase_1 = __webpack_require__(8);
-var esriToOl = __webpack_require__(16);
+var esriToOl = __webpack_require__(15);
 var mapPopup_1 = __webpack_require__(4);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
@@ -1766,8 +1766,7 @@ nm.resolutionToZoom = resolutionToZoom;
 
 
 /***/ }),
-/* 15 */,
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2146,7 +2145,7 @@ nm.makeMapServiceLegend = makeMapServiceLegend;
 
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2439,6 +2438,7 @@ exports.default = LayerLegend;
 
 
 /***/ }),
+/* 17 */,
 /* 18 */,
 /* 19 */,
 /* 20 */,
@@ -2473,7 +2473,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var quickMap_1 = __webpack_require__(7);
 var LayerEsriMapServer_1 = __webpack_require__(10);
-var LayerLegend_1 = __webpack_require__(17);
+var LayerLegend_1 = __webpack_require__(16);
 var map = quickMap_1.quickMap();
 var wisDotRegions = new LayerEsriMapServer_1.LayerEsriMapServer('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/Metamanager_regions/MapServer');
 var sixYearPlan = new LayerEsriMapServer_1.LayerEsriMapServer('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/SixYearPlan/MapServer', { name: 'Six Year Plan', legendCollapse: true });

@@ -767,7 +767,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by gavorhes on 12/7/2015.
  */
 var LayerBase_1 = __webpack_require__(8);
-var esriToOl = __webpack_require__(16);
+var esriToOl = __webpack_require__(15);
 var mapPopup_1 = __webpack_require__(4);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
@@ -1766,8 +1766,7 @@ nm.resolutionToZoom = resolutionToZoom;
 
 
 /***/ }),
-/* 15 */,
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2146,6 +2145,7 @@ nm.makeMapServiceLegend = makeMapServiceLegend;
 
 
 /***/ }),
+/* 16 */,
 /* 17 */,
 /* 18 */,
 /* 19 */,

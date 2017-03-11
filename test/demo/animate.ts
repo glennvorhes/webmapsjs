@@ -4,8 +4,6 @@ import {MediaControl, changeFunction} from "../../src/domUtil/media-control";
 import $ = require('jquery');
 import {LayerBaseVectorEsri} from "../../src/layers/LayerBaseVectorEsri";
 import {LayerEsriMapServer} from "../../src/layers/LayerEsriMapServer";
-import 'jquery-ui';
-
 
 let nexrhresStatic = new LayerRealEarthTile({
         products: 'nexrhres',

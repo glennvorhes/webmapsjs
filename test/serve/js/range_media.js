@@ -112,13 +112,6 @@ module.exports = $;
 
 /***/ }),
 
-/***/ 15:
-/***/ (function(module, exports) {
-
-module.exports = jquery-ui;
-
-/***/ }),
-
 /***/ 24:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -127,7 +120,6 @@ module.exports = jquery-ui;
 Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = __webpack_require__(0);
 var $ = __webpack_require__(1);
-__webpack_require__(15);
 var nm = provide_1.default('domUtil');
 var DayRange = (function () {
     /**
