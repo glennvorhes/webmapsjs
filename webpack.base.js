@@ -15,6 +15,6 @@ module.exports = {
         "custom-ol": "ol",
         "react": "React",
         "react-dom": "ReactDOM",
-        "jquery-ui": true
+        "jquery-ui": "$"
     }
 };
