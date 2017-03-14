@@ -63,22 +63,32 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 34);
+/******/ 	return __webpack_require__(__webpack_require__.s = 39);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 34:
+/***/ 39:
 /***/ (function(module, exports) {
 
 /**
  * Created by gavorhes on 9/22/2016.
  */
-console.log('here is another');
-console.log('here is another');
+// import * as React from "react";
+// import * as ReactDOM from "react/lib/";
+//
+// import { Hello } from "../_scratch/Hello";
+//
+// console.log('I am in a tsx file for some reason');
+//
+// ReactDOM.render(
+//     <Hello compiler="TypeScript" framework="React" />,
+//     document.getElementById("example")
+// );
+//
 
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=another.js.map
+//# sourceMappingURL=reacttst.js.map
