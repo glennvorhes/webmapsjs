@@ -78,8 +78,12 @@ export class LayerBaseVectorGeoJson extends LayerBaseVector {
      * @param {object} featureCollection - as geojson object
      */
     addFeatures(featureCollection: any) {
-
-        this.source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection));
+        this.source.addFeatures(
+            this._geoJsonFormat.readFeatures(featureCollection,
+                {dataProjection: this._transform.dataProjection,
+                    featureProjection: this._transform.featureProjection}
+                )
+        );
     }
 
 

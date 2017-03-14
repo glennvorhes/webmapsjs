@@ -72,7 +72,8 @@ var LayerBaseVectorGeoJson = (function (_super) {
      * @param {object} featureCollection - as geojson object
      */
     LayerBaseVectorGeoJson.prototype.addFeatures = function (featureCollection) {
-        this.source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection));
+        this.source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection, { dataProjection: this._transform.dataProjection,
+            featureProjection: this._transform.featureProjection }));
     };
     /**
      * trigger load features

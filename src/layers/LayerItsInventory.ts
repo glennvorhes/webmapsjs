@@ -7,6 +7,7 @@ import mapPopup from '../olHelpers/mapPopup';
 import provide from '../util/provide';
 import ol = require('custom-ol');
 import $ = require('jquery');
+import {proj4326, proj3857} from '../olHelpers/projections'
 
 let nm = provide('layers');
 
@@ -274,6 +275,8 @@ class LayerItsInventory extends LayerBaseVectorGeoJson {
         if (typeof options.itsType !== 'string') {
             throw 'its type must be defined';
         }
+
+        options.transform = {dataProjection: proj4326, featureProjection: proj3857};
 
         let addToLegend = '';
 

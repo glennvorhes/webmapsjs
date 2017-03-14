@@ -18,6 +18,7 @@ var mapPopup_1 = require("../olHelpers/mapPopup");
 var provide_1 = require("../util/provide");
 var ol = require("custom-ol");
 var $ = require("jquery");
+var projections_1 = require("../olHelpers/projections");
 var nm = provide_1.default('layers');
 function checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
     "use strict";
@@ -260,6 +261,7 @@ var LayerItsInventory = (function (_super) {
         if (typeof options.itsType !== 'string') {
             throw 'its type must be defined';
         }
+        options.transform = { dataProjection: projections_1.proj4326, featureProjection: projections_1.proj3857 };
         var addToLegend = '';
         // define a style with the helper function if it is not explicitly defined
         if (typeof options.style == 'undefined') {
