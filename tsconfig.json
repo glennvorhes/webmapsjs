@@ -6,7 +6,7 @@
     "target": "es5",
     "sourceMap": true,
     "inlineSources": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "noEmitOnError": true
   },
   "include": [
