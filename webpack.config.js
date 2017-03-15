@@ -2,22 +2,38 @@
 
 const path = require('path');
 const fs = require('fs');
-let config = require('./webpack.base');
 
 const demosDirectory = path.join(__dirname, 'test/demo');
 const files = fs.readdirSync(demosDirectory);
 
 let entries = {};
-for (let f of files){
+for (let f of files) {
     let key = f.replace(/.tsx?$/, '.js');
     entries[key] = path.join(demosDirectory, f);
 }
 
-config.entry = entries;
-
-config.output = {
-    path: path.join(__dirname, 'test/serve/js'),
-    filename: "[name]"
+module.exports = {
+    devtool: 'source-map',
+    entry: entries,
+    module: {
+        rules: [
+            {test: /\.tsx?$/, use: 'ts-loader'},
+            {test: /\.jsx?$/, use: 'source-map-loader'},
+        ]
+    },
+    resolve: {
+        extensions: [".ts", ".tsx", ".js", '.jsx']
+    },
+    externals: {
+        "jquery": "$",
+        "custom-ol": "ol",
+        "react": "React",
+        "react-dom": "ReactDOM",
+        "jquery-ui": "$"
+    },
+    output: {
+        path: path.join(__dirname, 'test/serve/js'),
+        filename: "[name]"
+    }
 };
 
-module.exports = config;
