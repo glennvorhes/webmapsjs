@@ -1,0 +1,947 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src\olHelpers\mapMoveCls.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/olHelpers/</a> mapMoveCls.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">25.81% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>32/124</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">3.23% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>2/62</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.76% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">24.79% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>30/121</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import LayerBaseVector from "../layers/LayerBaseVector";
+import MapInteractionBase from './mapInteractionBase';
+import * as checkDefined from '../util/checkDefined';
+import provide from '../util/provide';
+import makeGuid from '../util/makeGuid';
+import ol = require('custom-ol');
+import $ = require('jquery');
+const nm = provide('olHelpers');
+&nbsp;
+&nbsp;
+export interface extentObject{
+    minX: number;
+    minY: number;
+    maxX: number;
+    maxY: number;
+}
+&nbsp;
+export interface mapMoveCallbackFunction{
+    /**
+     *
+     * @param extent extent as predefined object minX, minX, maxX, maxY
+     * @param zoomLevel current zoom level
+     * @param evtType the event type 'change:center', 'change:resolution'
+     */
+    (extent: extentObject, zoomLevel: number, evtType?: string): any
+}
+&nbsp;
+&nbsp;
+/**
+ * assists with map move interactions, trigger callback functions
+ * @augments MapInteractionBase
+ */
+export class MapMoveCls extends MapInteractionBase {
+    _mapExtent: extentObject;
+    _zoomLevel: number;
+    _lookupLayer: Object;
+    _arrLayer: Array&lt;LayerBaseVector&gt;;
+    _arrLyrTimeout: Array&lt;number&gt;;
+    _mapMoveCallbackTimeout: Array&lt;number&gt;;
+    _mapMoveCallbackDelays: Array&lt;number&gt;;
+    _mapMoveCallbacksLookup: Object;
+    _mapMoveCallbackContext: Array&lt;Object&gt;;
+    _mapMoveCallbacks: Array&lt;mapMoveCallbackFunction&gt;;
+    _arrLyrRequest: Array&lt;any&gt;;
+&nbsp;
+    /**
+     * constructor called implicitly
+     */
+    constructor() {
+        super('map move');
+        this._arrLyrRequest = [];
+        this._arrLyrTimeout = [];
+        this._arrLayer = [];
+        this._lookupLayer = {};
+&nbsp;
+        this._mapMoveCallbacks = [];
+        this._mapMoveCallbacksLookup = {};
+        this._mapMoveCallbackDelays = [];
+        this._mapMoveCallbackContext = [];
+        this._mapMoveCallbackTimeout = [];
+&nbsp;
+        this._mapExtent = undefined;
+        this._zoomLevel = undefined;
+&nbsp;
+    }
+&nbsp;
+    /**
+     * initialize the map move object
+     * @param theMap - the ol map
+     */
+<span class="fstat-no" title="function not covered" >    init(theMap: ol.Map)</span>{
+<span class="cstat-no" title="statement not covered" >        super.init(theMap);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.map.getView().on(['change:center', 'change:resolution'], <span class="fstat-no" title="function not covered" >(e)</span> =&gt;{</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >           this._updateMapExtent();</span>
+&nbsp;
+            // trigger the layer updates
+<span class="cstat-no" title="statement not covered" >            for (let i = 0; i &lt; this._arrLayer.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                this.triggerLyrLoad(this._arrLayer[i], i, e.type);</span>
+            }
+&nbsp;
+            // trigger the map callbacks
+<span class="cstat-no" title="statement not covered" >            for (let i = 0; i &lt; this._mapMoveCallbacks.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                this.triggerMoveCallback(i, e.type);</span>
+            }
+        });
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _updateMapExtent() {</span>
+<span class="cstat-no" title="statement not covered" >        let theView = this.map.getView();</span>
+<span class="cstat-no" title="statement not covered" >        this._zoomLevel = theView.getZoom();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let extentArray = theView.calculateExtent(this.map.getSize());</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._mapExtent = {</span>
+            minX: extentArray[0],
+            minY: extentArray[1],
+            maxX: extentArray[2],
+            maxY: extentArray[3]
+        };
+    }
+&nbsp;
+    /**
+     * return the map extent
+     */
+<span class="fstat-no" title="function not covered" >    get mapExtent() {</span>
+<span class="cstat-no" title="statement not covered" >        if (!this._mapExtent) {</span>
+<span class="cstat-no" title="statement not covered" >            this._updateMapExtent();</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return this._mapExtent;</span>
+    }
+&nbsp;
+    /**
+     * Trigger the layer load
+     * @param lyr the layer being acted on
+     * @param index index of the layer
+     * @param eventType the event triggering the load, as 'change:center' or 'change:resolution'
+     */
+<span class="fstat-no" title="function not covered" >    triggerLyrLoad(lyr: LayerBaseVector, index?: number, eventType?: string)</span> {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (checkDefined.undefinedOrNull(lyr) &amp;&amp; checkDefined.undefinedOrNull(index)) {</span>
+<span class="cstat-no" title="statement not covered" >            throw 'need to define lyr or index';</span>
+        } else <span class="cstat-no" title="statement not covered" >if (checkDefined.definedAndNotNull(lyr) &amp;&amp; checkDefined.undefinedOrNull(index)) {</span>
+<span class="cstat-no" title="statement not covered" >            index = this._arrLayer.indexOf(lyr);</span>
+        } else <span class="cstat-no" title="statement not covered" >if (checkDefined.undefinedOrNull(lyr) &amp;&amp; checkDefined.definedAndNotNull(index)) {</span>
+<span class="cstat-no" title="statement not covered" >            lyr = this._arrLayer[index];</span>
+        }
+&nbsp;
+        // clear the timeout
+<span class="cstat-no" title="statement not covered" >        if (this._arrLyrTimeout[index] != null) {</span>
+<span class="cstat-no" title="statement not covered" >            clearTimeout(this._arrLyrTimeout[index]);</span>
+<span class="cstat-no" title="statement not covered" >            this._arrLyrTimeout[index] = null;</span>
+        }
+&nbsp;
+        // abort if necessary and clear the request
+<span class="cstat-no" title="statement not covered" >        if (this._arrLyrRequest[index] != null &amp;&amp; this._arrLyrRequest[index] != 4) {</span>
+<span class="cstat-no" title="statement not covered" >            this._arrLyrRequest[index].abort();</span>
+<span class="cstat-no" title="statement not covered" >            this._arrLyrRequest[index] = null;</span>
+        }
+&nbsp;
+        // dummy callback used if before load returns false
+<span class="cstat-no" title="statement not covered" >        let callbackFunc = <span class="fstat-no" title="function not covered" >function () {</span>};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (lyr.mapMoveBefore(this._zoomLevel, eventType)) {</span>
+<span class="cstat-no" title="statement not covered" >            lyr.mapMoveMakeGetParams(this._mapExtent, this._zoomLevel);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            let __this = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            callbackFunc = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="fstat-no" title="function not covered" >                function innerFunction(theLayer, theIndex)</span> {
+<span class="cstat-no" title="statement not covered" >                    let _innerThis = this;</span>
+<span class="cstat-no" title="statement not covered" >                    this._arrLyrRequest[theIndex] = $.get(</span>
+                        theLayer.url,
+                        theLayer.mapMoveParams,
+<span class="fstat-no" title="function not covered" >                        function (d)</span> {
+                            /**
+                             * @type {LayerBaseVector}
+                             */
+<span class="cstat-no" title="statement not covered" >                            theLayer.mapMoveCallback(d);</span>
+<span class="cstat-no" title="statement not covered" >                            theLayer.loadCallback();</span>
+                        }, 'json').fail(
+<span class="fstat-no" title="function not covered" >                        function (jqXHR)</span> {
+<span class="cstat-no" title="statement not covered" >                            if (jqXHR.statusText != 'abort') {</span>
+<span class="cstat-no" title="statement not covered" >                                console.log('failed');</span>
+<span class="cstat-no" title="statement not covered" >                                console.log(theLayer.url);</span>
+<span class="cstat-no" title="statement not covered" >                                console.log(theLayer.mapMoveParams);</span>
+                            }
+                        }).always(
+<span class="fstat-no" title="function not covered" >                        function () {</span>
+<span class="cstat-no" title="statement not covered" >                            _innerThis._arrLyrTimeout[theIndex] = null;</span>
+<span class="cstat-no" title="statement not covered" >                            _innerThis._arrLyrRequest[theIndex] = null;</span>
+                        });
+                }
+<span class="cstat-no" title="statement not covered" >                innerFunction.call(__this, lyr, index);</span>
+            };
+        } else {
+<span class="cstat-no" title="statement not covered" >            lyr.clear();</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this._arrLyrTimeout[index] = setTimeout(callbackFunc, lyr.onDemandDelay);</span>
+    }
+&nbsp;
+    /**
+     * trigger the map move call back at the given index
+     * @param ind - the index of the layer
+     * @param eventType=undefined the event triggering the load as 'change:center' or 'change:resolution'
+     * @param functionId=undefined the function id used to reference the added callback function
+     */
+<span class="fstat-no" title="function not covered" >    triggerMoveCallback(ind: number, eventType?: string, functionId?: string)</span> {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (typeof ind == 'undefined' &amp;&amp; typeof functionId == 'undefined'){</span>
+<span class="cstat-no" title="statement not covered" >            throw 'either the function index or the id must be defined';</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (typeof ind !== 'number'){</span>
+<span class="cstat-no" title="statement not covered" >            ind = this._mapMoveCallbacks.indexOf(this._mapMoveCallbacksLookup[functionId]);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (ind &lt; 0){</span>
+<span class="cstat-no" title="statement not covered" >            console.log('function not found');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+&nbsp;
+        // clear the timeout
+<span class="cstat-no" title="statement not covered" >        if (this._mapMoveCallbackTimeout[ind] != null) {</span>
+<span class="cstat-no" title="statement not covered" >            clearTimeout(this._mapMoveCallbackTimeout[ind]);</span>
+<span class="cstat-no" title="statement not covered" >            this._mapMoveCallbackTimeout[ind] = null;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let ctx = this._mapMoveCallbackContext[ind];</span>
+<span class="cstat-no" title="statement not covered" >        let theFunc = this._mapMoveCallbacks[ind];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let __this = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let f = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (ctx !== null) {</span>
+<span class="cstat-no" title="statement not covered" >                theFunc.call(ctx, __this._mapExtent, __this._zoomLevel, eventType);</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                theFunc(__this._mapExtent, __this._zoomLevel, eventType);</span>
+            }
+        };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._mapMoveCallbackTimeout[ind] = setTimeout(f, this._mapMoveCallbackDelays[ind]);</span>
+    }
+&nbsp;
+    /**
+     * Add a layer to the interaction
+     * @param  lyr - layer to add
+     * @param triggerOnAdd - if the layer should be loaded on add
+     */
+<span class="fstat-no" title="function not covered" >    addVectorLayer(lyr: LayerBaseVector, <span class="cstat-no" title="statement not covered" >triggerOnAdd: boolean = true)</span></span> {
+<span class="cstat-no" title="statement not covered" >        if (this._arrLayer.indexOf(lyr) &gt; -1) {</span>
+<span class="cstat-no" title="statement not covered" >            console.log('already added ' + lyr.name + ' to map move');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this._checkInit();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._arrLyrRequest.push(null);</span>
+<span class="cstat-no" title="statement not covered" >        this._arrLyrTimeout.push(null);</span>
+<span class="cstat-no" title="statement not covered" >        this._arrLayer.push(lyr);</span>
+<span class="cstat-no" title="statement not covered" >        this._lookupLayer[lyr.id] = lyr;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        triggerOnAdd = typeof triggerOnAdd == 'boolean' ? triggerOnAdd : true;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (triggerOnAdd) {</span>
+<span class="cstat-no" title="statement not covered" >            if (this._mapExtent === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                this._updateMapExtent();</span>
+            }
+<span class="cstat-no" title="statement not covered" >            this.triggerLyrLoad(lyr, this._arrLayer.length - 1);</span>
+        }
+    }
+&nbsp;
+&nbsp;
+    /**
+     * add a callback to the map move event
+     * @param func - callback function
+     * @param context - the context to use for this function
+     * @param delay=50 the delay before call load
+     * @param triggerOnAdd if the layer should be loaded on add to mapMove
+     * @param functionId optional id to reference the function later for outside triggering
+     */
+<span class="fstat-no" title="function not covered" >    addCallback(func: mapMoveCallbackFunction, context?: any, delay?: number, triggerOnAdd? : boolean, functionId?: string)</span> {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (this._mapMoveCallbacks.indexOf(func) &gt; -1) {</span>
+<span class="cstat-no" title="statement not covered" >            console.log('this function already added to map move');</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this._checkInit();</span>
+<span class="cstat-no" title="statement not covered" >        if (!functionId){</span>
+<span class="cstat-no" title="statement not covered" >            functionId = makeGuid();</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._mapMoveCallbacks.push(func);</span>
+<span class="cstat-no" title="statement not covered" >        this._mapMoveCallbacksLookup[functionId] = functionId;</span>
+<span class="cstat-no" title="statement not covered" >        this._mapMoveCallbackDelays.push(typeof delay == 'number' ? delay : 50);</span>
+<span class="cstat-no" title="statement not covered" >        this._mapMoveCallbackContext.push(checkDefined.definedAndNotNull(context) ? context : null);</span>
+<span class="cstat-no" title="statement not covered" >        this._mapMoveCallbackTimeout.push(null);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        triggerOnAdd = typeof triggerOnAdd == 'boolean' ? triggerOnAdd : true;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (triggerOnAdd) {</span>
+<span class="cstat-no" title="statement not covered" >            if (this._mapExtent === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                this._updateMapExtent();</span>
+            }
+<span class="cstat-no" title="statement not covered" >            this.triggerMoveCallback(this._mapMoveCallbacks.length - 1);</span>
+        }
+    }
+}
+&nbsp;
+nm.MapMoveCls = MapMoveCls;
+export default MapMoveCls;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 15 2017 01:55:33 GMT-0500 (Central Daylight Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

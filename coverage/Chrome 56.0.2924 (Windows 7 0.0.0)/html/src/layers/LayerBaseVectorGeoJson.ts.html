@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src\layers\LayerBaseVectorGeoJson.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/layers/</a> LayerBaseVectorGeoJson.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">86.11% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>31/36</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">77.78% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>14/18</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">62.5% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>5/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">84.85% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>28/33</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Created by gavorhes on 11/2/2015.
+ */
+&nbsp;
+import {LayerBaseVector, LayerBaseVectorOptions} from './LayerBaseVector';
+import provide from '../util/provide';
+import ol = require('custom-ol');
+import $ = require('jquery');
+import {MapMoveCls} from "../olHelpers/mapMoveCls";
+import * as proj from '../olHelpers/projections';
+import {proj3857} from "../olHelpers/projections";
+&nbsp;
+let nm = provide('layers');
+&nbsp;
+export interface crsTransform {
+    dataProjection?: ol.proj.Projection;
+    featureProjection?: ol.proj.Projection;
+}
+&nbsp;
+&nbsp;
+export interface LayerBaseVectorGeoJsonOptions extends LayerBaseVectorOptions {
+    transform?: crsTransform;
+    mapMoveObj?: MapMoveCls;
+}
+&nbsp;
+/**
+ * The Vector GeoJson Layer
+ * @augments LayerBaseVector
+ */
+export class LayerBaseVectorGeoJson extends LayerBaseVector {
+    _geoJsonFormat: ol.format.GeoJSON;
+    _transform: crsTransform;
+&nbsp;
+    /**
+     * @param {string|null} url - resource url, set to '' to make blank layer
+     * @param {object} options - config
+     * @param {string} [options.id] - layer id
+     * @param {string} [options.name=Unnamed Layer] - layer name
+     * @param {number} [options.opacity=1] - opacity
+     * @param {boolean} [options.visible=true] - default visible
+     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+     * @param {number} [options.zIndex=0] the z index for the layer
+     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+     * @param {boolean} [options.legendContent] additional content to add to the legend
+     *
+     * @param {boolean} [options.autoLoad=false] if the layer should auto load if not visible
+     * @param {object} [options.style=undefined] the layer style, use openlayers default style if not defined
+     * @param {boolean} [options.onDemand=false] if the layer should be loaded by extent on map move
+     * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
+     *
+     * @param {object} [options.transform={}] SR transform, set as false for no transform
+     * @param {string} options.transform.dataProjection=EPSG:4326 the _data CRS
+     * @param {string} options.transform.featureProjection=EPSG:3857 the feature/map CRS
+     * @param {mapMoveMakeGetParams} [options.mapMoveMakeGetParams=function(lyr, extent, zoomLevel){}] function to create additional map move params
+     * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
+     */
+    constructor(url?: string, <span class="missing-if-branch" title="else path not taken" >E</span>options: LayerBaseVectorGeoJsonOptions = {}) {
+        url = typeof url == 'string' ? url : '';
+        super(url, options)<span class="branch-1 cbranch-no" title="branch not covered" >;</span>
+&nbsp;
+        this._geoJsonFormat = new ol.format.GeoJSON();
+&nbsp;
+        this._transform = options.transform || {};
+        this._transform.dataProjection = this._transform.dataProjection || proj.proj4326;
+        this._transform.featureProjection = this._transform.featureProjection || proj3857;
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (this.autoLoad || <span class="branch-1 cbranch-no" title="branch not covered" >this.visible)</span> {
+            this._load();
+        }
+    }
+&nbsp;
+    /**
+     * add feature collection
+     * @param {object} featureCollection - as geojson object
+     */
+    addFeatures(featureCollection: any) {
+        this.source.addFeatures(
+            this._geoJsonFormat.readFeatures(featureCollection,
+                {dataProjection: this._transform.dataProjection,
+                    featureProjection: this._transform.featureProjection}
+                )
+        );
+    }
+&nbsp;
+&nbsp;
+    /**
+     * trigger load features
+     * @protected
+     * @returns {boolean} if already loaded
+     */
+    _load() {
+&nbsp;
+        if (super._load()) {
+            return true;
+        }
+&nbsp;
+        $.get(this._url,
+            this._params,
+<span class="fstat-no" title="function not covered" >            (d)</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >                this.addFeatures(d);</span>
+<span class="cstat-no" title="statement not covered" >                this.loadCallback(this);</span>
+            }, 'json').fail(
+<span class="fstat-no" title="function not covered" >            function () {</span>
+<span class="cstat-no" title="statement not covered" >                this._loaded = false;</span>
+            }
+        );
+&nbsp;
+        return false;
+    }
+&nbsp;
+    /**
+     * callback function on map move
+     * @param {object} d the json response
+     * @override
+     */
+<span class="fstat-no" title="function not covered" >    mapMoveCallback(d)</span> {
+<span class="cstat-no" title="statement not covered" >        super.mapMoveCallback(d);</span>
+<span class="cstat-no" title="statement not covered" >        this._source.addFeatures(this._geoJsonFormat.readFeatures(d,</span>
+            {featureProjection: this._transform.featureProjection, dataProjection: this._transform.dataProjection}));
+    }
+}
+&nbsp;
+nm.LayerBaseVectorGeoJson = LayerBaseVectorGeoJson;
+export default LayerBaseVectorGeoJson;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 15 2017 01:55:33 GMT-0500 (Central Daylight Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

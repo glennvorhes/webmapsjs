@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src\olHelpers\extentUtil.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/olHelpers/</a> extentUtil.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">20% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>6/30</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/18</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">20.69% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>6/29</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Created by gavorhes on 7/18/2016.
+ */
+import provide from '../util/provide';
+import ol = require('custom-ol');
+import {LayerBaseVector} from "../layers/LayerBaseVector";
+&nbsp;
+&nbsp;
+const nm = provide('util');
+&nbsp;
+/**
+ *
+ * @param {Array&lt;LayerBaseVector&gt;|Array&lt;ol.layer.Vector&gt;|LayerBaseVector|ol.layer.Vector|*} layers - array of layers or single
+ * @returns {ol.Extent|Array&lt;number&gt;|*} - collective extent
+ */
+<span class="fstat-no" title="function not covered" >export function calculateExtent(layers: ol.layer.Vector[]|LayerBaseVector[])</span>: ol.Extent|Array&lt;number&gt;| ol.Extent| number[] {
+    "use strict";
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    let hasExtent = false;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    let minX = 10E100;</span>
+<span class="cstat-no" title="statement not covered" >    let minY = 10E100;</span>
+<span class="cstat-no" title="statement not covered" >    let maxX = -10E100;</span>
+<span class="cstat-no" title="statement not covered" >    let maxY = -10E100;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    for (<span class="cstat-no" title="statement not covered" >let lyr </span>of layers) {</span>
+&nbsp;
+        /**
+         * 
+         * @type {ol.layer.Vector}
+         */
+<span class="cstat-no" title="statement not covered" >        let olLayer = lyr['olLayer'] || lyr;</span>
+        
+        
+<span class="cstat-no" title="statement not covered" >        if (olLayer.getSource().getFeatures().length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >            hasExtent = true;</span>
+<span class="cstat-no" title="statement not covered" >            let ext = olLayer.getSource().getExtent();</span>
+<span class="cstat-no" title="statement not covered" >            minX = ext[0] &lt; minX ? ext[0] : minX;</span>
+<span class="cstat-no" title="statement not covered" >            minY = ext[1] &lt; minY ? ext[1] : minY;</span>
+<span class="cstat-no" title="statement not covered" >            maxX = ext[2] &gt; maxX ? ext[2] : maxX;</span>
+<span class="cstat-no" title="statement not covered" >            maxY = ext[3] &gt; maxY ? ext[3] : maxY;</span>
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (hasExtent) {</span>
+<span class="cstat-no" title="statement not covered" >        return [minX, minY, maxX, maxY];</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >        return undefined;</span>
+    }
+}
+&nbsp;
+nm.calculateExtent = calculateExtent;
+ 
+&nbsp;
+/**
+ * given one or an array of layers, fit to the map
+ * @param layers - array of layers or single
+ * @param  mp - the map to fit
+ * @param [zoomOut=undefined] - levels to zoom out after fit
+ */
+<span class="fstat-no" title="function not covered" >export function fitToMap(layers: ol.layer.Vector[]|LayerBaseVector[], mp: ol.Map, zoomOut?: number)</span>{
+    "use strict";
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    let ext = calculateExtent(layers);</span>
+    
+<span class="cstat-no" title="statement not covered" >    if (typeof ext == 'undefined'){</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    }
+    
+<span class="cstat-no" title="statement not covered" >    mp.getView().fit(ext as ol.Extent, mp.getSize());</span>
+    
+<span class="cstat-no" title="statement not covered" >    if (typeof zoomOut == 'number'){</span>
+<span class="cstat-no" title="statement not covered" >        mp.getView().setZoom(mp.getView().getZoom() - zoomOut);</span>
+    }
+}
+&nbsp;
+nm.calculateExtent = calculateExtent;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 15 2017 01:55:33 GMT-0500 (Central Daylight Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

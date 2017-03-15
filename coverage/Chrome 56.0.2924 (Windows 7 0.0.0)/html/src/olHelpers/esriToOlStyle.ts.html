@@ -1,0 +1,1388 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src\olHelpers\esriToOlStyle.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/olHelpers/</a> esriToOlStyle.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">19.47% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>37/190</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/52</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">35% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>7/20</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">17.58% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>32/182</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Created by gavorhes on 1/4/2016.
+ */
+import provide from '../util/provide';
+import ol = require('custom-ol');
+const nm = provide('olHelpers.esriToOlStyle');
+&nbsp;
+/**
+ * This callback is displayed as part of the Requester class.
+ * @callback styleFunc
+ * @param {ol.Feature} feat - openlayers feature
+ * @param {number} resolution - map resolution
+ */
+&nbsp;
+/**
+ *
+ * @param {Array&lt;number&gt;} colorArray - input color array
+ * @param {number} opacity - the opacity 0 to 1
+ * @returns {string} rgba string
+ * @private
+ */
+<span class="fstat-no" title="function not covered" >function _colorArrayToRgba(colorArray, opacity)</span> {
+    "use strict";
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return `rgba(${colorArray[0]},${colorArray[1]},${colorArray[2]},${opacity})`;</span>
+}
+&nbsp;
+/**
+ * escape html charcters
+ * @param {string} str - input string
+ * @returns {string} escaped string
+ */
+<span class="fstat-no" title="function not covered" >function htmlEscape(str)</span> {
+<span class="cstat-no" title="statement not covered" >    return String(str)</span>
+        .replace(/&amp;/g, '&amp;amp;')
+        .replace(/"/g, '&amp;quot;')
+        .replace(/'/g, '&amp;#39;')
+        .replace(/&lt;/g, '&amp;lt;')
+        .replace(/&gt;/g, '&amp;gt;');
+}
+&nbsp;
+nm.htmlEscape = htmlEscape;
+&nbsp;
+&nbsp;
+export interface EsriResponse{
+    drawingInfo: {
+        renderer: EsriRenderer
+    },
+    geometryType: string
+}
+&nbsp;
+export interface EsriRenderer{
+    type: string;
+    symbol: EsriSymbol;
+    uniqueValueInfos: Array&lt;{label: string, value: any, symbol: EsriSymbol}&gt;;
+}
+&nbsp;
+export interface EsriSymbol{
+    size: number;
+    type: string;
+    outline:{
+        color: string;
+        width: number;
+    },
+    color: string;
+    width: number;
+}
+&nbsp;
+&nbsp;
+class CommonSymbol {
+    legendHtml: string;
+    opacity: number;
+    symbolObj: EsriSymbol;
+    olStyle: ol.style.Style|Array&lt;ol.style.Style&gt;|ol.StyleFunction;
+&nbsp;
+    /**
+     *
+     * @param symbolObj
+     * @param {number} opacity
+     */
+<span class="fstat-no" title="function not covered" >    constructor(symbolObj: EsriSymbol, opacity: number)</span> {
+<span class="cstat-no" title="statement not covered" >        this.symbolObj = symbolObj;</span>
+<span class="cstat-no" title="statement not covered" >        this.opacity = opacity;</span>
+<span class="cstat-no" title="statement not covered" >        this.olStyle = undefined;</span>
+<span class="cstat-no" title="statement not covered" >        this.legendHtml = '';</span>
+    }
+}
+&nbsp;
+interface ICommonSymbol{
+    new (symbolObj: EsriSymbol, opacity: number): CommonSymbol
+}
+&nbsp;
+&nbsp;
+class PointSymbol extends CommonSymbol {
+<span class="fstat-no" title="function not covered" >    constructor(symbolObj: EsriSymbol, opacity: number)</span> {
+        super(symbolObj, opacity);
+<span class="cstat-no" title="statement not covered" >        switch (this.symbolObj.type) {</span>
+            case 'esriSMS':
+<span class="cstat-no" title="statement not covered" >                let innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);</span>
+<span class="cstat-no" title="statement not covered" >                let outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);</span>
+<span class="cstat-no" title="statement not covered" >                let outlineWidth = this.symbolObj.outline.width;</span>
+<span class="cstat-no" title="statement not covered" >                let radius = this.symbolObj.size;</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                this.olStyle = new ol.style.Style({</span>
+                    image: new ol.style.Circle({
+                        radius: radius,
+                        fill: new ol.style.Fill({
+                            color: innerColor
+                        }),
+                        stroke: new ol.style.Stroke({color: outerColor, width: outlineWidth})
+                    })
+                });
+<span class="cstat-no" title="statement not covered" >                this.legendHtml = `&lt;span class="legend-layer-icon" style="color: ${innerColor}"&gt;&amp;#9679;&lt;/span&gt;`;</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+            case 'esriPMS':
+<span class="cstat-no" title="statement not covered" >                this.olStyle = new ol.style.Style({</span>
+                    image: new ol.style.Icon({src: `data:image/png;base64,${this.symbolObj['imageData']}`})
+                });
+<span class="cstat-no" title="statement not covered" >                this.legendHtml = `&lt;img class="legend-layer-icon" height="17" src="data:image/png;base64,${this.symbolObj['imageData']}"&gt;`;</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+            default:
+<span class="cstat-no" title="statement not covered" >                console.log(this.symbolObj);</span>
+<span class="cstat-no" title="statement not covered" >                alert('Point symbol does not handle symbol type: ' + this.symbolObj['type']);</span>
+        }
+    }
+}
+&nbsp;
+class LineSymbol extends CommonSymbol {
+<span class="fstat-no" title="function not covered" >    constructor(symbolObj: EsriSymbol, opacity: number)</span> {
+        super(symbolObj, opacity);
+<span class="cstat-no" title="statement not covered" >        switch (this.symbolObj.type) {</span>
+            case 'esriSLS':
+<span class="cstat-no" title="statement not covered" >                let innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);</span>
+<span class="cstat-no" title="statement not covered" >                let lineWidth = this.symbolObj.width;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                this.olStyle = new ol.style.Style({</span>
+                    stroke: new ol.style.Stroke({
+                        color: innerColor,
+                        //lineDash: [4],
+                        width: lineWidth
+                    })
+                });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                this.legendHtml = `&lt;span class="legend-layer-icon" `;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `style="`;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `background-color: ${innerColor};`;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `width: 40px;`;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `height: 4px;`;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `position: relative;`;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `display: inline-block;`;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `top: -1px;`;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `"&gt;&lt;/span&gt;`;</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+            default:
+<span class="cstat-no" title="statement not covered" >                console.log(this.symbolObj);</span>
+<span class="cstat-no" title="statement not covered" >                alert('Line symbol does not handle symbol type: ' + this.symbolObj['type']);</span>
+        }
+    }
+}
+&nbsp;
+class PolygonSymbol extends CommonSymbol {
+<span class="fstat-no" title="function not covered" >    constructor(symbolObj: EsriSymbol, opacity: number)</span> {
+        super(symbolObj, opacity);
+<span class="cstat-no" title="statement not covered" >        switch (this.symbolObj['type']) {</span>
+            case 'esriSFS':
+<span class="cstat-no" title="statement not covered" >                let innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);</span>
+<span class="cstat-no" title="statement not covered" >                let outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);</span>
+<span class="cstat-no" title="statement not covered" >                let outlineWidth = this.symbolObj.outline.width;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                this.olStyle = new ol.style.Style({</span>
+                    stroke: new ol.style.Stroke({
+                        color: outerColor,
+                        //lineDash: [4],
+                        width: outlineWidth
+                    }),
+                    fill: new ol.style.Fill({
+                        color: innerColor
+                    })
+                });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                this.legendHtml = `&lt;span class="legend-layer-icon" `;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `style="`;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `background-color: ${innerColor};`;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `border: solid ${outerColor} 1px;`;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `width: 40px;`;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `height: 9px;`;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `position: relative;`;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `display: inline-block;`;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `top: 2px;`;</span>
+<span class="cstat-no" title="statement not covered" >                this.legendHtml += `"&gt;&lt;/span&gt;`;</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            default:
+<span class="cstat-no" title="statement not covered" >                console.log(this.symbolObj);</span>
+<span class="cstat-no" title="statement not covered" >                alert('Polygon symbol does handle symbol type: ' + this.symbolObj['type']);</span>
+        }
+    }
+}
+&nbsp;
+class SymbolGenerator {
+    opacity: number;
+    renderer: EsriRenderer;
+    legendHtml: string;
+    olStyle: ol.style.Style|Array&lt;ol.style.Style&gt;|ol.StyleFunction;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    constructor(esriResponse: EsriResponse)</span> {
+<span class="cstat-no" title="statement not covered" >        this.opacity = (100 - (esriResponse['drawingInfo']['transparency'] || 0)) / 100;</span>
+<span class="cstat-no" title="statement not covered" >        this.renderer = esriResponse.drawingInfo.renderer;</span>
+<span class="cstat-no" title="statement not covered" >        this.olStyle = undefined;</span>
+<span class="cstat-no" title="statement not covered" >        this.legendHtml = '';</span>
+    }
+}
+&nbsp;
+class SingleSymbol extends SymbolGenerator {
+    symbol: EsriSymbol;
+    /**
+     *
+     * @param {object} esriResponse - layer info
+     * @param SymbolClass - the symbol class to use
+     */
+<span class="fstat-no" title="function not covered" >    constructor(esriResponse, SymbolClass: ICommonSymbol)</span> {
+        super(esriResponse);
+<span class="cstat-no" title="statement not covered" >        this.symbol = this.renderer.symbol;</span>
+<span class="cstat-no" title="statement not covered" >        let symbolObj = new SymbolClass(this.symbol, this.opacity);</span>
+<span class="cstat-no" title="statement not covered" >        this.olStyle = symbolObj.olStyle;</span>
+<span class="cstat-no" title="statement not covered" >        this.legendHtml = symbolObj.legendHtml;</span>
+    }
+}
+&nbsp;
+class UniqueValueSymbol extends SymbolGenerator {
+&nbsp;
+    propertyName: string;
+    defaultSymbol: EsriSymbol;
+    defaultStyle: ol.style.Style|Array&lt;ol.style.Style&gt;|ol.StyleFunction;
+    defaultLabelHtml: string;
+    labelArray: Array&lt;string&gt;;
+    legendArray: Array&lt;string&gt;;
+    propertyStyleLookup: Object;
+    valueArray: Array&lt;any&gt;;
+    uniqueValueInfos: Array&lt;{label: string, value: any, symbol: EsriSymbol}&gt;;
+&nbsp;
+    /**
+     *
+     * @param {object} esriResponse - layer info
+     * @param SymbolClass - the Symbol class definition
+     */
+<span class="fstat-no" title="function not covered" >    constructor(esriResponse: EsriResponse, SymbolClass: ICommonSymbol)</span> {
+        super(esriResponse);
+<span class="cstat-no" title="statement not covered" >        this.uniqueValueInfos = this.renderer['uniqueValueInfos'];</span>
+<span class="cstat-no" title="statement not covered" >        this.propertyName = this.renderer['field1'];</span>
+<span class="cstat-no" title="statement not covered" >        this.defaultSymbol = this.renderer['defaultSymbol'];</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (this.defaultSymbol) {</span>
+<span class="cstat-no" title="statement not covered" >            let symbolObj = new SymbolClass(this.defaultSymbol, this.opacity);</span>
+<span class="cstat-no" title="statement not covered" >            this.defaultStyle = symbolObj.olStyle;</span>
+<span class="cstat-no" title="statement not covered" >            this.defaultLabelHtml = `&lt;span class="legend-layer-subitem"&gt;${htmlEscape(this.renderer['defaultLabel'])}&lt;/span&gt;` + symbolObj.legendHtml;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            this.defaultStyle = undefined;</span>
+<span class="cstat-no" title="statement not covered" >            this.defaultLabelHtml = 'other';</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.valueArray = [];</span>
+<span class="cstat-no" title="statement not covered" >        this.labelArray = [];</span>
+<span class="cstat-no" title="statement not covered" >        this.legendArray = [];</span>
+<span class="cstat-no" title="statement not covered" >        this.propertyStyleLookup = {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (<span class="cstat-no" title="statement not covered" >let uniqueVal </span>of this.uniqueValueInfos) {</span>
+<span class="cstat-no" title="statement not covered" >            this.labelArray.push(uniqueVal['label']);</span>
+<span class="cstat-no" title="statement not covered" >            this.valueArray.push(uniqueVal['value']);</span>
+<span class="cstat-no" title="statement not covered" >            let uniqueSym = new SymbolClass(uniqueVal.symbol, this.opacity);</span>
+<span class="cstat-no" title="statement not covered" >            this.legendArray.push(`&lt;span class="legend-layer-subitem"&gt;${htmlEscape(uniqueVal['label'])}&lt;/span&gt;` + uniqueSym.legendHtml);</span>
+<span class="cstat-no" title="statement not covered" >            this.propertyStyleLookup[uniqueVal['value']] = uniqueSym.olStyle;</span>
+        }
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.olStyle = <span class="fstat-no" title="function not covered" >(feature: ol.Feature)</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            let checkProperties = feature.getProperties();</span>
+<span class="cstat-no" title="statement not covered" >            let checkProperty = checkProperties[this.propertyName];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            let returnValue;</span>
+<span class="cstat-no" title="statement not covered" >            if (this.propertyStyleLookup[checkProperty] !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                returnValue = [this.propertyStyleLookup[checkProperty]];</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >               returnValue = [this.defaultStyle];</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return returnValue;</span>
+        };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (this.defaultLabelHtml !== null) {</span>
+<span class="cstat-no" title="statement not covered" >            this.legendArray.push(this.defaultLabelHtml);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.legendHtml = '&lt;ul&gt;';</span>
+<span class="cstat-no" title="statement not covered" >        for (<span class="cstat-no" title="statement not covered" >let h </span>of this.legendArray) {</span>
+<span class="cstat-no" title="statement not covered" >            this.legendHtml += `&lt;li&gt;${h}&lt;/li&gt;`;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this.legendHtml += '&lt;/ul&gt;';</span>
+    }
+}
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * style and legend object
+ * @typedef {object} styleAndLegend
+ * @property {styleFunc} style - style function
+ * @property {string} legend - legend content
+ */
+&nbsp;
+/**
+ *
+ * @param {object} esriResponse - layer info
+ * @returns {styleAndLegend} style and legend object
+ */
+<span class="fstat-no" title="function not covered" >export function makeFeatureServiceLegendAndSymbol(esriResponse: EsriResponse)</span> {
+    "use strict";
+<span class="cstat-no" title="statement not covered" >    let renderer = esriResponse.drawingInfo.renderer;</span>
+<span class="cstat-no" title="statement not covered" >    let symbolLegendOut: SymbolGenerator = null;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    switch (renderer.type) {</span>
+        case 'simple':
+<span class="cstat-no" title="statement not covered" >            switch (esriResponse.geometryType) {</span>
+                case 'esriGeometryPoint':
+<span class="cstat-no" title="statement not covered" >                    symbolLegendOut = new SingleSymbol(esriResponse, PointSymbol);</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+                case 'esriGeometryPolyline':
+<span class="cstat-no" title="statement not covered" >                    symbolLegendOut = new SingleSymbol(esriResponse, LineSymbol);</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+                case 'esriGeometryPolygon':
+<span class="cstat-no" title="statement not covered" >                    symbolLegendOut = new SingleSymbol(esriResponse, PolygonSymbol);</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+                default:
+<span class="cstat-no" title="statement not covered" >                    console.log(esriResponse);</span>
+<span class="cstat-no" title="statement not covered" >                    alert(esriResponse.geometryType + ' not handled');</span>
+            }
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case 'uniqueValue':
+<span class="cstat-no" title="statement not covered" >            switch (esriResponse.geometryType) {</span>
+                case 'esriGeometryPoint':
+<span class="cstat-no" title="statement not covered" >                    symbolLegendOut = new UniqueValueSymbol(esriResponse, PointSymbol);</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+                case 'esriGeometryPolyline':
+<span class="cstat-no" title="statement not covered" >                    symbolLegendOut = new UniqueValueSymbol(esriResponse, LineSymbol);</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+                case 'esriGeometryPolygon':
+<span class="cstat-no" title="statement not covered" >                    symbolLegendOut = new UniqueValueSymbol(esriResponse, PolygonSymbol);</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+                default:
+<span class="cstat-no" title="statement not covered" >                    console.log(esriResponse);</span>
+<span class="cstat-no" title="statement not covered" >                    alert(esriResponse['geometryType'] + ' not handled');</span>
+            }
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        default:
+<span class="cstat-no" title="statement not covered" >            alert('not handled renderer type: ' + renderer['type']);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (symbolLegendOut == null) {</span>
+<span class="cstat-no" title="statement not covered" >        return {style: undefined, legend: ''};</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >        return {style: symbolLegendOut.olStyle, legend: symbolLegendOut.legendHtml};</span>
+    }
+}
+&nbsp;
+nm.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
+&nbsp;
+&nbsp;
+/**
+ *
+ * @param {object} lyrObject - the layer as defined in the response
+ * @param {boolean} [skipLayerNameAndExpander=false] use only icons
+ * @returns {string} legend html
+ */
+<span class="fstat-no" title="function not covered" >function mapServiceLegendItem(lyrObject, <span class="cstat-no" title="statement not covered" >skipLayerNameAndExpander: boolean = false)</span></span> {
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    skipLayerNameAndExpander = typeof skipLayerNameAndExpander == 'boolean' ? skipLayerNameAndExpander : false;</span>
+<span class="cstat-no" title="statement not covered" >    let layerName = lyrObject['layerName'];</span>
+<span class="cstat-no" title="statement not covered" >    let legendItems = lyrObject['legend'];</span>
+<span class="cstat-no" title="statement not covered" >    let legendHtml = '';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!skipLayerNameAndExpander) {</span>
+<span class="cstat-no" title="statement not covered" >        legendHtml += `&lt;span class="legend-layer-subitem"&gt;${layerName}&lt;/span&gt;`;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (legendItems.length == 1) {</span>
+<span class="cstat-no" title="statement not covered" >        legendHtml = `&lt;img class="legend-layer-icon" height="17" src="data:image/png;base64,${legendItems[0]['imageData']}"&gt;`;</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >        if (!skipLayerNameAndExpander) {</span>
+<span class="cstat-no" title="statement not covered" >            legendHtml += '&lt;span class="legend-items-expander" title="Expand/Collapse"&gt;&amp;#9660;&lt;/span&gt;';</span>
+        }
+<span class="cstat-no" title="statement not covered" >        legendHtml += '&lt;ul&gt;';</span>
+<span class="cstat-no" title="statement not covered" >        for (let i = 0; i &lt; legendItems.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            legendHtml += `&lt;li&gt;`;</span>
+<span class="cstat-no" title="statement not covered" >            legendHtml += `&lt;span class="legend-layer-subitem"&gt;${htmlEscape(legendItems[i]['label'])}&lt;/span&gt;`;</span>
+<span class="cstat-no" title="statement not covered" >            legendHtml += `&lt;img class="legend-layer-icon" height="17" src="data:image/png;base64,${legendItems[i]['imageData']}"&gt;`;</span>
+<span class="cstat-no" title="statement not covered" >            legendHtml += `&lt;/li&gt;`;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        legendHtml += '&lt;/ul&gt;';</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!skipLayerNameAndExpander) {</span>
+<span class="cstat-no" title="statement not covered" >        legendHtml = `&lt;span class="legend-layer-subitem"&gt;${layerName}&lt;/span&gt;` + legendHtml;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return legendHtml;</span>
+}
+&nbsp;
+/**
+ * make map service legent
+ * @param {object} esriResponse - layer info
+ * @returns {string} legend content
+ */
+<span class="fstat-no" title="function not covered" >export function makeMapServiceLegend(esriResponse)</span> {
+    "use strict";
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    let newLegendHtml = '';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    let layers = esriResponse['layers'];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (layers.length == 1) {</span>
+<span class="cstat-no" title="statement not covered" >        newLegendHtml += mapServiceLegendItem(layers[0], true);</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >        newLegendHtml += '&lt;ul&gt;';</span>
+<span class="cstat-no" title="statement not covered" >        for (let i = 0; i &lt; layers.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            newLegendHtml += '&lt;li&gt;' + mapServiceLegendItem(layers[i]) + '&lt;/li&gt;';</span>
+        }
+<span class="cstat-no" title="statement not covered" >        newLegendHtml += '&lt;/ul&gt;';</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return newLegendHtml;</span>
+}
+&nbsp;
+nm.makeMapServiceLegend = makeMapServiceLegend;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 15 2017 01:55:33 GMT-0500 (Central Daylight Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

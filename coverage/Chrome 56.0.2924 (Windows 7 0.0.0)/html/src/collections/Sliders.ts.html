@@ -1,0 +1,2024 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src\collections\Sliders.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/collections/</a> Sliders.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.07% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>33/298</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/68</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.11% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>4/36</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">10.81% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>32/296</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Created by gavorhes on 12/10/2015.
+ */
+&nbsp;
+import provide from '../util/provide';
+import $ = require('jquery');
+&nbsp;
+let nm = provide('collections');
+&nbsp;
+export interface TipSliderConfig {
+    label: string;
+    yearOptions: Array&lt;{column: string, label: string}&gt;
+}
+&nbsp;
+export interface TipPresetConfig {
+    label: string;
+    presets: Array&lt;{column: string, value: number}&gt;
+}
+&nbsp;
+export interface ChangeResponse{
+    paramWeights: Object;
+    region: string;
+    mmVersion: string;
+}
+&nbsp;
+export interface ChangeCallback{
+    (chg: ChangeResponse): any
+}
+&nbsp;
+&nbsp;
+class TipPresets implements TipPresetConfig {
+    label: string;
+    presets: Array&lt;{column: string, value: number}&gt;;
+    domId: string;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    constructor(conf: TipPresetConfig)</span> {
+<span class="cstat-no" title="statement not covered" >        this.label = conf.label;</span>
+<span class="cstat-no" title="statement not covered" >        this.presets = conf.presets;</span>
+<span class="cstat-no" title="statement not covered" >        this.domId = this.label.replace(/ /g, '').toLowerCase();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let theSum = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (<span class="cstat-no" title="statement not covered" >let pr </span>of this.presets){</span>
+<span class="cstat-no" title="statement not covered" >            theSum += pr.value;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (theSum != 100){</span>
+<span class="cstat-no" title="statement not covered" >            throw 'preset sum does note equal 100';</span>
+        }
+    }
+}
+&nbsp;
+&nbsp;
+class _Slider {
+    _min: number;
+    _max: number;
+    _locked: boolean;
+    atMin: boolean;
+    atMax: boolean;
+    _weightDefault: number;
+    _weight: number;
+    html: string;
+    domId: string;
+    name: string;
+&nbsp;
+    labelLow: JQuery;
+    labelHigh: JQuery;
+    labelVal: JQuery;
+    slider: JQuery;
+    selectionBox: JQuery;
+    chk: JQuery;
+&nbsp;
+    selectedParam: any;
+    selectedParamDefault: any;
+    _dropdownSelection: string;
+&nbsp;
+    /**
+     * Slider constructor
+     * @param sliderConfig - the configuration
+&nbsp;
+     */
+<span class="fstat-no" title="function not covered" >    constructor(sliderConfig: TipSliderConfig)</span> {
+<span class="cstat-no" title="statement not covered" >        this._dropdownSelection = null;</span>
+<span class="cstat-no" title="statement not covered" >        this._weight = null;</span>
+<span class="cstat-no" title="statement not covered" >        this.name = sliderConfig.label;</span>
+<span class="cstat-no" title="statement not covered" >        this.domId = this.name.toLowerCase().replace(/ /g, '-');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._locked = false;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._min = 0.0;</span>
+<span class="cstat-no" title="statement not covered" >        this._max = 100;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.labelLow = null;</span>
+<span class="cstat-no" title="statement not covered" >        this.labelHigh = null;</span>
+<span class="cstat-no" title="statement not covered" >        this.labelVal = null;</span>
+<span class="cstat-no" title="statement not covered" >        this.slider = null;</span>
+<span class="cstat-no" title="statement not covered" >        this.chk = null;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.atMin = false;</span>
+<span class="cstat-no" title="statement not covered" >        this.atMax = false;</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let sel = `&lt;select class="${sliderConfig.yearOptions.length == 1 ? 'hidden-select' : 'show-select'}" id="${this.domId}_chg"&gt;`;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (let i = 0; i &lt; sliderConfig.yearOptions.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            let itm = sliderConfig.yearOptions[i];</span>
+<span class="cstat-no" title="statement not covered" >            sel += `&lt;option value="${itm.column}"&gt;${itm.label}&lt;/option&gt;`;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        sel += '&lt;/select&gt;';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.selectedParamDefault = this.selectedParam;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.html = '&lt;div class="slider-div"&gt;' +</span>
+            `&lt;label for="${this.domId}_chk" class="slider-label"&gt;${this.name}&lt;/label&gt;` +
+            sel + `&lt;br&gt;` +
+            `&lt;input id="${this.domId}_chk" type="checkbox" title="Lock/Unlock Slider"&gt;` +
+            `&lt;label id="${this.domId}_low" class="low-high"&gt;&lt;/label&gt;` +
+            `&lt;input id="${this.domId}" type="range" value="50" min="0" max="100" step="0.1"&gt;` +
+            `&lt;label id="${this.domId}_high" class="low-high"&gt;&lt;/label&gt;` +
+            `&lt;label id="${this.domId}_lbl" for="${this.domId}" class="percent-label"&gt;&lt;/label&gt;&lt;/div&gt;`;
+    }
+&nbsp;
+    /**
+     * add html to dom
+     * @param {jQuery} $container - container element
+     */
+<span class="fstat-no" title="function not covered" >    addToDom($container)</span> {
+<span class="cstat-no" title="statement not covered" >        $container.append(this.html);</span>
+<span class="cstat-no" title="statement not covered" >        this.labelLow = $(`#${this.domId}_low`);</span>
+<span class="cstat-no" title="statement not covered" >        this.labelHigh = $(`#${this.domId}_high`);</span>
+<span class="cstat-no" title="statement not covered" >        this.labelVal = $(`#${this.domId}_lbl`);</span>
+<span class="cstat-no" title="statement not covered" >        this.slider = $(`#${this.domId}`);</span>
+<span class="cstat-no" title="statement not covered" >        this.selectionBox = $(`#${this.domId}_chg`);</span>
+<span class="cstat-no" title="statement not covered" >        this.chk = $(`#${this.domId}_chk`);</span>
+    }
+&nbsp;
+    /**
+     * increment the slider
+     * @param {number} delta change delta
+     * @returns {number} the remainder not able to be allocated to this slider
+     */
+<span class="fstat-no" title="function not covered" >    increment(delta)</span> {
+<span class="cstat-no" title="statement not covered" >        let remainder = 0;</span>
+<span class="cstat-no" title="statement not covered" >        delta = Number(delta.toFixed(1));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._weight += delta;</span>
+<span class="cstat-no" title="statement not covered" >        if (this._weight &lt; this._min) {</span>
+<span class="cstat-no" title="statement not covered" >            remainder = this._min - this._weight;</span>
+<span class="cstat-no" title="statement not covered" >            this._weight = this._min;</span>
+<span class="cstat-no" title="statement not covered" >            this.atMin = true;</span>
+        } else <span class="cstat-no" title="statement not covered" >if (this._weight &gt; this._max) {</span>
+<span class="cstat-no" title="statement not covered" >            remainder = this._max - this._weight;</span>
+<span class="cstat-no" title="statement not covered" >            this._weight = this._max;</span>
+<span class="cstat-no" title="statement not covered" >            this.atMax = true;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            this.atMin = false;</span>
+<span class="cstat-no" title="statement not covered" >            this.atMax = false;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.slider.val(this._weight.toFixed(1));</span>
+<span class="cstat-no" title="statement not covered" >        this.labelVal.html(this._weight.toFixed(1) + '%');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return remainder;</span>
+    }
+&nbsp;
+    /**
+     * set the value and drop down
+     * @param {number} newVal the new value
+     * @param {string} selectedParam the selected parameter
+     */
+<span class="fstat-no" title="function not covered" >    setValAndDropDown(newVal: number, selectedParam: string)</span> {
+<span class="cstat-no" title="statement not covered" >        this.min = 0;</span>
+<span class="cstat-no" title="statement not covered" >        this.max = 100;</span>
+<span class="cstat-no" title="statement not covered" >        this.weight = newVal;</span>
+<span class="cstat-no" title="statement not covered" >        this.slider.val(newVal.toFixed(1));</span>
+<span class="cstat-no" title="statement not covered" >        this.selectionBox.val(selectedParam);</span>
+<span class="cstat-no" title="statement not covered" >        this.selectedParam = selectedParam;</span>
+<span class="cstat-no" title="statement not covered" >        this.locked = true;</span>
+    }
+&nbsp;
+    /**
+     *
+     * @returns {boolean} if locked
+     */
+<span class="fstat-no" title="function not covered" >    get locked() {</span>
+<span class="cstat-no" title="statement not covered" >        return this._locked;</span>
+    }
+&nbsp;
+    /**
+     *
+     * @param {boolean} val if locked
+     */
+<span class="fstat-no" title="function not covered" >    set locked(val)</span> {
+<span class="cstat-no" title="statement not covered" >        this._locked = val;</span>
+<span class="cstat-no" title="statement not covered" >        this.slider.prop('disabled', this._locked);</span>
+<span class="cstat-no" title="statement not covered" >        this.selectionBox.prop('disabled', this._locked);</span>
+<span class="cstat-no" title="statement not covered" >        this.chk.prop('checked', !this._locked);</span>
+    }
+&nbsp;
+    /**
+     *
+     * @returns {number} the minimum
+     */
+<span class="fstat-no" title="function not covered" >    get min() {</span>
+<span class="cstat-no" title="statement not covered" >        return this._min;</span>
+    }
+&nbsp;
+    /**
+     *
+     * @param {number} newVal new minimum
+     */
+<span class="fstat-no" title="function not covered" >    set min(newVal)</span> {
+<span class="cstat-no" title="statement not covered" >        this._min = Number(newVal.toFixed(1));</span>
+<span class="cstat-no" title="statement not covered" >        if (this._min &lt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >            this._min = 0;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this.labelLow.html(this._min.toFixed(1));</span>
+<span class="cstat-no" title="statement not covered" >        this.slider.attr('min', this._min.toFixed(1));</span>
+<span class="cstat-no" title="statement not covered" >        this.atMin = this._weight == this._min;</span>
+    }
+&nbsp;
+    /**
+     *
+     * @returns {number} the maximum
+     */
+<span class="fstat-no" title="function not covered" >    get max() {</span>
+<span class="cstat-no" title="statement not covered" >        return this._max;</span>
+    }
+&nbsp;
+    /**
+     *
+     * @param {number} newVal the maximum
+     */
+<span class="fstat-no" title="function not covered" >    set max(newVal)</span> {
+<span class="cstat-no" title="statement not covered" >        this._max = Number(newVal.toFixed(1));</span>
+<span class="cstat-no" title="statement not covered" >        if (this._max &gt; 100) {</span>
+<span class="cstat-no" title="statement not covered" >            this._max = 100.0;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this.labelHigh.html(this._max.toFixed(1));</span>
+<span class="cstat-no" title="statement not covered" >        this.slider.attr('max', this._max.toFixed(1));</span>
+<span class="cstat-no" title="statement not covered" >        this.atMax = this._weight == this._max;</span>
+    }
+&nbsp;
+    /**
+     *
+     * @returns {number} the weight
+     */
+<span class="fstat-no" title="function not covered" >    get weight() {</span>
+<span class="cstat-no" title="statement not covered" >        return this._weight;</span>
+    }
+&nbsp;
+    /**
+     *
+     * @param {number} newVal the weight
+     */
+<span class="fstat-no" title="function not covered" >    set weight(newVal)</span> {
+<span class="cstat-no" title="statement not covered" >        this._weight = Number(newVal.toFixed(1));</span>
+<span class="cstat-no" title="statement not covered" >        this.labelVal.html(this._weight.toFixed(1) + '%');</span>
+<span class="cstat-no" title="statement not covered" >        if (this._weight &lt;= this._min) {</span>
+<span class="cstat-no" title="statement not covered" >            this.atMin = true;</span>
+<span class="cstat-no" title="statement not covered" >            this.atMax = false;</span>
+        } else <span class="cstat-no" title="statement not covered" >if (this._weight &gt;= this._max) {</span>
+<span class="cstat-no" title="statement not covered" >            this.atMin = false;</span>
+<span class="cstat-no" title="statement not covered" >            this.atMax = true;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            this.atMin = false;</span>
+<span class="cstat-no" title="statement not covered" >            this.atMax = false;</span>
+        }
+    }
+}
+&nbsp;
+nm._Slider = _Slider;
+&nbsp;
+&nbsp;
+/**
+ * class to keep track of the sliders
+ */
+export class TipSliders {
+    $container: JQuery;
+    reservedPercent: number;
+    lockedCount: number;
+    notLockedCount: number;
+    private _sliderList: Array&lt;_Slider&gt;;
+    private _sliderLookup: {[s: string]: _Slider};
+    private resetting: boolean;
+    private _changedCallback: ChangeCallback;
+&nbsp;
+    private _lockedList: Array&lt;_Slider&gt;;
+    private _inRangeList: Array&lt;_Slider&gt;;
+    private _atMinList: Array&lt;_Slider&gt;;
+    private _atMaxList: Array&lt;_Slider&gt;;
+&nbsp;
+    private _presetArray: Array&lt;TipPresets&gt;;
+    private _presetLookup: {[s: string]: TipPresets};
+&nbsp;
+    private _$presetSelector: JQuery;
+    private _$regionSelector: JQuery;
+    private _$versionSelector: JQuery;
+&nbsp;
+    /**
+     *
+     * @param sliderConfigs
+     * @param presetConfig
+     * @param divId
+     * @param presetSelector
+     * @param regionSelector
+     * @param versionSelector
+     * @param chgCallback
+     */
+<span class="fstat-no" title="function not covered" >    constructor(sliderConfigs: Array&lt;TipSliderConfig&gt;, presetConfig: Array&lt;TipPresetConfig&gt;,</span>
+                divId: string, presetSelector: JQuery, regionSelector: JQuery, versionSelector: JQuery,
+                chgCallback?: ChangeCallback) {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.resetting = false;</span>
+<span class="cstat-no" title="statement not covered" >        this.reservedPercent = 0.0;</span>
+<span class="cstat-no" title="statement not covered" >        this.$container = $('#' + divId);</span>
+<span class="cstat-no" title="statement not covered" >        this.$container.addClass('slider-container');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._changedCallback = typeof chgCallback == 'function' ? chgCallback : <span class="fstat-no" title="function not covered" >() =&gt; {</span>};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._$presetSelector = presetSelector;</span>
+<span class="cstat-no" title="statement not covered" >        this._$regionSelector = regionSelector;</span>
+<span class="cstat-no" title="statement not covered" >        this._$versionSelector = versionSelector;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._sliderList = [];</span>
+<span class="cstat-no" title="statement not covered" >        this._sliderLookup = {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (let i = 0; i &lt; sliderConfigs.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            let sld = new _Slider(sliderConfigs[i]);</span>
+<span class="cstat-no" title="statement not covered" >            this._sliderList.push(sld);</span>
+<span class="cstat-no" title="statement not covered" >            this._sliderLookup[sld.domId] = sld;</span>
+<span class="cstat-no" title="statement not covered" >            sld.addToDom(this.$container);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._presetArray = [];</span>
+<span class="cstat-no" title="statement not covered" >        this._presetLookup = {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (let i = 0; i &lt; presetConfig.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            let preset = new TipPresets(presetConfig[i]);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            let idx = (i + 1).toFixed();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            this._presetLookup[idx] = preset;</span>
+<span class="cstat-no" title="statement not covered" >            this._presetArray.push(preset);</span>
+<span class="cstat-no" title="statement not covered" >            this._$presetSelector.append(`&lt;option value="${idx}"&gt;${preset.label}&lt;/option&gt;`);</span>
+        }
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._lockedList = [];</span>
+<span class="cstat-no" title="statement not covered" >        this._inRangeList = [];</span>
+<span class="cstat-no" title="statement not covered" >        this._atMinList = [];</span>
+<span class="cstat-no" title="statement not covered" >        this._atMaxList = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.lockedCount = 10;</span>
+<span class="cstat-no" title="statement not covered" >        this.notLockedCount = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._splitSliderArray();</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._$presetSelector.change(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >            this.setPresetValues();</span>
+<span class="cstat-no" title="statement not covered" >            this._runChangedCallback();</span>
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._$regionSelector.change(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >            this._runChangedCallback();</span>
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._$versionSelector.change(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >            this._runChangedCallback();</span>
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._$presetSelector.trigger('change');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._addEventListeners();</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _runChangedCallback(){</span>
+<span class="cstat-no" title="statement not covered" >        this._changedCallback(this.paramWeightsRegionVersion);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    get changedCallback(): ChangeCallback{</span>
+<span class="cstat-no" title="statement not covered" >        return this._changedCallback</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    set changedCallback(chg: ChangeCallback)</span>{
+<span class="cstat-no" title="statement not covered" >        this._changedCallback = chg;</span>
+<span class="cstat-no" title="statement not covered" >        this._runChangedCallback();</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    setPresetValues() {</span>
+<span class="cstat-no" title="statement not covered" >        let idx = this._$presetSelector.val() || '1';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let thePreset = this._presetLookup[idx];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (let i = 0; i &lt; thePreset.presets.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            let presetValues = thePreset.presets[i];</span>
+<span class="cstat-no" title="statement not covered" >            let theSlider = this._sliderList[i];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            theSlider.locked = true;</span>
+<span class="cstat-no" title="statement not covered" >            theSlider.setValAndDropDown(presetValues.value, presetValues.column);</span>
+        }
+    }
+&nbsp;
+    /**
+     * split array into subarrays holding the sliders
+     * @private
+     */
+<span class="fstat-no" title="function not covered" >    _splitSliderArray() {</span>
+<span class="cstat-no" title="statement not covered" >        this._lockedList = [];</span>
+<span class="cstat-no" title="statement not covered" >        this._inRangeList = [];</span>
+<span class="cstat-no" title="statement not covered" >        this._atMinList = [];</span>
+<span class="cstat-no" title="statement not covered" >        this._atMaxList = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (let i = 0; i &lt; this._sliderList.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            let sld = this._sliderList[i];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (sld.locked) {</span>
+<span class="cstat-no" title="statement not covered" >                this._lockedList.push(sld);</span>
+            } else <span class="cstat-no" title="statement not covered" >if (sld.atMin) {</span>
+<span class="cstat-no" title="statement not covered" >                this._atMinList.push(sld);</span>
+            } else <span class="cstat-no" title="statement not covered" >if (sld.atMax) {</span>
+<span class="cstat-no" title="statement not covered" >                this._atMaxList.push(sld);</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                this._inRangeList.push(sld);</span>
+            }
+        }
+<span class="cstat-no" title="statement not covered" >        this.lockedCount = this._lockedList.length;</span>
+<span class="cstat-no" title="statement not covered" >        this.notLockedCount = this._sliderList.length - this.lockedCount;</span>
+    }
+&nbsp;
+    /**
+     * handle remainder, recursive to take care of min max overshoots
+     * @param {number} remain the remainder
+     * @param {string} skipDomId - this dom id
+     * @private
+     */
+<span class="fstat-no" title="function not covered" >    _handleRemainder(remain, skipDomId)</span> {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        remain = Number(remain.toFixed(1));</span>
+<span class="cstat-no" title="statement not covered" >        if (remain == 0) {</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._splitSliderArray();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let canChangeArray = [];</span>
+<span class="cstat-no" title="statement not covered" >        for (let i = 0; i &lt; this._inRangeList.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            let sld = this._inRangeList[i];</span>
+<span class="cstat-no" title="statement not covered" >            if (sld.domId == skipDomId) {</span>
+<span class="cstat-no" title="statement not covered" >                continue;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            canChangeArray.push(sld);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (remain &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >            for (let i = 0; i &lt; this._atMaxList.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                let sld = this._atMaxList[i];</span>
+<span class="cstat-no" title="statement not covered" >                if (sld.domId == skipDomId) {</span>
+<span class="cstat-no" title="statement not covered" >                    continue;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                canChangeArray.push(sld);</span>
+            }
+        } else {
+<span class="cstat-no" title="statement not covered" >            for (let i = 0; i &lt; this._atMinList.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                let sld = this._atMinList[i];</span>
+<span class="cstat-no" title="statement not covered" >                if (sld.domId == skipDomId) {</span>
+<span class="cstat-no" title="statement not covered" >                    continue;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                canChangeArray.push(sld);</span>
+            }
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (canChangeArray.length == 0) {</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let inc = -1 * Number((remain / canChangeArray.length).toFixed(1));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let newRemainder = 0;</span>
+<span class="cstat-no" title="statement not covered" >        for (let i = 0; i &lt; canChangeArray.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            newRemainder += canChangeArray[i].increment(inc);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._handleRemainder(newRemainder, skipDomId);</span>
+    }
+&nbsp;
+    /**
+     *
+     * @param {object} keyValList key and value list
+     */
+<span class="fstat-no" title="function not covered" >    setValues(keyValList)</span> {
+<span class="cstat-no" title="statement not covered" >        this.resetting = true;</span>
+<span class="cstat-no" title="statement not covered" >        for (let k in keyValList) {</span>
+<span class="cstat-no" title="statement not covered" >            if (keyValList.hasOwnProperty(k)) {</span>
+<span class="cstat-no" title="statement not covered" >                this._sliderLookup[k].setValAndDropDown(keyValList[k][0], keyValList[k][1]);</span>
+            }
+        }
+<span class="cstat-no" title="statement not covered" >        this.resetting = false;</span>
+    }
+&nbsp;
+    /**
+     * get the weight sum
+     * @returns {number} the weight sum
+     */
+<span class="fstat-no" title="function not covered" >    getSum() {</span>
+<span class="cstat-no" title="statement not covered" >        let total = 0;</span>
+<span class="cstat-no" title="statement not covered" >        for (let i = 0; i &lt; this._sliderList.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            let sld = this._sliderList[i];</span>
+<span class="cstat-no" title="statement not covered" >            total += Number(sld.weight.toFixed(1));</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return total;</span>
+    }
+&nbsp;
+    /**
+     * get the parameter weights
+     * @returns {object} lookup with parameter weights
+     */
+<span class="fstat-no" title="function not covered" >    getParams() {</span>
+<span class="cstat-no" title="statement not covered" >        let paramWeights = {};</span>
+<span class="cstat-no" title="statement not covered" >        for (let i = 0; i &lt; this._sliderList.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            let sld = this._sliderList[i];</span>
+<span class="cstat-no" title="statement not covered" >            paramWeights[sld.selectedParam] = Number(sld.weight.toFixed(1));</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return paramWeights;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _addEventListeners() {</span>
+<span class="cstat-no" title="statement not covered" >        let ___this = this;</span>
+&nbsp;
+&nbsp;
+        //change function
+<span class="cstat-no" title="statement not covered" >        this.$container.find('input[type="range"]').change(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >                if (___this.resetting) {</span>
+<span class="cstat-no" title="statement not covered" >                    return;</span>
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                let $this = $(this);</span>
+<span class="cstat-no" title="statement not covered" >                let domId = this['id'];</span>
+<span class="cstat-no" title="statement not covered" >                let sldr = ___this._sliderLookup[domId];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                let newValue = parseFloat($this.val());</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                let oldValue = sldr.weight;</span>
+<span class="cstat-no" title="statement not covered" >                let diff = newValue - oldValue;</span>
+<span class="cstat-no" title="statement not covered" >                diff = Number(diff.toFixed(1));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                sldr.weight = Number(newValue.toFixed(1));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                ___this._handleRemainder(diff, domId);</span>
+&nbsp;
+                //cleanup, make sure the sum is still 100
+<span class="cstat-no" title="statement not covered" >                let sum = Number(___this.getSum().toFixed(1));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if (sum &gt; 100) {</span>
+<span class="cstat-no" title="statement not covered" >                    loop1:</span>
+<span class="cstat-no" title="statement not covered" >                        while (true) {</span>
+<span class="cstat-no" title="statement not covered" >                            for (let i = 0; i &lt; ___this._sliderList.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                                let sld = ___this._sliderList[i];</span>
+<span class="cstat-no" title="statement not covered" >                                if (sld.domId == domId || sld.locked || sld.atMin) {</span>
+<span class="cstat-no" title="statement not covered" >                                    continue;</span>
+                                }
+<span class="cstat-no" title="statement not covered" >                                sld.increment(-0.1);</span>
+<span class="cstat-no" title="statement not covered" >                                sum -= 0.1;</span>
+<span class="cstat-no" title="statement not covered" >                                if (sum.toFixed(1) == '100.0') {</span>
+<span class="cstat-no" title="statement not covered" >                                    break loop1;</span>
+                                }
+                            }
+                        }
+                } else <span class="cstat-no" title="statement not covered" >if (sum &lt; 100) {</span>
+<span class="cstat-no" title="statement not covered" >                    loop1:</span>
+<span class="cstat-no" title="statement not covered" >                        while (true) {</span>
+<span class="cstat-no" title="statement not covered" >                            for (let i = 0; i &lt; ___this._sliderList.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                                let sld = ___this._sliderList[i];</span>
+<span class="cstat-no" title="statement not covered" >                                if (sld.domId == domId || sld.locked || sld.atMax) {</span>
+<span class="cstat-no" title="statement not covered" >                                    continue;</span>
+                                }
+<span class="cstat-no" title="statement not covered" >                                sld.increment(0.1);</span>
+<span class="cstat-no" title="statement not covered" >                                sum += 0.1;</span>
+<span class="cstat-no" title="statement not covered" >                                if (sum.toFixed(1) == '100.0') {</span>
+<span class="cstat-no" title="statement not covered" >                                    break loop1;</span>
+                                }
+                            }
+                        }
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                ___this._$presetSelector.val('0');</span>
+<span class="cstat-no" title="statement not covered" >                ___this._runChangedCallback();</span>
+            }
+        );
+&nbsp;
+        //update the selected parameter when the selection is changed
+<span class="cstat-no" title="statement not covered" >        $('.show-select').change(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (___this.resetting) {</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            ___this._sliderLookup[this['id'].replace('_chg', '')].selectedParam = $(this).val();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            ___this._$presetSelector.val('0');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            ___this._runChangedCallback();</span>
+&nbsp;
+        });
+&nbsp;
+        //lock the slider and update the reserved percent
+<span class="cstat-no" title="statement not covered" >        this.$container.find('input[type="checkbox"]').change(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            let domEl = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            ___this._sliderLookup[domEl.id.replace('_chk', '')].locked = !domEl.checked;</span>
+<span class="cstat-no" title="statement not covered" >            ___this.reservedPercent = 0.0;</span>
+<span class="cstat-no" title="statement not covered" >            ___this.notLockedCount = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            let notLockedSliders = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            for (let i = 0; i &lt; ___this._sliderList.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                let sld = ___this._sliderList[i];</span>
+<span class="cstat-no" title="statement not covered" >                if (sld.locked) {</span>
+<span class="cstat-no" title="statement not covered" >                    ___this.reservedPercent += sld.weight;</span>
+<span class="cstat-no" title="statement not covered" >                    continue;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                notLockedSliders.push(sld);</span>
+<span class="cstat-no" title="statement not covered" >                ___this.notLockedCount++;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            for (let i = 0; i &lt; ___this._sliderList.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                let sld = ___this._sliderList[i];</span>
+<span class="cstat-no" title="statement not covered" >                if (sld.locked) {</span>
+<span class="cstat-no" title="statement not covered" >                    continue;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                sld.max = 100 - ___this.reservedPercent;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (notLockedSliders.length == 1) {</span>
+<span class="cstat-no" title="statement not covered" >                notLockedSliders[0].min = notLockedSliders[0].weight;</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                for (let i = 0; i &lt; notLockedSliders.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                    notLockedSliders[i].min = 0;</span>
+                }
+            }
+        });
+&nbsp;
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    get paramWeightsRegionVersion(): ChangeResponse{</span>
+<span class="cstat-no" title="statement not covered" >        return {paramWeights: this.getParams(),</span>
+            region: this._$regionSelector.val() as string, mmVersion: this._$versionSelector.val() as string}
+    }
+}
+&nbsp;
+nm.Sliders = TipSliders;
+export default TipSliders;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 15 2017 01:55:33 GMT-0500 (Central Daylight Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

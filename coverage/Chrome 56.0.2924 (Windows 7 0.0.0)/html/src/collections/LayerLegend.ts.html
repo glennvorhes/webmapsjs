@@ -1,0 +1,1145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src\collections\LayerLegend.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/collections/</a> LayerLegend.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.46% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>18/157</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/60</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">20% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>3/15</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.69% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>18/154</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Created by gavorhes on 12/16/2015.
+ */
+&nbsp;
+import provide from '../util/provide';
+import makeGuid from '../util/makeGuid';
+import mapMove from '../olHelpers/mapMove';
+&nbsp;
+let nm = provide('collections');
+import $ = require('jquery');
+&nbsp;
+class LayerGroup {
+    groupLayers: any;
+    groupLayersLookup: any;
+    groupGroupsLookup: any;
+    groupGroups: any;
+    itemIdArray: any;
+    groupId: any;
+    groupName: any;
+    allLayerArray: any;
+    parent: any;
+    allGroupArray: any;
+    allGroupLookup: any;
+    allLayerLookup: any;
+    collapse: any;
+    addCheck: any;
+    layerParentLookup: any;
+&nbsp;
+    /**
+     *
+     * @param {object} [groupConfig={}] - group configuration object
+     * @param {string} groupConfig.groupName - the group name
+     * @param {boolean} [groupConfig.collapse=false] - if the group should be collapsed initially
+     * @param {boolean} [groupConfig.addCheck=true] - if the group should have a checkbox controlling visibility of all layers
+     * @param {LayerGroup} [parent=undefined] - the parent group
+     */
+<span class="fstat-no" title="function not covered" >    constructor(groupConfig?, parent?)</span> {
+<span class="cstat-no" title="statement not covered" >        this.groupLayers = [];</span>
+<span class="cstat-no" title="statement not covered" >        this.groupLayersLookup = {};</span>
+<span class="cstat-no" title="statement not covered" >        this.groupGroups = [];</span>
+<span class="cstat-no" title="statement not covered" >        this.groupGroupsLookup = {};</span>
+<span class="cstat-no" title="statement not covered" >        this.itemIdArray = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (typeof groupConfig == 'undefined') {</span>
+<span class="cstat-no" title="statement not covered" >            this.parent = null;</span>
+<span class="cstat-no" title="statement not covered" >            this.groupId = 'root';</span>
+<span class="cstat-no" title="statement not covered" >            this.groupName = 'root';</span>
+<span class="cstat-no" title="statement not covered" >            this.allGroupLookup = {root: this};</span>
+<span class="cstat-no" title="statement not covered" >            this.allGroupArray = [this];</span>
+<span class="cstat-no" title="statement not covered" >            this.allLayerArray = [];</span>
+<span class="cstat-no" title="statement not covered" >            this.allLayerLookup = {};</span>
+<span class="cstat-no" title="statement not covered" >            this.layerParentLookup = {};</span>
+<span class="cstat-no" title="statement not covered" >            this.collapse = false;</span>
+<span class="cstat-no" title="statement not covered" >            this.addCheck = false;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            this.groupId = makeGuid();</span>
+<span class="cstat-no" title="statement not covered" >            this.parent = parent;</span>
+<span class="cstat-no" title="statement not covered" >            this.groupName = groupConfig.groupName;</span>
+<span class="cstat-no" title="statement not covered" >            this.collapse = typeof  groupConfig.collapse == 'boolean' ? groupConfig.collapse : false;</span>
+<span class="cstat-no" title="statement not covered" >            this.addCheck = typeof  groupConfig.addCheck == 'boolean' ? groupConfig.addCheck : true;</span>
+        }
+    }
+&nbsp;
+    /**
+     *
+     * @param {object} groupConfig - configuration object
+     * @param {string} groupConfig.groupName - the group name
+     * @param {boolean} groupConfig.collapse if the group should be collapsed initially
+     * @param {boolean} groupConfig.addCheck if the group should have a checkbox controlling visibility of all layers
+     * @param {Array&lt;LayerGroup&gt;} parents parent groups
+     * @returns {LayerGroup} the layer group just added
+     */
+<span class="fstat-no" title="function not covered" >    addGroup(groupConfig, parents)</span> {
+<span class="cstat-no" title="statement not covered" >        let parent;</span>
+<span class="cstat-no" title="statement not covered" >        if (parents.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >            parent = parents[parents.length - 1];</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            parent = 'root';</span>
+        }
+&nbsp;
+&nbsp;
+        /**
+         * @type {LayerGroup}
+         */
+<span class="cstat-no" title="statement not covered" >        let parentGroup = this.allGroupLookup[parent];</span>
+<span class="cstat-no" title="statement not covered" >        let newGroup = new LayerGroup(groupConfig, parentGroup);</span>
+<span class="cstat-no" title="statement not covered" >        this.allGroupLookup[newGroup.groupId] = newGroup;</span>
+<span class="cstat-no" title="statement not covered" >        this.allGroupArray.push(newGroup);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        parentGroup.groupGroups.push(newGroup);</span>
+<span class="cstat-no" title="statement not covered" >        parentGroup.groupGroupsLookup[newGroup.groupId] = newGroup;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (parentGroup.itemIdArray.indexOf(newGroup.groupId) &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >            console.log(newGroup.groupId);</span>
+<span class="cstat-no" title="statement not covered" >            throw 'layer and group ids must be unique';</span>
+        }
+<span class="cstat-no" title="statement not covered" >        parentGroup.itemIdArray.push(newGroup.groupId);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return newGroup;</span>
+    }
+&nbsp;
+    /**
+     *
+     * @param {LayerBase} newLayer the layer to be added
+     * @param {Array} parents array
+     */
+<span class="fstat-no" title="function not covered" >    addLegendLayer(newLayer, parents)</span> {
+<span class="cstat-no" title="statement not covered" >        let parent;</span>
+<span class="cstat-no" title="statement not covered" >        if (parents.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >            parent = parents[parents.length - 1];</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            parent = 'root';</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.allLayerLookup[newLayer.id] = newLayer;</span>
+<span class="cstat-no" title="statement not covered" >        this.allLayerArray.push(newLayer);</span>
+&nbsp;
+        /**
+         * @type {LayerGroup}
+         */
+<span class="cstat-no" title="statement not covered" >        let parentGroup = this.allGroupLookup[parent];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        parentGroup.groupLayers.push(newLayer);</span>
+<span class="cstat-no" title="statement not covered" >        parentGroup.groupLayersLookup[newLayer.id] = newLayer;</span>
+<span class="cstat-no" title="statement not covered" >        if (parentGroup.itemIdArray.indexOf(newLayer.id) &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >            console.log(newLayer.id);</span>
+<span class="cstat-no" title="statement not covered" >            throw 'layer and group ids must be unique';</span>
+        }
+<span class="cstat-no" title="statement not covered" >        parentGroup.itemIdArray.push(newLayer.id);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.layerParentLookup[newLayer.id] = parentGroup;</span>
+&nbsp;
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    getLegendHtml(legendId, options)</span> {
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let legendHtml = `&lt;ul id="${legendId}" class="legend-container"&gt;`;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        legendHtml += `&lt;li&gt;${options.legendTitle}&lt;input type="checkbox" checked id="suppress-by-extent-${legendId}" class="suppress-by-extent"&gt;` +</span>
+            `&lt;label title="Suppress layers not visible at this zoom level" for="suppress-by-extent-${legendId}"&gt;` +
+            `&lt;span&gt;&lt;/span&gt;` +
+            `&lt;/label&gt;&lt;/li&gt;`;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        legendHtml += this._buildLegend(this.itemIdArray, this, options.layerDivClasses) + '&lt;/ul&gt;';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return legendHtml;</span>
+    }
+&nbsp;
+    /**
+     * @param {Array} itemIds the items to process
+     * @param {LayerGroup} theGroup new group
+     * @param {Array} [layerDivClasses=[]] optional classes to apply to the layer divs
+     * @static
+     * @returns {string} html string
+     */
+<span class="fstat-no" title="function not covered" >    _buildLegend(itemIds, theGroup, layerDivClasses)</span> {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (itemIds.length == 0) {</span>
+<span class="cstat-no" title="statement not covered" >            return '';</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let theHml = '';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let itemId = itemIds[0];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (theGroup.groupLayersLookup[itemId]) {</span>
+&nbsp;
+            /**
+             * @type {LayerBase}
+             */
+<span class="cstat-no" title="statement not covered" >            let lyr = theGroup.groupLayersLookup[itemId];</span>
+<span class="cstat-no" title="statement not covered" >            theHml += `&lt;li id="${lyr.id}-layer-li" class="legend-layer-li ${layerDivClasses.join(' ')}"&gt;` + lyr.getLegendDiv() + '&lt;/li&gt;';</span>
+&nbsp;
+&nbsp;
+        } else <span class="cstat-no" title="statement not covered" >if (theGroup.groupGroupsLookup[itemId]) {</span>
+            /**
+             * type {LayerGroup}
+             */
+<span class="cstat-no" title="statement not covered" >            let otherGroup = theGroup.groupGroupsLookup[itemId];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            theHml += `&lt;li&gt;`;</span>
+<span class="cstat-no" title="statement not covered" >            theHml += `&lt;div id="${otherGroup.groupId}-legend-layer-div" ` +</span>
+                `class="legend-layer-group  ${layerDivClasses.join(' ')}"&gt;`;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (otherGroup.addCheck) {</span>
+<span class="cstat-no" title="statement not covered" >                theHml += `&lt;input type="checkbox" checked id="${otherGroup.groupId}-group-chck"&gt;` +</span>
+                    `&lt;label for="${otherGroup.groupId}-group-chck" title="Click arrow to expand or collapse"&gt;${otherGroup.groupName}&lt;/label&gt;`;
+            } else {
+<span class="cstat-no" title="statement not covered" >                theHml += `&lt;label title="Click arrow to expand or collapse"&gt;${otherGroup.groupName}&lt;/label&gt;`;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            theHml += `&lt;span title="Expand/Collapse" class="layer-group-expander`;</span>
+<span class="cstat-no" title="statement not covered" >            theHml += `${otherGroup.collapse ? ' legend-layer-group-initial-collapse' : ''}"&gt;`;</span>
+<span class="cstat-no" title="statement not covered" >            theHml += otherGroup.collapse ? '&amp;#9654;' : '&amp;#9660;';</span>
+<span class="cstat-no" title="statement not covered" >            theHml += '&lt;/span&gt;';</span>
+&nbsp;
+            //parents.push(groupId);
+<span class="cstat-no" title="statement not covered" >            theHml += '&lt;ul&gt;' + this._buildLegend(otherGroup.itemIdArray, otherGroup, layerDivClasses) + '&lt;/ul&gt;';</span>
+<span class="cstat-no" title="statement not covered" >            theHml += '&lt;/div&gt;';</span>
+<span class="cstat-no" title="statement not covered" >            theHml += '&lt;/li&gt;';</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return theHml + this._buildLegend(itemIds.slice(1), theGroup, layerDivClasses);</span>
+    }
+}
+&nbsp;
+/**
+ * a wrapper to make a legend
+ */
+class LayerLegend {
+&nbsp;
+    $divElement: any;
+    _legendItems: any;
+    layerGroup: any;
+    legendId: any;
+&nbsp;
+    /**
+     *
+     * @param {Array} legendItems array of layers or objects with {groupName:  {string}, collapse: {boolean}, addCheck: {boolean}, items: {Array}}
+     * @param {string} divId the div where the legend should be added
+     * @param {object} options for legend
+     * @param {Array} [options.layerDivClasses=[]] optional array of classes to be applied to the layer legend divs for custom styling
+     * @param {string} [options.legendTitle=Legend] the legend title
+     * @param {boolean} [options.scaleDependent=true] if legend display is scale dependent
+     */
+<span class="fstat-no" title="function not covered" >    constructor(legendItems, divId, options)</span> {
+<span class="cstat-no" title="statement not covered" >        for (<span class="cstat-no" title="statement not covered" >let i </span>of legendItems) {</span>
+<span class="cstat-no" title="statement not covered" >            if (typeof i == 'undefined') {</span>
+<span class="cstat-no" title="statement not covered" >                throw 'undefined item passed in array to legend constructor';</span>
+            }
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        options = options || {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        options.legendTitle = typeof options.legendTitle == 'string' ? options.legendTitle : 'Legend';</span>
+<span class="cstat-no" title="statement not covered" >        options.scaleDependent = typeof options.scaleDependent == 'boolean' ? options.scaleDependent : true;</span>
+<span class="cstat-no" title="statement not covered" >        options.layerDivClasses = options.layerDivClasses || [];</span>
+&nbsp;
+        // if legend display is scale dependent, make sure the mapMove object is initialized first
+<span class="cstat-no" title="statement not covered" >        if (options.scaleDependent) {</span>
+<span class="cstat-no" title="statement not covered" >            mapMove.checkInit();</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.$divElement = $('#' + divId);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._legendItems = legendItems;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.layerGroup = new LayerGroup();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._buildTree(legendItems);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.legendId = makeGuid();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.$divElement.append(this.layerGroup.getLegendHtml(this.legendId, options));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (<span class="cstat-no" title="statement not covered" >let l </span>of this.layerGroup.allLayerArray){</span>
+<span class="cstat-no" title="statement not covered" >            l.applyCollapse();</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let _this = this;</span>
+        //// if legend display is scale dependent, make sure the mapMove object is initialized first
+<span class="cstat-no" title="statement not covered" >        if (options.scaleDependent) {</span>
+<span class="cstat-no" title="statement not covered" >            mapMove.checkInit();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            mapMove.addCallback(<span class="fstat-no" title="function not covered" >function (ext, zoom, evt)</span> {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if (typeof evt == 'undefined' || evt == 'change:resolution') {</span>
+<span class="cstat-no" title="statement not covered" >                    for (<span class="cstat-no" title="statement not covered" >let lyr </span>of this.layerGroup.allLayerArray) {</span>
+<span class="cstat-no" title="statement not covered" >                        let $lyrLi = $('#' + lyr.id + '-layer-li');</span>
+<span class="cstat-no" title="statement not covered" >                        if (zoom &gt; lyr.maxZoom || zoom &lt; lyr.minZoom) {</span>
+<span class="cstat-no" title="statement not covered" >                            $lyrLi.addClass('layer-not-visible');</span>
+                        } else {
+<span class="cstat-no" title="statement not covered" >                            $lyrLi.removeClass('layer-not-visible');</span>
+                        }
+                    }
+                }
+            }, this, 100, true, 'legend1');
+        }
+&nbsp;
+        // &lt;editor-fold desc="add event listeners"&gt;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.$divElement.find(".suppress-by-extent").change(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            let legendLayerLis = $('.legend-layer-li');</span>
+<span class="cstat-no" title="statement not covered" >            if (this.checked) {</span>
+<span class="cstat-no" title="statement not covered" >                legendLayerLis.removeClass('layer-force-show');</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                legendLayerLis.addClass('layer-force-show');</span>
+            }
+        });
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.$divElement.find('.legend-check').change(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            let lyrId = this.id.replace('-legend-layer-check', '');</span>
+<span class="cstat-no" title="statement not covered" >            _this.layerGroup.allLayerLookup[lyrId].visible = this.checked;</span>
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.$divElement.find('.legend-layer-group &gt; input[type=checkbox]').change(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            $(this).siblings('ul').find('input[type=checkbox]').prop('checked', this.checked).trigger('change');</span>
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.$divElement.find('.layer-group-expander').click(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            let $this = $(this);</span>
+<span class="cstat-no" title="statement not covered" >            $this.removeClass('legend-layer-group-initial-collapse');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            $this.siblings('ul').slideToggle();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if ($this.hasClass('legend-layer-group-collapsed')){</span>
+<span class="cstat-no" title="statement not covered" >                $this.removeClass('legend-layer-group-collapsed');</span>
+<span class="cstat-no" title="statement not covered" >                $this.html('&amp;#9660;');</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                $this.addClass('legend-layer-group-collapsed');</span>
+<span class="cstat-no" title="statement not covered" >                $this.html('&amp;#9654;');</span>
+            }
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.$divElement.find('.legend-layer-group-initial-collapse').trigger('click');</span>
+        // &lt;/editor-fold&gt;
+    }
+&nbsp;
+&nbsp;
+    /**
+     * @param {Array} [legendItems=this._layerConfig] the legend items
+     * @param {Array} [parents=[]] the ordered list of groups in which this item is a member
+     * @private
+     */
+<span class="fstat-no" title="function not covered" >    _buildTree(legendItems, parents?)</span> {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (legendItems.length == 0) {</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let oneItem = legendItems[0];</span>
+&nbsp;
+        //reset the parent if the item is in the base array
+<span class="cstat-no" title="statement not covered" >        if (this._legendItems.indexOf(oneItem) &gt; -1 || typeof parents == 'undefined') {</span>
+<span class="cstat-no" title="statement not covered" >            parents = [];</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (typeof oneItem['groupName'] !== 'undefined') {</span>
+<span class="cstat-no" title="statement not covered" >            let groupItem = legendItems[0];</span>
+<span class="cstat-no" title="statement not covered" >            let newGroup = this.layerGroup.addGroup(groupItem, parents);</span>
+<span class="cstat-no" title="statement not covered" >            parents.push(newGroup.groupId);</span>
+<span class="cstat-no" title="statement not covered" >            this._buildTree(groupItem.items, parents);</span>
+        } else {
+            /**
+             * @type {LayerBase}
+             */
+<span class="cstat-no" title="statement not covered" >            let layerItem = legendItems[0];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            this.layerGroup.addLegendLayer(layerItem, parents);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._buildTree(legendItems.slice(1), parents);</span>
+    }
+&nbsp;
+}
+&nbsp;
+nm.LayerLegend = LayerLegend;
+export default LayerLegend;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 15 2017 01:55:33 GMT-0500 (Central Daylight Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src\domUtil\SelectBoxBase.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/domUtil/</a> SelectBoxBase.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">29.79% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>14/47</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">20% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">28.89% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>13/45</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Created by gavorhes on 5/13/2016.
+ */
+&nbsp;
+import makeGuid from '../util/makeGuid';
+import provide from '../util/provide';
+const nm = provide('domUtil');
+&nbsp;
+export interface selectChangeCallback{
+    /**
+     *
+     * @param theValue the current select value of the select box
+     */
+    (theValue: string) : void
+}
+&nbsp;
+/**
+ * must return in the contents &lt;select id="${guid}"&gt;&lt;/select&gt; among other things
+ */
+export interface contentGenerator{
+    /**
+     * @param aGuid
+     */
+    (aGuid: string): string
+}
+&nbsp;
+&nbsp;
+export class SelectBoxBase{
+    _$container: JQuery;
+    $label: JQuery;
+    _box: JQuery;
+    _changeListeners: Array&lt;selectChangeCallback&gt;;
+    /**
+     *
+     * @param {jQuery} parent - parent container
+     * @param {string} labelContent
+     * @param {contentGenerator} [contentGen=undefined]
+     */
+<span class="fstat-no" title="function not covered" >    constructor(parent, labelContent, contentGen?: contentGenerator)</span>{
+<span class="cstat-no" title="statement not covered" >        let guidTop = makeGuid();</span>
+<span class="cstat-no" title="statement not covered" >        let guid = makeGuid();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let htmlString = `&lt;div id="${guidTop}"&gt;`;</span>
+<span class="cstat-no" title="statement not covered" >        htmlString += `&lt;label for="${guid}"&gt;${labelContent}&lt;/label&gt;`;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (contentGen){</span>
+<span class="cstat-no" title="statement not covered" >            htmlString += contentGen(guid);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            htmlString += `&lt;select id="${guid}"&gt;&lt;/select&gt;`;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        htmlString += '&lt;/div&gt;';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        parent.append(htmlString);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._$container = parent.find('#' + guidTop);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.$label = this._$container.find('label');</span>
+&nbsp;
+        /**
+         *
+         * @type {Array&lt;selectChangeCallback&gt;}
+         * @private
+         */
+<span class="cstat-no" title="statement not covered" >        this._changeListeners = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._box = parent.find(`#${guid}`);</span>
+        
+<span class="cstat-no" title="statement not covered" >        if (!this._box){</span>
+<span class="cstat-no" title="statement not covered" >            throw 'the select box was not found';</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._box.change(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >            this.changed();</span>
+        })
+    }
+&nbsp;
+    /**
+     * 
+     * @returns {jQuery}
+     */
+<span class="fstat-no" title="function not covered" >    get box(){</span>
+<span class="cstat-no" title="statement not covered" >        return this._box;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    changed(){</span>
+<span class="cstat-no" title="statement not covered" >        let v = this._box.val();</span>
+        
+<span class="cstat-no" title="statement not covered" >        for (<span class="cstat-no" title="statement not covered" >let f </span>of this._changeListeners){</span>
+<span class="cstat-no" title="statement not covered" >            f(v);</span>
+        }
+    }
+&nbsp;
+    /**
+     *
+     * @param {selectChangeCallback} func
+     */
+<span class="fstat-no" title="function not covered" >    addChangeListener(func: selectChangeCallback)</span>{
+<span class="cstat-no" title="statement not covered" >        this._changeListeners.push(func);</span>
+    }
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    get selectedValue(): string|number{</span>
+<span class="cstat-no" title="statement not covered" >        let theVal = this.box.val();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (theVal == null || typeof theVal == 'undefined'){</span>
+<span class="cstat-no" title="statement not covered" >            return null;</span>
+        } else <span class="cstat-no" title="statement not covered" >if (isNaN(theVal)){</span>
+<span class="cstat-no" title="statement not covered" >            return theVal</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            if (theVal.indexOf('.') &gt; -1){</span>
+<span class="cstat-no" title="statement not covered" >                return parseFloat(theVal)</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                return parseInt(theVal);</span>
+            }
+        }
+    }
+&nbsp;
+    /**
+     *
+     * @param {string|number} v
+     */
+<span class="fstat-no" title="function not covered" >    set selectedValue(v: string|number)</span>{
+<span class="cstat-no" title="statement not covered" >        this.box.val(v);</span>
+    }
+    
+<span class="fstat-no" title="function not covered" >    get selectedText(){</span>
+<span class="cstat-no" title="statement not covered" >        return this.box.find('option:selected').text();</span>
+    }
+&nbsp;
+}
+&nbsp;
+nm.SelectBoxBase = SelectBoxBase;
+&nbsp;
+export default SelectBoxBase;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 15 2017 01:55:33 GMT-0500 (Central Daylight Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
