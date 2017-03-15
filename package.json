@@ -15,10 +15,10 @@
     "update-custom-ol": "npm update custom-ol & COPY /y node_modules\\custom-ol\\lib\\index.js test-html\\lib\\ol.js",
     "serve-demos": "cd test/serve & python -m http.server 5002",
     "typedoc": "typedoc --excludePrivate --mode file --out doc src",
-    "webpack": "node_modules/.bin/webpack -w",
-    "webpack-prod": "node_modules/.bin/webpack -p -w",
-    "tsc": "node_modules/.bin/tsc -d -w --rootDir ./src --outDir ./dist",
-    "karma": "node_modules/.bin/karma start"
+    "webpack": "node_modules\\.bin\\webpack -w",
+    "webpack-prod": "node_modules\\.bin\\webpack -p -w",
+    "tsc": "node_modules\\.bin\\tsc -d -w --rootDir ./src --outDir ./dist",
+    "karma": "node_modules\\.bin\\karma start"
   },
   "author": "TOPS Lab",
   "license": "ISC",
