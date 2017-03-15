@@ -5,11 +5,6 @@
 import provide from './provide';
 let nm = provide('util');
 
-/**
- * @typedef {object} keyValuePair
- * @property {string} key
- * @property {object} value
- */
 
 export interface keyVals {
     key: string;
@@ -17,13 +12,16 @@ export interface keyVals {
 }
 
 
+
+
 /**
  * iterate over the key value pairs of an object
+ * @example for (let x:KeyValuePair of keyValPairs(object)){..}
  * @param {object} obj - the input object
- * @returns {Array<keyValuePair>} - array of key value pairs
+ * @returns {Array<keyVals>} - array of key value pairs
  */
-export function keyValPairs(obj): keyVals[] {
-    let outArray = [];
+export function keyValPairs(obj): Array<keyVals> {
+    let outArray: Array<keyVals> = [];
     for (let key of Object.keys(obj)) {
         outArray.push({'key': key, 'value': obj[key]});
 
