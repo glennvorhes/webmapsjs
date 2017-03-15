@@ -5,7 +5,7 @@
 
 import {LayerBaseVectorGeoJson, LayerBaseVectorGeoJsonOptions} from '../../../src/layers/LayerBaseVectorGeoJson';
 
-import {cams, trench, sample_segs} from '../../data/geoJsonFeatures';
+import {cams, trench, sample_segs} from '../_data/geoJsonFeatures';
 
 describe('LayerBaseVectorGeoJSON', function () {
     let geoj: LayerBaseVectorGeoJson;
@@ -39,6 +39,11 @@ describe('LayerBaseVectorGeoJSON', function () {
         geoj.addFeatures(sample_segs);
         expect(geoj.features.length).toBeGreaterThan(0);
     });
+    
+    it('should load the features', function () {
+        let geoj1 = new LayerBaseVectorGeoJson('http://transportal.cee.wisc.edu/its/inventory/?resource=dms&format=json');
+
+    })
 
 });
 
