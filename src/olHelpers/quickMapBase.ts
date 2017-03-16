@@ -33,8 +33,7 @@ export interface quickMapOptions {
  * @param [options.fullScreen=false] if add base map switcher
  * @returns the ol map
  */
-export function quickMapBase(options?: quickMapOptions): ol.Map {
-    options = options || {} as quickMapOptions;
+export function quickMapBase(options: quickMapOptions = {}): ol.Map {
     options.divId = options.divId || 'map';
     options.center = options.center || {x: -10018378, y: 5574910};
     options.zoom = typeof options.zoom == 'number' ? options.zoom : 7;

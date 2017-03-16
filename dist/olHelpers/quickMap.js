@@ -25,6 +25,7 @@ var nm = provide_1.default('olHelpers');
  * @returns {ol.Map} the ol map
  */
 function quickMap(options) {
+    if (options === void 0) { options = {}; }
     var m = quickMapBase_1.quickMapBase(options);
     mapMove_1.default.init(m);
     mapPopup_1.default.init(m);

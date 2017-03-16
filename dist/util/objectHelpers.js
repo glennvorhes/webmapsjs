@@ -7,8 +7,9 @@ var provide_1 = require("./provide");
 var nm = provide_1.default('util');
 /**
  * iterate over the key value pairs of an object
+ * @example for (let x:KeyValuePair of keyValPairs(object)){..}
  * @param {object} obj - the input object
- * @returns {Array<keyValuePair>} - array of key value pairs
+ * @returns {Array<keyVals>} - array of key value pairs
  */
 function keyValPairs(obj) {
     var outArray = [];

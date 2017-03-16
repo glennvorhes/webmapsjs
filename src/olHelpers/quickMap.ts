@@ -25,7 +25,7 @@ let nm = provide('olHelpers');
  * @param {boolean} [options.fullScreen=false] if add base map switcher
  * @returns {ol.Map} the ol map
  */
-export function quickMap(options? : quickMapOptions): ol.Map {
+export function quickMap(options : quickMapOptions = {}): ol.Map {
     let m = quickMapBase(options);
     mapMove.init(m);
     mapPopup.init(m);
