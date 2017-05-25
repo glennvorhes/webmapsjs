@@ -57,7 +57,7 @@ class SortedFeatures {
      * @param {Array} [sortedFeatures=this.sortedFeatures] - the candidate features
      * @returns {ol.Feature|undefined} the feature matching the lookup
      */
-    getFeature(propertyValue, exactMatch: boolean = false, sortedFeatures? :Array<ol.Feature>) {
+    getFeature(propertyValue, exactMatch: boolean = false, sortedFeatures? :Array<ol.Feature>): ol.Feature {
         if (typeof sortedFeatures == 'undefined'){
             sortedFeatures = this.sortedFeatures;
         }

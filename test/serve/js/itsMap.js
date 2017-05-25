@@ -294,6 +294,7 @@ var nm = provide_1.default('olHelpers');
  * @returns {ol.Map} the ol map
  */
 function quickMap(options) {
+    if (options === void 0) { options = {}; }
     var m = quickMapBase_1.quickMapBase(options);
     mapMove_1.default.init(m);
     mapPopup_1.default.init(m);
@@ -1458,7 +1459,7 @@ var nm = provide_1.default('olHelpers');
  * @returns the ol map
  */
 function quickMapBase(options) {
-    options = options || {};
+    if (options === void 0) { options = {}; }
     options.divId = options.divId || 'map';
     options.center = options.center || { x: -10018378, y: 5574910 };
     options.zoom = typeof options.zoom == 'number' ? options.zoom : 7;
