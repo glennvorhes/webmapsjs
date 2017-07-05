@@ -17,7 +17,7 @@
     "typedoc": "typedoc --excludePrivate --mode file --out doc src",
     "webpack": "node_modules\\.bin\\webpack -w",
     "webpack-prod": "node_modules\\.bin\\webpack -p -w",
-    "tsc": "node_modules\\.bin\\tsc -d -w --rootDir ./src ",
+    "tsc": "node_modules\\.bin\\tsc -d -w",
     "karma": "node_modules\\.bin\\karma start"
   },
   "author": "TOPS Lab",
