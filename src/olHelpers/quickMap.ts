@@ -9,6 +9,8 @@ import mapPopup from './mapPopup';
 import ol = require('custom-ol');
 let nm = provide('olHelpers');
 
+export {quickMapOptions} from './quickMapBase';
+
 /**
  * Sets up a map with some default parameters and initializes
  * mapMove and mapPopup
