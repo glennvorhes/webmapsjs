@@ -5,17 +5,16 @@
     "module": "commonjs",
     "target": "es5",
     "sourceMap": true,
-    "sourceRoot": "src",
+//    "sourceRoot": "./src",
 //    "inlineSourceMap": true,
     "inlineSources": true,
     "jsx": "preserve",
     "noEmitOnError": true,
-//    "rootDir": "src",
-    "outDir": "dist",
-    "baseUrl": "."
-//    "baseUrl": "src"
+    "rootDir": "./src",
+    "outDir": "./dist"
+//    "baseUrl": "./src"
   },
   "include": [
-    "src/**/*"
+    "./src/**/*"
   ]
 }
