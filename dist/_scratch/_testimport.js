@@ -1,4 +1,4 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 // console.log(ol.animation.bounce({duration: 10, resolution: 30, start: 4, easing: (t) => {return 5}})); 
-//# sourceMappingURL=_testimport.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiX3Rlc3RpbXBvcnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvX3NjcmF0Y2gvX3Rlc3RpbXBvcnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFHQSx5R0FBeUciLCJzb3VyY2VzQ29udGVudCI6WyJcclxuaW1wb3J0IG9sID0gcmVxdWlyZSgnY3VzdG9tLW9sJyk7XHJcblxyXG4vLyBjb25zb2xlLmxvZyhvbC5hbmltYXRpb24uYm91bmNlKHtkdXJhdGlvbjogMTAsIHJlc29sdXRpb246IDMwLCBzdGFydDogNCwgZWFzaW5nOiAodCkgPT4ge3JldHVybiA1fX0pKTsiXX0=
