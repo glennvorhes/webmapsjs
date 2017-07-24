@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var reactRedux_1 = require("./reactRedux");
+var reactAndRedux_1 = require("./reactAndRedux");
 require("jquery-ui");
 var makeGuid_1 = require("../util/makeGuid");
 var RadioItem = (function (_super) {
@@ -52,7 +52,7 @@ var RadioItem = (function (_super) {
         </li>;
     };
     return RadioItem;
-}(reactRedux_1.React.Component));
+}(reactAndRedux_1.React.Component));
 var RadioBase = (function (_super) {
     __extends(RadioBase, _super);
     function RadioBase(props, context) {
@@ -96,7 +96,7 @@ var RadioBase = (function (_super) {
         </div>;
     };
     return RadioBase;
-}(reactRedux_1.React.Component));
+}(reactAndRedux_1.React.Component));
 var Radio = (function (_super) {
     __extends(Radio, _super);
     function Radio() {
@@ -106,7 +106,7 @@ var Radio = (function (_super) {
         return <RadioBase title={this.props.title} items={this.props.items} callback={this.props.callback} inline={this.props.inline} selectedValueOrIndex={this.props.defaultValue} connected={false}/>;
     };
     return Radio;
-}(reactRedux_1.React.Component));
+}(reactAndRedux_1.React.Component));
 exports.Radio = Radio;
 var RadioConnected = (function (_super) {
     __extends(RadioConnected, _super);
@@ -117,6 +117,6 @@ var RadioConnected = (function (_super) {
         return <RadioBase title={this.props.title} items={this.props.items} callback={this.props.callback} inline={this.props.inline} selectedValueOrIndex={this.props.selectedIndex} connected={true}/>;
     };
     return RadioConnected;
-}(reactRedux_1.React.Component));
+}(reactAndRedux_1.React.Component));
 exports.RadioConnected = RadioConnected;
 //# sourceMappingURL=Radio.jsx.map

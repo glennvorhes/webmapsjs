@@ -2,7 +2,7 @@
  * Created by glenn on 6/12/2017.
  */
 
-import {React} from './reactRedux';
+import {React} from './reactAndRedux';
 import $ = require('jquery');
 import 'jquery-ui';
 import makeGuid from '../util/makeGuid';

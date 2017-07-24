@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var reactRedux_1 = require("./reactRedux");
+var reactAndRedux_1 = require("./reactAndRedux");
 var makeGuid_1 = require("../util/makeGuid");
 var Slider = (function (_super) {
     __extends(Slider, _super);
@@ -111,6 +111,6 @@ var Slider = (function (_super) {
         </div>;
     };
     return Slider;
-}(reactRedux_1.React.Component));
+}(reactAndRedux_1.React.Component));
 exports.Slider = Slider;
 //# sourceMappingURL=Slider.jsx.map

@@ -2,7 +2,7 @@
  * Created by glenn on 6/12/2017.
  */
 
-import {React} from './reactRedux';
+import {React} from './reactAndRedux';
 import ol = require('custom-ol');
 import LayerBaseVectorGeoJson from '../layers/LayerBaseVectorGeoJson';
 import {proj4326, proj3857} from '../olHelpers/projections'

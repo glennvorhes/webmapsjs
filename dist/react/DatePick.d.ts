@@ -2,7 +2,7 @@
 /**
  * Created by glenn on 6/14/2017.
  */
-import { React } from './reactRedux';
+import { React } from './reactAndRedux';
 import 'jquery-ui';
 /**
  * params label, id, initialDate, change callback with value as string

@@ -3,7 +3,7 @@
  */
 
 
-import {React} from './reactRedux';
+import {React} from './reactAndRedux';
 import makeGuid from '../util/makeGuid';
 
 

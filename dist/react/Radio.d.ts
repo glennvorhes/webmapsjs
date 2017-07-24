@@ -2,7 +2,7 @@
 /**
  * Created by glenn on 6/12/2017.
  */
-import { React } from './reactRedux';
+import { React } from './reactAndRedux';
 import 'jquery-ui';
 export declare class Radio extends React.Component<{
     title: string;

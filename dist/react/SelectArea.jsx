@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var reactRedux_1 = require("./reactRedux");
+var reactAndRedux_1 = require("./reactAndRedux");
 var ol = require("custom-ol");
 var LayerBaseVectorGeoJson_1 = require("../layers/LayerBaseVectorGeoJson");
 var projections_1 = require("../olHelpers/projections");
@@ -101,6 +101,6 @@ var SelectArea = (function (_super) {
         </div>;
     };
     return SelectArea;
-}(reactRedux_1.React.Component));
+}(reactAndRedux_1.React.Component));
 exports.SelectArea = SelectArea;
 //# sourceMappingURL=SelectArea.jsx.map

@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var reactRedux_1 = require("./reactRedux");
+var reactAndRedux_1 = require("./reactAndRedux");
 var $ = require("jquery");
 require("jquery-ui");
 var makeGuid_1 = require("../util/makeGuid");
@@ -44,7 +44,7 @@ var DatePick = (function (_super) {
         </span>;
     };
     return DatePick;
-}(reactRedux_1.React.Component));
+}(reactAndRedux_1.React.Component));
 exports.DatePick = DatePick;
 exports.default = DatePick;
 //# sourceMappingURL=DatePick.jsx.map

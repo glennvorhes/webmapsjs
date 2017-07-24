@@ -12,4 +12,4 @@ exports.Provider = exports.reactRedux.Provider;
 // export { connect, Provider } from 'react-redux';
 exports.combineReducers = exports.redux.combineReducers;
 exports.createStore = exports.redux.createStore;
-//# sourceMappingURL=reactRedux.js.map
+//# sourceMappingURL=reactAndRedux.js.map

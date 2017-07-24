@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var reactRedux_1 = require("./reactRedux");
+var reactAndRedux_1 = require("./reactAndRedux");
 require("jquery-ui");
 var makeGuid_1 = require("../util/makeGuid");
 var fixDate = require("./helpers/dateFormat");
@@ -91,6 +91,6 @@ var DateRange = (function (_super) {
         </div>;
     };
     return DateRange;
-}(reactRedux_1.React.Component));
+}(reactAndRedux_1.React.Component));
 exports.DateRange = DateRange;
 //# sourceMappingURL=DateRange.jsx.map

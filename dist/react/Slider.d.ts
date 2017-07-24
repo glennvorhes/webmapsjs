@@ -2,7 +2,7 @@
 /**
  * Created by glenn on 7/6/2017.
  */
-import { React } from './reactRedux';
+import { React } from './reactAndRedux';
 export declare class Slider extends React.Component<{
     change: (d: number) => any;
     steps?: number;
