@@ -3,8 +3,8 @@
  */
 export import React = require('react');
 export import ReactDom = require('react-dom');
-import reactRedux = require('react-redux');
-import redux = require('redux');
+export import reactRedux = require('react-redux');
+export import redux = require('redux');
 
 export const connect = reactRedux.connect;
 export const Provider = reactRedux.Provider;

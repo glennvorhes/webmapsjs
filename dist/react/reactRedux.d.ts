@@ -3,7 +3,8 @@
  */
 export import React = require('react');
 export import ReactDom = require('react-dom');
-import redux = require('redux');
+export import reactRedux = require('react-redux');
+export import redux = require('redux');
 export declare const connect: any;
 export declare const Provider: any;
 export declare const combineReducers: typeof redux.combineReducers;
