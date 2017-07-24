@@ -1,1 +1,0 @@
-{"version":3,"file":"_testimport.js","sourceRoot":"","sources":["../../src/_scratch/_testimport.ts"],"names":[],"mappings":";;AAGA,yGAAyG","sourcesContent":["\r\nimport ol = require('custom-ol');\r\n\r\n// console.log(ol.animation.bounce({duration: 10, resolution: 30, start: 4, easing: (t) => {return 5}}));"]}

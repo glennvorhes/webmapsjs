@@ -70,47 +70,46 @@ var Slider = (function (_super) {
         var _this = this;
         var theInput;
         if (this.props.steps) {
-            theInput = <input id={this.uid} type="range" min="0" max={this.props.steps} step={1} defaultValue="0" onChange={function (evt) {
-                _this.props.change(parseFloat(evt.target.value));
-            }} style={{ width: '100%' }}/>;
+            theInput = reactRedux_1.React.createElement("input", { id: this.uid, type: "range", min: "0", max: this.props.steps, step: 1, defaultValue: "0", onChange: function (evt) {
+                    _this.props.change(parseFloat(evt.target.value));
+                }, style: { width: '100%' } });
         }
         else {
-            theInput = <input id={this.uid} type="range" min="0" max="100" step="0.1" defaultValue="0" onChange={function (evt) {
-                _this.props.change(parseFloat(evt.target.value));
-            }} style={{ width: '100%' }}/>;
+            theInput = reactRedux_1.React.createElement("input", { id: this.uid, type: "range", min: "0", max: "100", step: "0.1", defaultValue: "0", onChange: function (evt) {
+                    _this.props.change(parseFloat(evt.target.value));
+                }, style: { width: '100%' } });
         }
         var start = null;
         var stop = null;
         var intervalSelect = null;
         if (this.props.animate) {
-            start = <button id={this.startUid} onClick={function () {
-                _this.startAnimate();
-            }}>Start</button>;
-            stop = <button id={this.endUid} onClick={function () {
-                _this.stopAnimate();
-            }}>Stop</button>;
-            intervalSelect = <span>
-            <label>Interval (s)</label>
-            <select defaultValue="200" id={this.intervalUid} onChange={function () { _this.restartAnimate(); }}>
-                <option value="100">0.1</option>
-                <option value="200">0.2</option>
-                <option value="300">0.3</option>
-                <option value="400">0.4</option>
-                <option value="500">0.5</option>
-                <option value="600">0.6</option>
-                <option value="700">0.7</option>
-                <option value="800">0.8</option>
-                <option value="900">0.9</option>
-                <option value="1000">1.0</option>
-            </select>
-            </span>;
+            start = reactRedux_1.React.createElement("button", { id: this.startUid, onClick: function () {
+                    _this.startAnimate();
+                } }, "Start");
+            stop = reactRedux_1.React.createElement("button", { id: this.endUid, onClick: function () {
+                    _this.stopAnimate();
+                } }, "Stop");
+            intervalSelect = reactRedux_1.React.createElement("span", null,
+                reactRedux_1.React.createElement("label", null, "Interval (s)"),
+                reactRedux_1.React.createElement("select", { defaultValue: "200", id: this.intervalUid, onChange: function () { _this.restartAnimate(); } },
+                    reactRedux_1.React.createElement("option", { value: "100" }, "0.1"),
+                    reactRedux_1.React.createElement("option", { value: "200" }, "0.2"),
+                    reactRedux_1.React.createElement("option", { value: "300" }, "0.3"),
+                    reactRedux_1.React.createElement("option", { value: "400" }, "0.4"),
+                    reactRedux_1.React.createElement("option", { value: "500" }, "0.5"),
+                    reactRedux_1.React.createElement("option", { value: "600" }, "0.6"),
+                    reactRedux_1.React.createElement("option", { value: "700" }, "0.7"),
+                    reactRedux_1.React.createElement("option", { value: "800" }, "0.8"),
+                    reactRedux_1.React.createElement("option", { value: "900" }, "0.9"),
+                    reactRedux_1.React.createElement("option", { value: "1000" }, "1.0")));
         }
-        return <div>
-            {theInput}
-            {start}{stop}{intervalSelect}
-        </div>;
+        return reactRedux_1.React.createElement("div", null,
+            theInput,
+            start,
+            stop,
+            intervalSelect);
     };
     return Slider;
 }(reactRedux_1.React.Component));
 exports.Slider = Slider;
-//# sourceMappingURL=Slider.jsx.map
+//# sourceMappingURL=Slider.js.map

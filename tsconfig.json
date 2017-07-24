@@ -8,7 +8,7 @@
 //    "sourceRoot": "./src",
 //    "inlineSourceMap": true,
     "inlineSources": true,
-    "jsx": "preserve",
+    "jsx": "react",
     "noEmitOnError": true,
     "rootDir": "./src",
     "outDir": "./dist"
