@@ -38,12 +38,13 @@ var DatePick = (function (_super) {
         });
     };
     DatePick.prototype.render = function () {
-        return reactRedux_1.React.createElement("span", null,
-            reactRedux_1.React.createElement("label", null, this.props.label),
-            reactRedux_1.React.createElement("input", { id: this.props.id || this.defaultId, type: "text", style: { margin: "0 10px 0 5px", width: '73px', textAlign: 'center' }, defaultValue: dateFormat_1.dateToString(this.props.initialDate || new Date()), readOnly: true }));
+        return <span>
+            <label>{this.props.label}</label>
+            <input id={this.props.id || this.defaultId} type="text" style={{ margin: "0 10px 0 5px", width: '73px', textAlign: 'center' }} defaultValue={dateFormat_1.dateToString(this.props.initialDate || new Date())} readOnly={true}/>
+        </span>;
     };
     return DatePick;
 }(reactRedux_1.React.Component));
 exports.DatePick = DatePick;
 exports.default = DatePick;
-//# sourceMappingURL=DatePick.js.map
+//# sourceMappingURL=DatePick.jsx.map

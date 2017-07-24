@@ -85,11 +85,12 @@ var DateRange = (function (_super) {
     };
     DateRange.prototype.render = function () {
         var _this = this;
-        return reactRedux_1.React.createElement("div", null,
-            reactRedux_1.React.createElement(DatePick_1.default, { id: this.startId, label: "Start", initialDate: this.start, change: function (s) { _this.setStart(s); } }),
-            reactRedux_1.React.createElement(DatePick_1.default, { id: this.endId, label: "End", initialDate: this.end, change: function (s) { _this.setEnd(s); } }));
+        return <div>
+            <DatePick_1.default id={this.startId} label="Start" initialDate={this.start} change={function (s) { _this.setStart(s); }}/>
+            <DatePick_1.default id={this.endId} label="End" initialDate={this.end} change={function (s) { _this.setEnd(s); }}/>
+        </div>;
     };
     return DateRange;
 }(reactRedux_1.React.Component));
 exports.DateRange = DateRange;
-//# sourceMappingURL=DateRange.js.map
+//# sourceMappingURL=DateRange.jsx.map
