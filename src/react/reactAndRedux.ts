@@ -3,15 +3,15 @@
  */
 export import React = require('react');
 export import ReactDom = require('react-dom');
-export import reactRedux = require('react-redux');
-export import redux = require('redux');
+export import ReactRedux = require('react-redux');
+export import Redux = require('redux');
 
 
-export const connect = reactRedux.connect;
-export const Provider = reactRedux.Provider;
+export const connect = ReactRedux.connect;
+export const Provider = ReactRedux.Provider;
 // export { connect, Provider } from 'react-redux';
-export const combineReducers = redux.combineReducers;
-export const createStore = redux.createStore;
+export const combineReducers = Redux.combineReducers;
+export const createStore = Redux.createStore;
 
 // export {combineReducers, createStore, Store, } from 'redux';
 
