@@ -4,6 +4,7 @@
 export import React = require('react');
 export import ReactDom = require('react-dom');
 export { connect, Provider } from 'react-redux';
+export { combineReducers, createStore, Store } from 'redux';
 export interface iAction {
     type: string;
 }
