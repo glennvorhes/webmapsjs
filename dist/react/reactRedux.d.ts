@@ -3,8 +3,11 @@
  */
 export import React = require('react');
 export import ReactDom = require('react-dom');
-export { connect, Provider } from 'react-redux';
-export { combineReducers, createStore, Store } from 'redux';
+import redux = require('redux');
+export declare const connect: any;
+export declare const Provider: any;
+export declare const combineReducers: typeof redux.combineReducers;
+export declare const createStore: redux.StoreCreator;
 export interface iAction {
     type: string;
 }

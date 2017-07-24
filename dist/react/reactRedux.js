@@ -5,10 +5,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 exports.React = require("react");
 exports.ReactDom = require("react-dom");
-var react_redux_1 = require("react-redux");
-exports.connect = react_redux_1.connect;
-exports.Provider = react_redux_1.Provider;
-var redux_1 = require("redux");
-exports.combineReducers = redux_1.combineReducers;
-exports.createStore = redux_1.createStore;
+var reactRedux = require("react-redux");
+var redux = require("redux");
+exports.connect = reactRedux.connect;
+exports.Provider = reactRedux.Provider;
+// export { connect, Provider } from 'react-redux';
+exports.combineReducers = redux.combineReducers;
+exports.createStore = redux.createStore;
 //# sourceMappingURL=reactRedux.js.map
