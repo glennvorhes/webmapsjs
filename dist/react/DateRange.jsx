@@ -18,6 +18,14 @@ require("jquery-ui");
 var makeGuid_1 = require("../util/makeGuid");
 var fixDate = require("./helpers/dateFormat");
 var DatePick_1 = require("./DatePick");
+function stringToDate(dte) {
+    if (dte['getTime']) {
+        return dte;
+    }
+    else {
+        return new Date(dte);
+    }
+}
 var DateRange = (function (_super) {
     __extends(DateRange, _super);
     function DateRange(props, context) {
@@ -29,7 +37,12 @@ var DateRange = (function (_super) {
         if (_this.minRange > _this.maxRange) {
             throw "DateRange component: Max range must be greater than min range";
         }
-        _this.end = new Date();
+        if (_this.props.initialEnd) {
+            _this.end = stringToDate(_this.props.initialEnd);
+        }
+        else {
+            _this.end = new Date();
+        }
         _this.end.setHours(0, 0, 0);
         _this.start = new Date(_this.end);
         _this.start.setDate(_this.start.getDate() - _this.maxRange);

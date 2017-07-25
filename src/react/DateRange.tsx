@@ -9,11 +9,22 @@ import makeGuid from '../util/makeGuid';
 import * as fixDate from './helpers/dateFormat';
 import DatePick from './DatePick';
 
+function stringToDate(dte: string|Date){
+    if (dte['getTime']){
+        return dte as Date;
+    } else {
+        return new Date(dte);
+    }
+}
+
 
 export class DateRange extends React.Component<{
     maxRange: number,
     callback: (start: string|Date, end: string|Date) => any,
-    minRange?: number
+    minRange?: number,
+    maxDate?: string|Date,
+    minDate?: string|Date
+    initialEnd?: string|Date
 }, null> {
     startId = makeGuid();
     endId = makeGuid();
@@ -35,7 +46,12 @@ export class DateRange extends React.Component<{
             throw "DateRange component: Max range must be greater than min range";
         }
 
-        this.end = new Date();
+        if (this.props.initialEnd){
+            this.end = stringToDate(this.props.initialEnd)
+        } else {
+            this.end = new Date();
+        }
+
         this.end.setHours(0, 0, 0);
         this.start = new Date(this.end);
         this.start.setDate(this.start.getDate() - this.maxRange);

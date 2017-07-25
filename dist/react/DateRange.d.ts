@@ -8,6 +8,9 @@ export declare class DateRange extends React.Component<{
     maxRange: number;
     callback: (start: string | Date, end: string | Date) => any;
     minRange?: number;
+    maxDate?: string | Date;
+    minDate?: string | Date;
+    initialEnd?: string | Date;
 }, null> {
     startId: string;
     endId: string;
