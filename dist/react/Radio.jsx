@@ -88,7 +88,7 @@ var RadioBase = (function (_super) {
             }
             arr.push(<RadioItem {...itemProps}/>);
         }
-        return <div>
+        return <div className="radio-list">
             <h4 style={{ margin: '7px 0' }}>{this.props.title}</h4>
             <ul style={{ listStyle: 'none', margin: '0', paddingLeft: "10px", maxHeight: "200px", overflowY: 'auto' }}>
                 {arr}
