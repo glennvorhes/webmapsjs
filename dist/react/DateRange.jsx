@@ -98,7 +98,7 @@ var DateRange = (function (_super) {
     };
     DateRange.prototype.render = function () {
         var _this = this;
-        return <div>
+        return <div className="date-range">
             <DatePick_1.default id={this.startId} label="Start" initialDate={this.start} change={function (s) { _this.setStart(s); }}/>
             <DatePick_1.default id={this.endId} label="End" initialDate={this.end} change={function (s) { _this.setEnd(s); }}/>
         </div>;

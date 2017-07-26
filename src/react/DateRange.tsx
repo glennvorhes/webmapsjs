@@ -112,7 +112,7 @@ export class DateRange extends React.Component<{
     }
 
     render() {
-        return <div>
+        return <div className="date-range">
             <DatePick id={this.startId} label="Start" initialDate={this.start} change={(s) => {this.setStart(s)}}/>
             <DatePick id={this.endId} label="End" initialDate={this.end} change={(s) => {this.setEnd(s)}}/>
         </div>;

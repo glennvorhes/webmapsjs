@@ -34,7 +34,7 @@ export class DatePick extends React.Component<{label: string, id?: string, initi
     }
 
     render() {
-        return <span>
+        return <span className="date-pick">
             <label>{this.props.label}</label>
             <input id={this.props.id || this.defaultId} type="text"
                    style={{margin: "0 10px 0 5px", width: '73px', textAlign: 'center'}}
