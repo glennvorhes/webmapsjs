@@ -87,8 +87,8 @@ class RadioBase extends React.Component<
         }
 
         return <div className="radio-list">
-            <h4 style={{margin: '7px 0'}}>{this.props.title}</h4>
-            <ul style={{listStyle: 'none', margin: '0', paddingLeft: "10px", maxHeight: "200px", overflowY: 'auto'}}>
+            <h4>{this.props.title}</h4>
+            <ul style={{listStyle: 'none'}}>
                 {arr}
             </ul>
         </div>
