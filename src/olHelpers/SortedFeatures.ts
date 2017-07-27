@@ -8,7 +8,7 @@ let nm = provide('olHelpers');
 /**
  * take an array of features and sort by a given property name
  */
-class SortedFeatures {
+export class SortedFeatures {
     sortedFeatures: Array<ol.Feature>;
     propertyName: string;
     _propertyType: string;
@@ -18,7 +18,7 @@ class SortedFeatures {
      * @param {Array<ol.Feature>} features array of ol features
      * @param {string} propertyName - the property name to use for lookup
      */
-    constructor(features, propertyName) {
+    constructor(features: ol.Feature[], propertyName: string) {
         this.sortedFeatures = features;
         this.propertyName = propertyName;
 

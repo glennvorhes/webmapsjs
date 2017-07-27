@@ -2,7 +2,7 @@ import ol = require('custom-ol');
 /**
  * take an array of features and sort by a given property name
  */
-declare class SortedFeatures {
+export declare class SortedFeatures {
     sortedFeatures: Array<ol.Feature>;
     propertyName: string;
     _propertyType: string;
@@ -11,7 +11,7 @@ declare class SortedFeatures {
      * @param {Array<ol.Feature>} features array of ol features
      * @param {string} propertyName - the property name to use for lookup
      */
-    constructor(features: any, propertyName: any);
+    constructor(features: ol.Feature[], propertyName: string);
     /**
      * recursive search to find the value
      * @param {number|string} propertyValue - the property value to search for

@@ -112,6 +112,7 @@ var SortedFeatures = (function () {
     };
     return SortedFeatures;
 }());
+exports.SortedFeatures = SortedFeatures;
 nm.SortedFeatures = SortedFeatures;
 exports.default = SortedFeatures;
 //# sourceMappingURL=SortedFeatures.js.map
