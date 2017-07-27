@@ -114,7 +114,7 @@ var Slider = (function (_super) {
             </span>;
         }
         return <div>
-             <input {...attrs}/>;
+             <input {...attrs}/>
             {start}{stop}{intervalSelect}
         </div>;
     };

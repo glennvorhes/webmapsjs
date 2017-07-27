@@ -133,7 +133,7 @@ export class Slider extends React.Component<{ change: (d: number) => any, steps?
         }
 
         return <div>
-             <input {...attrs}/>;
+             <input {...attrs}/>
             {start}{stop}{intervalSelect}
         </div>
     }
