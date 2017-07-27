@@ -7,6 +7,7 @@ export declare class Slider extends React.Component<{
     change: (d: number) => any;
     steps?: number;
     animate?: boolean;
+    value?: number;
 }, null> {
     uid: string;
     startUid: string;

@@ -7,7 +7,7 @@ import {React} from './reactAndRedux';
 import makeGuid from '../util/makeGuid';
 
 
-export class Slider extends React.Component<{ change: (d: number) => any, steps?: number, animate?: boolean }, null> {
+export class Slider extends React.Component<{ change: (d: number) => any, steps?: number, animate?: boolean, value?: number}, null> {
     uid: string;
     startUid: string;
     endUid: string;
@@ -80,27 +80,27 @@ export class Slider extends React.Component<{ change: (d: number) => any, steps?
 
     render() {
 
-        let theInput;
+        let attrs = {
+            id: this.uid,
+            min: 0,
+            type: 'range',
+            onChange: (evt) => {this.props.change(parseFloat(evt.target.value))},
+            style: {width: '100%'},
+            max: "100",
+            step: '0.1'
+        };
 
-        if (this.props.steps) {
-            theInput = <input id={this.uid}
-                              type="range" min="0" max={this.props.steps} step={1}
-                              defaultValue="0"
-                              onChange={(evt) => {
-                                  this.props.change(parseFloat(evt.target.value))
-                              }}
-                              style={{width: '100%'}}
-            />
-        } else {
-            theInput = <input id={this.uid}
-                              type="range" min="0" max="100" step="0.1"
-                              defaultValue="0"
-                              onChange={(evt) => {
-                                  this.props.change(parseFloat(evt.target.value))
-                              }}
-                              style={{width: '100%'}}
-            />
+        if (this.props.steps){
+            attrs.max = this.props.steps.toString();
+            attrs.step = '1';
         }
+
+        if (this.props.value){
+            attrs['value'] = this.props.value.toString()
+        } else {
+            attrs['defaultValue'] = "0";
+        }
+
 
         let start = null;
         let stop = null;
@@ -133,7 +133,7 @@ export class Slider extends React.Component<{ change: (d: number) => any, steps?
         }
 
         return <div>
-            {theInput}
+             <input {...attrs}/>;
             {start}{stop}{intervalSelect}
         </div>
     }

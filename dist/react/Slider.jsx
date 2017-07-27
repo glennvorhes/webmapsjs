@@ -68,16 +68,24 @@ var Slider = (function (_super) {
     };
     Slider.prototype.render = function () {
         var _this = this;
-        var theInput;
+        var attrs = {
+            id: this.uid,
+            min: 0,
+            type: 'range',
+            onChange: function (evt) { _this.props.change(parseFloat(evt.target.value)); },
+            style: { width: '100%' },
+            max: "100",
+            step: '0.1'
+        };
         if (this.props.steps) {
-            theInput = <input id={this.uid} type="range" min="0" max={this.props.steps} step={1} defaultValue="0" onChange={function (evt) {
-                _this.props.change(parseFloat(evt.target.value));
-            }} style={{ width: '100%' }}/>;
+            attrs.max = this.props.steps.toString();
+            attrs.step = '1';
+        }
+        if (this.props.value) {
+            attrs['value'] = this.props.value.toString();
         }
         else {
-            theInput = <input id={this.uid} type="range" min="0" max="100" step="0.1" defaultValue="0" onChange={function (evt) {
-                _this.props.change(parseFloat(evt.target.value));
-            }} style={{ width: '100%' }}/>;
+            attrs['defaultValue'] = "0";
         }
         var start = null;
         var stop = null;
@@ -106,7 +114,7 @@ var Slider = (function (_super) {
             </span>;
         }
         return <div>
-            {theInput}
+             <input {...attrs}/>;
             {start}{stop}{intervalSelect}
         </div>;
     };
