@@ -12,6 +12,14 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var reactAndRedux_1 = require("./reactAndRedux");
 require("jquery-ui");
@@ -46,10 +54,9 @@ var RadioItem = (function (_super) {
         else {
             props['defaultChecked'] = this.props.checked;
         }
-        return <li style={style}>
-            <input {...props}/>
-            <label htmlFor={this.guid}>{this.props.text}</label>
-        </li>;
+        return reactAndRedux_1.React.createElement("li", { style: style },
+            reactAndRedux_1.React.createElement("input", __assign({}, props)),
+            reactAndRedux_1.React.createElement("label", { htmlFor: this.guid }, this.props.text));
     };
     return RadioItem;
 }(reactAndRedux_1.React.Component));
@@ -86,14 +93,11 @@ var RadioBase = (function (_super) {
             else {
                 itemProps.checked = this.props.items[i] == this.props.selectedValueOrIndex;
             }
-            arr.push(<RadioItem {...itemProps}/>);
+            arr.push(reactAndRedux_1.React.createElement(RadioItem, __assign({}, itemProps)));
         }
-        return <div className="radio-list">
-            <h4>{this.props.title}</h4>
-            <ul style={{ listStyle: 'none' }}>
-                {arr}
-            </ul>
-        </div>;
+        return reactAndRedux_1.React.createElement("div", { className: "radio-list" },
+            reactAndRedux_1.React.createElement("h4", null, this.props.title),
+            reactAndRedux_1.React.createElement("ul", { style: { listStyle: 'none' } }, arr));
     };
     return RadioBase;
 }(reactAndRedux_1.React.Component));
@@ -103,7 +107,7 @@ var Radio = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Radio.prototype.render = function () {
-        return <RadioBase title={this.props.title} items={this.props.items} callback={this.props.callback} inline={this.props.inline} selectedValueOrIndex={this.props.defaultValue} connected={false}/>;
+        return reactAndRedux_1.React.createElement(RadioBase, { title: this.props.title, items: this.props.items, callback: this.props.callback, inline: this.props.inline, selectedValueOrIndex: this.props.defaultValue, connected: false });
     };
     return Radio;
 }(reactAndRedux_1.React.Component));
@@ -114,9 +118,9 @@ var RadioConnected = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     RadioConnected.prototype.render = function () {
-        return <RadioBase title={this.props.title} items={this.props.items} callback={this.props.callback} inline={this.props.inline} selectedValueOrIndex={this.props.selectedIndex} connected={true}/>;
+        return reactAndRedux_1.React.createElement(RadioBase, { title: this.props.title, items: this.props.items, callback: this.props.callback, inline: this.props.inline, selectedValueOrIndex: this.props.selectedIndex, connected: true });
     };
     return RadioConnected;
 }(reactAndRedux_1.React.Component));
 exports.RadioConnected = RadioConnected;
-//# sourceMappingURL=Radio.jsx.map
+//# sourceMappingURL=Radio.js.map
