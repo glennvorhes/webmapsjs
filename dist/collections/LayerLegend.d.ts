@@ -5,7 +5,7 @@ export interface iLegendItem {
     groupName: string;
     collapse: boolean;
     addCheck: boolean;
-    items: iLegendItem[];
+    items: Array<iLegendItem | LayerBase>;
 }
 export interface iLegendOptions {
     layerDivClasses?: string[];
@@ -17,7 +17,7 @@ export interface iLegendOptions {
  */
 declare class LayerLegend {
     $divElement: JQuery;
-    _legendItems: Array<iLegendItem> | Array<LayerBase>;
+    _legendItems: Array<iLegendItem | LayerBase>;
     layerGroup: any;
     legendId: string;
     /**``
@@ -29,12 +29,12 @@ declare class LayerLegend {
      * @param {string} [options.legendTitle=Legend] the legend title
      * @param {boolean} [options.scaleDependent=true] if legend display is scale dependent
      */
-    constructor(legendItems: Array<iLegendItem> | Array<LayerBase>, divId: string, options?: iLegendOptions);
+    constructor(legendItems: Array<iLegendItem | LayerBase>, divId: string, options?: iLegendOptions);
     /**
      * @param {Array} [legendItems=this._layerConfig] the legend items
      * @param {Array} [parents=[]] the ordered list of groups in which this item is a member
      * @private
      */
-    _buildTree(legendItems: Array<iLegendItem> | Array<LayerBase>, parents?: string[]): void;
+    _buildTree(legendItems: Array<iLegendItem | LayerBase>, parents?: string[]): void;
 }
 export default LayerLegend;
