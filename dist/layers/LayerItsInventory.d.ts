@@ -31,7 +31,7 @@ export interface iLayerItsInventory extends LayerBaseVectorGeoJsonOptions {
  * Its Layer class
  * @augments LayerBaseVectorGeoJson
  */
-declare class LayerItsInventory extends LayerBaseVectorGeoJson {
+export declare class LayerItsInventory extends LayerBaseVectorGeoJson {
     /**
      * ITS device layer, types available at https://transportal.cee.wisc.edu/its/inventory/
      * @param {object} options - config

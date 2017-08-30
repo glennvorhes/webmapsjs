@@ -239,7 +239,7 @@ function defineLegend(itsIcon: string, itsLineStyle: iLineStyle, itsIconConfig: 
  * Its Layer class
  * @augments LayerBaseVectorGeoJson
  */
-class LayerItsInventory extends LayerBaseVectorGeoJson {
+export class LayerItsInventory extends LayerBaseVectorGeoJson {
 
     /**
      * ITS device layer, types available at https://transportal.cee.wisc.edu/its/inventory/

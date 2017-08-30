@@ -287,6 +287,7 @@ var LayerItsInventory = (function (_super) {
     };
     return LayerItsInventory;
 }(LayerBaseVectorGeoJson_1.LayerBaseVectorGeoJson));
+exports.LayerItsInventory = LayerItsInventory;
 nm.LayerItsInventory = LayerItsInventory;
 exports.default = LayerItsInventory;
 //# sourceMappingURL=LayerItsInventory.js.map

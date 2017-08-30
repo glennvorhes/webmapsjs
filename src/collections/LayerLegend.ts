@@ -230,7 +230,7 @@ class LayerGroup {
 class LayerLegend {
 
     $divElement: JQuery;
-    _legendItems: Array<iLegendItem|LayerBase>;
+    _legendItems: Array<iLegendItem>|Array<LayerBase>;
     layerGroup: any;
     legendId: string;
 
@@ -243,7 +243,7 @@ class LayerLegend {
      * @param {string} [options.legendTitle=Legend] the legend title
      * @param {boolean} [options.scaleDependent=true] if legend display is scale dependent
      */
-    constructor(legendItems: Array<iLegendItem|LayerBase>, divId: string, options: iLegendOptions = {}) {
+    constructor(legendItems: Array<iLegendItem>|Array<LayerBase>, divId: string, options: iLegendOptions = {}) {
         for (let i of legendItems) {
             if (typeof i == 'undefined') {
                 throw 'undefined item passed in array to legend constructor';
@@ -341,7 +341,7 @@ class LayerLegend {
      * @param {Array} [parents=[]] the ordered list of groups in which this item is a member
      * @private
      */
-    _buildTree(legendItems: Array<iLegendItem|LayerBase>, parents?: string[]) {
+    _buildTree(legendItems: Array<iLegendItem>|Array<LayerBase>, parents?: string[]) {
 
         if (legendItems.length == 0) {
             return;
@@ -350,7 +350,7 @@ class LayerLegend {
         let oneItem = legendItems[0];
 
         //reset the parent if the item is in the base array
-        if (this._legendItems.indexOf(oneItem) > -1 || typeof parents == 'undefined') {
+        if ((this._legendItems as Array<any>).indexOf(oneItem) > -1 || typeof parents == 'undefined') {
             parents = [];
         }
 
