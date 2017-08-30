@@ -12,14 +12,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var reactAndRedux_1 = require("./reactAndRedux");
 var makeGuid_1 = require("../util/makeGuid");
@@ -99,33 +91,34 @@ var Slider = (function (_super) {
         var stop = null;
         var intervalSelect = null;
         if (this.props.animate) {
-            start = reactAndRedux_1.React.createElement("button", { id: this.startUid, onClick: function () {
-                    _this.startAnimate();
-                } }, "Start");
-            stop = reactAndRedux_1.React.createElement("button", { id: this.endUid, onClick: function () {
-                    _this.stopAnimate();
-                } }, "Stop");
-            intervalSelect = reactAndRedux_1.React.createElement("span", null,
-                reactAndRedux_1.React.createElement("label", null, "Interval (s)"),
-                reactAndRedux_1.React.createElement("select", { defaultValue: "200", id: this.intervalUid, onChange: function () { _this.restartAnimate(); } },
-                    reactAndRedux_1.React.createElement("option", { value: "100" }, "0.1"),
-                    reactAndRedux_1.React.createElement("option", { value: "200" }, "0.2"),
-                    reactAndRedux_1.React.createElement("option", { value: "300" }, "0.3"),
-                    reactAndRedux_1.React.createElement("option", { value: "400" }, "0.4"),
-                    reactAndRedux_1.React.createElement("option", { value: "500" }, "0.5"),
-                    reactAndRedux_1.React.createElement("option", { value: "600" }, "0.6"),
-                    reactAndRedux_1.React.createElement("option", { value: "700" }, "0.7"),
-                    reactAndRedux_1.React.createElement("option", { value: "800" }, "0.8"),
-                    reactAndRedux_1.React.createElement("option", { value: "900" }, "0.9"),
-                    reactAndRedux_1.React.createElement("option", { value: "1000" }, "1.0")));
+            start = <button id={this.startUid} onClick={function () {
+                _this.startAnimate();
+            }}>Start</button>;
+            stop = <button id={this.endUid} onClick={function () {
+                _this.stopAnimate();
+            }}>Stop</button>;
+            intervalSelect = <span>
+            <label>Interval (s)</label>
+            <select defaultValue="200" id={this.intervalUid} onChange={function () { _this.restartAnimate(); }}>
+                <option value="100">0.1</option>
+                <option value="200">0.2</option>
+                <option value="300">0.3</option>
+                <option value="400">0.4</option>
+                <option value="500">0.5</option>
+                <option value="600">0.6</option>
+                <option value="700">0.7</option>
+                <option value="800">0.8</option>
+                <option value="900">0.9</option>
+                <option value="1000">1.0</option>
+            </select>
+            </span>;
         }
-        return reactAndRedux_1.React.createElement("div", null,
-            reactAndRedux_1.React.createElement("input", __assign({}, attrs)),
-            start,
-            stop,
-            intervalSelect);
+        return <div>
+             <input {...attrs}/>
+            {start}{stop}{intervalSelect}
+        </div>;
     };
     return Slider;
 }(reactAndRedux_1.React.Component));
 exports.Slider = Slider;
-//# sourceMappingURL=Slider.js.map
+//# sourceMappingURL=Slider.jsx.map

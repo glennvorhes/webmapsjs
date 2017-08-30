@@ -89,15 +89,18 @@ var SelectArea = (function (_super) {
     };
     SelectArea.prototype.render = function () {
         var _this = this;
-        return reactAndRedux_1.React.createElement("div", { style: { margin: '10px' } },
-            reactAndRedux_1.React.createElement("button", { id: this.selectId, onClick: function () {
-                    _this.setArea();
-                } }, "Select Area"),
-            reactAndRedux_1.React.createElement("button", { id: this.cancelId, onClick: function () {
-                    _this.cancel();
-                }, style: { display: 'none' } }, "Cancel"));
+        return <div style={{ margin: '10px' }}>
+            <button id={this.selectId} onClick={function () {
+            _this.setArea();
+        }}>Select Area
+            </button>
+            <button id={this.cancelId} onClick={function () {
+            _this.cancel();
+        }} style={{ display: 'none' }}>Cancel
+            </button>
+        </div>;
     };
     return SelectArea;
 }(reactAndRedux_1.React.Component));
 exports.SelectArea = SelectArea;
-//# sourceMappingURL=SelectArea.js.map
+//# sourceMappingURL=SelectArea.jsx.map
