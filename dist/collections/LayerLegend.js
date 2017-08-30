@@ -165,7 +165,7 @@ var LayerGroup = (function () {
  * a wrapper to make a legend
  */
 var LayerLegend = (function () {
-    /**
+    /**``
      *
      * @param {Array} legendItems array of layers or objects with {groupName:  {string}, collapse: {boolean}, addCheck: {boolean}, items: {Array}}
      * @param {string} divId the div where the legend should be added
@@ -265,11 +265,11 @@ var LayerLegend = (function () {
         if (this._legendItems.indexOf(oneItem) > -1 || typeof parents == 'undefined') {
             parents = [];
         }
-        if (typeof oneItem['groupName'] !== 'undefined') {
+        if (typeof oneItem.groupName !== 'undefined') {
             var groupItem = legendItems[0];
             var newGroup = this.layerGroup.addGroup(groupItem, parents);
             parents.push(newGroup.groupId);
-            this._buildTree(groupItem.items, parents);
+            this._buildTree(oneItem.items, parents);
         }
         else {
             /**

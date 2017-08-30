@@ -224,18 +224,17 @@ class LayerGroup {
 }
 
 
-
 /**
  * a wrapper to make a legend
  */
 class LayerLegend {
 
-    $divElement: any;
-    _legendItems: any;
+    $divElement: JQuery;
+    _legendItems: Array<iLegendItem|LayerBase>;
     layerGroup: any;
-    legendId: any;
+    legendId: string;
 
-    /**
+    /**``
      *
      * @param {Array} legendItems array of layers or objects with {groupName:  {string}, collapse: {boolean}, addCheck: {boolean}, items: {Array}}
      * @param {string} divId the div where the legend should be added
@@ -244,7 +243,7 @@ class LayerLegend {
      * @param {string} [options.legendTitle=Legend] the legend title
      * @param {boolean} [options.scaleDependent=true] if legend display is scale dependent
      */
-    constructor(legendItems: iLegendItem[], divId: string, options: iLegendOptions = {}) {
+    constructor(legendItems: Array<iLegendItem|LayerBase>, divId: string, options: iLegendOptions = {}) {
         for (let i of legendItems) {
             if (typeof i == 'undefined') {
                 throw 'undefined item passed in array to legend constructor';
@@ -342,7 +341,7 @@ class LayerLegend {
      * @param {Array} [parents=[]] the ordered list of groups in which this item is a member
      * @private
      */
-    _buildTree(legendItems: iLegendItem[], parents?: string[]) {
+    _buildTree(legendItems: Array<iLegendItem|LayerBase>, parents?: string[]) {
 
         if (legendItems.length == 0) {
             return;
@@ -355,23 +354,22 @@ class LayerLegend {
             parents = [];
         }
 
-        if (typeof oneItem['groupName'] !== 'undefined') {
+        if (typeof (oneItem as iLegendItem).groupName !== 'undefined') {
             let groupItem = legendItems[0];
             let newGroup = this.layerGroup.addGroup(groupItem, parents);
             parents.push(newGroup.groupId);
-            this._buildTree(groupItem.items, parents);
+            this._buildTree((oneItem as iLegendItem).items, parents);
         } else {
             /**
              * @type {LayerBase}
              */
-            let layerItem = legendItems[0];
+            let layerItem: LayerBase = legendItems[0] as LayerBase;
 
             this.layerGroup.addLegendLayer(layerItem, parents);
         }
 
         this._buildTree(legendItems.slice(1), parents);
     }
-
 }
 
 nm.LayerLegend = LayerLegend;

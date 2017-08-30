@@ -63,30 +63,15 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 39);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 39:
+/***/ 6:
 /***/ (function(module, exports) {
 
-/**
- * Created by gavorhes on 9/22/2016.
- */
-// import * as React from "react";
-// import * as ReactDOM from "react/lib/";
-//
-// import { Hello } from "../_scratch/Hello";
-//
-// console.log('I am in a tsx file for some reason');
-//
-// ReactDOM.render(
-//     <Hello compiler="TypeScript" framework="React" />,
-//     document.getElementById("example")
-// );
-//
-
+throw new Error("Module build failed: Error: Typescript emitted no output for C:\\Users\\glenn\\PycharmProjects\\webmapsjs\\test\\demo\\reacttst.tsx.\n    at Object.loader (C:\\Users\\glenn\\PycharmProjects\\webmapsjs\\node_modules\\ts-loader\\dist\\index.js:32:15)");
 
 /***/ })
 

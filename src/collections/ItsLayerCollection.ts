@@ -94,8 +94,6 @@ let itsConfig = [
             ]
         }
     }
-
-
 ];
 
 
@@ -157,9 +155,10 @@ export class ItsLayerCollection {
      * Return the array of layers in this collection
      * @returns {Array<LayerItsInventory>} an array of layers
      */
-    get layers() {
+    get layers(): LayerItsInventory[] {
         return this._layers;
     }
+
 }
 
 nm.ItsLayerCollection = ItsLayerCollection;
