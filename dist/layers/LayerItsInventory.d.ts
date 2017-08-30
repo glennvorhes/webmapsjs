@@ -8,7 +8,7 @@ import LayerBaseVectorGeoJson from './LayerBaseVectorGeoJson';
  */
 declare class LayerItsInventory extends LayerBaseVectorGeoJson {
     /**
-     * ITS device layer, types available at http://transportal.cee.wisc.edu/its/inventory/
+     * ITS device layer, types available at https://transportal.cee.wisc.edu/its/inventory/
      * @param {object} options - config
      * @param {string} [options.id] - layer id
      * @param {string} [options.name=Unnamed Layer] - layer name
@@ -29,10 +29,10 @@ declare class LayerItsInventory extends LayerBaseVectorGeoJson {
      * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
      * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
      *
-     * @param {string} options.itsType the ITS device type, use the url flag at http://transportal.cee.wisc.edu/its/inventory/
+     * @param {string} options.itsType the ITS device type, use the url flag at https://transportal.cee.wisc.edu/its/inventory/
      * @param {boolean} [options.addPopup=true] if the popup should be added automatically
      *
-     * @param {string} [options.itsIcon=undefined] the ITS device type icon image see http://transportal.cee.wisc.edu/its/inventory/icons/
+     * @param {string} [options.itsIcon=undefined] the ITS device type icon image see https://transportal.cee.wisc.edu/its/inventory/icons/
      *
      * @param {object} [options.itsLineStyle=undefined] A single line style
      * @param {string} options.itsLineStyle.color the line color as rgb or hex

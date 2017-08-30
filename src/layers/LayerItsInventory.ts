@@ -64,7 +64,7 @@ function checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
 
 /**
  *
- * @param {string} [itsIcon=undefined] the ITS device type icon image see http://transportal.cee.wisc.edu/its/inventory/icons/
+ * @param {string} [itsIcon=undefined] the ITS device type icon image see https://transportal.cee.wisc.edu/its/inventory/icons/
  *
  * @param {object} [itsLineStyle=undefined] A single line style
  * @param {string} itsLineStyle.color the line color as rgb or hex
@@ -88,7 +88,7 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) : ol.s
     "use strict";
     checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig);
 
-    let _iconUrlRoot = 'http://transportal.cee.wisc.edu/its/inventory/icons/';
+    let _iconUrlRoot = 'https://transportal.cee.wisc.edu/its/inventory/icons/';
 
     if (itsIcon) {
         return new ol.style.Style({
@@ -159,7 +159,7 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) : ol.s
 
 /**
  *
- * @param {string} [itsIcon=undefined] the ITS device type icon image see http://transportal.cee.wisc.edu/its/inventory/icons/
+ * @param {string} [itsIcon=undefined] the ITS device type icon image see https://transportal.cee.wisc.edu/its/inventory/icons/
  *
  * @param {object} [itsLineStyle=undefined] A single line style
  * @param {string} itsLineStyle.color the line color as rgb or hex
@@ -186,7 +186,7 @@ function defineLegend(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
 
     checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig);
 
-    let _iconUrlRoot = 'http://transportal.cee.wisc.edu/its/inventory/icons/';
+    let _iconUrlRoot = 'https://transportal.cee.wisc.edu/its/inventory/icons/';
 
     if (itsIcon) {
         return `<img src="${_iconUrlRoot + itsIcon}" class="legend-layer-icon" height="${iconHeight}">`;
@@ -228,7 +228,7 @@ function defineLegend(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
 class LayerItsInventory extends LayerBaseVectorGeoJson {
 
     /**
-     * ITS device layer, types available at http://transportal.cee.wisc.edu/its/inventory/
+     * ITS device layer, types available at https://transportal.cee.wisc.edu/its/inventory/
      * @param {object} options - config
      * @param {string} [options.id] - layer id
      * @param {string} [options.name=Unnamed Layer] - layer name
@@ -249,10 +249,10 @@ class LayerItsInventory extends LayerBaseVectorGeoJson {
      * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
      * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
      *
-     * @param {string} options.itsType the ITS device type, use the url flag at http://transportal.cee.wisc.edu/its/inventory/
+     * @param {string} options.itsType the ITS device type, use the url flag at https://transportal.cee.wisc.edu/its/inventory/
      * @param {boolean} [options.addPopup=true] if the popup should be added automatically
      *
-     * @param {string} [options.itsIcon=undefined] the ITS device type icon image see http://transportal.cee.wisc.edu/its/inventory/icons/
+     * @param {string} [options.itsIcon=undefined] the ITS device type icon image see https://transportal.cee.wisc.edu/its/inventory/icons/
      *
      * @param {object} [options.itsLineStyle=undefined] A single line style
      * @param {string} options.itsLineStyle.color the line color as rgb or hex
@@ -293,7 +293,7 @@ class LayerItsInventory extends LayerBaseVectorGeoJson {
         options.params = typeof options.params == 'object' ? options.params : {};
         $.extend(options.params, {format: 'JSON', resource: options.itsType});
 
-        super('http://transportal.cee.wisc.edu/its/inventory/', options);
+        super('https://transportal.cee.wisc.edu/its/inventory/', options);
 
         //add any additional content to the legend
         this.addLegendContent(addToLegend);
@@ -302,7 +302,7 @@ class LayerItsInventory extends LayerBaseVectorGeoJson {
 
         if (options.addPopup) {
             mapPopup.addVectorPopup(this, function (props) {
-                return `<iframe src="http://transportal.cee.wisc.edu/its/inventory/?feature=${props['featureGuid']}" ` +
+                return `<iframe src="https://transportal.cee.wisc.edu/its/inventory/?feature=${props['featureGuid']}" ` +
                     `height="250" width="350"></iframe>`;
             });
         }

@@ -60,7 +60,7 @@ function checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
 }
 /**
  *
- * @param {string} [itsIcon=undefined] the ITS device type icon image see http://transportal.cee.wisc.edu/its/inventory/icons/
+ * @param {string} [itsIcon=undefined] the ITS device type icon image see https://transportal.cee.wisc.edu/its/inventory/icons/
  *
  * @param {object} [itsLineStyle=undefined] A single line style
  * @param {string} itsLineStyle.color the line color as rgb or hex
@@ -83,7 +83,7 @@ function checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
 function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
     "use strict";
     checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig);
-    var _iconUrlRoot = 'http://transportal.cee.wisc.edu/its/inventory/icons/';
+    var _iconUrlRoot = 'https://transportal.cee.wisc.edu/its/inventory/icons/';
     if (itsIcon) {
         return new ol.style.Style({
             image: new ol.style.Icon({
@@ -146,7 +146,7 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
 }
 /**
  *
- * @param {string} [itsIcon=undefined] the ITS device type icon image see http://transportal.cee.wisc.edu/its/inventory/icons/
+ * @param {string} [itsIcon=undefined] the ITS device type icon image see https://transportal.cee.wisc.edu/its/inventory/icons/
  *
  * @param {object} [itsLineStyle=undefined] A single line style
  * @param {string} itsLineStyle.color the line color as rgb or hex
@@ -170,7 +170,7 @@ function defineLegend(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
     "use strict";
     var iconHeight = 17;
     checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig);
-    var _iconUrlRoot = 'http://transportal.cee.wisc.edu/its/inventory/icons/';
+    var _iconUrlRoot = 'https://transportal.cee.wisc.edu/its/inventory/icons/';
     if (itsIcon) {
         return "<img src=\"" + (_iconUrlRoot + itsIcon) + "\" class=\"legend-layer-icon\" height=\"" + iconHeight + "\">";
     }
@@ -213,7 +213,7 @@ function defineLegend(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
 var LayerItsInventory = (function (_super) {
     __extends(LayerItsInventory, _super);
     /**
-     * ITS device layer, types available at http://transportal.cee.wisc.edu/its/inventory/
+     * ITS device layer, types available at https://transportal.cee.wisc.edu/its/inventory/
      * @param {object} options - config
      * @param {string} [options.id] - layer id
      * @param {string} [options.name=Unnamed Layer] - layer name
@@ -234,10 +234,10 @@ var LayerItsInventory = (function (_super) {
      * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
      * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
      *
-     * @param {string} options.itsType the ITS device type, use the url flag at http://transportal.cee.wisc.edu/its/inventory/
+     * @param {string} options.itsType the ITS device type, use the url flag at https://transportal.cee.wisc.edu/its/inventory/
      * @param {boolean} [options.addPopup=true] if the popup should be added automatically
      *
-     * @param {string} [options.itsIcon=undefined] the ITS device type icon image see http://transportal.cee.wisc.edu/its/inventory/icons/
+     * @param {string} [options.itsIcon=undefined] the ITS device type icon image see https://transportal.cee.wisc.edu/its/inventory/icons/
      *
      * @param {object} [options.itsLineStyle=undefined] A single line style
      * @param {string} options.itsLineStyle.color the line color as rgb or hex
@@ -270,13 +270,13 @@ var LayerItsInventory = (function (_super) {
         }
         options.params = typeof options.params == 'object' ? options.params : {};
         $.extend(options.params, { format: 'JSON', resource: options.itsType });
-        _this = _super.call(this, 'http://transportal.cee.wisc.edu/its/inventory/', options) || this;
+        _this = _super.call(this, 'https://transportal.cee.wisc.edu/its/inventory/', options) || this;
         //add any additional content to the legend
         _this.addLegendContent(addToLegend);
         options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : true;
         if (options.addPopup) {
             mapPopup_1.default.addVectorPopup(_this, function (props) {
-                return "<iframe src=\"http://transportal.cee.wisc.edu/its/inventory/?feature=" + props['featureGuid'] + "\" " +
+                return "<iframe src=\"https://transportal.cee.wisc.edu/its/inventory/?feature=" + props['featureGuid'] + "\" " +
                     "height=\"250\" width=\"350\"></iframe>";
             });
         }
