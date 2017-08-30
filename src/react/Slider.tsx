@@ -8,14 +8,9 @@ import makeGuid from '../util/makeGuid';
 import {ChangeEvent} from "react";
 
 
-export interface iSlider {
-    change: (d: number) => any;
-    steps?: number;
-    animate?: boolean;
-    value?: number;
-}
 
-export class Slider extends React.Component<iSlider, null>{
+
+export class Slider extends React.Component<{change: (d: number) => any, steps?: number, animate?: boolean, value?: number}, null>{
     uid: string;
     startUid: string;
     endUid: string;
@@ -30,7 +25,7 @@ export class Slider extends React.Component<iSlider, null>{
     maxVal: number;
     step: number;
 
-    constructor(props: iSlider, context: Object) {
+    constructor(props: {change: (d: number) => any, steps?: number, animate?: boolean, value?: number}, context: Object) {
         super(props, context);
         this.uid = makeGuid();
         this.startUid = makeGuid();

@@ -14,8 +14,8 @@ import {LayerBase} from "../layers";
 
 export interface iLegendItem{
     groupName: string;
-    collapse: boolean;
-    addCheck: boolean;
+    collapse?: boolean;
+    addCheck?: boolean;
     items: Array<iLegendItem|LayerBase>
 }
 
