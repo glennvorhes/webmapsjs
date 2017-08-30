@@ -10,7 +10,14 @@ import {ChangeEvent} from "react";
 
 
 
-export class Slider extends React.Component<{change: (d: number) => any, steps?: number, animate?: boolean, value?: number}, null>{
+export interface iSlider {
+    change: (d: number) => any;
+    steps?: number;
+    animate?: boolean;
+    value?: number;
+}
+
+export class Slider extends React.Component<iSlider, null>{
     uid: string;
     startUid: string;
     endUid: string;
@@ -25,7 +32,7 @@ export class Slider extends React.Component<{change: (d: number) => any, steps?:
     maxVal: number;
     step: number;
 
-    constructor(props: {change: (d: number) => any, steps?: number, animate?: boolean, value?: number}, context: Object) {
+    constructor(props: iSlider, context: Object) {
         super(props, context);
         this.uid = makeGuid();
         this.startUid = makeGuid();
