@@ -5,7 +5,7 @@
 import provide from './provide';
 let nm = provide('util.dateConvert');
 
-function leadingPad(inNum) {
+function leadingPad(inNum: number) {
     let strNum = inNum.toFixed();
     if (strNum.length < 2) {
         strNum = '0' + strNum;

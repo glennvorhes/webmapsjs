@@ -8,6 +8,22 @@ import mapMove from '../olHelpers/mapMove';
 
 let nm = provide('collections');
 import $ = require('jquery');
+import {LayerBase} from "../layers";
+
+
+
+export interface iLegendItem{
+    groupName: string;
+    collapse: boolean;
+    addCheck: boolean;
+    items: iLegendItem[]
+}
+
+export interface iLegendOptions{
+    layerDivClasses?: string[]
+    legendTitle?: string
+    scaleDependent?: boolean
+}
 
 class LayerGroup {
     groupLayers: any;
@@ -22,8 +38,8 @@ class LayerGroup {
     allGroupArray: any;
     allGroupLookup: any;
     allLayerLookup: any;
-    collapse: any;
-    addCheck: any;
+    collapse: boolean;
+    addCheck: boolean;
     layerParentLookup: any;
 
     /**
@@ -34,7 +50,7 @@ class LayerGroup {
      * @param {boolean} [groupConfig.addCheck=true] - if the group should have a checkbox controlling visibility of all layers
      * @param {LayerGroup} [parent=undefined] - the parent group
      */
-    constructor(groupConfig?, parent?) {
+    constructor(groupConfig?: iLegendItem, parent?: LayerGroup) {
         this.groupLayers = [];
         this.groupLayersLookup = {};
         this.groupGroups = [];
@@ -70,7 +86,7 @@ class LayerGroup {
      * @param {Array<LayerGroup>} parents parent groups
      * @returns {LayerGroup} the layer group just added
      */
-    addGroup(groupConfig, parents) {
+    addGroup(groupConfig: iLegendItem, parents: string[]) {
         let parent;
         if (parents.length > 0) {
             parent = parents[parents.length - 1];
@@ -104,7 +120,7 @@ class LayerGroup {
      * @param {LayerBase} newLayer the layer to be added
      * @param {Array} parents array
      */
-    addLegendLayer(newLayer, parents) {
+    addLegendLayer(newLayer: LayerBase, parents: string[]) {
         let parent;
         if (parents.length > 0) {
             parent = parents[parents.length - 1];
@@ -132,7 +148,9 @@ class LayerGroup {
 
     }
 
-    getLegendHtml(legendId, options) {
+
+
+    getLegendHtml(legendId: string, options: iLegendOptions) {
 
 
         let legendHtml = `<ul id="${legendId}" class="legend-container">`;
@@ -154,7 +172,7 @@ class LayerGroup {
      * @static
      * @returns {string} html string
      */
-    _buildLegend(itemIds, theGroup, layerDivClasses) {
+    _buildLegend(itemIds: string[], theGroup: LayerGroup, layerDivClasses: string[]): string {
 
         if (itemIds.length == 0) {
             return '';
@@ -205,6 +223,8 @@ class LayerGroup {
     }
 }
 
+
+
 /**
  * a wrapper to make a legend
  */
@@ -224,14 +244,12 @@ class LayerLegend {
      * @param {string} [options.legendTitle=Legend] the legend title
      * @param {boolean} [options.scaleDependent=true] if legend display is scale dependent
      */
-    constructor(legendItems, divId, options) {
+    constructor(legendItems: iLegendItem[], divId: string, options: iLegendOptions = {}) {
         for (let i of legendItems) {
             if (typeof i == 'undefined') {
                 throw 'undefined item passed in array to legend constructor';
             }
         }
-
-        options = options || {};
 
         options.legendTitle = typeof options.legendTitle == 'string' ? options.legendTitle : 'Legend';
         options.scaleDependent = typeof options.scaleDependent == 'boolean' ? options.scaleDependent : true;
@@ -324,7 +342,7 @@ class LayerLegend {
      * @param {Array} [parents=[]] the ordered list of groups in which this item is a member
      * @private
      */
-    _buildTree(legendItems, parents?) {
+    _buildTree(legendItems: iLegendItem[], parents?: string[]) {
 
         if (legendItems.length == 0) {
             return;

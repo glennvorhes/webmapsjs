@@ -23,12 +23,16 @@ export interface mapMoveCallbackFunction {
 export declare class MapMoveCls extends MapInteractionBase {
     _mapExtent: extentObject;
     _zoomLevel: number;
-    _lookupLayer: Object;
+    _lookupLayer: {
+        [s: string]: LayerBaseVector;
+    };
     _arrLayer: Array<LayerBaseVector>;
     _arrLyrTimeout: Array<number>;
     _mapMoveCallbackTimeout: Array<number>;
     _mapMoveCallbackDelays: Array<number>;
-    _mapMoveCallbacksLookup: Object;
+    _mapMoveCallbacksLookup: {
+        [s: string]: mapMoveCallbackFunction;
+    };
     _mapMoveCallbackContext: Array<Object>;
     _mapMoveCallbacks: Array<mapMoveCallbackFunction>;
     _arrLyrRequest: Array<any>;

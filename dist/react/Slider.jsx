@@ -75,17 +75,21 @@ var Slider = (function (_super) {
             onChange: function (evt) { _this.props.change(parseFloat(evt.target.value)); },
             style: { width: '100%' },
             max: "100",
-            step: '0.1'
+            step: '0.1',
+            value: this.props.value.toString(),
+            defaultValue: "0"
         };
         if (this.props.steps) {
             attrs.max = this.props.steps.toString();
             attrs.step = '1';
         }
         if (this.props.value) {
-            attrs['value'] = this.props.value.toString();
+            delete attrs.defaultValue;
+            // attrs['value'] = this.props.value.toString()
         }
         else {
-            attrs['defaultValue'] = "0";
+            delete attrs.value;
+            // attrs['defaultValue'] = "0";
         }
         var start = null;
         var stop = null;

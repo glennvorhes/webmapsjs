@@ -11,5 +11,5 @@ import ol = require('custom-ol');
  * @param {propertiesZoomStyle|*} styleFunc - style function
  * @returns {function|*} new function
  */
-declare function propertiesZoomStyle(styleFunc: any): (feature: ol.Feature, resolution: any) => void;
+declare function propertiesZoomStyle(styleFunc: (f: ol.Feature, res: number) => ol.style.Style | ol.style.Style[]): (feature: ol.Feature, zoom: number) => ol.style.Style | ol.style.Style[];
 export default propertiesZoomStyle;

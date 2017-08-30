@@ -6,6 +6,7 @@
 import MapInteractionBase from './mapInteractionBase';
 import ol = require('custom-ol');
 import { LayerBaseVector } from "../layers/LayerBaseVector";
+import { LayerBase } from "../layers/LayerBase";
 import LayerEsriMapServer from "../layers/LayerEsriMapServer";
 export interface popupChangedFunction {
     ($popContent: JQuery): any;
@@ -114,7 +115,7 @@ export declare class MapPopupCls extends MapInteractionBase {
      * @returns  the new selection layer
      * @private
      */
-    _addPopupLayer(lyr: LayerBaseVector, selectionStyle: {
+    _addPopupLayer(lyr: LayerBaseVector | LayerEsriMapServer, selectionStyle: {
         color?: string;
         width?: number;
         olStyle?: ol.style.Style;
@@ -138,7 +139,7 @@ export declare class MapPopupCls extends MapInteractionBase {
      *
      * @param {LayerBase} lyr - layer
      */
-    removeVectorPopup(lyr: any): void;
+    removeVectorPopup(lyr: LayerBase): void;
     /**
      *
      * @param {LayerEsriMapServer} lyr - map server layer
@@ -148,7 +149,7 @@ export declare class MapPopupCls extends MapInteractionBase {
      * @param {object|function} [selectionStyle.olStyle=undefined] an openlayers style object or function
      * @returns {object} a reference to the ol selection layer
      */
-    addMapServicePopup(lyr: any, selectionStyle?: ol.style.Style | Array<ol.style.Style> | ol.StyleFunction): ol.layer.Vector;
+    addMapServicePopup(lyr: LayerEsriMapServer, selectionStyle?: ol.style.Style | Array<ol.style.Style> | ol.StyleFunction): ol.layer.Vector;
     clearSelection(): void;
     /**
      * Add a function to be called when the map is clicked but before any popups are implemented

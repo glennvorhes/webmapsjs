@@ -5,10 +5,11 @@
 import { React } from './reactAndRedux';
 import ol = require('custom-ol');
 import LayerBaseVectorGeoJson from '../layers/LayerBaseVectorGeoJson';
-export declare class SelectArea extends React.Component<{
+export interface iSelectArea {
     map: ol.Map | (() => ol.Map);
     callback: (coords: Array<number[]>) => any;
-}, null> {
+}
+export declare class SelectArea extends React.Component<iSelectArea, null> {
     map: ol.Map;
     callback: (coords: Array<number[]>) => any;
     areaOverlay: LayerBaseVectorGeoJson;
@@ -17,7 +18,7 @@ export declare class SelectArea extends React.Component<{
     cancelId: string;
     selectButton: HTMLButtonElement;
     cancelButton: HTMLButtonElement;
-    constructor(props: any, context: any);
+    constructor(props: iSelectArea, context: Object);
     componentDidMount(): void;
     setArea(): void;
     cancel(): void;

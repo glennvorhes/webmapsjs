@@ -98,7 +98,7 @@ class RealEarthAnimateVector extends RealEarthAnimate {
      * @param {object} geojObj - the geojson object
      * @private
      */
-    _loadFeatures(geojObj) {
+    _loadFeatures(geojObj: Object) {
         this._source.addFeatures(this._lyr._geoJsonFormat.readFeatures(geojObj,
             {featureProjection: this._lyr._transform.featureProjection, dataProjection: this._lyr._transform.dataProjection}));
     }

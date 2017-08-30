@@ -84,13 +84,13 @@ class LayerSwipe {
      *
      * @param {LayerBase|*} lyr - layer to be added to left side
      */
-    addLeftLayer(lyr) {
+    addLeftLayer(lyr: LayerBase) {
 
         if (this.leftLayers.indexOf(lyr) != -1){
             return;
         }
 
-        lyr.olLayer.on('precompose', (event) => {
+        lyr.olLayer.on('precompose', (event: {context: CanvasRenderingContext2D}) => {
             let ctx = event['context'];
             let width = ctx.canvas.width * (this.percentRight / 100);
 
@@ -100,7 +100,7 @@ class LayerSwipe {
             ctx.clip();
         });
 
-        lyr.olLayer.on('postcompose', function (event) {
+        lyr.olLayer.on('postcompose', function (event: {context: CanvasRenderingContext2D}) {
             let ctx = event['context'];
             ctx.restore();
         });
@@ -113,13 +113,13 @@ class LayerSwipe {
      *
      * @param {LayerBase|*} lyr - layer to be added to right side
      */
-    addRightLayer(lyr) {
+    addRightLayer(lyr: LayerBase) {
 
         if (this.rightLayers.indexOf(lyr) != -1){
             return;
         }
 
-        lyr.olLayer.on('precompose', (event) => {
+        lyr.olLayer.on('precompose', (event: {context: CanvasRenderingContext2D}) => {
             let ctx = event['context'];
             let width = ctx.canvas.width * (this.percentRight / 100);
 
@@ -129,7 +129,7 @@ class LayerSwipe {
             ctx.clip();
         });
 
-        lyr.olLayer.on('postcompose', function (event) {
+        lyr.olLayer.on('postcompose', function (event: {context: CanvasRenderingContext2D}) {
             let ctx = event['context'];
             ctx.restore();
         });

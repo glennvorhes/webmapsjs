@@ -117,7 +117,7 @@ export class LayerBaseVectorGeoJson extends LayerBaseVector {
      * @param {object} d the json response
      * @override
      */
-    mapMoveCallback(d) {
+    mapMoveCallback(d: Object) {
         super.mapMoveCallback(d);
         this._source.addFeatures(this._geoJsonFormat.readFeatures(d,
             {featureProjection: this._transform.featureProjection, dataProjection: this._transform.dataProjection}));

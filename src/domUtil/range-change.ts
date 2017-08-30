@@ -1,13 +1,14 @@
 import provide from '../util/provide';
 import $ = require('jquery');
+import {ChangeEvent} from "react";
 
 const nm = provide('domUtil');
 
 let mouseIn = false;
 let mouseDown = false;
-let timeout = null;
+let timeout: number = null;
 let dragged = false;
-let lastVal;
+let lastVal: number;
 
 
 /**
@@ -28,7 +29,7 @@ export interface rangeChangedCallback{
      * @param ratio ratio from low to high, 0 to 1
      * @param evt the original event
      */
-    (newValue: number, ratio: number, evt: Event): any
+    (newValue: number, ratio: number, evt: ChangeEvent<HTMLInputElement>): any
 }
 
 
@@ -36,7 +37,7 @@ export interface rangeChangedCallback{
  * Created by gavorhes on 11/2/2015.
  */
 
-function triggerCallback(callback: rangeChangedCallback, evt) {
+function triggerCallback(callback: rangeChangedCallback, evt: ChangeEvent<HTMLInputElement>) {
     "use strict";
 
     let val = parseFloat(this.value);

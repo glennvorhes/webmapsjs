@@ -18,8 +18,8 @@ require("jquery-ui");
 var makeGuid_1 = require("../util/makeGuid");
 var RadioItem = (function (_super) {
     __extends(RadioItem, _super);
-    function RadioItem() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+    function RadioItem(props, context) {
+        var _this = _super.call(this, props, context) || this;
         _this.guid = makeGuid_1.default();
         return _this;
     }
@@ -27,8 +27,10 @@ var RadioItem = (function (_super) {
         var _this = this;
         var style = {};
         if (this.props.inline) {
-            style['display'] = 'inline-block';
-            style['padding'] = '0 5px';
+            style = {
+                display: 'inline-block',
+                padding: '0 5px'
+            };
         }
         var props = {
             id: this.guid,
@@ -38,13 +40,15 @@ var RadioItem = (function (_super) {
             onChange: function (evt) {
                 _this.props.change(evt.target.value);
                 evt.target.checked = true;
-            }
+            },
+            checked: this.props.checked,
+            defaultChecked: this.props.checked
         };
         if (this.props.connected) {
-            props['checked'] = this.props.checked;
+            delete props.defaultChecked;
         }
         else {
-            props['defaultChecked'] = this.props.checked;
+            delete props.checked;
         }
         return <li style={style}>
             <input {...props}/>
@@ -65,8 +69,10 @@ var RadioBase = (function (_super) {
         var _this = this;
         var style = {};
         if (this.inline) {
-            style['display'] = 'inline-block';
-            style['padding'] = '0 5px';
+            style = {
+                display: 'inline-block',
+                padding: '0 5px'
+            };
         }
         var arr = [];
         for (var i = 0; i < this.props.items.length; i++) {
@@ -78,13 +84,14 @@ var RadioBase = (function (_super) {
                 key: this.props.items[i],
                 connected: this.props.connected || false,
                 checked: false,
+                index: i
             };
             if (typeof this.props.selectedValueOrIndex == 'number') {
                 itemProps.checked = i == this.props.selectedValueOrIndex;
-                itemProps['index'] = i;
             }
             else {
                 itemProps.checked = this.props.items[i] == this.props.selectedValueOrIndex;
+                delete itemProps.index;
             }
             arr.push(<RadioItem {...itemProps}/>);
         }

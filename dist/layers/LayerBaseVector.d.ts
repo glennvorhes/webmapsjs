@@ -8,7 +8,12 @@ export interface makeMapMoveParams {
      * @param extent
      * @param zoomLevel
      */
-    (lyr: LayerBaseVector, extent: Array<number>, zoomLevel?: number): any;
+    (lyr: LayerBaseVector, extent: {
+        minX: number;
+        minY: number;
+        maxX: number;
+        maxY: number;
+    }, zoomLevel?: number): any;
 }
 export interface LayerBaseVectorOptions extends LayerBaseOptions {
     autoLoad?: boolean;
@@ -66,14 +71,14 @@ export declare class LayerBaseVector extends LayerBase {
      * dummy to be overridden
      * @param {object} featureCollection - geojson or esrijson object
      */
-    addFeatures(featureCollection: any): void;
+    addFeatures(featureCollection: Object): void;
     /**
      * Before call to map move callback, can prevent call by returning false
      * @param {number} zoom - zoom level
      * @param {string} [evtType=undefined] undefined for initial load, otherwise one of 'change:center', 'change:resolution'
      * @returns {boolean} if the call should proceed
      */
-    mapMoveBefore(zoom: any, evtType: any): boolean;
+    mapMoveBefore(zoom: number, evtType: string): boolean;
     /**
      * callback to generate the parameters passed in the get request
      * @param {object} extent - extent object
@@ -83,12 +88,17 @@ export declare class LayerBaseVector extends LayerBase {
      * @param {number} extent.maxY - maxY
      * @param {number} zoomLevel - zoom level
      */
-    mapMoveMakeGetParams(extent: any, zoomLevel: any): void;
+    mapMoveMakeGetParams(extent: {
+        minX: number;
+        minY: number;
+        maxX: number;
+        maxY: number;
+    }, zoomLevel: number): void;
     /**
      * callback function on map move
      * @param {object} d - the json response
      */
-    mapMoveCallback(d: any): void;
+    mapMoveCallback(d: Object): void;
     /**
      * clear features in the layer
      */

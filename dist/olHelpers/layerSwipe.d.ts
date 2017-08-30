@@ -21,12 +21,12 @@ declare class LayerSwipe {
      *
      * @param {LayerBase|*} lyr - layer to be added to left side
      */
-    addLeftLayer(lyr: any): void;
+    addLeftLayer(lyr: LayerBase): void;
     /**
      *
      * @param {LayerBase|*} lyr - layer to be added to right side
      */
-    addRightLayer(lyr: any): void;
+    addRightLayer(lyr: LayerBase): void;
     percentRight: number;
 }
 export default LayerSwipe;

@@ -8,4 +8,6 @@ export interface keyVals {
  * @param {object} obj - the input object
  * @returns {Array<keyVals>} - array of key value pairs
  */
-export declare function keyValPairs(obj: any): Array<keyVals>;
+export declare function keyValPairs(obj: {
+    [s: string]: any;
+}): Array<keyVals>;

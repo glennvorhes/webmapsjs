@@ -124,7 +124,7 @@ class _Slider {
      * add html to dom
      * @param {jQuery} $container - container element
      */
-    addToDom($container) {
+    addToDom($container: JQuery) {
         $container.append(this.html);
         this.labelLow = $(`#${this.domId}_low`);
         this.labelHigh = $(`#${this.domId}_high`);
@@ -139,7 +139,7 @@ class _Slider {
      * @param {number} delta change delta
      * @returns {number} the remainder not able to be allocated to this slider
      */
-    increment(delta) {
+    increment(delta: number): number {
         let remainder = 0;
         delta = Number(delta.toFixed(1));
 
@@ -435,7 +435,7 @@ export class TipSliders {
      * @param {string} skipDomId - this dom id
      * @private
      */
-    _handleRemainder(remain, skipDomId) {
+    _handleRemainder(remain: number, skipDomId: string) {
 
         remain = Number(remain.toFixed(1));
         if (remain == 0) {
@@ -489,7 +489,7 @@ export class TipSliders {
      *
      * @param {object} keyValList key and value list
      */
-    setValues(keyValList) {
+    setValues(keyValList: {[s:string]: [number, string]}) {
         this.resetting = true;
         for (let k in keyValList) {
             if (keyValList.hasOwnProperty(k)) {
@@ -518,7 +518,7 @@ export class TipSliders {
      * @returns {object} lookup with parameter weights
      */
     getParams() {
-        let paramWeights = {};
+        let paramWeights: {[s: string]: number} = {};
         for (let i = 0; i < this._sliderList.length; i++) {
             let sld = this._sliderList[i];
             paramWeights[sld.selectedParam] = Number(sld.weight.toFixed(1));

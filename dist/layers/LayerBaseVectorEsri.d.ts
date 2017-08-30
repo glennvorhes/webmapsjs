@@ -60,7 +60,7 @@ export declare class LayerBaseVectorEsri extends LayerBaseVector {
      * add feature collection
      * @param {object} featureCollection - features as esrijson
      */
-    addFeatures(featureCollection: any): void;
+    addFeatures(featureCollection: Object): void;
     /**
      * trigger load features
      * @protected
@@ -76,18 +76,23 @@ export declare class LayerBaseVectorEsri extends LayerBaseVector {
      * @param {number} extent.maxY - maxY
      * @param {number} zoomLevel - zoom level
      */
-    mapMoveMakeGetParams(extent: any, zoomLevel: any): void;
+    mapMoveMakeGetParams(extent: {
+        minX: number;
+        minY: number;
+        maxX: number;
+        maxY: number;
+    }, zoomLevel: number): void;
     /**
      * Before call to map move callback, can prevent call by returning false
      * @param {number} zoom - zoom level
      * @param {string} [evtType=undefined] undefined for initial load, otherwise one of 'change:center', 'change:resolution'
      * @returns {boolean} if the call should proceed
      */
-    mapMoveBefore(zoom: any, evtType: any): boolean;
+    mapMoveBefore(zoom: number, evtType: string): boolean;
     /**
      * callback function on map move
      * @param {object} d - the json response
      */
-    mapMoveCallback(d: any): void;
+    mapMoveCallback(d: Object): void;
 }
 export default LayerBaseVectorEsri;

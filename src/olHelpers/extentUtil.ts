@@ -25,11 +25,7 @@ export function calculateExtent(layers: ol.layer.Vector[]|LayerBaseVector[]): ol
 
     for (let lyr of layers) {
 
-        /**
-         * 
-         * @type {ol.layer.Vector}
-         */
-        let olLayer = lyr['olLayer'] || lyr;
+        let olLayer: ol.layer.Vector = (lyr as LayerBaseVector).olLayer || lyr as ol.layer.Vector;
         
         
         if (olLayer.getSource().getFeatures().length > 0) {

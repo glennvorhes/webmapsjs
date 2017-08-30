@@ -19,11 +19,7 @@ function calculateExtent(layers) {
     var maxY = -10E100;
     for (var _i = 0, layers_1 = layers; _i < layers_1.length; _i++) {
         var lyr = layers_1[_i];
-        /**
-         *
-         * @type {ol.layer.Vector}
-         */
-        var olLayer = lyr['olLayer'] || lyr;
+        var olLayer = lyr.olLayer || lyr;
         if (olLayer.getSource().getFeatures().length > 0) {
             hasExtent = true;
             var ext = olLayer.getSource().getExtent();

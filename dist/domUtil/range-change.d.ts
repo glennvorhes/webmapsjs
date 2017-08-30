@@ -1,5 +1,7 @@
+/// <reference types="react" />
 /// <reference types="jquery" />
 /// <reference types="jqueryui" />
+import { ChangeEvent } from "react";
 /**
  * callback on range change interaction, context of this is the firing dom element
  * @callback rangeChangeCallback
@@ -17,7 +19,7 @@ export interface rangeChangedCallback {
      * @param ratio ratio from low to high, 0 to 1
      * @param evt the original event
      */
-    (newValue: number, ratio: number, evt: Event): any;
+    (newValue: number, ratio: number, evt: ChangeEvent<HTMLInputElement>): any;
 }
 /**
  * Add a variety of listeners for range inputs applied to a common callback

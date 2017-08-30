@@ -47,7 +47,7 @@ export declare class MediaControl {
      * @param {number} [newValue=newMin] the value to set
      * @param {number} [newStep=(newMax-newMin)/20] step value
      */
-    setMinMaxValueStep(newMin: any, newMax: any, newValue: any, newStep: any): void;
+    setMinMaxValueStep(newMin: number, newMax: number, newValue: number, newStep: number): void;
     /**
      *
      * @param {mediaCallback} newFunc the callback on change

@@ -20,7 +20,7 @@ export interface keyVals {
  * @param {object} obj - the input object
  * @returns {Array<keyVals>} - array of key value pairs
  */
-export function keyValPairs(obj): Array<keyVals> {
+export function keyValPairs(obj: {[s: string]: any}): Array<keyVals> {
     let outArray: Array<keyVals> = [];
     for (let key of Object.keys(obj)) {
         outArray.push({'key': key, 'value': obj[key]});

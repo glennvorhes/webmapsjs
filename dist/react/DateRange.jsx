@@ -19,7 +19,7 @@ var makeGuid_1 = require("../util/makeGuid");
 var fixDate = require("./helpers/dateFormat");
 var DatePick_1 = require("./DatePick");
 function stringToDate(dte) {
-    if (dte['getTime']) {
+    if (dte.getTime) {
         return dte;
     }
     else {

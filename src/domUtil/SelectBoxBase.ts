@@ -36,7 +36,7 @@ export class SelectBoxBase{
      * @param {string} labelContent
      * @param {contentGenerator} [contentGen=undefined]
      */
-    constructor(parent, labelContent, contentGen?: contentGenerator){
+    constructor(parent: JQuery, labelContent: string, contentGen?: contentGenerator){
         let guidTop = makeGuid();
         let guid = makeGuid();
 

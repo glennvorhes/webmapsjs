@@ -4,14 +4,15 @@
  */
 import { React } from './reactAndRedux';
 import 'jquery-ui';
-export declare class DateRange extends React.Component<{
+export interface iDateRange {
     maxRange: number;
     callback: (start: string | Date, end: string | Date) => any;
     minRange?: number;
     maxDate?: string | Date;
     minDate?: string | Date;
     initialEnd?: string | Date;
-}, null> {
+}
+export declare class DateRange extends React.Component<iDateRange, null> {
     startId: string;
     endId: string;
     startInput: HTMLInputElement;
@@ -21,7 +22,7 @@ export declare class DateRange extends React.Component<{
     maxRange: number;
     minRange: number;
     numDays: number;
-    constructor(props: any, context: any);
+    constructor(props: iDateRange, context: Object);
     setNumDays(): void;
     componentDidMount(): void;
     readonly needReset: boolean;

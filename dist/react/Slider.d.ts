@@ -3,12 +3,13 @@
  * Created by glenn on 7/6/2017.
  */
 import { React } from './reactAndRedux';
-export declare class Slider extends React.Component<{
+export interface iSlider {
     change: (d: number) => any;
     steps?: number;
     animate?: boolean;
     value?: number;
-}, null> {
+}
+export declare class Slider extends React.Component<iSlider, null> {
     uid: string;
     startUid: string;
     endUid: string;
@@ -22,7 +23,7 @@ export declare class Slider extends React.Component<{
     minVal: number;
     maxVal: number;
     step: number;
-    constructor(props: any, context: any);
+    constructor(props: iSlider, context: Object);
     componentDidMount(): void;
     updateRunning(): void;
     startAnimate(): void;

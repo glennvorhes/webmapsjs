@@ -2,20 +2,20 @@
  * Created by gavorhes on 12/10/2015.
  */
 
-
+declare const window: Window;
 /**
  * create a namespace on the gv object
  * @param {string} namespace to create
  * @returns {object} object representing the namespace
  */
-function provide(namespace){
+function provide(namespace: string){
     "use strict";
-    if (typeof window['gv'] == 'undefined'){
-        window['gv'] = {};
+    if (typeof (<any>window).gv == 'undefined'){
+        (<any>window).gv = {};
     }
 
     let parts = namespace.split('.');
-    let nameSpace = window['gv'];
+    let nameSpace = (<any>window).gv;
 
     for (let i=0; i< parts.length; i++){
         let newObject = nameSpace[parts[i]];
@@ -31,6 +31,6 @@ function provide(namespace){
 }
 
 provide('util');
-window['gv'].util.provide = provide;
+(<any>window).gv.util.provide = provide;
 
 export default provide;

@@ -10,11 +10,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 function provide(namespace) {
     "use strict";
-    if (typeof window['gv'] == 'undefined') {
-        window['gv'] = {};
+    if (typeof window.gv == 'undefined') {
+        window.gv = {};
     }
     var parts = namespace.split('.');
-    var nameSpace = window['gv'];
+    var nameSpace = window.gv;
     for (var i = 0; i < parts.length; i++) {
         var newObject = nameSpace[parts[i]];
         if (typeof newObject == 'undefined') {
@@ -25,6 +25,6 @@ function provide(namespace) {
     return nameSpace;
 }
 provide('util');
-window['gv'].util.provide = provide;
+window.gv.util.provide = provide;
 exports.default = provide;
 //# sourceMappingURL=provide.js.map

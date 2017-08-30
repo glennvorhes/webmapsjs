@@ -9,8 +9,12 @@ import {proj4326, proj3857} from '../olHelpers/projections'
 import makeGuid from '../util/makeGuid';
 import getMap from './helpers/get_map';
 
+export interface iSelectArea{
+    map: ol.Map | (() => ol.Map);
+    callback: (coords: Array<number[]>) => any
+}
 
-export class SelectArea extends React.Component<{ map: ol.Map | (() => ol.Map), callback: (coords: Array<number[]>) => any }, null> {
+export class SelectArea extends React.Component<iSelectArea, null> {
     map: ol.Map;
     callback: (coords: Array<number[]>) => any;
     areaOverlay: LayerBaseVectorGeoJson;
@@ -21,7 +25,7 @@ export class SelectArea extends React.Component<{ map: ol.Map | (() => ol.Map), 
     cancelButton: HTMLButtonElement;
 
 
-    constructor(props, context) {
+    constructor(props: iSelectArea, context: Object) {
         super(props, context);
 
         this.selectId = makeGuid();
@@ -48,7 +52,7 @@ export class SelectArea extends React.Component<{ map: ol.Map | (() => ol.Map), 
             type: 'Polygon'
         });
 
-        this.draw.on('drawend', (evt) => {
+        this.draw.on('drawend', (evt: {feature: {getGeometry: () => ol.geom.Polygon}}) => {
             this.selectButton.style.display = '';
             this.cancelButton.style.display = 'none';
 

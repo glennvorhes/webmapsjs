@@ -2,7 +2,7 @@
  * Created by gavorhes on 10/30/2015.
  */
 
-if (!String.prototype['format']) {
+if (!(<any>String.prototype).format) {
     /**
      *  helper function for string replacement to keep code clean
      * usage
@@ -18,7 +18,7 @@ if (!String.prototype['format']) {
      * aString.format(arrReplacements)
      * @returns {string} converted string
      */
-    String.prototype['format'] = function () {
+    (<any>String.prototype).format = function () {
         let args = arguments;
         for (let i = 0; i < args.length; i++) {
             args[i] = (args[i] !== null ? args[i] : '');
@@ -29,7 +29,7 @@ if (!String.prototype['format']) {
             args = args[0];
         }
 
-        return this.replace(/{(\d+)}/g, function (match, number) {
+        return this.replace(/{(\d+)}/g, function (match: string, number: number) {
             return typeof args[number] != 'undefined' ? args[number] : match;
         });
     };

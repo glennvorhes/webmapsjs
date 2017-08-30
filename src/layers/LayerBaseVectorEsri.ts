@@ -117,7 +117,7 @@ export class LayerBaseVectorEsri extends LayerBaseVector {
      * add feature collection
      * @param {object} featureCollection - features as esrijson
      */
-    addFeatures(featureCollection) {
+    addFeatures(featureCollection: Object) {
         let feats = this._esriFormat.readFeatures(featureCollection);
         this.source.addFeatures(feats);
     }
@@ -150,7 +150,7 @@ export class LayerBaseVectorEsri extends LayerBaseVector {
      * @param {number} extent.maxY - maxY
      * @param {number} zoomLevel - zoom level
      */
-    mapMoveMakeGetParams(extent, zoomLevel) {
+    mapMoveMakeGetParams(extent: {minX: number, minY: number, maxX: number, maxY: number}, zoomLevel: number) {
         super.mapMoveMakeGetParams(extent, zoomLevel);
         this.mapMoveParams['geometry'] = `${extent.minX},${extent.minY},${extent.maxX},${extent.maxY}`;
         this.mapMoveParams['geometryType'] = 'esriGeometryEnvelope';
@@ -168,7 +168,7 @@ export class LayerBaseVectorEsri extends LayerBaseVector {
      * @param {string} [evtType=undefined] undefined for initial load, otherwise one of 'change:center', 'change:resolution'
      * @returns {boolean} if the call should proceed
      */
-    mapMoveBefore(zoom, evtType) {
+    mapMoveBefore(zoom: number, evtType: string) {
         return super.mapMoveBefore(zoom, evtType);
         //if (super.mapMoveBefore(zoom, evtType)){
         //    //place holder for additional processing
@@ -182,7 +182,7 @@ export class LayerBaseVectorEsri extends LayerBaseVector {
      * callback function on map move
      * @param {object} d - the json response
      */
-    mapMoveCallback(d) {
+    mapMoveCallback(d: Object) {
         super.mapMoveCallback(d);
         this.source.addFeatures(this._esriFormat.readFeatures(d));
     }

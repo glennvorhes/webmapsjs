@@ -175,13 +175,13 @@ var LayerLegend = (function () {
      * @param {boolean} [options.scaleDependent=true] if legend display is scale dependent
      */
     function LayerLegend(legendItems, divId, options) {
+        if (options === void 0) { options = {}; }
         for (var _i = 0, legendItems_1 = legendItems; _i < legendItems_1.length; _i++) {
             var i = legendItems_1[_i];
             if (typeof i == 'undefined') {
                 throw 'undefined item passed in array to legend constructor';
             }
         }
-        options = options || {};
         options.legendTitle = typeof options.legendTitle == 'string' ? options.legendTitle : 'Legend';
         options.scaleDependent = typeof options.scaleDependent == 'boolean' ? options.scaleDependent : true;
         options.layerDivClasses = options.layerDivClasses || [];

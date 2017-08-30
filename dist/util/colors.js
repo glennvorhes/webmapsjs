@@ -14,7 +14,14 @@ var nm = provide_1.default('util.colors');
  */
 function _hex(x) {
     var hexDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
-    return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+    if (isNaN(x)) {
+        return "00";
+    }
+    else {
+        var m = x;
+        return hexDigits[(m - m % 16) / 16] + hexDigits[m % 16];
+    }
+    // return isNaN(x as number) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
 }
 /**
  * converts an RGB string to hex
@@ -75,6 +82,7 @@ nm.rgbToRgba = rgbToRgba;
  * @returns {colorLookupByNumber} color lookup function
  */
 function makeBlueGreenRedGradient(minVal, maxVal, flipColors) {
+    if (flipColors === void 0) { flipColors = false; }
     if (typeof flipColors != "boolean") {
         flipColors = false;
     }
@@ -141,6 +149,7 @@ nm.makeBlueGreenRedGradient = makeBlueGreenRedGradient;
  * @returns {colorLookupByNumber} color lookup function
  */
 function makeBlueGreenRedGradientZScore(median, stdDev, flipColors) {
+    if (flipColors === void 0) { flipColors = false; }
     var grd = makeBlueGreenRedGradient(-2.5, 2.5, flipColors);
     return function (theVal) {
         var zScore;

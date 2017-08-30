@@ -3,7 +3,7 @@
  */
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-if (!String.prototype['format']) {
+if (!String.prototype.format) {
     /**
      *  helper function for string replacement to keep code clean
      * usage
@@ -19,7 +19,7 @@ if (!String.prototype['format']) {
      * aString.format(arrReplacements)
      * @returns {string} converted string
      */
-    String.prototype['format'] = function () {
+    String.prototype.format = function () {
         var args = arguments;
         for (var i = 0; i < args.length; i++) {
             args[i] = (args[i] !== null ? args[i] : '');

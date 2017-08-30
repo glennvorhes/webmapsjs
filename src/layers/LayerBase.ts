@@ -184,11 +184,11 @@ export abstract class LayerBase {
      * add additional content to the legend
      * @param {string} [additionalContent=] - additonal content to add
      */
-    addLegendContent(additionalContent) {
+    addLegendContent(additionalContent: string) {
         this._addLegendContent(additionalContent);
     }
 
-    applyCollapse() {
+    applyCollapse(): void {
         if (this._applyCollapseCalled) {
             console.log('collapse already applied');
 

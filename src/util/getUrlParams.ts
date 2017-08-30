@@ -21,7 +21,7 @@ export default function getUrlParams() {
     let match;
     let pl = /\+/g;  // Regex for replacing addition symbol with a space
     let search = /([^&=]+)=?([^&]*)/g;
-    let decode = function (s) {
+    let decode = function (s: string) {
         return decodeURIComponent(s.replace(pl, " "));
     };
     let query = window.location.search.substring(1);
@@ -50,7 +50,7 @@ export default function getUrlParams() {
         else {
             typedVal = val;
         }
-        urlParams[decode(match[1])] = typedVal;
+        (<any>urlParams)[decode(match[1])] = typedVal;
     }
 
     return urlParams;

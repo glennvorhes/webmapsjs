@@ -10,13 +10,20 @@ import makeGuid from '../util/makeGuid';
 
 import {dateToString} from './helpers/dateFormat';
 
+export interface iDatePick{
+    label: string;
+    id?: string;
+    initialDate?: Date;
+    change: (val: string) => any
+}
+
 /**
  * params label, id, initialDate, change callback with value as string
  */
-export class DatePick extends React.Component<{label: string, id?: string, initialDate?: Date, change: (val: string) => any}, null> {
+export class DatePick extends React.Component<iDatePick, null> {
     defaultId: string;
 
-    constructor(props, context){
+    constructor(props: iDatePick, context: Object){
         super(props, context);
         this.defaultId = makeGuid();
     }

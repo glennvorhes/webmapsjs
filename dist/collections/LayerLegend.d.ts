@@ -1,3 +1,14 @@
+export interface iLegendItem {
+    groupName: string;
+    collapse: boolean;
+    addCheck: boolean;
+    items: iLegendItem[];
+}
+export interface iLegendOptions {
+    layerDivClasses?: string[];
+    legendTitle?: string;
+    scaleDependent?: boolean;
+}
 /**
  * a wrapper to make a legend
  */
@@ -15,12 +26,12 @@ declare class LayerLegend {
      * @param {string} [options.legendTitle=Legend] the legend title
      * @param {boolean} [options.scaleDependent=true] if legend display is scale dependent
      */
-    constructor(legendItems: any, divId: any, options: any);
+    constructor(legendItems: iLegendItem[], divId: string, options?: iLegendOptions);
     /**
      * @param {Array} [legendItems=this._layerConfig] the legend items
      * @param {Array} [parents=[]] the ordered list of groups in which this item is a member
      * @private
      */
-    _buildTree(legendItems: any, parents?: any): void;
+    _buildTree(legendItems: iLegendItem[], parents?: string[]): void;
 }
 export default LayerLegend;

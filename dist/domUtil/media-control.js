@@ -27,7 +27,9 @@ var MediaControl = (function () {
      * @param mediaConfig
      */
     function MediaControl(element, changeFunc, mediaConfig) {
-        if (changeFunc === void 0) { changeFunc = function () { return; }; }
+        if (changeFunc === void 0) { changeFunc = function () {
+            return;
+        }; }
         if (mediaConfig === void 0) { mediaConfig = {}; }
         var _this = this;
         mediaConfig.min = typeof mediaConfig.min == 'number' ? mediaConfig.min : 0;
@@ -39,7 +41,7 @@ var MediaControl = (function () {
         if (typeof element == 'string') {
             this._container = $('#' + element);
         }
-        else if (typeof element['style'] !== 'undefined') {
+        else if (typeof element.style !== 'undefined') {
             this._container = $(element);
         }
         else {
@@ -76,7 +78,9 @@ var MediaControl = (function () {
         this._$valLabelVal = this._container.find('.media-control-value-label-val');
         this._$valLabelMax = this._container.find('.media-control-value-label-max');
         this.setMinMaxValueStep(mediaConfig.min, mediaConfig.max, mediaConfig.val, mediaConfig.step);
-        range_change_1.rangeChange(this._$slider, function (newVal) { _this.currentValue = newVal; }, 100);
+        range_change_1.rangeChange(this._$slider, function (newVal) {
+            _this.currentValue = newVal;
+        }, 100);
         var ___this = this;
         btnPlay.click(function () {
             var $this = $(this);

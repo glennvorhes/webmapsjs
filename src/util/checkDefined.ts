@@ -6,7 +6,7 @@ let nm = provide('util.checkDefined');
  * @param input - input pointer
  * @returns true undefined or null
  */
-export function undefinedOrNull (input): boolean{
+export function undefinedOrNull (input: any): boolean{
     "use strict";
 
     return (typeof input === 'undefined' || input === null);

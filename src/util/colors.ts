@@ -3,6 +3,7 @@
  */
 import provide from './provide';
 import * as chk from './checkDefined';
+
 let nm = provide('util.colors');
 
 
@@ -12,10 +13,16 @@ let nm = provide('util.colors');
  * @returns {string} number as hex
  * @private
  */
-function _hex(x) {
+function _hex(x: number|string): string {
     let hexDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
 
-    return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+    if (isNaN(x as number)){
+        return "00";
+    } else {
+        let m = x as number;
+        return hexDigits[(m - m % 16) / 16] + hexDigits[m % 16];
+    }
+    // return isNaN(x as number) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
 }
 
 /**
@@ -23,7 +30,7 @@ function _hex(x) {
  * @param {string} rgb - rgb color
  * @returns {string} rbg as hex
  */
-export function rgb2hex(rgb) {
+export function rgb2hex(rgb: string): string {
     let rgb1 = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
 
     return ("#" + _hex(rgb1[1]) + _hex(rgb1[2]) + _hex(rgb1[3])).toUpperCase();
@@ -38,7 +45,7 @@ nm.rgb2hex = rgb2hex;
  * @param {number} [alphaVal=undefined] Alpha value
  * @returns {string} - rgb or rgba color
  */
-export function hexAlphaToRgbOrRgba(hexString, alphaVal) {
+export function hexAlphaToRgbOrRgba(hexString: string, alphaVal: number): string {
     hexString = ((hexString.charAt(0) == "#") ? hexString.substring(1, 7) : hexString);
     let r = parseInt(hexString.substring(0, 2), 16).toString() || '0';
     let g = parseInt(hexString.substring(2, 4), 16).toString() || '0';
@@ -59,7 +66,7 @@ nm.hexAlphaToRgbOrRgba = hexAlphaToRgbOrRgba;
  * @param {number} alpha - alpha value 0 to 1
  * @returns {string} rgba color
  */
-export function rgbToRgba(rgb, alpha) {
+export function rgbToRgba(rgb: string, alpha: number): string {
     let pieces = rgb.split(',');
     pieces[0] = pieces[0].replace('rgb', 'rgba');
     pieces[2] = pieces[2].replace(')', '');
@@ -85,13 +92,13 @@ nm.rgbToRgba = rgbToRgba;
  * @param {boolean} flipColors - if the colors should be flipped
  * @returns {colorLookupByNumber} color lookup function
  */
-export function makeBlueGreenRedGradient(minVal, maxVal, flipColors) {
+export function makeBlueGreenRedGradient(minVal: number, maxVal: number, flipColors:boolean=false): (v: number) => string {
 
     if (typeof flipColors != "boolean") {
         flipColors = false;
     }
 
-    return function (theVal) {
+    return function (theVal: number): string {
         let r, g, b;
         let ratio;
 
@@ -156,11 +163,11 @@ nm.makeBlueGreenRedGradient = makeBlueGreenRedGradient;
  * @param {boolean} flipColors - if the colors should be flipped
  * @returns {colorLookupByNumber} color lookup function
  */
-export function makeBlueGreenRedGradientZScore(median, stdDev, flipColors) {
+export function makeBlueGreenRedGradientZScore(median: number, stdDev: number, flipColors: boolean = false):(v: number) => string {
 
     let grd = makeBlueGreenRedGradient(-2.5, 2.5, flipColors);
 
-    return function (theVal) {
+    return function (theVal: number): string {
 
         let zScore;
         if (theVal == null) {

@@ -4,17 +4,18 @@
  */
 import { React } from './reactAndRedux';
 import 'jquery-ui';
-/**
- * params label, id, initialDate, change callback with value as string
- */
-export declare class DatePick extends React.Component<{
+export interface iDatePick {
     label: string;
     id?: string;
     initialDate?: Date;
     change: (val: string) => any;
-}, null> {
+}
+/**
+ * params label, id, initialDate, change callback with value as string
+ */
+export declare class DatePick extends React.Component<iDatePick, null> {
     defaultId: string;
-    constructor(props: any, context: any);
+    constructor(props: iDatePick, context: Object);
     componentDidMount(): void;
     render(): JSX.Element;
 }

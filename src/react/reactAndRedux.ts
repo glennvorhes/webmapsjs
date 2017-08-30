@@ -7,6 +7,7 @@ export import ReactRedux = require('react-redux');
 export import Redux = require('redux');
 
 
+
 export const connect = ReactRedux.connect;
 export const Provider = ReactRedux.Provider;
 // export { connect, Provider } from 'react-redux';
@@ -18,3 +19,5 @@ export const createStore = Redux.createStore;
 export interface iAction{
     type: string;
 }
+
+

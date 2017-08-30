@@ -43,7 +43,7 @@ export class LayerEsriMapServer extends LayerBase {
      * @param {boolean} [options.addPopup=false] if a popup should be added
      * @param {undefined|Array<number>} [options.showLayers=undefined] if a popup should be added
      */
-    constructor(url, options: LayerEsriMapServerOptions = {}) {
+    constructor(url: string, options: LayerEsriMapServerOptions = {}) {
 
         super(url, options);
         this._source = new ol.source.TileArcGISRest(
@@ -95,7 +95,7 @@ export class LayerEsriMapServer extends LayerBase {
     }
 
 
-    getPopupInfo(queryParams) {
+    getPopupInfo(queryParams: {[s: string]: any}) {
         if (!this.visible) {
             return;
         }

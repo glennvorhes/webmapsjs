@@ -42,7 +42,7 @@ let _zoomResLookup = [
  * @param {number} zoomLevel - the zoom level
  * @returns {number|*} the map resolution
  */
-export function zoomToResolution(zoomLevel) {
+export function zoomToResolution(zoomLevel: number): number {
     "use strict";
 
     if (typeof zoomLevel == 'number') {
@@ -65,7 +65,7 @@ nm.zoomToResolution = zoomToResolution;
  * @param {number} resolution - the resolution
  * @returns {number|*} the zoom level
  */
-export function resolutionToZoom(resolution){
+export function resolutionToZoom(resolution: number): number{
     for (let i = 0; i < _zoomResLookup.length; i++){
         if (resolution >= _zoomResLookup[i] ){
             return i;

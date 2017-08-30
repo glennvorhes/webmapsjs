@@ -76,7 +76,7 @@ var itsConfig = [
         legendCollapse: true,
         itsLineConfig: {
             prop: 'owner',
-            //defaultName: 'Other',
+            defaultName: 'Other',
             //defaultWidth: 7,
             defaultColor: colors.hexAlphaToRgbOrRgba('#747474', 0.8),
             lineArray: [

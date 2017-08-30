@@ -27,7 +27,7 @@ export declare class SelectBoxBase {
      * @param {string} labelContent
      * @param {contentGenerator} [contentGen=undefined]
      */
-    constructor(parent: any, labelContent: any, contentGen?: contentGenerator);
+    constructor(parent: JQuery, labelContent: string, contentGen?: contentGenerator);
     /**
      *
      * @returns {jQuery}

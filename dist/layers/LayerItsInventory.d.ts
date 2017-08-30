@@ -1,7 +1,32 @@
 /**
  * Created by gavorhes on 12/8/2015.
  */
-import LayerBaseVectorGeoJson from './LayerBaseVectorGeoJson';
+import { LayerBaseVectorGeoJson, LayerBaseVectorGeoJsonOptions } from './LayerBaseVectorGeoJson';
+export interface iLineStyle {
+    color: string;
+    width?: number;
+}
+export interface iMultiConfig {
+    prop: string;
+    defaultName: string;
+}
+export interface iIconConfig extends iMultiConfig {
+    defaultIcon: string;
+    iconArray: string[][];
+}
+export interface iLineConfig extends iMultiConfig {
+    defaultColor: string;
+    defaultWidth?: number;
+    lineArray: any[][];
+}
+export interface iLayerItsInventory extends LayerBaseVectorGeoJsonOptions {
+    itsType: string;
+    addPopup?: boolean;
+    itsIcon?: string;
+    itsLineStyle?: iLineStyle;
+    itsIconConfig?: iIconConfig;
+    itsLineConfig?: iLineConfig;
+}
 /**
  * Its Layer class
  * @augments LayerBaseVectorGeoJson
@@ -51,7 +76,7 @@ declare class LayerItsInventory extends LayerBaseVectorGeoJson {
      * @param {number} [options.itsLineConfig.defaultWidth] The default line width to be used for no other matches
      * @param {object} [options.itsLineConfig.lineArray=[]] an array, items with format [property, name, color, optional width = 5]
      */
-    constructor(options: any);
+    constructor(options: iLayerItsInventory);
     /**
      * callback to generate the parameters passed in the get request
      * @callback makeGetParams
@@ -62,6 +87,11 @@ declare class LayerItsInventory extends LayerBaseVectorGeoJson {
      * @param {number} extent.maxY - maxY
      * @param {number} zoomLevel - zoom level
      */
-    mapMoveMakeGetParams(extent: any, zoomLevel: any): void;
+    mapMoveMakeGetParams(extent: {
+        minX: number;
+        minY: number;
+        maxX: number;
+        maxY: number;
+    }, zoomLevel: number): void;
 }
 export default LayerItsInventory;

@@ -7,16 +7,34 @@ import {React} from './reactAndRedux';
 import $ = require('jquery');
 import 'jquery-ui';
 import makeGuid from '../util/makeGuid';
+import {ChangeEvent} from "react";
 
-class RadioItem extends React.Component<{ groupId: string, text: string, checked: boolean, inline: boolean, change: (s: string) => any, connected?: boolean, index?: number}, null> {
-    guid: string = makeGuid();
+export interface iRadioItem{
+    groupId: string;
+    text: string;
+    checked: boolean;
+    inline: boolean;
+    change: (s: string) => any;
+    connected?: boolean;
+    index?: number
+}
+
+class RadioItem extends React.Component<iRadioItem, null> {
+    guid: string;
+
+    constructor(props: iRadioItem, context: Object){
+        super(props, context);
+        this.guid = makeGuid()
+    }
 
 
     render() {
         let style = {};
         if (this.props.inline) {
-            style['display'] = 'inline-block';
-            style['padding'] = '0 5px';
+            style = {
+                display: 'inline-block',
+                padding: '0 5px'
+            };
         }
 
         let props = {
@@ -24,16 +42,18 @@ class RadioItem extends React.Component<{ groupId: string, text: string, checked
             type: "radio",
             name: this.props.groupId,
             value: typeof this.props.index == 'undefined' ? this.props.text : this.props.index.toFixed(),
-            onChange: (evt) => {
+            onChange: (evt: ChangeEvent<HTMLInputElement>) => {
                 this.props.change(evt.target.value);
                 evt.target.checked = true;
-            }
+            },
+            checked: this.props.checked,
+            defaultChecked:  this.props.checked
         };
 
         if (this.props.connected) {
-            props['checked'] = this.props.checked
+            delete props.defaultChecked;
         } else {
-            props['defaultChecked'] = this.props.checked
+            delete props.checked
         }
 
         return <li style={style}>
@@ -43,12 +63,20 @@ class RadioItem extends React.Component<{ groupId: string, text: string, checked
     }
 }
 
-class RadioBase extends React.Component<
-    { title: string, items: string[], callback: (val: string) => any, inline?: boolean, selectedValueOrIndex: string|number, connected: boolean}, null> {
+interface iRadioBase {
+    title: string;
+    items: string[];
+    callback: (val: string) => any;
+    inline?: boolean;
+    selectedValueOrIndex: string|number;
+    connected: boolean;
+}
+
+class RadioBase extends React.Component<iRadioBase, null> {
     inline: boolean;
     groupId: string;
 
-    constructor(props, context) {
+    constructor(props: iRadioBase, context: Object) {
         super(props, context);
         this.inline = this.props.inline || false;
         this.groupId = this.props.title.toLowerCase().replace(/ /g, '');
@@ -57,8 +85,10 @@ class RadioBase extends React.Component<
     render() {
         let style = {};
         if (this.inline) {
-            style['display'] = 'inline-block';
-            style['padding'] = '0 5px';
+            style = {
+                display: 'inline-block',
+                padding: '0 5px'
+            }
         }
 
         let arr = [];
@@ -69,18 +99,18 @@ class RadioBase extends React.Component<
                 groupId: this.groupId,
                 text: this.props.items[i],
                 inline: this.props.inline,
-                change: (s) => (this.props.callback(s)),
+                change: (s: string) => (this.props.callback(s)),
                 key: this.props.items[i],
                 connected: this.props.connected || false,
                 checked: false,
-
+                index: i
             };
 
             if (typeof this.props.selectedValueOrIndex == 'number'){
                 itemProps.checked = i == this.props.selectedValueOrIndex;
-                itemProps['index'] = i;
             } else {
                 itemProps.checked = this.props.items[i] == this.props.selectedValueOrIndex;
+                delete itemProps.index
             }
 
             arr.push(<RadioItem {...itemProps}/>)

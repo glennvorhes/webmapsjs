@@ -144,28 +144,6 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
         return undefined;
     }
 }
-/**
- *
- * @param {string} [itsIcon=undefined] the ITS device type icon image see https://transportal.cee.wisc.edu/its/inventory/icons/
- *
- * @param {object} [itsLineStyle=undefined] A single line style
- * @param {string} itsLineStyle.color the line color as rgb or hex
- * @param {number} [itsLineStyle.width=5] the line width
- *
- * @param {object} [itsIconConfig=undefined] The icon subtype configuration
- * @param {string} itsIconConfig.prop The property used to define icon attribute symbolization
- * @param {string} itsIconConfig.defaultName The default name to be used if no other match is found
- * @param {string} itsIconConfig.defaultIcon The default icon to be used for no other matches
- * @param {object} [itsIconConfig.iconArray=[]] an array, items with format [property, name, img]
- *
- * @param {object} [itsLineConfig=undefined] The property used to define icon attribute symbolization
- * @param {string} itsLineConfig.prop The property used to define icon attribute symbolization
- * @param {string} [itsLineConfig.defaultName=Other] The default name to be used if no other match is found
- * @param {string} [itsLineConfig.defaultColor=red] The default line color to be used for no other matches
- * @param {number} [itsLineConfig.defaultWidth=5] The default line width to be used for no other matches
- * @param {object} [itsLineConfig.lineArray=[]] an array, items with format [property, name, color, optional width]
- * @returns {string} html to be added to the legend
- */
 function defineLegend(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
     "use strict";
     var iconHeight = 17;
@@ -276,7 +254,7 @@ var LayerItsInventory = (function (_super) {
         options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : true;
         if (options.addPopup) {
             mapPopup_1.default.addVectorPopup(_this, function (props) {
-                return "<iframe src=\"https://transportal.cee.wisc.edu/its/inventory/?feature=" + props['featureGuid'] + "\" " +
+                return "<iframe src=\"https://transportal.cee.wisc.edu/its/inventory/?feature=" + props.featureGuid + "\" " +
                     "height=\"250\" width=\"350\"></iframe>";
             });
         }
@@ -308,7 +286,7 @@ var LayerItsInventory = (function (_super) {
         });
     };
     return LayerItsInventory;
-}(LayerBaseVectorGeoJson_1.default));
+}(LayerBaseVectorGeoJson_1.LayerBaseVectorGeoJson));
 nm.LayerItsInventory = LayerItsInventory;
 exports.default = LayerItsInventory;
 //# sourceMappingURL=LayerItsInventory.js.map

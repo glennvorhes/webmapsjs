@@ -5,9 +5,17 @@
 
 import {React} from './reactAndRedux';
 import makeGuid from '../util/makeGuid';
+import {ChangeEvent} from "react";
 
 
-export class Slider extends React.Component<{ change: (d: number) => any, steps?: number, animate?: boolean, value?: number}, null> {
+export interface iSlider {
+    change: (d: number) => any;
+    steps?: number;
+    animate?: boolean;
+    value?: number;
+}
+
+export class Slider extends React.Component<iSlider, null> {
     uid: string;
     startUid: string;
     endUid: string;
@@ -22,7 +30,7 @@ export class Slider extends React.Component<{ change: (d: number) => any, steps?
     maxVal: number;
     step: number;
 
-    constructor(props, context) {
+    constructor(props: iSlider, context: Object) {
         super(props, context);
         this.uid = makeGuid();
         this.startUid = makeGuid();
@@ -84,10 +92,12 @@ export class Slider extends React.Component<{ change: (d: number) => any, steps?
             id: this.uid,
             min: 0,
             type: 'range',
-            onChange: (evt) => {this.props.change(parseFloat(evt.target.value))},
+            onChange: (evt: ChangeEvent<HTMLInputElement>) => {this.props.change(parseFloat(evt.target.value))},
             style: {width: '100%'},
             max: "100",
-            step: '0.1'
+            step: '0.1',
+            value: this.props.value.toString(),
+            defaultValue: "0"
         };
 
         if (this.props.steps){
@@ -96,9 +106,11 @@ export class Slider extends React.Component<{ change: (d: number) => any, steps?
         }
 
         if (this.props.value){
-            attrs['value'] = this.props.value.toString()
+            delete attrs.defaultValue;
+            // attrs['value'] = this.props.value.toString()
         } else {
-            attrs['defaultValue'] = "0";
+            delete attrs.value;
+            // attrs['defaultValue'] = "0";
         }
 
 

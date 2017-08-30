@@ -68,12 +68,14 @@ export declare class TipSliders {
      * @param {string} skipDomId - this dom id
      * @private
      */
-    _handleRemainder(remain: any, skipDomId: any): void;
+    _handleRemainder(remain: number, skipDomId: string): void;
     /**
      *
      * @param {object} keyValList key and value list
      */
-    setValues(keyValList: any): void;
+    setValues(keyValList: {
+        [s: string]: [number, string];
+    }): void;
     /**
      * get the weight sum
      * @returns {number} the weight sum
@@ -83,7 +85,9 @@ export declare class TipSliders {
      * get the parameter weights
      * @returns {object} lookup with parameter weights
      */
-    getParams(): {};
+    getParams(): {
+        [s: string]: number;
+    };
     _addEventListeners(): void;
     readonly paramWeightsRegionVersion: ChangeResponse;
 }

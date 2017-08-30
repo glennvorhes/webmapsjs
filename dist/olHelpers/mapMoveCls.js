@@ -219,7 +219,7 @@ var MapMoveCls = (function (_super) {
             functionId = makeGuid_1.default();
         }
         this._mapMoveCallbacks.push(func);
-        this._mapMoveCallbacksLookup[functionId] = functionId;
+        this._mapMoveCallbacksLookup[functionId] = func;
         this._mapMoveCallbackDelays.push(typeof delay == 'number' ? delay : 50);
         this._mapMoveCallbackContext.push(checkDefined.definedAndNotNull(context) ? context : null);
         this._mapMoveCallbackTimeout.push(null);

@@ -5,12 +5,6 @@ import provide from '../util/provide';
 import ol = require('custom-ol');
 const nm = provide('olHelpers.esriToOlStyle');
 
-/**
- * This callback is displayed as part of the Requester class.
- * @callback styleFunc
- * @param {ol.Feature} feat - openlayers feature
- * @param {number} resolution - map resolution
- */
 
 /**
  *
@@ -19,7 +13,7 @@ const nm = provide('olHelpers.esriToOlStyle');
  * @returns {string} rgba string
  * @private
  */
-function _colorArrayToRgba(colorArray, opacity) {
+function _colorArrayToRgba(colorArray: [number, number, number], opacity: number): string {
     "use strict";
 
     return `rgba(${colorArray[0]},${colorArray[1]},${colorArray[2]},${opacity})`;
@@ -30,7 +24,7 @@ function _colorArrayToRgba(colorArray, opacity) {
  * @param {string} str - input string
  * @returns {string} escaped string
  */
-function htmlEscape(str) {
+function htmlEscape(str: string): string {
     return String(str)
         .replace(/&/g, '&amp;')
         .replace(/"/g, '&quot;')
@@ -42,43 +36,49 @@ function htmlEscape(str) {
 nm.htmlEscape = htmlEscape;
 
 
-export interface EsriResponse{
+export interface iEsriResponse{
     drawingInfo: {
-        renderer: EsriRenderer
+        renderer: iEsriRenderer;
+        transparency: number
     },
     geometryType: string
 }
 
-export interface EsriRenderer{
+
+export interface iEsriRenderer{
     type: string;
-    symbol: EsriSymbol;
-    uniqueValueInfos: Array<{label: string, value: any, symbol: EsriSymbol}>;
+    symbol: iEsriSymbol;
+    uniqueValueInfos: Array<{label: string, value: any, symbol: iEsriSymbol}>;
+    field1: string;
+    defaultSymbol: iEsriSymbol;
+    defaultLabel: string;
 }
 
-export interface EsriSymbol{
+export interface iEsriSymbol{
     size: number;
     type: string;
     outline:{
-        color: string;
+        color: [number, number, number];
         width: number;
     },
-    color: string;
+    color: [number, number, number];
     width: number;
+    imageData: string
 }
 
 
 class CommonSymbol {
     legendHtml: string;
     opacity: number;
-    symbolObj: EsriSymbol;
-    olStyle: ol.style.Style|Array<ol.style.Style>|ol.StyleFunction;
+    symbolObj: iEsriSymbol;
+    olStyle: ol.style.Style;
 
     /**
      *
      * @param symbolObj
      * @param {number} opacity
      */
-    constructor(symbolObj: EsriSymbol, opacity: number) {
+    constructor(symbolObj: iEsriSymbol, opacity: number) {
         this.symbolObj = symbolObj;
         this.opacity = opacity;
         this.olStyle = undefined;
@@ -87,12 +87,12 @@ class CommonSymbol {
 }
 
 interface ICommonSymbol{
-    new (symbolObj: EsriSymbol, opacity: number): CommonSymbol
+    new (symbolObj: iEsriSymbol, opacity: number): CommonSymbol
 }
 
 
 class PointSymbol extends CommonSymbol {
-    constructor(symbolObj: EsriSymbol, opacity: number) {
+    constructor(symbolObj: iEsriSymbol, opacity: number) {
         super(symbolObj, opacity);
         switch (this.symbolObj.type) {
             case 'esriSMS':
@@ -127,7 +127,7 @@ class PointSymbol extends CommonSymbol {
 }
 
 class LineSymbol extends CommonSymbol {
-    constructor(symbolObj: EsriSymbol, opacity: number) {
+    constructor(symbolObj: iEsriSymbol, opacity: number) {
         super(symbolObj, opacity);
         switch (this.symbolObj.type) {
             case 'esriSLS':
@@ -160,7 +160,7 @@ class LineSymbol extends CommonSymbol {
 }
 
 class PolygonSymbol extends CommonSymbol {
-    constructor(symbolObj: EsriSymbol, opacity: number) {
+    constructor(symbolObj: iEsriSymbol, opacity: number) {
         super(symbolObj, opacity);
         switch (this.symbolObj['type']) {
             case 'esriSFS':
@@ -198,13 +198,17 @@ class PolygonSymbol extends CommonSymbol {
     }
 }
 
+export interface iStyleFunc{
+    (f: ol.Feature): ol.style.Style| ol.style.Style[]
+}
+
 class SymbolGenerator {
     opacity: number;
-    renderer: EsriRenderer;
+    renderer: iEsriRenderer;
     legendHtml: string;
-    olStyle: ol.style.Style|Array<ol.style.Style>|ol.StyleFunction;
+    olStyle: iStyleFunc | ol.style.Style;
 
-    constructor(esriResponse: EsriResponse) {
+    constructor(esriResponse: iEsriResponse) {
         this.opacity = (100 - (esriResponse['drawingInfo']['transparency'] || 0)) / 100;
         this.renderer = esriResponse.drawingInfo.renderer;
         this.olStyle = undefined;
@@ -213,13 +217,13 @@ class SymbolGenerator {
 }
 
 class SingleSymbol extends SymbolGenerator {
-    symbol: EsriSymbol;
+    symbol: iEsriSymbol;
     /**
      *
      * @param {object} esriResponse - layer info
      * @param SymbolClass - the symbol class to use
      */
-    constructor(esriResponse, SymbolClass: ICommonSymbol) {
+    constructor(esriResponse: iEsriResponse, SymbolClass: ICommonSymbol) {
         super(esriResponse);
         this.symbol = this.renderer.symbol;
         let symbolObj = new SymbolClass(this.symbol, this.opacity);
@@ -231,25 +235,25 @@ class SingleSymbol extends SymbolGenerator {
 class UniqueValueSymbol extends SymbolGenerator {
 
     propertyName: string;
-    defaultSymbol: EsriSymbol;
-    defaultStyle: ol.style.Style|Array<ol.style.Style>|ol.StyleFunction;
+    defaultSymbol: iEsriSymbol;
+    defaultStyle: ol.style.Style;
     defaultLabelHtml: string;
     labelArray: Array<string>;
     legendArray: Array<string>;
-    propertyStyleLookup: Object;
+    propertyStyleLookup: {[s: string]: ol.style.Style};
     valueArray: Array<any>;
-    uniqueValueInfos: Array<{label: string, value: any, symbol: EsriSymbol}>;
+    uniqueValueInfos: Array<{label: string, value: any, symbol: iEsriSymbol}>;
 
     /**
      *
      * @param {object} esriResponse - layer info
      * @param SymbolClass - the Symbol class definition
      */
-    constructor(esriResponse: EsriResponse, SymbolClass: ICommonSymbol) {
+    constructor(esriResponse: iEsriResponse, SymbolClass: ICommonSymbol) {
         super(esriResponse);
-        this.uniqueValueInfos = this.renderer['uniqueValueInfos'];
-        this.propertyName = this.renderer['field1'];
-        this.defaultSymbol = this.renderer['defaultSymbol'];
+        this.uniqueValueInfos = this.renderer.uniqueValueInfos;
+        this.propertyName = this.renderer.field1;
+        this.defaultSymbol = this.renderer.defaultSymbol;
 
 
         if (this.defaultSymbol) {
@@ -274,19 +278,15 @@ class UniqueValueSymbol extends SymbolGenerator {
             this.propertyStyleLookup[uniqueVal['value']] = uniqueSym.olStyle;
         }
 
-
-        this.olStyle = (feature: ol.Feature) => {
+        this.olStyle = (feature: ol.Feature): ol.style.Style[] => {
             let checkProperties = feature.getProperties();
             let checkProperty = checkProperties[this.propertyName];
 
-            let returnValue;
             if (this.propertyStyleLookup[checkProperty] !== undefined) {
-                returnValue = [this.propertyStyleLookup[checkProperty]];
+                return [this.propertyStyleLookup[checkProperty]];
             } else {
-               returnValue = [this.defaultStyle];
+               return [this.defaultStyle];
             }
-
-            return returnValue;
         };
 
         if (this.defaultLabelHtml !== null) {
@@ -301,26 +301,7 @@ class UniqueValueSymbol extends SymbolGenerator {
     }
 }
 
-
-
-
-
-
-
-
-/**
- * style and legend object
- * @typedef {object} styleAndLegend
- * @property {styleFunc} style - style function
- * @property {string} legend - legend content
- */
-
-/**
- *
- * @param {object} esriResponse - layer info
- * @returns {styleAndLegend} style and legend object
- */
-export function makeFeatureServiceLegendAndSymbol(esriResponse: EsriResponse) {
+export function makeFeatureServiceLegendAndSymbol(esriResponse: iEsriResponse): {style: iStyleFunc | ol.style.Style, legend: string} {
     "use strict";
     let renderer = esriResponse.drawingInfo.renderer;
     let symbolLegendOut: SymbolGenerator = null;
@@ -372,13 +353,18 @@ export function makeFeatureServiceLegendAndSymbol(esriResponse: EsriResponse) {
 nm.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
 
 
+export interface iMapServiceLegend{
+    layerName: string;
+    legend: {label: string, imageData: string}[]
+}
+
 /**
  *
  * @param {object} lyrObject - the layer as defined in the response
  * @param {boolean} [skipLayerNameAndExpander=false] use only icons
  * @returns {string} legend html
  */
-function mapServiceLegendItem(lyrObject, skipLayerNameAndExpander: boolean = false) {
+function mapServiceLegendItem(lyrObject: iMapServiceLegend, skipLayerNameAndExpander: boolean = false) {
 
 
     skipLayerNameAndExpander = typeof skipLayerNameAndExpander == 'boolean' ? skipLayerNameAndExpander : false;
@@ -418,7 +404,7 @@ function mapServiceLegendItem(lyrObject, skipLayerNameAndExpander: boolean = fal
  * @param {object} esriResponse - layer info
  * @returns {string} legend content
  */
-export function makeMapServiceLegend(esriResponse) {
+export function makeMapServiceLegend(esriResponse: {layers: iMapServiceLegend[]}) {
     "use strict";
 
     let newLegendHtml = '';

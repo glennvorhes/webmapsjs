@@ -9,7 +9,8 @@
     "jsx": "preserve",
     "noEmitOnError": true,
     "rootDir": "./src",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "noImplicitAny": true
   },
   "include": [
     "./src/**/*"

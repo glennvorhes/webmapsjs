@@ -14,7 +14,7 @@ export interface makeMapMoveParams {
      * @param extent
      * @param zoomLevel
      */
-    (lyr: LayerBaseVector, extent: Array<number>, zoomLevel?: number): any
+    (lyr: LayerBaseVector, extent: {minX: number, minY: number, maxX: number, maxY: number}, zoomLevel?: number): any
 }
 
 
@@ -132,7 +132,6 @@ export class LayerBaseVector extends LayerBase {
 
         this.olLayer.setZIndex(this._zIndex);
 
-
         this._projectionMap = null;
         this._projection4326 = new ol.proj.Projection({code: "EPSG:4326"});
     }
@@ -141,7 +140,7 @@ export class LayerBaseVector extends LayerBase {
      * dummy to be overridden
      * @param {object} featureCollection - geojson or esrijson object
      */
-    addFeatures(featureCollection) {
+    addFeatures(featureCollection: Object) {
         console.log('Layer vector base addFeatures is a placeholder and does nothing');
     }
 
@@ -151,7 +150,7 @@ export class LayerBaseVector extends LayerBase {
      * @param {string} [evtType=undefined] undefined for initial load, otherwise one of 'change:center', 'change:resolution'
      * @returns {boolean} if the call should proceed
      */
-    mapMoveBefore(zoom, evtType) {
+    mapMoveBefore(zoom: number, evtType: string) {
         if (this.minZoom !== undefined) {
             if (zoom < this.minZoom) {
                 return false;
@@ -176,7 +175,7 @@ export class LayerBaseVector extends LayerBase {
      * @param {number} extent.maxY - maxY
      * @param {number} zoomLevel - zoom level
      */
-    mapMoveMakeGetParams(extent, zoomLevel) {
+    mapMoveMakeGetParams(extent: {minX: number, minY: number, maxX: number, maxY: number}, zoomLevel: number) {
         this._mapMoveParams = {};
         $.extend(this._mapMoveParams, this.params);
         $.extend(this._mapMoveParams, this._mapMoveMakeGetParams(this, extent, zoomLevel));
@@ -186,7 +185,7 @@ export class LayerBaseVector extends LayerBase {
      * callback function on map move
      * @param {object} d - the json response
      */
-    mapMoveCallback(d) {
+    mapMoveCallback(d: Object) {
         if (this.source) {
             this._source.clear();
         }

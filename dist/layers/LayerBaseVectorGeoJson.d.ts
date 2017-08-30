@@ -63,6 +63,6 @@ export declare class LayerBaseVectorGeoJson extends LayerBaseVector {
      * @param {object} d the json response
      * @override
      */
-    mapMoveCallback(d: any): void;
+    mapMoveCallback(d: Object): void;
 }
 export default LayerBaseVectorGeoJson;

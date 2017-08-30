@@ -44,7 +44,7 @@ declare class RealEarthAnimateVector extends RealEarthAnimate {
      * @param {object} geojObj - the geojson object
      * @private
      */
-    _loadFeatures(geojObj: any): void;
+    _loadFeatures(geojObj: Object): void;
     setLayerTime(theTime: number): boolean;
 }
 export default RealEarthAnimateVector;

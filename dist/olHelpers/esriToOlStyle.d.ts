@@ -1,47 +1,53 @@
 import ol = require('custom-ol');
-export interface EsriResponse {
+export interface iEsriResponse {
     drawingInfo: {
-        renderer: EsriRenderer;
+        renderer: iEsriRenderer;
+        transparency: number;
     };
     geometryType: string;
 }
-export interface EsriRenderer {
+export interface iEsriRenderer {
     type: string;
-    symbol: EsriSymbol;
+    symbol: iEsriSymbol;
     uniqueValueInfos: Array<{
         label: string;
         value: any;
-        symbol: EsriSymbol;
+        symbol: iEsriSymbol;
     }>;
+    field1: string;
+    defaultSymbol: iEsriSymbol;
+    defaultLabel: string;
 }
-export interface EsriSymbol {
+export interface iEsriSymbol {
     size: number;
     type: string;
     outline: {
-        color: string;
+        color: [number, number, number];
         width: number;
     };
-    color: string;
+    color: [number, number, number];
     width: number;
+    imageData: string;
 }
-/**
- * style and legend object
- * @typedef {object} styleAndLegend
- * @property {styleFunc} style - style function
- * @property {string} legend - legend content
- */
-/**
- *
- * @param {object} esriResponse - layer info
- * @returns {styleAndLegend} style and legend object
- */
-export declare function makeFeatureServiceLegendAndSymbol(esriResponse: EsriResponse): {
-    style: ol.style.Style | ol.style.Style[] | ol.StyleFunction;
+export interface iStyleFunc {
+    (f: ol.Feature): ol.style.Style | ol.style.Style[];
+}
+export declare function makeFeatureServiceLegendAndSymbol(esriResponse: iEsriResponse): {
+    style: iStyleFunc | ol.style.Style;
     legend: string;
 };
+export interface iMapServiceLegend {
+    layerName: string;
+    legend: {
+        label: string;
+        imageData: string;
+    }[];
+}
 /**
  * make map service legent
  * @param {object} esriResponse - layer info
  * @returns {string} legend content
  */
-export declare function makeMapServiceLegend(esriResponse: any): string;
+export declare function makeMapServiceLegend(esriResponse: {
+    layers: iMapServiceLegend[];
+}): string;

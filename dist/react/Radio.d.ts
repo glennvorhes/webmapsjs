@@ -4,6 +4,15 @@
  */
 import { React } from './reactAndRedux';
 import 'jquery-ui';
+export interface iRadioItem {
+    groupId: string;
+    text: string;
+    checked: boolean;
+    inline: boolean;
+    change: (s: string) => any;
+    connected?: boolean;
+    index?: number;
+}
 export declare class Radio extends React.Component<{
     title: string;
     items: string[];

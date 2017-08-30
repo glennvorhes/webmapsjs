@@ -34,13 +34,15 @@ export declare class LayerEsriMapServer extends LayerBase {
      * @param {boolean} [options.addPopup=false] if a popup should be added
      * @param {undefined|Array<number>} [options.showLayers=undefined] if a popup should be added
      */
-    constructor(url: any, options?: LayerEsriMapServerOptions);
+    constructor(url: string, options?: LayerEsriMapServerOptions);
     /**
      * add additional content to the legend
      * @param {string} [additionalContent=''] additional content for legend
      */
     addLegendContent(additionalContent?: string): void;
-    getPopupInfo(queryParams: any): void;
+    getPopupInfo(queryParams: {
+        [s: string]: any;
+    }): void;
     /**
      *
      * @returns {ol.source.TileArcGISRest} the vector source

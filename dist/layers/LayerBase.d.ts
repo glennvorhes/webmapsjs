@@ -80,8 +80,8 @@ export declare abstract class LayerBase {
      * add additional content to the legend
      * @param {string} [additionalContent=] - additonal content to add
      */
-    addLegendContent(additionalContent: any): void;
-    applyCollapse(): any;
+    addLegendContent(additionalContent: string): void;
+    applyCollapse(): void;
     /**
      * trick to refresh the layer
      */

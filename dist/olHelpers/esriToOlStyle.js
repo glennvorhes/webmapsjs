@@ -17,12 +17,6 @@ var provide_1 = require("../util/provide");
 var ol = require("custom-ol");
 var nm = provide_1.default('olHelpers.esriToOlStyle');
 /**
- * This callback is displayed as part of the Requester class.
- * @callback styleFunc
- * @param {ol.Feature} feat - openlayers feature
- * @param {number} resolution - map resolution
- */
-/**
  *
  * @param {Array<number>} colorArray - input color array
  * @param {number} opacity - the opacity 0 to 1
@@ -202,9 +196,9 @@ var UniqueValueSymbol = (function (_super) {
      */
     function UniqueValueSymbol(esriResponse, SymbolClass) {
         var _this = _super.call(this, esriResponse) || this;
-        _this.uniqueValueInfos = _this.renderer['uniqueValueInfos'];
-        _this.propertyName = _this.renderer['field1'];
-        _this.defaultSymbol = _this.renderer['defaultSymbol'];
+        _this.uniqueValueInfos = _this.renderer.uniqueValueInfos;
+        _this.propertyName = _this.renderer.field1;
+        _this.defaultSymbol = _this.renderer.defaultSymbol;
         if (_this.defaultSymbol) {
             var symbolObj = new SymbolClass(_this.defaultSymbol, _this.opacity);
             _this.defaultStyle = symbolObj.olStyle;
@@ -229,14 +223,12 @@ var UniqueValueSymbol = (function (_super) {
         _this.olStyle = function (feature) {
             var checkProperties = feature.getProperties();
             var checkProperty = checkProperties[_this.propertyName];
-            var returnValue;
             if (_this.propertyStyleLookup[checkProperty] !== undefined) {
-                returnValue = [_this.propertyStyleLookup[checkProperty]];
+                return [_this.propertyStyleLookup[checkProperty]];
             }
             else {
-                returnValue = [_this.defaultStyle];
+                return [_this.defaultStyle];
             }
-            return returnValue;
         };
         if (_this.defaultLabelHtml !== null) {
             _this.legendArray.push(_this.defaultLabelHtml);
@@ -251,17 +243,6 @@ var UniqueValueSymbol = (function (_super) {
     }
     return UniqueValueSymbol;
 }(SymbolGenerator));
-/**
- * style and legend object
- * @typedef {object} styleAndLegend
- * @property {styleFunc} style - style function
- * @property {string} legend - legend content
- */
-/**
- *
- * @param {object} esriResponse - layer info
- * @returns {styleAndLegend} style and legend object
- */
 function makeFeatureServiceLegendAndSymbol(esriResponse) {
     "use strict";
     var renderer = esriResponse.drawingInfo.renderer;

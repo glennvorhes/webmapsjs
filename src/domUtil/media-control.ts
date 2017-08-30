@@ -13,7 +13,7 @@ let nm = provide('domUtil');
  * @param {number} tm
  */
 
-function timeToLocalDateString(tm) {
+function timeToLocalDateString(tm: number) {
     "use strict";
     let d = new Date(tm);
     let p1 = d.toLocaleTimeString().split(' ');
@@ -23,11 +23,11 @@ function timeToLocalDateString(tm) {
     return d.toLocaleDateString() + '<br>' + p2.join(':') + ' ' + p1[1];
 }
 
-export interface changeFunction{
+export interface changeFunction {
     (newVal?: number): void;
 }
 
-export interface mediaRangeConfig{
+export interface mediaRangeConfig {
     min?: number;
     max?: number;
     val?: number;
@@ -35,7 +35,6 @@ export interface mediaRangeConfig{
     playInterval?: number;
     showAsDate?: boolean;
 }
-
 
 
 export class MediaControl {
@@ -64,10 +63,11 @@ export class MediaControl {
      * @param changeFunc
      * @param mediaConfig
      */
-    constructor(
-        element: JQuery|HTMLElement|string,
-        changeFunc: changeFunction = (): void => {return;},
-        mediaConfig: mediaRangeConfig = {}) {
+    constructor(element: JQuery | HTMLElement | string,
+                changeFunc: changeFunction = (): void => {
+                    return;
+                },
+                mediaConfig: mediaRangeConfig = {}) {
 
         mediaConfig.min = typeof mediaConfig.min == 'number' ? mediaConfig.min : 0;
         mediaConfig.max = typeof mediaConfig.max == 'number' ? mediaConfig.max : 100;
@@ -76,10 +76,10 @@ export class MediaControl {
         mediaConfig.playInterval = typeof mediaConfig.playInterval == 'number' ? mediaConfig.playInterval : 500;
         mediaConfig.showAsDate = typeof mediaConfig.showAsDate == 'boolean' ? mediaConfig.showAsDate : false;
 
-        if (typeof  element == 'string'){
+        if (typeof element == 'string') {
             this._container = $('#' + element);
         }
-        else if (typeof element['style'] !== 'undefined'){
+        else if (typeof (element as HTMLElement).style !== 'undefined') {
             this._container = $(element);
         } else {
             this._container = element as JQuery;
@@ -125,7 +125,9 @@ export class MediaControl {
 
         this.setMinMaxValueStep(mediaConfig.min, mediaConfig.max, mediaConfig.val, mediaConfig.step);
 
-        rangeChange(this._$slider,(newVal) => { this.currentValue = newVal;}, 100);
+        rangeChange(this._$slider, (newVal) => {
+            this.currentValue = newVal;
+        }, 100);
 
         let ___this = this;
 
@@ -163,13 +165,13 @@ export class MediaControl {
         });
     }
 
-    stopPlaying(){
-        if (this._playing){
+    stopPlaying() {
+        if (this._playing) {
             this._$btnStop.trigger('click');
         }
     }
 
-    get playing(){
+    get playing() {
         return this._playing;
     }
 
@@ -214,12 +216,12 @@ export class MediaControl {
      * @param {number} [newValue=newMin] the value to set
      * @param {number} [newStep=(newMax-newMin)/20] step value
      */
-    setMinMaxValueStep(newMin, newMax, newValue, newStep) {
+    setMinMaxValueStep(newMin: number, newMax: number, newValue: number, newStep: number) {
         this._min = newMin;
         this._max = newMax;
 
         newValue = typeof newValue == 'number' ? newValue : newMin;
-        newStep = typeof newStep == 'number' ? newStep : (newMax-newMin)/20;
+        newStep = typeof newStep == 'number' ? newStep : (newMax - newMin) / 20;
 
         this._currentValue = newValue;
         this._step = newStep;

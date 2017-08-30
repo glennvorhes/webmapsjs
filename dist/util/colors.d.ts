@@ -3,21 +3,21 @@
  * @param {string} rgb - rgb color
  * @returns {string} rbg as hex
  */
-export declare function rgb2hex(rgb: any): string;
+export declare function rgb2hex(rgb: string): string;
 /**
  * Convert hex string to RGB or RGBA string
  * @param {string} hexString - hex color string
  * @param {number} [alphaVal=undefined] Alpha value
  * @returns {string} - rgb or rgba color
  */
-export declare function hexAlphaToRgbOrRgba(hexString: any, alphaVal: any): string;
+export declare function hexAlphaToRgbOrRgba(hexString: string, alphaVal: number): string;
 /**
  * adds alpha value to rgb string 'rgb(r, b, g)', returns 'rgba(r, g, b, a)'
  * @param {string} rgb - rgb color
  * @param {number} alpha - alpha value 0 to 1
  * @returns {string} rgba color
  */
-export declare function rgbToRgba(rgb: any, alpha: any): any;
+export declare function rgbToRgba(rgb: string, alpha: number): string;
 /**
  * @typedef {function} colorLookupByNumber
  * @param {number} num - the number to use to retrieve the color
@@ -30,7 +30,7 @@ export declare function rgbToRgba(rgb: any, alpha: any): any;
  * @param {boolean} flipColors - if the colors should be flipped
  * @returns {colorLookupByNumber} color lookup function
  */
-export declare function makeBlueGreenRedGradient(minVal: any, maxVal: any, flipColors: any): (theVal: any) => string;
+export declare function makeBlueGreenRedGradient(minVal: number, maxVal: number, flipColors?: boolean): (v: number) => string;
 /**
  * Create a function that will return colors based on a gradient
  * @param {number} median - median value
@@ -38,4 +38,4 @@ export declare function makeBlueGreenRedGradient(minVal: any, maxVal: any, flipC
  * @param {boolean} flipColors - if the colors should be flipped
  * @returns {colorLookupByNumber} color lookup function
  */
-export declare function makeBlueGreenRedGradientZScore(median: any, stdDev: any, flipColors: any): (theVal: any) => string;
+export declare function makeBlueGreenRedGradientZScore(median: number, stdDev: number, flipColors?: boolean): (v: number) => string;

@@ -19,11 +19,8 @@ var nm = provide_1.default('olHelpers');
  * @returns {function|*} new function
  */
 function propertiesZoomStyle(styleFunc) {
-    if (styleFunc == undefined) {
-        return undefined;
-    }
-    return function (feature, resolution) {
-        styleFunc(feature.getProperties(), zoomResolutionConvert.resolutionToZoom(resolution));
+    return function (feature, zoom) {
+        return styleFunc(feature, zoomResolutionConvert.zoomToResolution(zoom));
     };
 }
 nm.propertiesZoomStyle = propertiesZoomStyle;

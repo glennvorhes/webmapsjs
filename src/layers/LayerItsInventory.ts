@@ -2,7 +2,7 @@
  * Created by gavorhes on 12/8/2015.
  */
 
-import LayerBaseVectorGeoJson from './LayerBaseVectorGeoJson';
+import {LayerBaseVectorGeoJson, LayerBaseVectorGeoJsonOptions} from './LayerBaseVectorGeoJson';
 import mapPopup from '../olHelpers/mapPopup';
 import provide from '../util/provide';
 import ol = require('custom-ol');
@@ -12,7 +12,40 @@ import {proj4326, proj3857} from '../olHelpers/projections'
 let nm = provide('layers');
 
 
-function checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
+export interface iLineStyle {
+    color: string;
+    width?: number
+}
+
+export interface iMultiConfig {
+    prop: string;
+    defaultName: string;
+}
+
+export interface iIconConfig extends iMultiConfig {
+    defaultIcon: string;
+    iconArray: string[][]
+}
+
+export interface iLineConfig extends iMultiConfig {
+    defaultColor: string;
+    defaultWidth?: number;
+    lineArray: any[][]
+}
+
+export interface iLayerItsInventory extends LayerBaseVectorGeoJsonOptions {
+    itsType: string;
+    addPopup?: boolean;
+    itsIcon?: string;
+    itsLineStyle?: iLineStyle;
+    itsIconConfig?: iIconConfig;
+    itsLineConfig?: iLineConfig
+}
+
+
+
+
+function checkStyleNumber(itsIcon: string, itsLineStyle: iLineStyle, itsIconConfig: iIconConfig, itsLineConfig: iLineConfig) {
     "use strict";
 
     //make sure one and only one configuration is defined;
@@ -84,7 +117,7 @@ function checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
  * @param {object} [itsLineConfig.lineArray=[]] an array, items with format [property, name, color, optional width]
  * @returns {*} undefined, style, or style function
  */
-function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) : ol.style.Style|Array<ol.style.Style>|ol.StyleFunction{
+function defineStyle(itsIcon: string, itsLineStyle: iLineStyle, itsIconConfig: iIconConfig, itsLineConfig: iLineConfig): ol.style.Style | Array<ol.style.Style> | ol.StyleFunction {
     "use strict";
     checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig);
 
@@ -157,29 +190,7 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) : ol.s
     }
 }
 
-/**
- *
- * @param {string} [itsIcon=undefined] the ITS device type icon image see https://transportal.cee.wisc.edu/its/inventory/icons/
- *
- * @param {object} [itsLineStyle=undefined] A single line style
- * @param {string} itsLineStyle.color the line color as rgb or hex
- * @param {number} [itsLineStyle.width=5] the line width
- *
- * @param {object} [itsIconConfig=undefined] The icon subtype configuration
- * @param {string} itsIconConfig.prop The property used to define icon attribute symbolization
- * @param {string} itsIconConfig.defaultName The default name to be used if no other match is found
- * @param {string} itsIconConfig.defaultIcon The default icon to be used for no other matches
- * @param {object} [itsIconConfig.iconArray=[]] an array, items with format [property, name, img]
- *
- * @param {object} [itsLineConfig=undefined] The property used to define icon attribute symbolization
- * @param {string} itsLineConfig.prop The property used to define icon attribute symbolization
- * @param {string} [itsLineConfig.defaultName=Other] The default name to be used if no other match is found
- * @param {string} [itsLineConfig.defaultColor=red] The default line color to be used for no other matches
- * @param {number} [itsLineConfig.defaultWidth=5] The default line width to be used for no other matches
- * @param {object} [itsLineConfig.lineArray=[]] an array, items with format [property, name, color, optional width]
- * @returns {string} html to be added to the legend
- */
-function defineLegend(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
+function defineLegend(itsIcon: string, itsLineStyle: iLineStyle, itsIconConfig: iIconConfig, itsLineConfig: iLineConfig) {
     "use strict";
 
     let iconHeight = 17;
@@ -199,8 +210,10 @@ function defineLegend(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
         for (let a of itsIconConfig.iconArray) {
             outHtml += `<li><span class="legend-layer-subitem">${a[1]}</span><img src="${_iconUrlRoot + a[2]}" class="legend-layer-icon" height="${iconHeight}">`;
         }
+
         outHtml += `<li><span class="legend-layer-subitem">${itsIconConfig.defaultName}</span>` +
             `<img src="${_iconUrlRoot + itsIconConfig.defaultIcon}" class="legend-layer-icon" height="${iconHeight}"></li>`;
+
         outHtml += '</ul>';
 
         return outHtml;
@@ -220,6 +233,7 @@ function defineLegend(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
         return '';
     }
 }
+
 
 /**
  * Its Layer class
@@ -271,7 +285,7 @@ class LayerItsInventory extends LayerBaseVectorGeoJson {
      * @param {number} [options.itsLineConfig.defaultWidth] The default line width to be used for no other matches
      * @param {object} [options.itsLineConfig.lineArray=[]] an array, items with format [property, name, color, optional width = 5]
      */
-    constructor(options) {
+    constructor(options: iLayerItsInventory) {
         if (typeof options.itsType !== 'string') {
             throw 'its type must be defined';
         }
@@ -301,8 +315,8 @@ class LayerItsInventory extends LayerBaseVectorGeoJson {
         options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : true;
 
         if (options.addPopup) {
-            mapPopup.addVectorPopup(this, function (props) {
-                return `<iframe src="https://transportal.cee.wisc.edu/its/inventory/?feature=${props['featureGuid']}" ` +
+            mapPopup.addVectorPopup(this, function (props: { featureGuid: string }) {
+                return `<iframe src="https://transportal.cee.wisc.edu/its/inventory/?feature=${props.featureGuid}" ` +
                     `height="250" width="350"></iframe>`;
             });
         }
@@ -318,7 +332,7 @@ class LayerItsInventory extends LayerBaseVectorGeoJson {
      * @param {number} extent.maxY - maxY
      * @param {number} zoomLevel - zoom level
      */
-    mapMoveMakeGetParams(extent, zoomLevel) {
+    mapMoveMakeGetParams(extent: { minX: number, minY: number, maxX: number, maxY: number }, zoomLevel: number) {
         super.mapMoveMakeGetParams(extent, zoomLevel);
         let lowerLeft = new ol.geom.Point([extent.minX, extent.minY]);
         lowerLeft.transform(this.mapProj, this._projection4326);

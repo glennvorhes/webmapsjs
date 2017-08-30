@@ -33,12 +33,12 @@ export interface mapMoveCallbackFunction{
 export class MapMoveCls extends MapInteractionBase {
     _mapExtent: extentObject;
     _zoomLevel: number;
-    _lookupLayer: Object;
+    _lookupLayer: {[s: string]: LayerBaseVector};
     _arrLayer: Array<LayerBaseVector>;
     _arrLyrTimeout: Array<number>;
     _mapMoveCallbackTimeout: Array<number>;
     _mapMoveCallbackDelays: Array<number>;
-    _mapMoveCallbacksLookup: Object;
+    _mapMoveCallbacksLookup: {[s: string]: mapMoveCallbackFunction};
     _mapMoveCallbackContext: Array<Object>;
     _mapMoveCallbacks: Array<mapMoveCallbackFunction>;
     _arrLyrRequest: Array<any>;
@@ -71,7 +71,7 @@ export class MapMoveCls extends MapInteractionBase {
     init(theMap: ol.Map){
         super.init(theMap);
 
-        this.map.getView().on(['change:center', 'change:resolution'], (e) =>{
+        this.map.getView().on(['change:center', 'change:resolution'], (e: {type: string}) =>{
 
            this._updateMapExtent();
 
@@ -149,7 +149,7 @@ export class MapMoveCls extends MapInteractionBase {
             let __this = this;
 
             callbackFunc = function () {
-                function innerFunction(theLayer, theIndex) {
+                function innerFunction(theLayer: LayerBaseVector, theIndex: number) {
                     let _innerThis = this;
                     this._arrLyrRequest[theIndex] = $.get(
                         theLayer.url,
@@ -274,7 +274,7 @@ export class MapMoveCls extends MapInteractionBase {
         }
 
         this._mapMoveCallbacks.push(func);
-        this._mapMoveCallbacksLookup[functionId] = functionId;
+        this._mapMoveCallbacksLookup[functionId] = func;
         this._mapMoveCallbackDelays.push(typeof delay == 'number' ? delay : 50);
         this._mapMoveCallbackContext.push(checkDefined.definedAndNotNull(context) ? context : null);
         this._mapMoveCallbackTimeout.push(null);

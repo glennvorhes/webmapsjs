@@ -21,13 +21,11 @@ const nm = provide('olHelpers');
  * @param {propertiesZoomStyle|*} styleFunc - style function
  * @returns {function|*} new function
  */
-function propertiesZoomStyle(styleFunc) {
-    if (styleFunc == undefined){
-        return undefined;
-    }
-
-    return function (feature: ol.Feature, resolution) {
-        styleFunc(feature.getProperties(), zoomResolutionConvert.resolutionToZoom(resolution));
+function propertiesZoomStyle(styleFunc: (f: ol.Feature, res: number) => ol.style.Style|ol.style.Style[]):
+(feature: ol.Feature, zoom: number) => ol.style.Style|ol.style.Style[]
+{
+    return function (feature: ol.Feature, zoom: number): ol.style.Style|ol.style.Style[] {
+        return styleFunc(feature, zoomResolutionConvert.zoomToResolution(zoom));
     };
 }
 

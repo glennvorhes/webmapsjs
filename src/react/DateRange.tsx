@@ -10,22 +10,24 @@ import * as fixDate from './helpers/dateFormat';
 import DatePick from './DatePick';
 
 function stringToDate(dte: string|Date){
-    if (dte['getTime']){
+    if ((dte as Date).getTime){
         return dte as Date;
     } else {
         return new Date(dte);
     }
 }
 
+export interface iDateRange{
+    maxRange: number;
+    callback: (start: string|Date, end: string|Date) => any;
+    minRange?: number;
+    maxDate?: string|Date;
+    minDate?: string|Date;
+    initialEnd?: string|Date;
+}
 
-export class DateRange extends React.Component<{
-    maxRange: number,
-    callback: (start: string|Date, end: string|Date) => any,
-    minRange?: number,
-    maxDate?: string|Date,
-    minDate?: string|Date
-    initialEnd?: string|Date
-}, null> {
+
+export class DateRange extends React.Component<iDateRange, null> {
     startId = makeGuid();
     endId = makeGuid();
     startInput: HTMLInputElement;
@@ -36,7 +38,7 @@ export class DateRange extends React.Component<{
     minRange: number;
     numDays: number;
 
-    constructor(props, context) {
+    constructor(props: iDateRange, context: Object) {
         super(props, context);
 
         this.maxRange = Math.round(this.props.maxRange) - 1;
