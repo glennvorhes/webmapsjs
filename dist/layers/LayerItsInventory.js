@@ -261,6 +261,7 @@ var LayerItsInventory = (function (_super) {
         if (typeof options.itsType !== 'string') {
             throw 'its type must be defined';
         }
+        console.log('its');
         options.transform = { dataProjection: projections_1.proj4326, featureProjection: projections_1.proj3857 };
         var addToLegend = '';
         // define a style with the helper function if it is not explicitly defined
