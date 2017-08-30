@@ -275,7 +275,6 @@ class LayerItsInventory extends LayerBaseVectorGeoJson {
         if (typeof options.itsType !== 'string') {
             throw 'its type must be defined';
         }
-        console.log('its');
 
         options.transform = {dataProjection: proj4326, featureProjection: proj3857};
 
