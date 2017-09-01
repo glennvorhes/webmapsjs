@@ -76,7 +76,7 @@ var Slider = (function (_super) {
             style: { width: '100%' },
             max: "100",
             step: '0.1',
-            value: this.props.value.toString(),
+            value: this.props.value ? this.props.value.toString() : '0',
             defaultValue: "0"
         };
         if (this.props.steps) {
