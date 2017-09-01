@@ -2,13 +2,10 @@
  * Created by glenn on 7/6/2017.
  */
 
-
 import {React} from './reactAndRedux';
 import makeGuid from '../util/makeGuid';
 import {ChangeEvent} from "react";
-
-
-
+import {get_browser} from '../util/get_browser';
 
 export interface iSlider {
     change: (d: number) => any;
@@ -31,6 +28,7 @@ export class Slider extends React.Component<iSlider, null>{
     minVal: number;
     maxVal: number;
     step: number;
+    // onchange: (evt: ChangeEvent<HTMLInputElement>) => any;
 
     constructor(props: iSlider, context: Object) {
         super(props, context);
@@ -49,10 +47,16 @@ export class Slider extends React.Component<iSlider, null>{
         this.startButton = document.getElementById(this.startUid) as HTMLButtonElement;
         this.endButton = document.getElementById(this.endUid) as HTMLButtonElement;
         this.intervalSelect = document.getElementById(this.intervalUid) as HTMLSelectElement;
+
+        if (get_browser().name.toUpperCase().indexOf('IE') > -1){
+            console.log('is ie');
+            this.el.onchange = (e) => {
+                this.props.change(parseFloat(e.target['value']))
+            }
+        }
     }
 
     updateRunning() {
-
         this.startButton.disabled = this.running;
         this.el.disabled = this.running;
         this.endButton.disabled = !this.running;
@@ -86,7 +90,6 @@ export class Slider extends React.Component<iSlider, null>{
             this.startAnimate();
         }
     }
-
 
     render() {
 

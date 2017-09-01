@@ -15,8 +15,10 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var reactAndRedux_1 = require("./reactAndRedux");
 var makeGuid_1 = require("../util/makeGuid");
+var get_browser_1 = require("../util/get_browser");
 var Slider = (function (_super) {
     __extends(Slider, _super);
+    // onchange: (evt: ChangeEvent<HTMLInputElement>) => any;
     function Slider(props, context) {
         var _this = _super.call(this, props, context) || this;
         _this.uid = makeGuid_1.default();
@@ -27,6 +29,7 @@ var Slider = (function (_super) {
         return _this;
     }
     Slider.prototype.componentDidMount = function () {
+        var _this = this;
         this.el = document.getElementById(this.uid);
         this.minVal = parseFloat(this.el.min);
         this.maxVal = parseFloat(this.el.max);
@@ -34,6 +37,12 @@ var Slider = (function (_super) {
         this.startButton = document.getElementById(this.startUid);
         this.endButton = document.getElementById(this.endUid);
         this.intervalSelect = document.getElementById(this.intervalUid);
+        if (get_browser_1.get_browser().name.toUpperCase().indexOf('IE') > -1) {
+            console.log('is ie');
+            this.el.onchange = function (e) {
+                _this.props.change(parseFloat(e.target['value']));
+            };
+        }
     };
     Slider.prototype.updateRunning = function () {
         this.startButton.disabled = this.running;
