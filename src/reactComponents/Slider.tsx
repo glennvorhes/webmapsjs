@@ -28,7 +28,6 @@ export class Slider extends React.Component<iSlider, null>{
     minVal: number;
     maxVal: number;
     step: number;
-    // onchange: (evt: ChangeEvent<HTMLInputElement>) => any;
 
     constructor(props: iSlider, context: Object) {
         super(props, context);
@@ -49,7 +48,6 @@ export class Slider extends React.Component<iSlider, null>{
         this.intervalSelect = document.getElementById(this.intervalUid) as HTMLSelectElement;
 
         if (get_browser().name.toUpperCase().indexOf('IE') > -1){
-            console.log('is ie');
             this.el.onchange = (e) => {
                 this.props.change(parseFloat(e.target['value']))
             }
@@ -92,7 +90,6 @@ export class Slider extends React.Component<iSlider, null>{
     }
 
     render() {
-
         let attrs = {
             id: this.uid,
             min: 0,
