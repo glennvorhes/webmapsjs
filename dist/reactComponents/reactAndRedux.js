@@ -9,7 +9,6 @@ exports.ReactRedux = require("react-redux");
 exports.Redux = require("redux");
 exports.connect = exports.ReactRedux.connect;
 exports.Provider = exports.ReactRedux.Provider;
-// export { connect, Provider } from 'react-redux';
 exports.combineReducers = exports.Redux.combineReducers;
 exports.createStore = exports.Redux.createStore;
 //# sourceMappingURL=reactAndRedux.js.map

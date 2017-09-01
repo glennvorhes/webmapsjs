@@ -9,6 +9,5 @@ export declare const connect: any;
 export declare const Provider: any;
 export declare const combineReducers: typeof Redux.combineReducers;
 export declare const createStore: Redux.StoreCreator;
-export interface iAction {
-    type: string;
+export interface iAction extends Redux.Action {
 }
