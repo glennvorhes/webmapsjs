@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>EsriRenderer | webmapsjs</title>
+	<title>iMapServiceLegend | webmapsjs</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="esrirenderer.html">EsriRenderer</a>
+					<a href="imapservicelegend.html">iMapServiceLegend</a>
 				</li>
 			</ul>
-			<h1>Interface EsriRenderer</h1>
+			<h1>Interface iMapServiceLegend</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +70,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">EsriRenderer</span>
+						<span class="target">iMapServiceLegend</span>
 					</li>
 				</ul>
 			</section>
@@ -81,9 +81,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="esrirenderer.html#symbol" class="tsd-kind-icon">symbol</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="esrirenderer.html#type" class="tsd-kind-icon">type</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="esrirenderer.html#uniquevalueinfos" class="tsd-kind-icon">unique<wbr>Value<wbr>Infos</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imapservicelegend.html#layername" class="tsd-kind-icon">layer<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imapservicelegend.html#legend" class="tsd-kind-icon">legend</a></li>
 							</ul>
 						</section>
 					</div>
@@ -92,34 +91,35 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="symbol" class="tsd-anchor"></a>
-					<h3>symbol</h3>
-					<div class="tsd-signature tsd-kind-icon">symbol<span class="tsd-signature-symbol">:</span> <a href="esrisymbol.html" class="tsd-signature-type">EsriSymbol</a></div>
+					<a name="layername" class="tsd-anchor"></a>
+					<h3>layer<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">layer<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/326824f/src/olHelpers/esriToOlStyle.ts#L54">olHelpers/esriToOlStyle.ts:54</a></li>
+							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/ffc92b5/src/olHelpers/esriToOlStyle.ts#L357">olHelpers/esriToOlStyle.ts:357</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="type" class="tsd-anchor"></a>
-					<h3>type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="legend" class="tsd-anchor"></a>
+					<h3>legend</h3>
+					<div class="tsd-signature tsd-kind-icon">legend<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/326824f/src/olHelpers/esriToOlStyle.ts#L53">olHelpers/esriToOlStyle.ts:53</a></li>
+							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/ffc92b5/src/olHelpers/esriToOlStyle.ts#L358">olHelpers/esriToOlStyle.ts:358</a></li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="uniquevalueinfos" class="tsd-anchor"></a>
-					<h3>unique<wbr>Value<wbr>Infos</h3>
-					<div class="tsd-signature tsd-kind-icon">unique<wbr>Value<wbr>Infos<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/326824f/src/olHelpers/esriToOlStyle.ts#L55">olHelpers/esriToOlStyle.ts:55</a></li>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>image<wbr>Data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>label<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
 						</ul>
-					</aside>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -136,16 +136,13 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="esrirenderer.html" class="tsd-kind-icon">Esri<wbr>Renderer</a>
+						<a href="imapservicelegend.html" class="tsd-kind-icon">i<wbr>Map<wbr>Service<wbr>Legend</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="esrirenderer.html#symbol" class="tsd-kind-icon">symbol</a>
+								<a href="imapservicelegend.html#layername" class="tsd-kind-icon">layer<wbr>Name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="esrirenderer.html#type" class="tsd-kind-icon">type</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="esrirenderer.html#uniquevalueinfos" class="tsd-kind-icon">unique<wbr>Value<wbr>Infos</a>
+								<a href="imapservicelegend.html#legend" class="tsd-kind-icon">legend</a>
 							</li>
 						</ul>
 					</li>

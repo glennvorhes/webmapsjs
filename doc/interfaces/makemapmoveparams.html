@@ -77,13 +77,13 @@
 			<section class="tsd-panel">
 				<h3 class="tsd-before-signature">Callable</h3>
 				<ul class="tsd-signatures tsd-kind-interface">
-					<li class="tsd-signature tsd-kind-icon">__call<span class="tsd-signature-symbol">(</span>lyr<span class="tsd-signature-symbol">: </span><a href="../classes/layerbasevector.html" class="tsd-signature-type">LayerBaseVector</a>, extent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span>, zoomLevel<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					<li class="tsd-signature tsd-kind-icon">__call<span class="tsd-signature-symbol">(</span>lyr<span class="tsd-signature-symbol">: </span><a href="../classes/layerbasevector.html" class="tsd-signature-type">LayerBaseVector</a>, extent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, zoomLevel<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/326824f/src/layers/LayerBaseVector.ts#L10">layers/LayerBaseVector.ts:10</a></li>
+								<li>Defined in <a href="https://github.com/glennvorhes/webmapsjs/blob/ffc92b5/src/layers/LayerBaseVector.ts#L10">layers/LayerBaseVector.ts:10</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -94,7 +94,21 @@
 								<h5>lyr: <a href="../classes/layerbasevector.html" class="tsd-signature-type">LayerBaseVector</a></h5>
 							</li>
 							<li>
-								<h5>extent: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>extent: <span class="tsd-signature-type">object</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter">
+										<h5>maxX<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+									</li>
+									<li class="tsd-parameter">
+										<h5>maxY<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+									</li>
+									<li class="tsd-parameter">
+										<h5>minX<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+									</li>
+									<li class="tsd-parameter">
+										<h5>minY<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+									</li>
+								</ul>
 							</li>
 							<li>
 								<h5><span class="tsd-flag ts-flagOptional">Optional</span> zoomLevel: <span class="tsd-signature-type">number</span></h5>
