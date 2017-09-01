@@ -14,10 +14,10 @@
     "lint": "eslint src/**/*.js",
     "update-custom-ol": "npm update custom-ol & COPY /y node_modules\\custom-ol\\lib\\index.js test-html\\lib\\ol.js",
     "serve-demos": "cd test/serve & python -m http.server 5002",
-    "typedoc": "typedoc --excludePrivate --mode file --out doc src",
+    "typedoc": "RD /S /Q doc & typedoc --excludePrivate --mode file --out doc src",
     "webpack": "node_modules\\.bin\\webpack -w",
     "webpack-prod": "node_modules\\.bin\\webpack -p -w",
-    "tsc": "node_modules\\.bin\\tsc -d -w",
+    "tsc": "RD /S /Q dist & node_modules\\.bin\\tsc -d -w",
     "karma": "node_modules\\.bin\\karma start"
   },
   "author": "TOPS Lab",
