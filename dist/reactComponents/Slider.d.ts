@@ -10,24 +10,29 @@ export interface iSlider {
     value?: number;
 }
 export declare class Slider extends React.Component<iSlider, null> {
-    uid: string;
-    startUid: string;
-    endUid: string;
-    intervalUid: string;
-    el: HTMLInputElement;
-    startButton: HTMLButtonElement;
-    endButton: HTMLButtonElement;
-    intervalSelect: HTMLSelectElement;
-    interval: number;
-    running: boolean;
-    minVal: number;
-    maxVal: number;
-    step: number;
+    private uid;
+    private startUid;
+    private endUid;
+    private previousUid;
+    private nextUid;
+    private intervalUid;
+    private el;
+    private previousButton;
+    private nextButton;
+    private startButton;
+    private endButton;
+    private intervalSelect;
+    private interval;
+    private running;
+    private minVal;
+    private maxVal;
+    private step;
     constructor(props: iSlider, context: Object);
     componentDidMount(): void;
     updateRunning(): void;
     startAnimate(): void;
     stopAnimate(): void;
     restartAnimate(): void;
+    increment(v: number): void;
     render(): JSX.Element;
 }

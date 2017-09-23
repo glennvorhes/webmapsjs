@@ -3,7 +3,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const demosDirectory = path.join(__dirname, 'test/demo');
+const demosDirectory = path.join(__dirname, 'src/_tests/demos');
 const files = fs.readdirSync(demosDirectory);
 
 let entries = {};

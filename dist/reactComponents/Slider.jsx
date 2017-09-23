@@ -24,6 +24,8 @@ var Slider = (function (_super) {
         _this.startUid = makeGuid_1.default();
         _this.endUid = makeGuid_1.default();
         _this.intervalUid = makeGuid_1.default();
+        _this.previousUid = makeGuid_1.default();
+        _this.nextUid = makeGuid_1.default();
         _this.running = false;
         return _this;
     }
@@ -35,6 +37,8 @@ var Slider = (function (_super) {
         this.step = parseFloat(this.el.step);
         this.startButton = document.getElementById(this.startUid);
         this.endButton = document.getElementById(this.endUid);
+        this.previousButton = document.getElementById(this.previousUid);
+        this.nextButton = document.getElementById(this.nextUid);
         this.intervalSelect = document.getElementById(this.intervalUid);
         if (get_browser_1.get_browser().name.toUpperCase().indexOf('IE') > -1) {
             this.el.onchange = function (e) {
@@ -44,6 +48,8 @@ var Slider = (function (_super) {
     };
     Slider.prototype.updateRunning = function () {
         this.startButton.disabled = this.running;
+        this.nextButton.disabled = this.running;
+        this.previousButton.disabled = this.running;
         this.el.disabled = this.running;
         this.endButton.disabled = !this.running;
     };
@@ -59,7 +65,6 @@ var Slider = (function (_super) {
             }
             _this.el.value = val.toString();
             _this.props.change(val);
-            console.log(parseFloat(_this.el.value));
         }, parseInt(this.intervalSelect.value));
     };
     Slider.prototype.stopAnimate = function () {
@@ -73,13 +78,21 @@ var Slider = (function (_super) {
             this.startAnimate();
         }
     };
+    Slider.prototype.increment = function (v) {
+        var val = parseFloat(this.el.value);
+        val = v > 0 ? val + this.step : val - this.step;
+        this.el.value = val.toString();
+        this.props.change(val);
+    };
     Slider.prototype.render = function () {
         var _this = this;
         var attrs = {
             id: this.uid,
             min: 0,
             type: 'range',
-            onChange: function (evt) { _this.props.change(parseFloat(evt.target.value)); },
+            onChange: function (evt) {
+                _this.props.change(parseFloat(evt.target.value));
+            },
             style: { width: '100%' },
             max: "100",
             step: '0.1',
@@ -92,25 +105,33 @@ var Slider = (function (_super) {
         }
         if (this.props.value) {
             delete attrs.defaultValue;
-            // attrs['value'] = this.props.value.toString()
         }
         else {
             delete attrs.value;
-            // attrs['defaultValue'] = "0";
         }
         var start = null;
         var stop = null;
+        var previous = null;
+        var next = null;
         var intervalSelect = null;
         if (this.props.animate) {
-            start = <button id={this.startUid} onClick={function () {
+            previous = <button id={this.previousUid} className="react-slider-previous" onClick={function () {
+                _this.increment(-1);
+            }}>Previous</button>;
+            next = <button id={this.nextUid} className="react-slider-next" onClick={function () {
+                _this.increment(1);
+            }}>Next</button>;
+            start = <button id={this.startUid} className="react-slider-start" onClick={function () {
                 _this.startAnimate();
             }}>Start</button>;
-            stop = <button id={this.endUid} onClick={function () {
+            stop = <button id={this.endUid} className="react-slider-stop" onClick={function () {
                 _this.stopAnimate();
             }}>Stop</button>;
             intervalSelect = <span>
             <label>Interval (s)</label>
-            <select defaultValue="200" id={this.intervalUid} onChange={function () { _this.restartAnimate(); }}>
+            <select defaultValue="200" id={this.intervalUid} onChange={function () {
+                _this.restartAnimate();
+            }}>
                 <option value="100">0.1</option>
                 <option value="200">0.2</option>
                 <option value="300">0.3</option>
@@ -125,8 +146,8 @@ var Slider = (function (_super) {
             </span>;
         }
         return <div>
-             <input {...attrs}/>
-            {start}{stop}{intervalSelect}
+            <input {...attrs}/>
+            {previous}{start}{stop}{next}{intervalSelect}
         </div>;
     };
     return Slider;

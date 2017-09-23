@@ -14,20 +14,24 @@ export interface iSlider {
     value?: number;
 }
 
-export class Slider extends React.Component<iSlider, null>{
-    uid: string;
-    startUid: string;
-    endUid: string;
-    intervalUid: string;
-    el: HTMLInputElement;
-    startButton: HTMLButtonElement;
-    endButton: HTMLButtonElement;
-    intervalSelect: HTMLSelectElement;
-    interval: number;
-    running: boolean;
-    minVal: number;
-    maxVal: number;
-    step: number;
+export class Slider extends React.Component<iSlider, null> {
+    private uid: string;
+    private startUid: string;
+    private endUid: string;
+    private previousUid: string;
+    private nextUid: string;
+    private intervalUid: string;
+    private el: HTMLInputElement;
+    private previousButton: HTMLButtonElement;
+    private nextButton: HTMLButtonElement;
+    private startButton: HTMLButtonElement;
+    private endButton: HTMLButtonElement;
+    private intervalSelect: HTMLSelectElement;
+    private interval: number;
+    private running: boolean;
+    private minVal: number;
+    private maxVal: number;
+    private step: number;
 
     constructor(props: iSlider, context: Object) {
         super(props, context);
@@ -35,6 +39,8 @@ export class Slider extends React.Component<iSlider, null>{
         this.startUid = makeGuid();
         this.endUid = makeGuid();
         this.intervalUid = makeGuid();
+        this.previousUid = makeGuid();
+        this.nextUid = makeGuid();
         this.running = false;
     }
 
@@ -45,9 +51,11 @@ export class Slider extends React.Component<iSlider, null>{
         this.step = parseFloat(this.el.step);
         this.startButton = document.getElementById(this.startUid) as HTMLButtonElement;
         this.endButton = document.getElementById(this.endUid) as HTMLButtonElement;
+        this.previousButton = document.getElementById(this.previousUid) as HTMLButtonElement;
+        this.nextButton = document.getElementById(this.nextUid) as HTMLButtonElement;
         this.intervalSelect = document.getElementById(this.intervalUid) as HTMLSelectElement;
 
-        if (get_browser().name.toUpperCase().indexOf('IE') > -1){
+        if (get_browser().name.toUpperCase().indexOf('IE') > -1) {
             this.el.onchange = (e) => {
                 this.props.change(parseFloat(e.target['value']))
             }
@@ -56,6 +64,8 @@ export class Slider extends React.Component<iSlider, null>{
 
     updateRunning() {
         this.startButton.disabled = this.running;
+        this.nextButton.disabled = this.running;
+        this.previousButton.disabled = this.running;
         this.el.disabled = this.running;
         this.endButton.disabled = !this.running;
     }
@@ -72,7 +82,6 @@ export class Slider extends React.Component<iSlider, null>{
 
             this.el.value = val.toString();
             this.props.change(val);
-            console.log(parseFloat(this.el.value));
         }, parseInt(this.intervalSelect.value));
     }
 
@@ -82,11 +91,18 @@ export class Slider extends React.Component<iSlider, null>{
         this.updateRunning();
     }
 
-    restartAnimate(){
-        if (this.running){
+    restartAnimate() {
+        if (this.running) {
             this.stopAnimate();
             this.startAnimate();
         }
+    }
+
+    increment(v: number) {
+        let val = parseFloat(this.el.value);
+        val = v > 0 ? val + this.step : val - this.step;
+        this.el.value = val.toString();
+        this.props.change(val);
     }
 
     render() {
@@ -94,44 +110,56 @@ export class Slider extends React.Component<iSlider, null>{
             id: this.uid,
             min: 0,
             type: 'range',
-            onChange: (evt: ChangeEvent<HTMLInputElement>) => {this.props.change(parseFloat(evt.target.value))},
+            onChange: (evt: ChangeEvent<HTMLInputElement>) => {
+                this.props.change(parseFloat(evt.target.value))
+            },
             style: {width: '100%'},
             max: "100",
             step: '0.1',
-            value: this.props.value ? this.props.value.toString(): '0',
+            value: this.props.value ? this.props.value.toString() : '0',
             defaultValue: "0"
         };
 
-        if (this.props.steps){
+        if (this.props.steps) {
             attrs.max = this.props.steps.toString();
             attrs.step = '1';
         }
 
-        if (this.props.value){
+        if (this.props.value) {
             delete attrs.defaultValue;
-            // attrs['value'] = this.props.value.toString()
         } else {
             delete attrs.value;
-            // attrs['defaultValue'] = "0";
         }
 
 
         let start = null;
         let stop = null;
+        let previous = null;
+        let next = null;
         let intervalSelect = null;
 
         if (this.props.animate) {
-            start = <button id={this.startUid} onClick={() => {
+            previous = <button id={this.previousUid} className="react-slider-previous" onClick={() => {
+                this.increment(-1)
+            }}>Previous</button>;
+
+            next = <button id={this.nextUid} className="react-slider-next" onClick={() => {
+                this.increment(1)
+            }}>Next</button>;
+
+            start = <button id={this.startUid} className="react-slider-start" onClick={() => {
                 this.startAnimate()
             }}>Start</button>;
 
-            stop = <button id={this.endUid} onClick={() => {
+            stop = <button id={this.endUid} className="react-slider-stop" onClick={() => {
                 this.stopAnimate()
             }}>Stop</button>;
 
             intervalSelect = <span>
             <label>Interval (s)</label>
-            <select defaultValue="200" id={this.intervalUid} onChange={() => {this.restartAnimate()}}>
+            <select defaultValue="200" id={this.intervalUid} onChange={() => {
+                this.restartAnimate()
+            }}>
                 <option value="100">0.1</option>
                 <option value="200">0.2</option>
                 <option value="300">0.3</option>
@@ -147,8 +175,8 @@ export class Slider extends React.Component<iSlider, null>{
         }
 
         return <div>
-             <input {...attrs}/>
-            {start}{stop}{intervalSelect}
+            <input {...attrs}/>
+            {previous}{start}{stop}{next}{intervalSelect}
         </div>
     }
 
