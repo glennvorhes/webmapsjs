@@ -107,7 +107,9 @@ export declare abstract class LayerBase {
      * @param {object} newParams - new get params
      * @protected
      */
-    params: any;
+    params: {
+        [s: string]: any;
+    };
     /**
      * get the minimum resolution
      * @type {number|*}

@@ -134,6 +134,7 @@ export class LayerBaseVector extends LayerBase {
 
         this._projectionMap = null;
         this._projection4326 = new ol.proj.Projection({code: "EPSG:4326"});
+        this._olLayer.setOpacity(this.opacity)
     }
 
     /**

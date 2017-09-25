@@ -254,7 +254,7 @@ export abstract class LayerBase {
      * get the legend content
      * @type {string}
      */
-    get legendContent() {
+    get legendContent(): string {
         return this._legendContent;
     }
 
@@ -263,7 +263,7 @@ export abstract class LayerBase {
      * @param {string} newVal - new content
      * @protected
      */
-    set legendContent(newVal) {
+    set legendContent(newVal: string) {
         this._legendContent = newVal;
     }
 
@@ -271,7 +271,7 @@ export abstract class LayerBase {
      * get the map get params
      * @type {object}
      */
-    get params() {
+    get params(): {[s: string]: any} {
         return this._params;
     }
 
@@ -280,7 +280,7 @@ export abstract class LayerBase {
      * @param {object} newParams - new get params
      * @protected
      */
-    set params(newParams) {
+    set params(newParams: {[s: string]: any}) {
         this._params = newParams;
     }
 
@@ -288,7 +288,7 @@ export abstract class LayerBase {
      * get the minimum resolution
      * @type {number|*}
      */
-    get minResolution() {
+    get minResolution(): number {
         return this._minResolution;
     }
 
@@ -296,7 +296,7 @@ export abstract class LayerBase {
      * get the maximum resolution
      * @type {number|*}
      */
-    get maxResolution() {
+    get maxResolution(): number {
         return this._maxResolution;
     }
 
@@ -304,7 +304,7 @@ export abstract class LayerBase {
      * get min zoom
      * @type {number|*}
      */
-    get minZoom() {
+    get minZoom(): number {
         return this._minZoom;
     }
 
@@ -312,7 +312,7 @@ export abstract class LayerBase {
      * get max zoom
      * @type {number|*}
      */
-    get maxZoom() {
+    get maxZoom(): number {
         return this._maxZoom;
     }
 
@@ -320,7 +320,7 @@ export abstract class LayerBase {
      * get the url
      * @type {string}
      */
-    get url() {
+    get url(): string {
         return this._url;
     }
 
@@ -355,7 +355,7 @@ export abstract class LayerBase {
      * Get the layer opacity
      * @type {number}
      */
-    get opacity() {
+    get opacity(): number {
         return this._opacity;
     }
 
@@ -363,7 +363,7 @@ export abstract class LayerBase {
      * Set the layer opacity
      * @param {number} opacity - layer opacity
      */
-    set opacity(opacity) {
+    set opacity(opacity: number) {
         this._opacity = opacity;
         if (this.olLayer) {
             this.olLayer.setOpacity(this._opacity);
@@ -374,7 +374,7 @@ export abstract class LayerBase {
      * Get the layer name
      * @type {string}
      */
-    get name() {
+    get name(): string {
         return this._name;
     }
 
@@ -382,7 +382,7 @@ export abstract class LayerBase {
      * set the layer name
      * @param {string} newName - the new name
      */
-    set name(newName) {
+    set name(newName: string) {
         this._name = newName;
     }
 
@@ -390,7 +390,7 @@ export abstract class LayerBase {
      * Check if the layer is loaded
      * @type {boolean}
      */
-    get loaded() {
+    get loaded():boolean {
         return this._loaded;
     }
 

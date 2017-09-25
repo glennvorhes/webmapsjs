@@ -91,6 +91,7 @@ var LayerBaseVector = (function (_super) {
         _this.olLayer.setZIndex(_this._zIndex);
         _this._projectionMap = null;
         _this._projection4326 = new ol.proj.Projection({ code: "EPSG:4326" });
+        _this._olLayer.setOpacity(_this.opacity);
         return _this;
     }
     /**
