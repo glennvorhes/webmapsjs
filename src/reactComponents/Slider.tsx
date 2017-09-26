@@ -17,7 +17,7 @@ export interface iSlider {
 export class Slider extends React.Component<iSlider, null> {
     private uid: string;
     private startUid: string;
-    private endUid: string;
+    private stopUid: string;
     private previousUid: string;
     private nextUid: string;
     private intervalUid: string;
@@ -25,7 +25,7 @@ export class Slider extends React.Component<iSlider, null> {
     private previousButton: HTMLButtonElement;
     private nextButton: HTMLButtonElement;
     private startButton: HTMLButtonElement;
-    private endButton: HTMLButtonElement;
+    private stopButton: HTMLButtonElement;
     private intervalSelect: HTMLSelectElement;
     private interval: number;
     private running: boolean;
@@ -37,7 +37,7 @@ export class Slider extends React.Component<iSlider, null> {
         super(props, context);
         this.uid = makeGuid();
         this.startUid = makeGuid();
-        this.endUid = makeGuid();
+        this.stopUid = makeGuid();
         this.intervalUid = makeGuid();
         this.previousUid = makeGuid();
         this.nextUid = makeGuid();
@@ -50,7 +50,7 @@ export class Slider extends React.Component<iSlider, null> {
         this.maxVal = parseFloat(this.el.max);
         this.step = parseFloat(this.el.step);
         this.startButton = document.getElementById(this.startUid) as HTMLButtonElement;
-        this.endButton = document.getElementById(this.endUid) as HTMLButtonElement;
+        this.stopButton = document.getElementById(this.stopUid) as HTMLButtonElement;
         this.previousButton = document.getElementById(this.previousUid) as HTMLButtonElement;
         this.nextButton = document.getElementById(this.nextUid) as HTMLButtonElement;
         this.intervalSelect = document.getElementById(this.intervalUid) as HTMLSelectElement;
@@ -63,11 +63,13 @@ export class Slider extends React.Component<iSlider, null> {
     }
 
     updateRunning() {
-        this.startButton.disabled = this.running;
+        this.el.disabled = this.running;
+
+        this.startButton.style.display = this.running ? 'none' : '';
+        this.stopButton.style.display = this.running ? '' : 'none';
+
         this.nextButton.disabled = this.running;
         this.previousButton.disabled = this.running;
-        this.el.disabled = this.running;
-        this.endButton.disabled = !this.running;
     }
 
     startAnimate() {
@@ -151,7 +153,7 @@ export class Slider extends React.Component<iSlider, null> {
                 this.startAnimate()
             }}>Start</button>;
 
-            stop = <button id={this.endUid} className="react-slider-stop" onClick={() => {
+            stop = <button id={this.stopUid} className="react-slider-stop" onClick={() => {
                 this.stopAnimate()
             }}>Stop</button>;
 
@@ -176,7 +178,9 @@ export class Slider extends React.Component<iSlider, null> {
 
         return <div>
             <input {...attrs}/>
-            {previous}{start}{stop}{next}{intervalSelect}
+            <div className="react-slider-controls" style={{textAlign: 'center'}}>
+                {previous}{start}{stop}{next}{intervalSelect}
+            </div>
         </div>
     }
 

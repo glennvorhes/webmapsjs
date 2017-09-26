@@ -22,7 +22,7 @@ var Slider = (function (_super) {
         var _this = _super.call(this, props, context) || this;
         _this.uid = makeGuid_1.default();
         _this.startUid = makeGuid_1.default();
-        _this.endUid = makeGuid_1.default();
+        _this.stopUid = makeGuid_1.default();
         _this.intervalUid = makeGuid_1.default();
         _this.previousUid = makeGuid_1.default();
         _this.nextUid = makeGuid_1.default();
@@ -36,7 +36,7 @@ var Slider = (function (_super) {
         this.maxVal = parseFloat(this.el.max);
         this.step = parseFloat(this.el.step);
         this.startButton = document.getElementById(this.startUid);
-        this.endButton = document.getElementById(this.endUid);
+        this.stopButton = document.getElementById(this.stopUid);
         this.previousButton = document.getElementById(this.previousUid);
         this.nextButton = document.getElementById(this.nextUid);
         this.intervalSelect = document.getElementById(this.intervalUid);
@@ -47,11 +47,11 @@ var Slider = (function (_super) {
         }
     };
     Slider.prototype.updateRunning = function () {
-        this.startButton.disabled = this.running;
+        this.el.disabled = this.running;
+        this.startButton.style.display = this.running ? 'none' : '';
+        this.stopButton.style.display = this.running ? '' : 'none';
         this.nextButton.disabled = this.running;
         this.previousButton.disabled = this.running;
-        this.el.disabled = this.running;
-        this.endButton.disabled = !this.running;
     };
     Slider.prototype.startAnimate = function () {
         var _this = this;
@@ -124,7 +124,7 @@ var Slider = (function (_super) {
             start = <button id={this.startUid} className="react-slider-start" onClick={function () {
                 _this.startAnimate();
             }}>Start</button>;
-            stop = <button id={this.endUid} className="react-slider-stop" onClick={function () {
+            stop = <button id={this.stopUid} className="react-slider-stop" onClick={function () {
                 _this.stopAnimate();
             }}>Stop</button>;
             intervalSelect = <span>
@@ -147,7 +147,9 @@ var Slider = (function (_super) {
         }
         return <div>
             <input {...attrs}/>
-            {previous}{start}{stop}{next}{intervalSelect}
+            <div className="react-slider-controls" style={{ textAlign: 'center' }}>
+                {previous}{start}{stop}{next}{intervalSelect}
+            </div>
         </div>;
     };
     return Slider;

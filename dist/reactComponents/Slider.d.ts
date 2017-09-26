@@ -12,7 +12,7 @@ export interface iSlider {
 export declare class Slider extends React.Component<iSlider, null> {
     private uid;
     private startUid;
-    private endUid;
+    private stopUid;
     private previousUid;
     private nextUid;
     private intervalUid;
@@ -20,7 +20,7 @@ export declare class Slider extends React.Component<iSlider, null> {
     private previousButton;
     private nextButton;
     private startButton;
-    private endButton;
+    private stopButton;
     private intervalSelect;
     private interval;
     private running;
