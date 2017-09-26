@@ -51,6 +51,7 @@ export class Slider extends React.Component<iSlider, null> {
         this.step = parseFloat(this.el.step);
         this.startButton = document.getElementById(this.startUid) as HTMLButtonElement;
         this.stopButton = document.getElementById(this.stopUid) as HTMLButtonElement;
+        this.stopButton.style.display = 'none';
         this.previousButton = document.getElementById(this.previousUid) as HTMLButtonElement;
         this.nextButton = document.getElementById(this.nextUid) as HTMLButtonElement;
         this.intervalSelect = document.getElementById(this.intervalUid) as HTMLSelectElement;
