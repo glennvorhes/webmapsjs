@@ -282,6 +282,7 @@ var LayerLegend = (function () {
     };
     return LayerLegend;
 }());
+exports.LayerLegend = LayerLegend;
 nm.LayerLegend = LayerLegend;
 exports.default = LayerLegend;
 //# sourceMappingURL=LayerLegend.js.map

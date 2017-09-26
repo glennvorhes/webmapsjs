@@ -10,8 +10,6 @@ let nm = provide('collections');
 import $ = require('jquery');
 import {LayerBase} from "../layers";
 
-
-
 export interface iLegendItem{
     groupName: string;
     collapse?: boolean;
@@ -227,7 +225,7 @@ class LayerGroup {
 /**
  * a wrapper to make a legend
  */
-class LayerLegend {
+export class LayerLegend {
 
     $divElement: JQuery;
     _legendItems: Array<iLegendItem|LayerBase>;

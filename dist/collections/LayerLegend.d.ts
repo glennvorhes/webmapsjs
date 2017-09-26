@@ -15,7 +15,7 @@ export interface iLegendOptions {
 /**
  * a wrapper to make a legend
  */
-declare class LayerLegend {
+export declare class LayerLegend {
     $divElement: JQuery;
     _legendItems: Array<iLegendItem | LayerBase>;
     layerGroup: any;
