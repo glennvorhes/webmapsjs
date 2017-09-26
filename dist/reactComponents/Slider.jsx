@@ -145,7 +145,7 @@ var Slider = (function (_super) {
             </select>
             </span>;
         }
-        return <div>
+        return <div className="react-slider">
             <input {...attrs}/>
             <div className="react-slider-controls" style={{ textAlign: 'center' }}>
                 {previous}{start}{stop}{next}{intervalSelect}
