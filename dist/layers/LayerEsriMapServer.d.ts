@@ -22,6 +22,7 @@ export interface LayerEsriMapServerOptions extends LayerBaseOptions {
 export declare class LayerEsriMapServer extends LayerBase {
     _esriFormat: ol.format.EsriJSON;
     _popupRequest: JQueryXHR;
+    _showLayers: number[];
     /**
      * The base layer for all others
      * @param {string} url - resource url

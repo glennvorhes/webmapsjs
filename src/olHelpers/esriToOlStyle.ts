@@ -402,9 +402,10 @@ function mapServiceLegendItem(lyrObject: iMapServiceLegend, skipLayerNameAndExpa
 /**
  * make map service legent
  * @param {object} esriResponse - layer info
+ * @param  showLayers - limited number of layers to show in map service
  * @returns {string} legend content
  */
-export function makeMapServiceLegend(esriResponse: {layers: iMapServiceLegend[]}) {
+export function makeMapServiceLegend(esriResponse: {layers: iMapServiceLegend[]}, showLayers: number[] = []) {
     "use strict";
 
     let newLegendHtml = '';
@@ -416,6 +417,9 @@ export function makeMapServiceLegend(esriResponse: {layers: iMapServiceLegend[]}
     } else {
         newLegendHtml += '<ul>';
         for (let i = 0; i < layers.length; i++) {
+            if (showLayers.length > 0 && showLayers.indexOf(i) < 0){
+                continue;
+            }
             newLegendHtml += '<li>' + mapServiceLegendItem(layers[i]) + '</li>';
         }
         newLegendHtml += '</ul>';

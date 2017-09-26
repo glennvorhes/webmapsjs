@@ -331,10 +331,12 @@ function mapServiceLegendItem(lyrObject, skipLayerNameAndExpander) {
 /**
  * make map service legent
  * @param {object} esriResponse - layer info
+ * @param  showLayers - limited number of layers to show in map service
  * @returns {string} legend content
  */
-function makeMapServiceLegend(esriResponse) {
+function makeMapServiceLegend(esriResponse, showLayers) {
     "use strict";
+    if (showLayers === void 0) { showLayers = []; }
     var newLegendHtml = '';
     var layers = esriResponse['layers'];
     if (layers.length == 1) {
@@ -343,6 +345,9 @@ function makeMapServiceLegend(esriResponse) {
     else {
         newLegendHtml += '<ul>';
         for (var i = 0; i < layers.length; i++) {
+            if (showLayers.length > 0 && showLayers.indexOf(i) < 0) {
+                continue;
+            }
             newLegendHtml += '<li>' + mapServiceLegendItem(layers[i]) + '</li>';
         }
         newLegendHtml += '</ul>';

@@ -62,6 +62,7 @@ var LayerEsriMapServer = (function (_super) {
             url: _this.url == '' ? undefined : _this.url,
             params: typeof options.showLayers == 'undefined' ? undefined : { layers: 'show:' + options.showLayers.join(',') }
         });
+        _this._showLayers = options.showLayers || [];
         _this._olLayer = new ol.layer.Tile({
             source: _this._source,
             visible: _this.visible,
@@ -91,7 +92,7 @@ var LayerEsriMapServer = (function (_super) {
         }
         urlCopy += 'legend?f=pjson&callback=?';
         $.get(urlCopy, {}, function (d) {
-            var newHtml = esriToOl.makeMapServiceLegend(d);
+            var newHtml = esriToOl.makeMapServiceLegend(d, _this._showLayers);
             _super.prototype.addLegendContent.call(_this, newHtml);
         }, 'json');
     };

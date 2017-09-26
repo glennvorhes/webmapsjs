@@ -33,6 +33,7 @@ export interface LayerEsriMapServerOptions extends LayerBaseOptions {
 export class LayerEsriMapServer extends LayerBase {
     _esriFormat: ol.format.EsriJSON;
     _popupRequest: JQueryXHR;
+    _showLayers: number[];
 
     /**
      * The base layer for all others
@@ -62,6 +63,8 @@ export class LayerEsriMapServer extends LayerBase {
                 params: typeof options.showLayers == 'undefined' ? undefined : {layers: 'show:' + options.showLayers.join(',')}
             }
         );
+
+        this._showLayers = options.showLayers || [];
 
         this._olLayer = new ol.layer.Tile({
             source: this._source as ol.source.Tile,
@@ -99,7 +102,7 @@ export class LayerEsriMapServer extends LayerBase {
         urlCopy += 'legend?f=pjson&callback=?';
 
         $.get(urlCopy, {}, (d) => {
-            let newHtml = esriToOl.makeMapServiceLegend(d);
+            let newHtml = esriToOl.makeMapServiceLegend(d, this._showLayers);
             super.addLegendContent(newHtml);
         }, 'json');
     }

@@ -46,8 +46,9 @@ export interface iMapServiceLegend {
 /**
  * make map service legent
  * @param {object} esriResponse - layer info
+ * @param  showLayers - limited number of layers to show in map service
  * @returns {string} legend content
  */
 export declare function makeMapServiceLegend(esriResponse: {
     layers: iMapServiceLegend[];
-}): string;
+}, showLayers?: number[]): string;
