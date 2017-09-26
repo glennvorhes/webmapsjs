@@ -19,7 +19,6 @@ export interface makeMapMoveParams {
 
 
 
-
 export interface LayerBaseVectorOptions extends LayerBaseOptions{
     autoLoad?: boolean;
     style?: ol.style.Style|Array<ol.style.Style>|ol.StyleFunction;
