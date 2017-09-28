@@ -94,7 +94,7 @@ var Slider = (function (_super) {
             onChange: function (evt) {
                 _this.props.change(parseFloat(evt.target.value));
             },
-            style: { width: '100%' },
+            style: { width: '100%', padding: '4px 0' },
             max: "100",
             step: '0.1',
             value: this.props.value ? this.props.value.toString() : '0',

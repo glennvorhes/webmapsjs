@@ -304,7 +304,6 @@ export class LayerLegend {
             }
         });
 
-
         this.$divElement.find('.legend-check').change(function () {
             let lyrId = this.id.replace('-legend-layer-check', '');
             _this.layerGroup.allLayerLookup[lyrId].visible = this.checked;
