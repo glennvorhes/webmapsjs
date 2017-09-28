@@ -118,16 +118,16 @@ var Slider = (function (_super) {
         if (this.props.animate) {
             previous = <button id={this.previousUid} className="react-slider-previous" onClick={function () {
                 _this.increment(-1);
-            }}>Previous</button>;
+            }} title="Previous"/>;
             next = <button id={this.nextUid} className="react-slider-next" onClick={function () {
                 _this.increment(1);
-            }}>Next</button>;
+            }} title="Next"/>;
             start = <button id={this.startUid} className="react-slider-start" onClick={function () {
                 _this.startAnimate();
-            }}>Start</button>;
+            }} title="Start"/>;
             stop = <button id={this.stopUid} className="react-slider-stop" onClick={function () {
                 _this.stopAnimate();
-            }}>Stop</button>;
+            }} title="Stop"/>;
             intervalSelect = <span>
             <label>Interval (s)</label>
             <select defaultValue="200" id={this.intervalUid} onChange={function () {

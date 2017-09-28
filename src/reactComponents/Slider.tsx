@@ -144,19 +144,19 @@ export class Slider extends React.Component<iSlider, null> {
         if (this.props.animate) {
             previous = <button id={this.previousUid} className="react-slider-previous" onClick={() => {
                 this.increment(-1)
-            }}>Previous</button>;
+            }} title="Previous"/>;
 
             next = <button id={this.nextUid} className="react-slider-next" onClick={() => {
                 this.increment(1)
-            }}>Next</button>;
+            }} title="Next"/>;
 
             start = <button id={this.startUid} className="react-slider-start" onClick={() => {
                 this.startAnimate()
-            }}>Start</button>;
+            }} title="Start"/>;
 
             stop = <button id={this.stopUid} className="react-slider-stop" onClick={() => {
                 this.stopAnimate()
-            }}>Stop</button>;
+            }} title="Stop"/>;
 
             intervalSelect = <span>
             <label>Interval (s)</label>
