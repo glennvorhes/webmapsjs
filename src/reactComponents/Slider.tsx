@@ -159,7 +159,7 @@ export class Slider extends React.Component<iSlider, null> {
             }} title="Stop"/>;
 
             intervalSelect = <span>
-            <label>Interval (s)</label>
+            <label style={{fontWeight: 'bold'}}>Interval (s)</label>
             <select defaultValue="200" id={this.intervalUid} onChange={() => {
                 this.restartAnimate()
             }}>
