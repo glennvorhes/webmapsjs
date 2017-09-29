@@ -11,6 +11,7 @@ export interface iSlider {
     change: (d: number) => any;
     steps?: number;
     animate?: boolean;
+    defaultAnimationInterval?: number;
     value?: number;
 }
 
@@ -141,6 +142,12 @@ export class Slider extends React.Component<iSlider, null> {
         let next = null;
         let intervalSelect = null;
 
+        let interval = "200";
+
+        if (this.props.defaultAnimationInterval){
+            interval = this.props.defaultAnimationInterval.toFixed();
+        }
+
         if (this.props.animate) {
             previous = <button id={this.previousUid} className="react-slider-previous" onClick={() => {
                 this.increment(-1)
@@ -159,8 +166,9 @@ export class Slider extends React.Component<iSlider, null> {
             }} title="Stop"/>;
 
             intervalSelect = <span>
+
             <label style={{fontWeight: 'bold', marginRight: '3px'}}>Interval (s)</label>
-            <select defaultValue="200" id={this.intervalUid} onChange={() => {
+            <select defaultValue={interval} id={this.intervalUid} onChange={() => {
                 this.restartAnimate()
             }}>
                 <option value="100">0.1</option>

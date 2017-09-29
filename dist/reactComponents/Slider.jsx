@@ -115,6 +115,10 @@ var Slider = (function (_super) {
         var previous = null;
         var next = null;
         var intervalSelect = null;
+        var interval = "200";
+        if (this.props.defaultAnimationInterval) {
+            interval = this.props.defaultAnimationInterval.toFixed();
+        }
         if (this.props.animate) {
             previous = <button id={this.previousUid} className="react-slider-previous" onClick={function () {
                 _this.increment(-1);
@@ -129,8 +133,9 @@ var Slider = (function (_super) {
                 _this.stopAnimate();
             }} title="Stop"/>;
             intervalSelect = <span>
+                
             <label style={{ fontWeight: 'bold', marginRight: '3px' }}>Interval (s)</label>
-            <select defaultValue="200" id={this.intervalUid} onChange={function () {
+            <select defaultValue={interval} id={this.intervalUid} onChange={function () {
                 _this.restartAnimate();
             }}>
                 <option value="100">0.1</option>

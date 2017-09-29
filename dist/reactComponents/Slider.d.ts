@@ -7,6 +7,7 @@ export interface iSlider {
     change: (d: number) => any;
     steps?: number;
     animate?: boolean;
+    defaultAnimationInterval?: number;
     value?: number;
 }
 export declare class Slider extends React.Component<iSlider, null> {
