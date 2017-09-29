@@ -27,7 +27,7 @@ export function localCacheUrl(folder: string, service: string): string{
 
     let url = `/mapserver/${folder}/${service}`;
 
-    if (loc.indexOf('http://transportal.cee.wisc.edu') > -1){
+    if (loc.indexOf('transportal.cee.wisc.edu') > -1){
         if (loc.toLowerCase().indexOf('webmapsstage') > -1){
             url = 'https://transportal.cee.wisc.edu/gis/webmapsstage' + url;
         } else {
