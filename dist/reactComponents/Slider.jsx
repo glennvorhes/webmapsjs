@@ -133,7 +133,7 @@ var Slider = (function (_super) {
                 _this.stopAnimate();
             }} title="Stop"/>;
             intervalSelect = <span>
-                
+
             <label style={{ fontWeight: 'bold', marginRight: '3px' }}>Interval (s)</label>
             <select defaultValue={interval} id={this.intervalUid} onChange={function () {
                 _this.restartAnimate();
