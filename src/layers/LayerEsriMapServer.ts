@@ -10,6 +10,8 @@ import $ = require('jquery');
 
 const nm = provide('layers');
 
+
+
 /**
  * Helper to return the url to the service on the production server
  * @param {string} folder
@@ -19,6 +21,25 @@ const nm = provide('layers');
 export function makeServiceUrl(folder: string, service: string): string{
     return `https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/${folder}/${service}/MapServer`
 }
+
+export function localCacheUrl(folder: string, service: string): string{
+    let loc = window.location.href;
+
+    let url = `/mapserver/${folder}/${service}`;
+
+    if (loc.indexOf('http://transportal.cee.wisc.edu') > -1){
+        if (loc.toLowerCase().indexOf('webmapsstage') > -1){
+            url = 'https://transportal.cee.wisc.edu/gis/webmapsstage' + url;
+        } else {
+            url = 'https://transportal.cee.wisc.edu/gis/webmaps' + url
+        }
+    }
+
+
+    return url;
+}
+
+
 
 
 export interface LayerEsriMapServerOptions extends LayerBaseOptions {

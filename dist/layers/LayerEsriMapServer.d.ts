@@ -11,6 +11,7 @@ import ol = require('custom-ol');
  * @returns {string}
  */
 export declare function makeServiceUrl(folder: string, service: string): string;
+export declare function localCacheUrl(folder: string, service: string): string;
 export interface LayerEsriMapServerOptions extends LayerBaseOptions {
     addPopup?: boolean;
     showLayers?: Array<number>;
