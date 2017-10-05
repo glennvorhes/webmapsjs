@@ -37,7 +37,9 @@ var Slider = (function (_super) {
         this.step = parseFloat(this.el.step);
         this.startButton = document.getElementById(this.startUid);
         this.stopButton = document.getElementById(this.stopUid);
-        this.stopButton.style.display = 'none';
+        if (this.props.animate) {
+            this.stopButton.style.display = 'none';
+        }
         this.previousButton = document.getElementById(this.previousUid);
         this.nextButton = document.getElementById(this.nextUid);
         this.intervalSelect = document.getElementById(this.intervalUid);
