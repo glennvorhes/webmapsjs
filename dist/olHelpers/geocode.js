@@ -64,6 +64,7 @@ var Geocode = (function () {
             _this.theInput.title = '';
             _this.theButton.title = '';
             if (!_this.theButton.disabled && evt.keyCode == 13) {
+                evt.preventDefault();
                 $theButton.click();
             }
         });

@@ -88,6 +88,7 @@ export class Geocode {
             this.theButton.title = '';
 
             if (!this.theButton.disabled && evt.keyCode == 13) {
+                evt.preventDefault();
                 $theButton.click();
             }
         })
