@@ -33,7 +33,8 @@ var Geocode = (function () {
         this.reset();
         var $theButton = $(this.theButton);
         var $theInput = $(this.theInput);
-        $theButton.click(function () {
+        $theButton.click(function (evt) {
+            evt.preventDefault();
             $theButton.addClass(geocoderLoadingClass);
             _this.theButton.disabled = true;
             _this.indicationLayer.getSource().clear();

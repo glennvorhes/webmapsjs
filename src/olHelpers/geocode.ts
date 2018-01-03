@@ -46,7 +46,9 @@ export class Geocode {
         let $theButton = $(this.theButton);
         let $theInput = $(this.theInput);
 
-        $theButton.click(() => {
+        $theButton.click((evt) => {
+
+            evt.preventDefault();
 
             $theButton.addClass(geocoderLoadingClass);
             this.theButton.disabled = true;
