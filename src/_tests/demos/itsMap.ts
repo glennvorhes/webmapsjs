@@ -9,6 +9,7 @@ import quickMap from '../../olHelpers/quickMap';
 
 let map = quickMap({addGeocode: true});
 
+
 window['map'] = map;
 
 let itsLayerCollection = new ItsLayerCollection(map);
