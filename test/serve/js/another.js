@@ -63,16 +63,22 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 34);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */,
-/* 1 */
+/******/ ({
+
+/***/ 34:
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed: Error: Typescript emitted no output for C:\\Users\\glenn\\PycharmProjects\\webmapsjs\\test\\demo\\another.ts.\n    at Object.loader (C:\\Users\\glenn\\PycharmProjects\\webmapsjs\\node_modules\\ts-loader\\dist\\index.js:32:15)");
+/**
+ * Created by gavorhes on 9/22/2016.
+ */
+console.log('here is another');
+console.log('here is another');
+
 
 /***/ })
-/******/ ]);
+
+/******/ });
 //# sourceMappingURL=another.js.map

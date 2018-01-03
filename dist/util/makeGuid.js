@@ -16,6 +16,7 @@ function makeGuid() {
         return v.toString(16);
     });
 }
+exports.makeGuid = makeGuid;
 nm.makeGuid = makeGuid;
 exports.default = makeGuid;
 //# sourceMappingURL=makeGuid.js.map

@@ -5,6 +5,7 @@
 import provide from '../util/provide';
 import ol = require('custom-ol');
 import $ = require('jquery');
+import {Geocode} from './geocode';
 const nm = provide('olHelpers');
 
 export interface quickMapOptions {
@@ -15,6 +16,7 @@ export interface quickMapOptions {
     maxZoom?: number;
     baseSwitcher?: boolean;
     fullScreen?: boolean;
+    addGeocode?: boolean;
 }
 
 /**
@@ -39,6 +41,7 @@ export function quickMapBase(options: quickMapOptions = {}): ol.Map {
     options.zoom = typeof options.zoom == 'number' ? options.zoom : 7;
     options.baseSwitcher = typeof options.baseSwitcher == 'boolean' ? options.baseSwitcher : true;
     options.fullScreen = typeof options.fullScreen == 'boolean' ? options.fullScreen : false;
+    options.addGeocode = options.addGeocode || false;
 
 
     let $mapDiv = $('#' + options.divId);
@@ -105,6 +108,10 @@ export function quickMapBase(options: quickMapOptions = {}): ol.Map {
 
     if (options.fullScreen) {
         map.addControl(new ol.control.FullScreen({}));
+    }
+
+    if (options.addGeocode){
+        new Geocode(document.getElementById(options.divId) as HTMLDivElement, map);
     }
 
     return map;

@@ -179,3 +179,88 @@
   background-size: 48px 13px;
   color: rgba(1, 1, 1, 0);
 }
+body,
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+#header {
+  height: 80px;
+  background-color: #808080;
+}
+#header span {
+  display: inline-block;
+  margin: 9px;
+  font-size: 28px;
+  line-height: 30px;
+}
+#header a {
+  float: right;
+}
+#header img {
+  margin: 3px 10px;
+  max-height: 70px;
+  width: auto;
+}
+#container {
+  display: flex;
+  height: calc(100% -  80px );
+  width: 100%;
+}
+#left {
+  height: 100%;
+  width: 320px;
+  overflow-y: auto;
+}
+#map {
+  flex: 1;
+}
+.legend-container {
+  border: none;
+}
+@media screen and (max-height: 640px), (max-width: 650px) {
+  #header a {
+    display: none;
+  }
+  #header {
+    display: none;
+  }
+  #container {
+    height: 100%;
+  }
+  #left {
+    width: 246px;
+    height: auto;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 10;
+    background-color: white;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    max-height: 250px;
+    overflow-y: scroll;
+  }
+  #map {
+    height: 100%;
+  }
+  .legend-container ul {
+    padding-left: 5px;
+  }
+}
+@media screen and (max-height: 500px), (max-width: 346px) {
+  #left {
+    width: 204px;
+    max-height: 204px;
+  }
+  .ol-popup {
+    width: 240px;
+    min-width: 240px;
+  }
+  .ol-popup iframe {
+    width: 240px;
+  }
+}

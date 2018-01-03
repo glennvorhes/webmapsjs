@@ -10,6 +10,7 @@ export interface quickMapOptions {
     maxZoom?: number;
     baseSwitcher?: boolean;
     fullScreen?: boolean;
+    addGeocode?: boolean;
 }
 /**
  * Sets up a map with some default parameters and initializes

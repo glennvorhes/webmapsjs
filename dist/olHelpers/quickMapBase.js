@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = require("../util/provide");
 var ol = require("custom-ol");
 var $ = require("jquery");
+var geocode_1 = require("./geocode");
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -30,6 +31,7 @@ function quickMapBase(options) {
     options.zoom = typeof options.zoom == 'number' ? options.zoom : 7;
     options.baseSwitcher = typeof options.baseSwitcher == 'boolean' ? options.baseSwitcher : true;
     options.fullScreen = typeof options.fullScreen == 'boolean' ? options.fullScreen : false;
+    options.addGeocode = options.addGeocode || false;
     var $mapDiv = $('#' + options.divId);
     $mapDiv.css('position', 'relative');
     var osmLayer = new ol.layer.Tile({ source: new ol.source.OSM() });
@@ -83,6 +85,9 @@ function quickMapBase(options) {
     });
     if (options.fullScreen) {
         map.addControl(new ol.control.FullScreen({}));
+    }
+    if (options.addGeocode) {
+        new geocode_1.Geocode(document.getElementById(options.divId), map);
     }
     return map;
 }
