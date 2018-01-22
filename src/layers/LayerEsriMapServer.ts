@@ -45,6 +45,7 @@ export function localCacheUrl(folder: string, service: string): string{
 export interface LayerEsriMapServerOptions extends LayerBaseOptions {
     addPopup?: boolean;
     showLayers?: Array<number>;
+    getLegend?: boolean;
 }
 
 /**
@@ -95,6 +96,7 @@ export class LayerEsriMapServer extends LayerBase {
             maxResolution: this._maxResolution
         });
 
+
         this._olLayer.setZIndex(this._zIndex);
 
         options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
@@ -102,7 +104,11 @@ export class LayerEsriMapServer extends LayerBase {
         this._esriFormat = new ol.format.EsriJSON();
         this._popupRequest = null;
 
-        this.addLegendContent();
+        options.getLegend = typeof options.getLegend === 'boolean' ? options.getLegend : true;
+
+        if (options.getLegend){
+            this.addLegendContent();
+        }
 
         if (options.addPopup) {
             mapPopup.addMapServicePopup(this);

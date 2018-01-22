@@ -14,21 +14,44 @@
 
 </head>
 <body>
+<!--<ul class="project-list ">-->
+    <!--<li>-->
+        <!--<a data-siteid="143" href="/veronard/">-->
+            <!--<i class="fa fa-caret-right" style="color: #f8983a"></i>-->
+            <!--Verona Road (US 18/151) Project</a></li>-->
+    <!--<li><a data-siteid="145" href="/i-39-90/"><i class="fa fa-caret-right" style="color: #f8983a"></i>I-39/90 Expansion-->
+        <!--Project</a></li>-->
+    <!--<li><a data-siteid="271" href="/beltlinebridges/"><i class="fa fa-caret-right" style="color: #f8983a"></i>Madison-->
+        <!--Beltline (US 12/18) bridges over Yahara River</a></li>-->
+    <!--<li><a data-siteid="294" href="/i39wis19/"><i class="fa fa-caret-right" style="color: #f8983a"></i>I-39/90/94 - WIS-->
+        <!--19 and CPR Overpass</a></li>-->
+    <!--<li><a data-siteid="357" href="/exit3/"><i class="fa fa-caret-right" style="color: #f8983a"></i>Exit 3 (I-90/US-->
+        <!--53/WIS 35) Interchange Reconstruction</a></li>-->
+    <!--<li><a data-siteid="393" href="/us18151countyid/"><i class="fa fa-caret-right" style="color: #f8983a"></i>US 18/151-->
+        <!--and County ID Interchange</a></li>-->
+    <!--<li><a data-siteid="398" href="/i39wis33us51/"><i class="fa fa-caret-right" style="color: #f8983a"></i>I-39 (WIS 33-->
+        <!--to US 51)</a></li>-->
+    <!--<li><a data-siteid="402" href="/wis13-wisconsindells/"><i class="fa fa-caret-right" style="color: #f8983a"></i>WIS-->
+        <!--13 (Broadway Street)</a></li>-->
+
+
+<!--</ul>-->
 <div id="header">
-    <span>WisDOT ITS Inventory </span>
-    <a title="Traffic Operations and Safety Lab" href="http://www.topslab.wisc.edu/">
-        <img src="http://transportal.cee.wisc.edu/gis/webmapsstatic/img/tops-logo.png">
-    </a>
-    <a title="WisDOT" href="http://wisconsindot.gov/Pages/home.aspx">
-        <img src="http://transportal.cee.wisc.edu/gis/webmapsstatic/img/wisdot.png">
-    </a>
+<span>WisDOT ITS Inventory </span>
+<a title="Traffic Operations and Safety Lab" href="http://www.topslab.wisc.edu/">
+<img src="http://transportal.cee.wisc.edu/gis/webmapsstatic/img/tops-logo.png">
+</a>
+<a title="WisDOT" href="http://wisconsindot.gov/Pages/home.aspx">
+<img src="http://transportal.cee.wisc.edu/gis/webmapsstatic/img/wisdot.png">
+</a>
 </div>
 <div id="container">
-    <div id="left">
-        <div id="legend-container"></div>
-    </div>
-    <div id="map"></div>
+<div id="left">
+<div id="legend-container"></div>
 </div>
+<div id="map"></div>
+</div>
+
 
 <script>
     var glob = {};
@@ -37,6 +60,105 @@
 <script src="../lib/jquery.min.js"></script>
 <script src="../lib/ol.js"></script>
 <script src="../js/itsMap.js"></script>
+
+<!--<script>-->
+    <!--/**-->
+     <!--* Priority order, list project names to appear at top in array-->
+     <!--* Others ordered alphabetically-->
+     <!--* Example: var order = ['First site', 'Second Site'];-->
+     <!--* Be sure to include brackets and matching single or double quotes-->
+     <!--*/-->
+    <!--var order = ['I-39/90 Expansion Project', 'Verona Road (US 18/151) Project'];-->
+
+    <!--function shortName(n) {-->
+        <!--return n.replace(/<.*>/, '').replace(/(\s|\n|\t)/g, '').toLowerCase()-->
+    <!--}-->
+
+    <!--function projectSort() {-->
+
+        <!--var ul = jQuery('.project-list');-->
+        <!--var lis = ul.find('li');-->
+
+        <!--var checkOrder = [];-->
+        <!--var sites = [];-->
+        <!--var non_priorities = [];-->
+        <!--var $refLi;-->
+
+        <!--for (var i = 0; i < order.length; i++) {-->
+            <!--checkOrder.push(shortName(order[i]));-->
+        <!--}-->
+
+        <!--for (i = 0; i < lis.length; i++) {-->
+            <!--var $li = jQuery(lis[i]);-->
+
+            <!--if (i === 0) {-->
+                <!--$refLi = $li;-->
+            <!--}-->
+
+            <!--var name = shortName(lis[i].getElementsByTagName('a')[0].innerHTML);-->
+            <!--var cont = false;-->
+
+            <!--for (let j = 0; j < checkOrder.length; j++) {-->
+                <!--if (name === checkOrder[j]) {-->
+                    <!--sites.push({name: name, el: $li});-->
+                    <!--cont = true;-->
+                    <!--break;-->
+                <!--}-->
+            <!--}-->
+
+            <!--if (cont) {-->
+                <!--continue;-->
+            <!--}-->
+
+            <!--non_priorities.push({name: name, el: $li})-->
+        <!--}-->
+
+        <!--sites.sort(function (a, b) {-->
+            <!--let indexA = checkOrder.indexOf(a['name']);-->
+            <!--let indexB = checkOrder.indexOf(b['name']);-->
+
+            <!--if (indexA === indexB) {-->
+                <!--return 0;-->
+            <!--} else {-->
+                <!--return indexA < indexB ? -1 : 1;-->
+            <!--}-->
+        <!--});-->
+
+        <!--non_priorities.sort(function (a, b) {-->
+            <!--let nameA = a['name'];-->
+            <!--let nameB = b['name'];-->
+
+            <!--if (nameA === nameB) {-->
+                <!--return 0;-->
+            <!--} else {-->
+                <!--return nameA < nameB ? -1 : 1;-->
+            <!--}-->
+        <!--});-->
+
+        <!--sites.push.apply(sites, non_priorities);-->
+
+
+        <!--if (sites.length > 0) {-->
+            <!--if ($refLi !== sites[0]['el']) {-->
+                <!--$refLi.before(sites[0]['el']);-->
+                <!--$refLi = sites[0]['el'];-->
+            <!--}-->
+
+            <!--if (sites.length > 1){-->
+                <!--for (i = 1; i < sites.length; i++){-->
+                    <!--sites[i]['el'].insertAfter($refLi);-->
+                    <!--$refLi = sites[i]['el'];-->
+                <!--}-->
+            <!--}-->
+        <!--}-->
+    <!--}-->
+
+    <!--jQuery(function () {-->
+        <!--projectSort();-->
+    <!--});-->
+
+
+<!--</script>-->
 
 </body>
 </html>

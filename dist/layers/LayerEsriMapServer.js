@@ -88,7 +88,10 @@ var LayerEsriMapServer = (function (_super) {
         options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
         _this._esriFormat = new ol.format.EsriJSON();
         _this._popupRequest = null;
-        _this.addLegendContent();
+        options.getLegend = typeof options.getLegend === 'boolean' ? options.getLegend : true;
+        if (options.getLegend) {
+            _this.addLegendContent();
+        }
         if (options.addPopup) {
             mapPopup_1.default.addMapServicePopup(_this);
         }

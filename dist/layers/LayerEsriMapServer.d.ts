@@ -15,6 +15,7 @@ export declare function localCacheUrl(folder: string, service: string): string;
 export interface LayerEsriMapServerOptions extends LayerBaseOptions {
     addPopup?: boolean;
     showLayers?: Array<number>;
+    getLegend?: boolean;
 }
 /**
  * esri mapserver layer
