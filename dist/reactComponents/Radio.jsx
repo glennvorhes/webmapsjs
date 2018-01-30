@@ -67,13 +67,6 @@ var RadioBase = (function (_super) {
     }
     RadioBase.prototype.render = function () {
         var _this = this;
-        var style = {};
-        if (this.inline) {
-            style = {
-                display: 'inline-block',
-                padding: '0 5px'
-            };
-        }
         var arr = [];
         for (var i = 0; i < this.props.items.length; i++) {
             var itemProps = {
@@ -95,7 +88,11 @@ var RadioBase = (function (_super) {
             }
             arr.push(<RadioItem {...itemProps}/>);
         }
-        return <div className="radio-list">
+        var classes = ['radio-list'];
+        if (this.props.classes) {
+            classes = classes.concat(this.props.classes);
+        }
+        return <div className={classes.join(' ')}>
             <h4>{this.props.title}</h4>
             <ul style={{ listStyle: 'none' }}>
                 {arr}
@@ -110,7 +107,7 @@ var Radio = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Radio.prototype.render = function () {
-        return <RadioBase title={this.props.title} items={this.props.items} callback={this.props.callback} inline={this.props.inline} selectedValueOrIndex={this.props.defaultValue} connected={false}/>;
+        return <RadioBase title={this.props.title} items={this.props.items} callback={this.props.callback} inline={this.props.inline} selectedValueOrIndex={this.props.defaultValue} connected={false} classes={this.props.classes}/>;
     };
     return Radio;
 }(reactAndRedux_1.React.Component));
@@ -121,7 +118,7 @@ var RadioConnected = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     RadioConnected.prototype.render = function () {
-        return <RadioBase title={this.props.title} items={this.props.items} callback={this.props.callback} inline={this.props.inline} selectedValueOrIndex={this.props.selectedIndex} connected={true}/>;
+        return <RadioBase title={this.props.title} items={this.props.items} callback={this.props.callback} inline={this.props.inline} selectedValueOrIndex={this.props.selectedIndex} connected={true} classes={this.props.classes}/>;
     };
     return RadioConnected;
 }(reactAndRedux_1.React.Component));

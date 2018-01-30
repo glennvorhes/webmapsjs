@@ -19,6 +19,7 @@ export declare class Radio extends React.Component<{
     callback: (val: string) => any;
     inline?: boolean;
     defaultValue: string;
+    classes?: string[];
 }, null> {
     render(): JSX.Element;
 }
@@ -28,6 +29,7 @@ export declare class RadioConnected extends React.Component<{
     callback: (val: string) => any;
     inline?: boolean;
     selectedIndex: number;
+    classes?: string[];
 }, null> {
     render(): JSX.Element;
 }

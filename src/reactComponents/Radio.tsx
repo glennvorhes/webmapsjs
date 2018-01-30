@@ -70,6 +70,7 @@ interface iRadioBase {
     inline?: boolean;
     selectedValueOrIndex: string|number;
     connected: boolean;
+    classes?: string[]
 }
 
 class RadioBase extends React.Component<iRadioBase, null> {
@@ -83,13 +84,6 @@ class RadioBase extends React.Component<iRadioBase, null> {
     }
 
     render() {
-        let style = {};
-        if (this.inline) {
-            style = {
-                display: 'inline-block',
-                padding: '0 5px'
-            }
-        }
 
         let arr = [];
 
@@ -116,7 +110,13 @@ class RadioBase extends React.Component<iRadioBase, null> {
             arr.push(<RadioItem {...itemProps}/>)
         }
 
-        return <div className="radio-list">
+        let classes = ['radio-list'];
+
+        if (this.props.classes){
+            classes = classes.concat(this.props.classes);
+        }
+
+        return <div className={classes.join(' ')}>
             <h4>{this.props.title}</h4>
             <ul style={{listStyle: 'none'}}>
                 {arr}
@@ -126,9 +126,12 @@ class RadioBase extends React.Component<iRadioBase, null> {
 }
 
 
-export class Radio extends React.Component<{ title: string, items: string[], callback: (val: string) => any, inline?: boolean, defaultValue: string }, null> {
+export class Radio extends React.Component<{
+    title: string, items: string[], callback: (val: string) => any, inline?: boolean,
+    defaultValue: string, classes?: string[] }, null> {
 
     render() {
+
         return <RadioBase
             title={this.props.title}
             items={this.props.items}
@@ -136,11 +139,14 @@ export class Radio extends React.Component<{ title: string, items: string[], cal
             inline={this.props.inline}
             selectedValueOrIndex={this.props.defaultValue}
             connected={false}
+            classes={this.props.classes}
         />
     }
 }
 
-export class RadioConnected extends React.Component<{ title: string, items: string[], callback: (val: string) => any, inline?: boolean, selectedIndex: number }, null> {
+export class RadioConnected extends React.Component<{
+    title: string, items: string[], callback: (val: string) => any, inline?: boolean,
+    selectedIndex: number, classes?: string[] }, null> {
 
     render() {
         return <RadioBase
@@ -150,6 +156,7 @@ export class RadioConnected extends React.Component<{ title: string, items: stri
             inline={this.props.inline}
             selectedValueOrIndex={this.props.selectedIndex}
             connected={true}
+            classes={this.props.classes}
         />
     }
 }
