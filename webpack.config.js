@@ -29,6 +29,7 @@ module.exports = {
         "custom-ol": "ol",
         "react": "React",
         "react-dom": "ReactDOM",
+        'react-redux': 'ReactRedux',
         "jquery-ui": "$"
     },
     output: {

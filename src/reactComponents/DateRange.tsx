@@ -19,11 +19,13 @@ function stringToDate(dte: string|Date){
 
 export interface iDateRange{
     maxRange: number;
-    callback: (start: string|Date, end: string|Date) => any;
+    callback: (start: Date, end: Date) => any;
     minRange?: number;
-    maxDate?: string|Date;
-    minDate?: string|Date;
-    initialEnd?: string|Date;
+    maxDate?: Date;
+    minDate?: Date;
+    initialEnd?: Date;
+    start?: Date;
+    end?: Date;
 }
 
 
@@ -37,6 +39,7 @@ export class DateRange extends React.Component<iDateRange, null> {
     maxRange: number;
     minRange: number;
     numDays: number;
+
 
     constructor(props: iDateRange, context: Object) {
         super(props, context);
@@ -71,12 +74,12 @@ export class DateRange extends React.Component<iDateRange, null> {
         this.props.callback(this.start, this.end);
     }
 
-    get needReset(): boolean {
+    private get needReset(): boolean {
         return this.numDays > this.maxRange || this.numDays < this.minRange;
     }
 
-    setStart(s: string) {
-        this.start = fixDate.stringToDate(s);
+    private setStart(s: Date) {
+        this.start = s;
         this.setNumDays();
 
         if (this.needReset) {
@@ -94,8 +97,8 @@ export class DateRange extends React.Component<iDateRange, null> {
         this.props.callback(this.start, this.end);
     }
 
-    setEnd(s: string) {
-        this.end = fixDate.stringToDate(s);
+    private setEnd(s: Date) {
+        this.end = s;
         this.setNumDays();
 
         if (this.needReset) {

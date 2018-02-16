@@ -8,46 +8,62 @@ import $ = require('jquery');
 import 'jquery-ui';
 import makeGuid from '../util/makeGuid';
 
-import {dateToString} from './helpers/dateFormat';
+import {dateToString, stringToDate} from './helpers/dateFormat';
 
 export interface iDatePick{
     label: string;
     id?: string;
     initialDate?: Date;
-    change: (val: string) => any
+    change: (val: Date) => any;
+    val?: Date
 }
 
 /**
  * params label, id, initialDate, change callback with value as string
  */
 export class DatePick extends React.Component<iDatePick, null> {
-    defaultId: string;
+    private elId: string;
 
     constructor(props: iDatePick, context: Object){
         super(props, context);
-        this.defaultId = makeGuid();
+        this.elId = this.props.id || makeGuid();
     }
 
     componentDidMount() {
-        let $el = $('#' + (this.props.id || this.defaultId));
+        let $el = $('#' + this.elId);
 
         $el.datepicker(
             {
                 onSelect: () => {
-                    this.props.change($el.val());
+                    this.props.change(stringToDate($el.val()));
                 }
             }
         );
     }
 
     render() {
+        let params = {
+            id: this.elId,
+            type: 'text',
+            style: {margin: "0 10px 0 5px", width: '73px', textAlign: 'center'},
+            readOnly: true
+        };
+
+        if (this.props.val){
+            params['value'] = dateToString(this.props.val);
+        } else {
+            params['defaultValue'] = dateToString(this.props.initialDate || new Date());
+        }
+
+
         return <span className="date-pick">
-            <label>{this.props.label}</label>
-            <input id={this.props.id || this.defaultId} type="text"
-                   style={{margin: "0 10px 0 5px", width: '73px', textAlign: 'center'}}
-                   defaultValue={dateToString(this.props.initialDate || new Date())}
-                   readOnly={true}
-            />
+            <label htmlFor={this.elId}>{this.props.label}</label>
+            {/*<input id={this.elId} type="text"*/}
+                   {/*style={{margin: "0 10px 0 5px", width: '73px', textAlign: 'center'}}*/}
+                   {/*defaultValue={dateToString(this.props.initialDate || new Date())}*/}
+                   {/*readOnly={true}*/}
+            {/*/>*/}
+            <input {...params}/>
         </span>
     }
 }

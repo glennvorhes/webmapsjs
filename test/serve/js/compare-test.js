@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 35);
+/******/ 	return __webpack_require__(__webpack_require__.s = 63);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -147,44 +147,6 @@ exports.default = makeGuid;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/**
- * Created by gavorhes on 11/3/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var mapMoveCls_1 = __webpack_require__(10);
-/**
- * The single map move object catch is that it is common to multimap pages
- * @type {MapMoveCls}
- */
-exports.mapMove = new mapMoveCls_1.default();
-exports.default = exports.mapMove;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 11/3/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var mapPopupCls_1 = __webpack_require__(11);
-/**
- * The single popup object catch is that it is common to multimap pages
- * @type {MapPopupCls}
- */
-exports.mapPopup = new mapPopupCls_1.default();
-exports.default = exports.mapPopup;
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
@@ -264,7 +226,26 @@ exports.default = MapInteractionBase;
 
 
 /***/ }),
-/* 7 */
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var mapPopupCls_1 = __webpack_require__(13);
+/**
+ * The single popup object catch is that it is common to multimap pages
+ * @type {MapPopupCls}
+ */
+exports.mapPopup = new mapPopupCls_1.default();
+exports.default = exports.mapPopup;
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -273,9 +254,9 @@ exports.default = MapInteractionBase;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickMapBase_1 = __webpack_require__(12);
+var quickMapBase_1 = __webpack_require__(14);
 var provide_1 = __webpack_require__(0);
-var mapMove_1 = __webpack_require__(4);
+var mapMove_1 = __webpack_require__(7);
 var mapPopup_1 = __webpack_require__(5);
 var nm = provide_1.default('olHelpers');
 /**
@@ -307,13 +288,81 @@ exports.default = quickMap;
 
 
 /***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var mapMoveCls_1 = __webpack_require__(12);
+/**
+ * The single map move object catch is that it is common to multimap pages
+ * @type {MapMoveCls}
+ */
+exports.mapMove = new mapMoveCls_1.default();
+exports.default = exports.mapMove;
+
+
+/***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var zoomResolutionConvert = __webpack_require__(13);
+/**
+ * Created by gavorhes on 10/3/2016.
+ */
+var ol = __webpack_require__(2);
+exports.proj4326 = new ol.proj.Projection({ code: 'EPSG:4326' });
+exports.proj3857 = new ol.proj.Projection({ code: 'EPSG:3857' });
+exports.proj3070 = new ol.proj.Projection({ code: 'EPSG:3070' });
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('util.checkDefined');
+/**
+ * check if the input is undefined or null
+ * @param input - input pointer
+ * @returns true undefined or null
+ */
+function undefinedOrNull(input) {
+    "use strict";
+    return (typeof input === 'undefined' || input === null);
+}
+exports.undefinedOrNull = undefinedOrNull;
+nm.undefinedOrNull = undefinedOrNull;
+/**
+ * check if the input is defined and not null
+ * @param input - input pointer
+ * @returns true defined and not null
+ */
+function definedAndNotNull(input) {
+    "use strict";
+    return !(undefinedOrNull(input));
+}
+exports.definedAndNotNull = definedAndNotNull;
+nm.definedAndNotNull = definedAndNotNull;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var zoomResolutionConvert = __webpack_require__(16);
 var provide_1 = __webpack_require__(0);
 var makeGuid_1 = __webpack_require__(3);
 var $ = __webpack_require__(1);
@@ -716,40 +765,93 @@ exports.default = LayerBase;
 
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('util.checkDefined');
-/**
- * check if the input is undefined or null
- * @param input - input pointer
- * @returns true undefined or null
- */
-function undefinedOrNull(input) {
-    "use strict";
-    return (typeof input === 'undefined' || input === null);
-}
-exports.undefinedOrNull = undefinedOrNull;
-nm.undefinedOrNull = undefinedOrNull;
-/**
- * check if the input is defined and not null
- * @param input - input pointer
- * @returns true defined and not null
- */
-function definedAndNotNull(input) {
-    "use strict";
-    return !(undefinedOrNull(input));
-}
-exports.definedAndNotNull = definedAndNotNull;
-nm.definedAndNotNull = definedAndNotNull;
+var $ = __webpack_require__(1);
+var makeGuid_1 = __webpack_require__(3);
+var ol = __webpack_require__(2);
+var projections_1 = __webpack_require__(8);
+var invalidClass = 'geocoder-invalid';
+var geocoderLoadingClass = 'geocoder-loading';
+// let testAddress = '65 7th Street, Prairie du Sac, WI';
+var Geocode = (function () {
+    function Geocode(mapDiv, map) {
+        var _this = this;
+        var inputGuid = makeGuid_1.makeGuid();
+        var buttonGuid = makeGuid_1.makeGuid();
+        this.map = map;
+        this.indicationLayer = new ol.layer.Vector({
+            source: new ol.source.Vector(),
+            style: new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: 12,
+                    fill: new ol.style.Fill({ color: 'rgba(255,0,0,0.5)' }),
+                    stroke: new ol.style.Stroke({ color: 'red', width: 1 })
+                })
+            })
+        });
+        this.map.addLayer(this.indicationLayer);
+        $(mapDiv).append('<div class="geocoder-el">' +
+            ("<input type=\"text\" id=\"" + inputGuid + "\">") +
+            ("<button id=\"" + buttonGuid + "\">Search</button>") +
+            '</div>');
+        this.theButton = document.getElementById(buttonGuid);
+        this.theInput = document.getElementById(inputGuid);
+        this.reset();
+        var $theButton = $(this.theButton);
+        var $theInput = $(this.theInput);
+        $theButton.click(function (evt) {
+            evt.preventDefault();
+            $theButton.addClass(geocoderLoadingClass);
+            _this.theButton.disabled = true;
+            _this.indicationLayer.getSource().clear();
+            $.get("https://geocode.xyz/" + _this.theInput.value + "?geoit=json", {}, function (d) {
+                var lat = parseFloat(d['latt']);
+                var lon = parseFloat(d['longt']);
+                if ((lat == 0 && lon == 0) || d['error']) {
+                    $theInput.addClass(invalidClass);
+                    _this.theInput.title = 'Specified Location Invalid';
+                    _this.theButton.title = 'Specified Location Invalid';
+                }
+                else {
+                    var v = _this.map.getView();
+                    var p = new ol.geom.Point([lon, lat]);
+                    var feat = new ol.Feature(p);
+                    _this.indicationLayer.getSource().addFeature(feat);
+                    p.transform(projections_1.proj4326, projections_1.proj3857);
+                    v.setCenter(p.getCoordinates());
+                    v.setZoom(13);
+                }
+                $theButton.removeClass(geocoderLoadingClass);
+                _this.theButton.disabled = false;
+            }, 'json');
+        });
+        $(this.theInput).keyup(function (evt) {
+            _this.theButton.disabled = _this.theInput.value.length == 0;
+            $theInput.removeClass(invalidClass);
+            _this.theInput.title = '';
+            _this.theButton.title = '';
+            if (!_this.theButton.disabled && evt.keyCode == 13) {
+                evt.preventDefault();
+                $theButton.click();
+            }
+        });
+    }
+    Geocode.prototype.reset = function () {
+        this.theButton.disabled = true;
+        this.theInput.value = '';
+    };
+    return Geocode;
+}());
+exports.Geocode = Geocode;
 
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -765,7 +867,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapInteractionBase_1 = __webpack_require__(6);
+var mapInteractionBase_1 = __webpack_require__(4);
 var checkDefined = __webpack_require__(9);
 var provide_1 = __webpack_require__(0);
 var makeGuid_1 = __webpack_require__(3);
@@ -994,7 +1096,7 @@ exports.default = MapMoveCls;
 
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1013,7 +1115,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapInteractionBase_1 = __webpack_require__(6);
+var mapInteractionBase_1 = __webpack_require__(4);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
@@ -1429,7 +1531,7 @@ exports.default = MapPopupCls;
 
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1441,7 +1543,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
-var geocode_1 = __webpack_require__(43);
+var geocode_1 = __webpack_require__(11);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -1532,89 +1634,6 @@ exports.default = quickMapBase;
 
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 12/14/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('olHelpers.zoomResolutionConvert');
-var _zoomResLookup = [
-    156543.03392804097,
-    78271.51696402048,
-    39135.75848201024,
-    19567.87924100512,
-    9783.93962050256,
-    4891.96981025128,
-    2445.98490512564,
-    1222.99245256282,
-    611.49622628141,
-    305.748113140705,
-    152.8740565703525,
-    76.43702828517625,
-    38.21851414258813,
-    19.109257071294063,
-    9.554628535647032,
-    4.777314267823516,
-    2.388657133911758,
-    1.194328566955879,
-    0.5971642834779395,
-    0.29858214173896974,
-    0.14929107086948487,
-    0.07464553543474244,
-    0.03732276771737122,
-    0.01866138385868561,
-    0.009330691929342804,
-    0.004665345964671402,
-    0.002332672982335701,
-    0.0011663364911678506,
-    0.0005831682455839253 //28
-];
-/**
- * Get the resolution given the zoom level
- * @param {number} zoomLevel - the zoom level
- * @returns {number|*} the map resolution
- */
-function zoomToResolution(zoomLevel) {
-    "use strict";
-    if (typeof zoomLevel == 'number') {
-        if (zoomLevel % 1 === 0 && zoomLevel >= 0 && zoomLevel <= 28) {
-            return _zoomResLookup[zoomLevel];
-        }
-        else {
-            console.log("invalid zoom level provided: " + zoomLevel);
-            return undefined;
-        }
-    }
-    else {
-        return undefined;
-    }
-}
-exports.zoomToResolution = zoomToResolution;
-nm.zoomToResolution = zoomToResolution;
-/**
- * Get resolution from the zoom level
- * @param {number} resolution - the resolution
- * @returns {number|*} the zoom level
- */
-function resolutionToZoom(resolution) {
-    for (var i = 0; i < _zoomResLookup.length; i++) {
-        if (resolution >= _zoomResLookup[i]) {
-            return i;
-        }
-    }
-    return 0;
-}
-exports.resolutionToZoom = resolutionToZoom;
-nm.resolutionToZoom = resolutionToZoom;
-
-
-/***/ }),
-/* 14 */,
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1634,7 +1653,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by gavorhes on 12/7/2015.
  */
-var LayerBase_1 = __webpack_require__(8);
+var LayerBase_1 = __webpack_require__(10);
 var esriToOl = __webpack_require__(17);
 var mapPopup_1 = __webpack_require__(5);
 var provide_1 = __webpack_require__(0);
@@ -1709,7 +1728,10 @@ var LayerEsriMapServer = (function (_super) {
         options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
         _this._esriFormat = new ol.format.EsriJSON();
         _this._popupRequest = null;
-        _this.addLegendContent();
+        options.getLegend = typeof options.getLegend === 'boolean' ? options.getLegend : true;
+        if (options.getLegend) {
+            _this.addLegendContent();
+        }
         if (options.addPopup) {
             mapPopup_1.default.addMapServicePopup(_this);
         }
@@ -1803,15 +1825,81 @@ exports.default = LayerEsriMapServer;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/**
+ * Created by gavorhes on 12/14/2015.
+ */
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('olHelpers.zoomResolutionConvert');
+var _zoomResLookup = [
+    156543.03392804097,
+    78271.51696402048,
+    39135.75848201024,
+    19567.87924100512,
+    9783.93962050256,
+    4891.96981025128,
+    2445.98490512564,
+    1222.99245256282,
+    611.49622628141,
+    305.748113140705,
+    152.8740565703525,
+    76.43702828517625,
+    38.21851414258813,
+    19.109257071294063,
+    9.554628535647032,
+    4.777314267823516,
+    2.388657133911758,
+    1.194328566955879,
+    0.5971642834779395,
+    0.29858214173896974,
+    0.14929107086948487,
+    0.07464553543474244,
+    0.03732276771737122,
+    0.01866138385868561,
+    0.009330691929342804,
+    0.004665345964671402,
+    0.002332672982335701,
+    0.0011663364911678506,
+    0.0005831682455839253 //28
+];
 /**
- * Created by gavorhes on 10/3/2016.
+ * Get the resolution given the zoom level
+ * @param {number} zoomLevel - the zoom level
+ * @returns {number|*} the map resolution
  */
-var ol = __webpack_require__(2);
-exports.proj4326 = new ol.proj.Projection({ code: 'EPSG:4326' });
-exports.proj3857 = new ol.proj.Projection({ code: 'EPSG:3857' });
-exports.proj3070 = new ol.proj.Projection({ code: 'EPSG:3070' });
+function zoomToResolution(zoomLevel) {
+    "use strict";
+    if (typeof zoomLevel == 'number') {
+        if (zoomLevel % 1 === 0 && zoomLevel >= 0 && zoomLevel <= 28) {
+            return _zoomResLookup[zoomLevel];
+        }
+        else {
+            console.log("invalid zoom level provided: " + zoomLevel);
+            return undefined;
+        }
+    }
+    else {
+        return undefined;
+    }
+}
+exports.zoomToResolution = zoomToResolution;
+nm.zoomToResolution = zoomToResolution;
+/**
+ * Get resolution from the zoom level
+ * @param {number} resolution - the resolution
+ * @returns {number|*} the zoom level
+ */
+function resolutionToZoom(resolution) {
+    for (var i = 0; i < _zoomResLookup.length; i++) {
+        if (resolution >= _zoomResLookup[i]) {
+            return i;
+        }
+    }
+    return 0;
+}
+exports.resolutionToZoom = resolutionToZoom;
+nm.resolutionToZoom = resolutionToZoom;
 
 
 /***/ }),
@@ -2191,7 +2279,12 @@ nm.makeMapServiceLegend = makeMapServiceLegend;
 /* 26 */,
 /* 27 */,
 /* 28 */,
-/* 29 */
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2324,12 +2417,35 @@ exports.default = LayerSwipe;
 
 
 /***/ }),
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2338,8 +2454,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by gavorhes on 6/1/2016.
  */
-var quickMap_1 = __webpack_require__(7);
-var layerSwipe_1 = __webpack_require__(29);
+var quickMap_1 = __webpack_require__(6);
+var layerSwipe_1 = __webpack_require__(34);
 var LayerEsriMapServer_1 = __webpack_require__(15);
 var map = quickMap_1.quickMap();
 var swiper = new layerSwipe_1.default(map);
@@ -2373,97 +2489,6 @@ swiper.addLeftLayer(wisDotRegions);
 swiper.addRightLayer(metamanagerSegments);
 swiper.addLeftLayer(truckSpeed2014);
 swiper.addRightLayer(truckSpeed2015);
-
-
-/***/ }),
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var $ = __webpack_require__(1);
-var makeGuid_1 = __webpack_require__(3);
-var ol = __webpack_require__(2);
-var projections_1 = __webpack_require__(16);
-var invalidClass = 'geocoder-invalid';
-var geocoderLoadingClass = 'geocoder-loading';
-// let testAddress = '65 7th Street, Prairie du Sac, WI';
-var Geocode = (function () {
-    function Geocode(mapDiv, map) {
-        var _this = this;
-        var inputGuid = makeGuid_1.makeGuid();
-        var buttonGuid = makeGuid_1.makeGuid();
-        this.map = map;
-        this.indicationLayer = new ol.layer.Vector({
-            source: new ol.source.Vector(),
-            style: new ol.style.Style({
-                image: new ol.style.Circle({
-                    radius: 12,
-                    fill: new ol.style.Fill({ color: 'rgba(255,0,0,0.5)' }),
-                    stroke: new ol.style.Stroke({ color: 'red', width: 1 })
-                })
-            })
-        });
-        this.map.addLayer(this.indicationLayer);
-        $(mapDiv).append('<div class="geocoder-el">' +
-            ("<input type=\"text\" id=\"" + inputGuid + "\">") +
-            ("<button id=\"" + buttonGuid + "\">Search</button>") +
-            '</div>');
-        this.theButton = document.getElementById(buttonGuid);
-        this.theInput = document.getElementById(inputGuid);
-        this.reset();
-        var $theButton = $(this.theButton);
-        var $theInput = $(this.theInput);
-        $theButton.click(function () {
-            $theButton.addClass(geocoderLoadingClass);
-            _this.theButton.disabled = true;
-            _this.indicationLayer.getSource().clear();
-            $.get("https://geocode.xyz/" + _this.theInput.value + "?geoit=json", {}, function (d) {
-                var lat = parseFloat(d['latt']);
-                var lon = parseFloat(d['longt']);
-                if ((lat == 0 && lon == 0) || d['error']) {
-                    $theInput.addClass(invalidClass);
-                    _this.theInput.title = 'Specified Location Invalid';
-                    _this.theButton.title = 'Specified Location Invalid';
-                }
-                else {
-                    var v = _this.map.getView();
-                    var p = new ol.geom.Point([lon, lat]);
-                    var feat = new ol.Feature(p);
-                    _this.indicationLayer.getSource().addFeature(feat);
-                    p.transform(projections_1.proj4326, projections_1.proj3857);
-                    v.setCenter(p.getCoordinates());
-                    v.setZoom(13);
-                }
-                $theButton.removeClass(geocoderLoadingClass);
-                _this.theButton.disabled = false;
-            }, 'json');
-        });
-        $(this.theInput).keyup(function (evt) {
-            _this.theButton.disabled = _this.theInput.value.length == 0;
-            $theInput.removeClass(invalidClass);
-            _this.theInput.title = '';
-            _this.theButton.title = '';
-            if (!_this.theButton.disabled && evt.keyCode == 13) {
-                $theButton.click();
-            }
-        });
-    }
-    Geocode.prototype.reset = function () {
-        this.theButton.disabled = true;
-        this.theInput.value = '';
-    };
-    return Geocode;
-}());
-exports.Geocode = Geocode;
 
 
 /***/ })

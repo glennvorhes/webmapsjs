@@ -63,11 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 41);
+/******/ 	return __webpack_require__(__webpack_require__.s = 69);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -103,217 +104,21 @@ exports.default = provide;
 
 
 /***/ }),
-/* 1 */
+
+/***/ 1:
 /***/ (function(module, exports) {
 
 module.exports = $;
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports) {
 
-module.exports = ol;
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 11/3/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('util');
-/**
- * guids are used to uniquely identify groups and features
- * @returns {string} a new guid
- */
-function makeGuid() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
-        .replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : r & 0x3 | 0x8;
-        return v.toString(16);
-    });
-}
-exports.makeGuid = makeGuid;
-nm.makeGuid = makeGuid;
-exports.default = makeGuid;
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 11/3/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var mapMoveCls_1 = __webpack_require__(10);
-/**
- * The single map move object catch is that it is common to multimap pages
- * @type {MapMoveCls}
- */
-exports.mapMove = new mapMoveCls_1.default();
-exports.default = exports.mapMove;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 11/3/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var mapPopupCls_1 = __webpack_require__(11);
-/**
- * The single popup object catch is that it is common to multimap pages
- * @type {MapPopupCls}
- */
-exports.mapPopup = new mapPopupCls_1.default();
-exports.default = exports.mapPopup;
-
-
-/***/ }),
-/* 6 */
+/***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Created by gavorhes on 12/8/2015.
- */
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('olHelpers');
-/**
- * base interaction
- */
-var MapInteractionBase = (function () {
-    /**
-     * map interaction base
-     * @param subtype - the interaction subtype
-     */
-    function MapInteractionBase(subtype) {
-        this._map = null;
-        this._initialized = false;
-        this._subtype = subtype;
-    }
-    /**
-     * base initializer, returns true for already initialized
-     * @param theMap - the ol Map
-     * @returns true for already initialized
-     */
-    MapInteractionBase.prototype.init = function (theMap) {
-        if (!this._initialized) {
-            this._map = theMap;
-            this._initialized = true;
-        }
-    };
-    Object.defineProperty(MapInteractionBase.prototype, "map", {
-        /**
-         * get reference to the ol map object
-         * @returns {ol.Map} the map object
-         */
-        get: function () {
-            return this._map;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MapInteractionBase.prototype, "initialized", {
-        /**
-         * get if is initialized
-         * @returns {boolean} is initialized
-         */
-        get: function () {
-            return this._initialized;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * Check the initialization status and throw exception if not valid yet
-     * @protected
-     */
-    MapInteractionBase.prototype._checkInit = function () {
-        if (!this.initialized) {
-            var msg = this._subtype + " object not initialized";
-            alert(msg);
-            console.log(msg);
-            throw msg;
-        }
-    };
-    /**
-     * Check the initialization status and throw exception if not valid yet
-     */
-    MapInteractionBase.prototype.checkInit = function () {
-        this._checkInit();
-    };
-    return MapInteractionBase;
-}());
-exports.MapInteractionBase = MapInteractionBase;
-nm.MapInteractionBase = MapInteractionBase;
-exports.default = MapInteractionBase;
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 12/15/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var quickMapBase_1 = __webpack_require__(12);
-var provide_1 = __webpack_require__(0);
-var mapMove_1 = __webpack_require__(4);
-var mapPopup_1 = __webpack_require__(5);
-var nm = provide_1.default('olHelpers');
-/**
- * Sets up a map with some default parameters and initializes
- * mapMove and mapPopup
- *
- * @param {object} [options={}] config options
- * @param {string} [options.divId=map] map div id
- * @param {object} [options.center={}] center config object
- * @param {number} [options.center.x=-10018378] center x, web mercator x or lon
- * @param {number} [options.center.y=5574910] center y, web mercator y or lat
- * @param {number} [options.zoom=7] zoom level
- * @param {number} [options.minZoom=undefined] min zoom
- * @param {number} [options.maxZoom=undefined] max zoom
- * @param {boolean} [options.baseSwitcher=true] if add base map switcher
- * @param {boolean} [options.fullScreen=false] if add base map switcher
- * @returns {ol.Map} the ol map
- */
-function quickMap(options) {
-    if (options === void 0) { options = {}; }
-    var m = quickMapBase_1.quickMapBase(options);
-    mapMove_1.default.init(m);
-    mapPopup_1.default.init(m);
-    return m;
-}
-exports.quickMap = quickMap;
-nm.quickMap = quickMap;
-exports.default = quickMap;
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var zoomResolutionConvert = __webpack_require__(13);
+var zoomResolutionConvert = __webpack_require__(16);
 var provide_1 = __webpack_require__(0);
 var makeGuid_1 = __webpack_require__(3);
 var $ = __webpack_require__(1);
@@ -716,40 +521,95 @@ exports.default = LayerBase;
 
 
 /***/ }),
-/* 9 */
+
+/***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('util.checkDefined');
-/**
- * check if the input is undefined or null
- * @param input - input pointer
- * @returns true undefined or null
- */
-function undefinedOrNull(input) {
-    "use strict";
-    return (typeof input === 'undefined' || input === null);
-}
-exports.undefinedOrNull = undefinedOrNull;
-nm.undefinedOrNull = undefinedOrNull;
-/**
- * check if the input is defined and not null
- * @param input - input pointer
- * @returns true defined and not null
- */
-function definedAndNotNull(input) {
-    "use strict";
-    return !(undefinedOrNull(input));
-}
-exports.definedAndNotNull = definedAndNotNull;
-nm.definedAndNotNull = definedAndNotNull;
+var $ = __webpack_require__(1);
+var makeGuid_1 = __webpack_require__(3);
+var ol = __webpack_require__(2);
+var projections_1 = __webpack_require__(8);
+var invalidClass = 'geocoder-invalid';
+var geocoderLoadingClass = 'geocoder-loading';
+// let testAddress = '65 7th Street, Prairie du Sac, WI';
+var Geocode = (function () {
+    function Geocode(mapDiv, map) {
+        var _this = this;
+        var inputGuid = makeGuid_1.makeGuid();
+        var buttonGuid = makeGuid_1.makeGuid();
+        this.map = map;
+        this.indicationLayer = new ol.layer.Vector({
+            source: new ol.source.Vector(),
+            style: new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: 12,
+                    fill: new ol.style.Fill({ color: 'rgba(255,0,0,0.5)' }),
+                    stroke: new ol.style.Stroke({ color: 'red', width: 1 })
+                })
+            })
+        });
+        this.map.addLayer(this.indicationLayer);
+        $(mapDiv).append('<div class="geocoder-el">' +
+            ("<input type=\"text\" id=\"" + inputGuid + "\">") +
+            ("<button id=\"" + buttonGuid + "\">Search</button>") +
+            '</div>');
+        this.theButton = document.getElementById(buttonGuid);
+        this.theInput = document.getElementById(inputGuid);
+        this.reset();
+        var $theButton = $(this.theButton);
+        var $theInput = $(this.theInput);
+        $theButton.click(function (evt) {
+            evt.preventDefault();
+            $theButton.addClass(geocoderLoadingClass);
+            _this.theButton.disabled = true;
+            _this.indicationLayer.getSource().clear();
+            $.get("https://geocode.xyz/" + _this.theInput.value + "?geoit=json", {}, function (d) {
+                var lat = parseFloat(d['latt']);
+                var lon = parseFloat(d['longt']);
+                if ((lat == 0 && lon == 0) || d['error']) {
+                    $theInput.addClass(invalidClass);
+                    _this.theInput.title = 'Specified Location Invalid';
+                    _this.theButton.title = 'Specified Location Invalid';
+                }
+                else {
+                    var v = _this.map.getView();
+                    var p = new ol.geom.Point([lon, lat]);
+                    var feat = new ol.Feature(p);
+                    _this.indicationLayer.getSource().addFeature(feat);
+                    p.transform(projections_1.proj4326, projections_1.proj3857);
+                    v.setCenter(p.getCoordinates());
+                    v.setZoom(13);
+                }
+                $theButton.removeClass(geocoderLoadingClass);
+                _this.theButton.disabled = false;
+            }, 'json');
+        });
+        $(this.theInput).keyup(function (evt) {
+            _this.theButton.disabled = _this.theInput.value.length == 0;
+            $theInput.removeClass(invalidClass);
+            _this.theInput.title = '';
+            _this.theButton.title = '';
+            if (!_this.theButton.disabled && evt.keyCode == 13) {
+                evt.preventDefault();
+                $theButton.click();
+            }
+        });
+    }
+    Geocode.prototype.reset = function () {
+        this.theButton.disabled = true;
+        this.theInput.value = '';
+    };
+    return Geocode;
+}());
+exports.Geocode = Geocode;
 
 
 /***/ }),
-/* 10 */
+
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -765,7 +625,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapInteractionBase_1 = __webpack_require__(6);
+var mapInteractionBase_1 = __webpack_require__(4);
 var checkDefined = __webpack_require__(9);
 var provide_1 = __webpack_require__(0);
 var makeGuid_1 = __webpack_require__(3);
@@ -994,7 +854,8 @@ exports.default = MapMoveCls;
 
 
 /***/ }),
-/* 11 */
+
+/***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1013,7 +874,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapInteractionBase_1 = __webpack_require__(6);
+var mapInteractionBase_1 = __webpack_require__(4);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
@@ -1429,7 +1290,8 @@ exports.default = MapPopupCls;
 
 
 /***/ }),
-/* 12 */
+
+/***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1441,7 +1303,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
-var geocode_1 = __webpack_require__(43);
+var geocode_1 = __webpack_require__(11);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -1532,383 +1394,8 @@ exports.default = quickMapBase;
 
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/**
- * Created by gavorhes on 12/14/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('olHelpers.zoomResolutionConvert');
-var _zoomResLookup = [
-    156543.03392804097,
-    78271.51696402048,
-    39135.75848201024,
-    19567.87924100512,
-    9783.93962050256,
-    4891.96981025128,
-    2445.98490512564,
-    1222.99245256282,
-    611.49622628141,
-    305.748113140705,
-    152.8740565703525,
-    76.43702828517625,
-    38.21851414258813,
-    19.109257071294063,
-    9.554628535647032,
-    4.777314267823516,
-    2.388657133911758,
-    1.194328566955879,
-    0.5971642834779395,
-    0.29858214173896974,
-    0.14929107086948487,
-    0.07464553543474244,
-    0.03732276771737122,
-    0.01866138385868561,
-    0.009330691929342804,
-    0.004665345964671402,
-    0.002332672982335701,
-    0.0011663364911678506,
-    0.0005831682455839253 //28
-];
-/**
- * Get the resolution given the zoom level
- * @param {number} zoomLevel - the zoom level
- * @returns {number|*} the map resolution
- */
-function zoomToResolution(zoomLevel) {
-    "use strict";
-    if (typeof zoomLevel == 'number') {
-        if (zoomLevel % 1 === 0 && zoomLevel >= 0 && zoomLevel <= 28) {
-            return _zoomResLookup[zoomLevel];
-        }
-        else {
-            console.log("invalid zoom level provided: " + zoomLevel);
-            return undefined;
-        }
-    }
-    else {
-        return undefined;
-    }
-}
-exports.zoomToResolution = zoomToResolution;
-nm.zoomToResolution = zoomToResolution;
-/**
- * Get resolution from the zoom level
- * @param {number} resolution - the resolution
- * @returns {number|*} the zoom level
- */
-function resolutionToZoom(resolution) {
-    for (var i = 0; i < _zoomResLookup.length; i++) {
-        if (resolution >= _zoomResLookup[i]) {
-            return i;
-        }
-    }
-    return 0;
-}
-exports.resolutionToZoom = resolutionToZoom;
-nm.resolutionToZoom = resolutionToZoom;
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 12/16/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var makeGuid_1 = __webpack_require__(3);
-var mapMove_1 = __webpack_require__(4);
-var nm = provide_1.default('collections');
-var $ = __webpack_require__(1);
-var LayerGroup = (function () {
-    /**
-     *
-     * @param {object} [groupConfig={}] - group configuration object
-     * @param {string} groupConfig.groupName - the group name
-     * @param {boolean} [groupConfig.collapse=false] - if the group should be collapsed initially
-     * @param {boolean} [groupConfig.addCheck=true] - if the group should have a checkbox controlling visibility of all layers
-     * @param {LayerGroup} [parent=undefined] - the parent group
-     */
-    function LayerGroup(groupConfig, parent) {
-        this.groupLayers = [];
-        this.groupLayersLookup = {};
-        this.groupGroups = [];
-        this.groupGroupsLookup = {};
-        this.itemIdArray = [];
-        if (typeof groupConfig == 'undefined') {
-            this.parent = null;
-            this.groupId = 'root';
-            this.groupName = 'root';
-            this.allGroupLookup = { root: this };
-            this.allGroupArray = [this];
-            this.allLayerArray = [];
-            this.allLayerLookup = {};
-            this.layerParentLookup = {};
-            this.collapse = false;
-            this.addCheck = false;
-        }
-        else {
-            this.groupId = makeGuid_1.default();
-            this.parent = parent;
-            this.groupName = groupConfig.groupName;
-            this.collapse = typeof groupConfig.collapse == 'boolean' ? groupConfig.collapse : false;
-            this.addCheck = typeof groupConfig.addCheck == 'boolean' ? groupConfig.addCheck : true;
-        }
-    }
-    /**
-     *
-     * @param {object} groupConfig - configuration object
-     * @param {string} groupConfig.groupName - the group name
-     * @param {boolean} groupConfig.collapse if the group should be collapsed initially
-     * @param {boolean} groupConfig.addCheck if the group should have a checkbox controlling visibility of all layers
-     * @param {Array<LayerGroup>} parents parent groups
-     * @returns {LayerGroup} the layer group just added
-     */
-    LayerGroup.prototype.addGroup = function (groupConfig, parents) {
-        var parent;
-        if (parents.length > 0) {
-            parent = parents[parents.length - 1];
-        }
-        else {
-            parent = 'root';
-        }
-        /**
-         * @type {LayerGroup}
-         */
-        var parentGroup = this.allGroupLookup[parent];
-        var newGroup = new LayerGroup(groupConfig, parentGroup);
-        this.allGroupLookup[newGroup.groupId] = newGroup;
-        this.allGroupArray.push(newGroup);
-        parentGroup.groupGroups.push(newGroup);
-        parentGroup.groupGroupsLookup[newGroup.groupId] = newGroup;
-        if (parentGroup.itemIdArray.indexOf(newGroup.groupId) > 0) {
-            console.log(newGroup.groupId);
-            throw 'layer and group ids must be unique';
-        }
-        parentGroup.itemIdArray.push(newGroup.groupId);
-        return newGroup;
-    };
-    /**
-     *
-     * @param {LayerBase} newLayer the layer to be added
-     * @param {Array} parents array
-     */
-    LayerGroup.prototype.addLegendLayer = function (newLayer, parents) {
-        var parent;
-        if (parents.length > 0) {
-            parent = parents[parents.length - 1];
-        }
-        else {
-            parent = 'root';
-        }
-        this.allLayerLookup[newLayer.id] = newLayer;
-        this.allLayerArray.push(newLayer);
-        /**
-         * @type {LayerGroup}
-         */
-        var parentGroup = this.allGroupLookup[parent];
-        parentGroup.groupLayers.push(newLayer);
-        parentGroup.groupLayersLookup[newLayer.id] = newLayer;
-        if (parentGroup.itemIdArray.indexOf(newLayer.id) > 0) {
-            console.log(newLayer.id);
-            throw 'layer and group ids must be unique';
-        }
-        parentGroup.itemIdArray.push(newLayer.id);
-        this.layerParentLookup[newLayer.id] = parentGroup;
-    };
-    LayerGroup.prototype.getLegendHtml = function (legendId, options) {
-        var legendHtml = "<ul id=\"" + legendId + "\" class=\"legend-container\">";
-        legendHtml += "<li>" + options.legendTitle + "<input type=\"checkbox\" checked id=\"suppress-by-extent-" + legendId + "\" class=\"suppress-by-extent\">" +
-            ("<label title=\"Suppress layers not visible at this zoom level\" for=\"suppress-by-extent-" + legendId + "\">") +
-            "<span></span>" +
-            "</label></li>";
-        legendHtml += this._buildLegend(this.itemIdArray, this, options.layerDivClasses) + '</ul>';
-        return legendHtml;
-    };
-    /**
-     * @param {Array} itemIds the items to process
-     * @param {LayerGroup} theGroup new group
-     * @param {Array} [layerDivClasses=[]] optional classes to apply to the layer divs
-     * @static
-     * @returns {string} html string
-     */
-    LayerGroup.prototype._buildLegend = function (itemIds, theGroup, layerDivClasses) {
-        if (itemIds.length == 0) {
-            return '';
-        }
-        var theHml = '';
-        var itemId = itemIds[0];
-        if (theGroup.groupLayersLookup[itemId]) {
-            /**
-             * @type {LayerBase}
-             */
-            var lyr = theGroup.groupLayersLookup[itemId];
-            theHml += "<li id=\"" + lyr.id + "-layer-li\" class=\"legend-layer-li " + layerDivClasses.join(' ') + "\">" + lyr.getLegendDiv() + '</li>';
-        }
-        else if (theGroup.groupGroupsLookup[itemId]) {
-            /**
-             * type {LayerGroup}
-             */
-            var otherGroup = theGroup.groupGroupsLookup[itemId];
-            theHml += "<li>";
-            theHml += "<div id=\"" + otherGroup.groupId + "-legend-layer-div\" " +
-                ("class=\"legend-layer-group  " + layerDivClasses.join(' ') + "\">");
-            if (otherGroup.addCheck) {
-                theHml += "<input type=\"checkbox\" checked id=\"" + otherGroup.groupId + "-group-chck\">" +
-                    ("<label for=\"" + otherGroup.groupId + "-group-chck\" title=\"Click arrow to expand or collapse\">" + otherGroup.groupName + "</label>");
-            }
-            else {
-                theHml += "<label title=\"Click arrow to expand or collapse\">" + otherGroup.groupName + "</label>";
-            }
-            theHml += "<span title=\"Expand/Collapse\" class=\"layer-group-expander";
-            theHml += (otherGroup.collapse ? ' legend-layer-group-initial-collapse' : '') + "\">";
-            theHml += otherGroup.collapse ? '&#9654;' : '&#9660;';
-            theHml += '</span>';
-            //parents.push(groupId);
-            theHml += '<ul>' + this._buildLegend(otherGroup.itemIdArray, otherGroup, layerDivClasses) + '</ul>';
-            theHml += '</div>';
-            theHml += '</li>';
-        }
-        return theHml + this._buildLegend(itemIds.slice(1), theGroup, layerDivClasses);
-    };
-    return LayerGroup;
-}());
-/**
- * a wrapper to make a legend
- */
-var LayerLegend = (function () {
-    /**``
-     *
-     * @param {Array} legendItems array of layers or objects with {groupName:  {string}, collapse: {boolean}, addCheck: {boolean}, items: {Array}}
-     * @param {string} divId the div where the legend should be added
-     * @param {object} options for legend
-     * @param {Array} [options.layerDivClasses=[]] optional array of classes to be applied to the layer legend divs for custom styling
-     * @param {string} [options.legendTitle=Legend] the legend title
-     * @param {boolean} [options.scaleDependent=true] if legend display is scale dependent
-     */
-    function LayerLegend(legendItems, divId, options) {
-        if (options === void 0) { options = {}; }
-        for (var _i = 0, legendItems_1 = legendItems; _i < legendItems_1.length; _i++) {
-            var i = legendItems_1[_i];
-            if (typeof i == 'undefined') {
-                throw 'undefined item passed in array to legend constructor';
-            }
-        }
-        options.legendTitle = typeof options.legendTitle == 'string' ? options.legendTitle : 'Legend';
-        options.scaleDependent = typeof options.scaleDependent == 'boolean' ? options.scaleDependent : true;
-        options.layerDivClasses = options.layerDivClasses || [];
-        // if legend display is scale dependent, make sure the mapMove object is initialized first
-        if (options.scaleDependent) {
-            mapMove_1.default.checkInit();
-        }
-        this.$divElement = $('#' + divId);
-        this._legendItems = legendItems;
-        this.layerGroup = new LayerGroup();
-        this._buildTree(legendItems);
-        this.legendId = makeGuid_1.default();
-        this.$divElement.append(this.layerGroup.getLegendHtml(this.legendId, options));
-        for (var _a = 0, _b = this.layerGroup.allLayerArray; _a < _b.length; _a++) {
-            var l = _b[_a];
-            l.applyCollapse();
-        }
-        var _this = this;
-        //// if legend display is scale dependent, make sure the mapMove object is initialized first
-        if (options.scaleDependent) {
-            mapMove_1.default.checkInit();
-            mapMove_1.default.addCallback(function (ext, zoom, evt) {
-                if (typeof evt == 'undefined' || evt == 'change:resolution') {
-                    for (var _i = 0, _a = this.layerGroup.allLayerArray; _i < _a.length; _i++) {
-                        var lyr = _a[_i];
-                        var $lyrLi = $('#' + lyr.id + '-layer-li');
-                        if (zoom > lyr.maxZoom || zoom < lyr.minZoom) {
-                            $lyrLi.addClass('layer-not-visible');
-                        }
-                        else {
-                            $lyrLi.removeClass('layer-not-visible');
-                        }
-                    }
-                }
-            }, this, 100, true, 'legend1');
-        }
-        // <editor-fold desc="add event listeners">
-        this.$divElement.find(".suppress-by-extent").change(function () {
-            var legendLayerLis = $('.legend-layer-li');
-            if (this.checked) {
-                legendLayerLis.removeClass('layer-force-show');
-            }
-            else {
-                legendLayerLis.addClass('layer-force-show');
-            }
-        });
-        this.$divElement.find('.legend-check').change(function () {
-            var lyrId = this.id.replace('-legend-layer-check', '');
-            _this.layerGroup.allLayerLookup[lyrId].visible = this.checked;
-        });
-        this.$divElement.find('.legend-layer-group > input[type=checkbox]').change(function () {
-            $(this).siblings('ul').find('input[type=checkbox]').prop('checked', this.checked).trigger('change');
-        });
-        this.$divElement.find('.layer-group-expander').click(function () {
-            var $this = $(this);
-            $this.removeClass('legend-layer-group-initial-collapse');
-            $this.siblings('ul').slideToggle();
-            if ($this.hasClass('legend-layer-group-collapsed')) {
-                $this.removeClass('legend-layer-group-collapsed');
-                $this.html('&#9660;');
-            }
-            else {
-                $this.addClass('legend-layer-group-collapsed');
-                $this.html('&#9654;');
-            }
-        });
-        this.$divElement.find('.legend-layer-group-initial-collapse').trigger('click');
-        // </editor-fold>
-    }
-    /**
-     * @param {Array} [legendItems=this._layerConfig] the legend items
-     * @param {Array} [parents=[]] the ordered list of groups in which this item is a member
-     * @private
-     */
-    LayerLegend.prototype._buildTree = function (legendItems, parents) {
-        if (legendItems.length == 0) {
-            return;
-        }
-        var oneItem = legendItems[0];
-        //reset the parent if the item is in the base array
-        if (this._legendItems.indexOf(oneItem) > -1 || typeof parents == 'undefined') {
-            parents = [];
-        }
-        if (typeof oneItem.groupName !== 'undefined') {
-            var groupItem = legendItems[0];
-            var newGroup = this.layerGroup.addGroup(groupItem, parents);
-            parents.push(newGroup.groupId);
-            this._buildTree(oneItem.items, parents);
-        }
-        else {
-            /**
-             * @type {LayerBase}
-             */
-            var layerItem = legendItems[0];
-            this.layerGroup.addLegendLayer(layerItem, parents);
-        }
-        this._buildTree(legendItems.slice(1), parents);
-    };
-    return LayerLegend;
-}());
-exports.LayerLegend = LayerLegend;
-nm.LayerLegend = LayerLegend;
-exports.default = LayerLegend;
-
-
-/***/ }),
-/* 15 */
+/***/ 15:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1927,7 +1414,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by gavorhes on 12/7/2015.
  */
-var LayerBase_1 = __webpack_require__(8);
+var LayerBase_1 = __webpack_require__(10);
 var esriToOl = __webpack_require__(17);
 var mapPopup_1 = __webpack_require__(5);
 var provide_1 = __webpack_require__(0);
@@ -2002,7 +1489,10 @@ var LayerEsriMapServer = (function (_super) {
         options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
         _this._esriFormat = new ol.format.EsriJSON();
         _this._popupRequest = null;
-        _this.addLegendContent();
+        options.getLegend = typeof options.getLegend === 'boolean' ? options.getLegend : true;
+        if (options.getLegend) {
+            _this.addLegendContent();
+        }
         if (options.addPopup) {
             mapPopup_1.default.addMapServicePopup(_this);
         }
@@ -2092,23 +1582,91 @@ exports.default = LayerEsriMapServer;
 
 
 /***/ }),
-/* 16 */
+
+/***/ 16:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/**
+ * Created by gavorhes on 12/14/2015.
+ */
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('olHelpers.zoomResolutionConvert');
+var _zoomResLookup = [
+    156543.03392804097,
+    78271.51696402048,
+    39135.75848201024,
+    19567.87924100512,
+    9783.93962050256,
+    4891.96981025128,
+    2445.98490512564,
+    1222.99245256282,
+    611.49622628141,
+    305.748113140705,
+    152.8740565703525,
+    76.43702828517625,
+    38.21851414258813,
+    19.109257071294063,
+    9.554628535647032,
+    4.777314267823516,
+    2.388657133911758,
+    1.194328566955879,
+    0.5971642834779395,
+    0.29858214173896974,
+    0.14929107086948487,
+    0.07464553543474244,
+    0.03732276771737122,
+    0.01866138385868561,
+    0.009330691929342804,
+    0.004665345964671402,
+    0.002332672982335701,
+    0.0011663364911678506,
+    0.0005831682455839253 //28
+];
 /**
- * Created by gavorhes on 10/3/2016.
+ * Get the resolution given the zoom level
+ * @param {number} zoomLevel - the zoom level
+ * @returns {number|*} the map resolution
  */
-var ol = __webpack_require__(2);
-exports.proj4326 = new ol.proj.Projection({ code: 'EPSG:4326' });
-exports.proj3857 = new ol.proj.Projection({ code: 'EPSG:3857' });
-exports.proj3070 = new ol.proj.Projection({ code: 'EPSG:3070' });
+function zoomToResolution(zoomLevel) {
+    "use strict";
+    if (typeof zoomLevel == 'number') {
+        if (zoomLevel % 1 === 0 && zoomLevel >= 0 && zoomLevel <= 28) {
+            return _zoomResLookup[zoomLevel];
+        }
+        else {
+            console.log("invalid zoom level provided: " + zoomLevel);
+            return undefined;
+        }
+    }
+    else {
+        return undefined;
+    }
+}
+exports.zoomToResolution = zoomToResolution;
+nm.zoomToResolution = zoomToResolution;
+/**
+ * Get resolution from the zoom level
+ * @param {number} resolution - the resolution
+ * @returns {number|*} the zoom level
+ */
+function resolutionToZoom(resolution) {
+    for (var i = 0; i < _zoomResLookup.length; i++) {
+        if (resolution >= _zoomResLookup[i]) {
+            return i;
+        }
+    }
+    return 0;
+}
+exports.resolutionToZoom = resolutionToZoom;
+nm.resolutionToZoom = resolutionToZoom;
 
 
 /***/ }),
-/* 17 */
+
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2473,30 +2031,487 @@ nm.makeMapServiceLegend = makeMapServiceLegend;
 
 
 /***/ }),
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */
+
+/***/ 18:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 12/16/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var makeGuid_1 = __webpack_require__(3);
+var mapMove_1 = __webpack_require__(7);
+var nm = provide_1.default('collections');
+var $ = __webpack_require__(1);
+var LayerGroup = (function () {
+    /**
+     *
+     * @param {object} [groupConfig={}] - group configuration object
+     * @param {string} groupConfig.groupName - the group name
+     * @param {boolean} [groupConfig.collapse=false] - if the group should be collapsed initially
+     * @param {boolean} [groupConfig.addCheck=true] - if the group should have a checkbox controlling visibility of all layers
+     * @param {LayerGroup} [parent=undefined] - the parent group
+     */
+    function LayerGroup(groupConfig, parent) {
+        this.groupLayers = [];
+        this.groupLayersLookup = {};
+        this.groupGroups = [];
+        this.groupGroupsLookup = {};
+        this.itemIdArray = [];
+        if (typeof groupConfig == 'undefined') {
+            this.parent = null;
+            this.groupId = 'root';
+            this.groupName = 'root';
+            this.allGroupLookup = { root: this };
+            this.allGroupArray = [this];
+            this.allLayerArray = [];
+            this.allLayerLookup = {};
+            this.layerParentLookup = {};
+            this.collapse = false;
+            this.addCheck = false;
+        }
+        else {
+            this.groupId = makeGuid_1.default();
+            this.parent = parent;
+            this.groupName = groupConfig.groupName;
+            this.collapse = typeof groupConfig.collapse == 'boolean' ? groupConfig.collapse : false;
+            this.addCheck = typeof groupConfig.addCheck == 'boolean' ? groupConfig.addCheck : true;
+        }
+    }
+    /**
+     *
+     * @param {object} groupConfig - configuration object
+     * @param {string} groupConfig.groupName - the group name
+     * @param {boolean} groupConfig.collapse if the group should be collapsed initially
+     * @param {boolean} groupConfig.addCheck if the group should have a checkbox controlling visibility of all layers
+     * @param {Array<LayerGroup>} parents parent groups
+     * @returns {LayerGroup} the layer group just added
+     */
+    LayerGroup.prototype.addGroup = function (groupConfig, parents) {
+        var parent;
+        if (parents.length > 0) {
+            parent = parents[parents.length - 1];
+        }
+        else {
+            parent = 'root';
+        }
+        /**
+         * @type {LayerGroup}
+         */
+        var parentGroup = this.allGroupLookup[parent];
+        var newGroup = new LayerGroup(groupConfig, parentGroup);
+        this.allGroupLookup[newGroup.groupId] = newGroup;
+        this.allGroupArray.push(newGroup);
+        parentGroup.groupGroups.push(newGroup);
+        parentGroup.groupGroupsLookup[newGroup.groupId] = newGroup;
+        if (parentGroup.itemIdArray.indexOf(newGroup.groupId) > 0) {
+            console.log(newGroup.groupId);
+            throw 'layer and group ids must be unique';
+        }
+        parentGroup.itemIdArray.push(newGroup.groupId);
+        return newGroup;
+    };
+    /**
+     *
+     * @param {LayerBase} newLayer the layer to be added
+     * @param {Array} parents array
+     */
+    LayerGroup.prototype.addLegendLayer = function (newLayer, parents) {
+        var parent;
+        if (parents.length > 0) {
+            parent = parents[parents.length - 1];
+        }
+        else {
+            parent = 'root';
+        }
+        this.allLayerLookup[newLayer.id] = newLayer;
+        this.allLayerArray.push(newLayer);
+        /**
+         * @type {LayerGroup}
+         */
+        var parentGroup = this.allGroupLookup[parent];
+        parentGroup.groupLayers.push(newLayer);
+        parentGroup.groupLayersLookup[newLayer.id] = newLayer;
+        if (parentGroup.itemIdArray.indexOf(newLayer.id) > 0) {
+            console.log(newLayer.id);
+            throw 'layer and group ids must be unique';
+        }
+        parentGroup.itemIdArray.push(newLayer.id);
+        this.layerParentLookup[newLayer.id] = parentGroup;
+    };
+    LayerGroup.prototype.getLegendHtml = function (legendId, options) {
+        var legendHtml = "<ul id=\"" + legendId + "\" class=\"legend-container\">";
+        legendHtml += "<li>" + options.legendTitle + "<input type=\"checkbox\" checked id=\"suppress-by-extent-" + legendId + "\" class=\"suppress-by-extent\">" +
+            ("<label title=\"Suppress layers not visible at this zoom level\" for=\"suppress-by-extent-" + legendId + "\">") +
+            "<span></span>" +
+            "</label></li>";
+        legendHtml += this._buildLegend(this.itemIdArray, this, options.layerDivClasses) + '</ul>';
+        return legendHtml;
+    };
+    /**
+     * @param {Array} itemIds the items to process
+     * @param {LayerGroup} theGroup new group
+     * @param {Array} [layerDivClasses=[]] optional classes to apply to the layer divs
+     * @static
+     * @returns {string} html string
+     */
+    LayerGroup.prototype._buildLegend = function (itemIds, theGroup, layerDivClasses) {
+        if (itemIds.length == 0) {
+            return '';
+        }
+        var theHml = '';
+        var itemId = itemIds[0];
+        if (theGroup.groupLayersLookup[itemId]) {
+            /**
+             * @type {LayerBase}
+             */
+            var lyr = theGroup.groupLayersLookup[itemId];
+            theHml += "<li id=\"" + lyr.id + "-layer-li\" class=\"legend-layer-li " + layerDivClasses.join(' ') + "\">" + lyr.getLegendDiv() + '</li>';
+        }
+        else if (theGroup.groupGroupsLookup[itemId]) {
+            /**
+             * type {LayerGroup}
+             */
+            var otherGroup = theGroup.groupGroupsLookup[itemId];
+            theHml += "<li>";
+            theHml += "<div id=\"" + otherGroup.groupId + "-legend-layer-div\" " +
+                ("class=\"legend-layer-group  " + layerDivClasses.join(' ') + "\">");
+            if (otherGroup.addCheck) {
+                theHml += "<input type=\"checkbox\" checked id=\"" + otherGroup.groupId + "-group-chck\">" +
+                    ("<label for=\"" + otherGroup.groupId + "-group-chck\" title=\"Click arrow to expand or collapse\">" + otherGroup.groupName + "</label>");
+            }
+            else {
+                theHml += "<label title=\"Click arrow to expand or collapse\">" + otherGroup.groupName + "</label>";
+            }
+            theHml += "<span title=\"Expand/Collapse\" class=\"layer-group-expander";
+            theHml += (otherGroup.collapse ? ' legend-layer-group-initial-collapse' : '') + "\">";
+            theHml += otherGroup.collapse ? '&#9654;' : '&#9660;';
+            theHml += '</span>';
+            //parents.push(groupId);
+            theHml += '<ul>' + this._buildLegend(otherGroup.itemIdArray, otherGroup, layerDivClasses) + '</ul>';
+            theHml += '</div>';
+            theHml += '</li>';
+        }
+        return theHml + this._buildLegend(itemIds.slice(1), theGroup, layerDivClasses);
+    };
+    return LayerGroup;
+}());
+/**
+ * a wrapper to make a legend
+ */
+var LayerLegend = (function () {
+    /**``
+     *
+     * @param {Array} legendItems array of layers or objects with {groupName:  {string}, collapse: {boolean}, addCheck: {boolean}, items: {Array}}
+     * @param {string} divId the div where the legend should be added
+     * @param {object} options for legend
+     * @param {Array} [options.layerDivClasses=[]] optional array of classes to be applied to the layer legend divs for custom styling
+     * @param {string} [options.legendTitle=Legend] the legend title
+     * @param {boolean} [options.scaleDependent=true] if legend display is scale dependent
+     */
+    function LayerLegend(legendItems, divId, options) {
+        if (options === void 0) { options = {}; }
+        for (var _i = 0, legendItems_1 = legendItems; _i < legendItems_1.length; _i++) {
+            var i = legendItems_1[_i];
+            if (typeof i == 'undefined') {
+                throw 'undefined item passed in array to legend constructor';
+            }
+        }
+        options.legendTitle = typeof options.legendTitle == 'string' ? options.legendTitle : 'Legend';
+        options.scaleDependent = typeof options.scaleDependent == 'boolean' ? options.scaleDependent : true;
+        options.layerDivClasses = options.layerDivClasses || [];
+        // if legend display is scale dependent, make sure the mapMove object is initialized first
+        if (options.scaleDependent) {
+            mapMove_1.default.checkInit();
+        }
+        this.$divElement = $('#' + divId);
+        this._legendItems = legendItems;
+        this.layerGroup = new LayerGroup();
+        this._buildTree(legendItems);
+        this.legendId = makeGuid_1.default();
+        this.$divElement.append(this.layerGroup.getLegendHtml(this.legendId, options));
+        for (var _a = 0, _b = this.layerGroup.allLayerArray; _a < _b.length; _a++) {
+            var l = _b[_a];
+            l.applyCollapse();
+        }
+        var _this = this;
+        //// if legend display is scale dependent, make sure the mapMove object is initialized first
+        if (options.scaleDependent) {
+            mapMove_1.default.checkInit();
+            mapMove_1.default.addCallback(function (ext, zoom, evt) {
+                if (typeof evt == 'undefined' || evt == 'change:resolution') {
+                    for (var _i = 0, _a = this.layerGroup.allLayerArray; _i < _a.length; _i++) {
+                        var lyr = _a[_i];
+                        var $lyrLi = $('#' + lyr.id + '-layer-li');
+                        if (zoom > lyr.maxZoom || zoom < lyr.minZoom) {
+                            $lyrLi.addClass('layer-not-visible');
+                        }
+                        else {
+                            $lyrLi.removeClass('layer-not-visible');
+                        }
+                    }
+                }
+            }, this, 100, true, 'legend1');
+        }
+        // <editor-fold desc="add event listeners">
+        this.$divElement.find(".suppress-by-extent").change(function () {
+            var legendLayerLis = $('.legend-layer-li');
+            if (this.checked) {
+                legendLayerLis.removeClass('layer-force-show');
+            }
+            else {
+                legendLayerLis.addClass('layer-force-show');
+            }
+        });
+        this.$divElement.find('.legend-check').change(function () {
+            var lyrId = this.id.replace('-legend-layer-check', '');
+            _this.layerGroup.allLayerLookup[lyrId].visible = this.checked;
+        });
+        this.$divElement.find('.legend-layer-group > input[type=checkbox]').change(function () {
+            $(this).siblings('ul').find('input[type=checkbox]').prop('checked', this.checked).trigger('change');
+        });
+        this.$divElement.find('.layer-group-expander').click(function () {
+            var $this = $(this);
+            $this.removeClass('legend-layer-group-initial-collapse');
+            $this.siblings('ul').slideToggle();
+            if ($this.hasClass('legend-layer-group-collapsed')) {
+                $this.removeClass('legend-layer-group-collapsed');
+                $this.html('&#9660;');
+            }
+            else {
+                $this.addClass('legend-layer-group-collapsed');
+                $this.html('&#9654;');
+            }
+        });
+        this.$divElement.find('.legend-layer-group-initial-collapse').trigger('click');
+        // </editor-fold>
+    }
+    /**
+     * @param {Array} [legendItems=this._layerConfig] the legend items
+     * @param {Array} [parents=[]] the ordered list of groups in which this item is a member
+     * @private
+     */
+    LayerLegend.prototype._buildTree = function (legendItems, parents) {
+        if (legendItems.length == 0) {
+            return;
+        }
+        var oneItem = legendItems[0];
+        //reset the parent if the item is in the base array
+        if (this._legendItems.indexOf(oneItem) > -1 || typeof parents == 'undefined') {
+            parents = [];
+        }
+        if (typeof oneItem.groupName !== 'undefined') {
+            var groupItem = legendItems[0];
+            var newGroup = this.layerGroup.addGroup(groupItem, parents);
+            parents.push(newGroup.groupId);
+            this._buildTree(oneItem.items, parents);
+        }
+        else {
+            /**
+             * @type {LayerBase}
+             */
+            var layerItem = legendItems[0];
+            this.layerGroup.addLegendLayer(layerItem, parents);
+        }
+        this._buildTree(legendItems.slice(1), parents);
+    };
+    return LayerLegend;
+}());
+exports.LayerLegend = LayerLegend;
+nm.LayerLegend = LayerLegend;
+exports.default = LayerLegend;
+
+
+/***/ }),
+
+/***/ 2:
+/***/ (function(module, exports) {
+
+module.exports = ol;
+
+/***/ }),
+
+/***/ 3:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('util');
+/**
+ * guids are used to uniquely identify groups and features
+ * @returns {string} a new guid
+ */
+function makeGuid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+        .replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : r & 0x3 | 0x8;
+        return v.toString(16);
+    });
+}
+exports.makeGuid = makeGuid;
+nm.makeGuid = makeGuid;
+exports.default = makeGuid;
+
+
+/***/ }),
+
+/***/ 4:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Created by gavorhes on 12/8/2015.
+ */
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('olHelpers');
+/**
+ * base interaction
+ */
+var MapInteractionBase = (function () {
+    /**
+     * map interaction base
+     * @param subtype - the interaction subtype
+     */
+    function MapInteractionBase(subtype) {
+        this._map = null;
+        this._initialized = false;
+        this._subtype = subtype;
+    }
+    /**
+     * base initializer, returns true for already initialized
+     * @param theMap - the ol Map
+     * @returns true for already initialized
+     */
+    MapInteractionBase.prototype.init = function (theMap) {
+        if (!this._initialized) {
+            this._map = theMap;
+            this._initialized = true;
+        }
+    };
+    Object.defineProperty(MapInteractionBase.prototype, "map", {
+        /**
+         * get reference to the ol map object
+         * @returns {ol.Map} the map object
+         */
+        get: function () {
+            return this._map;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MapInteractionBase.prototype, "initialized", {
+        /**
+         * get if is initialized
+         * @returns {boolean} is initialized
+         */
+        get: function () {
+            return this._initialized;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Check the initialization status and throw exception if not valid yet
+     * @protected
+     */
+    MapInteractionBase.prototype._checkInit = function () {
+        if (!this.initialized) {
+            var msg = this._subtype + " object not initialized";
+            alert(msg);
+            console.log(msg);
+            throw msg;
+        }
+    };
+    /**
+     * Check the initialization status and throw exception if not valid yet
+     */
+    MapInteractionBase.prototype.checkInit = function () {
+        this._checkInit();
+    };
+    return MapInteractionBase;
+}());
+exports.MapInteractionBase = MapInteractionBase;
+nm.MapInteractionBase = MapInteractionBase;
+exports.default = MapInteractionBase;
+
+
+/***/ }),
+
+/***/ 5:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var mapPopupCls_1 = __webpack_require__(13);
+/**
+ * The single popup object catch is that it is common to multimap pages
+ * @type {MapPopupCls}
+ */
+exports.mapPopup = new mapPopupCls_1.default();
+exports.default = exports.mapPopup;
+
+
+/***/ }),
+
+/***/ 6:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 12/15/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var quickMapBase_1 = __webpack_require__(14);
+var provide_1 = __webpack_require__(0);
+var mapMove_1 = __webpack_require__(7);
+var mapPopup_1 = __webpack_require__(5);
+var nm = provide_1.default('olHelpers');
+/**
+ * Sets up a map with some default parameters and initializes
+ * mapMove and mapPopup
+ *
+ * @param {object} [options={}] config options
+ * @param {string} [options.divId=map] map div id
+ * @param {object} [options.center={}] center config object
+ * @param {number} [options.center.x=-10018378] center x, web mercator x or lon
+ * @param {number} [options.center.y=5574910] center y, web mercator y or lat
+ * @param {number} [options.zoom=7] zoom level
+ * @param {number} [options.minZoom=undefined] min zoom
+ * @param {number} [options.maxZoom=undefined] max zoom
+ * @param {boolean} [options.baseSwitcher=true] if add base map switcher
+ * @param {boolean} [options.fullScreen=false] if add base map switcher
+ * @returns {ol.Map} the ol map
+ */
+function quickMap(options) {
+    if (options === void 0) { options = {}; }
+    var m = quickMapBase_1.quickMapBase(options);
+    mapMove_1.default.init(m);
+    mapPopup_1.default.init(m);
+    return m;
+}
+exports.quickMap = quickMap;
+nm.quickMap = quickMap;
+exports.default = quickMap;
+
+
+/***/ }),
+
+/***/ 69:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2505,9 +2520,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by gavorhes on 9/23/2016.
  */
-var quickMap_1 = __webpack_require__(7);
+var quickMap_1 = __webpack_require__(6);
 var LayerEsriMapServer_1 = __webpack_require__(15);
-var LayerLegend_1 = __webpack_require__(14);
+var LayerLegend_1 = __webpack_require__(18);
 var map = quickMap_1.quickMap();
 var wisDotRegions = new LayerEsriMapServer_1.LayerEsriMapServer('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/Metamanager_regions/MapServer');
 var sixYearPlan = new LayerEsriMapServer_1.LayerEsriMapServer('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/SixYearPlan/MapServer', { name: 'Six Year Plan', legendCollapse: true });
@@ -2529,90 +2544,77 @@ var legend = new LayerLegend_1.default(layerArray, 'legend-container', {});
 
 
 /***/ }),
-/* 42 */,
-/* 43 */
+
+/***/ 7:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var mapMoveCls_1 = __webpack_require__(12);
+/**
+ * The single map move object catch is that it is common to multimap pages
+ * @type {MapMoveCls}
+ */
+exports.mapMove = new mapMoveCls_1.default();
+exports.default = exports.mapMove;
+
+
+/***/ }),
+
+/***/ 8:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var $ = __webpack_require__(1);
-var makeGuid_1 = __webpack_require__(3);
+/**
+ * Created by gavorhes on 10/3/2016.
+ */
 var ol = __webpack_require__(2);
-var projections_1 = __webpack_require__(16);
-var invalidClass = 'geocoder-invalid';
-var geocoderLoadingClass = 'geocoder-loading';
-// let testAddress = '65 7th Street, Prairie du Sac, WI';
-var Geocode = (function () {
-    function Geocode(mapDiv, map) {
-        var _this = this;
-        var inputGuid = makeGuid_1.makeGuid();
-        var buttonGuid = makeGuid_1.makeGuid();
-        this.map = map;
-        this.indicationLayer = new ol.layer.Vector({
-            source: new ol.source.Vector(),
-            style: new ol.style.Style({
-                image: new ol.style.Circle({
-                    radius: 12,
-                    fill: new ol.style.Fill({ color: 'rgba(255,0,0,0.5)' }),
-                    stroke: new ol.style.Stroke({ color: 'red', width: 1 })
-                })
-            })
-        });
-        this.map.addLayer(this.indicationLayer);
-        $(mapDiv).append('<div class="geocoder-el">' +
-            ("<input type=\"text\" id=\"" + inputGuid + "\">") +
-            ("<button id=\"" + buttonGuid + "\">Search</button>") +
-            '</div>');
-        this.theButton = document.getElementById(buttonGuid);
-        this.theInput = document.getElementById(inputGuid);
-        this.reset();
-        var $theButton = $(this.theButton);
-        var $theInput = $(this.theInput);
-        $theButton.click(function () {
-            $theButton.addClass(geocoderLoadingClass);
-            _this.theButton.disabled = true;
-            _this.indicationLayer.getSource().clear();
-            $.get("https://geocode.xyz/" + _this.theInput.value + "?geoit=json", {}, function (d) {
-                var lat = parseFloat(d['latt']);
-                var lon = parseFloat(d['longt']);
-                if ((lat == 0 && lon == 0) || d['error']) {
-                    $theInput.addClass(invalidClass);
-                    _this.theInput.title = 'Specified Location Invalid';
-                    _this.theButton.title = 'Specified Location Invalid';
-                }
-                else {
-                    var v = _this.map.getView();
-                    var p = new ol.geom.Point([lon, lat]);
-                    var feat = new ol.Feature(p);
-                    _this.indicationLayer.getSource().addFeature(feat);
-                    p.transform(projections_1.proj4326, projections_1.proj3857);
-                    v.setCenter(p.getCoordinates());
-                    v.setZoom(13);
-                }
-                $theButton.removeClass(geocoderLoadingClass);
-                _this.theButton.disabled = false;
-            }, 'json');
-        });
-        $(this.theInput).keyup(function (evt) {
-            _this.theButton.disabled = _this.theInput.value.length == 0;
-            $theInput.removeClass(invalidClass);
-            _this.theInput.title = '';
-            _this.theButton.title = '';
-            if (!_this.theButton.disabled && evt.keyCode == 13) {
-                $theButton.click();
-            }
-        });
-    }
-    Geocode.prototype.reset = function () {
-        this.theButton.disabled = true;
-        this.theInput.value = '';
-    };
-    return Geocode;
-}());
-exports.Geocode = Geocode;
+exports.proj4326 = new ol.proj.Projection({ code: 'EPSG:4326' });
+exports.proj3857 = new ol.proj.Projection({ code: 'EPSG:3857' });
+exports.proj3070 = new ol.proj.Projection({ code: 'EPSG:3070' });
+
+
+/***/ }),
+
+/***/ 9:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('util.checkDefined');
+/**
+ * check if the input is undefined or null
+ * @param input - input pointer
+ * @returns true undefined or null
+ */
+function undefinedOrNull(input) {
+    "use strict";
+    return (typeof input === 'undefined' || input === null);
+}
+exports.undefinedOrNull = undefinedOrNull;
+nm.undefinedOrNull = undefinedOrNull;
+/**
+ * check if the input is defined and not null
+ * @param input - input pointer
+ * @returns true defined and not null
+ */
+function definedAndNotNull(input) {
+    "use strict";
+    return !(undefinedOrNull(input));
+}
+exports.definedAndNotNull = definedAndNotNull;
+nm.definedAndNotNull = definedAndNotNull;
 
 
 /***/ })
-/******/ ]);
+
+/******/ });
 //# sourceMappingURL=simple_map.js.map

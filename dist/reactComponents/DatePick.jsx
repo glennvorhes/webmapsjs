@@ -25,12 +25,12 @@ var DatePick = (function (_super) {
     __extends(DatePick, _super);
     function DatePick(props, context) {
         var _this = _super.call(this, props, context) || this;
-        _this.defaultId = makeGuid_1.default();
+        _this.elId = _this.props.id || makeGuid_1.default();
         return _this;
     }
     DatePick.prototype.componentDidMount = function () {
         var _this = this;
-        var $el = $('#' + (this.props.id || this.defaultId));
+        var $el = $('#' + (this.elId));
         $el.datepicker({
             onSelect: function () {
                 _this.props.change($el.val());
@@ -38,9 +38,22 @@ var DatePick = (function (_super) {
         });
     };
     DatePick.prototype.render = function () {
+        var params = {
+            id: this.elId,
+            type: 'text',
+            style: { margin: "0 10px 0 5px", width: '73px', textAlign: 'center' },
+            readOnly: true
+        };
+        if (this.props.val) {
+            params['value'] = this.props.val;
+        }
+        else {
+            params['defaultValue'] = dateFormat_1.dateToString(this.props.initialDate || new Date());
+        }
         return <span className="date-pick">
-            <label>{this.props.label}</label>
-            <input id={this.props.id || this.defaultId} type="text" style={{ margin: "0 10px 0 5px", width: '73px', textAlign: 'center' }} defaultValue={dateFormat_1.dateToString(this.props.initialDate || new Date())} readOnly={true}/>
+            <label htmlFor={this.elId}>{this.props.label}</label>
+            <input id={this.elId} type="text" style={{ margin: "0 10px 0 5px", width: '73px', textAlign: 'center' }} defaultValue={dateFormat_1.dateToString(this.props.initialDate || new Date())} readOnly={true}/>
+            <input {...params}/>
         </span>;
     };
     return DatePick;

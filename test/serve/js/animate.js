@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 33);
+/******/ 	return __webpack_require__(__webpack_require__.s = 61);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -147,44 +147,6 @@ exports.default = makeGuid;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/**
- * Created by gavorhes on 11/3/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var mapMoveCls_1 = __webpack_require__(10);
-/**
- * The single map move object catch is that it is common to multimap pages
- * @type {MapMoveCls}
- */
-exports.mapMove = new mapMoveCls_1.default();
-exports.default = exports.mapMove;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 11/3/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var mapPopupCls_1 = __webpack_require__(11);
-/**
- * The single popup object catch is that it is common to multimap pages
- * @type {MapPopupCls}
- */
-exports.mapPopup = new mapPopupCls_1.default();
-exports.default = exports.mapPopup;
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
@@ -264,7 +226,26 @@ exports.default = MapInteractionBase;
 
 
 /***/ }),
-/* 7 */
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var mapPopupCls_1 = __webpack_require__(13);
+/**
+ * The single popup object catch is that it is common to multimap pages
+ * @type {MapPopupCls}
+ */
+exports.mapPopup = new mapPopupCls_1.default();
+exports.default = exports.mapPopup;
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -273,9 +254,9 @@ exports.default = MapInteractionBase;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickMapBase_1 = __webpack_require__(12);
+var quickMapBase_1 = __webpack_require__(14);
 var provide_1 = __webpack_require__(0);
-var mapMove_1 = __webpack_require__(4);
+var mapMove_1 = __webpack_require__(7);
 var mapPopup_1 = __webpack_require__(5);
 var nm = provide_1.default('olHelpers');
 /**
@@ -307,13 +288,81 @@ exports.default = quickMap;
 
 
 /***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var mapMoveCls_1 = __webpack_require__(12);
+/**
+ * The single map move object catch is that it is common to multimap pages
+ * @type {MapMoveCls}
+ */
+exports.mapMove = new mapMoveCls_1.default();
+exports.default = exports.mapMove;
+
+
+/***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var zoomResolutionConvert = __webpack_require__(13);
+/**
+ * Created by gavorhes on 10/3/2016.
+ */
+var ol = __webpack_require__(2);
+exports.proj4326 = new ol.proj.Projection({ code: 'EPSG:4326' });
+exports.proj3857 = new ol.proj.Projection({ code: 'EPSG:3857' });
+exports.proj3070 = new ol.proj.Projection({ code: 'EPSG:3070' });
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('util.checkDefined');
+/**
+ * check if the input is undefined or null
+ * @param input - input pointer
+ * @returns true undefined or null
+ */
+function undefinedOrNull(input) {
+    "use strict";
+    return (typeof input === 'undefined' || input === null);
+}
+exports.undefinedOrNull = undefinedOrNull;
+nm.undefinedOrNull = undefinedOrNull;
+/**
+ * check if the input is defined and not null
+ * @param input - input pointer
+ * @returns true defined and not null
+ */
+function definedAndNotNull(input) {
+    "use strict";
+    return !(undefinedOrNull(input));
+}
+exports.definedAndNotNull = definedAndNotNull;
+nm.definedAndNotNull = definedAndNotNull;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var zoomResolutionConvert = __webpack_require__(16);
 var provide_1 = __webpack_require__(0);
 var makeGuid_1 = __webpack_require__(3);
 var $ = __webpack_require__(1);
@@ -716,40 +765,93 @@ exports.default = LayerBase;
 
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('util.checkDefined');
-/**
- * check if the input is undefined or null
- * @param input - input pointer
- * @returns true undefined or null
- */
-function undefinedOrNull(input) {
-    "use strict";
-    return (typeof input === 'undefined' || input === null);
-}
-exports.undefinedOrNull = undefinedOrNull;
-nm.undefinedOrNull = undefinedOrNull;
-/**
- * check if the input is defined and not null
- * @param input - input pointer
- * @returns true defined and not null
- */
-function definedAndNotNull(input) {
-    "use strict";
-    return !(undefinedOrNull(input));
-}
-exports.definedAndNotNull = definedAndNotNull;
-nm.definedAndNotNull = definedAndNotNull;
+var $ = __webpack_require__(1);
+var makeGuid_1 = __webpack_require__(3);
+var ol = __webpack_require__(2);
+var projections_1 = __webpack_require__(8);
+var invalidClass = 'geocoder-invalid';
+var geocoderLoadingClass = 'geocoder-loading';
+// let testAddress = '65 7th Street, Prairie du Sac, WI';
+var Geocode = (function () {
+    function Geocode(mapDiv, map) {
+        var _this = this;
+        var inputGuid = makeGuid_1.makeGuid();
+        var buttonGuid = makeGuid_1.makeGuid();
+        this.map = map;
+        this.indicationLayer = new ol.layer.Vector({
+            source: new ol.source.Vector(),
+            style: new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: 12,
+                    fill: new ol.style.Fill({ color: 'rgba(255,0,0,0.5)' }),
+                    stroke: new ol.style.Stroke({ color: 'red', width: 1 })
+                })
+            })
+        });
+        this.map.addLayer(this.indicationLayer);
+        $(mapDiv).append('<div class="geocoder-el">' +
+            ("<input type=\"text\" id=\"" + inputGuid + "\">") +
+            ("<button id=\"" + buttonGuid + "\">Search</button>") +
+            '</div>');
+        this.theButton = document.getElementById(buttonGuid);
+        this.theInput = document.getElementById(inputGuid);
+        this.reset();
+        var $theButton = $(this.theButton);
+        var $theInput = $(this.theInput);
+        $theButton.click(function (evt) {
+            evt.preventDefault();
+            $theButton.addClass(geocoderLoadingClass);
+            _this.theButton.disabled = true;
+            _this.indicationLayer.getSource().clear();
+            $.get("https://geocode.xyz/" + _this.theInput.value + "?geoit=json", {}, function (d) {
+                var lat = parseFloat(d['latt']);
+                var lon = parseFloat(d['longt']);
+                if ((lat == 0 && lon == 0) || d['error']) {
+                    $theInput.addClass(invalidClass);
+                    _this.theInput.title = 'Specified Location Invalid';
+                    _this.theButton.title = 'Specified Location Invalid';
+                }
+                else {
+                    var v = _this.map.getView();
+                    var p = new ol.geom.Point([lon, lat]);
+                    var feat = new ol.Feature(p);
+                    _this.indicationLayer.getSource().addFeature(feat);
+                    p.transform(projections_1.proj4326, projections_1.proj3857);
+                    v.setCenter(p.getCoordinates());
+                    v.setZoom(13);
+                }
+                $theButton.removeClass(geocoderLoadingClass);
+                _this.theButton.disabled = false;
+            }, 'json');
+        });
+        $(this.theInput).keyup(function (evt) {
+            _this.theButton.disabled = _this.theInput.value.length == 0;
+            $theInput.removeClass(invalidClass);
+            _this.theInput.title = '';
+            _this.theButton.title = '';
+            if (!_this.theButton.disabled && evt.keyCode == 13) {
+                evt.preventDefault();
+                $theButton.click();
+            }
+        });
+    }
+    Geocode.prototype.reset = function () {
+        this.theButton.disabled = true;
+        this.theInput.value = '';
+    };
+    return Geocode;
+}());
+exports.Geocode = Geocode;
 
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -765,7 +867,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapInteractionBase_1 = __webpack_require__(6);
+var mapInteractionBase_1 = __webpack_require__(4);
 var checkDefined = __webpack_require__(9);
 var provide_1 = __webpack_require__(0);
 var makeGuid_1 = __webpack_require__(3);
@@ -994,7 +1096,7 @@ exports.default = MapMoveCls;
 
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1013,7 +1115,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapInteractionBase_1 = __webpack_require__(6);
+var mapInteractionBase_1 = __webpack_require__(4);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
@@ -1429,7 +1531,7 @@ exports.default = MapPopupCls;
 
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1441,7 +1543,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
-var geocode_1 = __webpack_require__(43);
+var geocode_1 = __webpack_require__(11);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -1532,89 +1634,6 @@ exports.default = quickMapBase;
 
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 12/14/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('olHelpers.zoomResolutionConvert');
-var _zoomResLookup = [
-    156543.03392804097,
-    78271.51696402048,
-    39135.75848201024,
-    19567.87924100512,
-    9783.93962050256,
-    4891.96981025128,
-    2445.98490512564,
-    1222.99245256282,
-    611.49622628141,
-    305.748113140705,
-    152.8740565703525,
-    76.43702828517625,
-    38.21851414258813,
-    19.109257071294063,
-    9.554628535647032,
-    4.777314267823516,
-    2.388657133911758,
-    1.194328566955879,
-    0.5971642834779395,
-    0.29858214173896974,
-    0.14929107086948487,
-    0.07464553543474244,
-    0.03732276771737122,
-    0.01866138385868561,
-    0.009330691929342804,
-    0.004665345964671402,
-    0.002332672982335701,
-    0.0011663364911678506,
-    0.0005831682455839253 //28
-];
-/**
- * Get the resolution given the zoom level
- * @param {number} zoomLevel - the zoom level
- * @returns {number|*} the map resolution
- */
-function zoomToResolution(zoomLevel) {
-    "use strict";
-    if (typeof zoomLevel == 'number') {
-        if (zoomLevel % 1 === 0 && zoomLevel >= 0 && zoomLevel <= 28) {
-            return _zoomResLookup[zoomLevel];
-        }
-        else {
-            console.log("invalid zoom level provided: " + zoomLevel);
-            return undefined;
-        }
-    }
-    else {
-        return undefined;
-    }
-}
-exports.zoomToResolution = zoomToResolution;
-nm.zoomToResolution = zoomToResolution;
-/**
- * Get resolution from the zoom level
- * @param {number} resolution - the resolution
- * @returns {number|*} the zoom level
- */
-function resolutionToZoom(resolution) {
-    for (var i = 0; i < _zoomResLookup.length; i++) {
-        if (resolution >= _zoomResLookup[i]) {
-            return i;
-        }
-    }
-    return 0;
-}
-exports.resolutionToZoom = resolutionToZoom;
-nm.resolutionToZoom = resolutionToZoom;
-
-
-/***/ }),
-/* 14 */,
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1634,7 +1653,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by gavorhes on 12/7/2015.
  */
-var LayerBase_1 = __webpack_require__(8);
+var LayerBase_1 = __webpack_require__(10);
 var esriToOl = __webpack_require__(17);
 var mapPopup_1 = __webpack_require__(5);
 var provide_1 = __webpack_require__(0);
@@ -1709,7 +1728,10 @@ var LayerEsriMapServer = (function (_super) {
         options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
         _this._esriFormat = new ol.format.EsriJSON();
         _this._popupRequest = null;
-        _this.addLegendContent();
+        options.getLegend = typeof options.getLegend === 'boolean' ? options.getLegend : true;
+        if (options.getLegend) {
+            _this.addLegendContent();
+        }
         if (options.addPopup) {
             mapPopup_1.default.addMapServicePopup(_this);
         }
@@ -1803,15 +1825,81 @@ exports.default = LayerEsriMapServer;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/**
+ * Created by gavorhes on 12/14/2015.
+ */
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('olHelpers.zoomResolutionConvert');
+var _zoomResLookup = [
+    156543.03392804097,
+    78271.51696402048,
+    39135.75848201024,
+    19567.87924100512,
+    9783.93962050256,
+    4891.96981025128,
+    2445.98490512564,
+    1222.99245256282,
+    611.49622628141,
+    305.748113140705,
+    152.8740565703525,
+    76.43702828517625,
+    38.21851414258813,
+    19.109257071294063,
+    9.554628535647032,
+    4.777314267823516,
+    2.388657133911758,
+    1.194328566955879,
+    0.5971642834779395,
+    0.29858214173896974,
+    0.14929107086948487,
+    0.07464553543474244,
+    0.03732276771737122,
+    0.01866138385868561,
+    0.009330691929342804,
+    0.004665345964671402,
+    0.002332672982335701,
+    0.0011663364911678506,
+    0.0005831682455839253 //28
+];
 /**
- * Created by gavorhes on 10/3/2016.
+ * Get the resolution given the zoom level
+ * @param {number} zoomLevel - the zoom level
+ * @returns {number|*} the map resolution
  */
-var ol = __webpack_require__(2);
-exports.proj4326 = new ol.proj.Projection({ code: 'EPSG:4326' });
-exports.proj3857 = new ol.proj.Projection({ code: 'EPSG:3857' });
-exports.proj3070 = new ol.proj.Projection({ code: 'EPSG:3070' });
+function zoomToResolution(zoomLevel) {
+    "use strict";
+    if (typeof zoomLevel == 'number') {
+        if (zoomLevel % 1 === 0 && zoomLevel >= 0 && zoomLevel <= 28) {
+            return _zoomResLookup[zoomLevel];
+        }
+        else {
+            console.log("invalid zoom level provided: " + zoomLevel);
+            return undefined;
+        }
+    }
+    else {
+        return undefined;
+    }
+}
+exports.zoomToResolution = zoomToResolution;
+nm.zoomToResolution = zoomToResolution;
+/**
+ * Get resolution from the zoom level
+ * @param {number} resolution - the resolution
+ * @returns {number|*} the zoom level
+ */
+function resolutionToZoom(resolution) {
+    for (var i = 0; i < _zoomResLookup.length; i++) {
+        if (resolution >= _zoomResLookup[i]) {
+            return i;
+        }
+    }
+    return 0;
+}
+exports.resolutionToZoom = resolutionToZoom;
+nm.resolutionToZoom = resolutionToZoom;
 
 
 /***/ }),
@@ -2180,7 +2268,332 @@ nm.makeMapServiceLegend = makeMapServiceLegend;
 
 
 /***/ }),
-/* 18 */
+/* 18 */,
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 11/2/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var range_change_1 = __webpack_require__(20);
+var $ = __webpack_require__(1);
+var nm = provide_1.default('domUtil');
+/**
+ * @callback mediaCallback
+ * @param {number} tm
+ */
+function timeToLocalDateString(tm) {
+    "use strict";
+    var d = new Date(tm);
+    var p1 = d.toLocaleTimeString().split(' ');
+    var p2 = p1[0].split(':');
+    p2 = p2.slice(0, 2);
+    return d.toLocaleDateString() + '<br>' + p2.join(':') + ' ' + p1[1];
+}
+var MediaControl = (function () {
+    /**
+     *
+     * @param element
+     * @param changeFunc
+     * @param mediaConfig
+     */
+    function MediaControl(element, changeFunc, mediaConfig) {
+        if (changeFunc === void 0) { changeFunc = function () {
+            return;
+        }; }
+        if (mediaConfig === void 0) { mediaConfig = {}; }
+        var _this = this;
+        mediaConfig.min = typeof mediaConfig.min == 'number' ? mediaConfig.min : 0;
+        mediaConfig.max = typeof mediaConfig.max == 'number' ? mediaConfig.max : 100;
+        mediaConfig.val = typeof mediaConfig.val == 'number' ? mediaConfig.val : 0;
+        mediaConfig.step = typeof mediaConfig.step == 'number' ? mediaConfig.step : 5;
+        mediaConfig.playInterval = typeof mediaConfig.playInterval == 'number' ? mediaConfig.playInterval : 500;
+        mediaConfig.showAsDate = typeof mediaConfig.showAsDate == 'boolean' ? mediaConfig.showAsDate : false;
+        if (typeof element == 'string') {
+            this._container = $('#' + element);
+        }
+        else if (typeof element.style !== 'undefined') {
+            this._container = $(element);
+        }
+        else {
+            this._container = element;
+        }
+        this._container.addClass('media-control-container');
+        this._playInterval = mediaConfig.playInterval;
+        this._changeFunc = changeFunc;
+        this._showAsDate = mediaConfig.showAsDate;
+        this._currentValue = undefined;
+        this._min = undefined;
+        this._max = undefined;
+        this._step = undefined;
+        this._playing = false;
+        var htmlStr = '<span class="media-player-button media-back"></span>' +
+            '<span class="media-player-button media-play"></span>' +
+            '<span class="media-player-button media-pause media-disabled"></span>' +
+            '<span class="media-player-button media-stop media-disabled" ></span>' +
+            '<span class="media-player-button media-ahead"></span>' +
+            "<input type=\"range\">" +
+            "<div class=\"media-control-value-label-container\">" +
+            "<span class=\"media-control-value-label-min\"></span>" +
+            "<span class=\"media-control-value-label-val\"></span>" +
+            "<span class=\"media-control-value-label-max\"></span>" +
+            "</div>";
+        this._container.append(htmlStr);
+        // let btnPause = this._container.find('.media-pause');
+        var btnPlay = this._container.find('.media-play');
+        this._$btnStop = this._container.find('.media-stop');
+        var btnAhead = this._container.find('.media-ahead');
+        var btnBack = this._container.find('.media-back');
+        this._$slider = this._container.find('input[type=range]');
+        this._$valLabelMin = this._container.find('.media-control-value-label-min');
+        this._$valLabelVal = this._container.find('.media-control-value-label-val');
+        this._$valLabelMax = this._container.find('.media-control-value-label-max');
+        this.setMinMaxValueStep(mediaConfig.min, mediaConfig.max, mediaConfig.val, mediaConfig.step);
+        range_change_1.rangeChange(this._$slider, function (newVal) {
+            _this.currentValue = newVal;
+        }, 100);
+        var ___this = this;
+        btnPlay.click(function () {
+            var $this = $(this);
+            $this.addClass('media-disabled');
+            ___this._$btnStop.removeClass('media-disabled');
+            btnAhead.addClass('media-locked');
+            btnBack.addClass('media-locked');
+            ___this._$slider.prop('disabled', true);
+            ___this._playing = true;
+            ___this._interval = setInterval(function () {
+                ___this.currentValue += ___this._step;
+            }, ___this._playInterval);
+        });
+        this._$btnStop.click(function () {
+            clearInterval(___this._interval);
+            var $this = $(this);
+            $this.addClass('media-disabled');
+            btnPlay.removeClass('media-disabled');
+            btnAhead.removeClass('media-locked');
+            btnBack.removeClass('media-locked');
+            ___this._$slider.prop('disabled', false);
+            ___this._playing = false;
+        });
+        btnAhead.click(function () {
+            ___this.currentValue = ___this.currentValue + ___this._step;
+        });
+        btnBack.click(function () {
+            ___this.currentValue = ___this.currentValue - ___this._step;
+        });
+    }
+    MediaControl.prototype.stopPlaying = function () {
+        if (this._playing) {
+            this._$btnStop.trigger('click');
+        }
+    };
+    Object.defineProperty(MediaControl.prototype, "playing", {
+        get: function () {
+            return this._playing;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MediaControl.prototype, "min", {
+        get: function () {
+            return this._min;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MediaControl.prototype, "max", {
+        get: function () {
+            return this._max;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MediaControl.prototype, "step", {
+        get: function () {
+            return this._step;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MediaControl.prototype, "currentValue", {
+        get: function () {
+            return this._currentValue;
+        },
+        set: function (newValue) {
+            if (newValue > this._max) {
+                newValue = this._min;
+            }
+            else if (newValue < this._min) {
+                newValue = this._max;
+            }
+            this._currentValue = newValue;
+            this._$slider.val(this._currentValue.toFixed(2));
+            if (this._showAsDate) {
+                this._$valLabelVal.html(timeToLocalDateString(this.currentValue));
+            }
+            else {
+                this._$valLabelVal.html(this.currentValue.toString());
+            }
+            this._changeFunc(newValue);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * set min and max value with step
+     * @param {number} newMin the new min
+     * @param {number} newMax the new mas
+     * @param {number} [newValue=newMin] the value to set
+     * @param {number} [newStep=(newMax-newMin)/20] step value
+     */
+    MediaControl.prototype.setMinMaxValueStep = function (newMin, newMax, newValue, newStep) {
+        this._min = newMin;
+        this._max = newMax;
+        newValue = typeof newValue == 'number' ? newValue : newMin;
+        newStep = typeof newStep == 'number' ? newStep : (newMax - newMin) / 20;
+        this._currentValue = newValue;
+        this._step = newStep;
+        this._$slider.prop('min', this.min.toString());
+        this._$slider.prop('max', this.max.toString());
+        this._$slider.prop('step', this.step.toString());
+        this._$slider.val(this.currentValue.toString());
+        if (this._showAsDate) {
+            this._$valLabelMin.html(timeToLocalDateString(this._min));
+            this._$valLabelVal.html(timeToLocalDateString(this.currentValue));
+            this._$valLabelMax.html(timeToLocalDateString(this._max));
+        }
+        else {
+            this._$valLabelMin.html(this._min.toString());
+            this._$valLabelVal.html(this.currentValue.toString());
+            this._$valLabelMax.html(this._max.toString());
+        }
+    };
+    Object.defineProperty(MediaControl.prototype, "changeFunction", {
+        /**
+         *
+         * @param {mediaCallback} newFunc the callback on change
+         */
+        set: function (newFunc) {
+            this._changeFunc = newFunc;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return MediaControl;
+}());
+exports.MediaControl = MediaControl;
+nm.MediaControl = MediaControl;
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('domUtil');
+var mouseIn = false;
+var mouseDown = false;
+var timeout = null;
+var dragged = false;
+var lastVal;
+/**
+ * Created by gavorhes on 11/2/2015.
+ */
+function triggerCallback(callback, evt) {
+    "use strict";
+    var val = parseFloat(this.value);
+    var min = parseFloat(this.min);
+    var max = parseFloat(this.max);
+    var step = parseFloat(this.step);
+    if (max - val < step) {
+        val = max;
+    }
+    var percent = (val - min) / (max - min);
+    if (typeof lastVal == 'number' && val == lastVal) {
+        return;
+    }
+    lastVal = val;
+    callback(val, percent, evt);
+}
+/**
+ * Add a variety of listeners for range inputs applied to a common callback
+ * @param  $slider - jquery reference to the slider
+ * @param {rangeChangeCallback} callback - the callback
+ * @param {number} [changeTimeout=75] before the callback is called
+ * @this {jQuery}
+ * @returns {jQuery} the jQuery object
+ */
+function rangeChange($slider, callback, changeTimeout) {
+    changeTimeout = typeof changeTimeout == 'number' ? changeTimeout : 75;
+    $slider.mouseenter(function () {
+        mouseIn = true;
+    });
+    $slider.mouseleave(function () {
+        mouseIn = false;
+        mouseDown = false;
+    });
+    $slider.mousedown(function () {
+        mouseDown = true;
+    });
+    $slider.mouseup(function () {
+        mouseDown = false;
+    });
+    $slider.mousemove(
+    /**
+     *
+     * @param {object} evt - event properties
+     * @this {HTMLElement}
+     */
+    function (evt) {
+        if (!(mouseIn && mouseDown)) {
+            return;
+        }
+        dragged = true;
+        if (lastVal == this['value']) {
+            return;
+        }
+        lastVal = this['value'];
+        if (timeout != null) {
+            clearTimeout(timeout);
+        }
+        var _this = this;
+        timeout = setTimeout(function () {
+            triggerCallback.call(_this, callback, evt);
+            timeout = null;
+        }, changeTimeout);
+    });
+    $slider.keyup(
+    /**
+     *
+     * @param {object} evt - event properties
+     */
+    function (evt) {
+        if (evt.keyCode == 37 || evt.keyCode == 39) {
+            triggerCallback.call(this, callback, evt);
+        }
+    });
+    $slider.change(function (evt) {
+        if (dragged) {
+            dragged = false;
+            return;
+        }
+        triggerCallback.call(this, callback, evt);
+    });
+    return this;
+}
+exports.rangeChange = rangeChange;
+nm.rangeChange = rangeChange;
+
+
+/***/ }),
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2196,8 +2609,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var LayerBase_1 = __webpack_require__(8);
-var mapMove_1 = __webpack_require__(4);
+var LayerBase_1 = __webpack_require__(10);
+var mapMove_1 = __webpack_require__(7);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
@@ -2483,337 +2896,17 @@ exports.default = LayerBaseVector;
 
 
 /***/ }),
-/* 19 */,
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 11/2/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var range_change_1 = __webpack_require__(21);
-var $ = __webpack_require__(1);
-var nm = provide_1.default('domUtil');
-/**
- * @callback mediaCallback
- * @param {number} tm
- */
-function timeToLocalDateString(tm) {
-    "use strict";
-    var d = new Date(tm);
-    var p1 = d.toLocaleTimeString().split(' ');
-    var p2 = p1[0].split(':');
-    p2 = p2.slice(0, 2);
-    return d.toLocaleDateString() + '<br>' + p2.join(':') + ' ' + p1[1];
-}
-var MediaControl = (function () {
-    /**
-     *
-     * @param element
-     * @param changeFunc
-     * @param mediaConfig
-     */
-    function MediaControl(element, changeFunc, mediaConfig) {
-        if (changeFunc === void 0) { changeFunc = function () {
-            return;
-        }; }
-        if (mediaConfig === void 0) { mediaConfig = {}; }
-        var _this = this;
-        mediaConfig.min = typeof mediaConfig.min == 'number' ? mediaConfig.min : 0;
-        mediaConfig.max = typeof mediaConfig.max == 'number' ? mediaConfig.max : 100;
-        mediaConfig.val = typeof mediaConfig.val == 'number' ? mediaConfig.val : 0;
-        mediaConfig.step = typeof mediaConfig.step == 'number' ? mediaConfig.step : 5;
-        mediaConfig.playInterval = typeof mediaConfig.playInterval == 'number' ? mediaConfig.playInterval : 500;
-        mediaConfig.showAsDate = typeof mediaConfig.showAsDate == 'boolean' ? mediaConfig.showAsDate : false;
-        if (typeof element == 'string') {
-            this._container = $('#' + element);
-        }
-        else if (typeof element.style !== 'undefined') {
-            this._container = $(element);
-        }
-        else {
-            this._container = element;
-        }
-        this._container.addClass('media-control-container');
-        this._playInterval = mediaConfig.playInterval;
-        this._changeFunc = changeFunc;
-        this._showAsDate = mediaConfig.showAsDate;
-        this._currentValue = undefined;
-        this._min = undefined;
-        this._max = undefined;
-        this._step = undefined;
-        this._playing = false;
-        var htmlStr = '<span class="media-player-button media-back"></span>' +
-            '<span class="media-player-button media-play"></span>' +
-            '<span class="media-player-button media-pause media-disabled"></span>' +
-            '<span class="media-player-button media-stop media-disabled" ></span>' +
-            '<span class="media-player-button media-ahead"></span>' +
-            "<input type=\"range\">" +
-            "<div class=\"media-control-value-label-container\">" +
-            "<span class=\"media-control-value-label-min\"></span>" +
-            "<span class=\"media-control-value-label-val\"></span>" +
-            "<span class=\"media-control-value-label-max\"></span>" +
-            "</div>";
-        this._container.append(htmlStr);
-        // let btnPause = this._container.find('.media-pause');
-        var btnPlay = this._container.find('.media-play');
-        this._$btnStop = this._container.find('.media-stop');
-        var btnAhead = this._container.find('.media-ahead');
-        var btnBack = this._container.find('.media-back');
-        this._$slider = this._container.find('input[type=range]');
-        this._$valLabelMin = this._container.find('.media-control-value-label-min');
-        this._$valLabelVal = this._container.find('.media-control-value-label-val');
-        this._$valLabelMax = this._container.find('.media-control-value-label-max');
-        this.setMinMaxValueStep(mediaConfig.min, mediaConfig.max, mediaConfig.val, mediaConfig.step);
-        range_change_1.rangeChange(this._$slider, function (newVal) {
-            _this.currentValue = newVal;
-        }, 100);
-        var ___this = this;
-        btnPlay.click(function () {
-            var $this = $(this);
-            $this.addClass('media-disabled');
-            ___this._$btnStop.removeClass('media-disabled');
-            btnAhead.addClass('media-locked');
-            btnBack.addClass('media-locked');
-            ___this._$slider.prop('disabled', true);
-            ___this._playing = true;
-            ___this._interval = setInterval(function () {
-                ___this.currentValue += ___this._step;
-            }, ___this._playInterval);
-        });
-        this._$btnStop.click(function () {
-            clearInterval(___this._interval);
-            var $this = $(this);
-            $this.addClass('media-disabled');
-            btnPlay.removeClass('media-disabled');
-            btnAhead.removeClass('media-locked');
-            btnBack.removeClass('media-locked');
-            ___this._$slider.prop('disabled', false);
-            ___this._playing = false;
-        });
-        btnAhead.click(function () {
-            ___this.currentValue = ___this.currentValue + ___this._step;
-        });
-        btnBack.click(function () {
-            ___this.currentValue = ___this.currentValue - ___this._step;
-        });
-    }
-    MediaControl.prototype.stopPlaying = function () {
-        if (this._playing) {
-            this._$btnStop.trigger('click');
-        }
-    };
-    Object.defineProperty(MediaControl.prototype, "playing", {
-        get: function () {
-            return this._playing;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MediaControl.prototype, "min", {
-        get: function () {
-            return this._min;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MediaControl.prototype, "max", {
-        get: function () {
-            return this._max;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MediaControl.prototype, "step", {
-        get: function () {
-            return this._step;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MediaControl.prototype, "currentValue", {
-        get: function () {
-            return this._currentValue;
-        },
-        set: function (newValue) {
-            if (newValue > this._max) {
-                newValue = this._min;
-            }
-            else if (newValue < this._min) {
-                newValue = this._max;
-            }
-            this._currentValue = newValue;
-            this._$slider.val(this._currentValue.toFixed(2));
-            if (this._showAsDate) {
-                this._$valLabelVal.html(timeToLocalDateString(this.currentValue));
-            }
-            else {
-                this._$valLabelVal.html(this.currentValue.toString());
-            }
-            this._changeFunc(newValue);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * set min and max value with step
-     * @param {number} newMin the new min
-     * @param {number} newMax the new mas
-     * @param {number} [newValue=newMin] the value to set
-     * @param {number} [newStep=(newMax-newMin)/20] step value
-     */
-    MediaControl.prototype.setMinMaxValueStep = function (newMin, newMax, newValue, newStep) {
-        this._min = newMin;
-        this._max = newMax;
-        newValue = typeof newValue == 'number' ? newValue : newMin;
-        newStep = typeof newStep == 'number' ? newStep : (newMax - newMin) / 20;
-        this._currentValue = newValue;
-        this._step = newStep;
-        this._$slider.prop('min', this.min.toString());
-        this._$slider.prop('max', this.max.toString());
-        this._$slider.prop('step', this.step.toString());
-        this._$slider.val(this.currentValue.toString());
-        if (this._showAsDate) {
-            this._$valLabelMin.html(timeToLocalDateString(this._min));
-            this._$valLabelVal.html(timeToLocalDateString(this.currentValue));
-            this._$valLabelMax.html(timeToLocalDateString(this._max));
-        }
-        else {
-            this._$valLabelMin.html(this._min.toString());
-            this._$valLabelVal.html(this.currentValue.toString());
-            this._$valLabelMax.html(this._max.toString());
-        }
-    };
-    Object.defineProperty(MediaControl.prototype, "changeFunction", {
-        /**
-         *
-         * @param {mediaCallback} newFunc the callback on change
-         */
-        set: function (newFunc) {
-            this._changeFunc = newFunc;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return MediaControl;
-}());
-exports.MediaControl = MediaControl;
-nm.MediaControl = MediaControl;
-
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('domUtil');
-var mouseIn = false;
-var mouseDown = false;
-var timeout = null;
-var dragged = false;
-var lastVal;
-/**
- * Created by gavorhes on 11/2/2015.
- */
-function triggerCallback(callback, evt) {
-    "use strict";
-    var val = parseFloat(this.value);
-    var min = parseFloat(this.min);
-    var max = parseFloat(this.max);
-    var step = parseFloat(this.step);
-    if (max - val < step) {
-        val = max;
-    }
-    var percent = (val - min) / (max - min);
-    if (typeof lastVal == 'number' && val == lastVal) {
-        return;
-    }
-    lastVal = val;
-    callback(val, percent, evt);
-}
-/**
- * Add a variety of listeners for range inputs applied to a common callback
- * @param  $slider - jquery reference to the slider
- * @param {rangeChangeCallback} callback - the callback
- * @param {number} [changeTimeout=75] before the callback is called
- * @this {jQuery}
- * @returns {jQuery} the jQuery object
- */
-function rangeChange($slider, callback, changeTimeout) {
-    changeTimeout = typeof changeTimeout == 'number' ? changeTimeout : 75;
-    $slider.mouseenter(function () {
-        mouseIn = true;
-    });
-    $slider.mouseleave(function () {
-        mouseIn = false;
-        mouseDown = false;
-    });
-    $slider.mousedown(function () {
-        mouseDown = true;
-    });
-    $slider.mouseup(function () {
-        mouseDown = false;
-    });
-    $slider.mousemove(
-    /**
-     *
-     * @param {object} evt - event properties
-     * @this {HTMLElement}
-     */
-    function (evt) {
-        if (!(mouseIn && mouseDown)) {
-            return;
-        }
-        dragged = true;
-        if (lastVal == this['value']) {
-            return;
-        }
-        lastVal = this['value'];
-        if (timeout != null) {
-            clearTimeout(timeout);
-        }
-        var _this = this;
-        timeout = setTimeout(function () {
-            triggerCallback.call(_this, callback, evt);
-            timeout = null;
-        }, changeTimeout);
-    });
-    $slider.keyup(
-    /**
-     *
-     * @param {object} evt - event properties
-     */
-    function (evt) {
-        if (evt.keyCode == 37 || evt.keyCode == 39) {
-            triggerCallback.call(this, callback, evt);
-        }
-    });
-    $slider.change(function (evt) {
-        if (dragged) {
-            dragged = false;
-            return;
-        }
-        triggerCallback.call(this, callback, evt);
-    });
-    return this;
-}
-exports.rangeChange = rangeChange;
-nm.rangeChange = rangeChange;
-
-
-/***/ }),
 /* 22 */,
 /* 23 */,
 /* 24 */,
 /* 25 */,
 /* 26 */,
-/* 27 */
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2832,7 +2925,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var LayerBaseVector_1 = __webpack_require__(18);
+var LayerBaseVector_1 = __webpack_require__(21);
 var esriToOl = __webpack_require__(17);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
@@ -2999,7 +3092,7 @@ exports.default = LayerBaseVectorEsri;
 
 
 /***/ }),
-/* 28 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3018,8 +3111,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var LayerBaseXyzTile_1 = __webpack_require__(30);
-var RealEarthAnimateTile_1 = __webpack_require__(32);
+var LayerBaseXyzTile_1 = __webpack_require__(53);
+var RealEarthAnimateTile_1 = __webpack_require__(56);
 var provide_1 = __webpack_require__(0);
 var nm = provide_1.default('layers');
 /**
@@ -3085,8 +3178,26 @@ exports.default = LayerRealEarthTile;
 
 
 /***/ }),
-/* 29 */,
-/* 30 */
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3105,7 +3216,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by gavorhes on 12/4/2015.
  */
-var LayerBase_1 = __webpack_require__(8);
+var LayerBase_1 = __webpack_require__(10);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var nm = provide_1.default('layers');
@@ -3177,7 +3288,8 @@ exports.default = LayerBaseXyzTile;
 
 
 /***/ }),
-/* 31 */
+/* 54 */,
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3309,7 +3421,7 @@ exports.default = RealEarthAnimate;
 
 
 /***/ }),
-/* 32 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3328,7 +3440,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by gavorhes on 12/4/2015.
  */
-var RealEarthAnimate_1 = __webpack_require__(31);
+var RealEarthAnimate_1 = __webpack_require__(55);
 var provide_1 = __webpack_require__(0);
 var nm = provide_1.default('mixin');
 /**
@@ -3381,17 +3493,21 @@ exports.default = RealEarthAnimateTile;
 
 
 /***/ }),
-/* 33 */
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickMap_1 = __webpack_require__(7);
-var LayerRealEarthTile_1 = __webpack_require__(28);
-var media_control_1 = __webpack_require__(20);
+var quickMap_1 = __webpack_require__(6);
+var LayerRealEarthTile_1 = __webpack_require__(33);
+var media_control_1 = __webpack_require__(19);
 var $ = __webpack_require__(1);
-var LayerBaseVectorEsri_1 = __webpack_require__(27);
+var LayerBaseVectorEsri_1 = __webpack_require__(32);
 var LayerEsriMapServer_1 = __webpack_require__(15);
 var nexrhresStatic = new LayerRealEarthTile_1.default({
     products: 'nexrhres',
@@ -3449,99 +3565,6 @@ for (var i = 0; i < oakRidgeLayers.length; i++) {
     });
     map.addLayer(oakRidgeLayer.olLayer);
 }
-
-
-/***/ }),
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var $ = __webpack_require__(1);
-var makeGuid_1 = __webpack_require__(3);
-var ol = __webpack_require__(2);
-var projections_1 = __webpack_require__(16);
-var invalidClass = 'geocoder-invalid';
-var geocoderLoadingClass = 'geocoder-loading';
-// let testAddress = '65 7th Street, Prairie du Sac, WI';
-var Geocode = (function () {
-    function Geocode(mapDiv, map) {
-        var _this = this;
-        var inputGuid = makeGuid_1.makeGuid();
-        var buttonGuid = makeGuid_1.makeGuid();
-        this.map = map;
-        this.indicationLayer = new ol.layer.Vector({
-            source: new ol.source.Vector(),
-            style: new ol.style.Style({
-                image: new ol.style.Circle({
-                    radius: 12,
-                    fill: new ol.style.Fill({ color: 'rgba(255,0,0,0.5)' }),
-                    stroke: new ol.style.Stroke({ color: 'red', width: 1 })
-                })
-            })
-        });
-        this.map.addLayer(this.indicationLayer);
-        $(mapDiv).append('<div class="geocoder-el">' +
-            ("<input type=\"text\" id=\"" + inputGuid + "\">") +
-            ("<button id=\"" + buttonGuid + "\">Search</button>") +
-            '</div>');
-        this.theButton = document.getElementById(buttonGuid);
-        this.theInput = document.getElementById(inputGuid);
-        this.reset();
-        var $theButton = $(this.theButton);
-        var $theInput = $(this.theInput);
-        $theButton.click(function () {
-            $theButton.addClass(geocoderLoadingClass);
-            _this.theButton.disabled = true;
-            _this.indicationLayer.getSource().clear();
-            $.get("https://geocode.xyz/" + _this.theInput.value + "?geoit=json", {}, function (d) {
-                var lat = parseFloat(d['latt']);
-                var lon = parseFloat(d['longt']);
-                if ((lat == 0 && lon == 0) || d['error']) {
-                    $theInput.addClass(invalidClass);
-                    _this.theInput.title = 'Specified Location Invalid';
-                    _this.theButton.title = 'Specified Location Invalid';
-                }
-                else {
-                    var v = _this.map.getView();
-                    var p = new ol.geom.Point([lon, lat]);
-                    var feat = new ol.Feature(p);
-                    _this.indicationLayer.getSource().addFeature(feat);
-                    p.transform(projections_1.proj4326, projections_1.proj3857);
-                    v.setCenter(p.getCoordinates());
-                    v.setZoom(13);
-                }
-                $theButton.removeClass(geocoderLoadingClass);
-                _this.theButton.disabled = false;
-            }, 'json');
-        });
-        $(this.theInput).keyup(function (evt) {
-            _this.theButton.disabled = _this.theInput.value.length == 0;
-            $theInput.removeClass(invalidClass);
-            _this.theInput.title = '';
-            _this.theButton.title = '';
-            if (!_this.theButton.disabled && evt.keyCode == 13) {
-                $theButton.click();
-            }
-        });
-    }
-    Geocode.prototype.reset = function () {
-        this.theButton.disabled = true;
-        this.theInput.value = '';
-    };
-    return Geocode;
-}());
-exports.Geocode = Geocode;
 
 
 /***/ })

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 39);
+/******/ 	return __webpack_require__(__webpack_require__.s = 67);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -112,7 +112,7 @@ module.exports = $;
 
 /***/ }),
 
-/***/ 26:
+/***/ 31:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -213,7 +213,7 @@ exports.default = DayRange;
 
 /***/ }),
 
-/***/ 39:
+/***/ 67:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -222,7 +222,7 @@ exports.default = DayRange;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var day_range_1 = __webpack_require__(26);
+var day_range_1 = __webpack_require__(31);
 var $ = __webpack_require__(1);
 var dayRange = new day_range_1.DayRange($('#day-range'), 10);
 
