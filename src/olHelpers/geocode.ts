@@ -84,18 +84,16 @@ export class Geocode {
         });
 
         $(this.theInput).keyup((evt) => {
-            this.theButton.focus();
+            evt.preventDefault();
             this.theButton.disabled = this.theInput.value.length == 0;
             $theInput.removeClass(invalidClass);
             this.theInput.title = '';
             this.theButton.title = '';
 
             if (!this.theButton.disabled && evt.keyCode == 13) {
-                evt.preventDefault();
                 $theButton.click();
             }
         })
-
     }
 
     private reset() {

@@ -60,13 +60,12 @@ var Geocode = (function () {
             }, 'json');
         });
         $(this.theInput).keyup(function (evt) {
-            _this.theButton.focus();
+            evt.preventDefault();
             _this.theButton.disabled = _this.theInput.value.length == 0;
             $theInput.removeClass(invalidClass);
             _this.theInput.title = '';
             _this.theButton.title = '';
             if (!_this.theButton.disabled && evt.keyCode == 13) {
-                evt.preventDefault();
                 $theButton.click();
             }
         });
