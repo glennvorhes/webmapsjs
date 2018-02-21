@@ -6,11 +6,13 @@ import { React } from './reactAndRedux';
 import 'jquery-ui';
 export interface iDateRange {
     maxRange: number;
-    callback: (start: string | Date, end: string | Date) => any;
+    callback: (start: Date, end: Date) => any;
     minRange?: number;
-    maxDate?: string | Date;
-    minDate?: string | Date;
-    initialEnd?: string | Date;
+    maxDate?: Date;
+    minDate?: Date;
+    initialEnd?: Date;
+    start?: Date;
+    end?: Date;
 }
 export declare class DateRange extends React.Component<iDateRange, null> {
     startId: string;
@@ -25,8 +27,8 @@ export declare class DateRange extends React.Component<iDateRange, null> {
     constructor(props: iDateRange, context: Object);
     setNumDays(): void;
     componentDidMount(): void;
-    readonly needReset: boolean;
-    setStart(s: string): void;
-    setEnd(s: string): void;
+    private readonly needReset;
+    private setStart(s);
+    private setEnd(s);
     render(): JSX.Element;
 }

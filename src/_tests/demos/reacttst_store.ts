@@ -1,6 +1,5 @@
-import {createStore, combineReducers} from '../../reactComponents/reactAndRedux';
 import * as actions from './reacttst_actions';
-
+import Redux = require('redux');
 
 
 function oneDate(state = new Date(), action: {type: string, d: Date}) {
@@ -28,8 +27,8 @@ function twoDates(state = {start: now, end: before}, action: {type: string, star
 
 
 
-export const store = createStore(
-    combineReducers({oneDate, twoDates})
+export const theStore = Redux.createStore(
+    Redux.combineReducers({oneDate, twoDates})
 );
 
 
@@ -41,9 +40,9 @@ export interface iState {
 
 
 export function getState(): iState{
-    return store.getState() as iState;
+    return theStore.getState() as iState;
 }
 
-export default store;
+export default theStore;
 
 

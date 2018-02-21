@@ -33,13 +33,13 @@ class Demo extends React.Component<null, null> {
 }
 
 reactDom.render(
-    <Provider store={s.store}>
+    <Provider store={s.theStore}>
         <Demo/>
     </Provider>,
     document.getElementById("example")
 );
 
-s.store.subscribe(() => {
+s.theStore.subscribe(() => {
     console.log(s.getState());
 });
 

@@ -8,7 +8,7 @@ export interface iDatePick {
     label: string;
     id?: string;
     initialDate?: Date;
-    change: (val: string) => any;
+    change: (val: Date) => any;
     val?: Date;
 }
 /**

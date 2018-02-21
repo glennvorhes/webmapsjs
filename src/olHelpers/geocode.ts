@@ -84,6 +84,7 @@ export class Geocode {
         });
 
         $(this.theInput).keyup((evt) => {
+            this.theButton.focus();
             this.theButton.disabled = this.theInput.value.length == 0;
             $theInput.removeClass(invalidClass);
             this.theInput.title = '';

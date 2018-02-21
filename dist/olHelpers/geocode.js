@@ -60,6 +60,7 @@ var Geocode = (function () {
             }, 'json');
         });
         $(this.theInput).keyup(function (evt) {
+            _this.theButton.focus();
             _this.theButton.disabled = _this.theInput.value.length == 0;
             $theInput.removeClass(invalidClass);
             _this.theInput.title = '';
