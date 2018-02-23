@@ -11,7 +11,7 @@ function callback(d: string){
 }
 
 setTimeout(() => {
-    mapToBase64(map, callback, {resize: {height: 400, width: 400}});
+    mapToBase64(map, callback, {delay: 1500});
 }, 2000);
 
 

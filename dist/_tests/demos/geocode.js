@@ -8,7 +8,7 @@ function callback(d) {
     console.log(d);
 }
 setTimeout(function () {
-    mapToBase64_1.mapToBase64(map, callback, { resize: { height: 400, width: 400 } });
+    mapToBase64_1.mapToBase64(map, callback, { delay: 1500 });
 }, 2000);
 console.log('it works');
 //# sourceMappingURL=geocode.js.map

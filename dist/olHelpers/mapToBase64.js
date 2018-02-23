@@ -10,7 +10,10 @@ var extentUtil_1 = require("../olHelpers/extentUtil");
  */
 function mapToBase64(map, callback, options) {
     options = options || {};
-    if (typeof options.delay === 'undefined' && (options.layers || options.resize)) {
+    if (typeof options.delay === 'number') {
+        //pass
+    }
+    else if (options.layers || options.resize) {
         options.delay = 2000;
     }
     else {

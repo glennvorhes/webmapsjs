@@ -1237,7 +1237,7 @@ function callback(d) {
     console.log(d);
 }
 setTimeout(function () {
-    mapToBase64_1.mapToBase64(map, callback, { resize: { height: 400, width: 400 } });
+    mapToBase64_1.mapToBase64(map, callback, { delay: 1500 });
 }, 2000);
 console.log('it works');
 
@@ -1260,7 +1260,10 @@ var extentUtil_1 = __webpack_require__(78);
  */
 function mapToBase64(map, callback, options) {
     options = options || {};
-    if (typeof options.delay === 'undefined' && (options.layers || options.resize)) {
+    if (typeof options.delay === 'number') {
+        //pass
+    }
+    else if (options.layers || options.resize) {
         options.delay = 2000;
     }
     else {

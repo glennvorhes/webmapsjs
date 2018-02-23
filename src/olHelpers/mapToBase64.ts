@@ -22,7 +22,9 @@ export interface iMapToBase64Options {
 export function mapToBase64(map: ol.Map, callback: (imgData: string) =>  any, options?: iMapToBase64Options): any {
     options = options || {};
 
-    if (typeof options.delay  === 'undefined' && (options.layers || options.resize)){
+    if (typeof options.delay  === 'number'){
+        //pass
+    } else if (options.layers || options.resize){
         options.delay = 2000;
     } else {
         options.delay = 1;
@@ -46,6 +48,7 @@ export function mapToBase64(map: ol.Map, callback: (imgData: string) =>  any, op
     }
 
     map.once('postrender', () => {
+
         if (options.layers) {
             fitToMap(options.layers, map);
         }
