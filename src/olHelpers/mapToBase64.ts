@@ -5,7 +5,7 @@ import {layers} from "../";
 
 declare const glob: Object;
 
-interface iMapToBase64Options {
+export interface iMapToBase64Options {
     resize?: { width: number, height: number };
     layers?: LayerBaseVector[] | LayerBaseVector[];
     delay?: number;
