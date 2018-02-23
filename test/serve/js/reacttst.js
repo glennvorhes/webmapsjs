@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 68);
+/******/ 	return __webpack_require__(__webpack_require__.s = 74);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -143,24 +143,43 @@ exports.default = makeGuid;
 /* 6 */,
 /* 7 */,
 /* 8 */,
-/* 9 */,
-/* 10 */,
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Created by glenn on 6/12/2017.
+ */
+exports.React = __webpack_require__(52);
+exports.ReactDom = __webpack_require__(53);
+exports.ReactRedux = __webpack_require__(54);
+exports.Redux = __webpack_require__(27);
+exports.connect = exports.ReactRedux.connect;
+exports.Provider = exports.ReactRedux.Provider;
+exports.combineReducers = exports.Redux.combineReducers;
+exports.createStore = exports.Redux.createStore;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SET_ONE_DATE = 'set one date';
+exports.SET_TWO_DATES = 'set two dates';
+
+
+/***/ }),
 /* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__root_js__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__root_js__ = __webpack_require__(36);
 
 
 /** Built-in value references. */
@@ -170,13 +189,13 @@ var Symbol = __WEBPACK_IMPORTED_MODULE_0__root_js__["a" /* default */].Symbol;
 
 
 /***/ }),
-/* 23 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getPrototype_js__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__isObjectLike_js__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getPrototype_js__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__isObjectLike_js__ = __webpack_require__(37);
 
 
 
@@ -242,7 +261,7 @@ function isPlainObject(value) {
 
 
 /***/ }),
-/* 24 */
+/* 14 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -428,7 +447,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 25 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -467,12 +486,12 @@ function compose() {
 }
 
 /***/ }),
-/* 26 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_symbol_observable__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ActionTypes; });
 /* harmony export (immutable) */ __webpack_exports__["a"] = createStore;
@@ -726,7 +745,7 @@ var ActionTypes = {
 }
 
 /***/ }),
-/* 27 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -754,7 +773,7 @@ function warning(message) {
 }
 
 /***/ }),
-/* 28 */
+/* 18 */
 /***/ (function(module, exports) {
 
 var g;
@@ -781,39 +800,247 @@ module.exports = g;
 
 
 /***/ }),
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */
+/* 19 */,
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * Created by glenn on 6/12/2017.
+ * Created by glenn on 6/14/2017.
  */
-exports.React = __webpack_require__(58);
-exports.ReactDom = __webpack_require__(59);
-exports.ReactRedux = __webpack_require__(60);
-exports.Redux = __webpack_require__(47);
-exports.connect = exports.ReactRedux.connect;
-exports.Provider = exports.ReactRedux.Provider;
-exports.combineReducers = exports.Redux.combineReducers;
-exports.createStore = exports.Redux.createStore;
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var reactAndRedux_1 = __webpack_require__(9);
+var $ = __webpack_require__(1);
+__webpack_require__(1);
+var makeGuid_1 = __webpack_require__(3);
+var dateFormat_1 = __webpack_require__(45);
+/**
+ * params label, id, initialDate, change callback with value as string
+ */
+var DatePick = (function (_super) {
+    __extends(DatePick, _super);
+    function DatePick(props, context) {
+        var _this = _super.call(this, props, context) || this;
+        _this.elId = _this.props.id || makeGuid_1.default();
+        return _this;
+    }
+    DatePick.prototype.componentDidMount = function () {
+        var _this = this;
+        var $el = $('#' + this.elId);
+        $el.datepicker({
+            onSelect: function () {
+                _this.props.change(dateFormat_1.stringToDate($el.val()));
+            }
+        });
+    };
+    DatePick.prototype.render = function () {
+        var params = {
+            id: this.elId,
+            type: 'text',
+            style: { margin: "0 10px 0 5px", width: '73px', textAlign: 'center' },
+            readOnly: true
+        };
+        if (this.props.val) {
+            params['value'] = dateFormat_1.dateToString(this.props.val);
+        }
+        else {
+            params['defaultValue'] = dateFormat_1.dateToString(this.props.initialDate || new Date());
+        }
+        return reactAndRedux_1.React.createElement("span", { className: "date-pick" },
+            reactAndRedux_1.React.createElement("label", { htmlFor: this.elId }, this.props.label),
+            reactAndRedux_1.React.createElement("input", __assign({}, params)));
+    };
+    return DatePick;
+}(reactAndRedux_1.React.Component));
+exports.DatePick = DatePick;
+exports.default = DatePick;
 
 
 /***/ }),
-/* 36 */
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getRawTag_js__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__objectToString_js__ = __webpack_require__(40);
+/* WEBPACK VAR INJECTION */(function(process) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__combineReducers__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__compose__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warning__ = __webpack_require__(17);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createStore", function() { return __WEBPACK_IMPORTED_MODULE_0__createStore__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "combineReducers", function() { return __WEBPACK_IMPORTED_MODULE_1__combineReducers__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "bindActionCreators", function() { return __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "applyMiddleware", function() { return __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "compose", function() { return __WEBPACK_IMPORTED_MODULE_4__compose__["a"]; });
+
+
+
+
+
+
+
+/*
+* This is a dummy function to check if the function name has been altered by minification.
+* If the function has been minified and NODE_ENV !== 'production', warn the user.
+*/
+function isCrushed() {}
+
+if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' && isCrushed.name !== 'isCrushed') {
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__utils_warning__["a" /* default */])('You are currently using minified code outside of NODE_ENV === \'production\'. ' + 'This means that you are running a slower development build of Redux. ' + 'You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify ' + 'or DefinePlugin for webpack (http://stackoverflow.com/questions/30030031) ' + 'to ensure you have the correct code for your production build.');
+}
+
+
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(14)))
+
+/***/ }),
+/* 28 */,
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by glenn on 6/12/2017.
+ */
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var reactAndRedux_1 = __webpack_require__(9);
+__webpack_require__(1);
+var makeGuid_1 = __webpack_require__(3);
+var fixDate = __webpack_require__(45);
+var DatePick_1 = __webpack_require__(20);
+function stringToDate(dte) {
+    if (dte.getTime) {
+        return dte;
+    }
+    else {
+        return new Date(dte);
+    }
+}
+var DateRange = (function (_super) {
+    __extends(DateRange, _super);
+    function DateRange(props, context) {
+        var _this = _super.call(this, props, context) || this;
+        _this.startId = makeGuid_1.default();
+        _this.endId = makeGuid_1.default();
+        _this.maxRange = Math.round(_this.props.maxRange) - 1;
+        _this.minRange = typeof _this.props['minRange'] == 'number' ? Math.round(_this.props['minRange']) : 1;
+        if (_this.minRange > _this.maxRange) {
+            throw "DateRange component: Max range must be greater than min range";
+        }
+        if (_this.props.initialEnd) {
+            _this.end = stringToDate(_this.props.initialEnd);
+        }
+        else {
+            _this.end = new Date();
+        }
+        _this.end.setHours(0, 0, 0);
+        _this.start = new Date(_this.end);
+        _this.start.setDate(_this.start.getDate() - _this.maxRange);
+        _this.setNumDays();
+        return _this;
+    }
+    DateRange.prototype.setNumDays = function () {
+        this.numDays = Math.round((this.end.getTime() - this.start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+    };
+    DateRange.prototype.componentDidMount = function () {
+        this.startInput = document.getElementById(this.startId);
+        this.endInput = document.getElementById(this.endId);
+        this.props.callback(this.start, this.end);
+    };
+    Object.defineProperty(DateRange.prototype, "needReset", {
+        get: function () {
+            return this.numDays > this.maxRange || this.numDays < this.minRange;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DateRange.prototype.setStart = function (s) {
+        this.start = s;
+        this.setNumDays();
+        if (this.needReset) {
+            this.end = new Date(this.start);
+            if (this.numDays > this.maxRange) {
+                this.end.setDate(this.end.getDate() + this.maxRange);
+            }
+            else {
+                this.end.setDate(this.end.getDate() + this.minRange - 1);
+            }
+            this.endInput.value = fixDate.dateToString(this.end);
+            this.setNumDays();
+        }
+        this.props.callback(this.start, this.end);
+    };
+    DateRange.prototype.setEnd = function (s) {
+        this.end = s;
+        this.setNumDays();
+        if (this.needReset) {
+            this.start = new Date(this.end);
+            if (this.numDays > this.maxRange) {
+                this.start.setDate(this.start.getDate() - this.maxRange);
+            }
+            else {
+                this.start.setDate(this.start.getDate() - this.minRange + 1);
+            }
+            this.startInput.value = fixDate.dateToString(this.start);
+            this.setNumDays();
+        }
+        this.props.callback(this.start, this.end);
+    };
+    DateRange.prototype.render = function () {
+        var _this = this;
+        return reactAndRedux_1.React.createElement("div", { className: "date-range" },
+            reactAndRedux_1.React.createElement(DatePick_1.default, { id: this.startId, label: "Start", initialDate: this.start, change: function (s) { _this.setStart(s); } }),
+            reactAndRedux_1.React.createElement(DatePick_1.default, { id: this.endId, label: "End", initialDate: this.end, change: function (s) { _this.setEnd(s); } }));
+    };
+    return DateRange;
+}(reactAndRedux_1.React.Component));
+exports.DateRange = DateRange;
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getRawTag_js__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__objectToString_js__ = __webpack_require__(34);
 
 
 
@@ -845,7 +1072,7 @@ function baseGetTag(value) {
 
 
 /***/ }),
-/* 37 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -854,14 +1081,14 @@ var freeGlobal = typeof global == 'object' && global && global.Object === Object
 
 /* harmony default export */ __webpack_exports__["a"] = freeGlobal;
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(28)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(18)))
 
 /***/ }),
-/* 38 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__overArg_js__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__overArg_js__ = __webpack_require__(35);
 
 
 /** Built-in value references. */
@@ -871,11 +1098,11 @@ var getPrototype = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__overArg_js
 
 
 /***/ }),
-/* 39 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(12);
 
 
 /** Used for built-in method references. */
@@ -925,7 +1152,7 @@ function getRawTag(value) {
 
 
 /***/ }),
-/* 40 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -954,7 +1181,7 @@ function objectToString(value) {
 
 
 /***/ }),
-/* 41 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -976,11 +1203,11 @@ function overArg(func, transform) {
 
 
 /***/ }),
-/* 42 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__freeGlobal_js__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__freeGlobal_js__ = __webpack_require__(31);
 
 
 /** Detect free variable `self`. */
@@ -993,7 +1220,7 @@ var root = __WEBPACK_IMPORTED_MODULE_0__freeGlobal_js__["a" /* default */] || fr
 
 
 /***/ }),
-/* 43 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1029,11 +1256,11 @@ function isObjectLike(value) {
 
 
 /***/ }),
-/* 44 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__compose__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__compose__ = __webpack_require__(15);
 /* harmony export (immutable) */ __webpack_exports__["a"] = applyMiddleware;
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -1085,7 +1312,7 @@ function applyMiddleware() {
 }
 
 /***/ }),
-/* 45 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1139,13 +1366,13 @@ function bindActionCreators(actionCreators, dispatch) {
 }
 
 /***/ }),
-/* 46 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_es_isPlainObject__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_warning__ = __webpack_require__(27);
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_es_isPlainObject__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_warning__ = __webpack_require__(17);
 /* harmony export (immutable) */ __webpack_exports__["a"] = combineReducers;
 
 
@@ -1277,54 +1504,17 @@ function combineReducers(reducers) {
     return hasChanged ? nextState : state;
   };
 }
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(24)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(14)))
 
 /***/ }),
-/* 47 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__combineReducers__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__compose__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warning__ = __webpack_require__(27);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createStore", function() { return __WEBPACK_IMPORTED_MODULE_0__createStore__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "combineReducers", function() { return __WEBPACK_IMPORTED_MODULE_1__combineReducers__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "bindActionCreators", function() { return __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "applyMiddleware", function() { return __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "compose", function() { return __WEBPACK_IMPORTED_MODULE_4__compose__["a"]; });
-
-
-
-
-
-
-
-/*
-* This is a dummy function to check if the function name has been altered by minification.
-* If the function has been minified and NODE_ENV !== 'production', warn the user.
-*/
-function isCrushed() {}
-
-if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' && isCrushed.name !== 'isCrushed') {
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__utils_warning__["a" /* default */])('You are currently using minified code outside of NODE_ENV === \'production\'. ' + 'This means that you are running a slower development build of Redux. ' + 'You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify ' + 'or DefinePlugin for webpack (http://stackoverflow.com/questions/30030031) ' + 'to ensure you have the correct code for your production build.');
-}
-
-
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(24)))
-
-/***/ }),
-/* 48 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(49);
+module.exports = __webpack_require__(42);
 
 
 /***/ }),
-/* 49 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1334,7 +1524,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ponyfill = __webpack_require__(50);
+var _ponyfill = __webpack_require__(43);
 
 var _ponyfill2 = _interopRequireDefault(_ponyfill);
 
@@ -1357,10 +1547,10 @@ if (typeof self !== 'undefined') {
 
 var result = (0, _ponyfill2['default'])(root);
 exports['default'] = result;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28), __webpack_require__(51)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18), __webpack_require__(44)(module)))
 
 /***/ }),
-/* 50 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1389,7 +1579,7 @@ function symbolObservablePonyfill(root) {
 };
 
 /***/ }),
-/* 51 */
+/* 44 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -1417,174 +1607,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */
-/***/ (function(module, exports) {
-
-module.exports = React;
-
-/***/ }),
-/* 59 */
-/***/ (function(module, exports) {
-
-module.exports = ReactDOM;
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports) {
-
-module.exports = ReactRedux;
-
-/***/ }),
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 9/22/2016.
- */
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var reactAndRedux_1 = __webpack_require__(35);
-var DatePick_1 = __webpack_require__(71);
-var DateRange_1 = __webpack_require__(76);
-var reacttst_connect_1 = __webpack_require__(73);
-var s = __webpack_require__(74);
-var Demo = (function (_super) {
-    __extends(Demo, _super);
-    function Demo() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    Demo.prototype.render = function () {
-        return reactAndRedux_1.React.createElement("div", null,
-            reactAndRedux_1.React.createElement("h1", null, "Date Pick"),
-            reactAndRedux_1.React.createElement(DatePick_1.DatePick, { label: 'Date Picker', change: function (v) {
-                    console.log(v);
-                } }),
-            reactAndRedux_1.React.createElement("h1", null, "Date Pick Connected"),
-            reactAndRedux_1.React.createElement(reacttst_connect_1.DatePickConnected, null),
-            reactAndRedux_1.React.createElement("h1", null, "Date Range"),
-            reactAndRedux_1.React.createElement(DateRange_1.DateRange, { maxRange: 10, initialEnd: new Date(), minRange: 1, callback: function (start, end) {
-                    console.log(start, end);
-                } }),
-            reactAndRedux_1.React.createElement("h1", null, "Date Range Connected"),
-            reactAndRedux_1.React.createElement(reacttst_connect_1.DateRangeConnected, null));
-    };
-    return Demo;
-}(reactAndRedux_1.React.Component));
-reactAndRedux_1.ReactDom.render(reactAndRedux_1.React.createElement(reactAndRedux_1.Provider, { store: s.store },
-    reactAndRedux_1.React.createElement(Demo, null)), document.getElementById("example"));
-s.store.subscribe(function () {
-    console.log(s.getState());
-});
-setInterval(function () {
-    var state = s.getState();
-    // console.log(state.oneDate);
-    // s.store.dispatch({type: s.ACTION_SET_ONE_DATE, d: state.oneDate.setDate(state.oneDate.getDate() - 1)});
-}, 1000);
-
-
-/***/ }),
-/* 69 */,
-/* 70 */,
-/* 71 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by glenn on 6/14/2017.
- */
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var reactAndRedux_1 = __webpack_require__(35);
-var $ = __webpack_require__(1);
-__webpack_require__(1);
-var makeGuid_1 = __webpack_require__(3);
-var dateFormat_1 = __webpack_require__(72);
-/**
- * params label, id, initialDate, change callback with value as string
- */
-var DatePick = (function (_super) {
-    __extends(DatePick, _super);
-    function DatePick(props, context) {
-        var _this = _super.call(this, props, context) || this;
-        _this.elId = _this.props.id || makeGuid_1.default();
-        return _this;
-    }
-    DatePick.prototype.componentDidMount = function () {
-        var _this = this;
-        var $el = $('#' + this.elId);
-        $el.datepicker({
-            onSelect: function () {
-                _this.props.change(dateFormat_1.stringToDate($el.val()));
-            }
-        });
-    };
-    DatePick.prototype.render = function () {
-        var params = {
-            id: this.elId,
-            type: 'text',
-            style: { margin: "0 10px 0 5px", width: '73px', textAlign: 'center' },
-            readOnly: true
-        };
-        if (this.props.val) {
-            params['value'] = dateFormat_1.dateToString(this.props.val);
-        }
-        else {
-            params['defaultValue'] = dateFormat_1.dateToString(this.props.initialDate || new Date());
-        }
-        return reactAndRedux_1.React.createElement("span", { className: "date-pick" },
-            reactAndRedux_1.React.createElement("label", { htmlFor: this.elId }, this.props.label),
-            reactAndRedux_1.React.createElement("input", __assign({}, params)));
-    };
-    return DatePick;
-}(reactAndRedux_1.React.Component));
-exports.DatePick = DatePick;
-exports.default = DatePick;
-
-
-/***/ }),
-/* 72 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1617,16 +1640,18 @@ exports.dateToString = dateToString;
 
 
 /***/ }),
-/* 73 */
+/* 46 */,
+/* 47 */,
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var reactAndRedux_1 = __webpack_require__(35);
-var DatePick_1 = __webpack_require__(71);
-var DateRange_1 = __webpack_require__(76);
-var actions = __webpack_require__(75);
+var reactAndRedux_1 = __webpack_require__(9);
+var DatePick_1 = __webpack_require__(20);
+var DateRange_1 = __webpack_require__(29);
+var actions = __webpack_require__(10);
 exports.DatePickConnected = reactAndRedux_1.connect(function (state) {
     return {
         label: 'Date Picker Connected',
@@ -1658,14 +1683,14 @@ exports.DateRangeConnected = reactAndRedux_1.connect(function (state) {
 
 
 /***/ }),
-/* 74 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var reactAndRedux_1 = __webpack_require__(35);
-var actions = __webpack_require__(75);
+var actions = __webpack_require__(10);
+var Redux = __webpack_require__(27);
 function oneDate(state, action) {
     if (state === void 0) { state = new Date(); }
     if (action.type == actions.SET_ONE_DATE) {
@@ -1690,32 +1715,60 @@ function twoDates(state, action) {
         return state;
     }
 }
-exports.store = reactAndRedux_1.createStore(reactAndRedux_1.combineReducers({ oneDate: oneDate, twoDates: twoDates }));
+exports.theStore = Redux.createStore(Redux.combineReducers({ oneDate: oneDate, twoDates: twoDates }));
 function getState() {
-    return exports.store.getState();
+    return exports.theStore.getState();
 }
 exports.getState = getState;
-exports.default = exports.store;
+exports.default = exports.theStore;
 
 
 /***/ }),
-/* 75 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 50 */,
+/* 51 */,
+/* 52 */
+/***/ (function(module, exports) {
 
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SET_ONE_DATE = 'set one date';
-exports.SET_TWO_DATES = 'set two dates';
-
+module.exports = React;
 
 /***/ }),
-/* 76 */
+/* 53 */
+/***/ (function(module, exports) {
+
+module.exports = ReactDOM;
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports) {
+
+module.exports = ReactRedux;
+
+/***/ }),
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /**
- * Created by glenn on 6/12/2017.
+ * Created by gavorhes on 9/22/2016.
  */
 
 var __extends = (this && this.__extends) || (function () {
@@ -1729,98 +1782,43 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var reactAndRedux_1 = __webpack_require__(35);
-__webpack_require__(1);
-var makeGuid_1 = __webpack_require__(3);
-var fixDate = __webpack_require__(72);
-var DatePick_1 = __webpack_require__(71);
-function stringToDate(dte) {
-    if (dte.getTime) {
-        return dte;
+var reactAndRedux_1 = __webpack_require__(9);
+var DatePick_1 = __webpack_require__(20);
+var DateRange_1 = __webpack_require__(29);
+var reacttst_connect_1 = __webpack_require__(48);
+var s = __webpack_require__(49);
+var Demo = (function (_super) {
+    __extends(Demo, _super);
+    function Demo() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    else {
-        return new Date(dte);
-    }
-}
-var DateRange = (function (_super) {
-    __extends(DateRange, _super);
-    function DateRange(props, context) {
-        var _this = _super.call(this, props, context) || this;
-        _this.startId = makeGuid_1.default();
-        _this.endId = makeGuid_1.default();
-        _this.maxRange = Math.round(_this.props.maxRange) - 1;
-        _this.minRange = typeof _this.props['minRange'] == 'number' ? Math.round(_this.props['minRange']) : 1;
-        if (_this.minRange > _this.maxRange) {
-            throw "DateRange component: Max range must be greater than min range";
-        }
-        if (_this.props.initialEnd) {
-            _this.end = stringToDate(_this.props.initialEnd);
-        }
-        else {
-            _this.end = new Date();
-        }
-        _this.end.setHours(0, 0, 0);
-        _this.start = new Date(_this.end);
-        _this.start.setDate(_this.start.getDate() - _this.maxRange);
-        _this.setNumDays();
-        return _this;
-    }
-    DateRange.prototype.setNumDays = function () {
-        this.numDays = Math.round((this.end.getTime() - this.start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+    Demo.prototype.render = function () {
+        return reactAndRedux_1.React.createElement("div", null,
+            reactAndRedux_1.React.createElement("h1", null, "Date Pick"),
+            reactAndRedux_1.React.createElement(DatePick_1.DatePick, { label: 'Date Picker', change: function (v) {
+                    console.log(v);
+                } }),
+            reactAndRedux_1.React.createElement("h1", null, "Date Pick Connected"),
+            reactAndRedux_1.React.createElement(reacttst_connect_1.DatePickConnected, null),
+            reactAndRedux_1.React.createElement("h1", null, "Date Range"),
+            reactAndRedux_1.React.createElement(DateRange_1.DateRange, { maxRange: 10, initialEnd: new Date(), minRange: 1, callback: function (start, end) {
+                    console.log(start, end);
+                } }),
+            reactAndRedux_1.React.createElement("h1", null, "Date Range Connected"),
+            reactAndRedux_1.React.createElement(reacttst_connect_1.DateRangeConnected, null));
     };
-    DateRange.prototype.componentDidMount = function () {
-        this.startInput = document.getElementById(this.startId);
-        this.endInput = document.getElementById(this.endId);
-        this.props.callback(this.start, this.end);
-    };
-    Object.defineProperty(DateRange.prototype, "needReset", {
-        get: function () {
-            return this.numDays > this.maxRange || this.numDays < this.minRange;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    DateRange.prototype.setStart = function (s) {
-        this.start = s;
-        this.setNumDays();
-        if (this.needReset) {
-            this.end = new Date(this.start);
-            if (this.numDays > this.maxRange) {
-                this.end.setDate(this.end.getDate() + this.maxRange);
-            }
-            else {
-                this.end.setDate(this.end.getDate() + this.minRange - 1);
-            }
-            this.endInput.value = fixDate.dateToString(this.end);
-            this.setNumDays();
-        }
-        this.props.callback(this.start, this.end);
-    };
-    DateRange.prototype.setEnd = function (s) {
-        this.end = s;
-        this.setNumDays();
-        if (this.needReset) {
-            this.start = new Date(this.end);
-            if (this.numDays > this.maxRange) {
-                this.start.setDate(this.start.getDate() - this.maxRange);
-            }
-            else {
-                this.start.setDate(this.start.getDate() - this.minRange + 1);
-            }
-            this.startInput.value = fixDate.dateToString(this.start);
-            this.setNumDays();
-        }
-        this.props.callback(this.start, this.end);
-    };
-    DateRange.prototype.render = function () {
-        var _this = this;
-        return reactAndRedux_1.React.createElement("div", { className: "date-range" },
-            reactAndRedux_1.React.createElement(DatePick_1.default, { id: this.startId, label: "Start", initialDate: this.start, change: function (s) { _this.setStart(s); } }),
-            reactAndRedux_1.React.createElement(DatePick_1.default, { id: this.endId, label: "End", initialDate: this.end, change: function (s) { _this.setEnd(s); } }));
-    };
-    return DateRange;
+    return Demo;
 }(reactAndRedux_1.React.Component));
-exports.DateRange = DateRange;
+reactAndRedux_1.ReactDom.render(reactAndRedux_1.React.createElement(reactAndRedux_1.Provider, { store: s.theStore },
+    reactAndRedux_1.React.createElement(Demo, null)), document.getElementById("example"));
+s.theStore.subscribe(function () {
+    console.log(s.getState());
+});
+setInterval(function () {
+    var state = s.getState();
+    // console.log(state.oneDate);
+    // s.store.dispatch({type: s.ACTION_SET_ONE_DATE, d: state.oneDate.setDate(state.oneDate.getDate() - 1)});
+}, 1000);
 
 
 /***/ })

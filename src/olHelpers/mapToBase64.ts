@@ -1,0 +1,82 @@
+import ol = require('custom-ol');
+import {LayerBaseVector} from "../layers/LayerBaseVector";
+import {fitToMap} from '../olHelpers/extentUtil';
+import {layers} from "../";
+
+declare const glob: Object;
+
+interface iMapToBase64Options {
+    resize?: { width: number, height: number };
+    layers?: LayerBaseVector[] | LayerBaseVector[];
+    delay?: number;
+}
+
+
+/**
+ *
+ * @param {ol.Map} map
+ * @param {(imgData) => string} callback
+ * @param {iMapToBase64Options} options
+ * @returns {any}
+ */
+export function mapToBase64(map: ol.Map, callback: (imgData: string) =>  any, options?: iMapToBase64Options): any {
+    options = options || {};
+
+    if (typeof options.delay  === 'undefined' && (options.layers || options.resize)){
+        options.delay = 2000;
+    } else {
+        options.delay = 1;
+    }
+
+    let mapTarget: HTMLDivElement = map.getTargetElement() as HTMLDivElement;
+
+    let originalHeight = mapTarget.style.height;
+    let originalWidth = mapTarget.style.width;
+    let originalPosition = mapTarget.style.position;
+    let originalCenter = map.getView().getCenter();
+    let originalZoom = map.getView().getZoom();
+
+    // let mapTimeout = 1;
+
+    if (options.resize) {
+        mapTarget.style.height = `${options.resize.height}px`;
+        mapTarget.style.width = `${options.resize.width}px`;
+        mapTarget.style.position = 'absolute';
+        map.updateSize();
+    }
+
+    map.once('postrender', () => {
+        if (options.layers) {
+            fitToMap(options.layers, map);
+        }
+
+        setTimeout(() => {
+            map.once('postcompose', (event) => {
+                try {
+                    let canvas: HTMLCanvasElement = event['context'].canvas;
+                    let imgData = canvas.toDataURL('image/png');
+                    callback(imgData);
+                }
+                catch (ex) {
+                    // reportParams['imgData'] = null;
+                } finally {
+                    if (options.resize) {
+                        mapTarget.style.height = originalHeight;
+                        mapTarget.style.width = originalWidth;
+                        mapTarget.style.position = originalPosition;
+
+                        map.updateSize();
+                        map.getView().setCenter(originalCenter);
+                        map.getView().setZoom(originalZoom);
+                    }
+                }
+            });
+            map.renderSync();
+        }, options.delay);
+    });
+
+    map.updateSize();
+
+}
+
+export default mapToBase64;

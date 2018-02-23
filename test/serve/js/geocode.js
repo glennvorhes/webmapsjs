@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 64);
+/******/ 	return __webpack_require__(__webpack_require__.s = 70);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -112,7 +112,48 @@ module.exports = $;
 
 /***/ }),
 
-/***/ 11:
+/***/ 19:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('util.checkDefined');
+/**
+ * check if the input is undefined or null
+ * @param input - input pointer
+ * @returns true undefined or null
+ */
+function undefinedOrNull(input) {
+    "use strict";
+    return (typeof input === 'undefined' || input === null);
+}
+exports.undefinedOrNull = undefinedOrNull;
+nm.undefinedOrNull = undefinedOrNull;
+/**
+ * check if the input is defined and not null
+ * @param input - input pointer
+ * @returns true defined and not null
+ */
+function definedAndNotNull(input) {
+    "use strict";
+    return !(undefinedOrNull(input));
+}
+exports.definedAndNotNull = definedAndNotNull;
+nm.definedAndNotNull = definedAndNotNull;
+
+
+/***/ }),
+
+/***/ 2:
+/***/ (function(module, exports) {
+
+module.exports = ol;
+
+/***/ }),
+
+/***/ 22:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -178,12 +219,12 @@ var Geocode = (function () {
             }, 'json');
         });
         $(this.theInput).keyup(function (evt) {
+            evt.preventDefault();
             _this.theButton.disabled = _this.theInput.value.length == 0;
             $theInput.removeClass(invalidClass);
             _this.theInput.title = '';
             _this.theButton.title = '';
             if (!_this.theButton.disabled && evt.keyCode == 13) {
-                evt.preventDefault();
                 $theButton.click();
             }
         });
@@ -199,7 +240,7 @@ exports.Geocode = Geocode;
 
 /***/ }),
 
-/***/ 12:
+/***/ 23:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -215,8 +256,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapInteractionBase_1 = __webpack_require__(4);
-var checkDefined = __webpack_require__(9);
+var mapInteractionBase_1 = __webpack_require__(5);
+var checkDefined = __webpack_require__(19);
 var provide_1 = __webpack_require__(0);
 var makeGuid_1 = __webpack_require__(3);
 var $ = __webpack_require__(1);
@@ -445,7 +486,7 @@ exports.default = MapMoveCls;
 
 /***/ }),
 
-/***/ 13:
+/***/ 24:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -464,7 +505,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapInteractionBase_1 = __webpack_require__(4);
+var mapInteractionBase_1 = __webpack_require__(5);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
@@ -881,7 +922,7 @@ exports.default = MapPopupCls;
 
 /***/ }),
 
-/***/ 14:
+/***/ 25:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -893,7 +934,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
-var geocode_1 = __webpack_require__(11);
+var geocode_1 = __webpack_require__(22);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -985,13 +1026,6 @@ exports.default = quickMapBase;
 
 /***/ }),
 
-/***/ 2:
-/***/ (function(module, exports) {
-
-module.exports = ol;
-
-/***/ }),
-
 /***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1022,6 +1056,26 @@ exports.default = makeGuid;
 /***/ }),
 
 /***/ 4:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var mapPopupCls_1 = __webpack_require__(24);
+/**
+ * The single popup object catch is that it is common to multimap pages
+ * @type {MapPopupCls}
+ */
+exports.mapPopup = new mapPopupCls_1.default();
+exports.default = exports.mapPopup;
+
+
+/***/ }),
+
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1105,7 +1159,7 @@ exports.default = MapInteractionBase;
 
 /***/ }),
 
-/***/ 5:
+/***/ 6:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1114,18 +1168,18 @@ exports.default = MapInteractionBase;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapPopupCls_1 = __webpack_require__(13);
+var mapMoveCls_1 = __webpack_require__(23);
 /**
- * The single popup object catch is that it is common to multimap pages
- * @type {MapPopupCls}
+ * The single map move object catch is that it is common to multimap pages
+ * @type {MapMoveCls}
  */
-exports.mapPopup = new mapPopupCls_1.default();
-exports.default = exports.mapPopup;
+exports.mapMove = new mapMoveCls_1.default();
+exports.default = exports.mapMove;
 
 
 /***/ }),
 
-/***/ 6:
+/***/ 7:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1134,10 +1188,10 @@ exports.default = exports.mapPopup;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickMapBase_1 = __webpack_require__(14);
+var quickMapBase_1 = __webpack_require__(25);
 var provide_1 = __webpack_require__(0);
-var mapMove_1 = __webpack_require__(7);
-var mapPopup_1 = __webpack_require__(5);
+var mapMove_1 = __webpack_require__(6);
+var mapPopup_1 = __webpack_require__(4);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -1169,36 +1223,161 @@ exports.default = quickMap;
 
 /***/ }),
 
-/***/ 64:
+/***/ 70:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickMap_1 = __webpack_require__(6);
+var quickMap_1 = __webpack_require__(7);
+var mapToBase64_1 = __webpack_require__(77);
 var map = quickMap_1.default({ addGeocode: true });
 window['map'] = map;
+function callback(d) {
+    console.log(d);
+}
+setTimeout(function () {
+    mapToBase64_1.mapToBase64(map, callback, { resize: { height: 400, width: 400 } });
+}, 2000);
 console.log('it works');
 
 
 /***/ }),
 
-/***/ 7:
+/***/ 77:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/**
- * Created by gavorhes on 11/3/2015.
- */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapMoveCls_1 = __webpack_require__(12);
+var extentUtil_1 = __webpack_require__(78);
 /**
- * The single map move object catch is that it is common to multimap pages
- * @type {MapMoveCls}
+ *
+ * @param {ol.Map} map
+ * @param {(imgData) => string} callback
+ * @param {iMapToBase64Options} options
+ * @returns {any}
  */
-exports.mapMove = new mapMoveCls_1.default();
-exports.default = exports.mapMove;
+function mapToBase64(map, callback, options) {
+    options = options || {};
+    if (typeof options.delay === 'undefined' && (options.layers || options.resize)) {
+        options.delay = 2000;
+    }
+    else {
+        options.delay = 1;
+    }
+    var mapTarget = map.getTargetElement();
+    var originalHeight = mapTarget.style.height;
+    var originalWidth = mapTarget.style.width;
+    var originalPosition = mapTarget.style.position;
+    var originalCenter = map.getView().getCenter();
+    var originalZoom = map.getView().getZoom();
+    // let mapTimeout = 1;
+    if (options.resize) {
+        mapTarget.style.height = options.resize.height + "px";
+        mapTarget.style.width = options.resize.width + "px";
+        mapTarget.style.position = 'absolute';
+        map.updateSize();
+    }
+    map.once('postrender', function () {
+        if (options.layers) {
+            extentUtil_1.fitToMap(options.layers, map);
+        }
+        setTimeout(function () {
+            map.once('postcompose', function (event) {
+                try {
+                    var canvas = event['context'].canvas;
+                    var imgData = canvas.toDataURL('image/png');
+                    callback(imgData);
+                }
+                catch (ex) {
+                    // reportParams['imgData'] = null;
+                }
+                finally {
+                    if (options.resize) {
+                        mapTarget.style.height = originalHeight;
+                        mapTarget.style.width = originalWidth;
+                        mapTarget.style.position = originalPosition;
+                        map.updateSize();
+                        map.getView().setCenter(originalCenter);
+                        map.getView().setZoom(originalZoom);
+                    }
+                }
+            });
+            map.renderSync();
+        }, options.delay);
+    });
+    map.updateSize();
+}
+exports.mapToBase64 = mapToBase64;
+exports.default = mapToBase64;
+
+
+/***/ }),
+
+/***/ 78:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Created by gavorhes on 7/18/2016.
+ */
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('util');
+/**
+ *
+ * @param {Array<LayerBaseVector>|Array<ol.layer.Vector>|LayerBaseVector|ol.layer.Vector|*} layers - array of layers or single
+ * @returns {ol.Extent|Array<number>|*} - collective extent
+ */
+function calculateExtent(layers) {
+    "use strict";
+    var hasExtent = false;
+    var minX = 10E100;
+    var minY = 10E100;
+    var maxX = -10E100;
+    var maxY = -10E100;
+    for (var _i = 0, layers_1 = layers; _i < layers_1.length; _i++) {
+        var lyr = layers_1[_i];
+        var olLayer = lyr.olLayer || lyr;
+        if (olLayer.getSource().getFeatures().length > 0) {
+            hasExtent = true;
+            var ext = olLayer.getSource().getExtent();
+            minX = ext[0] < minX ? ext[0] : minX;
+            minY = ext[1] < minY ? ext[1] : minY;
+            maxX = ext[2] > maxX ? ext[2] : maxX;
+            maxY = ext[3] > maxY ? ext[3] : maxY;
+        }
+    }
+    if (hasExtent) {
+        return [minX, minY, maxX, maxY];
+    }
+    else {
+        return undefined;
+    }
+}
+exports.calculateExtent = calculateExtent;
+nm.calculateExtent = calculateExtent;
+/**
+ * given one or an array of layers, fit to the map
+ * @param layers - array of layers or single
+ * @param  mp - the map to fit
+ * @param [zoomOut=undefined] - levels to zoom out after fit
+ */
+function fitToMap(layers, mp, zoomOut) {
+    "use strict";
+    var ext = calculateExtent(layers);
+    if (typeof ext == 'undefined') {
+        return;
+    }
+    mp.getView().fit(ext, mp.getSize());
+    if (typeof zoomOut == 'number') {
+        mp.getView().setZoom(mp.getView().getZoom() - zoomOut);
+    }
+}
+exports.fitToMap = fitToMap;
+nm.calculateExtent = calculateExtent;
 
 
 /***/ }),
@@ -1216,40 +1395,6 @@ var ol = __webpack_require__(2);
 exports.proj4326 = new ol.proj.Projection({ code: 'EPSG:4326' });
 exports.proj3857 = new ol.proj.Projection({ code: 'EPSG:3857' });
 exports.proj3070 = new ol.proj.Projection({ code: 'EPSG:3070' });
-
-
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('util.checkDefined');
-/**
- * check if the input is undefined or null
- * @param input - input pointer
- * @returns true undefined or null
- */
-function undefinedOrNull(input) {
-    "use strict";
-    return (typeof input === 'undefined' || input === null);
-}
-exports.undefinedOrNull = undefinedOrNull;
-nm.undefinedOrNull = undefinedOrNull;
-/**
- * check if the input is defined and not null
- * @param input - input pointer
- * @returns true defined and not null
- */
-function definedAndNotNull(input) {
-    "use strict";
-    return !(undefinedOrNull(input));
-}
-exports.definedAndNotNull = definedAndNotNull;
-nm.definedAndNotNull = definedAndNotNull;
 
 
 /***/ })

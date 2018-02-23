@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 65);
+/******/ 	return __webpack_require__(__webpack_require__.s = 71);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -147,6 +147,25 @@ exports.default = makeGuid;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var mapPopupCls_1 = __webpack_require__(24);
+/**
+ * The single popup object catch is that it is common to multimap pages
+ * @type {MapPopupCls}
+ */
+exports.mapPopup = new mapPopupCls_1.default();
+exports.default = exports.mapPopup;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
@@ -226,7 +245,7 @@ exports.default = MapInteractionBase;
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -235,17 +254,17 @@ exports.default = MapInteractionBase;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapPopupCls_1 = __webpack_require__(13);
+var mapMoveCls_1 = __webpack_require__(23);
 /**
- * The single popup object catch is that it is common to multimap pages
- * @type {MapPopupCls}
+ * The single map move object catch is that it is common to multimap pages
+ * @type {MapMoveCls}
  */
-exports.mapPopup = new mapPopupCls_1.default();
-exports.default = exports.mapPopup;
+exports.mapMove = new mapMoveCls_1.default();
+exports.default = exports.mapMove;
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -254,10 +273,10 @@ exports.default = exports.mapPopup;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickMapBase_1 = __webpack_require__(14);
+var quickMapBase_1 = __webpack_require__(25);
 var provide_1 = __webpack_require__(0);
-var mapMove_1 = __webpack_require__(7);
-var mapPopup_1 = __webpack_require__(5);
+var mapMove_1 = __webpack_require__(6);
+var mapPopup_1 = __webpack_require__(4);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -288,25 +307,6 @@ exports.default = quickMap;
 
 
 /***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 11/3/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var mapMoveCls_1 = __webpack_require__(12);
-/**
- * The single map move object catch is that it is common to multimap pages
- * @type {MapMoveCls}
- */
-exports.mapMove = new mapMoveCls_1.default();
-exports.default = exports.mapMove;
-
-
-/***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -323,46 +323,15 @@ exports.proj3070 = new ol.proj.Projection({ code: 'EPSG:3070' });
 
 
 /***/ }),
-/* 9 */
+/* 9 */,
+/* 10 */,
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('util.checkDefined');
-/**
- * check if the input is undefined or null
- * @param input - input pointer
- * @returns true undefined or null
- */
-function undefinedOrNull(input) {
-    "use strict";
-    return (typeof input === 'undefined' || input === null);
-}
-exports.undefinedOrNull = undefinedOrNull;
-nm.undefinedOrNull = undefinedOrNull;
-/**
- * check if the input is defined and not null
- * @param input - input pointer
- * @returns true defined and not null
- */
-function definedAndNotNull(input) {
-    "use strict";
-    return !(undefinedOrNull(input));
-}
-exports.definedAndNotNull = definedAndNotNull;
-nm.definedAndNotNull = definedAndNotNull;
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var zoomResolutionConvert = __webpack_require__(16);
+var zoomResolutionConvert = __webpack_require__(26);
 var provide_1 = __webpack_require__(0);
 var makeGuid_1 = __webpack_require__(3);
 var $ = __webpack_require__(1);
@@ -765,7 +734,49 @@ exports.default = LayerBase;
 
 
 /***/ }),
-/* 11 */
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('util.checkDefined');
+/**
+ * check if the input is undefined or null
+ * @param input - input pointer
+ * @returns true undefined or null
+ */
+function undefinedOrNull(input) {
+    "use strict";
+    return (typeof input === 'undefined' || input === null);
+}
+exports.undefinedOrNull = undefinedOrNull;
+nm.undefinedOrNull = undefinedOrNull;
+/**
+ * check if the input is defined and not null
+ * @param input - input pointer
+ * @returns true defined and not null
+ */
+function definedAndNotNull(input) {
+    "use strict";
+    return !(undefinedOrNull(input));
+}
+exports.definedAndNotNull = definedAndNotNull;
+nm.definedAndNotNull = definedAndNotNull;
+
+
+/***/ }),
+/* 20 */,
+/* 21 */,
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -831,12 +842,12 @@ var Geocode = (function () {
             }, 'json');
         });
         $(this.theInput).keyup(function (evt) {
+            evt.preventDefault();
             _this.theButton.disabled = _this.theInput.value.length == 0;
             $theInput.removeClass(invalidClass);
             _this.theInput.title = '';
             _this.theButton.title = '';
             if (!_this.theButton.disabled && evt.keyCode == 13) {
-                evt.preventDefault();
                 $theButton.click();
             }
         });
@@ -851,7 +862,7 @@ exports.Geocode = Geocode;
 
 
 /***/ }),
-/* 12 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -867,8 +878,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapInteractionBase_1 = __webpack_require__(4);
-var checkDefined = __webpack_require__(9);
+var mapInteractionBase_1 = __webpack_require__(5);
+var checkDefined = __webpack_require__(19);
 var provide_1 = __webpack_require__(0);
 var makeGuid_1 = __webpack_require__(3);
 var $ = __webpack_require__(1);
@@ -1096,7 +1107,7 @@ exports.default = MapMoveCls;
 
 
 /***/ }),
-/* 13 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1115,7 +1126,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapInteractionBase_1 = __webpack_require__(4);
+var mapInteractionBase_1 = __webpack_require__(5);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
@@ -1531,7 +1542,7 @@ exports.default = MapPopupCls;
 
 
 /***/ }),
-/* 14 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1543,7 +1554,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
-var geocode_1 = __webpack_require__(11);
+var geocode_1 = __webpack_require__(22);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -1634,8 +1645,7 @@ exports.default = quickMapBase;
 
 
 /***/ }),
-/* 15 */,
-/* 16 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1717,8 +1727,26 @@ nm.resolutionToZoom = resolutionToZoom;
 
 
 /***/ }),
-/* 17 */,
-/* 18 */
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1729,7 +1757,7 @@ nm.resolutionToZoom = resolutionToZoom;
 Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = __webpack_require__(0);
 var makeGuid_1 = __webpack_require__(3);
-var mapMove_1 = __webpack_require__(7);
+var mapMove_1 = __webpack_require__(6);
 var nm = provide_1.default('collections');
 var $ = __webpack_require__(1);
 var LayerGroup = (function () {
@@ -2012,9 +2040,11 @@ exports.default = LayerLegend;
 
 
 /***/ }),
-/* 19 */,
-/* 20 */,
-/* 21 */
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2030,8 +2060,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var LayerBase_1 = __webpack_require__(10);
-var mapMove_1 = __webpack_require__(7);
+var LayerBase_1 = __webpack_require__(11);
+var mapMove_1 = __webpack_require__(6);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
@@ -2317,14 +2347,10 @@ exports.default = LayerBaseVector;
 
 
 /***/ }),
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2333,9 +2359,9 @@ exports.default = LayerBaseVector;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var colors = __webpack_require__(57);
+var colors = __webpack_require__(66);
 var provide_1 = __webpack_require__(0);
-var LayerItsInventory_1 = __webpack_require__(54);
+var LayerItsInventory_1 = __webpack_require__(63);
 var nm = provide_1.default('collections');
 var itsConfig = [
     {
@@ -2486,29 +2512,12 @@ exports.default = ItsLayerCollection;
 
 
 /***/ }),
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2527,7 +2536,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var LayerBaseVector_1 = __webpack_require__(21);
+var LayerBaseVector_1 = __webpack_require__(51);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
@@ -2624,8 +2633,8 @@ exports.default = LayerBaseVectorGeoJson;
 
 
 /***/ }),
-/* 53 */,
-/* 54 */
+/* 62 */,
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2644,8 +2653,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var LayerBaseVectorGeoJson_1 = __webpack_require__(52);
-var mapPopup_1 = __webpack_require__(5);
+var LayerBaseVectorGeoJson_1 = __webpack_require__(61);
+var mapPopup_1 = __webpack_require__(4);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
@@ -2924,9 +2933,9 @@ exports.default = LayerItsInventory;
 
 
 /***/ }),
-/* 55 */,
-/* 56 */,
-/* 57 */
+/* 64 */,
+/* 65 */,
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2936,7 +2945,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by gavorhes on 11/3/2015.
  */
 var provide_1 = __webpack_require__(0);
-var chk = __webpack_require__(9);
+var chk = __webpack_require__(19);
 var nm = provide_1.default('util.colors');
 /**
  * helper function to convert to hex
@@ -3099,14 +3108,11 @@ nm.makeBlueGreenRedGradientZScore = makeBlueGreenRedGradientZScore;
 
 
 /***/ }),
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3115,9 +3121,9 @@ nm.makeBlueGreenRedGradientZScore = makeBlueGreenRedGradientZScore;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var ItsLayerCollection_1 = __webpack_require__(29);
-var LayerLegend_1 = __webpack_require__(18);
-var quickMap_1 = __webpack_require__(6);
+var ItsLayerCollection_1 = __webpack_require__(55);
+var LayerLegend_1 = __webpack_require__(46);
+var quickMap_1 = __webpack_require__(7);
 var map = quickMap_1.default({ addGeocode: true });
 window['map'] = map;
 var itsLayerCollection = new ItsLayerCollection_1.default(map);

@@ -56,3 +56,7 @@ swiper.addRightLayer(metamanagerSegments);
 
 swiper.addLeftLayer(truckSpeed2014);
 swiper.addRightLayer(truckSpeed2015);
+
+setTimeout(() => {
+
+}, 5000);

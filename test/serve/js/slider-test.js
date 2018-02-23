@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 70);
+/******/ 	return __webpack_require__(__webpack_require__.s = 76);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -112,7 +112,7 @@ module.exports = $;
 
 /***/ }),
 
-/***/ 30:
+/***/ 56:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -641,7 +641,7 @@ exports.default = TipSliders;
 
 /***/ }),
 
-/***/ 70:
+/***/ 76:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -650,7 +650,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by gavorhes on 6/22/2016.
  */
-var Sliders_1 = __webpack_require__(30);
+var Sliders_1 = __webpack_require__(56);
 var $ = __webpack_require__(1);
 __webpack_require__(1);
 exports.tipConfig = {

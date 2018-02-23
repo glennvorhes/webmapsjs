@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 66);
+/******/ 	return __webpack_require__(__webpack_require__.s = 72);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -112,7 +112,7 @@ module.exports = $;
 
 /***/ }),
 
-/***/ 19:
+/***/ 47:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -122,7 +122,7 @@ module.exports = $;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = __webpack_require__(0);
-var range_change_1 = __webpack_require__(20);
+var range_change_1 = __webpack_require__(50);
 var $ = __webpack_require__(1);
 var nm = provide_1.default('domUtil');
 /**
@@ -334,7 +334,7 @@ nm.MediaControl = MediaControl;
 
 /***/ }),
 
-/***/ 20:
+/***/ 50:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -438,14 +438,14 @@ nm.rangeChange = rangeChange;
 
 /***/ }),
 
-/***/ 66:
+/***/ 72:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 // let g = new
-var media_control_1 = __webpack_require__(19);
+var media_control_1 = __webpack_require__(47);
 //
 //
 console.log('eat this fish');

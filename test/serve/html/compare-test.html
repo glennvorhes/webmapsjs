@@ -20,13 +20,22 @@
             /*position: relative;*/
         }
 
+
+
     </style>
 </head>
 <body>
 <div id="map"></div>
-<script src="../lib/jquery.min.js"></script>
+<script src="../lib/jquery.js"></script>
 <script src="../lib/ol.js"></script>
 <script src="../js/compare-test.js"></script>
+
+<form action="/SSA/download-all" method="post">
+    <input name="ssaId" value=""/>
+    <input name="snapshotVersion" value=""/>
+    <input name="imgString" value=""/>
+    <input type="submit" value="submit">
+</form>
 
 </body>
 </html>
