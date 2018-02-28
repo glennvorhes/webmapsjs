@@ -19,12 +19,12 @@ export interface iMapToBase64Options {
  * @param {iMapToBase64Options} options
  * @returns {any}
  */
-export function mapToBase64(map: ol.Map, callback: (imgData: string) =>  any, options?: iMapToBase64Options): any {
+export function mapToBase64(map: ol.Map, callback: (imgData: string) => any, options?: iMapToBase64Options): any {
     options = options || {};
 
-    if (typeof options.delay  === 'number'){
+    if (typeof options.delay === 'number') {
         //pass
-    } else if (options.layers || options.resize){
+    } else if (options.layers || options.resize) {
         options.delay = 2000;
     } else {
         options.delay = 1;
@@ -71,6 +71,10 @@ export function mapToBase64(map: ol.Map, callback: (imgData: string) =>  any, op
                         map.updateSize();
                         map.getView().setCenter(originalCenter);
                         map.getView().setZoom(originalZoom);
+                    }
+
+                    if (options.layers) {
+                        fitToMap(options.layers, map);
                     }
                 }
             });

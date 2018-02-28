@@ -55,6 +55,9 @@ function mapToBase64(map, callback, options) {
                         map.getView().setCenter(originalCenter);
                         map.getView().setZoom(originalZoom);
                     }
+                    if (options.layers) {
+                        extentUtil_1.fitToMap(options.layers, map);
+                    }
                 }
             });
             map.renderSync();
