@@ -31,12 +31,14 @@ export const DateRangeConnected = connect(
             maxRange: 10,
             start: state.twoDates.start,
             end: state.twoDates.end,
+            initialEnd: state.twoDates.end,
+            npmrds: true
         }
     },
     (dispatch) => {
         return {
-            callback: (s: Date, e: Date) => {
-                dispatch({type: actions.SET_TWO_DATES, start: s, end: e});
+            callback: (s: Date, e: Date, version: number) => {
+                dispatch({type: actions.SET_TWO_DATES, start: s, end: e, version: version});
             }
         }
     }

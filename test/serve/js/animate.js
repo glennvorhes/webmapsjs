@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 67);
+/******/ 	return __webpack_require__(__webpack_require__.s = 69);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -147,25 +147,6 @@ exports.default = makeGuid;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/**
- * Created by gavorhes on 11/3/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var mapPopupCls_1 = __webpack_require__(24);
-/**
- * The single popup object catch is that it is common to multimap pages
- * @type {MapPopupCls}
- */
-exports.mapPopup = new mapPopupCls_1.default();
-exports.default = exports.mapPopup;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
@@ -245,7 +226,7 @@ exports.default = MapInteractionBase;
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -254,17 +235,17 @@ exports.default = MapInteractionBase;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapMoveCls_1 = __webpack_require__(23);
+var mapPopupCls_1 = __webpack_require__(15);
 /**
- * The single map move object catch is that it is common to multimap pages
- * @type {MapMoveCls}
+ * The single popup object catch is that it is common to multimap pages
+ * @type {MapPopupCls}
  */
-exports.mapMove = new mapMoveCls_1.default();
-exports.default = exports.mapMove;
+exports.mapPopup = new mapPopupCls_1.default();
+exports.default = exports.mapPopup;
 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -273,10 +254,10 @@ exports.default = exports.mapMove;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickMapBase_1 = __webpack_require__(25);
+var quickMapBase_1 = __webpack_require__(16);
 var provide_1 = __webpack_require__(0);
-var mapMove_1 = __webpack_require__(6);
-var mapPopup_1 = __webpack_require__(4);
+var mapMove_1 = __webpack_require__(7);
+var mapPopup_1 = __webpack_require__(5);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -307,6 +288,25 @@ exports.default = quickMap;
 
 
 /***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var mapMoveCls_1 = __webpack_require__(14);
+/**
+ * The single map move object catch is that it is common to multimap pages
+ * @type {MapMoveCls}
+ */
+exports.mapMove = new mapMoveCls_1.default();
+exports.default = exports.mapMove;
+
+
+/***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -323,9 +323,42 @@ exports.proj3070 = new ol.proj.Projection({ code: 'EPSG:3070' });
 
 
 /***/ }),
-/* 9 */,
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('util.checkDefined');
+/**
+ * check if the input is undefined or null
+ * @param input - input pointer
+ * @returns true undefined or null
+ */
+function undefinedOrNull(input) {
+    "use strict";
+    return (typeof input === 'undefined' || input === null);
+}
+exports.undefinedOrNull = undefinedOrNull;
+nm.undefinedOrNull = undefinedOrNull;
+/**
+ * check if the input is defined and not null
+ * @param input - input pointer
+ * @returns true defined and not null
+ */
+function definedAndNotNull(input) {
+    "use strict";
+    return !(undefinedOrNull(input));
+}
+exports.definedAndNotNull = definedAndNotNull;
+nm.definedAndNotNull = definedAndNotNull;
+
+
+/***/ }),
 /* 10 */,
-/* 11 */
+/* 11 */,
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -734,235 +767,7 @@ exports.default = LayerBase;
 
 
 /***/ }),
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('util.checkDefined');
-/**
- * check if the input is undefined or null
- * @param input - input pointer
- * @returns true undefined or null
- */
-function undefinedOrNull(input) {
-    "use strict";
-    return (typeof input === 'undefined' || input === null);
-}
-exports.undefinedOrNull = undefinedOrNull;
-nm.undefinedOrNull = undefinedOrNull;
-/**
- * check if the input is defined and not null
- * @param input - input pointer
- * @returns true defined and not null
- */
-function definedAndNotNull(input) {
-    "use strict";
-    return !(undefinedOrNull(input));
-}
-exports.definedAndNotNull = definedAndNotNull;
-nm.definedAndNotNull = definedAndNotNull;
-
-
-/***/ }),
-/* 20 */,
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Created by gavorhes on 12/7/2015.
- */
-var LayerBase_1 = __webpack_require__(11);
-var esriToOl = __webpack_require__(28);
-var mapPopup_1 = __webpack_require__(4);
-var provide_1 = __webpack_require__(0);
-var ol = __webpack_require__(2);
-var $ = __webpack_require__(1);
-var nm = provide_1.default('layers');
-/**
- * Helper to return the url to the service on the production server
- * @param {string} folder
- * @param {string} service
- * @returns {string}
- */
-function makeServiceUrl(folder, service) {
-    return "https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/" + folder + "/" + service + "/MapServer";
-}
-exports.makeServiceUrl = makeServiceUrl;
-function localCacheUrl(folder, service) {
-    var loc = window.location.href;
-    var url = "/mapserver/" + folder + "/" + service;
-    if (loc.indexOf('transportal.cee.wisc.edu') > -1) {
-        if (loc.toLowerCase().indexOf('webmapsstage') > -1) {
-            url = 'https://transportal.cee.wisc.edu/gis/webmapsstage' + url;
-        }
-        else {
-            url = 'https://transportal.cee.wisc.edu/gis/webmaps' + url;
-        }
-    }
-    return url;
-}
-exports.localCacheUrl = localCacheUrl;
-/**
- * esri mapserver layer
- * @augments LayerBase
- */
-var LayerEsriMapServer = (function (_super) {
-    __extends(LayerEsriMapServer, _super);
-    /**
-     * The base layer for all others
-     * @param {string} url - resource url
-     * @param {object} [options] - config
-     * @param {string} [options.id] - layer id
-     * @param {string} [options.name=Unnamed Layer] - layer name
-     * @param {number} [options.opacity=1] - opacity
-     * @param {boolean} [options.visible=true] - default visible
-     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
-     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
-     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
-     * @param {number} [options.zIndex=0] the z index for the layer
-     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
-     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
-     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
-     * @param {boolean} [options.legendContent] additional content to add to the legend
-     * @param {boolean} [options.addPopup=false] if a popup should be added
-     * @param {undefined|Array<number>} [options.showLayers=undefined] if a popup should be added
-     */
-    function LayerEsriMapServer(url, options) {
-        if (options === void 0) { options = {}; }
-        var _this = _super.call(this, url, options) || this;
-        _this._source = new ol.source.TileArcGISRest({
-            url: _this.url == '' ? undefined : _this.url,
-            params: typeof options.showLayers == 'undefined' ? undefined : { layers: 'show:' + options.showLayers.join(',') }
-        });
-        _this._showLayers = options.showLayers || [];
-        _this._olLayer = new ol.layer.Tile({
-            source: _this._source,
-            visible: _this.visible,
-            opacity: _this.opacity,
-            minResolution: _this._minResolution,
-            maxResolution: _this._maxResolution
-        });
-        _this._olLayer.setZIndex(_this._zIndex);
-        options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
-        _this._esriFormat = new ol.format.EsriJSON();
-        _this._popupRequest = null;
-        options.getLegend = typeof options.getLegend === 'boolean' ? options.getLegend : true;
-        if (options.getLegend) {
-            _this.addLegendContent();
-        }
-        if (options.addPopup) {
-            mapPopup_1.default.addMapServicePopup(_this);
-        }
-        return _this;
-    }
-    /**
-     * add additional content to the legend
-     * @param {string} [additionalContent=''] additional content for legend
-     */
-    LayerEsriMapServer.prototype.addLegendContent = function (additionalContent) {
-        var _this = this;
-        var urlCopy = this.url;
-        if (urlCopy[urlCopy.length - 1] !== '/') {
-            urlCopy += '/';
-        }
-        urlCopy += 'legend?f=pjson&callback=?';
-        $.get(urlCopy, {}, function (d) {
-            var newHtml = esriToOl.makeMapServiceLegend(d, _this._showLayers);
-            _super.prototype.addLegendContent.call(_this, newHtml);
-        }, 'json');
-    };
-    LayerEsriMapServer.prototype.getPopupInfo = function (queryParams) {
-        if (!this.visible) {
-            return;
-        }
-        var urlCopy = this.url;
-        if (urlCopy[urlCopy.length - 1] != '/') {
-            urlCopy += '/';
-        }
-        urlCopy += 'identify?callback=?';
-        var __this = this;
-        if (this._popupRequest != null) {
-            this._popupRequest.abort();
-        }
-        this._popupRequest = $.get(urlCopy, queryParams, function (d) {
-            for (var _i = 0, _a = d['results']; _i < _a.length; _i++) {
-                var r = _a[_i];
-                var popupHtml = '<table class="esri-popup-table">';
-                for (var a in r['attributes']) {
-                    if (r['attributes'].hasOwnProperty(a)) {
-                        var attrVal = r['attributes'][a];
-                        if (attrVal == null || attrVal.toString().toLowerCase() == 'null') {
-                            continue;
-                        }
-                        var attr = a;
-                        if (attr.length > 14) {
-                            attr = attr.slice(0, 11) + '...';
-                        }
-                        popupHtml += "<tr><td>" + attr + "</td><td>" + attrVal + "</td></tr>";
-                    }
-                }
-                popupHtml += '</table>';
-                mapPopup_1.default.addMapServicePopupContent(__this._esriFormat.readFeature(r), __this, popupHtml, r['layerName']);
-            }
-        }, 'json');
-        this._popupRequest.always(function () {
-            __this._popupRequest = null;
-        });
-    };
-    Object.defineProperty(LayerEsriMapServer.prototype, "source", {
-        /**
-         *
-         * @returns {ol.source.TileArcGISRest} the vector source
-         */
-        get: function () {
-            return _super.prototype.getSource.call(this);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(LayerEsriMapServer.prototype, "olLayer", {
-        /**
-         *
-         * @returns the ol layer
-         */
-        get: function () {
-            return _super.prototype.getOlLayer.call(this);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return LayerEsriMapServer;
-}(LayerBase_1.LayerBase));
-exports.LayerEsriMapServer = LayerEsriMapServer;
-nm.LayerEsriMapServer = LayerEsriMapServer;
-exports.default = LayerEsriMapServer;
-
-
-/***/ }),
-/* 22 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1048,7 +853,7 @@ exports.Geocode = Geocode;
 
 
 /***/ }),
-/* 23 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1064,8 +869,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapInteractionBase_1 = __webpack_require__(5);
-var checkDefined = __webpack_require__(19);
+var mapInteractionBase_1 = __webpack_require__(4);
+var checkDefined = __webpack_require__(9);
 var provide_1 = __webpack_require__(0);
 var makeGuid_1 = __webpack_require__(3);
 var $ = __webpack_require__(1);
@@ -1293,7 +1098,7 @@ exports.default = MapMoveCls;
 
 
 /***/ }),
-/* 24 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1312,7 +1117,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapInteractionBase_1 = __webpack_require__(5);
+var mapInteractionBase_1 = __webpack_require__(4);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
@@ -1728,7 +1533,7 @@ exports.default = MapPopupCls;
 
 
 /***/ }),
-/* 25 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1740,7 +1545,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
-var geocode_1 = __webpack_require__(22);
+var geocode_1 = __webpack_require__(13);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -1828,6 +1633,201 @@ function quickMapBase(options) {
 exports.quickMapBase = quickMapBase;
 nm.quickMapBase = quickMapBase;
 exports.default = quickMapBase;
+
+
+/***/ }),
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Created by gavorhes on 12/7/2015.
+ */
+var LayerBase_1 = __webpack_require__(12);
+var esriToOl = __webpack_require__(28);
+var mapPopup_1 = __webpack_require__(5);
+var provide_1 = __webpack_require__(0);
+var ol = __webpack_require__(2);
+var $ = __webpack_require__(1);
+var nm = provide_1.default('layers');
+/**
+ * Helper to return the url to the service on the production server
+ * @param {string} folder
+ * @param {string} service
+ * @returns {string}
+ */
+function makeServiceUrl(folder, service) {
+    return "https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/" + folder + "/" + service + "/MapServer";
+}
+exports.makeServiceUrl = makeServiceUrl;
+function localCacheUrl(folder, service) {
+    var loc = window.location.href;
+    var url = "/mapserver/" + folder + "/" + service;
+    if (loc.indexOf('transportal.cee.wisc.edu') > -1) {
+        if (loc.toLowerCase().indexOf('webmapsstage') > -1) {
+            url = 'https://transportal.cee.wisc.edu/gis/webmapsstage' + url;
+        }
+        else {
+            url = 'https://transportal.cee.wisc.edu/gis/webmaps' + url;
+        }
+    }
+    return url;
+}
+exports.localCacheUrl = localCacheUrl;
+/**
+ * esri mapserver layer
+ * @augments LayerBase
+ */
+var LayerEsriMapServer = (function (_super) {
+    __extends(LayerEsriMapServer, _super);
+    /**
+     * The base layer for all others
+     * @param {string} url - resource url
+     * @param {object} [options] - config
+     * @param {string} [options.id] - layer id
+     * @param {string} [options.name=Unnamed Layer] - layer name
+     * @param {number} [options.opacity=1] - opacity
+     * @param {boolean} [options.visible=true] - default visible
+     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+     * @param {number} [options.zIndex=0] the z index for the layer
+     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+     * @param {boolean} [options.legendContent] additional content to add to the legend
+     * @param {boolean} [options.addPopup=false] if a popup should be added
+     * @param {undefined|Array<number>} [options.showLayers=undefined] if a popup should be added
+     */
+    function LayerEsriMapServer(url, options) {
+        if (options === void 0) { options = {}; }
+        var _this = _super.call(this, url, options) || this;
+        _this._source = new ol.source.TileArcGISRest({
+            url: _this.url == '' ? undefined : _this.url,
+            params: typeof options.showLayers == 'undefined' ? undefined : { layers: 'show:' + options.showLayers.join(',') }
+        });
+        _this._showLayers = options.showLayers || [];
+        _this._olLayer = new ol.layer.Tile({
+            source: _this._source,
+            visible: _this.visible,
+            opacity: _this.opacity,
+            minResolution: _this._minResolution,
+            maxResolution: _this._maxResolution
+        });
+        _this._olLayer.setZIndex(_this._zIndex);
+        options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
+        _this._esriFormat = new ol.format.EsriJSON();
+        _this._popupRequest = null;
+        options.getLegend = typeof options.getLegend === 'boolean' ? options.getLegend : true;
+        if (options.getLegend) {
+            _this.addLegendContent();
+        }
+        if (options.addPopup) {
+            mapPopup_1.default.addMapServicePopup(_this);
+        }
+        return _this;
+    }
+    /**
+     * add additional content to the legend
+     * @param {string} [additionalContent=''] additional content for legend
+     */
+    LayerEsriMapServer.prototype.addLegendContent = function (additionalContent) {
+        var _this = this;
+        var urlCopy = this.url;
+        if (urlCopy[urlCopy.length - 1] !== '/') {
+            urlCopy += '/';
+        }
+        urlCopy += 'legend?f=pjson&callback=?';
+        $.get(urlCopy, {}, function (d) {
+            var newHtml = esriToOl.makeMapServiceLegend(d, _this._showLayers);
+            _super.prototype.addLegendContent.call(_this, newHtml);
+        }, 'json');
+    };
+    LayerEsriMapServer.prototype.getPopupInfo = function (queryParams) {
+        if (!this.visible) {
+            return;
+        }
+        var urlCopy = this.url;
+        if (urlCopy[urlCopy.length - 1] != '/') {
+            urlCopy += '/';
+        }
+        urlCopy += 'identify?callback=?';
+        var __this = this;
+        if (this._popupRequest != null) {
+            this._popupRequest.abort();
+        }
+        this._popupRequest = $.get(urlCopy, queryParams, function (d) {
+            for (var _i = 0, _a = d['results']; _i < _a.length; _i++) {
+                var r = _a[_i];
+                var popupHtml = '<table class="esri-popup-table">';
+                for (var a in r['attributes']) {
+                    if (r['attributes'].hasOwnProperty(a)) {
+                        var attrVal = r['attributes'][a];
+                        if (attrVal == null || attrVal.toString().toLowerCase() == 'null') {
+                            continue;
+                        }
+                        var attr = a;
+                        if (attr.length > 14) {
+                            attr = attr.slice(0, 11) + '...';
+                        }
+                        popupHtml += "<tr><td>" + attr + "</td><td>" + attrVal + "</td></tr>";
+                    }
+                }
+                popupHtml += '</table>';
+                mapPopup_1.default.addMapServicePopupContent(__this._esriFormat.readFeature(r), __this, popupHtml, r['layerName']);
+            }
+        }, 'json');
+        this._popupRequest.always(function () {
+            __this._popupRequest = null;
+        });
+    };
+    Object.defineProperty(LayerEsriMapServer.prototype, "source", {
+        /**
+         *
+         * @returns {ol.source.TileArcGISRest} the vector source
+         */
+        get: function () {
+            return _super.prototype.getSource.call(this);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LayerEsriMapServer.prototype, "olLayer", {
+        /**
+         *
+         * @returns the ol layer
+         */
+        get: function () {
+            return _super.prototype.getOlLayer.call(this);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return LayerEsriMapServer;
+}(LayerBase_1.LayerBase));
+exports.LayerEsriMapServer = LayerEsriMapServer;
+nm.LayerEsriMapServer = LayerEsriMapServer;
+exports.default = LayerEsriMapServer;
 
 
 /***/ }),
@@ -2639,8 +2639,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var LayerBase_1 = __webpack_require__(11);
-var mapMove_1 = __webpack_require__(6);
+var LayerBase_1 = __webpack_require__(12);
+var mapMove_1 = __webpack_require__(7);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
@@ -3137,8 +3137,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var LayerBaseXyzTile_1 = __webpack_require__(62);
-var RealEarthAnimateTile_1 = __webpack_require__(65);
+var LayerBaseXyzTile_1 = __webpack_require__(63);
+var RealEarthAnimateTile_1 = __webpack_require__(66);
 var provide_1 = __webpack_require__(0);
 var nm = provide_1.default('layers');
 /**
@@ -3206,7 +3206,8 @@ exports.default = LayerRealEarthTile;
 /***/ }),
 /* 60 */,
 /* 61 */,
-/* 62 */
+/* 62 */,
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3225,7 +3226,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by gavorhes on 12/4/2015.
  */
-var LayerBase_1 = __webpack_require__(11);
+var LayerBase_1 = __webpack_require__(12);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var nm = provide_1.default('layers');
@@ -3297,8 +3298,8 @@ exports.default = LayerBaseXyzTile;
 
 
 /***/ }),
-/* 63 */,
-/* 64 */
+/* 64 */,
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3308,7 +3309,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by gavorhes on 12/4/2015.
  */
 var provide_1 = __webpack_require__(0);
-var mapPopup_1 = __webpack_require__(4);
+var mapPopup_1 = __webpack_require__(5);
 var $ = __webpack_require__(1);
 var nm = provide_1.default('mixin');
 /**
@@ -3430,7 +3431,7 @@ exports.default = RealEarthAnimate;
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3449,7 +3450,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by gavorhes on 12/4/2015.
  */
-var RealEarthAnimate_1 = __webpack_require__(64);
+var RealEarthAnimate_1 = __webpack_require__(65);
 var provide_1 = __webpack_require__(0);
 var nm = provide_1.default('mixin');
 /**
@@ -3502,19 +3503,20 @@ exports.default = RealEarthAnimateTile;
 
 
 /***/ }),
-/* 66 */,
-/* 67 */
+/* 67 */,
+/* 68 */,
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickMap_1 = __webpack_require__(7);
+var quickMap_1 = __webpack_require__(6);
 var LayerRealEarthTile_1 = __webpack_require__(59);
 var media_control_1 = __webpack_require__(47);
 var $ = __webpack_require__(1);
 var LayerBaseVectorEsri_1 = __webpack_require__(58);
-var LayerEsriMapServer_1 = __webpack_require__(21);
+var LayerEsriMapServer_1 = __webpack_require__(25);
 var nexrhresStatic = new LayerRealEarthTile_1.default({
     products: 'nexrhres',
     id: 'nexrhres-static',

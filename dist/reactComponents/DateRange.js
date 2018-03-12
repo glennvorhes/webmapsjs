@@ -32,6 +32,7 @@ var DateRange = (function (_super) {
         var _this = _super.call(this, props, context) || this;
         _this.startId = makeGuid_1.default();
         _this.endId = makeGuid_1.default();
+        _this.versionTwoStart = new Date(2017, 1, 1);
         _this.maxRange = Math.round(_this.props.maxRange) - 1;
         _this.minRange = typeof _this.props['minRange'] == 'number' ? Math.round(_this.props['minRange']) : 1;
         if (_this.minRange > _this.maxRange) {
@@ -55,7 +56,7 @@ var DateRange = (function (_super) {
     DateRange.prototype.componentDidMount = function () {
         this.startInput = document.getElementById(this.startId);
         this.endInput = document.getElementById(this.endId);
-        this.props.callback(this.start, this.end);
+        this.props.callback(this.start, this.end, this.version);
     };
     Object.defineProperty(DateRange.prototype, "needReset", {
         get: function () {
@@ -64,7 +65,49 @@ var DateRange = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(DateRange.prototype, "versionSpan", {
+        get: function () {
+            if (this.start < this.versionTwoStart && this.end >= this.versionTwoStart) {
+                return true;
+            }
+            else if (fixDate.dateToString(this.versionTwoStart) === fixDate.dateToString(this.end) && this.start < this.versionTwoStart) {
+                return true;
+            }
+            return false;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DateRange.prototype, "version", {
+        get: function () {
+            if (fixDate.dateToString(this.start) == fixDate.dateToString(this.versionTwoStart)) {
+                return 2;
+            }
+            else if (this.start >= this.versionTwoStart) {
+                return 2;
+            }
+            return 1;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DateRange.prototype.finalizeChange = function () {
+        if (this.props.npmrds) {
+            if (this.versionSpan) {
+                this.start = this.previousStart;
+                this.end = this.previousEnd;
+                this.startInput.value = fixDate.dateToString(this.start);
+                this.endInput.value = fixDate.dateToString(this.end);
+                this.setNumDays();
+                alert("Start and End dates must not span version break: " + fixDate.dateToString(this.versionTwoStart));
+                return;
+            }
+        }
+        this.props.callback(this.start, this.end, this.version);
+    };
     DateRange.prototype.setStart = function (s) {
+        this.previousStart = new Date(this.start);
+        this.previousEnd = new Date(this.end);
         this.start = s;
         this.setNumDays();
         if (this.needReset) {
@@ -78,9 +121,11 @@ var DateRange = (function (_super) {
             this.endInput.value = fixDate.dateToString(this.end);
             this.setNumDays();
         }
-        this.props.callback(this.start, this.end);
+        this.finalizeChange();
     };
     DateRange.prototype.setEnd = function (s) {
+        this.previousStart = new Date(this.start);
+        this.previousEnd = new Date(this.end);
         this.end = s;
         this.setNumDays();
         if (this.needReset) {
@@ -94,7 +139,7 @@ var DateRange = (function (_super) {
             this.startInput.value = fixDate.dateToString(this.start);
             this.setNumDays();
         }
-        this.props.callback(this.start, this.end);
+        this.finalizeChange();
     };
     DateRange.prototype.render = function () {
         var _this = this;

@@ -19,13 +19,14 @@ function stringToDate(dte: string|Date){
 
 export interface iDateRange{
     maxRange: number;
-    callback: (start: Date, end: Date) => any;
+    callback: (start: Date, end: Date, version?: number) => any;
     minRange?: number;
     maxDate?: Date;
     minDate?: Date;
     initialEnd?: Date;
     start?: Date;
     end?: Date;
+    npmrds?: boolean;
 }
 
 
@@ -39,10 +40,14 @@ export class DateRange extends React.Component<iDateRange, null> {
     maxRange: number;
     minRange: number;
     numDays: number;
-
+    versionTwoStart: Date;
+    previousStart: Date;
+    previousEnd: Date;
 
     constructor(props: iDateRange, context: Object) {
         super(props, context);
+
+        this.versionTwoStart = new Date(2017, 1, 1);
 
         this.maxRange = Math.round(this.props.maxRange) - 1;
         this.minRange = typeof this.props['minRange'] == 'number' ? Math.round(this.props['minRange']) : 1;
@@ -71,15 +76,61 @@ export class DateRange extends React.Component<iDateRange, null> {
     componentDidMount() {
         this.startInput = document.getElementById(this.startId) as HTMLInputElement;
         this.endInput = document.getElementById(this.endId) as HTMLInputElement;
-        this.props.callback(this.start, this.end);
+
+
+        this.props.callback(this.start, this.end, this.version);
     }
 
     private get needReset(): boolean {
         return this.numDays > this.maxRange || this.numDays < this.minRange;
     }
 
+    private get versionSpan(): boolean{
+
+        if (this.start < this.versionTwoStart && this.end >= this.versionTwoStart){
+            return true;
+        } else if (fixDate.dateToString(this.versionTwoStart) === fixDate.dateToString(this.end) && this.start < this.versionTwoStart){
+            return true;
+        }
+
+        return false;
+    }
+
+    private get version(): number{
+
+        if (fixDate.dateToString(this.start) == fixDate.dateToString(this.versionTwoStart)){
+            return 2;
+        } else if (this.start >= this.versionTwoStart){
+            return 2;
+        }
+        return 1;
+    }
+
+    private finalizeChange(){
+
+        if (this.props.npmrds){
+            if (this.versionSpan){
+                this.start = this.previousStart;
+                this.end = this.previousEnd;
+
+                this.startInput.value = fixDate.dateToString(this.start);
+                this.endInput.value = fixDate.dateToString(this.end);
+                this.setNumDays();
+                alert("Start and End dates must not span version break: " + fixDate.dateToString(this.versionTwoStart));
+                return;
+            }
+        }
+
+        this.props.callback(this.start, this.end, this.version);
+    }
+
     private setStart(s: Date) {
+
+        this.previousStart = new Date(this.start);
+        this.previousEnd = new Date(this.end);
+
         this.start = s;
+
         this.setNumDays();
 
         if (this.needReset) {
@@ -94,10 +145,14 @@ export class DateRange extends React.Component<iDateRange, null> {
             this.endInput.value = fixDate.dateToString(this.end);
             this.setNumDays();
         }
-        this.props.callback(this.start, this.end);
+
+        this.finalizeChange();
     }
 
     private setEnd(s: Date) {
+        this.previousStart = new Date(this.start);
+        this.previousEnd = new Date(this.end);
+
         this.end = s;
         this.setNumDays();
 
@@ -113,7 +168,8 @@ export class DateRange extends React.Component<iDateRange, null> {
             this.startInput.value = fixDate.dateToString(this.start);
             this.setNumDays();
         }
-        this.props.callback(this.start, this.end);
+
+        this.finalizeChange();
     }
 
     render() {

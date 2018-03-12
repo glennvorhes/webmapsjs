@@ -11,15 +11,16 @@ function oneDate(state, action) {
         return state;
     }
 }
-var now = new Date();
-var before = new Date();
-before.setDate(before.getDate() - 10);
+var start = new Date('12/31/2017');
+var end = new Date('12/31/2017');
+start.setDate(start.getDate() - 10);
 function twoDates(state, action) {
-    if (state === void 0) { state = { start: now, end: before }; }
+    if (state === void 0) { state = { start: start, end: end, version: 2 }; }
     if (action.type == actions.SET_TWO_DATES) {
         return {
             start: action.start,
-            end: action.end
+            end: action.end,
+            version: action.version
         };
     }
     else {

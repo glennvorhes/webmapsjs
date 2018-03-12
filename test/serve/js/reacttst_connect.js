@@ -143,7 +143,8 @@ exports.default = makeGuid;
 /* 6 */,
 /* 7 */,
 /* 8 */,
-/* 9 */
+/* 9 */,
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -163,7 +164,7 @@ exports.createStore = exports.Redux.createStore;
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -174,8 +175,12 @@ exports.SET_TWO_DATES = 'set two dates';
 
 
 /***/ }),
-/* 11 */,
-/* 12 */
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -189,7 +194,7 @@ var Symbol = __WEBPACK_IMPORTED_MODULE_0__root_js__["a" /* default */].Symbol;
 
 
 /***/ }),
-/* 13 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -261,7 +266,7 @@ function isPlainObject(value) {
 
 
 /***/ }),
-/* 14 */
+/* 19 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -447,7 +452,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 15 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -486,11 +491,11 @@ function compose() {
 }
 
 /***/ }),
-/* 16 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_symbol_observable__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ActionTypes; });
@@ -745,7 +750,7 @@ var ActionTypes = {
 }
 
 /***/ }),
-/* 17 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -773,7 +778,7 @@ function warning(message) {
 }
 
 /***/ }),
-/* 18 */
+/* 23 */
 /***/ (function(module, exports) {
 
 var g;
@@ -800,8 +805,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 19 */,
-/* 20 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -828,7 +832,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var reactAndRedux_1 = __webpack_require__(9);
+var reactAndRedux_1 = __webpack_require__(10);
 var $ = __webpack_require__(1);
 __webpack_require__(1);
 var makeGuid_1 = __webpack_require__(3);
@@ -876,10 +880,6 @@ exports.default = DatePick;
 
 
 /***/ }),
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
 /* 25 */,
 /* 26 */,
 /* 27 */
@@ -887,12 +887,12 @@ exports.default = DatePick;
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__combineReducers__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__compose__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warning__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__compose__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warning__ = __webpack_require__(22);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createStore", function() { return __WEBPACK_IMPORTED_MODULE_0__createStore__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "combineReducers", function() { return __WEBPACK_IMPORTED_MODULE_1__combineReducers__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "bindActionCreators", function() { return __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__["a"]; });
@@ -916,7 +916,7 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 }
 
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(19)))
 
 /***/ }),
 /* 28 */,
@@ -939,11 +939,11 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var reactAndRedux_1 = __webpack_require__(9);
+var reactAndRedux_1 = __webpack_require__(10);
 __webpack_require__(1);
 var makeGuid_1 = __webpack_require__(3);
 var fixDate = __webpack_require__(45);
-var DatePick_1 = __webpack_require__(20);
+var DatePick_1 = __webpack_require__(24);
 function stringToDate(dte) {
     if (dte.getTime) {
         return dte;
@@ -958,6 +958,7 @@ var DateRange = (function (_super) {
         var _this = _super.call(this, props, context) || this;
         _this.startId = makeGuid_1.default();
         _this.endId = makeGuid_1.default();
+        _this.versionTwoStart = new Date(2017, 1, 1);
         _this.maxRange = Math.round(_this.props.maxRange) - 1;
         _this.minRange = typeof _this.props['minRange'] == 'number' ? Math.round(_this.props['minRange']) : 1;
         if (_this.minRange > _this.maxRange) {
@@ -981,7 +982,7 @@ var DateRange = (function (_super) {
     DateRange.prototype.componentDidMount = function () {
         this.startInput = document.getElementById(this.startId);
         this.endInput = document.getElementById(this.endId);
-        this.props.callback(this.start, this.end);
+        this.props.callback(this.start, this.end, this.version);
     };
     Object.defineProperty(DateRange.prototype, "needReset", {
         get: function () {
@@ -990,7 +991,49 @@ var DateRange = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(DateRange.prototype, "versionSpan", {
+        get: function () {
+            if (this.start < this.versionTwoStart && this.end >= this.versionTwoStart) {
+                return true;
+            }
+            else if (fixDate.dateToString(this.versionTwoStart) === fixDate.dateToString(this.end) && this.start < this.versionTwoStart) {
+                return true;
+            }
+            return false;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DateRange.prototype, "version", {
+        get: function () {
+            if (fixDate.dateToString(this.start) == fixDate.dateToString(this.versionTwoStart)) {
+                return 2;
+            }
+            else if (this.start >= this.versionTwoStart) {
+                return 2;
+            }
+            return 1;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DateRange.prototype.finalizeChange = function () {
+        if (this.props.npmrds) {
+            if (this.versionSpan) {
+                this.start = this.previousStart;
+                this.end = this.previousEnd;
+                this.startInput.value = fixDate.dateToString(this.start);
+                this.endInput.value = fixDate.dateToString(this.end);
+                this.setNumDays();
+                alert("Start and End dates must not span version break: " + fixDate.dateToString(this.versionTwoStart));
+                return;
+            }
+        }
+        this.props.callback(this.start, this.end, this.version);
+    };
     DateRange.prototype.setStart = function (s) {
+        this.previousStart = new Date(this.start);
+        this.previousEnd = new Date(this.end);
         this.start = s;
         this.setNumDays();
         if (this.needReset) {
@@ -1004,9 +1047,11 @@ var DateRange = (function (_super) {
             this.endInput.value = fixDate.dateToString(this.end);
             this.setNumDays();
         }
-        this.props.callback(this.start, this.end);
+        this.finalizeChange();
     };
     DateRange.prototype.setEnd = function (s) {
+        this.previousStart = new Date(this.start);
+        this.previousEnd = new Date(this.end);
         this.end = s;
         this.setNumDays();
         if (this.needReset) {
@@ -1020,7 +1065,7 @@ var DateRange = (function (_super) {
             this.startInput.value = fixDate.dateToString(this.start);
             this.setNumDays();
         }
-        this.props.callback(this.start, this.end);
+        this.finalizeChange();
     };
     DateRange.prototype.render = function () {
         var _this = this;
@@ -1038,7 +1083,7 @@ exports.DateRange = DateRange;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getRawTag_js__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__objectToString_js__ = __webpack_require__(34);
 
@@ -1081,7 +1126,7 @@ var freeGlobal = typeof global == 'object' && global && global.Object === Object
 
 /* harmony default export */ __webpack_exports__["a"] = freeGlobal;
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(18)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(23)))
 
 /***/ }),
 /* 32 */
@@ -1102,7 +1147,7 @@ var getPrototype = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__overArg_js
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(17);
 
 
 /** Used for built-in method references. */
@@ -1260,7 +1305,7 @@ function isObjectLike(value) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__compose__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__compose__ = __webpack_require__(20);
 /* harmony export (immutable) */ __webpack_exports__["a"] = applyMiddleware;
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -1370,9 +1415,9 @@ function bindActionCreators(actionCreators, dispatch) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_es_isPlainObject__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_warning__ = __webpack_require__(17);
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_es_isPlainObject__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_warning__ = __webpack_require__(22);
 /* harmony export (immutable) */ __webpack_exports__["a"] = combineReducers;
 
 
@@ -1504,7 +1549,7 @@ function combineReducers(reducers) {
     return hasChanged ? nextState : state;
   };
 }
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(19)))
 
 /***/ }),
 /* 41 */
@@ -1547,7 +1592,7 @@ if (typeof self !== 'undefined') {
 
 var result = (0, _ponyfill2['default'])(root);
 exports['default'] = result;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18), __webpack_require__(44)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23), __webpack_require__(44)(module)))
 
 /***/ }),
 /* 43 */
@@ -1648,10 +1693,10 @@ exports.dateToString = dateToString;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var reactAndRedux_1 = __webpack_require__(9);
-var DatePick_1 = __webpack_require__(20);
+var reactAndRedux_1 = __webpack_require__(10);
+var DatePick_1 = __webpack_require__(24);
 var DateRange_1 = __webpack_require__(29);
-var actions = __webpack_require__(10);
+var actions = __webpack_require__(11);
 exports.DatePickConnected = reactAndRedux_1.connect(function (state) {
     return {
         label: 'Date Picker Connected',
@@ -1672,11 +1717,13 @@ exports.DateRangeConnected = reactAndRedux_1.connect(function (state) {
         maxRange: 10,
         start: state.twoDates.start,
         end: state.twoDates.end,
+        initialEnd: state.twoDates.end,
+        npmrds: true
     };
 }, function (dispatch) {
     return {
-        callback: function (s, e) {
-            dispatch({ type: actions.SET_TWO_DATES, start: s, end: e });
+        callback: function (s, e, version) {
+            dispatch({ type: actions.SET_TWO_DATES, start: s, end: e, version: version });
         }
     };
 })(DateRange_1.DateRange);

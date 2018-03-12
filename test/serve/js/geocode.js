@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 70);
+/******/ 	return __webpack_require__(__webpack_require__.s = 72);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -112,48 +112,7 @@ module.exports = $;
 
 /***/ }),
 
-/***/ 19:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('util.checkDefined');
-/**
- * check if the input is undefined or null
- * @param input - input pointer
- * @returns true undefined or null
- */
-function undefinedOrNull(input) {
-    "use strict";
-    return (typeof input === 'undefined' || input === null);
-}
-exports.undefinedOrNull = undefinedOrNull;
-nm.undefinedOrNull = undefinedOrNull;
-/**
- * check if the input is defined and not null
- * @param input - input pointer
- * @returns true defined and not null
- */
-function definedAndNotNull(input) {
-    "use strict";
-    return !(undefinedOrNull(input));
-}
-exports.definedAndNotNull = definedAndNotNull;
-nm.definedAndNotNull = definedAndNotNull;
-
-
-/***/ }),
-
-/***/ 2:
-/***/ (function(module, exports) {
-
-module.exports = ol;
-
-/***/ }),
-
-/***/ 22:
+/***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -240,7 +199,7 @@ exports.Geocode = Geocode;
 
 /***/ }),
 
-/***/ 23:
+/***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -256,8 +215,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapInteractionBase_1 = __webpack_require__(5);
-var checkDefined = __webpack_require__(19);
+var mapInteractionBase_1 = __webpack_require__(4);
+var checkDefined = __webpack_require__(9);
 var provide_1 = __webpack_require__(0);
 var makeGuid_1 = __webpack_require__(3);
 var $ = __webpack_require__(1);
@@ -486,7 +445,7 @@ exports.default = MapMoveCls;
 
 /***/ }),
 
-/***/ 24:
+/***/ 15:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -505,7 +464,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapInteractionBase_1 = __webpack_require__(5);
+var mapInteractionBase_1 = __webpack_require__(4);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
@@ -922,7 +881,7 @@ exports.default = MapPopupCls;
 
 /***/ }),
 
-/***/ 25:
+/***/ 16:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -934,7 +893,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
-var geocode_1 = __webpack_require__(22);
+var geocode_1 = __webpack_require__(13);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -1026,6 +985,13 @@ exports.default = quickMapBase;
 
 /***/ }),
 
+/***/ 2:
+/***/ (function(module, exports) {
+
+module.exports = ol;
+
+/***/ }),
+
 /***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1056,26 +1022,6 @@ exports.default = makeGuid;
 /***/ }),
 
 /***/ 4:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 11/3/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var mapPopupCls_1 = __webpack_require__(24);
-/**
- * The single popup object catch is that it is common to multimap pages
- * @type {MapPopupCls}
- */
-exports.mapPopup = new mapPopupCls_1.default();
-exports.default = exports.mapPopup;
-
-
-/***/ }),
-
-/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1159,7 +1105,7 @@ exports.default = MapInteractionBase;
 
 /***/ }),
 
-/***/ 6:
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1168,18 +1114,18 @@ exports.default = MapInteractionBase;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapMoveCls_1 = __webpack_require__(23);
+var mapPopupCls_1 = __webpack_require__(15);
 /**
- * The single map move object catch is that it is common to multimap pages
- * @type {MapMoveCls}
+ * The single popup object catch is that it is common to multimap pages
+ * @type {MapPopupCls}
  */
-exports.mapMove = new mapMoveCls_1.default();
-exports.default = exports.mapMove;
+exports.mapPopup = new mapPopupCls_1.default();
+exports.default = exports.mapPopup;
 
 
 /***/ }),
 
-/***/ 7:
+/***/ 6:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1188,10 +1134,10 @@ exports.default = exports.mapMove;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickMapBase_1 = __webpack_require__(25);
+var quickMapBase_1 = __webpack_require__(16);
 var provide_1 = __webpack_require__(0);
-var mapMove_1 = __webpack_require__(6);
-var mapPopup_1 = __webpack_require__(4);
+var mapMove_1 = __webpack_require__(7);
+var mapPopup_1 = __webpack_require__(5);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -1223,34 +1169,13 @@ exports.default = quickMap;
 
 /***/ }),
 
-/***/ 70:
+/***/ 61:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickMap_1 = __webpack_require__(7);
-var mapToBase64_1 = __webpack_require__(77);
-var map = quickMap_1.default({ addGeocode: true });
-window['map'] = map;
-function callback(d) {
-    console.log(d);
-}
-setTimeout(function () {
-    mapToBase64_1.mapToBase64(map, callback, { delay: 1500 });
-}, 2000);
-console.log('it works');
-
-
-/***/ }),
-
-/***/ 77:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var extentUtil_1 = __webpack_require__(78);
+var extentUtil_1 = __webpack_require__(67);
 /**
  *
  * @param {ol.Map} map
@@ -1305,6 +1230,9 @@ function mapToBase64(map, callback, options) {
                         map.getView().setCenter(originalCenter);
                         map.getView().setZoom(originalZoom);
                     }
+                    if (options.layers) {
+                        extentUtil_1.fitToMap(options.layers, map);
+                    }
                 }
             });
             map.renderSync();
@@ -1318,7 +1246,7 @@ exports.default = mapToBase64;
 
 /***/ }),
 
-/***/ 78:
+/***/ 67:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1385,6 +1313,47 @@ nm.calculateExtent = calculateExtent;
 
 /***/ }),
 
+/***/ 7:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var mapMoveCls_1 = __webpack_require__(14);
+/**
+ * The single map move object catch is that it is common to multimap pages
+ * @type {MapMoveCls}
+ */
+exports.mapMove = new mapMoveCls_1.default();
+exports.default = exports.mapMove;
+
+
+/***/ }),
+
+/***/ 72:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var quickMap_1 = __webpack_require__(6);
+var mapToBase64_1 = __webpack_require__(61);
+var map = quickMap_1.default({ addGeocode: true });
+window['map'] = map;
+function callback(d) {
+    console.log(d);
+}
+setTimeout(function () {
+    mapToBase64_1.mapToBase64(map, callback, { delay: 1500 });
+}, 2000);
+console.log('it works');
+
+
+/***/ }),
+
 /***/ 8:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1398,6 +1367,40 @@ var ol = __webpack_require__(2);
 exports.proj4326 = new ol.proj.Projection({ code: 'EPSG:4326' });
 exports.proj3857 = new ol.proj.Projection({ code: 'EPSG:3857' });
 exports.proj3070 = new ol.proj.Projection({ code: 'EPSG:3070' });
+
+
+/***/ }),
+
+/***/ 9:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('util.checkDefined');
+/**
+ * check if the input is undefined or null
+ * @param input - input pointer
+ * @returns true undefined or null
+ */
+function undefinedOrNull(input) {
+    "use strict";
+    return (typeof input === 'undefined' || input === null);
+}
+exports.undefinedOrNull = undefinedOrNull;
+nm.undefinedOrNull = undefinedOrNull;
+/**
+ * check if the input is defined and not null
+ * @param input - input pointer
+ * @returns true defined and not null
+ */
+function definedAndNotNull(input) {
+    "use strict";
+    return !(undefinedOrNull(input));
+}
+exports.definedAndNotNull = definedAndNotNull;
+nm.definedAndNotNull = definedAndNotNull;
 
 
 /***/ })

@@ -24,11 +24,13 @@ exports.DateRangeConnected = reactAndRedux_1.connect(function (state) {
         maxRange: 10,
         start: state.twoDates.start,
         end: state.twoDates.end,
+        initialEnd: state.twoDates.end,
+        npmrds: true
     };
 }, function (dispatch) {
     return {
-        callback: function (s, e) {
-            dispatch({ type: actions.SET_TWO_DATES, start: s, end: e });
+        callback: function (s, e, version) {
+            dispatch({ type: actions.SET_TWO_DATES, start: s, end: e, version: version });
         }
     };
 })(DateRange_1.DateRange);

@@ -5,6 +5,7 @@ export interface iState {
     twoDates: {
         start: Date;
         end: Date;
+        version: number;
     };
 }
 export declare function getState(): iState;

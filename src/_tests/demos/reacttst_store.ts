@@ -10,15 +10,16 @@ function oneDate(state = new Date(), action: {type: string, d: Date}) {
     }
 }
 
-let now = new Date();
-let before = new Date();
-before.setDate(before.getDate() - 10);
+let start = new Date('12/31/2017');
+let end = new Date('12/31/2017');
+start.setDate(start.getDate() - 10);
 
-function twoDates(state = {start: now, end: before}, action: {type: string, start: Date, end: Date}){
+function twoDates(state = {start: start, end: end, version: 2}, action: {type: string, start: Date, end: Date, version: number}){
     if (action.type == actions.SET_TWO_DATES){
         return {
             start: action.start,
-            end: action.end
+            end: action.end,
+            version: action.version
         }
     } else {
         return state;
@@ -34,9 +35,8 @@ export const theStore = Redux.createStore(
 
 export interface iState {
     oneDate: Date;
-    twoDates: {start: Date, end: Date}
+    twoDates: {start: Date, end: Date, version: number}
 }
-
 
 
 export function getState(): iState{
