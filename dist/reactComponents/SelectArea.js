@@ -89,7 +89,7 @@ var SelectArea = (function (_super) {
     };
     SelectArea.prototype.render = function () {
         var _this = this;
-        return reactAndRedux_1.React.createElement("div", { style: { margin: '10px' } },
+        return reactAndRedux_1.React.createElement("div", { className: "ol-select-area", style: { margin: '10px' } },
             reactAndRedux_1.React.createElement("button", { id: this.selectId, onClick: function () {
                     _this.setArea();
                 } }, "Select Area"),

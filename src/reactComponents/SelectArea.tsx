@@ -111,7 +111,7 @@ export class SelectArea extends React.Component<iSelectArea, null> {
     }
 
     render() {
-        return <div style={{margin: '10px'}}>
+        return <div className="ol-select-area" style={{margin: '10px'}}>
             <button id={this.selectId} onClick={() => {
                 this.setArea()
             }}>Select Area
