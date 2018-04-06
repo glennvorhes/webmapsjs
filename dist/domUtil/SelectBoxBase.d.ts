@@ -44,6 +44,7 @@ export declare class SelectBoxBase {
      * @param {string|number} v
      */
     selectedValue: string | number;
+    readonly selectedIndex: number;
     readonly selectedText: string;
 }
 export default SelectBoxBase;

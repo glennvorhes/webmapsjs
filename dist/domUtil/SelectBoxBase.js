@@ -96,6 +96,13 @@ var SelectBoxBase = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(SelectBoxBase.prototype, "selectedIndex", {
+        get: function () {
+            return this._box[0].selectedIndex;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(SelectBoxBase.prototype, "selectedText", {
         get: function () {
             return this.box.find('option:selected').text();

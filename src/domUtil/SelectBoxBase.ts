@@ -115,6 +115,10 @@ export class SelectBoxBase{
         }
     }
 
+    get selectedIndex(): number {
+        return (this._box[0] as HTMLSelectElement).selectedIndex;
+    }
+
     /**
      *
      * @param {string|number} v
