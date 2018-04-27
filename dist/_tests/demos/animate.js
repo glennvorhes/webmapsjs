@@ -34,7 +34,7 @@ var media = new media_control_1.MediaControl($('#control'), function (v) {
 });
 var map = quickMap_1.quickMap();
 map.addLayer(nexrhresStatic.olLayer);
-var coordinationLayer = new LayerBaseVectorEsri_1.LayerBaseVectorEsri('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/GLRTOC/GlrtocCoordination/MapServer/0', {
+var coordinationLayer = new LayerBaseVectorEsri_1.LayerBaseVectorEsri('https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/GLRTOC/GlrtocCoordination/MapServer/0', {
     visible: true,
     autoLoad: true,
     name: 'Coordination',

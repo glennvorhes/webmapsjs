@@ -9,10 +9,10 @@ import LayerLegend from '../../collections/LayerLegend';
 let map = quickMap();
 
 let wisDotRegions = new LayerEsriMapServer(
-    'http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/Metamanager_regions/MapServer');
+    'https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/Metamanager_regions/MapServer');
 
 let sixYearPlan = new LayerEsriMapServer(
-    'http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/SixYearPlan/MapServer', {name: 'Six Year Plan', legendCollapse: true});
+    'https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/SixYearPlan/MapServer', {name: 'Six Year Plan', legendCollapse: true});
 
 map.addLayer(wisDotRegions.olLayer);
 map.addLayer(sixYearPlan.olLayer);

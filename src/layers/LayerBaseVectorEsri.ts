@@ -9,6 +9,17 @@ import ol = require('custom-ol');
 import $ = require('jquery');
 let nm = provide('layers');
 
+
+/**
+ * Helper to return the url to the service on the production server
+ * @param {string} folder
+ * @param {string} service
+ * @returns {string}
+ */
+export function makeServiceUrl(folder: string, service: string): string{
+    return `https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/${folder}/${service}/MapServer`
+}
+
 export interface LayerBaseVectorEsriOptions  extends LayerBaseVectorOptions{
     format?: string;
     outSR?: number;

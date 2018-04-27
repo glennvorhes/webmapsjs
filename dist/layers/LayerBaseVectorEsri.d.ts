@@ -3,6 +3,13 @@
  */
 import { LayerBaseVector, LayerBaseVectorOptions } from './LayerBaseVector';
 import ol = require('custom-ol');
+/**
+ * Helper to return the url to the service on the production server
+ * @param {string} folder
+ * @param {string} service
+ * @returns {string}
+ */
+export declare function makeServiceUrl(folder: string, service: string): string;
 export interface LayerBaseVectorEsriOptions extends LayerBaseVectorOptions {
     format?: string;
     outSR?: number;

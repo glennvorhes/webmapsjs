@@ -46,7 +46,7 @@ map.addLayer(nexrhresStatic.olLayer);
 
 
 let coordinationLayer = new LayerBaseVectorEsri(
-    'http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/GLRTOC/GlrtocCoordination/MapServer/0',
+    'https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/GLRTOC/GlrtocCoordination/MapServer/0',
     {
         visible: true,
         autoLoad: true,

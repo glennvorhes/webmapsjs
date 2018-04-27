@@ -12,7 +12,7 @@ let swiper = new LayerSwipe(map);
 
 
 let wisDotRegions = new LayerEsriMapServer(
-    'http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/Metamanager_regions/MapServer',
+    'https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/Metamanager_regions/MapServer',
     {
         minZoom: 6,
         maxZoom: 12,
@@ -20,7 +20,7 @@ let wisDotRegions = new LayerEsriMapServer(
     });
 
 let metamanagerSegments = new LayerEsriMapServer(
-    'http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/MM_All_Segments/MapServer',
+    'https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/MM_All_Segments/MapServer',
     {
         minZoom: 7,
         visible: true,
@@ -28,7 +28,7 @@ let metamanagerSegments = new LayerEsriMapServer(
     });
 
 let truckSpeed2014 = new LayerEsriMapServer(
-    'http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/NPMRDS/compareDynamic/MapServer',
+    'https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/NPMRDS/compareDynamic/MapServer',
     {
         minZoom: 7,
         visible: true,
@@ -37,7 +37,7 @@ let truckSpeed2014 = new LayerEsriMapServer(
     });
 
 let truckSpeed2015 = new LayerEsriMapServer(
-    'http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/NPMRDS/compareDynamic/MapServer',
+    'https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/NPMRDS/compareDynamic/MapServer',
     {
         minZoom: 7,
         visible: true,
