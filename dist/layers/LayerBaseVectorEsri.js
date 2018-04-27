@@ -23,10 +23,11 @@ var nm = provide_1.default('layers');
  * Helper to return the url to the service on the production server
  * @param {string} folder
  * @param {string} service
+ * @param {number} layer
  * @returns {string}
  */
-function makeServiceUrl(folder, service) {
-    return "https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/" + folder + "/" + service + "/MapServer";
+function makeServiceUrl(folder, service, layer) {
+    return "https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/" + folder + "/" + service + "/MapServer/" + layer;
 }
 exports.makeServiceUrl = makeServiceUrl;
 /**
