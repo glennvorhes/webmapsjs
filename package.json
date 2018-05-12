@@ -56,6 +56,7 @@
   },
   "dependencies": {
     "@types/es6-promise": "0.0.32",
+    "axios": "^0.15.3",
     "es6-promise": "^4.1.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
