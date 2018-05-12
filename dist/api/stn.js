@@ -5,6 +5,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var ajx = require("./_axios");
 var _host_1 = require("./_host");
+exports.stnApiUrl = _host_1.default + '/stn';
 function _abortHelper(x) {
     if (x && x['abort']) {
         x.abort();
@@ -13,7 +14,7 @@ function _abortHelper(x) {
 function getRoutes(yr, lon, lat, callback, error) {
     if (error === void 0) { error = function () {
     }; }
-    ajx.get(_host_1.stnApi + '/routes', function (d) {
+    ajx.get(exports.stnApiUrl + '/routes', function (d) {
         if (d.error) {
             error(d);
         }
@@ -26,7 +27,7 @@ exports.getRoutes = getRoutes;
 function getSnappedPoint(yr, routeId, lon, lat, callback, error) {
     if (error === void 0) { error = function () {
     }; }
-    ajx.get(_host_1.stnApi + '/snapped', function (d) {
+    ajx.get(exports.stnApiUrl + '/snapped', function (d) {
         if (d['error']) {
             error(d);
         }
@@ -39,7 +40,7 @@ exports.getSnappedPoint = getSnappedPoint;
 function getStnSegment(yr, routeId, lonStart, latStart, lonEnd, latEnd, callback, error) {
     if (error === void 0) { error = function () {
     }; }
-    ajx.get(_host_1.stnApi + '/segment', function (d) {
+    ajx.get(exports.stnApiUrl + '/segment', function (d) {
         if (d['error']) {
             error(d);
         }

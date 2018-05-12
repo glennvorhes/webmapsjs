@@ -1,2 +1,2 @@
-export declare const stnApi: string;
-export declare const npmrdsApi: string;
+declare const apiRoot: string;
+export default apiRoot;

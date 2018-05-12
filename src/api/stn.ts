@@ -4,8 +4,9 @@
 
 import $ = require('jquery');
 import * as ajx from './_axios';
-import {stnApi} from './_host';
+import apiRoot from './_host';
 
+export const stnApiUrl = apiRoot + '/stn';
 
 function _abortHelper(x: XMLHttpRequest) {
     if (x && x['abort']) {
@@ -29,7 +30,7 @@ export function getRoutes(yr: number,
                          error: (e: iError) => any = () => {
                          }) {
 
-    ajx.get(stnApi + '/routes', (d: iRoutes) => {
+    ajx.get(stnApiUrl + '/routes', (d: iRoutes) => {
             if (d.error) {
                 error(d)
             } else {
@@ -48,7 +49,7 @@ export function getSnappedPoint(yr: number,
                          error: (e: iError) => any = () => {
                          }) {
 
-    ajx.get(stnApi + '/snapped', (d) => {
+    ajx.get(stnApiUrl + '/snapped', (d) => {
             if (d['error']) {
                 error(d)
             } else {
@@ -68,7 +69,7 @@ export function getStnSegment(yr: number,
                          error: (e: iError) => any = () => {
                          }) {
 
-    ajx.get(stnApi + '/segment', (d) => {
+    ajx.get(stnApiUrl + '/segment', (d) => {
             if (d['error']) {
                 error(d)
             } else {

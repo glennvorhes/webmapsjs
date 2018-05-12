@@ -1,3 +1,4 @@
+export declare const stnApiUrl: string;
 export interface iError {
     error?: string;
 }

@@ -7,7 +7,9 @@ import axios from 'axios';
 import * as ajx from './_axios';
 import {iExtent, iGetRoads, iError, iGeometry, iRoute} from './_npmrdsInterfaces';
 import * as empty from './_npmrdsEmpty'
-import {npmrdsApi} from './_host';
+import apiRoot from './_host';
+
+export const npmrdsApiUrl = apiRoot + '/npmrds';
 
 
 
@@ -55,7 +57,7 @@ export function getRoads(extent: iExtent,
         callback({roads: []})
     } else if (ext) {
         let params = {extent: makeExtent(extent), version: version};
-        ajx.get(npmrdsApi + '/roads', (d: iGetRoads | iError) => {
+        ajx.get(npmrdsApiUrl + '/roads', (d: iGetRoads | iError) => {
             if ((d as iError).error) {
                 error(d as iError)
             } else {
@@ -96,7 +98,7 @@ export function getGeometry(extent: iExtent, version: number,
             params['end'] = options.startEnd.end;
         }
 
-        ajx.get(npmrdsApi + '/geometry', (d: iGeometry | iError) => {
+        ajx.get(npmrdsApiUrl + '/geometry', (d: iGeometry | iError) => {
             if ((d as iError).error) {
                 error(d as iError)
             } else {
@@ -141,7 +143,7 @@ export function getRoute(road: string, direction: string, version: number,
         params['end'] = options.startEnd.end;
     }
 
-    ajx.get(npmrdsApi + '/route', (d: iRoute | iError) => {
+    ajx.get(npmrdsApiUrl + '/route', (d: iRoute | iError) => {
         if ((d as iError).error) {
             error(d as iError)
         } else {
@@ -157,7 +159,7 @@ export function getTmcs(lon: number, lat: number, version: number, searchDist: n
 
     let params = {lon: lon, lat: lat, version: version, search: searchDist};
 
-    ajx.get(npmrdsApi + '/tmcs', (d: iGeometry | iError) => {
+    ajx.get(npmrdsApiUrl + '/tmcs', (d: iGeometry | iError) => {
         if ((d as iError).error) {
             error(d as iError)
         } else {
@@ -173,7 +175,7 @@ export function getTmc(tmc: string, version: number,
                         }) {
     let params = {tmc: tmc, version: version};
 
-    ajx.get(npmrdsApi + '/tmc', (d: iGeometry | iError) => {
+    ajx.get(npmrdsApiUrl + '/tmc', (d: iGeometry | iError) => {
         if ((d as iError).error) {
             error(d as iError)
         } else {

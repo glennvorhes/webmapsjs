@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var ajx = require("./_axios");
 var empty = require("./_npmrdsEmpty");
 var _host_1 = require("./_host");
+exports.npmrdsApiUrl = _host_1.default + '/npmrds';
 function _abortHelper(x) {
     if (x && x['abort']) {
         x.abort();
@@ -43,7 +44,7 @@ function getRoads(extent, version, callback, error) {
     }
     else if (ext) {
         var params = { extent: makeExtent(extent), version: version };
-        ajx.get(_host_1.npmrdsApi + '/roads', function (d) {
+        ajx.get(exports.npmrdsApiUrl + '/roads', function (d) {
             if (d.error) {
                 error(d);
             }
@@ -78,7 +79,7 @@ function getGeometry(extent, version, callback, options, error) {
             params['start'] = options.startEnd.start;
             params['end'] = options.startEnd.end;
         }
-        ajx.get(_host_1.npmrdsApi + '/geometry', function (d) {
+        ajx.get(exports.npmrdsApiUrl + '/geometry', function (d) {
             if (d.error) {
                 error(d);
             }
@@ -113,7 +114,7 @@ function getRoute(road, direction, version, callback, options, error) {
         params['start'] = options.startEnd.start;
         params['end'] = options.startEnd.end;
     }
-    ajx.get(_host_1.npmrdsApi + '/route', function (d) {
+    ajx.get(exports.npmrdsApiUrl + '/route', function (d) {
         if (d.error) {
             error(d);
         }
@@ -128,7 +129,7 @@ function getTmcs(lon, lat, version, searchDist, callback, error) {
     if (error === void 0) { error = function () {
     }; }
     var params = { lon: lon, lat: lat, version: version, search: searchDist };
-    ajx.get(_host_1.npmrdsApi + '/tmcs', function (d) {
+    ajx.get(exports.npmrdsApiUrl + '/tmcs', function (d) {
         if (d.error) {
             error(d);
         }
@@ -142,7 +143,7 @@ function getTmc(tmc, version, callback, error) {
     if (error === void 0) { error = function () {
     }; }
     var params = { tmc: tmc, version: version };
-    ajx.get(_host_1.npmrdsApi + '/tmc', function (d) {
+    ajx.get(exports.npmrdsApiUrl + '/tmc', function (d) {
         if (d.error) {
             error(d);
         }

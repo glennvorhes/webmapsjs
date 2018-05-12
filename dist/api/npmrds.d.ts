@@ -1,4 +1,5 @@
 import { iExtent, iGetRoads, iError, iGeometry, iRoute } from './_npmrdsInterfaces';
+export declare const npmrdsApiUrl: string;
 export declare function getRoads(extent: iExtent, version: number, callback: (d: iGetRoads) => any, error?: (e: iError) => any): void;
 export declare function getGeometry(extent: iExtent, version: number, callback: (d: iGeometry) => any, options?: {
     roadDirection?: {
