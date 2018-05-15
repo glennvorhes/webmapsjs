@@ -11,8 +11,22 @@ function _abortHelper(x) {
         x.abort();
     }
 }
-function getRoutes(yr, lon, lat, callback, error) {
-    if (error === void 0) { error = function () {
+/**
+ *
+ * @param {number} yr
+ * @param {number} lon
+ * @param {number} lat
+ * @param {number} searchDistance
+ * @param {(d: iRoutes) => any} callback
+ * @param {(e: iError) => any} error
+ */
+function getRoutes(yr, lon, lat, searchDistance, callback, error) {
+    if (searchDistance === void 0) { searchDistance = 200; }
+    if (callback === void 0) { callback = function (d) {
+        console.log(d);
+    }; }
+    if (error === void 0) { error = function (e) {
+        console.log(e);
     }; }
     ajx.get(exports.stnApiUrl + '/routes', function (d) {
         if (d.error) {
@@ -21,11 +35,31 @@ function getRoutes(yr, lon, lat, callback, error) {
         else {
             callback(d);
         }
-    }, { year: yr, lon: lon, lat: lat }, error);
+    }, {
+        year: yr,
+        lon: lon,
+        lat: lat,
+        distance: searchDistance
+    }, error);
 }
 exports.getRoutes = getRoutes;
-function getSnappedPoint(yr, routeId, lon, lat, callback, error) {
-    if (error === void 0) { error = function () {
+/**
+ *
+ * @param {number} yr
+ * @param {number} routeId
+ * @param {number} lon
+ * @param {number} lat
+ * @param {number} searchDistance
+ * @param {(d) => any} callback
+ * @param {(e: iError) => any} error
+ */
+function getSnappedPoint(yr, routeId, lon, lat, searchDistance, callback, error) {
+    if (searchDistance === void 0) { searchDistance = 200; }
+    if (callback === void 0) { callback = function (d) {
+        console.log(d);
+    }; }
+    if (error === void 0) { error = function (e) {
+        console.log(e);
     }; }
     ajx.get(exports.stnApiUrl + '/snapped', function (d) {
         if (d['error']) {
@@ -34,11 +68,34 @@ function getSnappedPoint(yr, routeId, lon, lat, callback, error) {
         else {
             callback(d);
         }
-    }, { year: yr, route: routeId, lon: lon, lat: lat }, error);
+    }, {
+        year: yr,
+        route: routeId,
+        lon: lon,
+        lat: lat,
+        distance: searchDistance
+    }, error);
 }
 exports.getSnappedPoint = getSnappedPoint;
-function getStnSegment(yr, routeId, lonStart, latStart, lonEnd, latEnd, callback, error) {
-    if (error === void 0) { error = function () {
+/**
+ *
+ * @param {number} yr
+ * @param {number} routeId
+ * @param {number} lonStart
+ * @param {number} latStart
+ * @param {number} lonEnd
+ * @param {number} latEnd
+ * @param {number} searchDistance
+ * @param {(d) => any} callback
+ * @param {(e: iError) => any} error
+ */
+function getStnSegment(yr, routeId, lonStart, latStart, lonEnd, latEnd, searchDistance, callback, error) {
+    if (searchDistance === void 0) { searchDistance = 200; }
+    if (callback === void 0) { callback = function (d) {
+        console.log(d);
+    }; }
+    if (error === void 0) { error = function (e) {
+        console.log(e);
     }; }
     ajx.get(exports.stnApiUrl + '/segment', function (d) {
         if (d['error']) {
@@ -47,7 +104,15 @@ function getStnSegment(yr, routeId, lonStart, latStart, lonEnd, latEnd, callback
         else {
             callback(d);
         }
-    }, { year: yr, route: routeId, lonStart: lonStart, latStart: latStart, lonEnd: lonEnd, latEnd: latEnd }, error);
+    }, {
+        year: yr,
+        route: routeId,
+        lonStart: lonStart,
+        latStart: latStart,
+        lonEnd: lonEnd,
+        latEnd: latEnd,
+        distance: searchDistance
+    }, error);
 }
 exports.getStnSegment = getStnSegment;
 //# sourceMappingURL=stn.js.map
