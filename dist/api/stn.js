@@ -4,8 +4,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ajx = require("./_axios");
-var _host_1 = require("./_host");
-exports.stnApiUrl = _host_1.default + '/stn';
+var host_1 = require("./host");
+exports.stnApiUrl = host_1.apiRoot + '/stn';
 function _abortHelper(x) {
     if (x && x['abort']) {
         x.abort();

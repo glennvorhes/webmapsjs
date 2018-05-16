@@ -5,8 +5,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var ajx = require("./_axios");
 var empty = require("./_npmrdsEmpty");
-var _host_1 = require("./_host");
-exports.npmrdsApiUrl = _host_1.default + '/npmrds';
+var host_1 = require("./host");
+exports.npmrdsApiUrl = host_1.apiRoot + '/npmrds';
 function _abortHelper(x) {
     if (x && x['abort']) {
         x.abort();

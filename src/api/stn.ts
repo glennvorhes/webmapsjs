@@ -3,7 +3,7 @@
  */
 
 import * as ajx from './_axios';
-import apiRoot from './_host';
+import {apiRoot} from './host';
 
 export const stnApiUrl = apiRoot + '/stn';
 
