@@ -3,7 +3,7 @@
  */
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ajx = require("./_axios");
+var ajx = require("./axios");
 var empty = require("./_npmrdsEmpty");
 var host_1 = require("./host");
 exports.npmrdsApiUrl = host_1.apiRoot + '/npmrds';

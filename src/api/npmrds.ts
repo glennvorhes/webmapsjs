@@ -3,8 +3,7 @@
  */
 
 import $ = require('jquery');
-import axios from 'axios';
-import * as ajx from './_axios';
+import * as ajx from './axios';
 import {iExtent, iGetRoads, iError, iGeometry, iRoute} from './_npmrdsInterfaces';
 import * as empty from './_npmrdsEmpty'
 import {apiRoot} from './host';

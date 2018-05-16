@@ -2,7 +2,7 @@
  * Created by glenn on 6/13/2017.
  */
 
-import * as ajx from './_axios';
+import * as ajx from './axios';
 import {apiRoot} from './host';
 
 export const stnApiUrl = apiRoot + '/stn';
