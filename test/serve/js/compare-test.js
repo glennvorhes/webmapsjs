@@ -112,13 +112,13 @@ module.exports = $;
 
 /***/ }),
 
-/***/ 12:
+/***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var zoomResolutionConvert = __webpack_require__(26);
+var zoomResolutionConvert = __webpack_require__(17);
 var provide_1 = __webpack_require__(0);
 var makeGuid_1 = __webpack_require__(3);
 var $ = __webpack_require__(1);
@@ -522,7 +522,7 @@ exports.default = LayerBase;
 
 /***/ }),
 
-/***/ 13:
+/***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -609,7 +609,7 @@ exports.Geocode = Geocode;
 
 /***/ }),
 
-/***/ 14:
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -855,7 +855,7 @@ exports.default = MapMoveCls;
 
 /***/ }),
 
-/***/ 15:
+/***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -929,9 +929,8 @@ var MapPopupCls = (function (_super) {
     function MapPopupCls() {
         var _this = _super.call(this, 'map popup') || this;
         _this._arrPopupLayerIds = [];
-        _this._arrPopupLayerNames = [];
         _this._arrPopupLayers = [];
-        _this._arrPopupOlLayers = [];
+        // this._arrPopupOlLayers = [];
         _this._arrPopupContentFunction = [];
         _this._$popupContainer = undefined;
         _this._$popupContent = undefined;
@@ -1082,19 +1081,22 @@ var MapPopupCls = (function (_super) {
                 return;
             }
             var pixel = _this.map.getEventPixel(evt['originalEvent']);
-            var hit = _this.map.hasFeatureAtPixel(pixel, function (lyrCandidate) {
-                for (var _i = 0, _a = _this._arrPopupOlLayers; _i < _a.length; _i++) {
-                    var olLayer = _a[_i];
-                    if (lyrCandidate == olLayer) {
-                        return true;
+            var hit = false;
+            _this.map.forEachLayerAtPixel(pixel, function (lyr) {
+                if (hit) {
+                    return;
+                }
+                for (var _i = 0, _a = _this._arrPopupLayers; _i < _a.length; _i++) {
+                    var vLyr = _a[_i];
+                    if (vLyr.olLayer == lyr) {
+                        hit = true;
+                        break;
                     }
                 }
-                return false;
             });
             var mapElement = _this.map.getTargetElement();
             mapElement.style.cursor = hit ? 'pointer' : '';
         });
-        return true;
     };
     /**
      * helper to select features
@@ -1145,9 +1147,18 @@ var MapPopupCls = (function (_super) {
         var _this = this;
         var layerFeatureObjectArray = [];
         this.map.forEachFeatureAtPixel(pixel, function (feature, layer) {
-            var lyrIndex = _this._arrPopupOlLayers.indexOf(layer);
-            if (lyrIndex > -1) {
-                layerFeatureObjectArray.push(new FeatureLayerProperties(feature, _this._arrPopupLayers[lyrIndex], lyrIndex, _this._selectionLayers[lyrIndex]));
+            var hasLyr = false;
+            var j;
+            var lyr = null;
+            for (j = 0; j < _this._arrPopupLayers.length; j++) {
+                lyr = _this._arrPopupLayers[j];
+                if (lyr.olLayer === layer) {
+                    hasLyr = true;
+                    break;
+                }
+            }
+            if (hasLyr) {
+                layerFeatureObjectArray.push(new FeatureLayerProperties(feature, lyr, j, _this._selectionLayers[j]));
             }
         });
         return layerFeatureObjectArray;
@@ -1227,9 +1238,8 @@ var MapPopupCls = (function (_super) {
     MapPopupCls.prototype.addVectorPopup = function (lyr, popupContentFunction, selectionStyle) {
         var selectionLayer = this._addPopupLayer(lyr, selectionStyle);
         this._arrPopupLayerIds.push(lyr.id);
-        this._arrPopupLayerNames.push(lyr.name);
         this._arrPopupLayers.push(lyr);
-        this._arrPopupOlLayers.push(lyr.olLayer);
+        // this._arrPopupOlLayers.push(lyr.olLayer);
         this._arrPopupContentFunction.push(popupContentFunction);
         return selectionLayer;
     };
@@ -1242,9 +1252,8 @@ var MapPopupCls = (function (_super) {
         var idx = this._arrPopupLayerIds.indexOf(lyr.id);
         if (idx > -1) {
             this._arrPopupLayerIds.splice(idx, 1);
-            this._arrPopupLayerNames.splice(idx, 1);
             this._arrPopupLayers.splice(idx, 1);
-            this._arrPopupOlLayers.splice(idx, 1);
+            // this._arrPopupOlLayers.splice(idx, 1);
             this._arrPopupContentFunction.splice(idx, 1);
             this._selectionLayers.splice(idx, 1);
             delete this._selectionLayerLookup[lyr.id];
@@ -1291,7 +1300,7 @@ exports.default = MapPopupCls;
 
 /***/ }),
 
-/***/ 16:
+/***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1303,7 +1312,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
-var geocode_1 = __webpack_require__(13);
+var geocode_1 = __webpack_require__(11);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -1395,6 +1404,89 @@ exports.default = quickMapBase;
 
 /***/ }),
 
+/***/ 17:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 12/14/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('olHelpers.zoomResolutionConvert');
+var _zoomResLookup = [
+    156543.03392804097,
+    78271.51696402048,
+    39135.75848201024,
+    19567.87924100512,
+    9783.93962050256,
+    4891.96981025128,
+    2445.98490512564,
+    1222.99245256282,
+    611.49622628141,
+    305.748113140705,
+    152.8740565703525,
+    76.43702828517625,
+    38.21851414258813,
+    19.109257071294063,
+    9.554628535647032,
+    4.777314267823516,
+    2.388657133911758,
+    1.194328566955879,
+    0.5971642834779395,
+    0.29858214173896974,
+    0.14929107086948487,
+    0.07464553543474244,
+    0.03732276771737122,
+    0.01866138385868561,
+    0.009330691929342804,
+    0.004665345964671402,
+    0.002332672982335701,
+    0.0011663364911678506,
+    0.0005831682455839253 //28
+];
+/**
+ * Get the resolution given the zoom level
+ * @param {number} zoomLevel - the zoom level
+ * @returns {number|*} the map resolution
+ */
+function zoomToResolution(zoomLevel) {
+    "use strict";
+    if (typeof zoomLevel == 'number') {
+        if (zoomLevel % 1 === 0 && zoomLevel >= 0 && zoomLevel <= 28) {
+            return _zoomResLookup[zoomLevel];
+        }
+        else {
+            console.log("invalid zoom level provided: " + zoomLevel);
+            return undefined;
+        }
+    }
+    else {
+        return undefined;
+    }
+}
+exports.zoomToResolution = zoomToResolution;
+nm.zoomToResolution = zoomToResolution;
+/**
+ * Get resolution from the zoom level
+ * @param {number} resolution - the resolution
+ * @returns {number|*} the zoom level
+ */
+function resolutionToZoom(resolution) {
+    for (var i = 0; i < _zoomResLookup.length; i++) {
+        if (resolution >= _zoomResLookup[i]) {
+            return i;
+        }
+    }
+    return 0;
+}
+exports.resolutionToZoom = resolutionToZoom;
+nm.resolutionToZoom = resolutionToZoom;
+
+
+/***/ }),
+
 /***/ 2:
 /***/ (function(module, exports) {
 
@@ -1402,7 +1494,7 @@ module.exports = ol;
 
 /***/ }),
 
-/***/ 25:
+/***/ 26:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1421,9 +1513,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by gavorhes on 12/7/2015.
  */
-var LayerBase_1 = __webpack_require__(12);
+var LayerBase_1 = __webpack_require__(10);
 var esriToOl = __webpack_require__(28);
-var mapPopup_1 = __webpack_require__(5);
+var mapPopup_1 = __webpack_require__(7);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
@@ -1586,89 +1678,6 @@ var LayerEsriMapServer = (function (_super) {
 exports.LayerEsriMapServer = LayerEsriMapServer;
 nm.LayerEsriMapServer = LayerEsriMapServer;
 exports.default = LayerEsriMapServer;
-
-
-/***/ }),
-
-/***/ 26:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 12/14/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('olHelpers.zoomResolutionConvert');
-var _zoomResLookup = [
-    156543.03392804097,
-    78271.51696402048,
-    39135.75848201024,
-    19567.87924100512,
-    9783.93962050256,
-    4891.96981025128,
-    2445.98490512564,
-    1222.99245256282,
-    611.49622628141,
-    305.748113140705,
-    152.8740565703525,
-    76.43702828517625,
-    38.21851414258813,
-    19.109257071294063,
-    9.554628535647032,
-    4.777314267823516,
-    2.388657133911758,
-    1.194328566955879,
-    0.5971642834779395,
-    0.29858214173896974,
-    0.14929107086948487,
-    0.07464553543474244,
-    0.03732276771737122,
-    0.01866138385868561,
-    0.009330691929342804,
-    0.004665345964671402,
-    0.002332672982335701,
-    0.0011663364911678506,
-    0.0005831682455839253 //28
-];
-/**
- * Get the resolution given the zoom level
- * @param {number} zoomLevel - the zoom level
- * @returns {number|*} the map resolution
- */
-function zoomToResolution(zoomLevel) {
-    "use strict";
-    if (typeof zoomLevel == 'number') {
-        if (zoomLevel % 1 === 0 && zoomLevel >= 0 && zoomLevel <= 28) {
-            return _zoomResLookup[zoomLevel];
-        }
-        else {
-            console.log("invalid zoom level provided: " + zoomLevel);
-            return undefined;
-        }
-    }
-    else {
-        return undefined;
-    }
-}
-exports.zoomToResolution = zoomToResolution;
-nm.zoomToResolution = zoomToResolution;
-/**
- * Get resolution from the zoom level
- * @param {number} resolution - the resolution
- * @returns {number|*} the zoom level
- */
-function resolutionToZoom(resolution) {
-    for (var i = 0; i < _zoomResLookup.length; i++) {
-        if (resolution >= _zoomResLookup[i]) {
-            return i;
-        }
-    }
-    return 0;
-}
-exports.resolutionToZoom = resolutionToZoom;
-nm.resolutionToZoom = resolutionToZoom;
 
 
 /***/ }),
@@ -2157,34 +2166,14 @@ exports.default = MapInteractionBase;
 
 "use strict";
 /**
- * Created by gavorhes on 11/3/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var mapPopupCls_1 = __webpack_require__(15);
-/**
- * The single popup object catch is that it is common to multimap pages
- * @type {MapPopupCls}
- */
-exports.mapPopup = new mapPopupCls_1.default();
-exports.default = exports.mapPopup;
-
-
-/***/ }),
-
-/***/ 6:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
  * Created by gavorhes on 12/15/2015.
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickMapBase_1 = __webpack_require__(16);
+var quickMapBase_1 = __webpack_require__(14);
 var provide_1 = __webpack_require__(0);
-var mapMove_1 = __webpack_require__(7);
-var mapPopup_1 = __webpack_require__(5);
+var mapMove_1 = __webpack_require__(6);
+var mapPopup_1 = __webpack_require__(7);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -2216,7 +2205,27 @@ exports.default = quickMap;
 
 /***/ }),
 
-/***/ 60:
+/***/ 6:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var mapMoveCls_1 = __webpack_require__(12);
+/**
+ * The single map move object catch is that it is common to multimap pages
+ * @type {MapMoveCls}
+ */
+exports.mapMove = new mapMoveCls_1.default();
+exports.default = exports.mapMove;
+
+
+/***/ }),
+
+/***/ 61:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2359,13 +2368,13 @@ exports.default = LayerSwipe;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapMoveCls_1 = __webpack_require__(14);
+var mapPopupCls_1 = __webpack_require__(13);
 /**
- * The single map move object catch is that it is common to multimap pages
- * @type {MapMoveCls}
+ * The single popup object catch is that it is common to multimap pages
+ * @type {MapPopupCls}
  */
-exports.mapMove = new mapMoveCls_1.default();
-exports.default = exports.mapMove;
+exports.mapPopup = new mapPopupCls_1.default();
+exports.default = exports.mapPopup;
 
 
 /***/ }),
@@ -2379,28 +2388,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by gavorhes on 6/1/2016.
  */
-var quickMap_1 = __webpack_require__(6);
-var layerSwipe_1 = __webpack_require__(60);
-var LayerEsriMapServer_1 = __webpack_require__(25);
+var quickMap_1 = __webpack_require__(5);
+var layerSwipe_1 = __webpack_require__(61);
+var LayerEsriMapServer_1 = __webpack_require__(26);
 var map = quickMap_1.quickMap();
 var swiper = new layerSwipe_1.default(map);
-var wisDotRegions = new LayerEsriMapServer_1.LayerEsriMapServer('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/Metamanager_regions/MapServer', {
+var wisDotRegions = new LayerEsriMapServer_1.LayerEsriMapServer('https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/Metamanager_regions/MapServer', {
     minZoom: 6,
     maxZoom: 12,
     name: 'WisDOT Regions'
 });
-var metamanagerSegments = new LayerEsriMapServer_1.LayerEsriMapServer('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/MM_All_Segments/MapServer', {
+var metamanagerSegments = new LayerEsriMapServer_1.LayerEsriMapServer('https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/MetaManager/MM_All_Segments/MapServer', {
     minZoom: 7,
     visible: true,
     name: 'Metamanager Segments'
 });
-var truckSpeed2014 = new LayerEsriMapServer_1.LayerEsriMapServer('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/NPMRDS/compareDynamic/MapServer', {
+var truckSpeed2014 = new LayerEsriMapServer_1.LayerEsriMapServer('https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/NPMRDS/compareDynamic/MapServer', {
     minZoom: 7,
     visible: true,
     name: 'truck2014',
     showLayers: [8]
 });
-var truckSpeed2015 = new LayerEsriMapServer_1.LayerEsriMapServer('http://transportal.cee.wisc.edu/applications/arcgis2/rest/services/NPMRDS/compareDynamic/MapServer', {
+var truckSpeed2015 = new LayerEsriMapServer_1.LayerEsriMapServer('https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/NPMRDS/compareDynamic/MapServer', {
     minZoom: 7,
     visible: true,
     name: 'truck2015',

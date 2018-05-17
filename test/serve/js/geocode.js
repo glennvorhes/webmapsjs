@@ -112,7 +112,7 @@ module.exports = $;
 
 /***/ }),
 
-/***/ 13:
+/***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -199,7 +199,7 @@ exports.Geocode = Geocode;
 
 /***/ }),
 
-/***/ 14:
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -445,7 +445,7 @@ exports.default = MapMoveCls;
 
 /***/ }),
 
-/***/ 15:
+/***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -519,9 +519,8 @@ var MapPopupCls = (function (_super) {
     function MapPopupCls() {
         var _this = _super.call(this, 'map popup') || this;
         _this._arrPopupLayerIds = [];
-        _this._arrPopupLayerNames = [];
         _this._arrPopupLayers = [];
-        _this._arrPopupOlLayers = [];
+        // this._arrPopupOlLayers = [];
         _this._arrPopupContentFunction = [];
         _this._$popupContainer = undefined;
         _this._$popupContent = undefined;
@@ -672,19 +671,22 @@ var MapPopupCls = (function (_super) {
                 return;
             }
             var pixel = _this.map.getEventPixel(evt['originalEvent']);
-            var hit = _this.map.hasFeatureAtPixel(pixel, function (lyrCandidate) {
-                for (var _i = 0, _a = _this._arrPopupOlLayers; _i < _a.length; _i++) {
-                    var olLayer = _a[_i];
-                    if (lyrCandidate == olLayer) {
-                        return true;
+            var hit = false;
+            _this.map.forEachLayerAtPixel(pixel, function (lyr) {
+                if (hit) {
+                    return;
+                }
+                for (var _i = 0, _a = _this._arrPopupLayers; _i < _a.length; _i++) {
+                    var vLyr = _a[_i];
+                    if (vLyr.olLayer == lyr) {
+                        hit = true;
+                        break;
                     }
                 }
-                return false;
             });
             var mapElement = _this.map.getTargetElement();
             mapElement.style.cursor = hit ? 'pointer' : '';
         });
-        return true;
     };
     /**
      * helper to select features
@@ -735,9 +737,18 @@ var MapPopupCls = (function (_super) {
         var _this = this;
         var layerFeatureObjectArray = [];
         this.map.forEachFeatureAtPixel(pixel, function (feature, layer) {
-            var lyrIndex = _this._arrPopupOlLayers.indexOf(layer);
-            if (lyrIndex > -1) {
-                layerFeatureObjectArray.push(new FeatureLayerProperties(feature, _this._arrPopupLayers[lyrIndex], lyrIndex, _this._selectionLayers[lyrIndex]));
+            var hasLyr = false;
+            var j;
+            var lyr = null;
+            for (j = 0; j < _this._arrPopupLayers.length; j++) {
+                lyr = _this._arrPopupLayers[j];
+                if (lyr.olLayer === layer) {
+                    hasLyr = true;
+                    break;
+                }
+            }
+            if (hasLyr) {
+                layerFeatureObjectArray.push(new FeatureLayerProperties(feature, lyr, j, _this._selectionLayers[j]));
             }
         });
         return layerFeatureObjectArray;
@@ -817,9 +828,8 @@ var MapPopupCls = (function (_super) {
     MapPopupCls.prototype.addVectorPopup = function (lyr, popupContentFunction, selectionStyle) {
         var selectionLayer = this._addPopupLayer(lyr, selectionStyle);
         this._arrPopupLayerIds.push(lyr.id);
-        this._arrPopupLayerNames.push(lyr.name);
         this._arrPopupLayers.push(lyr);
-        this._arrPopupOlLayers.push(lyr.olLayer);
+        // this._arrPopupOlLayers.push(lyr.olLayer);
         this._arrPopupContentFunction.push(popupContentFunction);
         return selectionLayer;
     };
@@ -832,9 +842,8 @@ var MapPopupCls = (function (_super) {
         var idx = this._arrPopupLayerIds.indexOf(lyr.id);
         if (idx > -1) {
             this._arrPopupLayerIds.splice(idx, 1);
-            this._arrPopupLayerNames.splice(idx, 1);
             this._arrPopupLayers.splice(idx, 1);
-            this._arrPopupOlLayers.splice(idx, 1);
+            // this._arrPopupOlLayers.splice(idx, 1);
             this._arrPopupContentFunction.splice(idx, 1);
             this._selectionLayers.splice(idx, 1);
             delete this._selectionLayerLookup[lyr.id];
@@ -881,7 +890,7 @@ exports.default = MapPopupCls;
 
 /***/ }),
 
-/***/ 16:
+/***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -893,7 +902,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
-var geocode_1 = __webpack_require__(13);
+var geocode_1 = __webpack_require__(11);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -1110,34 +1119,14 @@ exports.default = MapInteractionBase;
 
 "use strict";
 /**
- * Created by gavorhes on 11/3/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var mapPopupCls_1 = __webpack_require__(15);
-/**
- * The single popup object catch is that it is common to multimap pages
- * @type {MapPopupCls}
- */
-exports.mapPopup = new mapPopupCls_1.default();
-exports.default = exports.mapPopup;
-
-
-/***/ }),
-
-/***/ 6:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
  * Created by gavorhes on 12/15/2015.
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickMapBase_1 = __webpack_require__(16);
+var quickMapBase_1 = __webpack_require__(14);
 var provide_1 = __webpack_require__(0);
-var mapMove_1 = __webpack_require__(7);
-var mapPopup_1 = __webpack_require__(5);
+var mapMove_1 = __webpack_require__(6);
+var mapPopup_1 = __webpack_require__(7);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -1169,7 +1158,27 @@ exports.default = quickMap;
 
 /***/ }),
 
-/***/ 61:
+/***/ 6:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var mapMoveCls_1 = __webpack_require__(12);
+/**
+ * The single map move object catch is that it is common to multimap pages
+ * @type {MapMoveCls}
+ */
+exports.mapMove = new mapMoveCls_1.default();
+exports.default = exports.mapMove;
+
+
+/***/ }),
+
+/***/ 62:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1322,13 +1331,13 @@ nm.calculateExtent = calculateExtent;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapMoveCls_1 = __webpack_require__(14);
+var mapPopupCls_1 = __webpack_require__(13);
 /**
- * The single map move object catch is that it is common to multimap pages
- * @type {MapMoveCls}
+ * The single popup object catch is that it is common to multimap pages
+ * @type {MapPopupCls}
  */
-exports.mapMove = new mapMoveCls_1.default();
-exports.default = exports.mapMove;
+exports.mapPopup = new mapPopupCls_1.default();
+exports.default = exports.mapPopup;
 
 
 /***/ }),
@@ -1339,8 +1348,8 @@ exports.default = exports.mapMove;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickMap_1 = __webpack_require__(6);
-var mapToBase64_1 = __webpack_require__(61);
+var quickMap_1 = __webpack_require__(5);
+var mapToBase64_1 = __webpack_require__(62);
 var map = quickMap_1.default({ addGeocode: true });
 window['map'] = map;
 function callback(d) {

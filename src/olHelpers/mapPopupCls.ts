@@ -92,8 +92,7 @@ export class MapPopupCls extends MapInteractionBase {
     private _mapClickFunctions: Array<Function>;
     private _selectionLayerLookup: {[s: string]: ol.layer.Vector};
     private _arrPopupLayerIds: Array<string>;
-    private _arrPopupLayerNames: Array<string>;
-    private _arrPopupOlLayers: Array<ol.layer.Vector>;
+    // private _arrPopupOlLayers: Array<ol.layer.Vector>;
     private _arrPopupContentFunction: Array<popupCallback>;
     private _selectionLayers: Array<ol.layer.Vector>;
 
@@ -111,9 +110,8 @@ export class MapPopupCls extends MapInteractionBase {
     constructor() {
         super('map popup');
         this._arrPopupLayerIds = [];
-        this._arrPopupLayerNames = [];
         this._arrPopupLayers = [];
-        this._arrPopupOlLayers = [];
+        // this._arrPopupOlLayers = [];
         this._arrPopupContentFunction = [];
         this._$popupContainer = undefined;
         this._$popupContent = undefined;
@@ -293,25 +291,30 @@ export class MapPopupCls extends MapInteractionBase {
         });
 
         //change mouse cursor when over marker
-        this._map.on('pointermove', (evt: {dragging: boolean, originalEvent: Event}) => {
+        this._map.on('pointermove', (evt) => {
+
             if (evt['dragging']) {
                 return;
             }
             let pixel = this.map.getEventPixel(evt['originalEvent']);
-            let hit = this.map.hasFeatureAtPixel(pixel, (lyrCandidate) => {
-                for (let olLayer of this._arrPopupOlLayers) {
-                    if (lyrCandidate == olLayer) {
-                        return true;
+
+            let hit = false;
+
+            this.map.forEachLayerAtPixel(pixel, (lyr) => {
+                if (hit){
+                    return;
+                }
+                for (let vLyr of this._arrPopupLayers){
+                    if (vLyr.olLayer == lyr){
+                        hit = true;
+                        break;
                     }
                 }
-
-                return false;
             });
+
             let mapElement = this.map.getTargetElement() as HTMLElement;
             mapElement.style.cursor = hit ? 'pointer' : '';
         });
-
-        return true;
     }
 
     /**
@@ -372,12 +375,24 @@ export class MapPopupCls extends MapInteractionBase {
         let layerFeatureObjectArray: FeatureLayerProperties[] = [];
 
         this.map.forEachFeatureAtPixel(pixel, (feature: ol.Feature, layer: ol.layer.Vector) => {
-            let lyrIndex = this._arrPopupOlLayers.indexOf(layer);
+            let hasLyr = false;
 
-            if (lyrIndex > -1) {
+            let j;
+            let lyr = null;
+
+            for (j = 0; j < this._arrPopupLayers.length; j++){
+                lyr = this._arrPopupLayers[j];
+
+                if (lyr.olLayer === layer){
+                    hasLyr = true;
+                    break;
+                }
+            }
+
+            if (hasLyr) {
                 layerFeatureObjectArray.push(
                     new FeatureLayerProperties(
-                        feature, this._arrPopupLayers[lyrIndex], lyrIndex, this._selectionLayers[lyrIndex]));
+                        feature, lyr, j, this._selectionLayers[j]));
             }
         });
 
@@ -473,9 +488,8 @@ export class MapPopupCls extends MapInteractionBase {
                    selectionStyle?: {color?: string, width?: number, olStyle?: ol.style.Style}) {
         let selectionLayer = this._addPopupLayer(lyr, selectionStyle);
         this._arrPopupLayerIds.push(lyr.id);
-        this._arrPopupLayerNames.push(lyr.name);
         this._arrPopupLayers.push(lyr);
-        this._arrPopupOlLayers.push(lyr.olLayer);
+        // this._arrPopupOlLayers.push(lyr.olLayer);
         this._arrPopupContentFunction.push(popupContentFunction);
 
         return selectionLayer;
@@ -486,14 +500,13 @@ export class MapPopupCls extends MapInteractionBase {
      *
      * @param {LayerBase} lyr - layer
      */
-    removeVectorPopup(lyr: LayerBase) {
+    removeVectorPopup(lyr: LayerBaseVector) {
         let idx = this._arrPopupLayerIds.indexOf(lyr.id);
 
         if (idx > -1) {
             this._arrPopupLayerIds.splice(idx, 1);
-            this._arrPopupLayerNames.splice(idx, 1);
             this._arrPopupLayers.splice(idx, 1);
-            this._arrPopupOlLayers.splice(idx, 1);
+            // this._arrPopupOlLayers.splice(idx, 1);
             this._arrPopupContentFunction.splice(idx, 1);
             this._selectionLayers.splice(idx, 1);
             delete this._selectionLayerLookup[lyr.id];

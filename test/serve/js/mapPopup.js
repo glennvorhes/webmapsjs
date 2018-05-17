@@ -63,11 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 69);
+/******/ 	return __webpack_require__(__webpack_require__.s = 74);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -103,260 +104,15 @@ exports.default = provide;
 
 
 /***/ }),
-/* 1 */
+
+/***/ 1:
 /***/ (function(module, exports) {
 
 module.exports = $;
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports) {
 
-module.exports = ol;
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 11/3/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('util');
-/**
- * guids are used to uniquely identify groups and features
- * @returns {string} a new guid
- */
-function makeGuid() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
-        .replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : r & 0x3 | 0x8;
-        return v.toString(16);
-    });
-}
-exports.makeGuid = makeGuid;
-nm.makeGuid = makeGuid;
-exports.default = makeGuid;
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Created by gavorhes on 12/8/2015.
- */
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('olHelpers');
-/**
- * base interaction
- */
-var MapInteractionBase = (function () {
-    /**
-     * map interaction base
-     * @param subtype - the interaction subtype
-     */
-    function MapInteractionBase(subtype) {
-        this._map = null;
-        this._initialized = false;
-        this._subtype = subtype;
-    }
-    /**
-     * base initializer, returns true for already initialized
-     * @param theMap - the ol Map
-     * @returns true for already initialized
-     */
-    MapInteractionBase.prototype.init = function (theMap) {
-        if (!this._initialized) {
-            this._map = theMap;
-            this._initialized = true;
-        }
-    };
-    Object.defineProperty(MapInteractionBase.prototype, "map", {
-        /**
-         * get reference to the ol map object
-         * @returns {ol.Map} the map object
-         */
-        get: function () {
-            return this._map;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MapInteractionBase.prototype, "initialized", {
-        /**
-         * get if is initialized
-         * @returns {boolean} is initialized
-         */
-        get: function () {
-            return this._initialized;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * Check the initialization status and throw exception if not valid yet
-     * @protected
-     */
-    MapInteractionBase.prototype._checkInit = function () {
-        if (!this.initialized) {
-            var msg = this._subtype + " object not initialized";
-            alert(msg);
-            console.log(msg);
-            throw msg;
-        }
-    };
-    /**
-     * Check the initialization status and throw exception if not valid yet
-     */
-    MapInteractionBase.prototype.checkInit = function () {
-        this._checkInit();
-    };
-    return MapInteractionBase;
-}());
-exports.MapInteractionBase = MapInteractionBase;
-nm.MapInteractionBase = MapInteractionBase;
-exports.default = MapInteractionBase;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 12/15/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var quickMapBase_1 = __webpack_require__(14);
-var provide_1 = __webpack_require__(0);
-var mapMove_1 = __webpack_require__(6);
-var mapPopup_1 = __webpack_require__(7);
-var nm = provide_1.default('olHelpers');
-/**
- * Sets up a map with some default parameters and initializes
- * mapMove and mapPopup
- *
- * @param {object} [options={}] config options
- * @param {string} [options.divId=map] map div id
- * @param {object} [options.center={}] center config object
- * @param {number} [options.center.x=-10018378] center x, web mercator x or lon
- * @param {number} [options.center.y=5574910] center y, web mercator y or lat
- * @param {number} [options.zoom=7] zoom level
- * @param {number} [options.minZoom=undefined] min zoom
- * @param {number} [options.maxZoom=undefined] max zoom
- * @param {boolean} [options.baseSwitcher=true] if add base map switcher
- * @param {boolean} [options.fullScreen=false] if add base map switcher
- * @returns {ol.Map} the ol map
- */
-function quickMap(options) {
-    if (options === void 0) { options = {}; }
-    var m = quickMapBase_1.quickMapBase(options);
-    mapMove_1.default.init(m);
-    mapPopup_1.default.init(m);
-    return m;
-}
-exports.quickMap = quickMap;
-nm.quickMap = quickMap;
-exports.default = quickMap;
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 11/3/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var mapMoveCls_1 = __webpack_require__(12);
-/**
- * The single map move object catch is that it is common to multimap pages
- * @type {MapMoveCls}
- */
-exports.mapMove = new mapMoveCls_1.default();
-exports.default = exports.mapMove;
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 11/3/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var mapPopupCls_1 = __webpack_require__(13);
-/**
- * The single popup object catch is that it is common to multimap pages
- * @type {MapPopupCls}
- */
-exports.mapPopup = new mapPopupCls_1.default();
-exports.default = exports.mapPopup;
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Created by gavorhes on 10/3/2016.
- */
-var ol = __webpack_require__(2);
-exports.proj4326 = new ol.proj.Projection({ code: 'EPSG:4326' });
-exports.proj3857 = new ol.proj.Projection({ code: 'EPSG:3857' });
-exports.proj3070 = new ol.proj.Projection({ code: 'EPSG:3070' });
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('util.checkDefined');
-/**
- * check if the input is undefined or null
- * @param input - input pointer
- * @returns true undefined or null
- */
-function undefinedOrNull(input) {
-    "use strict";
-    return (typeof input === 'undefined' || input === null);
-}
-exports.undefinedOrNull = undefinedOrNull;
-nm.undefinedOrNull = undefinedOrNull;
-/**
- * check if the input is defined and not null
- * @param input - input pointer
- * @returns true defined and not null
- */
-function definedAndNotNull(input) {
-    "use strict";
-    return !(undefinedOrNull(input));
-}
-exports.definedAndNotNull = definedAndNotNull;
-nm.definedAndNotNull = definedAndNotNull;
-
-
-/***/ }),
-/* 10 */
+/***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -765,7 +521,8 @@ exports.default = LayerBase;
 
 
 /***/ }),
-/* 11 */
+
+/***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -851,7 +608,8 @@ exports.Geocode = Geocode;
 
 
 /***/ }),
-/* 12 */
+
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1096,7 +854,8 @@ exports.default = MapMoveCls;
 
 
 /***/ }),
-/* 13 */
+
+/***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1540,7 +1299,8 @@ exports.default = MapPopupCls;
 
 
 /***/ }),
-/* 14 */
+
+/***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1643,9 +1403,8 @@ exports.default = quickMapBase;
 
 
 /***/ }),
-/* 15 */,
-/* 16 */,
-/* 17 */
+
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1727,584 +1486,128 @@ nm.resolutionToZoom = resolutionToZoom;
 
 
 /***/ }),
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */
+
+/***/ 2:
+/***/ (function(module, exports) {
+
+module.exports = ol;
+
+/***/ }),
+
+/***/ 3:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('util');
+/**
+ * guids are used to uniquely identify groups and features
+ * @returns {string} a new guid
+ */
+function makeGuid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+        .replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : r & 0x3 | 0x8;
+        return v.toString(16);
+    });
+}
+exports.makeGuid = makeGuid;
+nm.makeGuid = makeGuid;
+exports.default = makeGuid;
+
+
+/***/ }),
+
+/***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * Created by gavorhes on 12/7/2015.
+ * Created by gavorhes on 12/8/2015.
  */
-var LayerBase_1 = __webpack_require__(10);
-var esriToOl = __webpack_require__(28);
-var mapPopup_1 = __webpack_require__(7);
 var provide_1 = __webpack_require__(0);
-var ol = __webpack_require__(2);
-var $ = __webpack_require__(1);
-var nm = provide_1.default('layers');
+var nm = provide_1.default('olHelpers');
 /**
- * Helper to return the url to the service on the production server
- * @param {string} folder
- * @param {string} service
- * @returns {string}
+ * base interaction
  */
-function makeServiceUrl(folder, service) {
-    return "https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/" + folder + "/" + service + "/MapServer";
-}
-exports.makeServiceUrl = makeServiceUrl;
-function localCacheUrl(folder, service) {
-    var loc = window.location.href;
-    var url = "/mapserver/" + folder + "/" + service;
-    if (loc.indexOf('transportal.cee.wisc.edu') > -1) {
-        if (loc.toLowerCase().indexOf('webmapsstage') > -1) {
-            url = 'https://transportal.cee.wisc.edu/gis/webmapsstage' + url;
-        }
-        else {
-            url = 'https://transportal.cee.wisc.edu/gis/webmaps' + url;
-        }
-    }
-    return url;
-}
-exports.localCacheUrl = localCacheUrl;
-/**
- * esri mapserver layer
- * @augments LayerBase
- */
-var LayerEsriMapServer = (function (_super) {
-    __extends(LayerEsriMapServer, _super);
+var MapInteractionBase = (function () {
     /**
-     * The base layer for all others
-     * @param {string} url - resource url
-     * @param {object} [options] - config
-     * @param {string} [options.id] - layer id
-     * @param {string} [options.name=Unnamed Layer] - layer name
-     * @param {number} [options.opacity=1] - opacity
-     * @param {boolean} [options.visible=true] - default visible
-     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
-     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
-     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
-     * @param {number} [options.zIndex=0] the z index for the layer
-     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
-     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
-     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
-     * @param {boolean} [options.legendContent] additional content to add to the legend
-     * @param {boolean} [options.addPopup=false] if a popup should be added
-     * @param {undefined|Array<number>} [options.showLayers=undefined] if a popup should be added
+     * map interaction base
+     * @param subtype - the interaction subtype
      */
-    function LayerEsriMapServer(url, options) {
-        if (options === void 0) { options = {}; }
-        var _this = _super.call(this, url, options) || this;
-        _this._source = new ol.source.TileArcGISRest({
-            url: _this.url == '' ? undefined : _this.url,
-            params: typeof options.showLayers == 'undefined' ? undefined : { layers: 'show:' + options.showLayers.join(',') }
-        });
-        _this._showLayers = options.showLayers || [];
-        _this._olLayer = new ol.layer.Tile({
-            source: _this._source,
-            visible: _this.visible,
-            opacity: _this.opacity,
-            minResolution: _this._minResolution,
-            maxResolution: _this._maxResolution
-        });
-        _this._olLayer.setZIndex(_this._zIndex);
-        options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
-        _this._esriFormat = new ol.format.EsriJSON();
-        _this._popupRequest = null;
-        options.getLegend = typeof options.getLegend === 'boolean' ? options.getLegend : true;
-        if (options.getLegend) {
-            _this.addLegendContent();
-        }
-        if (options.addPopup) {
-            mapPopup_1.default.addMapServicePopup(_this);
-        }
-        return _this;
+    function MapInteractionBase(subtype) {
+        this._map = null;
+        this._initialized = false;
+        this._subtype = subtype;
     }
     /**
-     * add additional content to the legend
-     * @param {string} [additionalContent=''] additional content for legend
+     * base initializer, returns true for already initialized
+     * @param theMap - the ol Map
+     * @returns true for already initialized
      */
-    LayerEsriMapServer.prototype.addLegendContent = function (additionalContent) {
-        var _this = this;
-        var urlCopy = this.url;
-        if (urlCopy[urlCopy.length - 1] !== '/') {
-            urlCopy += '/';
+    MapInteractionBase.prototype.init = function (theMap) {
+        if (!this._initialized) {
+            this._map = theMap;
+            this._initialized = true;
         }
-        urlCopy += 'legend?f=pjson&callback=?';
-        $.get(urlCopy, {}, function (d) {
-            var newHtml = esriToOl.makeMapServiceLegend(d, _this._showLayers);
-            _super.prototype.addLegendContent.call(_this, newHtml);
-        }, 'json');
     };
-    LayerEsriMapServer.prototype.getPopupInfo = function (queryParams) {
-        if (!this.visible) {
-            return;
-        }
-        var urlCopy = this.url;
-        if (urlCopy[urlCopy.length - 1] != '/') {
-            urlCopy += '/';
-        }
-        urlCopy += 'identify?callback=?';
-        var __this = this;
-        if (this._popupRequest != null) {
-            this._popupRequest.abort();
-        }
-        this._popupRequest = $.get(urlCopy, queryParams, function (d) {
-            for (var _i = 0, _a = d['results']; _i < _a.length; _i++) {
-                var r = _a[_i];
-                var popupHtml = '<table class="esri-popup-table">';
-                for (var a in r['attributes']) {
-                    if (r['attributes'].hasOwnProperty(a)) {
-                        var attrVal = r['attributes'][a];
-                        if (attrVal == null || attrVal.toString().toLowerCase() == 'null') {
-                            continue;
-                        }
-                        var attr = a;
-                        if (attr.length > 14) {
-                            attr = attr.slice(0, 11) + '...';
-                        }
-                        popupHtml += "<tr><td>" + attr + "</td><td>" + attrVal + "</td></tr>";
-                    }
-                }
-                popupHtml += '</table>';
-                mapPopup_1.default.addMapServicePopupContent(__this._esriFormat.readFeature(r), __this, popupHtml, r['layerName']);
-            }
-        }, 'json');
-        this._popupRequest.always(function () {
-            __this._popupRequest = null;
-        });
-    };
-    Object.defineProperty(LayerEsriMapServer.prototype, "source", {
+    Object.defineProperty(MapInteractionBase.prototype, "map", {
         /**
-         *
-         * @returns {ol.source.TileArcGISRest} the vector source
+         * get reference to the ol map object
+         * @returns {ol.Map} the map object
          */
         get: function () {
-            return _super.prototype.getSource.call(this);
+            return this._map;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(LayerEsriMapServer.prototype, "olLayer", {
+    Object.defineProperty(MapInteractionBase.prototype, "initialized", {
         /**
-         *
-         * @returns the ol layer
+         * get if is initialized
+         * @returns {boolean} is initialized
          */
         get: function () {
-            return _super.prototype.getOlLayer.call(this);
+            return this._initialized;
         },
         enumerable: true,
         configurable: true
     });
-    return LayerEsriMapServer;
-}(LayerBase_1.LayerBase));
-exports.LayerEsriMapServer = LayerEsriMapServer;
-nm.LayerEsriMapServer = LayerEsriMapServer;
-exports.default = LayerEsriMapServer;
-
-
-/***/ }),
-/* 27 */,
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    /**
+     * Check the initialization status and throw exception if not valid yet
+     * @protected
+     */
+    MapInteractionBase.prototype._checkInit = function () {
+        if (!this.initialized) {
+            var msg = this._subtype + " object not initialized";
+            alert(msg);
+            console.log(msg);
+            throw msg;
+        }
     };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Created by gavorhes on 1/4/2016.
- */
-var provide_1 = __webpack_require__(0);
-var ol = __webpack_require__(2);
-var nm = provide_1.default('olHelpers.esriToOlStyle');
-/**
- *
- * @param {Array<number>} colorArray - input color array
- * @param {number} opacity - the opacity 0 to 1
- * @returns {string} rgba string
- * @private
- */
-function _colorArrayToRgba(colorArray, opacity) {
-    "use strict";
-    return "rgba(" + colorArray[0] + "," + colorArray[1] + "," + colorArray[2] + "," + opacity + ")";
-}
-/**
- * escape html charcters
- * @param {string} str - input string
- * @returns {string} escaped string
- */
-function htmlEscape(str) {
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-}
-nm.htmlEscape = htmlEscape;
-var CommonSymbol = (function () {
     /**
-     *
-     * @param symbolObj
-     * @param {number} opacity
+     * Check the initialization status and throw exception if not valid yet
      */
-    function CommonSymbol(symbolObj, opacity) {
-        this.symbolObj = symbolObj;
-        this.opacity = opacity;
-        this.olStyle = undefined;
-        this.legendHtml = '';
-    }
-    return CommonSymbol;
+    MapInteractionBase.prototype.checkInit = function () {
+        this._checkInit();
+    };
+    return MapInteractionBase;
 }());
-var PointSymbol = (function (_super) {
-    __extends(PointSymbol, _super);
-    function PointSymbol(symbolObj, opacity) {
-        var _this = _super.call(this, symbolObj, opacity) || this;
-        switch (_this.symbolObj.type) {
-            case 'esriSMS':
-                var innerColor = _colorArrayToRgba(_this.symbolObj.color, _this.opacity);
-                var outerColor = _colorArrayToRgba(_this.symbolObj.outline.color, _this.opacity);
-                var outlineWidth = _this.symbolObj.outline.width;
-                var radius = _this.symbolObj.size;
-                _this.olStyle = new ol.style.Style({
-                    image: new ol.style.Circle({
-                        radius: radius,
-                        fill: new ol.style.Fill({
-                            color: innerColor
-                        }),
-                        stroke: new ol.style.Stroke({ color: outerColor, width: outlineWidth })
-                    })
-                });
-                _this.legendHtml = "<span class=\"legend-layer-icon\" style=\"color: " + innerColor + "\">&#9679;</span>";
-                break;
-            case 'esriPMS':
-                _this.olStyle = new ol.style.Style({
-                    image: new ol.style.Icon({ src: "data:image/png;base64," + _this.symbolObj['imageData'] })
-                });
-                _this.legendHtml = "<img class=\"legend-layer-icon\" height=\"17\" src=\"data:image/png;base64," + _this.symbolObj['imageData'] + "\">";
-                break;
-            default:
-                console.log(_this.symbolObj);
-                alert('Point symbol does not handle symbol type: ' + _this.symbolObj['type']);
-        }
-        return _this;
-    }
-    return PointSymbol;
-}(CommonSymbol));
-var LineSymbol = (function (_super) {
-    __extends(LineSymbol, _super);
-    function LineSymbol(symbolObj, opacity) {
-        var _this = _super.call(this, symbolObj, opacity) || this;
-        switch (_this.symbolObj.type) {
-            case 'esriSLS':
-                var innerColor = _colorArrayToRgba(_this.symbolObj.color, _this.opacity);
-                var lineWidth = _this.symbolObj.width;
-                _this.olStyle = new ol.style.Style({
-                    stroke: new ol.style.Stroke({
-                        color: innerColor,
-                        //lineDash: [4],
-                        width: lineWidth
-                    })
-                });
-                _this.legendHtml = "<span class=\"legend-layer-icon\" ";
-                _this.legendHtml += "style=\"";
-                _this.legendHtml += "background-color: " + innerColor + ";";
-                _this.legendHtml += "width: 40px;";
-                _this.legendHtml += "height: 4px;";
-                _this.legendHtml += "position: relative;";
-                _this.legendHtml += "display: inline-block;";
-                _this.legendHtml += "top: -1px;";
-                _this.legendHtml += "\"></span>";
-                break;
-            default:
-                console.log(_this.symbolObj);
-                alert('Line symbol does not handle symbol type: ' + _this.symbolObj['type']);
-        }
-        return _this;
-    }
-    return LineSymbol;
-}(CommonSymbol));
-var PolygonSymbol = (function (_super) {
-    __extends(PolygonSymbol, _super);
-    function PolygonSymbol(symbolObj, opacity) {
-        var _this = _super.call(this, symbolObj, opacity) || this;
-        switch (_this.symbolObj['type']) {
-            case 'esriSFS':
-                var innerColor = _colorArrayToRgba(_this.symbolObj.color, _this.opacity);
-                var outerColor = _colorArrayToRgba(_this.symbolObj.outline.color, _this.opacity);
-                var outlineWidth = _this.symbolObj.outline.width;
-                _this.olStyle = new ol.style.Style({
-                    stroke: new ol.style.Stroke({
-                        color: outerColor,
-                        //lineDash: [4],
-                        width: outlineWidth
-                    }),
-                    fill: new ol.style.Fill({
-                        color: innerColor
-                    })
-                });
-                _this.legendHtml = "<span class=\"legend-layer-icon\" ";
-                _this.legendHtml += "style=\"";
-                _this.legendHtml += "background-color: " + innerColor + ";";
-                _this.legendHtml += "border: solid " + outerColor + " 1px;";
-                _this.legendHtml += "width: 40px;";
-                _this.legendHtml += "height: 9px;";
-                _this.legendHtml += "position: relative;";
-                _this.legendHtml += "display: inline-block;";
-                _this.legendHtml += "top: 2px;";
-                _this.legendHtml += "\"></span>";
-                break;
-            default:
-                console.log(_this.symbolObj);
-                alert('Polygon symbol does handle symbol type: ' + _this.symbolObj['type']);
-        }
-        return _this;
-    }
-    return PolygonSymbol;
-}(CommonSymbol));
-var SymbolGenerator = (function () {
-    function SymbolGenerator(esriResponse) {
-        this.opacity = (100 - (esriResponse['drawingInfo']['transparency'] || 0)) / 100;
-        this.renderer = esriResponse.drawingInfo.renderer;
-        this.olStyle = undefined;
-        this.legendHtml = '';
-    }
-    return SymbolGenerator;
-}());
-var SingleSymbol = (function (_super) {
-    __extends(SingleSymbol, _super);
-    /**
-     *
-     * @param {object} esriResponse - layer info
-     * @param SymbolClass - the symbol class to use
-     */
-    function SingleSymbol(esriResponse, SymbolClass) {
-        var _this = _super.call(this, esriResponse) || this;
-        _this.symbol = _this.renderer.symbol;
-        var symbolObj = new SymbolClass(_this.symbol, _this.opacity);
-        _this.olStyle = symbolObj.olStyle;
-        _this.legendHtml = symbolObj.legendHtml;
-        return _this;
-    }
-    return SingleSymbol;
-}(SymbolGenerator));
-var UniqueValueSymbol = (function (_super) {
-    __extends(UniqueValueSymbol, _super);
-    /**
-     *
-     * @param {object} esriResponse - layer info
-     * @param SymbolClass - the Symbol class definition
-     */
-    function UniqueValueSymbol(esriResponse, SymbolClass) {
-        var _this = _super.call(this, esriResponse) || this;
-        _this.uniqueValueInfos = _this.renderer.uniqueValueInfos;
-        _this.propertyName = _this.renderer.field1;
-        _this.defaultSymbol = _this.renderer.defaultSymbol;
-        if (_this.defaultSymbol) {
-            var symbolObj = new SymbolClass(_this.defaultSymbol, _this.opacity);
-            _this.defaultStyle = symbolObj.olStyle;
-            _this.defaultLabelHtml = "<span class=\"legend-layer-subitem\">" + htmlEscape(_this.renderer['defaultLabel']) + "</span>" + symbolObj.legendHtml;
-        }
-        else {
-            _this.defaultStyle = undefined;
-            _this.defaultLabelHtml = 'other';
-        }
-        _this.valueArray = [];
-        _this.labelArray = [];
-        _this.legendArray = [];
-        _this.propertyStyleLookup = {};
-        for (var _i = 0, _a = _this.uniqueValueInfos; _i < _a.length; _i++) {
-            var uniqueVal = _a[_i];
-            _this.labelArray.push(uniqueVal['label']);
-            _this.valueArray.push(uniqueVal['value']);
-            var uniqueSym = new SymbolClass(uniqueVal.symbol, _this.opacity);
-            _this.legendArray.push("<span class=\"legend-layer-subitem\">" + htmlEscape(uniqueVal['label']) + "</span>" + uniqueSym.legendHtml);
-            _this.propertyStyleLookup[uniqueVal['value']] = uniqueSym.olStyle;
-        }
-        _this.olStyle = function (feature) {
-            var checkProperties = feature.getProperties();
-            var checkProperty = checkProperties[_this.propertyName];
-            if (_this.propertyStyleLookup[checkProperty] !== undefined) {
-                return [_this.propertyStyleLookup[checkProperty]];
-            }
-            else {
-                return [_this.defaultStyle];
-            }
-        };
-        if (_this.defaultLabelHtml !== null) {
-            _this.legendArray.push(_this.defaultLabelHtml);
-        }
-        _this.legendHtml = '<ul>';
-        for (var _b = 0, _c = _this.legendArray; _b < _c.length; _b++) {
-            var h = _c[_b];
-            _this.legendHtml += "<li>" + h + "</li>";
-        }
-        _this.legendHtml += '</ul>';
-        return _this;
-    }
-    return UniqueValueSymbol;
-}(SymbolGenerator));
-function makeFeatureServiceLegendAndSymbol(esriResponse) {
-    "use strict";
-    var renderer = esriResponse.drawingInfo.renderer;
-    var symbolLegendOut = null;
-    switch (renderer.type) {
-        case 'simple':
-            switch (esriResponse.geometryType) {
-                case 'esriGeometryPoint':
-                    symbolLegendOut = new SingleSymbol(esriResponse, PointSymbol);
-                    break;
-                case 'esriGeometryPolyline':
-                    symbolLegendOut = new SingleSymbol(esriResponse, LineSymbol);
-                    break;
-                case 'esriGeometryPolygon':
-                    symbolLegendOut = new SingleSymbol(esriResponse, PolygonSymbol);
-                    break;
-                default:
-                    console.log(esriResponse);
-                    alert(esriResponse.geometryType + ' not handled');
-            }
-            break;
-        case 'uniqueValue':
-            switch (esriResponse.geometryType) {
-                case 'esriGeometryPoint':
-                    symbolLegendOut = new UniqueValueSymbol(esriResponse, PointSymbol);
-                    break;
-                case 'esriGeometryPolyline':
-                    symbolLegendOut = new UniqueValueSymbol(esriResponse, LineSymbol);
-                    break;
-                case 'esriGeometryPolygon':
-                    symbolLegendOut = new UniqueValueSymbol(esriResponse, PolygonSymbol);
-                    break;
-                default:
-                    console.log(esriResponse);
-                    alert(esriResponse['geometryType'] + ' not handled');
-            }
-            break;
-        default:
-            alert('not handled renderer type: ' + renderer['type']);
-    }
-    if (symbolLegendOut == null) {
-        return { style: undefined, legend: '' };
-    }
-    else {
-        return { style: symbolLegendOut.olStyle, legend: symbolLegendOut.legendHtml };
-    }
-}
-exports.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
-nm.makeFeatureServiceLegendAndSymbol = makeFeatureServiceLegendAndSymbol;
-/**
- *
- * @param {object} lyrObject - the layer as defined in the response
- * @param {boolean} [skipLayerNameAndExpander=false] use only icons
- * @returns {string} legend html
- */
-function mapServiceLegendItem(lyrObject, skipLayerNameAndExpander) {
-    if (skipLayerNameAndExpander === void 0) { skipLayerNameAndExpander = false; }
-    skipLayerNameAndExpander = typeof skipLayerNameAndExpander == 'boolean' ? skipLayerNameAndExpander : false;
-    var layerName = lyrObject['layerName'];
-    var legendItems = lyrObject['legend'];
-    var legendHtml = '';
-    if (!skipLayerNameAndExpander) {
-        legendHtml += "<span class=\"legend-layer-subitem\">" + layerName + "</span>";
-    }
-    if (legendItems.length == 1) {
-        legendHtml = "<img class=\"legend-layer-icon\" height=\"17\" src=\"data:image/png;base64," + legendItems[0]['imageData'] + "\">";
-    }
-    else {
-        if (!skipLayerNameAndExpander) {
-            legendHtml += '<span class="legend-items-expander" title="Expand/Collapse">&#9660;</span>';
-        }
-        legendHtml += '<ul>';
-        for (var i = 0; i < legendItems.length; i++) {
-            legendHtml += "<li>";
-            legendHtml += "<span class=\"legend-layer-subitem\">" + htmlEscape(legendItems[i]['label']) + "</span>";
-            legendHtml += "<img class=\"legend-layer-icon\" height=\"17\" src=\"data:image/png;base64," + legendItems[i]['imageData'] + "\">";
-            legendHtml += "</li>";
-        }
-        legendHtml += '</ul>';
-    }
-    if (!skipLayerNameAndExpander) {
-        legendHtml = "<span class=\"legend-layer-subitem\">" + layerName + "</span>" + legendHtml;
-    }
-    return legendHtml;
-}
-/**
- * make map service legent
- * @param {object} esriResponse - layer info
- * @param  showLayers - limited number of layers to show in map service
- * @returns {string} legend content
- */
-function makeMapServiceLegend(esriResponse, showLayers) {
-    "use strict";
-    if (showLayers === void 0) { showLayers = []; }
-    var newLegendHtml = '';
-    var layers = esriResponse['layers'];
-    if (layers.length == 1) {
-        newLegendHtml += mapServiceLegendItem(layers[0], true);
-    }
-    else {
-        newLegendHtml += '<ul>';
-        for (var i = 0; i < layers.length; i++) {
-            if (showLayers.length > 0 && showLayers.indexOf(i) < 0) {
-                continue;
-            }
-            newLegendHtml += '<li>' + mapServiceLegendItem(layers[i]) + '</li>';
-        }
-        newLegendHtml += '</ul>';
-    }
-    return newLegendHtml;
-}
-exports.makeMapServiceLegend = makeMapServiceLegend;
-nm.makeMapServiceLegend = makeMapServiceLegend;
+exports.MapInteractionBase = MapInteractionBase;
+nm.MapInteractionBase = MapInteractionBase;
+exports.default = MapInteractionBase;
 
 
 /***/ }),
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */
+
+/***/ 45:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2607,342 +1910,8 @@ exports.default = LayerBaseVector;
 
 
 /***/ }),
-/* 46 */,
-/* 47 */,
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/**
- * Created by gavorhes on 11/2/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var range_change_1 = __webpack_require__(52);
-var $ = __webpack_require__(1);
-var nm = provide_1.default('domUtil');
-/**
- * @callback mediaCallback
- * @param {number} tm
- */
-function timeToLocalDateString(tm) {
-    "use strict";
-    var d = new Date(tm);
-    var p1 = d.toLocaleTimeString().split(' ');
-    var p2 = p1[0].split(':');
-    p2 = p2.slice(0, 2);
-    return d.toLocaleDateString() + '<br>' + p2.join(':') + ' ' + p1[1];
-}
-var MediaControl = (function () {
-    /**
-     *
-     * @param element
-     * @param changeFunc
-     * @param mediaConfig
-     */
-    function MediaControl(element, changeFunc, mediaConfig) {
-        if (changeFunc === void 0) { changeFunc = function () {
-            return;
-        }; }
-        if (mediaConfig === void 0) { mediaConfig = {}; }
-        var _this = this;
-        mediaConfig.min = typeof mediaConfig.min == 'number' ? mediaConfig.min : 0;
-        mediaConfig.max = typeof mediaConfig.max == 'number' ? mediaConfig.max : 100;
-        mediaConfig.val = typeof mediaConfig.val == 'number' ? mediaConfig.val : 0;
-        mediaConfig.step = typeof mediaConfig.step == 'number' ? mediaConfig.step : 5;
-        mediaConfig.playInterval = typeof mediaConfig.playInterval == 'number' ? mediaConfig.playInterval : 500;
-        mediaConfig.showAsDate = typeof mediaConfig.showAsDate == 'boolean' ? mediaConfig.showAsDate : false;
-        if (typeof element == 'string') {
-            this._container = $('#' + element);
-        }
-        else if (typeof element.style !== 'undefined') {
-            this._container = $(element);
-        }
-        else {
-            this._container = element;
-        }
-        this._container.addClass('media-control-container');
-        this._playInterval = mediaConfig.playInterval;
-        this._changeFunc = changeFunc;
-        this._showAsDate = mediaConfig.showAsDate;
-        this._currentValue = undefined;
-        this._min = undefined;
-        this._max = undefined;
-        this._step = undefined;
-        this._playing = false;
-        var htmlStr = '<span class="media-player-button media-back"></span>' +
-            '<span class="media-player-button media-play"></span>' +
-            '<span class="media-player-button media-pause media-disabled"></span>' +
-            '<span class="media-player-button media-stop media-disabled" ></span>' +
-            '<span class="media-player-button media-ahead"></span>' +
-            "<input type=\"range\">" +
-            "<div class=\"media-control-value-label-container\">" +
-            "<span class=\"media-control-value-label-min\"></span>" +
-            "<span class=\"media-control-value-label-val\"></span>" +
-            "<span class=\"media-control-value-label-max\"></span>" +
-            "</div>";
-        this._container.append(htmlStr);
-        // let btnPause = this._container.find('.media-pause');
-        var btnPlay = this._container.find('.media-play');
-        this._$btnStop = this._container.find('.media-stop');
-        var btnAhead = this._container.find('.media-ahead');
-        var btnBack = this._container.find('.media-back');
-        this._$slider = this._container.find('input[type=range]');
-        this._$valLabelMin = this._container.find('.media-control-value-label-min');
-        this._$valLabelVal = this._container.find('.media-control-value-label-val');
-        this._$valLabelMax = this._container.find('.media-control-value-label-max');
-        this.setMinMaxValueStep(mediaConfig.min, mediaConfig.max, mediaConfig.val, mediaConfig.step);
-        range_change_1.rangeChange(this._$slider, function (newVal) {
-            _this.currentValue = newVal;
-        }, 100);
-        var ___this = this;
-        btnPlay.click(function () {
-            var $this = $(this);
-            $this.addClass('media-disabled');
-            ___this._$btnStop.removeClass('media-disabled');
-            btnAhead.addClass('media-locked');
-            btnBack.addClass('media-locked');
-            ___this._$slider.prop('disabled', true);
-            ___this._playing = true;
-            ___this._interval = setInterval(function () {
-                ___this.currentValue += ___this._step;
-            }, ___this._playInterval);
-        });
-        this._$btnStop.click(function () {
-            clearInterval(___this._interval);
-            var $this = $(this);
-            $this.addClass('media-disabled');
-            btnPlay.removeClass('media-disabled');
-            btnAhead.removeClass('media-locked');
-            btnBack.removeClass('media-locked');
-            ___this._$slider.prop('disabled', false);
-            ___this._playing = false;
-        });
-        btnAhead.click(function () {
-            ___this.currentValue = ___this.currentValue + ___this._step;
-        });
-        btnBack.click(function () {
-            ___this.currentValue = ___this.currentValue - ___this._step;
-        });
-    }
-    MediaControl.prototype.stopPlaying = function () {
-        if (this._playing) {
-            this._$btnStop.trigger('click');
-        }
-    };
-    Object.defineProperty(MediaControl.prototype, "playing", {
-        get: function () {
-            return this._playing;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MediaControl.prototype, "min", {
-        get: function () {
-            return this._min;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MediaControl.prototype, "max", {
-        get: function () {
-            return this._max;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MediaControl.prototype, "step", {
-        get: function () {
-            return this._step;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MediaControl.prototype, "currentValue", {
-        get: function () {
-            return this._currentValue;
-        },
-        set: function (newValue) {
-            if (newValue > this._max) {
-                newValue = this._min;
-            }
-            else if (newValue < this._min) {
-                newValue = this._max;
-            }
-            this._currentValue = newValue;
-            this._$slider.val(this._currentValue.toFixed(2));
-            if (this._showAsDate) {
-                this._$valLabelVal.html(timeToLocalDateString(this.currentValue));
-            }
-            else {
-                this._$valLabelVal.html(this.currentValue.toString());
-            }
-            this._changeFunc(newValue);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * set min and max value with step
-     * @param {number} newMin the new min
-     * @param {number} newMax the new mas
-     * @param {number} [newValue=newMin] the value to set
-     * @param {number} [newStep=(newMax-newMin)/20] step value
-     */
-    MediaControl.prototype.setMinMaxValueStep = function (newMin, newMax, newValue, newStep) {
-        this._min = newMin;
-        this._max = newMax;
-        newValue = typeof newValue == 'number' ? newValue : newMin;
-        newStep = typeof newStep == 'number' ? newStep : (newMax - newMin) / 20;
-        this._currentValue = newValue;
-        this._step = newStep;
-        this._$slider.prop('min', this.min.toString());
-        this._$slider.prop('max', this.max.toString());
-        this._$slider.prop('step', this.step.toString());
-        this._$slider.val(this.currentValue.toString());
-        if (this._showAsDate) {
-            this._$valLabelMin.html(timeToLocalDateString(this._min));
-            this._$valLabelVal.html(timeToLocalDateString(this.currentValue));
-            this._$valLabelMax.html(timeToLocalDateString(this._max));
-        }
-        else {
-            this._$valLabelMin.html(this._min.toString());
-            this._$valLabelVal.html(this.currentValue.toString());
-            this._$valLabelMax.html(this._max.toString());
-        }
-    };
-    Object.defineProperty(MediaControl.prototype, "changeFunction", {
-        /**
-         *
-         * @param {mediaCallback} newFunc the callback on change
-         */
-        set: function (newFunc) {
-            this._changeFunc = newFunc;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return MediaControl;
-}());
-exports.MediaControl = MediaControl;
-nm.MediaControl = MediaControl;
-
-
-/***/ }),
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('domUtil');
-var mouseIn = false;
-var mouseDown = false;
-var timeout = null;
-var dragged = false;
-var lastVal;
-/**
- * Created by gavorhes on 11/2/2015.
- */
-function triggerCallback(callback, evt) {
-    "use strict";
-    var val = parseFloat(this.value);
-    var min = parseFloat(this.min);
-    var max = parseFloat(this.max);
-    var step = parseFloat(this.step);
-    if (max - val < step) {
-        val = max;
-    }
-    var percent = (val - min) / (max - min);
-    if (typeof lastVal == 'number' && val == lastVal) {
-        return;
-    }
-    lastVal = val;
-    callback(val, percent, evt);
-}
-/**
- * Add a variety of listeners for range inputs applied to a common callback
- * @param  $slider - jquery reference to the slider
- * @param {rangeChangeCallback} callback - the callback
- * @param {number} [changeTimeout=75] before the callback is called
- * @this {jQuery}
- * @returns {jQuery} the jQuery object
- */
-function rangeChange($slider, callback, changeTimeout) {
-    changeTimeout = typeof changeTimeout == 'number' ? changeTimeout : 75;
-    $slider.mouseenter(function () {
-        mouseIn = true;
-    });
-    $slider.mouseleave(function () {
-        mouseIn = false;
-        mouseDown = false;
-    });
-    $slider.mousedown(function () {
-        mouseDown = true;
-    });
-    $slider.mouseup(function () {
-        mouseDown = false;
-    });
-    $slider.mousemove(
-    /**
-     *
-     * @param {object} evt - event properties
-     * @this {HTMLElement}
-     */
-    function (evt) {
-        if (!(mouseIn && mouseDown)) {
-            return;
-        }
-        dragged = true;
-        if (lastVal == this['value']) {
-            return;
-        }
-        lastVal = this['value'];
-        if (timeout != null) {
-            clearTimeout(timeout);
-        }
-        var _this = this;
-        timeout = setTimeout(function () {
-            triggerCallback.call(_this, callback, evt);
-            timeout = null;
-        }, changeTimeout);
-    });
-    $slider.keyup(
-    /**
-     *
-     * @param {object} evt - event properties
-     */
-    function (evt) {
-        if (evt.keyCode == 37 || evt.keyCode == 39) {
-            triggerCallback.call(this, callback, evt);
-        }
-    });
-    $slider.change(function (evt) {
-        if (dragged) {
-            dragged = false;
-            return;
-        }
-        triggerCallback.call(this, callback, evt);
-    });
-    return this;
-}
-exports.rangeChange = rangeChange;
-nm.rangeChange = rangeChange;
-
-
-/***/ }),
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */
+/***/ 49:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2962,31 +1931,20 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var LayerBaseVector_1 = __webpack_require__(45);
-var esriToOl = __webpack_require__(28);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
+var proj = __webpack_require__(8);
+var projections_1 = __webpack_require__(8);
 var nm = provide_1.default('layers');
 /**
- * Helper to return the url to the service on the production server
- * @param {string} folder
- * @param {string} service
- * @param {number} layer
- * @returns {string}
- */
-function makeServiceUrl(folder, service, layer) {
-    return "https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/" + folder + "/" + service + "/MapServer/" + layer;
-}
-exports.makeServiceUrl = makeServiceUrl;
-/**
- * Base layer for esri vector layers
+ * The Vector GeoJson Layer
  * @augments LayerBaseVector
  */
-var LayerBaseVectorEsri = (function (_super) {
-    __extends(LayerBaseVectorEsri, _super);
+var LayerBaseVectorGeoJson = (function (_super) {
+    __extends(LayerBaseVectorGeoJson, _super);
     /**
-     * The base vector layer
-     * @param {string} url - url for source
+     * @param {string|null} url - resource url, set to '' to make blank layer
      * @param {object} options - config
      * @param {string} [options.id] - layer id
      * @param {string} [options.name=Unnamed Layer] - layer name
@@ -3005,596 +1963,298 @@ var LayerBaseVectorEsri = (function (_super) {
      * @param {object} [options.style=undefined] the layer style, use openlayers default style if not defined
      * @param {boolean} [options.onDemand=false] if the layer should be loaded by extent on map move
      * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
-     * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
      *
-     * @param {string} [options.where=1=1] the layer filter clause
-     * @param {string} [options.outFields=*] comma separated list of output fields, defaults to all
-     * @param {string} [options.format=pjson] the format the retrieve the data
-     * @param {number} [options.outSR=3857] the output spatial reference, defaults to web mercator
-     * @param {boolean} [options.useEsriStyle=false] if the map service style should be used
-     * @param {boolean} [options.collapseLegend=false] if the legend should be initially collapsed
-     * @param {number} [options.mapMoveMakeGetParams=function(extent, zoomLevel){}] function to create additional map move params
+     * @param {object} [options.transform={}] SR transform, set as false for no transform
+     * @param {string} options.transform.dataProjection=EPSG:4326 the data CRS
+     * @param {string} options.transform.featureProjection=EPSG:3857 the feature/map CRS
+     * @param {mapMoveMakeGetParams} [options.mapMoveMakeGetParams=function(lyr, extent, zoomLevel){}] function to create additional map move params
+     * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
      */
-    function LayerBaseVectorEsri(url, options) {
+    function LayerBaseVectorGeoJson(url, options) {
+        if (options === void 0) { options = {}; }
         var _this = this;
-        if (typeof options.params != 'object') {
-            options.params = {};
-        }
-        options.params['where'] = options.where || '1=1';
-        options.params['outFields'] = options.outFields || '*';
-        options.params['f'] = options.format || 'pjson';
-        options.params['outSR'] = options.outSR || 3857;
+        url = typeof url == 'string' ? url : '';
         _this = _super.call(this, url, options) || this;
-        _this._outSR = _this.params['outSR'];
-        _this._esriFormat = new ol.format.EsriJSON();
-        if (_this._url[_this._url.length - 1] !== '/') {
-            _this._url += '/';
-        }
-        _this._urlCopy = _this.url;
-        _this._url += 'query?callback=?';
+        _this._geoJsonFormat = new ol.format.GeoJSON();
+        _this._transform = options.transform || {};
+        _this._transform.dataProjection = _this._transform.dataProjection || proj.proj4326;
+        _this._transform.featureProjection = _this._transform.featureProjection || projections_1.proj3857;
         if (_this.autoLoad || _this.visible) {
             _this._load();
-        }
-        _this._useEsriStyle = typeof options.useEsriStyle == 'boolean' ? options.useEsriStyle : false;
-        if (_this._useEsriStyle) {
-            _this.addLegendContent();
         }
         return _this;
     }
     /**
-     * add additional content to the legend
-     * @param {string} [additionalContent=''] additional content to add to legend
-     */
-    LayerBaseVectorEsri.prototype.addLegendContent = function (additionalContent) {
-        var _this = this;
-        if (!this._useEsriStyle) {
-            _super.prototype.addLegendContent.call(this, additionalContent);
-        }
-        else {
-            $.get(this._urlCopy + '?f=pjson&callback=?', {}, function (d) {
-                if (d['subLayers'].length > 0) {
-                    alert('should only use single feature layers, not groups');
-                    return;
-                }
-                var newStyleAndLegend = esriToOl.makeFeatureServiceLegendAndSymbol(d);
-                _this.style = newStyleAndLegend.style;
-                _super.prototype.addLegendContent.call(_this, newStyleAndLegend.legend);
-            }, 'json');
-        }
-    };
-    /**
      * add feature collection
-     * @param {object} featureCollection - features as esrijson
+     * @param {object} featureCollection - as geojson object
      */
-    LayerBaseVectorEsri.prototype.addFeatures = function (featureCollection) {
-        var feats = this._esriFormat.readFeatures(featureCollection);
-        this.source.addFeatures(feats);
+    LayerBaseVectorGeoJson.prototype.addFeatures = function (featureCollection) {
+        this.source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection, { dataProjection: this._transform.dataProjection,
+            featureProjection: this._transform.featureProjection }));
     };
     /**
      * trigger load features
      * @protected
      * @returns {boolean} if already loaded
      */
-    LayerBaseVectorEsri.prototype._load = function () {
+    LayerBaseVectorGeoJson.prototype._load = function () {
         var _this = this;
         if (_super.prototype._load.call(this)) {
             return true;
         }
-        $.get(this._url, this.params, function (d) {
+        $.get(this._url, this._params, function (d) {
             _this.addFeatures(d);
             _this.loadCallback(_this);
         }, 'json').fail(function () {
-            _this._loaded = false;
+            this._loaded = false;
         });
         return false;
     };
     /**
-     * callback to generate the parameters passed in the get request
-     * @param {object} extent - extent object
-     * @param {number} extent.minX - minX
-     * @param {number} extent.minY - minY
-     * @param {number} extent.maxX - maxX
-     * @param {number} extent.maxY - maxY
-     * @param {number} zoomLevel - zoom level
-     */
-    LayerBaseVectorEsri.prototype.mapMoveMakeGetParams = function (extent, zoomLevel) {
-        _super.prototype.mapMoveMakeGetParams.call(this, extent, zoomLevel);
-        this.mapMoveParams['geometry'] = extent.minX + "," + extent.minY + "," + extent.maxX + "," + extent.maxY;
-        this.mapMoveParams['geometryType'] = 'esriGeometryEnvelope';
-        this.mapMoveParams['spatialRel'] = 'esriSpatialRelIntersects';
-        this.mapMoveParams['spatialRel'] = 'esriSpatialRelIntersects';
-        this.mapMoveParams['inSR'] = 3857;
-        if (this._outSR == 3857) {
-            this.mapMoveParams['geometryPrecision'] = 1;
-        }
-    };
-    /**
-     * Before call to map move callback, can prevent call by returning false
-     * @param {number} zoom - zoom level
-     * @param {string} [evtType=undefined] undefined for initial load, otherwise one of 'change:center', 'change:resolution'
-     * @returns {boolean} if the call should proceed
-     */
-    LayerBaseVectorEsri.prototype.mapMoveBefore = function (zoom, evtType) {
-        return _super.prototype.mapMoveBefore.call(this, zoom, evtType);
-        //if (super.mapMoveBefore(zoom, evtType)){
-        //    //place holder for additional processing
-        //    return true;
-        //} else {
-        //    return false;
-        //}
-    };
-    /**
      * callback function on map move
-     * @param {object} d - the json response
+     * @param {object} d the json response
+     * @override
      */
-    LayerBaseVectorEsri.prototype.mapMoveCallback = function (d) {
+    LayerBaseVectorGeoJson.prototype.mapMoveCallback = function (d) {
         _super.prototype.mapMoveCallback.call(this, d);
-        this.source.addFeatures(this._esriFormat.readFeatures(d));
+        this._source.addFeatures(this._geoJsonFormat.readFeatures(d, { featureProjection: this._transform.featureProjection, dataProjection: this._transform.dataProjection }));
     };
-    return LayerBaseVectorEsri;
+    return LayerBaseVectorGeoJson;
 }(LayerBaseVector_1.LayerBaseVector));
-exports.LayerBaseVectorEsri = LayerBaseVectorEsri;
-nm.LayerBaseVectorEsri = LayerBaseVectorEsri;
-exports.default = LayerBaseVectorEsri;
+exports.LayerBaseVectorGeoJson = LayerBaseVectorGeoJson;
+nm.LayerBaseVectorGeoJson = LayerBaseVectorGeoJson;
+exports.default = LayerBaseVectorGeoJson;
 
 
 /***/ }),
-/* 60 */
+
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /**
- * Created by gavorhes on 11/4/2015.
+ * Created by gavorhes on 12/15/2015.
  */
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var LayerBaseXyzTile_1 = __webpack_require__(63);
-var RealEarthAnimateTile_1 = __webpack_require__(66);
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('layers');
-/**
- * Real earth tile
- * @augments LayerBaseXyzTile
- */
-var LayerRealEarthTile = (function (_super) {
-    __extends(LayerRealEarthTile, _super);
-    /**
-     * The base layer for all others
-     * @param {object} options - config
-     * @param {string} [options.id] - layer id
-     * @param {string} [options.name=Unnamed Layer] - layer name
-     * @param {number} [options.opacity=1] - opacity
-     * @param {boolean} [options.visible=true] - default visible
-     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
-     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
-     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
-     * @param {number} [options.zIndex=0] the z index for the layer
-     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
-     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
-     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
-     * @param {boolean} [options.legendContent] additional content to add to the legend
-     *
-     * @param {string} options.products - the products to request
-     * @param {boolean} [options.hasTimes=false] If the layer is time dependent, fixed set of dates
-     * @param {boolean} [options.animate=false] if the layer should be animated
-     */
-    function LayerRealEarthTile(options) {
-        var _this = this;
-        options.animate = typeof options.animate == 'boolean' ? options.animate : false;
-        if (options.animate) {
-            _this = _super.call(this, '', options) || this;
-            _this._products = options.products;
-            _this.animator = new RealEarthAnimateTile_1.default(_this, options.timeLoadCallback);
-            _this.animator.timeInit();
-        }
-        else {
-            _this = _super.call(this, "http://realearth.ssec.wisc.edu/api/image?products=" + options.products + "&x={x}&y={y}&z={z}", options) || this;
-            _this._products = options.products;
-        }
-        return _this;
-    }
-    LayerRealEarthTile.prototype.setLayerTime = function (theTime) {
-        if (this.animator) {
-            return this.animator.setLayerTime(theTime);
-        }
-        else {
-            return false;
-        }
-    };
-    LayerRealEarthTile.prototype._load = function () {
-        if (this.animator) {
-            return false;
-        }
-        return _super.prototype._load.call(this);
-    };
-    return LayerRealEarthTile;
-}(LayerBaseXyzTile_1.LayerBaseXyzTile));
-exports.LayerRealEarthTile = LayerRealEarthTile;
-nm.LayerRealEarthTile = LayerRealEarthTile;
-exports.default = LayerRealEarthTile;
-
-
-/***/ }),
-/* 61 */,
-/* 62 */,
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Created by gavorhes on 12/4/2015.
- */
-var LayerBase_1 = __webpack_require__(10);
-var provide_1 = __webpack_require__(0);
-var ol = __webpack_require__(2);
-var nm = provide_1.default('layers');
-/**
- * XYZ tile
- * @augments LayerBase
- */
-var LayerBaseXyzTile = (function (_super) {
-    __extends(LayerBaseXyzTile, _super);
-    /**
-     * The XYZ tile layer
-     * @param {string} url - url for source
-     * @param {object} options - config
-     * @param {string} [options.id] - layer id
-     * @param {string} [options.name=Unnamed Layer] - layer name
-     * @param {number} [options.opacity=1] - opacity
-     * @param {boolean} [options.visible=true] - default visible
-     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
-     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
-     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
-     * @param {number} [options.zIndex=0] the z index for the layer
-     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
-     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
-     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
-     * @param {boolean} [options.legendContent] additional content to add to the legend
-     * @param {boolean} [options.useEsriStyle=false] if the map service style should be used
-     */
-    function LayerBaseXyzTile(url, options) {
-        if (options === void 0) { options = {}; }
-        var _this = _super.call(this, url, options) || this;
-        _this._source = new ol.source.XYZ({ url: _this.url == '' ? undefined : _this.url });
-        _this._olLayer = new ol.layer.Tile({
-            source: _this._source,
-            visible: _this.visible,
-            opacity: _this.opacity,
-            minResolution: _this._minResolution,
-            maxResolution: _this._maxResolution
-        });
-        _this._olLayer.setZIndex(_this._zIndex);
-        return _this;
-    }
-    Object.defineProperty(LayerBaseXyzTile.prototype, "source", {
-        /**
-         *
-         * @returns {ol.source.XYZ} the vector source
-         */
-        get: function () {
-            return this._source;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(LayerBaseXyzTile.prototype, "olLayer", {
-        /**
-         *
-         * @returns {ol.layer.Tile|ol.layer.Base|undefined} the ol layer
-         */
-        get: function () {
-            return this._olLayer;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return LayerBaseXyzTile;
-}(LayerBase_1.LayerBase));
-exports.LayerBaseXyzTile = LayerBaseXyzTile;
-nm.LayerBaseXyzTile = LayerBaseXyzTile;
-exports.default = LayerBaseXyzTile;
-
-
-/***/ }),
-/* 64 */,
-/* 65 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Created by gavorhes on 12/4/2015.
- */
+var quickMapBase_1 = __webpack_require__(14);
 var provide_1 = __webpack_require__(0);
+var mapMove_1 = __webpack_require__(6);
 var mapPopup_1 = __webpack_require__(7);
-var $ = __webpack_require__(1);
-var nm = provide_1.default('mixin');
+var nm = provide_1.default('olHelpers');
 /**
- * The GMT offset time in minutes
- * @type {number}
+ * Sets up a map with some default parameters and initializes
+ * mapMove and mapPopup
+ *
+ * @param {object} [options={}] config options
+ * @param {string} [options.divId=map] map div id
+ * @param {object} [options.center={}] center config object
+ * @param {number} [options.center.x=-10018378] center x, web mercator x or lon
+ * @param {number} [options.center.y=5574910] center y, web mercator y or lat
+ * @param {number} [options.zoom=7] zoom level
+ * @param {number} [options.minZoom=undefined] min zoom
+ * @param {number} [options.maxZoom=undefined] max zoom
+ * @param {boolean} [options.baseSwitcher=true] if add base map switcher
+ * @param {boolean} [options.fullScreen=false] if add base map switcher
+ * @returns {ol.Map} the ol map
  */
-var offsetMinutes = (new Date()).getTimezoneOffset();
-/**
- * Mixin to get the product times
- * Be sure to call getTimeInit after the mixin has been applied
- */
-var RealEarthAnimate = (function () {
-    function RealEarthAnimate(lyr, loadCallback) {
-        this.lyr = lyr;
-        this._products = lyr._products;
-        if (loadCallback) {
-            this.loadCallback = loadCallback;
-        }
-        else {
-            this.loadCallback = function () { return; };
-        }
-    }
-    /**
-     * Call this after the mixin has been applied
-     */
-    RealEarthAnimate.prototype.timeInit = function () {
-        var _this = this;
-        this._rawDateStrings = [];
-        this._localDates = [];
-        this.localTimes = [];
-        this._animateEnabled = true;
-        // this._loaded = true;
-        this._currentTime = undefined;
-        this._currentIndex = undefined;
-        $.get('http://realearth.ssec.wisc.edu/api/products', { products: this._products }, function (d) {
-            if (d.length == 0) {
-                console.log(_this._products + " layer not available or does not have times");
-                return;
-            }
-            d = d[0];
-            for (var i = 0; i < d['times'].length; i++) {
-                _this._loadDates.call(_this, d['times'][i]);
-            }
-            _this.loadCallback.call(_this.lyr, _this.lyr);
-            _this._loadLatest.call(_this);
-        }, 'json');
-    };
-    /**
-     * Given the raw time string, add to the arrays to keep track of dates and cache
-     * @param {string} inString - input string to parse
-     * @returns {string} the converted string
-     * @protected
-     */
-    RealEarthAnimate.prototype._loadDates = function (inString) {
-        var yr = inString.slice(0, 4);
-        var month = inString.slice(4, 6);
-        var d = inString.slice(6, 8);
-        var hr = inString.slice(9, 11);
-        var mn = inString.slice(11, 13);
-        var sec = inString.slice(13, 15);
-        var rawDateStr = inString.replace('.', '_');
-        this._rawDateStrings.push(rawDateStr);
-        var dteStr = month + "/" + d + "/" + yr + " " + hr + ":" + mn + ":" + sec;
-        var newDte = new Date(dteStr);
-        newDte.setMinutes(newDte.getMinutes() - offsetMinutes);
-        this._localDates.push(newDte);
-        this.localTimes.push(newDte.getTime());
-        return rawDateStr;
-    };
-    /**
-     *
-     * @protected
-     * @returns {boolean} if should continue
-     */
-    RealEarthAnimate.prototype._loadLatest = function () {
-        mapPopup_1.default.closePopup();
-        if (this.localTimes.length > 0) {
-            this._currentIndex = this.localTimes.length - 1;
-            return true;
-        }
-        else {
-            return false;
-        }
-    };
-    /**
-     *
-     * @param {number} theTime - the time
-     * @returns {boolean} true if new index, false if the same or below lowest value
-     */
-    RealEarthAnimate.prototype.setLayerTime = function (theTime) {
-        this._currentTime = theTime;
-        var newIndex;
-        if (theTime < this.localTimes[0]) {
-            return false;
-        }
-        else if (theTime > this.localTimes[this.localTimes.length - 1]) {
-            newIndex = this.localTimes.length - 1;
-        }
-        for (var i = 0; i < this.localTimes.length; i++) {
-            if (this.localTimes[i] >= theTime) {
-                newIndex = i;
-                break;
-            }
-        }
-        if (newIndex == this._currentIndex) {
-            return false;
-        }
-        else {
-            this._currentIndex = newIndex;
-            mapPopup_1.default.closePopup();
-            return true;
-        }
-    };
-    return RealEarthAnimate;
-}());
-exports.RealEarthAnimate = RealEarthAnimate;
-nm.RealEarthAnimate = RealEarthAnimate;
-exports.default = RealEarthAnimate;
+function quickMap(options) {
+    if (options === void 0) { options = {}; }
+    var m = quickMapBase_1.quickMapBase(options);
+    mapMove_1.default.init(m);
+    mapPopup_1.default.init(m);
+    return m;
+}
+exports.quickMap = quickMap;
+nm.quickMap = quickMap;
+exports.default = quickMap;
 
 
 /***/ }),
-/* 66 */
+
+/***/ 6:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
+var mapMoveCls_1 = __webpack_require__(12);
 /**
- * Created by gavorhes on 12/4/2015.
+ * The single map move object catch is that it is common to multimap pages
+ * @type {MapMoveCls}
  */
-var RealEarthAnimate_1 = __webpack_require__(65);
-var provide_1 = __webpack_require__(0);
-var nm = provide_1.default('mixin');
-/**
- * Animate real earth tile
- * @augments RealEarthAnimate
- */
-var RealEarthAnimateTile = (function (_super) {
-    __extends(RealEarthAnimateTile, _super);
-    function RealEarthAnimateTile(layer, loadCallback) {
-        var _this = _super.call(this, layer, loadCallback) || this;
-        _this._source = layer.source;
-        _this._olLayer = layer.olLayer;
-        return _this;
-    }
-    RealEarthAnimateTile.prototype.timeInit = function () {
-        _super.prototype.timeInit.call(this);
-        this._sourceUrls = [];
-    };
-    RealEarthAnimateTile.prototype._loadDates = function (inString) {
-        var rawDte = _super.prototype._loadDates.call(this, inString);
-        var dteProductUrl = "http://realearth.ssec.wisc.edu/api/image?products=" + this._products + "_" + rawDte + "&x={x}&y={y}&z={z}";
-        this._sourceUrls.push(dteProductUrl);
-        return '';
-    };
-    /**
-     * @protected
-     */
-    RealEarthAnimateTile.prototype._loadLatest = function () {
-        if (_super.prototype._loadLatest.call(this)) {
-            this._source.setUrl(this._sourceUrls[this._sourceUrls.length - 1]);
-        }
-        return true;
-    };
-    RealEarthAnimateTile.prototype.setLayerTime = function (theTime) {
-        if (_super.prototype.setLayerTime.call(this, theTime)) {
-            if (this._olLayer.getZIndex() < 0) {
-                this._olLayer.setZIndex(0);
-            }
-            this._source.setUrl(this._sourceUrls[this._currentIndex]);
-        }
-        else {
-            this._olLayer.setZIndex(-1);
-        }
-        return true;
-    };
-    return RealEarthAnimateTile;
-}(RealEarthAnimate_1.default));
-nm.RealEarthAnimateTile = RealEarthAnimateTile;
-exports.default = RealEarthAnimateTile;
+exports.mapMove = new mapMoveCls_1.default();
+exports.default = exports.mapMove;
 
 
 /***/ }),
-/* 67 */,
-/* 68 */,
-/* 69 */
+
+/***/ 7:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var mapPopupCls_1 = __webpack_require__(13);
+/**
+ * The single popup object catch is that it is common to multimap pages
+ * @type {MapPopupCls}
+ */
+exports.mapPopup = new mapPopupCls_1.default();
+exports.default = exports.mapPopup;
+
+
+/***/ }),
+
+/***/ 74:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 12/18/2015.
+ */
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var quickMap_1 = __webpack_require__(5);
-var LayerRealEarthTile_1 = __webpack_require__(60);
-var media_control_1 = __webpack_require__(48);
-var $ = __webpack_require__(1);
-var LayerBaseVectorEsri_1 = __webpack_require__(59);
-var LayerEsriMapServer_1 = __webpack_require__(26);
-var nexrhresStatic = new LayerRealEarthTile_1.default({
-    products: 'nexrhres',
-    id: 'nexrhres-static',
-    opacity: 0.6,
-    animate: true,
-    name: 'Hybrid Reflectivity',
-    // maxZoom: 10,
-    timeLoadCallback: function (f) {
-        console.log(f);
-    }
+var LayerBaseVectorGeoJson_1 = __webpack_require__(49);
+var ol = __webpack_require__(2);
+var mapPopup_1 = __webpack_require__(7);
+var reg = {
+    "type": "FeatureCollection",
+    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[[-91.4232, 43.9834], [-91.3246, 43.9834], [-91.3465, 44.0162], [-91.3082, 44.0655], [-91.2205, 44.0546], [-91.1767, 44.0874], [-91.1493, 44.0819], [-90.9741, 44.071], [-90.9741, 44.071], [-90.9796, 44.1312], [-90.9084, 44.1586], [-90.4921, 44.1586], [-90.3114, 44.1531], [-90.3114, 44.2463], [-90.0813, 44.2463], [-89.9006, 44.2517], [-89.928, 44.197], [-89.9061, 44.1805], [-89.928, 44.1531], [-89.9718, 44.1696], [-90.0266, 44.071], [-89.9608, 43.9779], [-89.9499, 43.9231], [-89.9828, 43.9122], [-89.9608, 43.8629], [-89.8513, 43.7698], [-89.7856, 43.6383], [-89.5994, 43.6438], [-89.2434, 43.6438], [-89.0079, 43.6328], [-88.8874, 43.6328], [-88.3999, 43.6328], [-88.3999, 43.5452], [-88.4163, 43.1947], [-88.5368, 43.1947], [-88.5423, 42.8442], [-88.5478, 42.8442], [-88.7778, 42.8442], [-88.7778, 42.4936], [-88.9421, 42.4936], [-89.3639, 42.4991], [-89.4022, 42.4991], [-89.8404, 42.5046], [-89.928, 42.5046], [-90.4264, 42.5046], [-90.64, 42.5101], [-90.7112, 42.636], [-90.8974, 42.6744], [-91.0672, 42.7511], [-91.1548, 42.9866], [-91.1767, 43.0797], [-91.1767, 43.1344], [-91.0562, 43.2549], [-91.1055, 43.3152], [-91.2041, 43.3535], [-91.2041, 43.4247], [-91.2315, 43.4576], [-91.2151, 43.5014], [-91.2698, 43.6164], [-91.2589, 43.7259], [-91.2424, 43.7752], [-91.2863, 43.8464]]]
+            }
+        }
+    ]
+};
+var reg2 = {
+    "type": "FeatureCollection",
+    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[[-93.0, 45.0], [-94.0, 45.0], [-94.0, 46.0], [-93.0, 46.0], [-93.0, 45.0]]]
+            }
+        }
+    ]
+};
+var map = quickMap_1.default({ addGeocode: true });
+var regionLayer = new LayerBaseVectorGeoJson_1.LayerBaseVectorGeoJson('', {
+    minZoom: 6,
+    maxZoom: 12,
+    name: 'WisDOT Regions',
+    style: new ol.style.Style({
+        fill: new ol.style.Fill({
+            color: 'blue'
+        }),
+        stroke: new ol.style.Stroke({
+            color: 'yellow',
+            width: 5
+        })
+    })
 });
-var d = new Date();
-var endTime = d.getTime();
-d.setHours(d.getHours() - 4);
-var startTime = d.getTime();
-var rangeStep = Math.round((endTime - startTime) / 8);
-var media = new media_control_1.MediaControl($('#control'), function (v) {
-    nexrhresStatic.setLayerTime(v);
-}, {
-    min: startTime,
-    max: endTime,
-    val: endTime,
-    step: rangeStep,
-    playInterval: 750,
-    showAsDate: true
+var regionLayer2 = new LayerBaseVectorGeoJson_1.LayerBaseVectorGeoJson('', {
+    minZoom: 6,
+    maxZoom: 12,
+    name: 'WisDOT Regions',
+    style: new ol.style.Style({
+        fill: new ol.style.Fill({
+            color: 'red'
+        }),
+        stroke: new ol.style.Stroke({
+            color: 'yellow',
+            width: 5
+        })
+    })
 });
-var map = quickMap_1.quickMap();
-map.addLayer(nexrhresStatic.olLayer);
-var coordinationLayer = new LayerBaseVectorEsri_1.LayerBaseVectorEsri('https://transportal.cee.wisc.edu/applications/arcgis2/rest/services/GLRTOC/GlrtocCoordination/MapServer/0', {
-    visible: true,
-    autoLoad: true,
-    name: 'Coordination',
-    useEsriStyle: true
-});
-map.addLayer(coordinationLayer.olLayer);
-var oakRidgeLayers = [
-    ['Cameras', 'cameras33'],
-    ['HAR', 'HAR33'],
-    ['DMS', 'MessageSigns33'],
-    //['State Summary', 'statesummary'],
-    ['Traffic Control', 'TrafficControl33'],
-    ['Traffic Detection', 'TrafficDetectionMulti'],
-    ['Weather', 'Weather33']
-];
-for (var i = 0; i < oakRidgeLayers.length; i++) {
-    var oakRidgeLayer = new LayerEsriMapServer_1.LayerEsriMapServer("http://itsdpro.ornl.gov/arcgis/rest/services/ITSPublic/" + oakRidgeLayers[i][1] + "/MapServer", {
-        id: oakRidgeLayers[i][1],
-        name: oakRidgeLayers[i][0],
-        visible: true,
-        minZoom: 7,
-        zIndex: 20,
-        addPopup: true,
-        legendCollapse: true
-    });
-    map.addLayer(oakRidgeLayer.olLayer);
+regionLayer.addFeatures(reg);
+regionLayer2.addFeatures(reg2);
+map.addLayer(regionLayer.olLayer);
+map.addLayer(regionLayer2.olLayer);
+mapPopup_1.mapPopup.addVectorPopup(regionLayer2, function (p) { return 'cats'; });
+window['map'] = map;
+//
+// let itsLayerCollection = new ItsLayerCollection(map);
+//
+// let layerArray = [
+//     {
+//         groupName: 'ITS Inventory Layers',
+//         collapse: false,
+//         addCheck: true,
+//         items: itsLayerCollection.layers
+//     }
+// ];
+// let legend = new LayerLegend(layerArray, 'legend-container', {});
+console.log('it works');
+
+
+/***/ }),
+
+/***/ 8:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Created by gavorhes on 10/3/2016.
+ */
+var ol = __webpack_require__(2);
+exports.proj4326 = new ol.proj.Projection({ code: 'EPSG:4326' });
+exports.proj3857 = new ol.proj.Projection({ code: 'EPSG:3857' });
+exports.proj3070 = new ol.proj.Projection({ code: 'EPSG:3070' });
+
+
+/***/ }),
+
+/***/ 9:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var nm = provide_1.default('util.checkDefined');
+/**
+ * check if the input is undefined or null
+ * @param input - input pointer
+ * @returns true undefined or null
+ */
+function undefinedOrNull(input) {
+    "use strict";
+    return (typeof input === 'undefined' || input === null);
 }
+exports.undefinedOrNull = undefinedOrNull;
+nm.undefinedOrNull = undefinedOrNull;
+/**
+ * check if the input is defined and not null
+ * @param input - input pointer
+ * @returns true defined and not null
+ */
+function definedAndNotNull(input) {
+    "use strict";
+    return !(undefinedOrNull(input));
+}
+exports.definedAndNotNull = definedAndNotNull;
+nm.definedAndNotNull = definedAndNotNull;
 
 
 /***/ })
-/******/ ]);
-//# sourceMappingURL=animate.js.map
+
+/******/ });
+//# sourceMappingURL=mapPopup.js.map

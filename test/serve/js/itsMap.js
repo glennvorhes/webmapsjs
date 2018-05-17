@@ -231,33 +231,14 @@ exports.default = MapInteractionBase;
 
 "use strict";
 /**
- * Created by gavorhes on 11/3/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var mapPopupCls_1 = __webpack_require__(15);
-/**
- * The single popup object catch is that it is common to multimap pages
- * @type {MapPopupCls}
- */
-exports.mapPopup = new mapPopupCls_1.default();
-exports.default = exports.mapPopup;
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
  * Created by gavorhes on 12/15/2015.
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickMapBase_1 = __webpack_require__(16);
+var quickMapBase_1 = __webpack_require__(14);
 var provide_1 = __webpack_require__(0);
-var mapMove_1 = __webpack_require__(7);
-var mapPopup_1 = __webpack_require__(5);
+var mapMove_1 = __webpack_require__(6);
+var mapPopup_1 = __webpack_require__(7);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -288,6 +269,25 @@ exports.default = quickMap;
 
 
 /***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 11/3/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var mapMoveCls_1 = __webpack_require__(12);
+/**
+ * The single map move object catch is that it is common to multimap pages
+ * @type {MapMoveCls}
+ */
+exports.mapMove = new mapMoveCls_1.default();
+exports.default = exports.mapMove;
+
+
+/***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -297,13 +297,13 @@ exports.default = quickMap;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var mapMoveCls_1 = __webpack_require__(14);
+var mapPopupCls_1 = __webpack_require__(13);
 /**
- * The single map move object catch is that it is common to multimap pages
- * @type {MapMoveCls}
+ * The single popup object catch is that it is common to multimap pages
+ * @type {MapPopupCls}
  */
-exports.mapMove = new mapMoveCls_1.default();
-exports.default = exports.mapMove;
+exports.mapPopup = new mapPopupCls_1.default();
+exports.default = exports.mapPopup;
 
 
 /***/ }),
@@ -356,15 +356,13 @@ nm.definedAndNotNull = definedAndNotNull;
 
 
 /***/ }),
-/* 10 */,
-/* 11 */,
-/* 12 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var zoomResolutionConvert = __webpack_require__(26);
+var zoomResolutionConvert = __webpack_require__(17);
 var provide_1 = __webpack_require__(0);
 var makeGuid_1 = __webpack_require__(3);
 var $ = __webpack_require__(1);
@@ -767,7 +765,7 @@ exports.default = LayerBase;
 
 
 /***/ }),
-/* 13 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -853,7 +851,7 @@ exports.Geocode = Geocode;
 
 
 /***/ }),
-/* 14 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1098,7 +1096,7 @@ exports.default = MapMoveCls;
 
 
 /***/ }),
-/* 15 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1172,9 +1170,8 @@ var MapPopupCls = (function (_super) {
     function MapPopupCls() {
         var _this = _super.call(this, 'map popup') || this;
         _this._arrPopupLayerIds = [];
-        _this._arrPopupLayerNames = [];
         _this._arrPopupLayers = [];
-        _this._arrPopupOlLayers = [];
+        // this._arrPopupOlLayers = [];
         _this._arrPopupContentFunction = [];
         _this._$popupContainer = undefined;
         _this._$popupContent = undefined;
@@ -1325,19 +1322,22 @@ var MapPopupCls = (function (_super) {
                 return;
             }
             var pixel = _this.map.getEventPixel(evt['originalEvent']);
-            var hit = _this.map.hasFeatureAtPixel(pixel, function (lyrCandidate) {
-                for (var _i = 0, _a = _this._arrPopupOlLayers; _i < _a.length; _i++) {
-                    var olLayer = _a[_i];
-                    if (lyrCandidate == olLayer) {
-                        return true;
+            var hit = false;
+            _this.map.forEachLayerAtPixel(pixel, function (lyr) {
+                if (hit) {
+                    return;
+                }
+                for (var _i = 0, _a = _this._arrPopupLayers; _i < _a.length; _i++) {
+                    var vLyr = _a[_i];
+                    if (vLyr.olLayer == lyr) {
+                        hit = true;
+                        break;
                     }
                 }
-                return false;
             });
             var mapElement = _this.map.getTargetElement();
             mapElement.style.cursor = hit ? 'pointer' : '';
         });
-        return true;
     };
     /**
      * helper to select features
@@ -1388,9 +1388,18 @@ var MapPopupCls = (function (_super) {
         var _this = this;
         var layerFeatureObjectArray = [];
         this.map.forEachFeatureAtPixel(pixel, function (feature, layer) {
-            var lyrIndex = _this._arrPopupOlLayers.indexOf(layer);
-            if (lyrIndex > -1) {
-                layerFeatureObjectArray.push(new FeatureLayerProperties(feature, _this._arrPopupLayers[lyrIndex], lyrIndex, _this._selectionLayers[lyrIndex]));
+            var hasLyr = false;
+            var j;
+            var lyr = null;
+            for (j = 0; j < _this._arrPopupLayers.length; j++) {
+                lyr = _this._arrPopupLayers[j];
+                if (lyr.olLayer === layer) {
+                    hasLyr = true;
+                    break;
+                }
+            }
+            if (hasLyr) {
+                layerFeatureObjectArray.push(new FeatureLayerProperties(feature, lyr, j, _this._selectionLayers[j]));
             }
         });
         return layerFeatureObjectArray;
@@ -1470,9 +1479,8 @@ var MapPopupCls = (function (_super) {
     MapPopupCls.prototype.addVectorPopup = function (lyr, popupContentFunction, selectionStyle) {
         var selectionLayer = this._addPopupLayer(lyr, selectionStyle);
         this._arrPopupLayerIds.push(lyr.id);
-        this._arrPopupLayerNames.push(lyr.name);
         this._arrPopupLayers.push(lyr);
-        this._arrPopupOlLayers.push(lyr.olLayer);
+        // this._arrPopupOlLayers.push(lyr.olLayer);
         this._arrPopupContentFunction.push(popupContentFunction);
         return selectionLayer;
     };
@@ -1485,9 +1493,8 @@ var MapPopupCls = (function (_super) {
         var idx = this._arrPopupLayerIds.indexOf(lyr.id);
         if (idx > -1) {
             this._arrPopupLayerIds.splice(idx, 1);
-            this._arrPopupLayerNames.splice(idx, 1);
             this._arrPopupLayers.splice(idx, 1);
-            this._arrPopupOlLayers.splice(idx, 1);
+            // this._arrPopupOlLayers.splice(idx, 1);
             this._arrPopupContentFunction.splice(idx, 1);
             this._selectionLayers.splice(idx, 1);
             delete this._selectionLayerLookup[lyr.id];
@@ -1533,7 +1540,7 @@ exports.default = MapPopupCls;
 
 
 /***/ }),
-/* 16 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1545,7 +1552,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
-var geocode_1 = __webpack_require__(13);
+var geocode_1 = __webpack_require__(11);
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -1636,16 +1643,9 @@ exports.default = quickMapBase;
 
 
 /***/ }),
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */
+/* 15 */,
+/* 16 */,
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1727,6 +1727,15 @@ nm.resolutionToZoom = resolutionToZoom;
 
 
 /***/ }),
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
 /* 27 */,
 /* 28 */,
 /* 29 */,
@@ -1745,306 +1754,7 @@ nm.resolutionToZoom = resolutionToZoom;
 /* 42 */,
 /* 43 */,
 /* 44 */,
-/* 45 */,
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 12/16/2015.
- */
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var provide_1 = __webpack_require__(0);
-var makeGuid_1 = __webpack_require__(3);
-var mapMove_1 = __webpack_require__(7);
-var nm = provide_1.default('collections');
-var $ = __webpack_require__(1);
-var LayerGroup = (function () {
-    /**
-     *
-     * @param {object} [groupConfig={}] - group configuration object
-     * @param {string} groupConfig.groupName - the group name
-     * @param {boolean} [groupConfig.collapse=false] - if the group should be collapsed initially
-     * @param {boolean} [groupConfig.addCheck=true] - if the group should have a checkbox controlling visibility of all layers
-     * @param {LayerGroup} [parent=undefined] - the parent group
-     */
-    function LayerGroup(groupConfig, parent) {
-        this.groupLayers = [];
-        this.groupLayersLookup = {};
-        this.groupGroups = [];
-        this.groupGroupsLookup = {};
-        this.itemIdArray = [];
-        if (typeof groupConfig == 'undefined') {
-            this.parent = null;
-            this.groupId = 'root';
-            this.groupName = 'root';
-            this.allGroupLookup = { root: this };
-            this.allGroupArray = [this];
-            this.allLayerArray = [];
-            this.allLayerLookup = {};
-            this.layerParentLookup = {};
-            this.collapse = false;
-            this.addCheck = false;
-        }
-        else {
-            this.groupId = makeGuid_1.default();
-            this.parent = parent;
-            this.groupName = groupConfig.groupName;
-            this.collapse = typeof groupConfig.collapse == 'boolean' ? groupConfig.collapse : false;
-            this.addCheck = typeof groupConfig.addCheck == 'boolean' ? groupConfig.addCheck : true;
-        }
-    }
-    /**
-     *
-     * @param {object} groupConfig - configuration object
-     * @param {string} groupConfig.groupName - the group name
-     * @param {boolean} groupConfig.collapse if the group should be collapsed initially
-     * @param {boolean} groupConfig.addCheck if the group should have a checkbox controlling visibility of all layers
-     * @param {Array<LayerGroup>} parents parent groups
-     * @returns {LayerGroup} the layer group just added
-     */
-    LayerGroup.prototype.addGroup = function (groupConfig, parents) {
-        var parent;
-        if (parents.length > 0) {
-            parent = parents[parents.length - 1];
-        }
-        else {
-            parent = 'root';
-        }
-        /**
-         * @type {LayerGroup}
-         */
-        var parentGroup = this.allGroupLookup[parent];
-        var newGroup = new LayerGroup(groupConfig, parentGroup);
-        this.allGroupLookup[newGroup.groupId] = newGroup;
-        this.allGroupArray.push(newGroup);
-        parentGroup.groupGroups.push(newGroup);
-        parentGroup.groupGroupsLookup[newGroup.groupId] = newGroup;
-        if (parentGroup.itemIdArray.indexOf(newGroup.groupId) > 0) {
-            console.log(newGroup.groupId);
-            throw 'layer and group ids must be unique';
-        }
-        parentGroup.itemIdArray.push(newGroup.groupId);
-        return newGroup;
-    };
-    /**
-     *
-     * @param {LayerBase} newLayer the layer to be added
-     * @param {Array} parents array
-     */
-    LayerGroup.prototype.addLegendLayer = function (newLayer, parents) {
-        var parent;
-        if (parents.length > 0) {
-            parent = parents[parents.length - 1];
-        }
-        else {
-            parent = 'root';
-        }
-        this.allLayerLookup[newLayer.id] = newLayer;
-        this.allLayerArray.push(newLayer);
-        /**
-         * @type {LayerGroup}
-         */
-        var parentGroup = this.allGroupLookup[parent];
-        parentGroup.groupLayers.push(newLayer);
-        parentGroup.groupLayersLookup[newLayer.id] = newLayer;
-        if (parentGroup.itemIdArray.indexOf(newLayer.id) > 0) {
-            console.log(newLayer.id);
-            throw 'layer and group ids must be unique';
-        }
-        parentGroup.itemIdArray.push(newLayer.id);
-        this.layerParentLookup[newLayer.id] = parentGroup;
-    };
-    LayerGroup.prototype.getLegendHtml = function (legendId, options) {
-        var legendHtml = "<ul id=\"" + legendId + "\" class=\"legend-container\">";
-        legendHtml += "<li>" + options.legendTitle + "<input type=\"checkbox\" checked id=\"suppress-by-extent-" + legendId + "\" class=\"suppress-by-extent\">" +
-            ("<label title=\"Suppress layers not visible at this zoom level\" for=\"suppress-by-extent-" + legendId + "\">") +
-            "<span></span>" +
-            "</label></li>";
-        legendHtml += this._buildLegend(this.itemIdArray, this, options.layerDivClasses) + '</ul>';
-        return legendHtml;
-    };
-    /**
-     * @param {Array} itemIds the items to process
-     * @param {LayerGroup} theGroup new group
-     * @param {Array} [layerDivClasses=[]] optional classes to apply to the layer divs
-     * @static
-     * @returns {string} html string
-     */
-    LayerGroup.prototype._buildLegend = function (itemIds, theGroup, layerDivClasses) {
-        if (itemIds.length == 0) {
-            return '';
-        }
-        var theHml = '';
-        var itemId = itemIds[0];
-        if (theGroup.groupLayersLookup[itemId]) {
-            /**
-             * @type {LayerBase}
-             */
-            var lyr = theGroup.groupLayersLookup[itemId];
-            theHml += "<li id=\"" + lyr.id + "-layer-li\" class=\"legend-layer-li " + layerDivClasses.join(' ') + "\">" + lyr.getLegendDiv() + '</li>';
-        }
-        else if (theGroup.groupGroupsLookup[itemId]) {
-            /**
-             * type {LayerGroup}
-             */
-            var otherGroup = theGroup.groupGroupsLookup[itemId];
-            theHml += "<li>";
-            theHml += "<div id=\"" + otherGroup.groupId + "-legend-layer-div\" " +
-                ("class=\"legend-layer-group  " + layerDivClasses.join(' ') + "\">");
-            if (otherGroup.addCheck) {
-                theHml += "<input type=\"checkbox\" checked id=\"" + otherGroup.groupId + "-group-chck\">" +
-                    ("<label for=\"" + otherGroup.groupId + "-group-chck\" title=\"Click arrow to expand or collapse\">" + otherGroup.groupName + "</label>");
-            }
-            else {
-                theHml += "<label title=\"Click arrow to expand or collapse\">" + otherGroup.groupName + "</label>";
-            }
-            theHml += "<span title=\"Expand/Collapse\" class=\"layer-group-expander";
-            theHml += (otherGroup.collapse ? ' legend-layer-group-initial-collapse' : '') + "\">";
-            theHml += otherGroup.collapse ? '&#9654;' : '&#9660;';
-            theHml += '</span>';
-            //parents.push(groupId);
-            theHml += '<ul>' + this._buildLegend(otherGroup.itemIdArray, otherGroup, layerDivClasses) + '</ul>';
-            theHml += '</div>';
-            theHml += '</li>';
-        }
-        return theHml + this._buildLegend(itemIds.slice(1), theGroup, layerDivClasses);
-    };
-    return LayerGroup;
-}());
-/**
- * a wrapper to make a legend
- */
-var LayerLegend = (function () {
-    /**``
-     *
-     * @param {Array} legendItems array of layers or objects with {groupName:  {string}, collapse: {boolean}, addCheck: {boolean}, items: {Array}}
-     * @param {string} divId the div where the legend should be added
-     * @param {object} options for legend
-     * @param {Array} [options.layerDivClasses=[]] optional array of classes to be applied to the layer legend divs for custom styling
-     * @param {string} [options.legendTitle=Legend] the legend title
-     * @param {boolean} [options.scaleDependent=true] if legend display is scale dependent
-     */
-    function LayerLegend(legendItems, divId, options) {
-        if (options === void 0) { options = {}; }
-        for (var _i = 0, legendItems_1 = legendItems; _i < legendItems_1.length; _i++) {
-            var i = legendItems_1[_i];
-            if (typeof i == 'undefined') {
-                throw 'undefined item passed in array to legend constructor';
-            }
-        }
-        options.legendTitle = typeof options.legendTitle == 'string' ? options.legendTitle : 'Legend';
-        options.scaleDependent = typeof options.scaleDependent == 'boolean' ? options.scaleDependent : true;
-        options.layerDivClasses = options.layerDivClasses || [];
-        // if legend display is scale dependent, make sure the mapMove object is initialized first
-        if (options.scaleDependent) {
-            mapMove_1.default.checkInit();
-        }
-        this.$divElement = $('#' + divId);
-        this._legendItems = legendItems;
-        this.layerGroup = new LayerGroup();
-        this._buildTree(legendItems);
-        this.legendId = makeGuid_1.default();
-        this.$divElement.append(this.layerGroup.getLegendHtml(this.legendId, options));
-        for (var _a = 0, _b = this.layerGroup.allLayerArray; _a < _b.length; _a++) {
-            var l = _b[_a];
-            l.applyCollapse();
-        }
-        var _this = this;
-        //// if legend display is scale dependent, make sure the mapMove object is initialized first
-        if (options.scaleDependent) {
-            mapMove_1.default.checkInit();
-            mapMove_1.default.addCallback(function (ext, zoom, evt) {
-                if (typeof evt == 'undefined' || evt == 'change:resolution') {
-                    for (var _i = 0, _a = this.layerGroup.allLayerArray; _i < _a.length; _i++) {
-                        var lyr = _a[_i];
-                        var $lyrLi = $('#' + lyr.id + '-layer-li');
-                        if (zoom > lyr.maxZoom || zoom < lyr.minZoom) {
-                            $lyrLi.addClass('layer-not-visible');
-                        }
-                        else {
-                            $lyrLi.removeClass('layer-not-visible');
-                        }
-                    }
-                }
-            }, this, 100, true, 'legend1');
-        }
-        // <editor-fold desc="add event listeners">
-        this.$divElement.find(".suppress-by-extent").change(function () {
-            var legendLayerLis = $('.legend-layer-li');
-            if (this.checked) {
-                legendLayerLis.removeClass('layer-force-show');
-            }
-            else {
-                legendLayerLis.addClass('layer-force-show');
-            }
-        });
-        this.$divElement.find('.legend-check').change(function () {
-            var lyrId = this.id.replace('-legend-layer-check', '');
-            _this.layerGroup.allLayerLookup[lyrId].visible = this.checked;
-        });
-        this.$divElement.find('.legend-layer-group > input[type=checkbox]').change(function () {
-            $(this).siblings('ul').find('input[type=checkbox]').prop('checked', this.checked).trigger('change');
-        });
-        this.$divElement.find('.layer-group-expander').click(function () {
-            var $this = $(this);
-            $this.removeClass('legend-layer-group-initial-collapse');
-            $this.siblings('ul').slideToggle();
-            if ($this.hasClass('legend-layer-group-collapsed')) {
-                $this.removeClass('legend-layer-group-collapsed');
-                $this.html('&#9660;');
-            }
-            else {
-                $this.addClass('legend-layer-group-collapsed');
-                $this.html('&#9654;');
-            }
-        });
-        this.$divElement.find('.legend-layer-group-initial-collapse').trigger('click');
-        // </editor-fold>
-    }
-    /**
-     * @param {Array} [legendItems=this._layerConfig] the legend items
-     * @param {Array} [parents=[]] the ordered list of groups in which this item is a member
-     * @private
-     */
-    LayerLegend.prototype._buildTree = function (legendItems, parents) {
-        if (legendItems.length == 0) {
-            return;
-        }
-        var oneItem = legendItems[0];
-        //reset the parent if the item is in the base array
-        if (this._legendItems.indexOf(oneItem) > -1 || typeof parents == 'undefined') {
-            parents = [];
-        }
-        if (typeof oneItem.groupName !== 'undefined') {
-            var groupItem = legendItems[0];
-            var newGroup = this.layerGroup.addGroup(groupItem, parents);
-            parents.push(newGroup.groupId);
-            this._buildTree(oneItem.items, parents);
-        }
-        else {
-            /**
-             * @type {LayerBase}
-             */
-            var layerItem = legendItems[0];
-            this.layerGroup.addLegendLayer(layerItem, parents);
-        }
-        this._buildTree(legendItems.slice(1), parents);
-    };
-    return LayerLegend;
-}());
-exports.LayerLegend = LayerLegend;
-nm.LayerLegend = LayerLegend;
-exports.default = LayerLegend;
-
-
-/***/ }),
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2060,8 +1770,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var LayerBase_1 = __webpack_require__(12);
-var mapMove_1 = __webpack_require__(7);
+var LayerBase_1 = __webpack_require__(10);
+var mapMove_1 = __webpack_require__(6);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
@@ -2347,10 +2057,425 @@ exports.default = LayerBaseVector;
 
 
 /***/ }),
+/* 46 */,
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 12/16/2015.
+ */
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var provide_1 = __webpack_require__(0);
+var makeGuid_1 = __webpack_require__(3);
+var mapMove_1 = __webpack_require__(6);
+var nm = provide_1.default('collections');
+var $ = __webpack_require__(1);
+var LayerGroup = (function () {
+    /**
+     *
+     * @param {object} [groupConfig={}] - group configuration object
+     * @param {string} groupConfig.groupName - the group name
+     * @param {boolean} [groupConfig.collapse=false] - if the group should be collapsed initially
+     * @param {boolean} [groupConfig.addCheck=true] - if the group should have a checkbox controlling visibility of all layers
+     * @param {LayerGroup} [parent=undefined] - the parent group
+     */
+    function LayerGroup(groupConfig, parent) {
+        this.groupLayers = [];
+        this.groupLayersLookup = {};
+        this.groupGroups = [];
+        this.groupGroupsLookup = {};
+        this.itemIdArray = [];
+        if (typeof groupConfig == 'undefined') {
+            this.parent = null;
+            this.groupId = 'root';
+            this.groupName = 'root';
+            this.allGroupLookup = { root: this };
+            this.allGroupArray = [this];
+            this.allLayerArray = [];
+            this.allLayerLookup = {};
+            this.layerParentLookup = {};
+            this.collapse = false;
+            this.addCheck = false;
+        }
+        else {
+            this.groupId = makeGuid_1.default();
+            this.parent = parent;
+            this.groupName = groupConfig.groupName;
+            this.collapse = typeof groupConfig.collapse == 'boolean' ? groupConfig.collapse : false;
+            this.addCheck = typeof groupConfig.addCheck == 'boolean' ? groupConfig.addCheck : true;
+        }
+    }
+    /**
+     *
+     * @param {object} groupConfig - configuration object
+     * @param {string} groupConfig.groupName - the group name
+     * @param {boolean} groupConfig.collapse if the group should be collapsed initially
+     * @param {boolean} groupConfig.addCheck if the group should have a checkbox controlling visibility of all layers
+     * @param {Array<LayerGroup>} parents parent groups
+     * @returns {LayerGroup} the layer group just added
+     */
+    LayerGroup.prototype.addGroup = function (groupConfig, parents) {
+        var parent;
+        if (parents.length > 0) {
+            parent = parents[parents.length - 1];
+        }
+        else {
+            parent = 'root';
+        }
+        /**
+         * @type {LayerGroup}
+         */
+        var parentGroup = this.allGroupLookup[parent];
+        var newGroup = new LayerGroup(groupConfig, parentGroup);
+        this.allGroupLookup[newGroup.groupId] = newGroup;
+        this.allGroupArray.push(newGroup);
+        parentGroup.groupGroups.push(newGroup);
+        parentGroup.groupGroupsLookup[newGroup.groupId] = newGroup;
+        if (parentGroup.itemIdArray.indexOf(newGroup.groupId) > 0) {
+            console.log(newGroup.groupId);
+            throw 'layer and group ids must be unique';
+        }
+        parentGroup.itemIdArray.push(newGroup.groupId);
+        return newGroup;
+    };
+    /**
+     *
+     * @param {LayerBase} newLayer the layer to be added
+     * @param {Array} parents array
+     */
+    LayerGroup.prototype.addLegendLayer = function (newLayer, parents) {
+        var parent;
+        if (parents.length > 0) {
+            parent = parents[parents.length - 1];
+        }
+        else {
+            parent = 'root';
+        }
+        this.allLayerLookup[newLayer.id] = newLayer;
+        this.allLayerArray.push(newLayer);
+        /**
+         * @type {LayerGroup}
+         */
+        var parentGroup = this.allGroupLookup[parent];
+        parentGroup.groupLayers.push(newLayer);
+        parentGroup.groupLayersLookup[newLayer.id] = newLayer;
+        if (parentGroup.itemIdArray.indexOf(newLayer.id) > 0) {
+            console.log(newLayer.id);
+            throw 'layer and group ids must be unique';
+        }
+        parentGroup.itemIdArray.push(newLayer.id);
+        this.layerParentLookup[newLayer.id] = parentGroup;
+    };
+    LayerGroup.prototype.getLegendHtml = function (legendId, options) {
+        var legendHtml = "<ul id=\"" + legendId + "\" class=\"legend-container\">";
+        legendHtml += "<li>" + options.legendTitle + "<input type=\"checkbox\" checked id=\"suppress-by-extent-" + legendId + "\" class=\"suppress-by-extent\">" +
+            ("<label title=\"Suppress layers not visible at this zoom level\" for=\"suppress-by-extent-" + legendId + "\">") +
+            "<span></span>" +
+            "</label></li>";
+        legendHtml += this._buildLegend(this.itemIdArray, this, options.layerDivClasses) + '</ul>';
+        return legendHtml;
+    };
+    /**
+     * @param {Array} itemIds the items to process
+     * @param {LayerGroup} theGroup new group
+     * @param {Array} [layerDivClasses=[]] optional classes to apply to the layer divs
+     * @static
+     * @returns {string} html string
+     */
+    LayerGroup.prototype._buildLegend = function (itemIds, theGroup, layerDivClasses) {
+        if (itemIds.length == 0) {
+            return '';
+        }
+        var theHml = '';
+        var itemId = itemIds[0];
+        if (theGroup.groupLayersLookup[itemId]) {
+            /**
+             * @type {LayerBase}
+             */
+            var lyr = theGroup.groupLayersLookup[itemId];
+            theHml += "<li id=\"" + lyr.id + "-layer-li\" class=\"legend-layer-li " + layerDivClasses.join(' ') + "\">" + lyr.getLegendDiv() + '</li>';
+        }
+        else if (theGroup.groupGroupsLookup[itemId]) {
+            /**
+             * type {LayerGroup}
+             */
+            var otherGroup = theGroup.groupGroupsLookup[itemId];
+            theHml += "<li>";
+            theHml += "<div id=\"" + otherGroup.groupId + "-legend-layer-div\" " +
+                ("class=\"legend-layer-group  " + layerDivClasses.join(' ') + "\">");
+            if (otherGroup.addCheck) {
+                theHml += "<input type=\"checkbox\" checked id=\"" + otherGroup.groupId + "-group-chck\">" +
+                    ("<label for=\"" + otherGroup.groupId + "-group-chck\" title=\"Click arrow to expand or collapse\">" + otherGroup.groupName + "</label>");
+            }
+            else {
+                theHml += "<label title=\"Click arrow to expand or collapse\">" + otherGroup.groupName + "</label>";
+            }
+            theHml += "<span title=\"Expand/Collapse\" class=\"layer-group-expander";
+            theHml += (otherGroup.collapse ? ' legend-layer-group-initial-collapse' : '') + "\">";
+            theHml += otherGroup.collapse ? '&#9654;' : '&#9660;';
+            theHml += '</span>';
+            //parents.push(groupId);
+            theHml += '<ul>' + this._buildLegend(otherGroup.itemIdArray, otherGroup, layerDivClasses) + '</ul>';
+            theHml += '</div>';
+            theHml += '</li>';
+        }
+        return theHml + this._buildLegend(itemIds.slice(1), theGroup, layerDivClasses);
+    };
+    return LayerGroup;
+}());
+/**
+ * a wrapper to make a legend
+ */
+var LayerLegend = (function () {
+    /**``
+     *
+     * @param {Array} legendItems array of layers or objects with {groupName:  {string}, collapse: {boolean}, addCheck: {boolean}, items: {Array}}
+     * @param {string} divId the div where the legend should be added
+     * @param {object} options for legend
+     * @param {Array} [options.layerDivClasses=[]] optional array of classes to be applied to the layer legend divs for custom styling
+     * @param {string} [options.legendTitle=Legend] the legend title
+     * @param {boolean} [options.scaleDependent=true] if legend display is scale dependent
+     */
+    function LayerLegend(legendItems, divId, options) {
+        if (options === void 0) { options = {}; }
+        for (var _i = 0, legendItems_1 = legendItems; _i < legendItems_1.length; _i++) {
+            var i = legendItems_1[_i];
+            if (typeof i == 'undefined') {
+                throw 'undefined item passed in array to legend constructor';
+            }
+        }
+        options.legendTitle = typeof options.legendTitle == 'string' ? options.legendTitle : 'Legend';
+        options.scaleDependent = typeof options.scaleDependent == 'boolean' ? options.scaleDependent : true;
+        options.layerDivClasses = options.layerDivClasses || [];
+        // if legend display is scale dependent, make sure the mapMove object is initialized first
+        if (options.scaleDependent) {
+            mapMove_1.default.checkInit();
+        }
+        this.$divElement = $('#' + divId);
+        this._legendItems = legendItems;
+        this.layerGroup = new LayerGroup();
+        this._buildTree(legendItems);
+        this.legendId = makeGuid_1.default();
+        this.$divElement.append(this.layerGroup.getLegendHtml(this.legendId, options));
+        for (var _a = 0, _b = this.layerGroup.allLayerArray; _a < _b.length; _a++) {
+            var l = _b[_a];
+            l.applyCollapse();
+        }
+        var _this = this;
+        //// if legend display is scale dependent, make sure the mapMove object is initialized first
+        if (options.scaleDependent) {
+            mapMove_1.default.checkInit();
+            mapMove_1.default.addCallback(function (ext, zoom, evt) {
+                if (typeof evt == 'undefined' || evt == 'change:resolution') {
+                    for (var _i = 0, _a = this.layerGroup.allLayerArray; _i < _a.length; _i++) {
+                        var lyr = _a[_i];
+                        var $lyrLi = $('#' + lyr.id + '-layer-li');
+                        if (zoom > lyr.maxZoom || zoom < lyr.minZoom) {
+                            $lyrLi.addClass('layer-not-visible');
+                        }
+                        else {
+                            $lyrLi.removeClass('layer-not-visible');
+                        }
+                    }
+                }
+            }, this, 100, true, 'legend1');
+        }
+        // <editor-fold desc="add event listeners">
+        this.$divElement.find(".suppress-by-extent").change(function () {
+            var legendLayerLis = $('.legend-layer-li');
+            if (this.checked) {
+                legendLayerLis.removeClass('layer-force-show');
+            }
+            else {
+                legendLayerLis.addClass('layer-force-show');
+            }
+        });
+        this.$divElement.find('.legend-check').change(function () {
+            var lyrId = this.id.replace('-legend-layer-check', '');
+            _this.layerGroup.allLayerLookup[lyrId].visible = this.checked;
+        });
+        this.$divElement.find('.legend-layer-group > input[type=checkbox]').change(function () {
+            $(this).siblings('ul').find('input[type=checkbox]').prop('checked', this.checked).trigger('change');
+        });
+        this.$divElement.find('.layer-group-expander').click(function () {
+            var $this = $(this);
+            $this.removeClass('legend-layer-group-initial-collapse');
+            $this.siblings('ul').slideToggle();
+            if ($this.hasClass('legend-layer-group-collapsed')) {
+                $this.removeClass('legend-layer-group-collapsed');
+                $this.html('&#9660;');
+            }
+            else {
+                $this.addClass('legend-layer-group-collapsed');
+                $this.html('&#9654;');
+            }
+        });
+        this.$divElement.find('.legend-layer-group-initial-collapse').trigger('click');
+        // </editor-fold>
+    }
+    /**
+     * @param {Array} [legendItems=this._layerConfig] the legend items
+     * @param {Array} [parents=[]] the ordered list of groups in which this item is a member
+     * @private
+     */
+    LayerLegend.prototype._buildTree = function (legendItems, parents) {
+        if (legendItems.length == 0) {
+            return;
+        }
+        var oneItem = legendItems[0];
+        //reset the parent if the item is in the base array
+        if (this._legendItems.indexOf(oneItem) > -1 || typeof parents == 'undefined') {
+            parents = [];
+        }
+        if (typeof oneItem.groupName !== 'undefined') {
+            var groupItem = legendItems[0];
+            var newGroup = this.layerGroup.addGroup(groupItem, parents);
+            parents.push(newGroup.groupId);
+            this._buildTree(oneItem.items, parents);
+        }
+        else {
+            /**
+             * @type {LayerBase}
+             */
+            var layerItem = legendItems[0];
+            this.layerGroup.addLegendLayer(layerItem, parents);
+        }
+        this._buildTree(legendItems.slice(1), parents);
+    };
+    return LayerLegend;
+}());
+exports.LayerLegend = LayerLegend;
+nm.LayerLegend = LayerLegend;
+exports.default = LayerLegend;
+
+
+/***/ }),
+/* 48 */,
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by gavorhes on 11/2/2015.
+ */
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var LayerBaseVector_1 = __webpack_require__(45);
+var provide_1 = __webpack_require__(0);
+var ol = __webpack_require__(2);
+var $ = __webpack_require__(1);
+var proj = __webpack_require__(8);
+var projections_1 = __webpack_require__(8);
+var nm = provide_1.default('layers');
+/**
+ * The Vector GeoJson Layer
+ * @augments LayerBaseVector
+ */
+var LayerBaseVectorGeoJson = (function (_super) {
+    __extends(LayerBaseVectorGeoJson, _super);
+    /**
+     * @param {string|null} url - resource url, set to '' to make blank layer
+     * @param {object} options - config
+     * @param {string} [options.id] - layer id
+     * @param {string} [options.name=Unnamed Layer] - layer name
+     * @param {number} [options.opacity=1] - opacity
+     * @param {boolean} [options.visible=true] - default visible
+     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
+     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
+     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
+     * @param {number} [options.zIndex=0] the z index for the layer
+     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
+     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
+     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
+     * @param {boolean} [options.legendContent] additional content to add to the legend
+     *
+     * @param {boolean} [options.autoLoad=false] if the layer should auto load if not visible
+     * @param {object} [options.style=undefined] the layer style, use openlayers default style if not defined
+     * @param {boolean} [options.onDemand=false] if the layer should be loaded by extent on map move
+     * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
+     *
+     * @param {object} [options.transform={}] SR transform, set as false for no transform
+     * @param {string} options.transform.dataProjection=EPSG:4326 the data CRS
+     * @param {string} options.transform.featureProjection=EPSG:3857 the feature/map CRS
+     * @param {mapMoveMakeGetParams} [options.mapMoveMakeGetParams=function(lyr, extent, zoomLevel){}] function to create additional map move params
+     * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
+     */
+    function LayerBaseVectorGeoJson(url, options) {
+        if (options === void 0) { options = {}; }
+        var _this = this;
+        url = typeof url == 'string' ? url : '';
+        _this = _super.call(this, url, options) || this;
+        _this._geoJsonFormat = new ol.format.GeoJSON();
+        _this._transform = options.transform || {};
+        _this._transform.dataProjection = _this._transform.dataProjection || proj.proj4326;
+        _this._transform.featureProjection = _this._transform.featureProjection || projections_1.proj3857;
+        if (_this.autoLoad || _this.visible) {
+            _this._load();
+        }
+        return _this;
+    }
+    /**
+     * add feature collection
+     * @param {object} featureCollection - as geojson object
+     */
+    LayerBaseVectorGeoJson.prototype.addFeatures = function (featureCollection) {
+        this.source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection, { dataProjection: this._transform.dataProjection,
+            featureProjection: this._transform.featureProjection }));
+    };
+    /**
+     * trigger load features
+     * @protected
+     * @returns {boolean} if already loaded
+     */
+    LayerBaseVectorGeoJson.prototype._load = function () {
+        var _this = this;
+        if (_super.prototype._load.call(this)) {
+            return true;
+        }
+        $.get(this._url, this._params, function (d) {
+            _this.addFeatures(d);
+            _this.loadCallback(_this);
+        }, 'json').fail(function () {
+            this._loaded = false;
+        });
+        return false;
+    };
+    /**
+     * callback function on map move
+     * @param {object} d the json response
+     * @override
+     */
+    LayerBaseVectorGeoJson.prototype.mapMoveCallback = function (d) {
+        _super.prototype.mapMoveCallback.call(this, d);
+        this._source.addFeatures(this._geoJsonFormat.readFeatures(d, { featureProjection: this._transform.featureProjection, dataProjection: this._transform.dataProjection }));
+    };
+    return LayerBaseVectorGeoJson;
+}(LayerBaseVector_1.LayerBaseVector));
+exports.LayerBaseVectorGeoJson = LayerBaseVectorGeoJson;
+nm.LayerBaseVectorGeoJson = LayerBaseVectorGeoJson;
+exports.default = LayerBaseVectorGeoJson;
+
+
+/***/ }),
+/* 50 */,
+/* 51 */,
 /* 52 */,
 /* 53 */,
 /* 54 */,
-/* 55 */
+/* 55 */,
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2512,128 +2637,12 @@ exports.default = ItsLayerCollection;
 
 
 /***/ }),
-/* 56 */,
 /* 57 */,
 /* 58 */,
 /* 59 */,
 /* 60 */,
 /* 61 */,
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by gavorhes on 11/2/2015.
- */
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var LayerBaseVector_1 = __webpack_require__(51);
-var provide_1 = __webpack_require__(0);
-var ol = __webpack_require__(2);
-var $ = __webpack_require__(1);
-var proj = __webpack_require__(8);
-var projections_1 = __webpack_require__(8);
-var nm = provide_1.default('layers');
-/**
- * The Vector GeoJson Layer
- * @augments LayerBaseVector
- */
-var LayerBaseVectorGeoJson = (function (_super) {
-    __extends(LayerBaseVectorGeoJson, _super);
-    /**
-     * @param {string|null} url - resource url, set to '' to make blank layer
-     * @param {object} options - config
-     * @param {string} [options.id] - layer id
-     * @param {string} [options.name=Unnamed Layer] - layer name
-     * @param {number} [options.opacity=1] - opacity
-     * @param {boolean} [options.visible=true] - default visible
-     * @param {number} [options.minZoom=undefined] - min zoom level, 0 - 28
-     * @param {number} [options.maxZoom=undefined] - max zoom level, 0 - 28
-     * @param {object} [options.params={}] the get parameters to include to retrieve the layer
-     * @param {number} [options.zIndex=0] the z index for the layer
-     * @param {function} [options.loadCallback] function to call on load, context this is the layer object
-     * @param {boolean} [options.legendCollapse=false] if the legend item should be initially collapsed
-     * @param {boolean} [options.legendCheckbox=true] if the legend item should have a checkbox for visibility
-     * @param {boolean} [options.legendContent] additional content to add to the legend
-     *
-     * @param {boolean} [options.autoLoad=false] if the layer should auto load if not visible
-     * @param {object} [options.style=undefined] the layer style, use openlayers default style if not defined
-     * @param {boolean} [options.onDemand=false] if the layer should be loaded by extent on map move
-     * @param {number} [options.onDemandDelay=300] delay before the map move callback should be called
-     *
-     * @param {object} [options.transform={}] SR transform, set as false for no transform
-     * @param {string} options.transform.dataProjection=EPSG:4326 the data CRS
-     * @param {string} options.transform.featureProjection=EPSG:3857 the feature/map CRS
-     * @param {mapMoveMakeGetParams} [options.mapMoveMakeGetParams=function(lyr, extent, zoomLevel){}] function to create additional map move params
-     * @param {MapMoveCls} [options.mapMoveObj=mapMove] alternate map move object for use with multi map pages
-     */
-    function LayerBaseVectorGeoJson(url, options) {
-        if (options === void 0) { options = {}; }
-        var _this = this;
-        url = typeof url == 'string' ? url : '';
-        _this = _super.call(this, url, options) || this;
-        _this._geoJsonFormat = new ol.format.GeoJSON();
-        _this._transform = options.transform || {};
-        _this._transform.dataProjection = _this._transform.dataProjection || proj.proj4326;
-        _this._transform.featureProjection = _this._transform.featureProjection || projections_1.proj3857;
-        if (_this.autoLoad || _this.visible) {
-            _this._load();
-        }
-        return _this;
-    }
-    /**
-     * add feature collection
-     * @param {object} featureCollection - as geojson object
-     */
-    LayerBaseVectorGeoJson.prototype.addFeatures = function (featureCollection) {
-        this.source.addFeatures(this._geoJsonFormat.readFeatures(featureCollection, { dataProjection: this._transform.dataProjection,
-            featureProjection: this._transform.featureProjection }));
-    };
-    /**
-     * trigger load features
-     * @protected
-     * @returns {boolean} if already loaded
-     */
-    LayerBaseVectorGeoJson.prototype._load = function () {
-        var _this = this;
-        if (_super.prototype._load.call(this)) {
-            return true;
-        }
-        $.get(this._url, this._params, function (d) {
-            _this.addFeatures(d);
-            _this.loadCallback(_this);
-        }, 'json').fail(function () {
-            this._loaded = false;
-        });
-        return false;
-    };
-    /**
-     * callback function on map move
-     * @param {object} d the json response
-     * @override
-     */
-    LayerBaseVectorGeoJson.prototype.mapMoveCallback = function (d) {
-        _super.prototype.mapMoveCallback.call(this, d);
-        this._source.addFeatures(this._geoJsonFormat.readFeatures(d, { featureProjection: this._transform.featureProjection, dataProjection: this._transform.dataProjection }));
-    };
-    return LayerBaseVectorGeoJson;
-}(LayerBaseVector_1.LayerBaseVector));
-exports.LayerBaseVectorGeoJson = LayerBaseVectorGeoJson;
-nm.LayerBaseVectorGeoJson = LayerBaseVectorGeoJson;
-exports.default = LayerBaseVectorGeoJson;
-
-
-/***/ }),
+/* 62 */,
 /* 63 */,
 /* 64 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -2654,8 +2663,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var LayerBaseVectorGeoJson_1 = __webpack_require__(62);
-var mapPopup_1 = __webpack_require__(5);
+var LayerBaseVectorGeoJson_1 = __webpack_require__(49);
+var mapPopup_1 = __webpack_require__(7);
 var provide_1 = __webpack_require__(0);
 var ol = __webpack_require__(2);
 var $ = __webpack_require__(1);
@@ -3123,9 +3132,9 @@ nm.makeBlueGreenRedGradientZScore = makeBlueGreenRedGradientZScore;
  */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var ItsLayerCollection_1 = __webpack_require__(55);
-var LayerLegend_1 = __webpack_require__(46);
-var quickMap_1 = __webpack_require__(6);
+var ItsLayerCollection_1 = __webpack_require__(56);
+var LayerLegend_1 = __webpack_require__(47);
+var quickMap_1 = __webpack_require__(5);
 var map = quickMap_1.default({ addGeocode: true });
 window['map'] = map;
 var itsLayerCollection = new ItsLayerCollection_1.default(map);

@@ -12,7 +12,7 @@
   "scripts": {
     "test": "node node_modules/.bin/karma start karma.conf.js",
     "lint": "eslint src/**/*.js",
-    "update-custom-ol": "npm update custom-ol & COPY /y node_modules\\custom-ol\\lib\\index.js test-html\\lib\\ol.js",
+    "update-custom-ol": "npm update custom-ol & COPY /y node_modules\\custom-ol\\lib\\index.js test\\serve\\lib\\ol.js",
     "serve-demos": "cd test/serve & python -m http.server 5002",
     "typedoc": "RD /S /Q doc & typedoc --excludePrivate --mode file --out doc src",
     "webpack": "node_modules\\.bin\\webpack -w",
