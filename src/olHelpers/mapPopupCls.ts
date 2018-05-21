@@ -300,12 +300,13 @@ export class MapPopupCls extends MapInteractionBase {
 
             let hit = false;
 
-            this.map.forEachLayerAtPixel(pixel, (lyr) => {
-                if (hit){
+            this.map.forEachFeatureAtPixel(pixel, (f, l) => {
+                if (hit) {
                     return;
                 }
+
                 for (let vLyr of this._arrPopupLayers){
-                    if (vLyr.olLayer == lyr){
+                    if (vLyr.olLayer == l){
                         hit = true;
                         break;
                     }

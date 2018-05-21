@@ -110,7 +110,6 @@ export const delete_ = (endpoint: string,
                           error: (d?: Object) => any = () => {}): any => {
 
     _axiosHelper(endpoint, callback, params, error, 'delete');
-
 };
 
 /**
