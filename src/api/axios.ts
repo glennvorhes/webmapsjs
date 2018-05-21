@@ -26,6 +26,39 @@ function getValue(obj: { [s: string]: any }, keyArr: string[], defaultVal: any =
     }
 }
 
+function _axiosHelper(endpoint: string,
+                          callback: (d: Object) => any,
+                          params: Object = {},
+                          error: (d?: Object) => any = () => {}, verb: string): any {
+
+    let f;
+
+    switch (verb){
+        case 'get':
+            f = axios.get;
+            break;
+        case 'post':
+            f = axios.post;
+            break;
+        case 'put':
+            f = axios.put;
+            break;
+        case 'delete':
+            f = axios.delete;
+            break;
+        default:
+            throw 'axios verb not found';
+
+    }
+
+    f(endpoint, {params: params}).then((response: any) => {
+        let data = getValue(response, ['data'], null);
+        callback(data);
+    }).catch((reason: any) => {
+        error(reason);
+    });
+}
+
 
 /**
  *
@@ -39,11 +72,60 @@ export const get = (endpoint: string,
                           callback: (d: Object) => any,
                           params: Object = {},
                           error: (d?: Object) => any = () => {}): any => {
-    axios.get(endpoint, {params: params}).then((response: any) => {
 
-        let data = getValue(response, ['data'], null);
-        callback(data);
-    }).catch((reason: any) => {
-        error(reason);
-    });
+    _axiosHelper(endpoint, callback, params, error, 'get');
+
+};
+
+
+/**
+ *
+ * @param {string} endpoint
+ * @param {(d: Object) => any} callback
+ * @param {Object} params
+ * @param {(d: Object) => any} error
+ * @returns {any}
+ */
+export const post = (endpoint: string,
+                          callback: (d: Object) => any,
+                          params: Object = {},
+                          error: (d?: Object) => any = () => {}): any => {
+
+    _axiosHelper(endpoint, callback, params, error, 'post');
+
+};
+
+
+/**
+ *
+ * @param {string} endpoint
+ * @param {(d: Object) => any} callback
+ * @param {Object} params
+ * @param {(d: Object) => any} error
+ * @returns {any}
+ */
+export const delete_ = (endpoint: string,
+                          callback: (d: Object) => any,
+                          params: Object = {},
+                          error: (d?: Object) => any = () => {}): any => {
+
+    _axiosHelper(endpoint, callback, params, error, 'delete');
+
+};
+
+/**
+ *
+ * @param {string} endpoint
+ * @param {(d: Object) => any} callback
+ * @param {Object} params
+ * @param {(d: Object) => any} error
+ * @returns {any}
+ */
+export const put = (endpoint: string,
+                          callback: (d: Object) => any,
+                          params: Object = {},
+                          error: (d?: Object) => any = () => {}): any => {
+
+    _axiosHelper(endpoint, callback, params, error, 'put');
+
 };

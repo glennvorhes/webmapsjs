@@ -27,6 +27,33 @@ function getValue(obj, keyArr, defaultVal) {
         }
     }
 }
+function _axiosHelper(endpoint, callback, params, error, verb) {
+    if (params === void 0) { params = {}; }
+    if (error === void 0) { error = function () { }; }
+    var f;
+    switch (verb) {
+        case 'get':
+            f = axios_1.default.get;
+            break;
+        case 'post':
+            f = axios_1.default.post;
+            break;
+        case 'put':
+            f = axios_1.default.put;
+            break;
+        case 'delete':
+            f = axios_1.default.delete;
+            break;
+        default:
+            throw 'axios verb not found';
+    }
+    f(endpoint, { params: params }).then(function (response) {
+        var data = getValue(response, ['data'], null);
+        callback(data);
+    }).catch(function (reason) {
+        error(reason);
+    });
+}
 /**
  *
  * @param {string} endpoint
@@ -38,11 +65,45 @@ function getValue(obj, keyArr, defaultVal) {
 exports.get = function (endpoint, callback, params, error) {
     if (params === void 0) { params = {}; }
     if (error === void 0) { error = function () { }; }
-    axios_1.default.get(endpoint, { params: params }).then(function (response) {
-        var data = getValue(response, ['data'], null);
-        callback(data);
-    }).catch(function (reason) {
-        error(reason);
-    });
+    _axiosHelper(endpoint, callback, params, error, 'get');
+};
+/**
+ *
+ * @param {string} endpoint
+ * @param {(d: Object) => any} callback
+ * @param {Object} params
+ * @param {(d: Object) => any} error
+ * @returns {any}
+ */
+exports.post = function (endpoint, callback, params, error) {
+    if (params === void 0) { params = {}; }
+    if (error === void 0) { error = function () { }; }
+    _axiosHelper(endpoint, callback, params, error, 'post');
+};
+/**
+ *
+ * @param {string} endpoint
+ * @param {(d: Object) => any} callback
+ * @param {Object} params
+ * @param {(d: Object) => any} error
+ * @returns {any}
+ */
+exports.delete_ = function (endpoint, callback, params, error) {
+    if (params === void 0) { params = {}; }
+    if (error === void 0) { error = function () { }; }
+    _axiosHelper(endpoint, callback, params, error, 'delete');
+};
+/**
+ *
+ * @param {string} endpoint
+ * @param {(d: Object) => any} callback
+ * @param {Object} params
+ * @param {(d: Object) => any} error
+ * @returns {any}
+ */
+exports.put = function (endpoint, callback, params, error) {
+    if (params === void 0) { params = {}; }
+    if (error === void 0) { error = function () { }; }
+    _axiosHelper(endpoint, callback, params, error, 'put');
 };
 //# sourceMappingURL=axios.js.map

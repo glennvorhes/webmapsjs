@@ -6,7 +6,6 @@
 import MapInteractionBase from './mapInteractionBase';
 import ol = require('custom-ol');
 import { LayerBaseVector } from "../layers/LayerBaseVector";
-import { LayerBase } from "../layers/LayerBase";
 import LayerEsriMapServer from "../layers/LayerEsriMapServer";
 export interface popupChangedFunction {
     ($popContent: JQuery): any;
@@ -60,8 +59,6 @@ export declare class MapPopupCls extends MapInteractionBase {
     private _mapClickFunctions;
     private _selectionLayerLookup;
     private _arrPopupLayerIds;
-    private _arrPopupLayerNames;
-    private _arrPopupOlLayers;
     private _arrPopupContentFunction;
     private _selectionLayers;
     /**
@@ -78,7 +75,7 @@ export declare class MapPopupCls extends MapInteractionBase {
      * map popup initialization
      * @param {ol.Map} theMap - the ol map
      */
-    init(theMap: ol.Map): boolean;
+    init(theMap: ol.Map): void;
     /**
      * helper to select features
      * @private
@@ -139,7 +136,7 @@ export declare class MapPopupCls extends MapInteractionBase {
      *
      * @param {LayerBase} lyr - layer
      */
-    removeVectorPopup(lyr: LayerBase): void;
+    removeVectorPopup(lyr: LayerBaseVector): void;
     /**
      *
      * @param {LayerEsriMapServer} lyr - map server layer
