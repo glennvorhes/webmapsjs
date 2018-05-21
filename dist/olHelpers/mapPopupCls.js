@@ -221,13 +221,13 @@ var MapPopupCls = (function (_super) {
             }
             var pixel = _this.map.getEventPixel(evt['originalEvent']);
             var hit = false;
-            _this.map.forEachLayerAtPixel(pixel, function (lyr) {
+            _this.map.forEachFeatureAtPixel(pixel, function (f, l) {
                 if (hit) {
                     return;
                 }
                 for (var _i = 0, _a = _this._arrPopupLayers; _i < _a.length; _i++) {
                     var vLyr = _a[_i];
-                    if (vLyr.olLayer == lyr) {
+                    if (vLyr.olLayer == l) {
                         hit = true;
                         break;
                     }
