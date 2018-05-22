@@ -51,7 +51,7 @@ function _axiosHelper(endpoint: string,
 
     }
 
-    f(endpoint, {params: params}).then((response: any) => {
+    f(endpoint, params).then((response: any) => {
         let data = getValue(response, ['data'], null);
         callback(data);
     }).catch((reason: any) => {
