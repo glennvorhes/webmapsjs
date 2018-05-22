@@ -47,7 +47,7 @@ function _axiosHelper(endpoint, callback, params, error, verb) {
         default:
             throw 'axios verb not found';
     }
-    f(endpoint, params).then(function (response) {
+    f(endpoint, { params: params }).then(function (response) {
         var data = getValue(response, ['data'], null);
         callback(data);
     }).catch(function (reason) {
