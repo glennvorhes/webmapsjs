@@ -31,23 +31,28 @@ function _axiosHelper(endpoint, callback, params, error, verb) {
     if (params === void 0) { params = {}; }
     if (error === void 0) { error = function () { }; }
     var f;
+    var payload;
     switch (verb) {
         case 'get':
             f = axios_1.default.get;
+            payload = { params: params };
             break;
         case 'post':
             f = axios_1.default.post;
+            payload = params;
             break;
         case 'put':
             f = axios_1.default.put;
+            payload = { params: params };
             break;
         case 'delete':
             f = axios_1.default.delete;
+            payload = { params: params };
             break;
         default:
             throw 'axios verb not found';
     }
-    f(endpoint, { params: params }).then(function (response) {
+    f(endpoint, payload).then(function (response) {
         var data = getValue(response, ['data'], null);
         callback(data);
     }).catch(function (reason) {

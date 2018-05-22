@@ -33,25 +33,31 @@ function _axiosHelper(endpoint: string,
 
     let f;
 
+    let payload;
+
     switch (verb){
         case 'get':
             f = axios.get;
+            payload = {params: params};
             break;
         case 'post':
             f = axios.post;
+            payload = params;
             break;
         case 'put':
             f = axios.put;
+            payload = {params: params};
             break;
         case 'delete':
             f = axios.delete;
+            payload = {params: params};
             break;
         default:
             throw 'axios verb not found';
 
     }
 
-    f(endpoint, {params: params}).then((response: any) => {
+    f(endpoint, payload).then((response: any) => {
         let data = getValue(response, ['data'], null);
         callback(data);
     }).catch((reason: any) => {
