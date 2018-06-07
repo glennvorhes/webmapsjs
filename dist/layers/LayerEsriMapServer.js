@@ -31,7 +31,8 @@ function makeServiceUrl(folder, service) {
 }
 exports.makeServiceUrl = makeServiceUrl;
 function localCacheUrl(folder, service) {
-    var loc = window.location.href;
+    var windowLocation = window.location;
+    var loc = windowLocation.href;
     var url = "/mapserver/" + folder + "/" + service;
     if (loc.indexOf('transportal.cee.wisc.edu') > -1) {
         if (loc.toLowerCase().indexOf('webmapsstage') > -1) {
@@ -40,6 +41,9 @@ function localCacheUrl(folder, service) {
         else {
             url = 'https://transportal.cee.wisc.edu/gis/webmaps' + url;
         }
+    }
+    else if (parseInt(windowLocation.port) !== 8081) {
+        url = 'https://transportal.cee.wisc.edu/gis/webmaps' + url;
     }
     return url;
 }

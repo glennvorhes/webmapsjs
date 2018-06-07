@@ -23,7 +23,8 @@ export function makeServiceUrl(folder: string, service: string): string{
 }
 
 export function localCacheUrl(folder: string, service: string): string{
-    let loc = window.location.href;
+    let windowLocation = window.location;
+    let loc = windowLocation.href;
 
     let url = `/mapserver/${folder}/${service}`;
 
@@ -33,6 +34,8 @@ export function localCacheUrl(folder: string, service: string): string{
         } else {
             url = 'https://transportal.cee.wisc.edu/gis/webmaps' + url
         }
+    } else if (parseInt(windowLocation.port) !== 8081){
+        url = 'https://transportal.cee.wisc.edu/gis/webmaps' + url
     }
 
 
