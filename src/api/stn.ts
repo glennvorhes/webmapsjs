@@ -21,6 +21,53 @@ export interface iRoutes extends iError {
     routes: { [s: string]: number }
 }
 
+export interface iGeoFeature {
+    type: string;
+    geometry: Object;
+    properties: Object;
+}
+
+export interface snappedPoint {
+    type: string;
+    geometry: {
+        type: string;
+        coordinates: [number, number]
+    },
+    properties: {
+        cumtMilg: number;
+        dtLinkCurr: string;
+        dtOpnTrfc: string;
+        dtTrxHstl: string;
+        editIndc: number;
+        lcmCkotTxnId: number;
+        lcmDtHstl: number;
+        lcmDtTxnCurr: string;
+        lcmFromToDis: number;
+        lcmStus: number;
+        lnkOffsetMi: number;
+        lnkOffsetPcnt: number;
+        rdwyLinkId: number;
+        refSiteFromId: number;
+        refSiteToId: number;
+        routeIds: number[]
+    }
+}
+
+export interface _iGeoJson{
+    type: string;
+    crs: {
+        type: string;
+        properties: {
+            name: string;
+        }
+    };
+    features: any[];
+}
+
+export interface iGeoJsonSnappedPoint extends _iGeoJson{
+    features: snappedPoint[];
+}
+
 
 /**
  *
@@ -75,14 +122,14 @@ export function getSnappedPoint(yr: number,
                                 lon: number,
                                 lat: number,
                                 searchDistance: number = 200,
-                                callback: (d) => any = (d) => {
+                                callback: (d: iGeoJsonSnappedPoint) => any = (d: iGeoJsonSnappedPoint) => {
                                     console.log(d);
                                 },
                                 error: (e: iError) => any = (e) => {
                                     console.log(e);
                                 }) {
 
-    ajx.get(stnApiUrl + '/snapped', (d) => {
+    ajx.get(stnApiUrl + '/snapped', (d: iGeoJsonSnappedPoint) => {
             if (d['error']) {
                 error(d)
             } else {
