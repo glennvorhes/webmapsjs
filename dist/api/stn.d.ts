@@ -12,7 +12,7 @@ export interface iGeoFeature {
     geometry: Object;
     properties: Object;
 }
-export interface snappedPoint {
+export interface iSnappedPoint {
     type: string;
     geometry: {
         type: string;
@@ -35,6 +35,27 @@ export interface snappedPoint {
         refSiteFromId: number;
         refSiteToId: number;
         routeIds: number[];
+        year: number;
+    };
+}
+export interface iStnSegment {
+    type: string;
+    geometry: {
+        type: string;
+        coordinates: Array<number[]>;
+    };
+    properties: {
+        cumtMilgEnd: number;
+        cumtMilgStart: number;
+        offsetMiEnd: number;
+        offsetMiStart: number;
+        offsetPcntEnd: number;
+        offsetPcntStart: number;
+        rdwyLinkIdEnd: number;
+        rdwyLinkIdStart: number;
+        rdwyLinkIds: number[];
+        rdwyRteId: number;
+        year: number;
     };
 }
 export interface _iGeoJson {
@@ -48,7 +69,10 @@ export interface _iGeoJson {
     features: any[];
 }
 export interface iGeoJsonSnappedPoint extends _iGeoJson {
-    features: snappedPoint[];
+    features: iSnappedPoint[];
+}
+export interface iGeoJsonStnSegment extends _iGeoJson {
+    features: iStnSegment[];
 }
 /**
  *
@@ -83,4 +107,4 @@ export declare function getSnappedPoint(yr: number, routeId: number, lon: number
  * @param {(d) => any} callback
  * @param {(e: iError) => any} error
  */
-export declare function getStnSegment(yr: number, routeId: number, lonStart: number, latStart: number, lonEnd: number, latEnd: number, searchDistance?: number, callback?: (d) => any, error?: (e: iError) => any): void;
+export declare function getStnSegment(yr: number, routeId: number, lonStart: number, latStart: number, lonEnd: number, latEnd: number, searchDistance?: number, callback?: (d: iGeoJsonStnSegment) => any, error?: (e: iError) => any): void;

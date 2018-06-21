@@ -27,7 +27,7 @@ export interface iGeoFeature {
     properties: Object;
 }
 
-export interface snappedPoint {
+export interface iSnappedPoint {
     type: string;
     geometry: {
         type: string;
@@ -49,7 +49,29 @@ export interface snappedPoint {
         rdwyLinkId: number;
         refSiteFromId: number;
         refSiteToId: number;
-        routeIds: number[]
+        routeIds: number[];
+        year: number;
+    }
+}
+
+export interface iStnSegment {
+    type: string;
+    geometry: {
+        type: string;
+        coordinates: Array<number[]>
+    },
+    properties: {
+        cumtMilgEnd: number;
+        cumtMilgStart: number;
+        offsetMiEnd: number;
+        offsetMiStart: number;
+        offsetPcntEnd: number;
+        offsetPcntStart: number;
+        rdwyLinkIdEnd: number;
+        rdwyLinkIdStart: number;
+        rdwyLinkIds: number[];
+        rdwyRteId: number;
+        year: number;
     }
 }
 
@@ -65,7 +87,11 @@ export interface _iGeoJson{
 }
 
 export interface iGeoJsonSnappedPoint extends _iGeoJson{
-    features: snappedPoint[];
+    features: iSnappedPoint[];
+}
+
+export interface iGeoJsonStnSegment extends _iGeoJson{
+    features: iStnSegment[];
 }
 
 
@@ -166,14 +192,14 @@ export function getStnSegment(yr: number,
                               lonEnd: number,
                               latEnd: number,
                               searchDistance: number = 200,
-                              callback: (d) => any = (d) => {
+                              callback: (d: iGeoJsonStnSegment) => any = (d: iGeoJsonStnSegment) => {
                                   console.log(d);
                               },
                               error: (e: iError) => any = (e) => {
                                   console.log(e);
                               }) {
 
-    ajx.get(stnApiUrl + '/segment', (d) => {
+    ajx.get(stnApiUrl + '/segment', (d: iGeoJsonStnSegment) => {
             if (d['error']) {
                 error(d)
             } else {
