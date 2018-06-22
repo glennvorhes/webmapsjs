@@ -108,3 +108,4 @@ export declare function getSnappedPoint(yr: number, routeId: number, lon: number
  * @param {(e: iError) => any} error
  */
 export declare function getStnSegment(yr: number, routeId: number, lonStart: number, latStart: number, lonEnd: number, latEnd: number, searchDistance?: number, callback?: (d: iGeoJsonStnSegment) => any, error?: (e: iError) => any): void;
+export declare function getStnSegmentByMiles(yr: number, routeId: number, startMile: number, endMile: number, callback?: (d: iGeoJsonStnSegment) => any, error?: (e: iError) => any): void;

@@ -75,7 +75,7 @@ export interface iStnSegment {
     }
 }
 
-export interface _iGeoJson{
+export interface _iGeoJson {
     type: string;
     crs: {
         type: string;
@@ -86,11 +86,11 @@ export interface _iGeoJson{
     features: any[];
 }
 
-export interface iGeoJsonSnappedPoint extends _iGeoJson{
+export interface iGeoJsonSnappedPoint extends _iGeoJson {
     features: iSnappedPoint[];
 }
 
-export interface iGeoJsonStnSegment extends _iGeoJson{
+export interface iGeoJsonStnSegment extends _iGeoJson {
     features: iStnSegment[];
 }
 
@@ -214,6 +214,36 @@ export function getStnSegment(yr: number,
             lonEnd: lonEnd,
             latEnd: latEnd,
             distance: searchDistance
+        },
+        error
+    );
+}
+
+
+export function getStnSegmentByMiles(
+    yr: number,
+    routeId: number,
+    startMile: number,
+    endMile: number,
+    callback: (d: iGeoJsonStnSegment) => any = (d: iGeoJsonStnSegment) => {
+        console.log(d);
+    },
+    error: (e: iError) => any = (e) => {
+        console.log(e);
+    }) {
+
+    ajx.get(stnApiUrl + '/segment', (d: iGeoJsonStnSegment) => {
+            if (d['error']) {
+                error(d)
+            } else {
+                callback(d)
+            }
+        },
+        {
+            year: yr,
+            route: routeId,
+            startMile: startMile,
+            endMile: endMile
         },
         error
     );

@@ -115,4 +115,26 @@ function getStnSegment(yr, routeId, lonStart, latStart, lonEnd, latEnd, searchDi
     }, error);
 }
 exports.getStnSegment = getStnSegment;
+function getStnSegmentByMiles(yr, routeId, startMile, endMile, callback, error) {
+    if (callback === void 0) { callback = function (d) {
+        console.log(d);
+    }; }
+    if (error === void 0) { error = function (e) {
+        console.log(e);
+    }; }
+    ajx.get(exports.stnApiUrl + '/segment', function (d) {
+        if (d['error']) {
+            error(d);
+        }
+        else {
+            callback(d);
+        }
+    }, {
+        year: yr,
+        route: routeId,
+        startMile: startMile,
+        endMile: endMile
+    }, error);
+}
+exports.getStnSegmentByMiles = getStnSegmentByMiles;
 //# sourceMappingURL=stn.js.map
