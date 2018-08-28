@@ -44,6 +44,7 @@ function mapToBase64(map, callback, options) {
                     callback(imgData);
                 }
                 catch (ex) {
+                    console.log(ex);
                     // reportParams['imgData'] = null;
                 }
                 finally {

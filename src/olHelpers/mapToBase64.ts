@@ -61,6 +61,7 @@ export function mapToBase64(map: ol.Map, callback: (imgData: string) => any, opt
                     callback(imgData);
                 }
                 catch (ex) {
+                    console.log(ex);
                     // reportParams['imgData'] = null;
                 } finally {
                     if (options.resize) {
@@ -83,7 +84,6 @@ export function mapToBase64(map: ol.Map, callback: (imgData: string) => any, opt
     });
 
     map.updateSize();
-
 }
 
 export default mapToBase64;
