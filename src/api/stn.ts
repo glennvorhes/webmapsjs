@@ -157,7 +157,7 @@ export function getSnappedPoint(yr: number,
 
     ajx.get(stnApiUrl + '/snapped', (d: iGeoJsonSnappedPoint) => {
             if (d['error']) {
-                error(d)
+                error(d as iError)
             } else {
                 callback(d)
             }
@@ -201,7 +201,7 @@ export function getStnSegment(yr: number,
 
     ajx.get(stnApiUrl + '/segment', (d: iGeoJsonStnSegment) => {
             if (d['error']) {
-                error(d)
+                error(d as iError)
             } else {
                 callback(d)
             }
@@ -234,7 +234,7 @@ export function getStnSegmentByMiles(
 
     ajx.get(stnApiUrl + '/segment', (d: iGeoJsonStnSegment) => {
             if (d['error']) {
-                error(d)
+                error(d as iError)
             } else {
                 callback(d)
             }
@@ -248,3 +248,23 @@ export function getStnSegmentByMiles(
         error
     );
 }
+
+export function getStnYears(
+    callback: (d: {years: number[]}) => any = (d: {years: number[]}) => {
+        console.log(d);
+    },
+    error: (e: iError) => any = (e) => {
+        console.log(e);
+    }) {
+
+    ajx.get(stnApiUrl + '/years', (d: {years: number[]}) => {
+            if (d['error']) {
+                error(d as iError)
+            } else {
+                callback(d)
+            }
+        },
+        error
+    );
+}
+
