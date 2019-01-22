@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by glenn on 6/12/2017.
  */
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -24,7 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var reactAndRedux_1 = require("./reactAndRedux");
 require("jquery-ui");
 var makeGuid_1 = require("../util/makeGuid");
-var RadioItem = (function (_super) {
+var RadioItem = /** @class */ (function (_super) {
     __extends(RadioItem, _super);
     function RadioItem(props, context) {
         var _this = _super.call(this, props, context) || this;
@@ -64,7 +64,7 @@ var RadioItem = (function (_super) {
     };
     return RadioItem;
 }(reactAndRedux_1.React.Component));
-var RadioBase = (function (_super) {
+var RadioBase = /** @class */ (function (_super) {
     __extends(RadioBase, _super);
     function RadioBase(props, context) {
         var _this = _super.call(this, props, context) || this;
@@ -105,7 +105,7 @@ var RadioBase = (function (_super) {
     };
     return RadioBase;
 }(reactAndRedux_1.React.Component));
-var Radio = (function (_super) {
+var Radio = /** @class */ (function (_super) {
     __extends(Radio, _super);
     function Radio() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -116,7 +116,7 @@ var Radio = (function (_super) {
     return Radio;
 }(reactAndRedux_1.React.Component));
 exports.Radio = Radio;
-var RadioConnected = (function (_super) {
+var RadioConnected = /** @class */ (function (_super) {
     __extends(RadioConnected, _super);
     function RadioConnected() {
         return _super !== null && _super.apply(this, arguments) || this;

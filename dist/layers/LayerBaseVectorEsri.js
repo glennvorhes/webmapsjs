@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 11/2/2015.
  */
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -34,7 +34,7 @@ exports.makeServiceUrl = makeServiceUrl;
  * Base layer for esri vector layers
  * @augments LayerBaseVector
  */
-var LayerBaseVectorEsri = (function (_super) {
+var LayerBaseVectorEsri = /** @class */ (function (_super) {
     __extends(LayerBaseVectorEsri, _super);
     /**
      * The base vector layer

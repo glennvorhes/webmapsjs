@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 11/4/2015.
  */
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -21,7 +21,7 @@ var nm = provide_1.default('layers');
  * Real earth tile
  * @augments LayerBaseXyzTile
  */
-var LayerRealEarthTile = (function (_super) {
+var LayerRealEarthTile = /** @class */ (function (_super) {
     __extends(LayerRealEarthTile, _super);
     /**
      * The base layer for all others

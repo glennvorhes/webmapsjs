@@ -1,3 +1,6 @@
+/**
+ * Created by gavorhes on 5/13/2016.
+ */
 /// <reference types="jquery" />
 /// <reference types="jqueryui" />
 export interface selectChangeCallback {
@@ -40,9 +43,9 @@ export declare class SelectBoxBase {
      */
     addChangeListener(func: selectChangeCallback): void;
     /**
-     *
-     * @param {string|number} v
-     */
+    *
+    * @param {string|number} v
+    */
     selectedValue: string | number;
     readonly selectedIndex: number;
     readonly selectedText: string;

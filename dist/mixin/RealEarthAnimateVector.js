@@ -21,7 +21,7 @@ var nm = provide_1.default('mixin');
  * class mixin to animate RealEarth vector layers
  * @augments RealEarthAnimate
  */
-var RealEarthAnimateVector = (function (_super) {
+var RealEarthAnimateVector = /** @class */ (function (_super) {
     __extends(RealEarthAnimateVector, _super);
     function RealEarthAnimateVector(layer, loadCallback) {
         var _this = _super.call(this, layer, loadCallback) || this;

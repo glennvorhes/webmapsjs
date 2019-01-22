@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 12/14/2015.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = require("../util/provide");
 var zoomResolutionConvert = require("./zoomResolutionConvert");

@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by glenn on 6/13/2017.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ajx = require("./axios");
 var host_1 = require("./host");
@@ -137,4 +137,21 @@ function getStnSegmentByMiles(yr, routeId, startMile, endMile, callback, error) 
     }, error);
 }
 exports.getStnSegmentByMiles = getStnSegmentByMiles;
+function getStnYears(callback, error) {
+    if (callback === void 0) { callback = function (d) {
+        console.log(d);
+    }; }
+    if (error === void 0) { error = function (e) {
+        console.log(e);
+    }; }
+    ajx.get(exports.stnApiUrl + '/years', function (d) {
+        if (d['error']) {
+            error(d);
+        }
+        else {
+            callback(d);
+        }
+    }, error);
+}
+exports.getStnYears = getStnYears;
 //# sourceMappingURL=stn.js.map

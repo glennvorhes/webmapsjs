@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by glenn on 6/14/2017.
  */
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -29,7 +29,7 @@ var dateFormat_1 = require("./helpers/dateFormat");
 /**
  * params label, id, initialDate, change callback with value as string
  */
-var DatePick = (function (_super) {
+var DatePick = /** @class */ (function (_super) {
     __extends(DatePick, _super);
     function DatePick(props, context) {
         var _this = _super.call(this, props, context) || this;

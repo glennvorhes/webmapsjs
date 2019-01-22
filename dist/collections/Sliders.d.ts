@@ -1,3 +1,6 @@
+/**
+ * Created by gavorhes on 12/10/2015.
+ */
 /// <reference types="jquery" />
 /// <reference types="jqueryui" />
 export interface TipSliderConfig {

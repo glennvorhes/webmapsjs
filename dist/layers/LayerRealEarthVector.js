@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 11/13/2015.
  */
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -21,7 +21,7 @@ var nm = provide_1.default('layers');
  * Vector real earth vector
  * @augments LayerBaseVectorGeoJson
  */
-var LayerVectorRealEarth = (function (_super) {
+var LayerVectorRealEarth = /** @class */ (function (_super) {
     __extends(LayerVectorRealEarth, _super);
     /**
      * Real Earth vector layer

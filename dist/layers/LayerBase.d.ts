@@ -93,20 +93,20 @@ export declare abstract class LayerBase {
      * @type {string}
      */
     /**
-     * set the legend content directly
-     * @param {string} newVal - new content
-     * @protected
-     */
+    * set the legend content directly
+    * @param {string} newVal - new content
+    * @protected
+    */
     legendContent: string;
     /**
      * get the map get params
      * @type {object}
      */
     /**
-     * set the map get params
-     * @param {object} newParams - new get params
-     * @protected
-     */
+    * set the map get params
+    * @param {object} newParams - new get params
+    * @protected
+    */
     params: {
         [s: string]: any;
     };
@@ -140,9 +140,9 @@ export declare abstract class LayerBase {
      * @type {boolean}
      */
     /**
-     * set the visibility
-     * @param visibility
-     */
+    * set the visibility
+    * @param visibility
+    */
     visible: boolean;
     protected setVisible(visibility: boolean): void;
     /**
@@ -150,18 +150,18 @@ export declare abstract class LayerBase {
      * @type {number}
      */
     /**
-     * Set the layer opacity
-     * @param {number} opacity - layer opacity
-     */
+    * Set the layer opacity
+    * @param {number} opacity - layer opacity
+    */
     opacity: number;
     /**
      * Get the layer name
      * @type {string}
      */
     /**
-     * set the layer name
-     * @param {string} newName - the new name
-     */
+    * set the layer name
+    * @param {string} newName - the new name
+    */
     name: string;
     /**
      * Check if the layer is loaded
@@ -178,8 +178,8 @@ export declare abstract class LayerBase {
      * get the z index
      */
     /**
-     * set the z index
-     */
+    * set the z index
+    */
     zIndex: number;
     protected setZIndex(newZ: number): void;
     /**

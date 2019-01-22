@@ -1,12 +1,12 @@
+"use strict";
 /**
  * Created by gavorhes on 6/1/2016.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = require("../util/provide");
 var $ = require("jquery");
 var nm = provide_1.default('collections.layerSwipe');
-var LayerSwipe = (function () {
+var LayerSwipe = /** @class */ (function () {
     /**
      *
      * @param {ol.Map} map - the map

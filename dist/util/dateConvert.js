@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 11/4/2015.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = require("./provide");
 var nm = provide_1.default('util.dateConvert');

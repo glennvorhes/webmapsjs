@@ -1,3 +1,6 @@
+/**
+ * Created by glenn on 6/13/2017.
+ */
 import { iExtent, iGetRoads, iError, iGeometry, iRoute } from './_npmrdsInterfaces';
 export declare const npmrdsApiUrl: string;
 export declare function getRoads(extent: iExtent, version: number, callback: (d: iGetRoads) => any, error?: (e: iError) => any): void;
@@ -19,5 +22,5 @@ export declare function getRoute(road: string, direction: string, version: numbe
     };
     version?: number;
 }, error?: (e: iError) => any): void;
-export declare function getTmcs(lon: number, lat: number, version: number, searchDist: number, callback: (d) => any, error?: (e: iError) => any): void;
-export declare function getTmc(tmc: string, version: number, callback: (d) => any, error?: (e: iError) => any): void;
+export declare function getTmcs(lon: number, lat: number, version: number, searchDist: number, callback: (d: any) => any, error?: (e: iError) => any): void;
+export declare function getTmc(tmc: string, version: number, callback: (d: any) => any, error?: (e: iError) => any): void;

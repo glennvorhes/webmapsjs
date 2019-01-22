@@ -5,5 +5,5 @@ export declare class Geocode {
     private map;
     private indicationLayer;
     constructor(mapDiv: HTMLDivElement, map: ol.Map);
-    private reset();
+    private reset;
 }

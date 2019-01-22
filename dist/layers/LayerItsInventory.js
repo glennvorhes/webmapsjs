@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 12/8/2015.
  */
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -188,7 +188,7 @@ function defineLegend(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
  * Its Layer class
  * @augments LayerBaseVectorGeoJson
  */
-var LayerItsInventory = (function (_super) {
+var LayerItsInventory = /** @class */ (function (_super) {
     __extends(LayerItsInventory, _super);
     /**
      * ITS device layer, types available at https://transportal.cee.wisc.edu/its/inventory/

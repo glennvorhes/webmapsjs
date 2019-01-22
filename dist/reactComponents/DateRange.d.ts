@@ -1,7 +1,7 @@
-/// <reference types="react" />
 /**
  * Created by glenn on 6/12/2017.
  */
+/// <reference types="react" />
 import { React } from './reactAndRedux';
 import 'jquery-ui';
 export interface iDateRange {
@@ -34,8 +34,8 @@ export declare class DateRange extends React.Component<iDateRange, null> {
     private readonly needReset;
     private readonly versionSpan;
     private readonly version;
-    private finalizeChange();
-    private setStart(s);
-    private setEnd(s);
+    private finalizeChange;
+    private setStart;
+    private setEnd;
     render(): JSX.Element;
 }

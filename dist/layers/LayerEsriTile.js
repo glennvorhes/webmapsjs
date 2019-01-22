@@ -21,7 +21,7 @@ var nm = provide_1.default('layers');
  * Esri tile
  * @augments LayerBaseXyzTile
  */
-var LayerEsriTile = (function (_super) {
+var LayerEsriTile = /** @class */ (function (_super) {
     __extends(LayerEsriTile, _super);
     /**
      * The Esri tile layer

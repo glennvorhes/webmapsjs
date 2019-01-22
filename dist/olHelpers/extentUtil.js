@@ -50,7 +50,7 @@ function fitToMap(layers, mp, zoomOut) {
     if (typeof ext == 'undefined') {
         return;
     }
-    mp.getView().fit(ext, mp.getSize());
+    mp.getView().fit(ext, { size: mp.getSize() });
     if (typeof zoomOut == 'number') {
         mp.getView().setZoom(mp.getView().getZoom() - zoomOut);
     }

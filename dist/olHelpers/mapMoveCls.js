@@ -20,7 +20,7 @@ var nm = provide_1.default('olHelpers');
  * assists with map move interactions, trigger callback functions
  * @augments MapInteractionBase
  */
-var MapMoveCls = (function (_super) {
+var MapMoveCls = /** @class */ (function (_super) {
     __extends(MapMoveCls, _super);
     /**
      * constructor called implicitly

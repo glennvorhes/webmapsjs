@@ -1,4 +1,3 @@
-/// <reference types="react" />
 /// <reference types="jquery" />
 /// <reference types="jqueryui" />
 import { ChangeEvent } from "react";

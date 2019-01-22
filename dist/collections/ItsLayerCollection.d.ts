@@ -1,3 +1,6 @@
+/**
+ * Created by gavorhes on 12/14/2015.
+ */
 import ol = require('custom-ol');
 import LayerItsInventory from "../layers/LayerItsInventory";
 export declare class ItsLayerCollection {

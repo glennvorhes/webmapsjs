@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 12/15/2015.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var quickMapBase_1 = require("./quickMapBase");
 var provide_1 = require("../util/provide");

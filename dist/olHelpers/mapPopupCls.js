@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 11/3/2015.
  */
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -18,7 +18,7 @@ var provide_1 = require("../util/provide");
 var ol = require("custom-ol");
 var $ = require("jquery");
 var nm = provide_1.default('olHelpers');
-var FeatureLayerProperties = (function () {
+var FeatureLayerProperties = /** @class */ (function () {
     /**
      *
      * @param feature the feature
@@ -54,7 +54,7 @@ exports.FeatureLayerProperties = FeatureLayerProperties;
  * map popup class
  * @augments MapInteractionBase
  */
-var MapPopupCls = (function (_super) {
+var MapPopupCls = /** @class */ (function (_super) {
     __extends(MapPopupCls, _super);
     /**
      * Definition for openlayers style function
@@ -408,7 +408,7 @@ var MapPopupCls = (function (_super) {
      * @returns {object} a reference to the ol selection layer
      */
     MapPopupCls.prototype.addMapServicePopup = function (lyr, selectionStyle) {
-        var selectionLayer = this._addPopupLayer(lyr, selectionStyle);
+        var selectionLayer = this._addPopupLayer(lyr, { olStyle: selectionStyle });
         this._esriMapServiceLayers.push(lyr);
         return selectionLayer;
     };

@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 9/22/2016.
  */
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -18,7 +18,7 @@ var DatePick_1 = require("../../reactComponents/DatePick");
 var DateRange_1 = require("../../reactComponents/DateRange");
 var reacttst_connect_1 = require("./reacttst_connect");
 var s = require("./reacttst_store");
-var Demo = (function (_super) {
+var Demo = /** @class */ (function (_super) {
     __extends(Demo, _super);
     function Demo() {
         return _super !== null && _super.apply(this, arguments) || this;

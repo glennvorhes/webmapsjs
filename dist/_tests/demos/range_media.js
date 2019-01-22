@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 10/10/2016.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var day_range_1 = require("../../domUtil/day-range");
 var $ = require("jquery");

@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 12/14/2015.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var colors = require("../util/colors");
 var provide_1 = require("../util/provide");
@@ -93,7 +93,7 @@ var itsConfig = [
         }
     }
 ];
-var ItsLayerCollection = (function () {
+var ItsLayerCollection = /** @class */ (function () {
     /**
      * Create a collection of all ITS layers
      * @param {ol.Map} theMap the openlayers map

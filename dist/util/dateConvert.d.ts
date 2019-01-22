@@ -1,4 +1,7 @@
 /**
+ * Created by gavorhes on 11/4/2015.
+ */
+/**
  * Given a date return a string in the format YYYY-mm-dd hh:MM:SS
  * @param {Date} dte to convert
  * @returns {string} the formatted date string

@@ -1,3 +1,6 @@
+/**
+ * Created by gavorhes on 6/7/2016.
+ */
 export interface keyVals {
     key: string;
     value: Object;

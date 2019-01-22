@@ -20,7 +20,7 @@ var nm = provide_1.default('mixin');
  * Animate real earth tile
  * @augments RealEarthAnimate
  */
-var RealEarthAnimateTile = (function (_super) {
+var RealEarthAnimateTile = /** @class */ (function (_super) {
     __extends(RealEarthAnimateTile, _super);
     function RealEarthAnimateTile(layer, loadCallback) {
         var _this = _super.call(this, layer, loadCallback) || this;

@@ -8,7 +8,7 @@ var nm = provide_1.default('olHelpers');
 /**
  * take an array of features and sort by a given property name
  */
-var SortedFeatures = (function () {
+var SortedFeatures = /** @class */ (function () {
     /**
      *
      * @param {Array<ol.Feature>} features array of ol features

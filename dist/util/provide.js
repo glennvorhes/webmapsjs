@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 12/10/2015.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * create a namespace on the gv object

@@ -13,7 +13,7 @@ function stringToDate(dte: string|Date){
     if ((dte as Date).getTime){
         return dte as Date;
     } else {
-        return new Date(dte);
+        return new Date(dte as string);
     }
 }
 
@@ -63,7 +63,8 @@ export class DateRange extends React.Component<iDateRange, null> {
         }
 
         this.end.setHours(0, 0, 0);
-        this.start = new Date(this.end);
+
+        this.start = new Date(this.end.getTime());
         this.start.setDate(this.start.getDate() - this.maxRange);
         this.setNumDays();
     }
@@ -126,15 +127,15 @@ export class DateRange extends React.Component<iDateRange, null> {
 
     private setStart(s: Date) {
 
-        this.previousStart = new Date(this.start);
-        this.previousEnd = new Date(this.end);
+        this.previousStart = new Date(this.start.getTime());
+        this.previousEnd = new Date(this.end.getTime());
 
         this.start = s;
 
         this.setNumDays();
 
         if (this.needReset) {
-            this.end = new Date(this.start);
+            this.end = new Date(this.start.getTime());
 
             if (this.numDays > this.maxRange) {
                 this.end.setDate(this.end.getDate() + this.maxRange);
@@ -150,14 +151,14 @@ export class DateRange extends React.Component<iDateRange, null> {
     }
 
     private setEnd(s: Date) {
-        this.previousStart = new Date(this.start);
-        this.previousEnd = new Date(this.end);
+        this.previousStart = new Date(this.start.getTime());
+        this.previousEnd = new Date(this.end.getTime());
 
         this.end = s;
         this.setNumDays();
 
         if (this.needReset) {
-            this.start = new Date(this.end);
+            this.start = new Date(this.end.getTime());
 
             if (this.numDays > this.maxRange) {
                 this.start.setDate(this.start.getDate() - this.maxRange);

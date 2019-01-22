@@ -21,7 +21,7 @@ var nm = provide_1.default('layers');
  * XYZ tile
  * @augments LayerBase
  */
-var LayerBaseXyzTile = (function (_super) {
+var LayerBaseXyzTile = /** @class */ (function (_super) {
     __extends(LayerBaseXyzTile, _super);
     /**
      * The XYZ tile layer

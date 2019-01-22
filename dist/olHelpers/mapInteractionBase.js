@@ -8,7 +8,7 @@ var nm = provide_1.default('olHelpers');
 /**
  * base interaction
  */
-var MapInteractionBase = (function () {
+var MapInteractionBase = /** @class */ (function () {
     /**
      * map interaction base
      * @param subtype - the interaction subtype

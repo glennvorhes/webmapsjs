@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 12/18/2015.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ItsLayerCollection_1 = require("../../collections/ItsLayerCollection");
 var LayerLegend_1 = require("../../collections/LayerLegend");

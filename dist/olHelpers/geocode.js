@@ -7,7 +7,7 @@ var projections_1 = require("./projections");
 var invalidClass = 'geocoder-invalid';
 var geocoderLoadingClass = 'geocoder-loading';
 // let testAddress = '65 7th Street, Prairie du Sac, WI';
-var Geocode = (function () {
+var Geocode = /** @class */ (function () {
     function Geocode(mapDiv, map) {
         var _this = this;
         var inputGuid = makeGuid_1.makeGuid();

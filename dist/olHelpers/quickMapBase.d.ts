@@ -1,3 +1,6 @@
+/**
+ * Created by gavorhes on 12/15/2015.
+ */
 import ol = require('custom-ol');
 export interface quickMapOptions {
     divId?: string;

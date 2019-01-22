@@ -21,7 +21,7 @@ var nm = provide_1.default('layers');
  * @augments LayerBase
  * @abstract
  */
-var LayerBaseVector = (function (_super) {
+var LayerBaseVector = /** @class */ (function (_super) {
     __extends(LayerBaseVector, _super);
     /**
      * The base vector layer

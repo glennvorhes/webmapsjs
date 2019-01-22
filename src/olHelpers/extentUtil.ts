@@ -63,7 +63,7 @@ export function fitToMap(layers: ol.layer.Vector[]|LayerBaseVector[], mp: ol.Map
         return;
     }
     
-    mp.getView().fit(ext as ol.Extent, mp.getSize());
+    mp.getView().fit(ext as ol.Extent, {size: mp.getSize()});
     
     if (typeof zoomOut == 'number'){
         mp.getView().setZoom(mp.getView().getZoom() - zoomOut);

@@ -1,3 +1,6 @@
+/**
+ * Created by gavorhes on 12/14/2015.
+ */
 import ol = require('custom-ol');
 /**
  * A style function based on properties and zoom level, wraps normal feature, resolution function

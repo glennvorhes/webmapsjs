@@ -1,7 +1,7 @@
-/// <reference types="react" />
 /**
  * Created by glenn on 7/6/2017.
  */
+/// <reference types="react" />
 import { React } from './reactAndRedux';
 export interface iSlider {
     change: (d: number) => any;

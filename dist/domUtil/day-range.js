@@ -4,7 +4,7 @@ var provide_1 = require("../util/provide");
 var $ = require("jquery");
 require("jquery-ui");
 var nm = provide_1.default('domUtil');
-var DayRange = (function () {
+var DayRange = /** @class */ (function () {
     /**
      * constructor for the date range
      * @param {number} dayRange number of days

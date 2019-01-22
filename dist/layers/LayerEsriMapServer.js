@@ -52,7 +52,7 @@ exports.localCacheUrl = localCacheUrl;
  * esri mapserver layer
  * @augments LayerBase
  */
-var LayerEsriMapServer = (function (_super) {
+var LayerEsriMapServer = /** @class */ (function (_super) {
     __extends(LayerEsriMapServer, _super);
     /**
      * The base layer for all others

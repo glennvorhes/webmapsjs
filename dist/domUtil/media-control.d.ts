@@ -1,3 +1,6 @@
+/**
+ * Created by gavorhes on 11/2/2015.
+ */
 /// <reference types="jquery" />
 /// <reference types="jqueryui" />
 export interface changeFunction {

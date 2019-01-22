@@ -1,3 +1,6 @@
+/**
+ * Created by glenn on 6/13/2017.
+ */
 export declare const emptyGeometry: {
     geom: {
         crs: {

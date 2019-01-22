@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by glenn on 6/12/2017.
  */
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -26,7 +26,7 @@ function stringToDate(dte) {
         return new Date(dte);
     }
 }
-var DateRange = (function (_super) {
+var DateRange = /** @class */ (function (_super) {
     __extends(DateRange, _super);
     function DateRange(props, context) {
         var _this = _super.call(this, props, context) || this;
@@ -45,7 +45,7 @@ var DateRange = (function (_super) {
             _this.end = new Date();
         }
         _this.end.setHours(0, 0, 0);
-        _this.start = new Date(_this.end);
+        _this.start = new Date(_this.end.getTime());
         _this.start.setDate(_this.start.getDate() - _this.maxRange);
         _this.setNumDays();
         return _this;
@@ -106,12 +106,12 @@ var DateRange = (function (_super) {
         this.props.callback(this.start, this.end, this.version);
     };
     DateRange.prototype.setStart = function (s) {
-        this.previousStart = new Date(this.start);
-        this.previousEnd = new Date(this.end);
+        this.previousStart = new Date(this.start.getTime());
+        this.previousEnd = new Date(this.end.getTime());
         this.start = s;
         this.setNumDays();
         if (this.needReset) {
-            this.end = new Date(this.start);
+            this.end = new Date(this.start.getTime());
             if (this.numDays > this.maxRange) {
                 this.end.setDate(this.end.getDate() + this.maxRange);
             }
@@ -124,12 +124,12 @@ var DateRange = (function (_super) {
         this.finalizeChange();
     };
     DateRange.prototype.setEnd = function (s) {
-        this.previousStart = new Date(this.start);
-        this.previousEnd = new Date(this.end);
+        this.previousStart = new Date(this.start.getTime());
+        this.previousEnd = new Date(this.end.getTime());
         this.end = s;
         this.setNumDays();
         if (this.needReset) {
-            this.start = new Date(this.end);
+            this.start = new Date(this.end.getTime());
             if (this.numDays > this.maxRange) {
                 this.start.setDate(this.start.getDate() - this.maxRange);
             }

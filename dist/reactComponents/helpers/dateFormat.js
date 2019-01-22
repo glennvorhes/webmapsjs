@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by glenn on 6/13/2017.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function stringToDate(dateStr) {
     var parts = dateStr.split('/');

@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 11/3/2015.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var mapPopupCls_1 = require("./mapPopupCls");
 /**

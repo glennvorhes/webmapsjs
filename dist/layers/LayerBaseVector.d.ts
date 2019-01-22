@@ -115,9 +115,9 @@ export declare class LayerBaseVector extends LayerBase {
      * get the style definition
      */
     /**
-     * set the style
-     * @param style - the style or function
-     */
+    * set the style
+    * @param style - the style or function
+    */
     style: ol.StyleFunction | Array<ol.style.Style> | ol.style.Style;
     /**
      * get the map CRS if it is defined by the map move object
@@ -135,10 +135,10 @@ export declare class LayerBaseVector extends LayerBase {
      */
     readonly mapMoveParams: any;
     /**
-     * Set the layer visibility
-     * @type {boolean}
-     * @override
-     */
+    * Set the layer visibility
+    * @type {boolean}
+    * @override
+    */
     visible: boolean;
     /**
      * get the layer vector source

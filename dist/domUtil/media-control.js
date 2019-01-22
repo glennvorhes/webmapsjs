@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 11/2/2015.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = require("../util/provide");
 var range_change_1 = require("./range-change");
@@ -19,7 +19,7 @@ function timeToLocalDateString(tm) {
     p2 = p2.slice(0, 2);
     return d.toLocaleDateString() + '<br>' + p2.join(':') + ' ' + p1[1];
 }
-var MediaControl = (function () {
+var MediaControl = /** @class */ (function () {
     /**
      *
      * @param element

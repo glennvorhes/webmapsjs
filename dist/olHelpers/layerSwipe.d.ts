@@ -1,3 +1,6 @@
+/**
+ * Created by gavorhes on 6/1/2016.
+ */
 /// <reference types="jquery" />
 /// <reference types="jqueryui" />
 import { LayerBase } from "../layers/LayerBase";

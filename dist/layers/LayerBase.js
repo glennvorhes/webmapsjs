@@ -9,7 +9,7 @@ var nm = provide_1.default('layers');
  * The base layer class
  * @abstract
  */
-var LayerBase = (function () {
+var LayerBase = /** @class */ (function () {
     /**
      * The base layer for all others
      * @param {string} url - url for source

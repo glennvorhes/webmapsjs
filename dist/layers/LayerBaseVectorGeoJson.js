@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 11/2/2015.
  */
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -24,7 +24,7 @@ var nm = provide_1.default('layers');
  * The Vector GeoJson Layer
  * @augments LayerBaseVector
  */
-var LayerBaseVectorGeoJson = (function (_super) {
+var LayerBaseVectorGeoJson = /** @class */ (function (_super) {
     __extends(LayerBaseVectorGeoJson, _super);
     /**
      * @param {string|null} url - resource url, set to '' to make blank layer

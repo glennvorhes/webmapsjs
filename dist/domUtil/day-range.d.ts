@@ -15,9 +15,9 @@ export declare class DayRange {
      */
     constructor(jQueryRef: JQuery, dayRange: number);
     /**
-     *
-     * @param val
-     */
+    *
+    * @param val
+    */
     startDate: Date;
     endDate: Date;
 }

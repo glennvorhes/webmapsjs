@@ -1,12 +1,12 @@
+"use strict";
 /**
  * Created by gavorhes on 12/10/2015.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = require("../util/provide");
 var $ = require("jquery");
 var nm = provide_1.default('collections');
-var TipPresets = (function () {
+var TipPresets = /** @class */ (function () {
     function TipPresets(conf) {
         this.label = conf.label;
         this.presets = conf.presets;
@@ -22,7 +22,7 @@ var TipPresets = (function () {
     }
     return TipPresets;
 }());
-var _Slider = (function () {
+var _Slider = /** @class */ (function () {
     /**
      * Slider constructor
      * @param sliderConfig - the configuration
@@ -219,7 +219,7 @@ nm._Slider = _Slider;
 /**
  * class to keep track of the sliders
  */
-var TipSliders = (function () {
+var TipSliders = /** @class */ (function () {
     /**
      *
      * @param sliderConfigs

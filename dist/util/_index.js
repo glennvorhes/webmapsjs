@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 9/22/2016.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var checkDefinedf = require("./checkDefined");
 var checkDefined;

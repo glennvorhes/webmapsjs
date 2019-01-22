@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 12/18/2015.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var quickMap_1 = require("../../olHelpers/quickMap");
 var LayerBaseVectorGeoJson_1 = require("../../layers/LayerBaseVectorGeoJson");

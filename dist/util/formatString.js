@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by gavorhes on 10/30/2015.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 if (!String.prototype.format) {
     /**

@@ -41,7 +41,7 @@ function htmlEscape(str) {
         .replace(/>/g, '&gt;');
 }
 nm.htmlEscape = htmlEscape;
-var CommonSymbol = (function () {
+var CommonSymbol = /** @class */ (function () {
     /**
      *
      * @param symbolObj
@@ -55,7 +55,7 @@ var CommonSymbol = (function () {
     }
     return CommonSymbol;
 }());
-var PointSymbol = (function (_super) {
+var PointSymbol = /** @class */ (function (_super) {
     __extends(PointSymbol, _super);
     function PointSymbol(symbolObj, opacity) {
         var _this = _super.call(this, symbolObj, opacity) || this;
@@ -90,7 +90,7 @@ var PointSymbol = (function (_super) {
     }
     return PointSymbol;
 }(CommonSymbol));
-var LineSymbol = (function (_super) {
+var LineSymbol = /** @class */ (function (_super) {
     __extends(LineSymbol, _super);
     function LineSymbol(symbolObj, opacity) {
         var _this = _super.call(this, symbolObj, opacity) || this;
@@ -123,7 +123,7 @@ var LineSymbol = (function (_super) {
     }
     return LineSymbol;
 }(CommonSymbol));
-var PolygonSymbol = (function (_super) {
+var PolygonSymbol = /** @class */ (function (_super) {
     __extends(PolygonSymbol, _super);
     function PolygonSymbol(symbolObj, opacity) {
         var _this = _super.call(this, symbolObj, opacity) || this;
@@ -161,7 +161,7 @@ var PolygonSymbol = (function (_super) {
     }
     return PolygonSymbol;
 }(CommonSymbol));
-var SymbolGenerator = (function () {
+var SymbolGenerator = /** @class */ (function () {
     function SymbolGenerator(esriResponse) {
         this.opacity = (100 - (esriResponse['drawingInfo']['transparency'] || 0)) / 100;
         this.renderer = esriResponse.drawingInfo.renderer;
@@ -170,7 +170,7 @@ var SymbolGenerator = (function () {
     }
     return SymbolGenerator;
 }());
-var SingleSymbol = (function (_super) {
+var SingleSymbol = /** @class */ (function (_super) {
     __extends(SingleSymbol, _super);
     /**
      *
@@ -187,7 +187,7 @@ var SingleSymbol = (function (_super) {
     }
     return SingleSymbol;
 }(SymbolGenerator));
-var UniqueValueSymbol = (function (_super) {
+var UniqueValueSymbol = /** @class */ (function (_super) {
     __extends(UniqueValueSymbol, _super);
     /**
      *

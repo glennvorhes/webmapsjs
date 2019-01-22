@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by glenn on 6/12/2017.
  */
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -19,7 +19,7 @@ var LayerBaseVectorGeoJson_1 = require("../layers/LayerBaseVectorGeoJson");
 var projections_1 = require("../olHelpers/projections");
 var makeGuid_1 = require("../util/makeGuid");
 var get_map_1 = require("./helpers/get_map");
-var SelectArea = (function (_super) {
+var SelectArea = /** @class */ (function (_super) {
     __extends(SelectArea, _super);
     function SelectArea(props, context) {
         var _this = _super.call(this, props, context) || this;

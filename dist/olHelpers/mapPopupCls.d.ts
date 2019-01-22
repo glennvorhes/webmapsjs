@@ -1,8 +1,8 @@
-/// <reference types="jquery" />
-/// <reference types="jqueryui" />
 /**
  * Created by gavorhes on 11/3/2015.
  */
+/// <reference types="jquery" />
+/// <reference types="jqueryui" />
 import MapInteractionBase from './mapInteractionBase';
 import ol = require('custom-ol');
 import { LayerBaseVector } from "../layers/LayerBaseVector";
@@ -146,7 +146,7 @@ export declare class MapPopupCls extends MapInteractionBase {
      * @param {object|function} [selectionStyle.olStyle=undefined] an openlayers style object or function
      * @returns {object} a reference to the ol selection layer
      */
-    addMapServicePopup(lyr: LayerEsriMapServer, selectionStyle?: ol.style.Style | Array<ol.style.Style> | ol.StyleFunction): ol.layer.Vector;
+    addMapServicePopup(lyr: LayerEsriMapServer, selectionStyle?: ol.style.Style | ol.style.Style[]): ol.layer.Vector;
     clearSelection(): void;
     /**
      * Add a function to be called when the map is clicked but before any popups are implemented

@@ -1,7 +1,7 @@
-/// <reference types="react" />
 /**
  * Created by glenn on 6/14/2017.
  */
+/// <reference types="react" />
 import { React } from './reactAndRedux';
 import 'jquery-ui';
 export interface iDatePick {

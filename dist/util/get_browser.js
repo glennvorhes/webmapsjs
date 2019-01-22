@@ -1,8 +1,8 @@
+"use strict";
 /**
  * get the browser name and version
  * @returns {{name: string; version: string}}
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function get_browser() {
     var ua = navigator.userAgent, tem, M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];

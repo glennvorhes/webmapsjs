@@ -16,7 +16,7 @@ var offsetMinutes = (new Date()).getTimezoneOffset();
  * Mixin to get the product times
  * Be sure to call getTimeInit after the mixin has been applied
  */
-var RealEarthAnimate = (function () {
+var RealEarthAnimate = /** @class */ (function () {
     function RealEarthAnimate(lyr, loadCallback) {
         this.lyr = lyr;
         this._products = lyr._products;

@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by glenn on 7/6/2017.
  */
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -24,7 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var reactAndRedux_1 = require("./reactAndRedux");
 var makeGuid_1 = require("../util/makeGuid");
 var get_browser_1 = require("../util/get_browser");
-var Slider = (function (_super) {
+var Slider = /** @class */ (function (_super) {
     __extends(Slider, _super);
     function Slider(props, context) {
         var _this = _super.call(this, props, context) || this;

@@ -404,7 +404,7 @@ export class MapPopupCls extends MapInteractionBase {
         this._checkInit();
         this._popupOpen = false;
         this._popupOverlay.setPosition(undefined);
-        this._$popupCloser[0].blur();
+        (this._$popupCloser[0] as HTMLSpanElement).blur();
         this.clearSelection();
         this._$popupContent.html('');
 
@@ -523,12 +523,13 @@ export class MapPopupCls extends MapInteractionBase {
      * @param {object|function} [selectionStyle.olStyle=undefined] an openlayers style object or function
      * @returns {object} a reference to the ol selection layer
      */
-    addMapServicePopup(lyr: LayerEsriMapServer, selectionStyle?: ol.style.Style|Array<ol.style.Style>|ol.StyleFunction) {
-        let selectionLayer = this._addPopupLayer(lyr, selectionStyle);
+    addMapServicePopup(lyr: LayerEsriMapServer, selectionStyle?: ol.style.Style|ol.style.Style[]) {
+        let selectionLayer = this._addPopupLayer(lyr, {olStyle: (selectionStyle as ol.style.Style)});
         this._esriMapServiceLayers.push(lyr);
 
         return selectionLayer;
     }
+
 
     clearSelection() {
         this._checkInit();

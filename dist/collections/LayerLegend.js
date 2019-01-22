@@ -1,14 +1,14 @@
+"use strict";
 /**
  * Created by gavorhes on 12/16/2015.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var provide_1 = require("../util/provide");
 var makeGuid_1 = require("../util/makeGuid");
 var mapMove_1 = require("../olHelpers/mapMove");
 var nm = provide_1.default('collections');
 var $ = require("jquery");
-var LayerGroup = (function () {
+var LayerGroup = /** @class */ (function () {
     /**
      *
      * @param {object} [groupConfig={}] - group configuration object
@@ -164,7 +164,7 @@ var LayerGroup = (function () {
 /**
  * a wrapper to make a legend
  */
-var LayerLegend = (function () {
+var LayerLegend = /** @class */ (function () {
     /**``
      *
      * @param {Array} legendItems array of layers or objects with {groupName:  {string}, collapse: {boolean}, addCheck: {boolean}, items: {Array}}
