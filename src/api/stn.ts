@@ -250,20 +250,63 @@ export function getStnSegmentByMiles(
 }
 
 export function getStnYears(
-    callback: (d: {years: number[]}) => any = (d: {years: number[]}) => {
+    callback: (d: { years: number[] }) => any = (d: { years: number[] }) => {
         console.log(d);
     },
     error: (e: iError) => any = (e) => {
         console.log(e);
     }) {
 
-    ajx.get(stnApiUrl + '/years', (d: {years: number[]}) => {
+    ajx.get(stnApiUrl + '/years', (d: { years: number[] }) => {
             if (d['error']) {
                 error(d as iError)
             } else {
                 callback(d)
             }
         },
+        {},
+        error
+    );
+}
+
+export interface iRouteGeom {
+    type: string,
+    crs: {
+        type: string
+        properties: {
+            name: string
+        }
+    },
+    features: {
+        type: string,
+        properties: {
+            rdwyLinkId: number,
+            rdwyRteId: number,
+            year: number
+        },
+        geometry: {
+            type: string,
+            coordinates: [number, number][]
+        }
+    }[]
+}
+
+export function getRouteGeom(year: number, route: number,
+                             callback: (d: iRouteGeom) => any = (d: iRouteGeom) => {
+                                 console.log(d);
+                             },
+                             error: (e: iError) => any = (e) => {
+                                 console.log(e);
+                             }) {
+
+    ajx.get(stnApiUrl + '/route', (d: iRouteGeom) => {
+            if (d['error']) {
+                error(d as iError)
+            } else {
+                callback(d)
+            }
+        },
+        {year: year, route: route},
         error
     );
 }

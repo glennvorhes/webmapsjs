@@ -115,3 +115,25 @@ export declare function getStnSegmentByMiles(yr: number, routeId: number, startM
 export declare function getStnYears(callback?: (d: {
     years: number[];
 }) => any, error?: (e: iError) => any): void;
+export interface iRouteGeom {
+    type: string;
+    crs: {
+        type: string;
+        properties: {
+            name: string;
+        };
+    };
+    features: {
+        type: string;
+        properties: {
+            rdwyLinkId: number;
+            rdwyRteId: number;
+            year: number;
+        };
+        geometry: {
+            type: string;
+            coordinates: [number, number][];
+        };
+    }[];
+}
+export declare function getRouteGeom(year: number, route: number, callback?: (d: iRouteGeom) => any, error?: (e: iError) => any): void;

@@ -151,7 +151,24 @@ function getStnYears(callback, error) {
         else {
             callback(d);
         }
-    }, error);
+    }, {}, error);
 }
 exports.getStnYears = getStnYears;
+function getRouteGeom(year, route, callback, error) {
+    if (callback === void 0) { callback = function (d) {
+        console.log(d);
+    }; }
+    if (error === void 0) { error = function (e) {
+        console.log(e);
+    }; }
+    ajx.get(exports.stnApiUrl + '/route', function (d) {
+        if (d['error']) {
+            error(d);
+        }
+        else {
+            callback(d);
+        }
+    }, { year: year, route: route }, error);
+}
+exports.getRouteGeom = getRouteGeom;
 //# sourceMappingURL=stn.js.map
