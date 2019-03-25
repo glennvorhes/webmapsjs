@@ -32,6 +32,7 @@ function quickMapBase(options) {
     options.baseSwitcher = typeof options.baseSwitcher == 'boolean' ? options.baseSwitcher : true;
     options.fullScreen = typeof options.fullScreen == 'boolean' ? options.fullScreen : false;
     options.addGeocode = options.addGeocode || false;
+    options.addOsm = typeof options.addOsm === 'undefined' ? true : options.addOsm;
     var $mapDiv = $('#' + options.divId);
     $mapDiv.css('position', 'relative');
     var osmLayer = new ol.layer.Tile({ source: new ol.source.OSM() });
@@ -78,11 +79,14 @@ function quickMapBase(options) {
         maxZoom: options.maxZoom
     });
     var map = new ol.Map({
-        layers: [osmLayer],
+        layers: [],
         target: options.divId,
         controls: controls,
         view: view
     });
+    if (options.addOsm) {
+        map.addLayer(osmLayer);
+    }
     if (options.fullScreen) {
         map.addControl(new ol.control.FullScreen({}));
     }

@@ -29,6 +29,7 @@
     "@types/jqueryui": "^1.11.32",
     "@types/react": "^15.0.15",
     "@types/react-dom": "^0.14.23",
+    "custom-ol": "github:glennvorhes/custom-ol",
     "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",
     "jquery": "^3.1.1",
@@ -42,13 +43,13 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-typescript": "monounity/karma-typescript",
     "karma-webpack": "^2.0.2",
+    "ol": "^5.3.1",
     "phantomjs-prebuilt": "^2.1.14",
     "source-map-loader": "^0.2.0",
     "ts-loader": "^2.0.1",
     "ts-node": "^2.1.0",
     "typescript": "^2.2.1",
-    "webpack": "^2.2.1",
-    "custom-ol": "github:glennvorhes/custom-ol"
+    "webpack": "^2.2.1"
   },
   "repository": {
     "type": "git",

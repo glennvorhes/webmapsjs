@@ -17,6 +17,7 @@ export interface quickMapOptions {
     baseSwitcher?: boolean;
     fullScreen?: boolean;
     addGeocode?: boolean;
+    addOsm?: boolean
 }
 
 /**
@@ -42,6 +43,7 @@ export function quickMapBase(options: quickMapOptions = {}): ol.Map {
     options.baseSwitcher = typeof options.baseSwitcher == 'boolean' ? options.baseSwitcher : true;
     options.fullScreen = typeof options.fullScreen == 'boolean' ? options.fullScreen : false;
     options.addGeocode = options.addGeocode || false;
+    options.addOsm = typeof options.addOsm === 'undefined' ? true : options.addOsm;
 
 
     let $mapDiv = $('#' + options.divId);
@@ -100,11 +102,15 @@ export function quickMapBase(options: quickMapOptions = {}): ol.Map {
     });
 
     let map = new ol.Map({
-        layers: [osmLayer],
+        layers: [],
         target: options.divId,
         controls: controls,
         view: view
     });
+
+    if (options.addOsm){
+        map.addLayer(osmLayer)
+    }
 
     if (options.fullScreen) {
         map.addControl(new ol.control.FullScreen({}));

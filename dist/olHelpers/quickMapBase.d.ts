@@ -14,6 +14,7 @@ export interface quickMapOptions {
     baseSwitcher?: boolean;
     fullScreen?: boolean;
     addGeocode?: boolean;
+    addOsm?: boolean;
 }
 /**
  * Sets up a map with some default parameters and initializes
