@@ -6,6 +6,7 @@
     "declaration": true,
 //    "maxNodeModuleJsDepth": 5,
 //    "allowJs": true,
+    "watch": true,
     "baseUrl": "./",
     "module": "commonjs",
     "target": "es5",
@@ -15,11 +16,11 @@
     "noEmitOnError": true,
     "rootDir": "./src",
     "outDir": "./dist",
-    "noImplicitAny": false,
-    "paths": {
-      "ol": ["./node_modules/ol/src"],
-      "ol/*": ["./node_modules/ol/src/*"]
-    }
+    "noImplicitAny": false
+//    "paths": {
+//      "ol": ["./node_modules/ol/src"],
+//      "ol/*": ["./node_modules/ol/src/*"]
+//    }
   },
 //  "files": [
 //    "./src/layers/LayerBase.ts",

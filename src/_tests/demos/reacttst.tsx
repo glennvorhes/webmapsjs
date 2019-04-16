@@ -10,14 +10,13 @@ import * as s from './reacttst_store'
 import {set} from "d3-collection";
 
 
-class Demo extends React.Component<null, null> {
-
+class Demo extends React.Component<{}, null> {
 
     render() {
         return <div>
             <h1>Date Pick</h1>
             <DatePick label={'Date Picker'} change={(v) => {
-                console.log(v)
+                console.log(v);
             }}/>
             <h1>Date Pick Connected</h1>
             <DatePickConnected/>

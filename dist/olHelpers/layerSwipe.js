@@ -13,8 +13,8 @@ var LayerSwipe = /** @class */ (function () {
      * @param {string} [sliderContent=''] - additional html to be added inside the slider div
      */
     function LayerSwipe(map, sliderContent) {
-        if (sliderContent === void 0) { sliderContent = ''; }
         var _this = this;
+        if (sliderContent === void 0) { sliderContent = ''; }
         sliderContent = sliderContent || '';
         /**
          *

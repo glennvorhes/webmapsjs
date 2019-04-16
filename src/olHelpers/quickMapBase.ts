@@ -103,10 +103,10 @@ export function quickMapBase(options: quickMapOptions = {}): Map {
         options.center.y = coordinates[1];
     }
 
-    const controls = control.defaults({
-            attributionOptions: {collapsible: false}
-        }
-    );
+    // const controls = control.defaults({
+    //         attributionOptions: {collapsible: false}
+    //     }
+    // );
 
     const view = new View({
         center: [options.center.x, options.center.y],
@@ -118,7 +118,7 @@ export function quickMapBase(options: quickMapOptions = {}): Map {
     let map = new Map({
         layers: [],
         target: options.divId,
-        controls: controls,
+        // controls: controls,
         view: view
     });
 
@@ -131,7 +131,7 @@ export function quickMapBase(options: quickMapOptions = {}): Map {
     }
 
     if (options.addGeocode){
-        new Geocode(document.getElementById(options.divId) as HTMLDivElement, map);
+        // new Geocode(document.getElementById(options.divId) as HTMLDivElement, map);
     }
 
     return map;

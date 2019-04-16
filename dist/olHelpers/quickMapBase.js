@@ -10,12 +10,10 @@ var OSM_1 = require("ol/source/OSM");
 var Point_1 = require("ol/geom/Point");
 var Projection_1 = require("ol/proj/Projection");
 var View_1 = require("ol/View");
-var control_1 = require("ol/control");
 var Fullscreen_1 = require("ol/control/Fullscreen");
 var proj = require("ol/proj");
 // import ol = require('custom-ol');
 var $ = require("jquery");
-var geocode_1 = require("./geocode");
 var nm = provide_1.default('olHelpers');
 /**
  * Sets up a map with some default parameters and initializes
@@ -80,9 +78,10 @@ function quickMapBase(options) {
         options.center.x = coordinates[0];
         options.center.y = coordinates[1];
     }
-    var controls = control_1.default.defaults({
-        attributionOptions: { collapsible: false }
-    });
+    // const controls = control.defaults({
+    //         attributionOptions: {collapsible: false}
+    //     }
+    // );
     var view = new View_1.default({
         center: [options.center.x, options.center.y],
         zoom: options.zoom,
@@ -92,7 +91,7 @@ function quickMapBase(options) {
     var map = new Map_1.default({
         layers: [],
         target: options.divId,
-        controls: controls,
+        // controls: controls,
         view: view
     });
     if (options.addOsm) {
@@ -102,7 +101,7 @@ function quickMapBase(options) {
         map.addControl(new Fullscreen_1.default({}));
     }
     if (options.addGeocode) {
-        new geocode_1.Geocode(document.getElementById(options.divId), map);
+        // new Geocode(document.getElementById(options.divId) as HTMLDivElement, map);
     }
     return map;
 }

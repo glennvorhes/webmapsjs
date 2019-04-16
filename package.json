@@ -17,7 +17,7 @@
     "typedoc": "RD /S /Q doc & typedoc --excludePrivate --mode file --out doc src",
     "webpack": "node_modules\\.bin\\webpack -w",
     "webpack-prod": "node_modules\\.bin\\webpack -p -w",
-    "tsc": "RD /S /Q dist & tsc -d -w",
+    "tsc": "RD /S /Q dist & tsc",
     "karma": "node_modules\\.bin\\karma start"
   },
   "author": "TOPS Lab",
@@ -44,9 +44,7 @@
     "phantomjs-prebuilt": "^2.1.14",
     "source-map-loader": "^0.2.0",
     "ts-loader": "^2.0.1",
-    "ts-node": "^2.1.0",
-    "typescript": "^2.2.1",
-    "webpack": "^2.2.1"
+    "ts-node": "^2.1.0"
   },
   "repository": {
     "type": "git",
@@ -61,6 +59,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "typescript": "^3.4.3"
   }
 }
