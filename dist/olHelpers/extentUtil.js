@@ -5,11 +5,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var provide_1 = require("../util/provide");
 var nm = provide_1.default('util');
-/**
- *
- * @param {Array<LayerBaseVector>|Array<ol.layer.Vector>|LayerBaseVector|ol.layer.Vector|*} layers - array of layers or single
- * @returns {ol.Extent|Array<number>|*} - collective extent
- */
 function calculateExtent(layers) {
     "use strict";
     var hasExtent = false;

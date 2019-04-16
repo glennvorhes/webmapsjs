@@ -17,8 +17,10 @@ var LayerBase_1 = require("./LayerBase");
 var esriToOl = require("../olHelpers/esriToOlStyle");
 var mapPopup_1 = require("../olHelpers/mapPopup");
 var provide_1 = require("../util/provide");
-var ol = require("custom-ol");
 var $ = require("jquery");
+var EsriJSON_1 = require("ol/format/EsriJSON");
+var TileArcGISRest_1 = require("ol/source/TileArcGISRest");
+var Tile_1 = require("ol/layer/Tile");
 var nm = provide_1.default('layers');
 /**
  * Helper to return the url to the service on the production server
@@ -76,12 +78,12 @@ var LayerEsriMapServer = /** @class */ (function (_super) {
     function LayerEsriMapServer(url, options) {
         if (options === void 0) { options = {}; }
         var _this = _super.call(this, url, options) || this;
-        _this._source = new ol.source.TileArcGISRest({
+        _this._source = new TileArcGISRest_1.default({
             url: _this.url == '' ? undefined : _this.url,
             params: typeof options.showLayers == 'undefined' ? undefined : { layers: 'show:' + options.showLayers.join(',') }
         });
         _this._showLayers = options.showLayers || [];
-        _this._olLayer = new ol.layer.Tile({
+        _this._olLayer = new Tile_1.default({
             source: _this._source,
             visible: _this.visible,
             opacity: _this.opacity,
@@ -90,7 +92,7 @@ var LayerEsriMapServer = /** @class */ (function (_super) {
         });
         _this._olLayer.setZIndex(_this._zIndex);
         options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
-        _this._esriFormat = new ol.format.EsriJSON();
+        _this._esriFormat = new EsriJSON_1.default();
         _this._popupRequest = null;
         options.getLegend = typeof options.getLegend === 'boolean' ? options.getLegend : true;
         if (options.getLegend) {
@@ -156,10 +158,6 @@ var LayerEsriMapServer = /** @class */ (function (_super) {
         });
     };
     Object.defineProperty(LayerEsriMapServer.prototype, "source", {
-        /**
-         *
-         * @returns {ol.source.TileArcGISRest} the vector source
-         */
         get: function () {
             return _super.prototype.getSource.call(this);
         },
@@ -167,10 +165,6 @@ var LayerEsriMapServer = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(LayerEsriMapServer.prototype, "olLayer", {
-        /**
-         *
-         * @returns the ol layer
-         */
         get: function () {
             return _super.prototype.getOlLayer.call(this);
         },

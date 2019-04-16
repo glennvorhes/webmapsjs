@@ -15,8 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var LayerBase_1 = require("./LayerBase");
 var provide_1 = require("../util/provide");
-var ol = require("custom-ol");
 var nm = provide_1.default('layers');
+var XYZ_1 = require("ol/source/XYZ");
+var Tile_1 = require("ol/layer/Tile");
 /**
  * XYZ tile
  * @augments LayerBase
@@ -44,8 +45,8 @@ var LayerBaseXyzTile = /** @class */ (function (_super) {
     function LayerBaseXyzTile(url, options) {
         if (options === void 0) { options = {}; }
         var _this = _super.call(this, url, options) || this;
-        _this._source = new ol.source.XYZ({ url: _this.url == '' ? undefined : _this.url });
-        _this._olLayer = new ol.layer.Tile({
+        _this._source = new XYZ_1.default({ url: _this.url == '' ? undefined : _this.url });
+        _this._olLayer = new Tile_1.default({
             source: _this._source,
             visible: _this.visible,
             opacity: _this.opacity,
@@ -56,10 +57,6 @@ var LayerBaseXyzTile = /** @class */ (function (_super) {
         return _this;
     }
     Object.defineProperty(LayerBaseXyzTile.prototype, "source", {
-        /**
-         *
-         * @returns {ol.source.XYZ} the vector source
-         */
         get: function () {
             return this._source;
         },
@@ -67,10 +64,6 @@ var LayerBaseXyzTile = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(LayerBaseXyzTile.prototype, "olLayer", {
-        /**
-         *
-         * @returns {ol.layer.Tile|ol.layer.Base|undefined} the ol layer
-         */
         get: function () {
             return this._olLayer;
         },

@@ -1,24 +1,24 @@
-import ol = require('custom-ol');
+import Feature from 'ol/Feature';
 /**
  * take an array of features and sort by a given property name
  */
 export declare class SortedFeatures {
-    sortedFeatures: Array<ol.Feature>;
+    sortedFeatures: Array<Feature>;
     propertyName: string;
     _propertyType: string;
     /**
      *
-     * @param {Array<ol.Feature>} features array of ol features
+     * @param {Array<Feature>} features array of ol features
      * @param {string} propertyName - the property name to use for lookup
      */
-    constructor(features: ol.Feature[], propertyName: string);
+    constructor(features: Feature[], propertyName: string);
     /**
      * recursive search to find the value
      * @param {number|string} propertyValue - the property value to search for
      * @param {boolean} [exactMatch=false] if only an exact match should be returned
      * @param {Array} [sortedFeatures=this.sortedFeatures] - the candidate features
-     * @returns {ol.Feature|undefined} the feature matching the lookup
+     * @returns {Feature|undefined} the feature matching the lookup
      */
-    getFeature(propertyValue: number | string, exactMatch?: boolean, sortedFeatures?: Array<ol.Feature>): ol.Feature;
+    getFeature(propertyValue: number | string, exactMatch?: boolean, sortedFeatures?: Array<Feature>): Feature;
 }
 export default SortedFeatures;

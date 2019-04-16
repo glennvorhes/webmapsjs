@@ -2,11 +2,12 @@
  * Created by gavorhes on 12/15/2015.
  */
 
+import Map from 'ol/Map'
+
 import {quickMapBase, quickMapOptions} from './quickMapBase';
 import provide from '../util/provide';
 import MapMoveCls from './mapMoveCls';
 import MapPopupCls from './mapPopupCls';
-import ol = require('custom-ol');
 let nm = provide('olHelpers');
 
 
@@ -33,7 +34,7 @@ let nm = provide('olHelpers');
  * @param {boolean} [options.fullScreen=false] if add base map switcher
  * @returns return object with map, map move, and map popup objects
  */
-function quickMapMulti(options: quickMapOptions): {map: ol.Map, mapMove: MapMoveCls, mapPopup: MapPopupCls} {
+function quickMapMulti(options: quickMapOptions): {map: Map, mapMove: MapMoveCls, mapPopup: MapPopupCls} {
     let m = quickMapBase(options);
     let mov = new MapMoveCls();
     let pop = new MapPopupCls();

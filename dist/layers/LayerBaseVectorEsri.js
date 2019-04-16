@@ -16,9 +16,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var LayerBaseVector_1 = require("./LayerBaseVector");
 var esriToOl = require("../olHelpers/esriToOlStyle");
 var provide_1 = require("../util/provide");
-var ol = require("custom-ol");
 var $ = require("jquery");
 var nm = provide_1.default('layers');
+var EsriJSON_1 = require("ol/format/EsriJSON");
 /**
  * Helper to return the url to the service on the production server
  * @param {string} folder
@@ -78,7 +78,7 @@ var LayerBaseVectorEsri = /** @class */ (function (_super) {
         options.params['outSR'] = options.outSR || 3857;
         _this = _super.call(this, url, options) || this;
         _this._outSR = _this.params['outSR'];
-        _this._esriFormat = new ol.format.EsriJSON();
+        _this._esriFormat = new EsriJSON_1.default();
         if (_this._url[_this._url.length - 1] !== '/') {
             _this._url += '/';
         }

@@ -14,7 +14,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by gavorhes on 1/4/2016.
  */
 var provide_1 = require("../util/provide");
-var ol = require("custom-ol");
+var Style_1 = require("ol/style/Style");
+var Circle_1 = require("ol/style/Circle");
+var Stroke_1 = require("ol/style/Stroke");
+var Fill_1 = require("ol/style/Fill");
+var Icon_1 = require("ol/style/Icon");
 var nm = provide_1.default('olHelpers.esriToOlStyle');
 /**
  *
@@ -65,20 +69,20 @@ var PointSymbol = /** @class */ (function (_super) {
                 var outerColor = _colorArrayToRgba(_this.symbolObj.outline.color, _this.opacity);
                 var outlineWidth = _this.symbolObj.outline.width;
                 var radius = _this.symbolObj.size;
-                _this.olStyle = new ol.style.Style({
-                    image: new ol.style.Circle({
+                _this.olStyle = new Style_1.default({
+                    image: new Circle_1.default({
                         radius: radius,
-                        fill: new ol.style.Fill({
+                        fill: new Fill_1.default({
                             color: innerColor
                         }),
-                        stroke: new ol.style.Stroke({ color: outerColor, width: outlineWidth })
+                        stroke: new Stroke_1.default({ color: outerColor, width: outlineWidth })
                     })
                 });
                 _this.legendHtml = "<span class=\"legend-layer-icon\" style=\"color: " + innerColor + "\">&#9679;</span>";
                 break;
             case 'esriPMS':
-                _this.olStyle = new ol.style.Style({
-                    image: new ol.style.Icon({ src: "data:image/png;base64," + _this.symbolObj['imageData'] })
+                _this.olStyle = new Style_1.default({
+                    image: new Icon_1.default({ src: "data:image/png;base64," + _this.symbolObj['imageData'] })
                 });
                 _this.legendHtml = "<img class=\"legend-layer-icon\" height=\"17\" src=\"data:image/png;base64," + _this.symbolObj['imageData'] + "\">";
                 break;
@@ -98,8 +102,8 @@ var LineSymbol = /** @class */ (function (_super) {
             case 'esriSLS':
                 var innerColor = _colorArrayToRgba(_this.symbolObj.color, _this.opacity);
                 var lineWidth = _this.symbolObj.width;
-                _this.olStyle = new ol.style.Style({
-                    stroke: new ol.style.Stroke({
+                _this.olStyle = new Style_1.default({
+                    stroke: new Stroke_1.default({
                         color: innerColor,
                         //lineDash: [4],
                         width: lineWidth
@@ -132,13 +136,13 @@ var PolygonSymbol = /** @class */ (function (_super) {
                 var innerColor = _colorArrayToRgba(_this.symbolObj.color, _this.opacity);
                 var outerColor = _colorArrayToRgba(_this.symbolObj.outline.color, _this.opacity);
                 var outlineWidth = _this.symbolObj.outline.width;
-                _this.olStyle = new ol.style.Style({
-                    stroke: new ol.style.Stroke({
+                _this.olStyle = new Style_1.default({
+                    stroke: new Stroke_1.default({
                         color: outerColor,
                         //lineDash: [4],
                         width: outlineWidth
                     }),
-                    fill: new ol.style.Fill({
+                    fill: new Fill_1.default({
                         color: innerColor
                     })
                 });

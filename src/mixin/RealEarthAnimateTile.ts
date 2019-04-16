@@ -3,9 +3,10 @@
  */
 import RealEarthAnimate from './RealEarthAnimate';
 import provide from '../util/provide';
-import ol = require('custom-ol');
 import LayerRealEarthTile from "../layers/LayerRealEarthTile";
 const nm = provide('mixin');
+import XYZ from 'ol/source/XYZ';
+import Tile from 'ol/layer/Tile';
 
 /**
  * Animate real earth tile
@@ -13,8 +14,8 @@ const nm = provide('mixin');
  */
 class RealEarthAnimateTile extends RealEarthAnimate {
     _sourceUrls: string[];
-    _source: ol.source.XYZ;
-    _olLayer: ol.layer.Tile;
+    _source: XYZ;
+    _olLayer: Tile;
 
     constructor(layer: LayerRealEarthTile, loadCallback?: (lyr: LayerRealEarthTile) => void){
         super(layer, loadCallback);

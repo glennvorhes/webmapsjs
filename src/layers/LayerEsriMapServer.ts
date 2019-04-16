@@ -5,11 +5,13 @@ import {LayerBase, LayerBaseOptions} from './LayerBase';
 import * as esriToOl from '../olHelpers/esriToOlStyle';
 import mapPopup from '../olHelpers/mapPopup';
 import provide from '../util/provide';
-import ol = require('custom-ol');
 import $ = require('jquery');
+import EsriJSON from 'ol/format/EsriJSON';
+import TileArcGISRestSource from 'ol/source/TileArcGISRest'
+import TileLayer from 'ol/layer/Tile';
+import TileSource from 'ol/source/Tile';
 
 const nm = provide('layers');
-
 
 
 /**
@@ -56,7 +58,7 @@ export interface LayerEsriMapServerOptions extends LayerBaseOptions {
  * @augments LayerBase
  */
 export class LayerEsriMapServer extends LayerBase {
-    _esriFormat: ol.format.EsriJSON;
+    _esriFormat: EsriJSON;
     _popupRequest: JQueryXHR;
     _showLayers: number[];
 
@@ -82,7 +84,7 @@ export class LayerEsriMapServer extends LayerBase {
     constructor(url: string, options: LayerEsriMapServerOptions = {}) {
 
         super(url, options);
-        this._source = new ol.source.TileArcGISRest(
+        this._source = new TileArcGISRestSource(
             {
                 url: this.url == '' ? undefined : this.url,
                 params: typeof options.showLayers == 'undefined' ? undefined : {layers: 'show:' + options.showLayers.join(',')}
@@ -91,8 +93,8 @@ export class LayerEsriMapServer extends LayerBase {
 
         this._showLayers = options.showLayers || [];
 
-        this._olLayer = new ol.layer.Tile({
-            source: this._source as ol.source.Tile,
+        this._olLayer = new TileLayer({
+            source: this._source as TileSource,
             visible: this.visible,
             opacity: this.opacity,
             minResolution: this._minResolution,
@@ -104,7 +106,7 @@ export class LayerEsriMapServer extends LayerBase {
 
         options.addPopup = typeof options.addPopup == 'boolean' ? options.addPopup : false;
 
-        this._esriFormat = new ol.format.EsriJSON();
+        this._esriFormat = new EsriJSON();
         this._popupRequest = null;
 
         options.getLegend = typeof options.getLegend === 'boolean' ? options.getLegend : true;
@@ -192,20 +194,14 @@ export class LayerEsriMapServer extends LayerBase {
 
     }
 
-    /**
-     *
-     * @returns {ol.source.TileArcGISRest} the vector source
-     */
-    get source(): ol.source.TileArcGISRest {
-        return super.getSource() as ol.source.TileArcGISRest;
+
+    get source(): TileArcGISRestSource {
+        return super.getSource() as TileArcGISRestSource;
     }
 
-    /**
-     *
-     * @returns the ol layer
-     */
-    get olLayer(): ol.layer.Tile {
-        return super.getOlLayer() as ol.layer.Tile;
+
+    get olLayer(): TileLayer {
+        return super.getOlLayer() as TileLayer;
     }
 }
 nm.LayerEsriMapServer = LayerEsriMapServer;

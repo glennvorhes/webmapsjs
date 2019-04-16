@@ -3,8 +3,9 @@ import MapInteractionBase from './mapInteractionBase';
 import * as checkDefined from '../util/checkDefined';
 import provide from '../util/provide';
 import makeGuid from '../util/makeGuid';
-import ol = require('custom-ol');
+import {} from 'ol/coordinate';
 import $ = require('jquery');
+import Map from 'ol/Map';
 const nm = provide('olHelpers');
 
 
@@ -68,7 +69,7 @@ export class MapMoveCls extends MapInteractionBase {
      * initialize the map move object
      * @param theMap - the ol map
      */
-    init(theMap: ol.Map){
+    init(theMap: Map){
         super.init(theMap);
 
         this.map.getView().on(['change:center', 'change:resolution'], (e: {type: string}) =>{

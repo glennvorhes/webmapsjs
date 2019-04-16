@@ -1,4 +1,5 @@
-import ol = require('custom-ol');
+import Style from 'ol/style/Style';
+import Feature from 'ol/Feature';
 export interface iEsriResponse {
     drawingInfo: {
         renderer: iEsriRenderer;
@@ -30,10 +31,10 @@ export interface iEsriSymbol {
     imageData: string;
 }
 export interface iStyleFunc {
-    (f: ol.Feature): ol.style.Style | ol.style.Style[];
+    (f: Feature): Style | Style[];
 }
 export declare function makeFeatureServiceLegendAndSymbol(esriResponse: iEsriResponse): {
-    style: iStyleFunc | ol.style.Style;
+    style: iStyleFunc | Style;
     legend: string;
 };
 export interface iMapServiceLegend {

@@ -2,7 +2,7 @@
  * Created by gavorhes on 12/15/2015.
  */
 import { quickMapOptions } from './quickMapBase';
-import ol = require('custom-ol');
+import Map from 'ol/Map';
 export { quickMapOptions } from './quickMapBase';
 /**
  * Sets up a map with some default parameters and initializes
@@ -20,5 +20,5 @@ export { quickMapOptions } from './quickMapBase';
  * @param {boolean} [options.fullScreen=false] if add base map switcher
  * @returns {ol.Map} the ol map
  */
-export declare function quickMap(options?: quickMapOptions): ol.Map;
+export declare function quickMap(options?: quickMapOptions): Map;
 export default quickMap;

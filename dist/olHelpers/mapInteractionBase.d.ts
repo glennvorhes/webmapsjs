@@ -1,9 +1,9 @@
-import ol = require('custom-ol');
+import Map from 'ol/Map';
 /**
  * base interaction
  */
 export declare class MapInteractionBase {
-    _map: ol.Map;
+    _map: Map;
     _initialized: boolean;
     _subtype: string;
     /**
@@ -16,12 +16,12 @@ export declare class MapInteractionBase {
      * @param theMap - the ol Map
      * @returns true for already initialized
      */
-    init(theMap: ol.Map): void;
+    init(theMap: Map): void;
     /**
      * get reference to the ol map object
      * @returns {ol.Map} the map object
      */
-    readonly map: ol.Map;
+    readonly map: Map;
     /**
      * get if is initialized
      * @returns {boolean} is initialized

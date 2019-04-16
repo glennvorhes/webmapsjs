@@ -11,7 +11,7 @@ var nm = provide_1.default('olHelpers');
 var SortedFeatures = /** @class */ (function () {
     /**
      *
-     * @param {Array<ol.Feature>} features array of ol features
+     * @param {Array<Feature>} features array of ol features
      * @param {string} propertyName - the property name to use for lookup
      */
     function SortedFeatures(features, propertyName) {
@@ -50,7 +50,7 @@ var SortedFeatures = /** @class */ (function () {
      * @param {number|string} propertyValue - the property value to search for
      * @param {boolean} [exactMatch=false] if only an exact match should be returned
      * @param {Array} [sortedFeatures=this.sortedFeatures] - the candidate features
-     * @returns {ol.Feature|undefined} the feature matching the lookup
+     * @returns {Feature|undefined} the feature matching the lookup
      */
     SortedFeatures.prototype.getFeature = function (propertyValue, exactMatch, sortedFeatures) {
         if (exactMatch === void 0) { exactMatch = false; }

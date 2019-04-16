@@ -1,14 +1,14 @@
 /**
  * Created by gavorhes on 12/14/2015.
  */
-import ol = require('custom-ol');
 import LayerItsInventory from "../layers/LayerItsInventory";
+import Map from 'ol/Map';
 export declare class ItsLayerCollection {
-    _map: ol.Map;
+    _map: Map;
     _layers: Array<LayerItsInventory>;
     /**
      * Create a collection of all ITS layers
-     * @param {ol.Map} theMap the openlayers map
+     * @param theMap the openlayers map
      * @param {Array} [exclude=[]] array of Its layer identifiers to exclude
      *
      * BLUE Bluetooth Detector - Bluetooth Detector
@@ -29,7 +29,7 @@ export declare class ItsLayerCollection {
      * TOWER Tower - The towers
      * TRENCH
      */
-    constructor(theMap: ol.Map, exclude?: Array<string>);
+    constructor(theMap: Map, exclude?: Array<string>);
     /**
      * Return the array of layers in this collection
      * @returns {Array<LayerItsInventory>} an array of layers

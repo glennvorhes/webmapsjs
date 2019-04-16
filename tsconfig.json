@@ -1,7 +1,12 @@
 {
   "compileOnSave": true,
-  "version": "2.2.1",
+  "version": "3.4.3",
   "compilerOptions": {
+//    "checkJs": true,
+    "declaration": true,
+//    "maxNodeModuleJsDepth": 5,
+//    "allowJs": true,
+    "baseUrl": "./",
     "module": "commonjs",
     "target": "es5",
     "sourceMap": true,
@@ -10,9 +15,19 @@
     "noEmitOnError": true,
     "rootDir": "./src",
     "outDir": "./dist",
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "paths": {
+      "ol": ["./node_modules/ol/src"],
+      "ol/*": ["./node_modules/ol/src/*"]
+    }
   },
-  "include": [
-    "./src/**/*"
-  ]
+//  "files": [
+//    "./src/layers/LayerBase.ts",
+//    "./src/layers/LayerBaseVector.ts"
+//  ]
+//  "include": [
+//    "./src/**/*"
+////    "node_modules/ol/**/*.js"
+//  ],
+  "exclude": ["test/*", "dist/*"]
 }

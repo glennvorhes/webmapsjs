@@ -3,8 +3,9 @@
  */
 import {LayerBase, LayerBaseOptions} from './LayerBase';
 import provide from '../util/provide';
-import ol = require('custom-ol');
 const nm = provide('layers');
+import XYZ from 'ol/source/XYZ';
+import Tile from 'ol/layer/Tile';
 
 
 /**
@@ -34,10 +35,10 @@ export class LayerBaseXyzTile extends LayerBase {
      */
     constructor(url: string, options: LayerBaseOptions = {}) {
         super(url, options);
-        this._source = new ol.source.XYZ({url: this.url == '' ? undefined : this.url});
+        this._source = new XYZ({url: this.url == '' ? undefined : this.url});
 
-        this._olLayer = new ol.layer.Tile({
-            source: this._source as ol.source.XYZ,
+        this._olLayer = new Tile({
+            source: this._source as XYZ,
             visible: this.visible,
             opacity: this.opacity,
             minResolution: this._minResolution,
@@ -47,20 +48,14 @@ export class LayerBaseXyzTile extends LayerBase {
         this._olLayer.setZIndex(this._zIndex);
     }
 
-    /**
-     *
-     * @returns {ol.source.XYZ} the vector source
-     */
-    get source(): ol.source.XYZ {
-        return this._source as ol.source.XYZ;
+
+    get source(): XYZ {
+        return this._source as XYZ;
     }
 
-    /**
-     *
-     * @returns {ol.layer.Tile|ol.layer.Base|undefined} the ol layer
-     */
-    get olLayer() : ol.layer.Tile {
-        return this._olLayer as ol.layer.Tile;
+
+    get olLayer() : Tile {
+        return this._olLayer as Tile;
     }
 }
 

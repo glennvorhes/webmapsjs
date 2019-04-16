@@ -3,12 +3,12 @@
  */
 
 
-import ItsLayerCollection from '../../collections/ItsLayerCollection';
-import LayerLegend from '../../collections/LayerLegend';
 import quickMap from '../../olHelpers/quickMap';
-import {LayerBaseVectorGeoJson} from '../../layers/LayerBaseVectorGeoJson';
-import ol = require("custom-ol");
+import {LayerBaseVectorGeoJson} from '../../layers';
 import {mapPopup} from '../../olHelpers/mapPopup';
+import Style from 'ol/style/Style';
+import Stroke from 'ol/style/Stroke';
+import Fill from 'ol/style/Fill';
 
 
 
@@ -54,11 +54,11 @@ let regionLayer = new LayerBaseVectorGeoJson(
             minZoom: 6,
             maxZoom: 12,
             name: 'WisDOT Regions',
-            style: new ol.style.Style({
-                fill: new ol.style.Fill({
+            style: new Style({
+                fill: new Fill({
                     color: 'blue'
                 }),
-                stroke: new ol.style.Stroke({
+                stroke: new Stroke({
                     color: 'yellow',
                     width: 5
                 })
@@ -71,11 +71,11 @@ let regionLayer2 = new LayerBaseVectorGeoJson(
             minZoom: 6,
             maxZoom: 12,
             name: 'WisDOT Regions',
-            style: new ol.style.Style({
-                fill: new ol.style.Fill({
+            style: new Style({
+                fill: new Fill({
                     color: 'red'
                 }),
-                stroke: new ol.style.Stroke({
+                stroke: new Stroke({
                     color: 'yellow',
                     width: 5
                 })
@@ -106,4 +106,4 @@ window['map'] = map;
 
 // let legend = new LayerLegend(layerArray, 'legend-container', {});
 
-console.log('it works');
+// console.log('it works');

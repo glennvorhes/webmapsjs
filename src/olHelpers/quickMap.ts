@@ -6,8 +6,8 @@ import {quickMapOptions, quickMapBase} from './quickMapBase';
 import provide from '../util/provide';
 import mapMove from './mapMove';
 import mapPopup from './mapPopup';
-import ol = require('custom-ol');
 let nm = provide('olHelpers');
+import Map from 'ol/Map';
 
 export {quickMapOptions} from './quickMapBase';
 
@@ -27,7 +27,7 @@ export {quickMapOptions} from './quickMapBase';
  * @param {boolean} [options.fullScreen=false] if add base map switcher
  * @returns {ol.Map} the ol map
  */
-export function quickMap(options : quickMapOptions = {}): ol.Map {
+export function quickMap(options : quickMapOptions = {}): Map {
     let m = quickMapBase(options);
     mapMove.init(m);
     mapPopup.init(m);

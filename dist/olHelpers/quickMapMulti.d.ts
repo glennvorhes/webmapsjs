@@ -1,10 +1,10 @@
 /**
  * Created by gavorhes on 12/15/2015.
  */
+import Map from 'ol/Map';
 import { quickMapOptions } from './quickMapBase';
 import MapMoveCls from './mapMoveCls';
 import MapPopupCls from './mapPopupCls';
-import ol = require('custom-ol');
 /**
  * @typedef {object} quickMapMultiReturn
  * @property {ol.Map} map The X Coordinate
@@ -28,7 +28,7 @@ import ol = require('custom-ol');
  * @returns return object with map, map move, and map popup objects
  */
 declare function quickMapMulti(options: quickMapOptions): {
-    map: ol.Map;
+    map: Map;
     mapMove: MapMoveCls;
     mapPopup: MapPopupCls;
 };

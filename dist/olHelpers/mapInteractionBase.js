@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by gavorhes on 12/8/2015.
  */
 var provide_1 = require("../util/provide");
+// import ol = require('custom-ol');
 var nm = provide_1.default('olHelpers');
 /**
  * base interaction

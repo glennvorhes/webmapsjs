@@ -1,13 +1,14 @@
 /**
  * Created by glenn on 7/6/2017.
  */
-import ol = require('custom-ol');
+import Map from 'ol/Map';
+import Base from 'ol/layer/Base';
 
-export default function (map: ol.Map | (() => ol.Map), layer: ol.layer.Base): Promise<ol.Map> {
+export default function (map: Map | (() => Map), layer: Base): Promise<Map> {
     return new Promise((resolve, reject) => {
 
         if (typeof map == 'function') {
-            let getMap = map as () => ol.Map;
+            let getMap = map as () => Map;
 
             let g = setInterval(() => {
                 let m = getMap();
@@ -21,7 +22,7 @@ export default function (map: ol.Map | (() => ol.Map), layer: ol.layer.Base): Pr
                 }
             }, 15);
         } else {
-            let m = map as ol.Map;
+            let m = map as Map;
             m.addLayer(layer);
             resolve(m);
         }

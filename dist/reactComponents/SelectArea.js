@@ -14,11 +14,14 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var reactAndRedux_1 = require("./reactAndRedux");
-var ol = require("custom-ol");
 var LayerBaseVectorGeoJson_1 = require("../layers/LayerBaseVectorGeoJson");
 var projections_1 = require("../olHelpers/projections");
 var makeGuid_1 = require("../util/makeGuid");
 var get_map_1 = require("./helpers/get_map");
+var Draw_1 = require("ol/interaction/Draw");
+var Style_1 = require("ol/style/Style");
+var Stroke_1 = require("ol/style/Stroke");
+var Fill_1 = require("ol/style/Fill");
 var SelectArea = /** @class */ (function (_super) {
     __extends(SelectArea, _super);
     function SelectArea(props, context) {
@@ -27,25 +30,26 @@ var SelectArea = /** @class */ (function (_super) {
         _this.cancelId = makeGuid_1.default();
         _this.callback = _this.props.callback;
         _this.areaOverlay = new LayerBaseVectorGeoJson_1.default('', {
-            style: new ol.style.Style({
-                fill: new ol.style.Fill({
+            style: new Style_1.default({
+                fill: new Fill_1.default({
                     color: 'rgba(255, 0, 237, 0.1)'
                 }),
-                stroke: new ol.style.Stroke({
+                stroke: new Stroke_1.default({
                     color: 'rgb(255, 0, 237)',
                     width: 2
                 })
             }),
             transform: { dataProjection: projections_1.proj4326, featureProjection: projections_1.proj3857 }
         });
-        _this.draw = new ol.interaction.Draw({
+        _this.draw = new Draw_1.default({
             source: _this.areaOverlay.source,
             type: 'Polygon'
         });
+        // this.draw.on('drawend', (evt: {feature: {getGeometry: () => Polygon}}) => {
         _this.draw.on('drawend', function (evt) {
             _this.selectButton.style.display = '';
             _this.cancelButton.style.display = 'none';
-            var geom = evt.feature.getGeometry();
+            var geom = evt['feature'].getGeometry();
             var geomClone = geom.clone();
             geomClone.transform('EPSG:3857', 'EPSG:4326');
             setTimeout(function () {

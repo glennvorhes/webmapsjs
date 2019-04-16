@@ -4,9 +4,11 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 var quickMap_1 = require("../../olHelpers/quickMap");
-var LayerBaseVectorGeoJson_1 = require("../../layers/LayerBaseVectorGeoJson");
-var ol = require("custom-ol");
+var layers_1 = require("../../layers");
 var mapPopup_1 = require("../../olHelpers/mapPopup");
+var Style_1 = require("ol/style/Style");
+var Stroke_1 = require("ol/style/Stroke");
+var Fill_1 = require("ol/style/Fill");
 var reg = {
     "type": "FeatureCollection",
     "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
@@ -36,29 +38,29 @@ var reg2 = {
     ]
 };
 var map = quickMap_1.default({ addGeocode: true });
-var regionLayer = new LayerBaseVectorGeoJson_1.LayerBaseVectorGeoJson('', {
+var regionLayer = new layers_1.LayerBaseVectorGeoJson('', {
     minZoom: 6,
     maxZoom: 12,
     name: 'WisDOT Regions',
-    style: new ol.style.Style({
-        fill: new ol.style.Fill({
+    style: new Style_1.default({
+        fill: new Fill_1.default({
             color: 'blue'
         }),
-        stroke: new ol.style.Stroke({
+        stroke: new Stroke_1.default({
             color: 'yellow',
             width: 5
         })
     })
 });
-var regionLayer2 = new LayerBaseVectorGeoJson_1.LayerBaseVectorGeoJson('', {
+var regionLayer2 = new layers_1.LayerBaseVectorGeoJson('', {
     minZoom: 6,
     maxZoom: 12,
     name: 'WisDOT Regions',
-    style: new ol.style.Style({
-        fill: new ol.style.Fill({
+    style: new Style_1.default({
+        fill: new Fill_1.default({
             color: 'red'
         }),
-        stroke: new ol.style.Stroke({
+        stroke: new Stroke_1.default({
             color: 'yellow',
             width: 5
         })
@@ -82,5 +84,5 @@ window['map'] = map;
 //     }
 // ];
 // let legend = new LayerLegend(layerArray, 'legend-container', {});
-console.log('it works');
+// console.log('it works');
 //# sourceMappingURL=mapPopup.js.map

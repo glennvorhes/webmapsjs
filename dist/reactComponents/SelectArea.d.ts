@@ -3,17 +3,18 @@
  */
 /// <reference types="react" />
 import { React } from './reactAndRedux';
-import ol = require('custom-ol');
 import LayerBaseVectorGeoJson from '../layers/LayerBaseVectorGeoJson';
+import Map from 'ol/Map';
+import Draw from 'ol/interaction/Draw';
 export interface iSelectArea {
-    map: ol.Map | (() => ol.Map);
+    map: Map | (() => Map);
     callback: (coords: Array<number[]>) => any;
 }
 export declare class SelectArea extends React.Component<iSelectArea, null> {
-    map: ol.Map;
+    map: Map;
     callback: (coords: Array<number[]>) => any;
     areaOverlay: LayerBaseVectorGeoJson;
-    draw: ol.interaction.Draw;
+    draw: Draw;
     selectId: string;
     cancelId: string;
     selectButton: HTMLButtonElement;

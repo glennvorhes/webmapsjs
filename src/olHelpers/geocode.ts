@@ -1,11 +1,20 @@
 import $ = require('jquery')
 import {makeGuid} from '../util/makeGuid';
-import ol = require('custom-ol');
 import {proj3857, proj4326} from './projections';
+import Vector from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import Circle from 'ol/style/Circle';
+import Fill from 'ol/style/Fill';
+import Stroke from 'ol/style/Stroke';
+import Point from 'ol/geom/Point';
+import Feature from 'ol/Feature';
+
 
 
 let invalidClass = 'geocoder-invalid';
 let geocoderLoadingClass = 'geocoder-loading';
+import Map from 'ol/Map';
+import Style from "ol/style/Style";
 
 // let testAddress = '65 7th Street, Prairie du Sac, WI';
 
@@ -13,21 +22,21 @@ let geocoderLoadingClass = 'geocoder-loading';
 export class Geocode {
     private theButton: HTMLButtonElement;
     private theInput: HTMLInputElement;
-    private map: ol.Map;
+    private map: Map;
     private indicationLayer;
 
-    constructor(mapDiv: HTMLDivElement, map: ol.Map) {
+    constructor(mapDiv: HTMLDivElement, map: Map) {
         let inputGuid = makeGuid();
         let buttonGuid = makeGuid();
 
         this.map = map;
-        this.indicationLayer = new ol.layer.Vector({
-            source: new ol.source.Vector(),
-            style: new ol.style.Style({
-                image: new ol.style.Circle({
+        this.indicationLayer = new Vector({
+            source: new VectorSource(),
+            style: new Style({
+                image: new Circle({
                     radius: 12,
-                    fill: new ol.style.Fill({color: 'rgba(255,0,0,0.5)'}),
-                    stroke: new ol.style.Stroke({color: 'red', width: 1})
+                    fill: new Fill({color: 'rgba(255,0,0,0.5)'}),
+                    stroke: new Stroke({color: 'red', width: 1})
                 })
             })
         });
@@ -68,8 +77,8 @@ export class Geocode {
 
                     } else {
                         let v = this.map.getView();
-                        let p = new ol.geom.Point([lon, lat]);
-                        let feat = new ol.Feature(p);
+                        let p = new Point([lon, lat]);
+                        let feat = new Feature(p);
                         this.indicationLayer.getSource().addFeature(feat);
                         p.transform(proj4326, proj3857);
 

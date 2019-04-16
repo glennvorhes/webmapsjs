@@ -1,5 +1,6 @@
 /**
  * Created by glenn on 7/6/2017.
  */
-import ol = require('custom-ol');
-export default function (map: ol.Map | (() => ol.Map), layer: ol.layer.Base): Promise<ol.Map>;
+import Map from 'ol/Map';
+import Base from 'ol/layer/Base';
+export default function (map: Map | (() => Map), layer: Base): Promise<Map>;

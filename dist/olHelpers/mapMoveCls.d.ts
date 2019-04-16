@@ -1,6 +1,6 @@
 import LayerBaseVector from "../layers/LayerBaseVector";
 import MapInteractionBase from './mapInteractionBase';
-import ol = require('custom-ol');
+import Map from 'ol/Map';
 export interface extentObject {
     minX: number;
     minY: number;
@@ -44,7 +44,7 @@ export declare class MapMoveCls extends MapInteractionBase {
      * initialize the map move object
      * @param theMap - the ol map
      */
-    init(theMap: ol.Map): void;
+    init(theMap: Map): void;
     _updateMapExtent(): void;
     /**
      * return the map extent

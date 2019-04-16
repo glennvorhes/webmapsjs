@@ -1,6 +1,7 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// import ol = require('custom-ol');
 // let g = new
+Object.defineProperty(exports, "__esModule", { value: true });
 var media_control_1 = require("../../domUtil/media-control");
 //
 //

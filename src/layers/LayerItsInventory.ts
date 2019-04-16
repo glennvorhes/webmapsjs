@@ -5,9 +5,16 @@
 import {LayerBaseVectorGeoJson, LayerBaseVectorGeoJsonOptions} from './LayerBaseVectorGeoJson';
 import mapPopup from '../olHelpers/mapPopup';
 import provide from '../util/provide';
-import ol = require('custom-ol');
 import $ = require('jquery');
-import {proj4326, proj3857} from '../olHelpers/projections'
+import {proj4326, proj3857} from '../olHelpers/projections';
+import Style from 'ol/style/Style';
+import Icon from 'ol/style/Icon';
+import Stroke from 'ol/style/Stroke';
+import Fill from 'ol/style/Fill';
+import Feature from 'ol/Feature';
+import Point from 'ol/geom/Point';
+import {iStyleFunc} from "../olHelpers/esriToOlStyle";
+
 
 let nm = provide('layers');
 
@@ -117,15 +124,15 @@ function checkStyleNumber(itsIcon: string, itsLineStyle: iLineStyle, itsIconConf
  * @param {object} [itsLineConfig.lineArray=[]] an array, items with format [property, name, color, optional width]
  * @returns {*} undefined, style, or style function
  */
-function defineStyle(itsIcon: string, itsLineStyle: iLineStyle, itsIconConfig: iIconConfig, itsLineConfig: iLineConfig): ol.style.Style | Array<ol.style.Style> | ol.StyleFunction {
+function defineStyle(itsIcon: string, itsLineStyle: iLineStyle, itsIconConfig: iIconConfig, itsLineConfig: iLineConfig): Style |Style[]|iStyleFunc  {
     "use strict";
     checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig);
 
     let _iconUrlRoot = 'https://transportal.cee.wisc.edu/its/inventory/icons/';
 
     if (itsIcon) {
-        return new ol.style.Style({
-            image: new ol.style.Icon(
+        return new Style({
+            image: new Icon(
                 {
                     src: _iconUrlRoot + itsIcon,
                     crossOrigin: 'anonymous'
@@ -133,14 +140,14 @@ function defineStyle(itsIcon: string, itsLineStyle: iLineStyle, itsIconConfig: i
             )
         });
     } else if (itsLineStyle) {
-        return new ol.style.Style({
-            stroke: new ol.style.Stroke({
+        return new Style({
+            stroke: new Stroke({
                 color: itsLineStyle.color,
                 width: itsLineStyle.width
             })
         });
     } else if (itsIconConfig) {
-        return function (feature: ol.Feature) {
+        return function (feature: Feature) {
             let symbolProp = feature.getProperties()[itsIconConfig.prop];
             let iconUrl = _iconUrlRoot + itsIconConfig.defaultIcon;
 
@@ -153,8 +160,8 @@ function defineStyle(itsIcon: string, itsLineStyle: iLineStyle, itsIconConfig: i
                 }
             }
 
-            return [new ol.style.Style({
-                image: new ol.style.Icon(
+            return [new Style({
+                image: new Icon(
                     {
                         src: iconUrl,
                         crossOrigin: 'anonymous'
@@ -163,7 +170,7 @@ function defineStyle(itsIcon: string, itsLineStyle: iLineStyle, itsIconConfig: i
             })];
         };
     } else if (itsLineConfig) {
-        return function (feature: ol.Feature) {
+        return function (feature: Feature) {
             let symbolProp = feature.getProperties()[itsLineConfig.prop];
             let colr = itsLineConfig.defaultColor || 'red';
             let width = itsLineConfig.defaultWidth || 5;
@@ -178,8 +185,8 @@ function defineStyle(itsIcon: string, itsLineStyle: iLineStyle, itsIconConfig: i
                 }
             }
 
-            return [new ol.style.Style({
-                stroke: new ol.style.Stroke({
+            return [new Style({
+                stroke: new Stroke({
                     color: colr,
                     width: width
                 })
@@ -334,10 +341,10 @@ export class LayerItsInventory extends LayerBaseVectorGeoJson {
      */
     mapMoveMakeGetParams(extent: { minX: number, minY: number, maxX: number, maxY: number }, zoomLevel: number) {
         super.mapMoveMakeGetParams(extent, zoomLevel);
-        let lowerLeft = new ol.geom.Point([extent.minX, extent.minY]);
+        let lowerLeft = new Point([extent.minX, extent.minY]);
         lowerLeft.transform(this.mapProj, this._projection4326);
         let lowerLeftCoordinates = lowerLeft.getCoordinates();
-        let upperRight = new ol.geom.Point([extent.maxX, extent.maxY]);
+        let upperRight = new Point([extent.maxX, extent.maxY]);
         upperRight.transform(this.mapProj, this._projection4326);
         let upperRightCoordinates = upperRight.getCoordinates();
 

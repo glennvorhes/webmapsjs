@@ -1,7 +1,8 @@
 /**
  * Created by gavorhes on 12/14/2015.
  */
-import ol = require('custom-ol');
+import Feature from 'ol/Feature';
+import Style from 'ol/style/Style';
 /**
  * A style function based on properties and zoom level, wraps normal feature, resolution function
  * @callback propertiesZoomStyle
@@ -14,5 +15,5 @@ import ol = require('custom-ol');
  * @param {propertiesZoomStyle|*} styleFunc - style function
  * @returns {function|*} new function
  */
-declare function propertiesZoomStyle(styleFunc: (f: ol.Feature, res: number) => ol.style.Style | ol.style.Style[]): (feature: ol.Feature, zoom: number) => ol.style.Style | ol.style.Style[];
+declare function propertiesZoomStyle(styleFunc: (f: Feature, res: number) => Style | Style[]): (feature: Feature, zoom: number) => Style | Style[];
 export default propertiesZoomStyle;

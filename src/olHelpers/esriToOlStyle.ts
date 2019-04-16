@@ -2,8 +2,14 @@
  * Created by gavorhes on 1/4/2016.
  */
 import provide from '../util/provide';
-import ol = require('custom-ol');
+import Style from 'ol/style/Style';
+import Circle from 'ol/style/Circle';
+import Stroke from 'ol/style/Stroke';
+import Fill from 'ol/style/Fill';
+import Icon from "ol/style/Icon";
+import Feature from 'ol/Feature'
 const nm = provide('olHelpers.esriToOlStyle');
+
 
 
 /**
@@ -71,7 +77,7 @@ class CommonSymbol {
     legendHtml: string;
     opacity: number;
     symbolObj: iEsriSymbol;
-    olStyle: ol.style.Style;
+    olStyle: Style;
 
     /**
      *
@@ -102,20 +108,20 @@ class PointSymbol extends CommonSymbol {
                 let radius = this.symbolObj.size;
 
 
-                this.olStyle = new ol.style.Style({
-                    image: new ol.style.Circle({
+                this.olStyle = new Style({
+                    image: new Circle({
                         radius: radius,
-                        fill: new ol.style.Fill({
+                        fill: new Fill({
                             color: innerColor
                         }),
-                        stroke: new ol.style.Stroke({color: outerColor, width: outlineWidth})
+                        stroke: new Stroke({color: outerColor, width: outlineWidth})
                     })
                 });
                 this.legendHtml = `<span class="legend-layer-icon" style="color: ${innerColor}">&#9679;</span>`;
                 break;
             case 'esriPMS':
-                this.olStyle = new ol.style.Style({
-                    image: new ol.style.Icon({src: `data:image/png;base64,${this.symbolObj['imageData']}`})
+                this.olStyle = new Style({
+                    image: new Icon({src: `data:image/png;base64,${this.symbolObj['imageData']}`})
                 });
                 this.legendHtml = `<img class="legend-layer-icon" height="17" src="data:image/png;base64,${this.symbolObj['imageData']}">`;
                 break;
@@ -134,8 +140,8 @@ class LineSymbol extends CommonSymbol {
                 let innerColor = _colorArrayToRgba(this.symbolObj.color, this.opacity);
                 let lineWidth = this.symbolObj.width;
 
-                this.olStyle = new ol.style.Style({
-                    stroke: new ol.style.Stroke({
+                this.olStyle = new Style({
+                    stroke: new Stroke({
                         color: innerColor,
                         //lineDash: [4],
                         width: lineWidth
@@ -168,13 +174,13 @@ class PolygonSymbol extends CommonSymbol {
                 let outerColor = _colorArrayToRgba(this.symbolObj.outline.color, this.opacity);
                 let outlineWidth = this.symbolObj.outline.width;
 
-                this.olStyle = new ol.style.Style({
-                    stroke: new ol.style.Stroke({
+                this.olStyle = new Style({
+                    stroke: new Stroke({
                         color: outerColor,
                         //lineDash: [4],
                         width: outlineWidth
                     }),
-                    fill: new ol.style.Fill({
+                    fill: new Fill({
                         color: innerColor
                     })
                 });
@@ -199,14 +205,14 @@ class PolygonSymbol extends CommonSymbol {
 }
 
 export interface iStyleFunc{
-    (f: ol.Feature): ol.style.Style| ol.style.Style[]
+    (f: Feature): Style| Style[]
 }
 
 class SymbolGenerator {
     opacity: number;
     renderer: iEsriRenderer;
     legendHtml: string;
-    olStyle: iStyleFunc | ol.style.Style;
+    olStyle: iStyleFunc | Style;
 
     constructor(esriResponse: iEsriResponse) {
         this.opacity = (100 - (esriResponse['drawingInfo']['transparency'] || 0)) / 100;
@@ -236,11 +242,11 @@ class UniqueValueSymbol extends SymbolGenerator {
 
     propertyName: string;
     defaultSymbol: iEsriSymbol;
-    defaultStyle: ol.style.Style;
+    defaultStyle: Style;
     defaultLabelHtml: string;
     labelArray: Array<string>;
     legendArray: Array<string>;
-    propertyStyleLookup: {[s: string]: ol.style.Style};
+    propertyStyleLookup: {[s: string]: Style};
     valueArray: Array<any>;
     uniqueValueInfos: Array<{label: string, value: any, symbol: iEsriSymbol}>;
 
@@ -278,7 +284,7 @@ class UniqueValueSymbol extends SymbolGenerator {
             this.propertyStyleLookup[uniqueVal['value']] = uniqueSym.olStyle;
         }
 
-        this.olStyle = (feature: ol.Feature): ol.style.Style[] => {
+        this.olStyle = (feature: Feature): Style[] => {
             let checkProperties = feature.getProperties();
             let checkProperty = checkProperties[this.propertyName];
 
@@ -301,7 +307,7 @@ class UniqueValueSymbol extends SymbolGenerator {
     }
 }
 
-export function makeFeatureServiceLegendAndSymbol(esriResponse: iEsriResponse): {style: iStyleFunc | ol.style.Style, legend: string} {
+export function makeFeatureServiceLegendAndSymbol(esriResponse: iEsriResponse): {style: iStyleFunc | Style, legend: string} {
     "use strict";
     let renderer = esriResponse.drawingInfo.renderer;
     let symbolLegendOut: SymbolGenerator = null;

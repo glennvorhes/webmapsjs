@@ -96,7 +96,7 @@ var itsConfig = [
 var ItsLayerCollection = /** @class */ (function () {
     /**
      * Create a collection of all ITS layers
-     * @param {ol.Map} theMap the openlayers map
+     * @param theMap the openlayers map
      * @param {Array} [exclude=[]] array of Its layer identifiers to exclude
      *
      * BLUE Bluetooth Detector - Bluetooth Detector

@@ -15,8 +15,13 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var mapInteractionBase_1 = require("./mapInteractionBase");
 var provide_1 = require("../util/provide");
-var ol = require("custom-ol");
 var $ = require("jquery");
+// import * as ol from "custom-ol";
+var Vector_1 = require("ol/layer/Vector");
+var Vector_2 = require("ol/source/Vector");
+var Overlay_1 = require("ol/Overlay");
+var easing = require("ol/easing");
+var style_1 = require("ol/style");
 var nm = provide_1.default('olHelpers');
 var FeatureLayerProperties = /** @class */ (function () {
     /**
@@ -91,7 +96,7 @@ var MapPopupCls = /** @class */ (function (_super) {
     }
     /**
      * map popup initialization
-     * @param {ol.Map} theMap - the ol map
+     * @param  theMap - the ol map
      */
     MapPopupCls.prototype.init = function (theMap) {
         var _this = this;
@@ -112,9 +117,9 @@ var MapPopupCls = /** @class */ (function (_super) {
         this._$popupContent = $map.find('.popup-content');
         this._$popupCloser = $map.find('.ol-popup-closer');
         var _ease = function (n) {
-            return ol.easing.inAndOut(n);
+            return easing['inAndOut'](n);
         };
-        this._popupOverlay = new ol.Overlay({
+        this._popupOverlay = new Overlay_1.default({
             element: this._$popupContainer[0],
             autoPan: true,
             autoPanAnimation: {
@@ -339,23 +344,23 @@ var MapPopupCls = /** @class */ (function (_super) {
             theStyle = selectionStyle.olStyle;
         }
         else {
-            theStyle = new ol.style.Style({
-                stroke: new ol.style.Stroke({
+            theStyle = new style_1.Style({
+                stroke: new style_1.Stroke({
                     color: selectionStyle.color,
                     width: selectionStyle.width
                 }),
-                image: new ol.style.Circle({
+                image: new style_1.Circle({
                     radius: 7,
-                    fill: new ol.style.Fill({ color: selectionStyle.color }),
-                    stroke: new ol.style.Stroke({ color: selectionStyle.color, width: 1 })
+                    fill: new style_1.Fill({ color: selectionStyle.color }),
+                    stroke: new style_1.Stroke({ color: selectionStyle.color, width: 1 })
                 }),
-                fill: new ol.style.Fill({
+                fill: style_1.Fill({
                     color: selectionStyle.color
                 })
             });
         }
-        var selectionLayer = new ol.layer.Vector({
-            source: new ol.source.Vector(),
+        var selectionLayer = new Vector_1.default({
+            source: new Vector_2.default(),
             style: theStyle
         });
         selectionLayer.setZIndex(100);

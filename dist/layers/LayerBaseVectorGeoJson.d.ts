@@ -2,11 +2,12 @@
  * Created by gavorhes on 11/2/2015.
  */
 import { LayerBaseVector, LayerBaseVectorOptions } from './LayerBaseVector';
-import ol = require('custom-ol');
 import { MapMoveCls } from "../olHelpers/mapMoveCls";
+import Projection from 'ol/proj/Projection';
+import GeoJSON from 'ol/format/GeoJSON';
 export interface crsTransform {
-    dataProjection?: ol.proj.Projection;
-    featureProjection?: ol.proj.Projection;
+    dataProjection?: Projection;
+    featureProjection?: Projection;
 }
 export interface LayerBaseVectorGeoJsonOptions extends LayerBaseVectorOptions {
     transform?: crsTransform;
@@ -17,7 +18,7 @@ export interface LayerBaseVectorGeoJsonOptions extends LayerBaseVectorOptions {
  * @augments LayerBaseVector
  */
 export declare class LayerBaseVectorGeoJson extends LayerBaseVector {
-    _geoJsonFormat: ol.format.GeoJSON;
+    _geoJsonFormat: GeoJSON;
     _transform: crsTransform;
     /**
      * @param {string|null} url - resource url, set to '' to make blank layer

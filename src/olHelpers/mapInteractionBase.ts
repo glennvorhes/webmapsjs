@@ -2,8 +2,10 @@
  * Created by gavorhes on 12/8/2015.
  */
 import provide from '../util/provide';
-import ol = require('custom-ol');
+// import ol = require('custom-ol');
 const nm = provide('olHelpers');
+
+import Map from 'ol/Map'
 
 
 
@@ -11,7 +13,7 @@ const nm = provide('olHelpers');
  * base interaction
  */
 export class MapInteractionBase {
-    _map: ol.Map;
+    _map: Map;
     _initialized: boolean;
     _subtype: string;
 
@@ -30,7 +32,7 @@ export class MapInteractionBase {
      * @param theMap - the ol Map
      * @returns true for already initialized
      */
-    init(theMap: ol.Map){
+    init(theMap: Map){
         if (!this._initialized){
             this._map = theMap;
             this._initialized = true;

@@ -4,8 +4,7 @@
 
 
 import provide from '../util/provide';
-import {LayerBase} from "../layers/LayerBase";
-import ol = require('custom-ol');
+import {LayerBase} from "../layers";
 import $ = require('jquery');
 
 let nm = provide('collections.layerSwipe');
@@ -90,8 +89,8 @@ class LayerSwipe {
             return;
         }
 
-        lyr.olLayer.on('precompose', (event: {context: CanvasRenderingContext2D}) => {
-            let ctx = event['context'];
+        lyr.olLayer.on('precompose', (event) => {
+            let ctx = event['context'] as CanvasRenderingContext2D;
             let width = ctx.canvas.width * (this.percentRight / 100);
 
             ctx.save();
@@ -100,8 +99,8 @@ class LayerSwipe {
             ctx.clip();
         });
 
-        lyr.olLayer.on('postcompose', function (event: {context: CanvasRenderingContext2D}) {
-            let ctx = event['context'];
+        lyr.olLayer.on('postcompose', function (event) {
+            let ctx = event['context'] as CanvasRenderingContext2D;
             ctx.restore();
         });
 
@@ -119,8 +118,8 @@ class LayerSwipe {
             return;
         }
 
-        lyr.olLayer.on('precompose', (event: {context: CanvasRenderingContext2D}) => {
-            let ctx = event['context'];
+        lyr.olLayer.on('precompose', (event) => {
+            let ctx = event['context'] as CanvasRenderingContext2D;
             let width = ctx.canvas.width * (this.percentRight / 100);
 
             ctx.save();
@@ -129,8 +128,8 @@ class LayerSwipe {
             ctx.clip();
         });
 
-        lyr.olLayer.on('postcompose', function (event: {context: CanvasRenderingContext2D}) {
-            let ctx = event['context'];
+        lyr.olLayer.on('postcompose', function (event) {
+            let ctx = event['context'] as CanvasRenderingContext2D;
             ctx.restore();
         });
 

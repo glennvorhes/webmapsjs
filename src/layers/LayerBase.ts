@@ -1,7 +1,8 @@
 import * as zoomResolutionConvert from '../olHelpers/zoomResolutionConvert';
 import provide from '../util/provide';
-import ol = require('custom-ol');
 import makeGuid from '../util/makeGuid';
+import {Vector, Source} from 'ol/source';
+import Layer from 'ol/layer/Layer';
 import $ = require('jquery');
 
 const nm = provide('layers');
@@ -41,14 +42,14 @@ export abstract class LayerBase {
     protected _params: any;
     protected _id: string;
     protected _name: string;
-    protected _source: ol.source.Source;
+    protected _source: Source;
     protected _animate: boolean;
     protected _legendCollapse: boolean;
     protected _maxResolution: number;
     protected _minResolution: number;
     protected  _$legendDiv: JQuery;
     loadCallback: Function;
-    protected _olLayer: ol.layer.Layer;
+    protected _olLayer: Layer;
     protected _applyCollapseCalled: boolean;
 
 
@@ -70,7 +71,7 @@ export abstract class LayerBase {
      * @param {boolean} [options.legendCheckbox=true] - if the legend item should have a checkbox for visibility
      * @param {boolean} [options.legendContent=undefined] - additional content to add to the legend
      */
-    constructor(url: string, options: LayerBaseOptions = {}) {
+    protected constructor(url: string, options: LayerBaseOptions = {}) {
         options = options || {} as LayerBaseOptions;
 
         if (typeof url !== 'string') {
@@ -398,12 +399,12 @@ export abstract class LayerBase {
      * get the layer source
      * @type {*}
      */
-    get source(): ol.source.Source {
+    get source(): Source {
         return this.getSource();
     }
 
 
-    protected getSource(): ol.source.Source{
+    protected getSource(): Source{
         return this._source;
     }
 
@@ -428,11 +429,11 @@ export abstract class LayerBase {
     /**
      * the the ol layer
      */
-    get olLayer(): ol.layer.Layer {
+    get olLayer(): Layer {
         return this.getOlLayer();
     }
 
-    protected getOlLayer(): ol.layer.Layer{
+    protected getOlLayer(): Layer{
         return this._olLayer;
     }
 }

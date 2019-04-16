@@ -16,6 +16,7 @@ export interface LayerRealEarthTileOptions extends LayerBaseOptions {
 }
 
 
+
 /**
  * Real earth tile
  * @augments LayerBaseXyzTile

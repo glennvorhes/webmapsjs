@@ -1,7 +1,7 @@
-import ol = require('custom-ol');
-import {LayerBaseVector} from "../layers/LayerBaseVector";
+import {LayerBaseVector} from "../layers";
 import {fitToMap} from '../olHelpers/extentUtil';
 import {layers} from "../";
+import Map from 'ol/Map';
 
 declare const glob: Object;
 
@@ -12,14 +12,8 @@ export interface iMapToBase64Options {
 }
 
 
-/**
- *
- * @param {ol.Map} map
- * @param {(imgData) => string} callback
- * @param {iMapToBase64Options} options
- * @returns {any}
- */
-export function mapToBase64(map: ol.Map, callback: (imgData: string) => any, options?: iMapToBase64Options): any {
+
+export function mapToBase64(map: Map, callback: (imgData: string) => any, options?: iMapToBase64Options): any {
     options = options || {};
 
     if (typeof options.delay === 'number') {

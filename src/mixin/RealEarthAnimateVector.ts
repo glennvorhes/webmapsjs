@@ -3,10 +3,11 @@
  */
 import RealEarthAnimate from './RealEarthAnimate';
 import provide from '../util/provide';
-import ol = require('custom-ol');
 import {LayerVectorRealEarth} from "../layers/LayerRealEarthVector";
 import $ = require('jquery');
 const nm = provide('mixin');
+import VectorSource from 'ol/source/Vector';
+import VectorLayer from 'ol/layer/Vector';
 
 
 /**
@@ -15,10 +16,10 @@ const nm = provide('mixin');
  */
 class RealEarthAnimateVector extends RealEarthAnimate {
     _dataCache: Array<Array<Object>|Object>;
-    _source: ol.source.Vector;
+    _source: VectorSource;
     _rawTimesLookup: {[s: string]: any};
     _currentIndex: number;
-    _olLayer: ol.layer.Vector;
+    _olLayer: VectorLayer;
     _lyr: LayerVectorRealEarth;
 
     constructor(layer: LayerVectorRealEarth, loadCallback?: (lyr: LayerVectorRealEarth) => void){

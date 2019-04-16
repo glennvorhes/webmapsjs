@@ -13,8 +13,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var LayerBase_1 = require("./LayerBase");
 var mapMove_1 = require("../olHelpers/mapMove");
 var provide_1 = require("../util/provide");
-var ol = require("custom-ol");
+// import ol = require('custom-ol');
 var $ = require("jquery");
+var Vector_1 = require("ol/layer/Vector");
+var Vector_2 = require("ol/source/Vector");
+var Projection_1 = require("ol/proj/Projection");
 var nm = provide_1.default('layers');
 /**
  * The Vector layer base
@@ -79,8 +82,8 @@ var LayerBaseVector = /** @class */ (function (_super) {
             _this._mapMove.checkInit();
             _this._mapMove.addVectorLayer(_this);
         }
-        _this._source = new ol.source.Vector();
-        _this._olLayer = new ol.layer.Vector({
+        _this._source = new Vector_2.default();
+        _this._olLayer = new Vector_1.default({
             source: _this._source,
             visible: _this.visible,
             style: _this.style,
@@ -90,7 +93,7 @@ var LayerBaseVector = /** @class */ (function (_super) {
         });
         _this.olLayer.setZIndex(_this._zIndex);
         _this._projectionMap = null;
-        _this._projection4326 = new ol.proj.Projection({ code: "EPSG:4326" });
+        _this._projection4326 = new Projection_1.default({ code: "EPSG:4326" });
         _this._olLayer.setOpacity(_this.opacity);
         return _this;
     }

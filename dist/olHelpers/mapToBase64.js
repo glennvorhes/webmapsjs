@@ -1,13 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var extentUtil_1 = require("../olHelpers/extentUtil");
-/**
- *
- * @param {ol.Map} map
- * @param {(imgData) => string} callback
- * @param {iMapToBase64Options} options
- * @returns {any}
- */
 function mapToBase64(map, callback, options) {
     options = options || {};
     if (typeof options.delay === 'number') {

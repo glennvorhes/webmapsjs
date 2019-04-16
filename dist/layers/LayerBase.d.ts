@@ -1,6 +1,7 @@
 /// <reference types="jquery" />
 /// <reference types="jqueryui" />
-import ol = require('custom-ol');
+import { Source } from 'ol/source';
+import Layer from 'ol/layer/Layer';
 export interface LayerBaseOptions {
     id?: string;
     name?: string;
@@ -32,14 +33,14 @@ export declare abstract class LayerBase {
     protected _params: any;
     protected _id: string;
     protected _name: string;
-    protected _source: ol.source.Source;
+    protected _source: Source;
     protected _animate: boolean;
     protected _legendCollapse: boolean;
     protected _maxResolution: number;
     protected _minResolution: number;
     protected _$legendDiv: JQuery;
     loadCallback: Function;
-    protected _olLayer: ol.layer.Layer;
+    protected _olLayer: Layer;
     protected _applyCollapseCalled: boolean;
     /**
      * The base layer for all others
@@ -58,7 +59,7 @@ export declare abstract class LayerBase {
      * @param {boolean} [options.legendCheckbox=true] - if the legend item should have a checkbox for visibility
      * @param {boolean} [options.legendContent=undefined] - additional content to add to the legend
      */
-    constructor(url: string, options?: LayerBaseOptions);
+    protected constructor(url: string, options?: LayerBaseOptions);
     /**
      * base load function, sets _loaded = true if it is not already
      * @protected
@@ -172,8 +173,8 @@ export declare abstract class LayerBase {
      * get the layer source
      * @type {*}
      */
-    readonly source: ol.source.Source;
-    protected getSource(): ol.source.Source;
+    readonly source: Source;
+    protected getSource(): Source;
     /**
      * get the z index
      */
@@ -185,7 +186,7 @@ export declare abstract class LayerBase {
     /**
      * the the ol layer
      */
-    readonly olLayer: ol.layer.Layer;
-    protected getOlLayer(): ol.layer.Layer;
+    readonly olLayer: Layer;
+    protected getOlLayer(): Layer;
 }
 export default LayerBase;

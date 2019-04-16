@@ -2,8 +2,14 @@ import {LayerBase, LayerBaseOptions} from './LayerBase';
 import mapMove from '../olHelpers/mapMove';
 import MapMoveCls from '../olHelpers/mapMoveCls'
 import provide from '../util/provide';
-import ol = require('custom-ol');
+// import ol = require('custom-ol');
 import $ = require('jquery');
+import Style from 'ol/style/Style';
+import Feature from 'ol/Feature';
+import Vector from 'ol/layer/Vector'
+import VectorSource from 'ol/source/Vector';
+import Projection from 'ol/proj/Projection';
+import {iStyleFunc} from "../olHelpers/esriToOlStyle";
 
 const nm = provide('layers');
 
@@ -21,12 +27,12 @@ export interface makeMapMoveParams {
 
 export interface LayerBaseVectorOptions extends LayerBaseOptions{
     autoLoad?: boolean;
-    style?: ol.style.Style|Array<ol.style.Style>|ol.StyleFunction;
+    style?: Style|Style[]|iStyleFunc;
     onDemand?: boolean;
     onDemandDelay?: number;
     mapMoveMakeGetParams?: makeMapMoveParams;
     mapMoveObj?: MapMoveCls;
-    renderOrder?: (a: ol.Feature, b: ol.Feature) => number;
+    renderOrder?: (a: Feature, b: Feature) => number;
 
 }
 
@@ -38,17 +44,17 @@ export interface LayerBaseVectorOptions extends LayerBaseOptions{
  * @abstract
  */
 export class LayerBaseVector extends LayerBase {
-    _olLayer: ol.layer.Vector;
-    _source: ol.source.Vector;
-    _style: ol.style.Style|Array<ol.style.Style>|ol.StyleFunction;
+    _olLayer: Vector;
+    _source: VectorSource;
+    _style: Style|Array<Style>|iStyleFunc;
     _autoLoad: boolean;
     _onDemand: boolean;
     _onDemandDelay: number;
     _mapMoveMakeGetParams: makeMapMoveParams;
     _mapMoveParams: any;
     _mapMove: MapMoveCls;
-    _projectionMap: ol.proj.Projection;
-    _projection4326: ol.proj.Projection;
+    _projectionMap: Projection;
+    _projection4326: Projection;
 
 
 
@@ -115,10 +121,10 @@ export class LayerBaseVector extends LayerBase {
             this._mapMove.addVectorLayer(this);
         }
 
-        this._source = new ol.source.Vector();
+        this._source = new VectorSource();
 
 
-        this._olLayer = new ol.layer.Vector(
+        this._olLayer = new Vector(
             {
                 source: this._source,
                 visible: this.visible,
@@ -132,7 +138,7 @@ export class LayerBaseVector extends LayerBase {
         this.olLayer.setZIndex(this._zIndex);
 
         this._projectionMap = null;
-        this._projection4326 = new ol.proj.Projection({code: "EPSG:4326"});
+        this._projection4326 = new Projection({code: "EPSG:4326"});
         this._olLayer.setOpacity(this.opacity)
     }
 
@@ -217,7 +223,7 @@ export class LayerBaseVector extends LayerBase {
     /**
      * get the style definition
      */
-    get style(): ol.StyleFunction|Array<ol.style.Style>|ol.style.Style {
+    get style(): Array<Style>|Style|iStyleFunc {
         return this._style;
     }
 
@@ -225,9 +231,9 @@ export class LayerBaseVector extends LayerBase {
      * set the style
      * @param style - the style or function
      */
-    set style(style: ol.StyleFunction|Array<ol.style.Style>|ol.style.Style) {
+    set style(style: Style[]|Style|iStyleFunc) {
         this._style = style;
-        this.olLayer.setStyle(this._style as ol.style.Style);
+        this.olLayer.setStyle(this._style as Style);
     }
 
     /**
@@ -237,7 +243,7 @@ export class LayerBaseVector extends LayerBase {
         return this.mapProj == null ? null : this.mapProj.getCode();
     }
 
-    get mapProj(): ol.proj.Projection{
+    get mapProj(): Projection{
         if (this._projectionMap != null){
             return this._projectionMap;
         }
@@ -288,22 +294,22 @@ export class LayerBaseVector extends LayerBase {
      * get the layer vector source
      * @override
      */
-    get source(): ol.source.Vector {
-        return this.getSource() as ol.source.Vector;
+    get source(): VectorSource {
+        return this.getSource() as VectorSource;
     }
 
     /**
      * array of ol features
      */
-    get features(): Array<ol.Feature> {
+    get features(): Array<Feature> {
         return this.source.getFeatures();
     }
 
     /**
      *
      */
-    get olLayer(): ol.layer.Vector {
-        return super.getOlLayer() as ol.layer.Vector;
+    get olLayer(): Vector {
+        return super.getOlLayer() as Vector;
     }
 
     protected setZIndex(newZ: number) {

@@ -4,17 +4,18 @@
 
 import {LayerBaseVector, LayerBaseVectorOptions} from './LayerBaseVector';
 import provide from '../util/provide';
-import ol = require('custom-ol');
 import $ = require('jquery');
 import {MapMoveCls} from "../olHelpers/mapMoveCls";
 import * as proj from '../olHelpers/projections';
 import {proj3857} from "../olHelpers/projections";
+import Projection from 'ol/proj/Projection';
+import GeoJSON from 'ol/format/GeoJSON'
 
 let nm = provide('layers');
 
 export interface crsTransform {
-    dataProjection?: ol.proj.Projection;
-    featureProjection?: ol.proj.Projection;
+    dataProjection?: Projection;
+    featureProjection?: Projection;
 }
 
 
@@ -28,7 +29,7 @@ export interface LayerBaseVectorGeoJsonOptions extends LayerBaseVectorOptions {
  * @augments LayerBaseVector
  */
 export class LayerBaseVectorGeoJson extends LayerBaseVector {
-    _geoJsonFormat: ol.format.GeoJSON;
+    _geoJsonFormat: GeoJSON;
     _transform: crsTransform;
 
     /**
@@ -62,7 +63,7 @@ export class LayerBaseVectorGeoJson extends LayerBaseVector {
         url = typeof url == 'string' ? url : '';
         super(url, options);
 
-        this._geoJsonFormat = new ol.format.GeoJSON();
+        this._geoJsonFormat = new GeoJSON();
 
         this._transform = options.transform || {};
         this._transform.dataProjection = this._transform.dataProjection || proj.proj4326;

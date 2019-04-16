@@ -1,4 +1,4 @@
-import ol = require('custom-ol');
+// import ol = require('custom-ol');
 // let g = new
 
 

@@ -3,7 +3,8 @@
  */
 import {TipSliders, TipPresetConfig, TipSliderConfig} from '../../collections/Sliders';
 import $ = require('jquery');
-import ol = require('custom-ol');
+// import ol = require('custom-ol');
+import Map from 'ol/Map';
 import 'jquery-ui';
 
 
@@ -13,7 +14,7 @@ export interface ITipConfig{
     presetConfig: Array<TipPresetConfig>;
     tipSegmentLayerMinZoom: number;
     sliders: TipSliders;
-    _map: ol.Map;
+    _map: Map;
     $loadingGif: JQuery;
     $presetSelector: JQuery;
     $regionSelector: JQuery;

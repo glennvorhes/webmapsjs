@@ -15,10 +15,10 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var LayerBaseVector_1 = require("./LayerBaseVector");
 var provide_1 = require("../util/provide");
-var ol = require("custom-ol");
 var $ = require("jquery");
 var proj = require("../olHelpers/projections");
 var projections_1 = require("../olHelpers/projections");
+var GeoJSON_1 = require("ol/format/GeoJSON");
 var nm = provide_1.default('layers');
 /**
  * The Vector GeoJson Layer
@@ -58,7 +58,7 @@ var LayerBaseVectorGeoJson = /** @class */ (function (_super) {
         var _this = this;
         url = typeof url == 'string' ? url : '';
         _this = _super.call(this, url, options) || this;
-        _this._geoJsonFormat = new ol.format.GeoJSON();
+        _this._geoJsonFormat = new GeoJSON_1.default();
         _this._transform = options.transform || {};
         _this._transform.dataProjection = _this._transform.dataProjection || proj.proj4326;
         _this._transform.featureProjection = _this._transform.featureProjection || projections_1.proj3857;

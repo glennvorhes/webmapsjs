@@ -2,20 +2,21 @@
  * Created by gavorhes on 12/4/2015.
  */
 import RealEarthAnimate from './RealEarthAnimate';
-import ol = require('custom-ol');
 import { LayerVectorRealEarth } from "../layers/LayerRealEarthVector";
+import VectorSource from 'ol/source/Vector';
+import VectorLayer from 'ol/layer/Vector';
 /**
  * class mixin to animate RealEarth vector layers
  * @augments RealEarthAnimate
  */
 declare class RealEarthAnimateVector extends RealEarthAnimate {
     _dataCache: Array<Array<Object> | Object>;
-    _source: ol.source.Vector;
+    _source: VectorSource;
     _rawTimesLookup: {
         [s: string]: any;
     };
     _currentIndex: number;
-    _olLayer: ol.layer.Vector;
+    _olLayer: VectorLayer;
     _lyr: LayerVectorRealEarth;
     constructor(layer: LayerVectorRealEarth, loadCallback?: (lyr: LayerVectorRealEarth) => void);
     /**

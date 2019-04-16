@@ -2,7 +2,8 @@
  * Created by gavorhes on 12/4/2015.
  */
 import { LayerBase, LayerBaseOptions } from './LayerBase';
-import ol = require('custom-ol');
+import XYZ from 'ol/source/XYZ';
+import Tile from 'ol/layer/Tile';
 /**
  * XYZ tile
  * @augments LayerBase
@@ -27,15 +28,7 @@ export declare class LayerBaseXyzTile extends LayerBase {
      * @param {boolean} [options.useEsriStyle=false] if the map service style should be used
      */
     constructor(url: string, options?: LayerBaseOptions);
-    /**
-     *
-     * @returns {ol.source.XYZ} the vector source
-     */
-    readonly source: ol.source.XYZ;
-    /**
-     *
-     * @returns {ol.layer.Tile|ol.layer.Base|undefined} the ol layer
-     */
-    readonly olLayer: ol.layer.Tile;
+    readonly source: XYZ;
+    readonly olLayer: Tile;
 }
 export default LayerBaseXyzTile;

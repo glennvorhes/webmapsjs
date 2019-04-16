@@ -1,6 +1,11 @@
 import { LayerBase, LayerBaseOptions } from './LayerBase';
 import MapMoveCls from '../olHelpers/mapMoveCls';
-import ol = require('custom-ol');
+import Style from 'ol/style/Style';
+import Feature from 'ol/Feature';
+import Vector from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import Projection from 'ol/proj/Projection';
+import { iStyleFunc } from "../olHelpers/esriToOlStyle";
 export interface makeMapMoveParams {
     /**
      *
@@ -17,12 +22,12 @@ export interface makeMapMoveParams {
 }
 export interface LayerBaseVectorOptions extends LayerBaseOptions {
     autoLoad?: boolean;
-    style?: ol.style.Style | Array<ol.style.Style> | ol.StyleFunction;
+    style?: Style | Style[] | iStyleFunc;
     onDemand?: boolean;
     onDemandDelay?: number;
     mapMoveMakeGetParams?: makeMapMoveParams;
     mapMoveObj?: MapMoveCls;
-    renderOrder?: (a: ol.Feature, b: ol.Feature) => number;
+    renderOrder?: (a: Feature, b: Feature) => number;
 }
 /**
  * The Vector layer base
@@ -30,17 +35,17 @@ export interface LayerBaseVectorOptions extends LayerBaseOptions {
  * @abstract
  */
 export declare class LayerBaseVector extends LayerBase {
-    _olLayer: ol.layer.Vector;
-    _source: ol.source.Vector;
-    _style: ol.style.Style | Array<ol.style.Style> | ol.StyleFunction;
+    _olLayer: Vector;
+    _source: VectorSource;
+    _style: Style | Array<Style> | iStyleFunc;
     _autoLoad: boolean;
     _onDemand: boolean;
     _onDemandDelay: number;
     _mapMoveMakeGetParams: makeMapMoveParams;
     _mapMoveParams: any;
     _mapMove: MapMoveCls;
-    _projectionMap: ol.proj.Projection;
-    _projection4326: ol.proj.Projection;
+    _projectionMap: Projection;
+    _projection4326: Projection;
     /**
      * The base vector layer
      * @param {string} url - pass an empty string to prevent default load and add from a json source
@@ -118,12 +123,12 @@ export declare class LayerBaseVector extends LayerBase {
     * set the style
     * @param style - the style or function
     */
-    style: ol.StyleFunction | Array<ol.style.Style> | ol.style.Style;
+    style: Array<Style> | Style | iStyleFunc;
     /**
      * get the map CRS if it is defined by the map move object
      */
     readonly mapCrs: string;
-    readonly mapProj: ol.proj.Projection;
+    readonly mapProj: Projection;
     /**
      * get the map move object
      * @type {MapMoveCls|*}
@@ -144,15 +149,15 @@ export declare class LayerBaseVector extends LayerBase {
      * get the layer vector source
      * @override
      */
-    readonly source: ol.source.Vector;
+    readonly source: VectorSource;
     /**
      * array of ol features
      */
-    readonly features: Array<ol.Feature>;
+    readonly features: Array<Feature>;
     /**
      *
      */
-    readonly olLayer: ol.layer.Vector;
+    readonly olLayer: Vector;
     protected setZIndex(newZ: number): void;
 }
 export default LayerBaseVector;

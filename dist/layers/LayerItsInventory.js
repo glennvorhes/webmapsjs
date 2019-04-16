@@ -16,9 +16,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var LayerBaseVectorGeoJson_1 = require("./LayerBaseVectorGeoJson");
 var mapPopup_1 = require("../olHelpers/mapPopup");
 var provide_1 = require("../util/provide");
-var ol = require("custom-ol");
 var $ = require("jquery");
 var projections_1 = require("../olHelpers/projections");
+var Style_1 = require("ol/style/Style");
+var Icon_1 = require("ol/style/Icon");
+var Stroke_1 = require("ol/style/Stroke");
+var Point_1 = require("ol/geom/Point");
 var nm = provide_1.default('layers');
 function checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
     "use strict";
@@ -85,16 +88,16 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
     checkStyleNumber(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig);
     var _iconUrlRoot = 'https://transportal.cee.wisc.edu/its/inventory/icons/';
     if (itsIcon) {
-        return new ol.style.Style({
-            image: new ol.style.Icon({
+        return new Style_1.default({
+            image: new Icon_1.default({
                 src: _iconUrlRoot + itsIcon,
                 crossOrigin: 'anonymous'
             })
         });
     }
     else if (itsLineStyle) {
-        return new ol.style.Style({
-            stroke: new ol.style.Stroke({
+        return new Style_1.default({
+            stroke: new Stroke_1.default({
                 color: itsLineStyle.color,
                 width: itsLineStyle.width
             })
@@ -111,8 +114,8 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
                     break;
                 }
             }
-            return [new ol.style.Style({
-                    image: new ol.style.Icon({
+            return [new Style_1.default({
+                    image: new Icon_1.default({
                         src: iconUrl,
                         crossOrigin: 'anonymous'
                     })
@@ -132,8 +135,8 @@ function defineStyle(itsIcon, itsLineStyle, itsIconConfig, itsLineConfig) {
                     break;
                 }
             }
-            return [new ol.style.Style({
-                    stroke: new ol.style.Stroke({
+            return [new Style_1.default({
+                    stroke: new Stroke_1.default({
                         color: colr,
                         width: width
                     })
@@ -272,10 +275,10 @@ var LayerItsInventory = /** @class */ (function (_super) {
      */
     LayerItsInventory.prototype.mapMoveMakeGetParams = function (extent, zoomLevel) {
         _super.prototype.mapMoveMakeGetParams.call(this, extent, zoomLevel);
-        var lowerLeft = new ol.geom.Point([extent.minX, extent.minY]);
+        var lowerLeft = new Point_1.default([extent.minX, extent.minY]);
         lowerLeft.transform(this.mapProj, this._projection4326);
         var lowerLeftCoordinates = lowerLeft.getCoordinates();
-        var upperRight = new ol.geom.Point([extent.maxX, extent.maxY]);
+        var upperRight = new Point_1.default([extent.maxX, extent.maxY]);
         upperRight.transform(this.mapProj, this._projection4326);
         var upperRightCoordinates = upperRight.getCoordinates();
         $.extend(this.mapMoveParams, {

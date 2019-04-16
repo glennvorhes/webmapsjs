@@ -4,7 +4,8 @@
 
 import provide from '../util/provide';
 import * as zoomResolutionConvert from './zoomResolutionConvert';
-import ol = require('custom-ol');
+import Feature from 'ol/Feature';
+import Style from 'ol/style/Style';
 const nm = provide('olHelpers');
 
 
@@ -21,10 +22,10 @@ const nm = provide('olHelpers');
  * @param {propertiesZoomStyle|*} styleFunc - style function
  * @returns {function|*} new function
  */
-function propertiesZoomStyle(styleFunc: (f: ol.Feature, res: number) => ol.style.Style|ol.style.Style[]):
-(feature: ol.Feature, zoom: number) => ol.style.Style|ol.style.Style[]
+function propertiesZoomStyle(styleFunc: (f: Feature, res: number) => Style|Style[]):
+(feature: Feature, zoom: number) => Style|Style[]
 {
-    return function (feature: ol.Feature, zoom: number): ol.style.Style|ol.style.Style[] {
+    return function (feature: Feature, zoom: number): Style|Style[] {
         return styleFunc(feature, zoomResolutionConvert.zoomToResolution(zoom));
     };
 }

@@ -1,7 +1,7 @@
 /**
  * Created by gavorhes on 12/15/2015.
  */
-import ol = require('custom-ol');
+import Map from 'ol/Map';
 export interface quickMapOptions {
     divId?: string;
     center?: {
@@ -32,5 +32,5 @@ export interface quickMapOptions {
  * @param [options.fullScreen=false] if add base map switcher
  * @returns the ol map
  */
-export declare function quickMapBase(options?: quickMapOptions): ol.Map;
+export declare function quickMapBase(options?: quickMapOptions): Map;
 export default quickMapBase;

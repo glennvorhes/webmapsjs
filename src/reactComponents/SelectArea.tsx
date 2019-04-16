@@ -3,22 +3,28 @@
  */
 
 import {React} from './reactAndRedux';
-import ol = require('custom-ol');
 import LayerBaseVectorGeoJson from '../layers/LayerBaseVectorGeoJson';
 import {proj4326, proj3857} from '../olHelpers/projections'
 import makeGuid from '../util/makeGuid';
 import getMap from './helpers/get_map';
+import Map from 'ol/Map'
+import Draw from 'ol/interaction/Draw';
+import Style from 'ol/style/Style';
+import Stroke from 'ol/style/Stroke';
+import Fill from 'ol/style/Fill';
+import Polygon from 'ol/geom/Polygon';
+import Feature from 'ol/Feature';
 
 export interface iSelectArea{
-    map: ol.Map | (() => ol.Map);
+    map: Map | (() => Map);
     callback: (coords: Array<number[]>) => any
 }
 
 export class SelectArea extends React.Component<iSelectArea, null> {
-    map: ol.Map;
+    map: Map;
     callback: (coords: Array<number[]>) => any;
     areaOverlay: LayerBaseVectorGeoJson;
-    draw: ol.interaction.Draw;
+    draw: Draw;
     selectId: string;
     cancelId: string;
     selectButton: HTMLButtonElement;
@@ -35,11 +41,11 @@ export class SelectArea extends React.Component<iSelectArea, null> {
 
         this.areaOverlay = new LayerBaseVectorGeoJson('',
             {
-                style: new ol.style.Style({
-                    fill: new ol.style.Fill({
+                style: new Style({
+                    fill: new Fill({
                         color: 'rgba(255, 0, 237, 0.1)'
                     }),
-                    stroke: new ol.style.Stroke({
+                    stroke: new Stroke({
                         color: 'rgb(255, 0, 237)',
                         width: 2
                     })
@@ -47,16 +53,19 @@ export class SelectArea extends React.Component<iSelectArea, null> {
                 transform: {dataProjection: proj4326, featureProjection: proj3857}
             });
 
-        this.draw = new ol.interaction.Draw({
+        this.draw = new Draw({
             source: this.areaOverlay.source,
             type: 'Polygon'
         });
 
-        this.draw.on('drawend', (evt: {feature: {getGeometry: () => ol.geom.Polygon}}) => {
+        // this.draw.on('drawend', (evt: {feature: {getGeometry: () => Polygon}}) => {
+        this.draw.on('drawend', (evt) => {
             this.selectButton.style.display = '';
             this.cancelButton.style.display = 'none';
 
-            let geom = evt.feature.getGeometry();
+
+
+            let geom = (evt['feature'] as Feature).getGeometry() as Polygon;
             let geomClone = geom.clone();
 
             geomClone.transform('EPSG:3857', 'EPSG:4326');

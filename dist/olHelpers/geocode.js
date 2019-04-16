@@ -2,10 +2,17 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var $ = require("jquery");
 var makeGuid_1 = require("../util/makeGuid");
-var ol = require("custom-ol");
 var projections_1 = require("./projections");
+var Vector_1 = require("ol/layer/Vector");
+var Vector_2 = require("ol/source/Vector");
+var Circle_1 = require("ol/style/Circle");
+var Fill_1 = require("ol/style/Fill");
+var Stroke_1 = require("ol/style/Stroke");
+var Point_1 = require("ol/geom/Point");
+var Feature_1 = require("ol/Feature");
 var invalidClass = 'geocoder-invalid';
 var geocoderLoadingClass = 'geocoder-loading';
+var Style_1 = require("ol/style/Style");
 // let testAddress = '65 7th Street, Prairie du Sac, WI';
 var Geocode = /** @class */ (function () {
     function Geocode(mapDiv, map) {
@@ -13,13 +20,13 @@ var Geocode = /** @class */ (function () {
         var inputGuid = makeGuid_1.makeGuid();
         var buttonGuid = makeGuid_1.makeGuid();
         this.map = map;
-        this.indicationLayer = new ol.layer.Vector({
-            source: new ol.source.Vector(),
-            style: new ol.style.Style({
-                image: new ol.style.Circle({
+        this.indicationLayer = new Vector_1.default({
+            source: new Vector_2.default(),
+            style: new Style_1.default({
+                image: new Circle_1.default({
                     radius: 12,
-                    fill: new ol.style.Fill({ color: 'rgba(255,0,0,0.5)' }),
-                    stroke: new ol.style.Stroke({ color: 'red', width: 1 })
+                    fill: new Fill_1.default({ color: 'rgba(255,0,0,0.5)' }),
+                    stroke: new Stroke_1.default({ color: 'red', width: 1 })
                 })
             })
         });
@@ -48,8 +55,8 @@ var Geocode = /** @class */ (function () {
                 }
                 else {
                     var v = _this.map.getView();
-                    var p = new ol.geom.Point([lon, lat]);
-                    var feat = new ol.Feature(p);
+                    var p = new Point_1.default([lon, lat]);
+                    var feat = new Feature_1.default(p);
                     _this.indicationLayer.getSource().addFeature(feat);
                     p.transform(projections_1.proj4326, projections_1.proj3857);
                     v.setCenter(p.getCoordinates());

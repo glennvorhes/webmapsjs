@@ -71,6 +71,7 @@ export class LayerEsriTile extends LayerBaseXyzTile {
                 return;
             }
 
+
             if (urlCopy[urlCopy.length - 1] !== '/') {
                 urlCopy += '/';
             }

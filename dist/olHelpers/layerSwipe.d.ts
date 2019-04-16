@@ -3,8 +3,7 @@
  */
 /// <reference types="jquery" />
 /// <reference types="jqueryui" />
-import { LayerBase } from "../layers/LayerBase";
-import ol = require('custom-ol');
+import { LayerBase } from "../layers";
 declare class LayerSwipe {
     leftLayers: Array<LayerBase>;
     rightLayers: Array<LayerBase>;

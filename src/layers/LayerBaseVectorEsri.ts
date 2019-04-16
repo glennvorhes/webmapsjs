@@ -5,9 +5,9 @@
 import {LayerBaseVector, LayerBaseVectorOptions} from './LayerBaseVector';
 import * as esriToOl from '../olHelpers/esriToOlStyle';
 import provide from '../util/provide';
-import ol = require('custom-ol');
 import $ = require('jquery');
 let nm = provide('layers');
+import EsriJSON from 'ol/format/EsriJSON';
 
 
 /**
@@ -82,7 +82,7 @@ export class LayerBaseVectorEsri extends LayerBaseVector {
 
         super(url, options);
         this._outSR = this.params['outSR'];
-        this._esriFormat = new ol.format.EsriJSON();
+        this._esriFormat = new EsriJSON();
 
         if (this._url[this._url.length - 1] !== '/') {
             this._url += '/';

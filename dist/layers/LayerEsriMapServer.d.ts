@@ -3,7 +3,9 @@
  * Created by gavorhes on 12/7/2015.
  */
 import { LayerBase, LayerBaseOptions } from './LayerBase';
-import ol = require('custom-ol');
+import EsriJSON from 'ol/format/EsriJSON';
+import TileArcGISRestSource from 'ol/source/TileArcGISRest';
+import TileLayer from 'ol/layer/Tile';
 /**
  * Helper to return the url to the service on the production server
  * @param {string} folder
@@ -22,7 +24,7 @@ export interface LayerEsriMapServerOptions extends LayerBaseOptions {
  * @augments LayerBase
  */
 export declare class LayerEsriMapServer extends LayerBase {
-    _esriFormat: ol.format.EsriJSON;
+    _esriFormat: EsriJSON;
     _popupRequest: JQueryXHR;
     _showLayers: number[];
     /**
@@ -53,15 +55,7 @@ export declare class LayerEsriMapServer extends LayerBase {
     getPopupInfo(queryParams: {
         [s: string]: any;
     }): void;
-    /**
-     *
-     * @returns {ol.source.TileArcGISRest} the vector source
-     */
-    readonly source: ol.source.TileArcGISRest;
-    /**
-     *
-     * @returns the ol layer
-     */
-    readonly olLayer: ol.layer.Tile;
+    readonly source: TileArcGISRestSource;
+    readonly olLayer: TileLayer;
 }
 export default LayerEsriMapServer;
