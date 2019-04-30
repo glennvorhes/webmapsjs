@@ -1,0 +1,1 @@
+{"version":3,"file":"import-query.js","sourceRoot":"","sources":["../src/import-query.ts"],"names":[],"mappings":";;AAAA,0BAA6B;AAE7B,kBAAe,CAAC,MAAM,CAAC,GAAG,CAAC,GAAG,MAAM,CAAC,QAAQ,CAAC,GAAG,CAAC,CAAC,CAAC","sourcesContent":["import $ = require(\"jquery\");\r\n\r\nexport default (window['$'] = window['jQuery'] = $);"]}

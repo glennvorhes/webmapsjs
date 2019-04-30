@@ -19,7 +19,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var mapInteractionBase_1 = require("./mapInteractionBase");
 var provide_1 = require("../util/provide");
 var $ = require("jquery");
-// import * as ol from "custom-ol";
 var Vector_1 = require("ol/layer/Vector");
 var Vector_2 = require("ol/source/Vector");
 var Overlay_1 = require("ol/Overlay");

@@ -10,7 +10,6 @@ import {LayerBase} from "../layers/LayerBase";
 import LayerEsriMapServer from "../layers/LayerEsriMapServer";
 import $ = require('jquery');
 import Map from 'ol/Map';
-// import * as ol from "custom-ol";
 import Vector from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import Feature from 'ol/Feature';
