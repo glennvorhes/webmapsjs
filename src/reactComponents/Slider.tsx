@@ -15,7 +15,7 @@ export interface iSlider {
     value?: number;
 }
 
-export class Slider extends React.Component<iSlider, null> {
+export class Slider extends React.Component<iSlider, {}> {
     private uid: string;
     private startUid: string;
     private stopUid: string;

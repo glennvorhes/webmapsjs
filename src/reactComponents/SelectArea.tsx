@@ -20,7 +20,7 @@ export interface iSelectArea{
     callback: (coords: Array<number[]>) => any
 }
 
-export class SelectArea extends React.Component<iSelectArea, null> {
+export class SelectArea extends React.Component<iSelectArea, {}> {
     map: Map;
     callback: (coords: Array<number[]>) => any;
     areaOverlay: LayerBaseVectorGeoJson;

@@ -19,7 +19,7 @@ export interface iRadioItem{
     index?: number
 }
 
-class RadioItem extends React.Component<iRadioItem, null> {
+class RadioItem extends React.Component<iRadioItem, {}> {
     guid: string;
 
     constructor(props: iRadioItem, context: Object){
@@ -73,7 +73,7 @@ interface iRadioBase {
     classes?: string[]
 }
 
-class RadioBase extends React.Component<iRadioBase, null> {
+class RadioBase extends React.Component<iRadioBase, {}> {
     inline: boolean;
     groupId: string;
 
@@ -128,7 +128,7 @@ class RadioBase extends React.Component<iRadioBase, null> {
 
 export class Radio extends React.Component<{
     title: string, items: string[], callback: (val: string) => any, inline?: boolean,
-    defaultValue: string, classes?: string[] }, null> {
+    defaultValue: string, classes?: string[] }, {}> {
 
     render() {
 
@@ -146,7 +146,7 @@ export class Radio extends React.Component<{
 
 export class RadioConnected extends React.Component<{
     title: string, items: string[], callback: (val: string) => any, inline?: boolean,
-    selectedIndex: number, classes?: string[] }, null> {
+    selectedIndex: number, classes?: string[] }, {}> {
 
     render() {
         return <RadioBase

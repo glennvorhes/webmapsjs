@@ -10,7 +10,7 @@ export interface iSlider {
     defaultAnimationInterval?: number;
     value?: number;
 }
-export declare class Slider extends React.Component<iSlider, null> {
+export declare class Slider extends React.Component<iSlider, {}> {
     private uid;
     private startUid;
     private stopUid;
