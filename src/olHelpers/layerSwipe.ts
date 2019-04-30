@@ -43,7 +43,7 @@ class LayerSwipe {
         this.offset = null;
 
         this._map = map;
-        this.$mapElement = $(map.getTargetElement());
+        this.$mapElement = $(map.getTargetElement() as HTMLElement);
         this.$mapElement.append(`<div class="layer-swiper">${sliderContent}</div>`);
 
 

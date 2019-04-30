@@ -3,7 +3,7 @@
  */
 /// <reference types="react" />
 import { React } from './reactAndRedux';
-import 'jquery-ui';
+import 'jqueryui';
 export interface iDatePick {
     label: string;
     id?: string;

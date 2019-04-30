@@ -391,7 +391,7 @@ export class TipSliders {
     setPresetValues() {
         let idx = this._$presetSelector.val() || '1';
 
-        let thePreset = this._presetLookup[idx];
+        let thePreset = this._presetLookup[idx as string];
 
         for (let i = 0; i < thePreset.presets.length; i++) {
             let presetValues = thePreset.presets[i];
@@ -541,7 +541,7 @@ export class TipSliders {
                 let domId = this['id'];
                 let sldr = ___this._sliderLookup[domId];
 
-                let newValue = parseFloat($this.val());
+                let newValue = parseFloat($this.val() as string);
 
                 let oldValue = sldr.weight;
                 let diff = newValue - oldValue;
@@ -608,7 +608,7 @@ export class TipSliders {
         this.$container.find('input[type="checkbox"]').change(function () {
             let domEl = this;
 
-            ___this._sliderLookup[domEl.id.replace('_chk', '')].locked = !domEl.checked;
+            ___this._sliderLookup[domEl.id.replace('_chk', '')].locked = !(domEl as HTMLInputElement).checked;
             ___this.reservedPercent = 0.0;
             ___this.notLockedCount = 0;
 

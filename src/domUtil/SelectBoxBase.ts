@@ -86,7 +86,7 @@ export class SelectBoxBase{
         let v = this._box.val();
         
         for (let f of this._changeListeners){
-            f(v);
+            f(v as string);
         }
     }
 
@@ -104,13 +104,13 @@ export class SelectBoxBase{
 
         if (theVal == null || typeof theVal == 'undefined'){
             return null;
-        } else if (isNaN(theVal)){
-            return theVal
+        } else if (isNaN(theVal as number)){
+            return theVal as number;
         } else {
-            if (theVal.indexOf('.') > -1){
-                return parseFloat(theVal)
+            if ((theVal as string).indexOf('.') > -1){
+                return parseFloat(theVal as string)
             } else {
-                return parseInt(theVal);
+                return parseInt(theVal as string);
             }
         }
     }

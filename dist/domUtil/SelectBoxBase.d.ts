@@ -35,7 +35,7 @@ export declare class SelectBoxBase {
      *
      * @returns {jQuery}
      */
-    readonly box: JQuery;
+    readonly box: JQuery<HTMLElement>;
     changed(): void;
     /**
      *

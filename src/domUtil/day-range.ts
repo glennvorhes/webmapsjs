@@ -47,11 +47,11 @@ export class DayRange {
 
         //add event listeners
         this._$startDate.change(function () {
-            _this.startDate = this.value;
+            _this.startDate = new Date((this as HTMLInputElement).value);
         });
 
         this._$endDate.change(function () {
-            _this.endDate = this.value;
+            _this.endDate = new Date((this as HTMLInputElement).value);
         });
 
         // initialize

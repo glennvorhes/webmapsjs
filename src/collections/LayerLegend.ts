@@ -297,7 +297,7 @@ export class LayerLegend {
 
         this.$divElement.find(".suppress-by-extent").change(function () {
             let legendLayerLis = $('.legend-layer-li');
-            if (this.checked) {
+            if ((this as HTMLInputElement).checked) {
                 legendLayerLis.removeClass('layer-force-show');
             } else {
                 legendLayerLis.addClass('layer-force-show');
@@ -306,11 +306,11 @@ export class LayerLegend {
 
         this.$divElement.find('.legend-check').change(function () {
             let lyrId = this.id.replace('-legend-layer-check', '');
-            _this.layerGroup.allLayerLookup[lyrId].visible = this.checked;
+            _this.layerGroup.allLayerLookup[lyrId].visible = (this as HTMLInputElement).checked;
         });
 
         this.$divElement.find('.legend-layer-group > input[type=checkbox]').change(function () {
-            $(this).siblings('ul').find('input[type=checkbox]').prop('checked', this.checked).trigger('change');
+            $(this).siblings('ul').find('input[type=checkbox]').prop('checked', (this as HTMLInputElement).checked).trigger('change');
         });
 
         this.$divElement.find('.layer-group-expander').click(function () {

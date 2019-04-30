@@ -5,8 +5,9 @@
 
 import {React} from './reactAndRedux';
 import $ = require('jquery');
-import 'jquery-ui';
+import 'jqueryui';
 import makeGuid from '../util/makeGuid';
+
 
 import {dateToString, stringToDate} from './helpers/dateFormat';
 
@@ -35,7 +36,7 @@ export class DatePick extends React.Component<iDatePick, null> {
         $el.datepicker(
             {
                 onSelect: () => {
-                    this.props.change(stringToDate($el.val()));
+                    this.props.change(stringToDate($el.val() as string));
                 }
             }
         );
@@ -45,7 +46,7 @@ export class DatePick extends React.Component<iDatePick, null> {
         let params = {
             id: this.elId,
             type: 'text',
-            style: {margin: "0 10px 0 5px", width: '73px', textAlign: 'center'},
+            // style: {margin: "0 10px 0 5px", width: '73px'},
             readOnly: true
         };
 
@@ -63,7 +64,7 @@ export class DatePick extends React.Component<iDatePick, null> {
                    {/*defaultValue={dateToString(this.props.initialDate || new Date())}*/}
                    {/*readOnly={true}*/}
             {/*/>*/}
-            <input {...params}/>
+            <input style={{textAlign: 'center', margin: "0 10px 0 5px", width: '73px'}} {...params}/>
         </span>
     }
 }

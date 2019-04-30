@@ -29,7 +29,7 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var reactAndRedux_1 = require("./reactAndRedux");
 var $ = require("jquery");
-require("jquery-ui");
+require("jqueryui");
 var makeGuid_1 = require("../util/makeGuid");
 var dateFormat_1 = require("./helpers/dateFormat");
 /**
@@ -55,7 +55,7 @@ var DatePick = /** @class */ (function (_super) {
         var params = {
             id: this.elId,
             type: 'text',
-            style: { margin: "0 10px 0 5px", width: '73px', textAlign: 'center' },
+            // style: {margin: "0 10px 0 5px", width: '73px'},
             readOnly: true
         };
         if (this.props.val) {
@@ -66,7 +66,7 @@ var DatePick = /** @class */ (function (_super) {
         }
         return reactAndRedux_1.React.createElement("span", { className: "date-pick" },
             reactAndRedux_1.React.createElement("label", { htmlFor: this.elId }, this.props.label),
-            reactAndRedux_1.React.createElement("input", __assign({}, params)));
+            reactAndRedux_1.React.createElement("input", __assign({ style: { textAlign: 'center', margin: "0 10px 0 5px", width: '73px' } }, params)));
     };
     return DatePick;
 }(reactAndRedux_1.React.Component));

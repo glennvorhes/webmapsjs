@@ -32,10 +32,10 @@ var DayRange = /** @class */ (function () {
         var _this = this;
         //add event listeners
         this._$startDate.change(function () {
-            _this.startDate = this.value;
+            _this.startDate = new Date(this.value);
         });
         this._$endDate.change(function () {
-            _this.endDate = this.value;
+            _this.endDate = new Date(this.value);
         });
         // initialize
         this.endDate = new Date();
