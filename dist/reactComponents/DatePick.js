@@ -29,6 +29,7 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var reactAndRedux_1 = require("./reactAndRedux");
 var $ = require("jquery");
+window['$'] = window['jQuery'] = $; // notice the definition of global variables here
 require("jqueryui");
 var makeGuid_1 = require("../util/makeGuid");
 var dateFormat_1 = require("./helpers/dateFormat");

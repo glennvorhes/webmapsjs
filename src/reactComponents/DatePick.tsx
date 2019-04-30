@@ -4,7 +4,8 @@
 
 
 import {React} from './reactAndRedux';
-import $ = require('jquery');
+import $ = require("jquery");
+window['$'] = window['jQuery'] = $; // notice the definition of global variables here
 import 'jqueryui';
 import makeGuid from '../util/makeGuid';
 
